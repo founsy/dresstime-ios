@@ -1,0 +1,490 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D21B5935B3003D5E41 /* AppDelegate.swift */; };
+		01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */; };
+		01C454D81B5935B3003D5E41 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D71B5935B3003D5E41 /* TodayViewController.swift */; };
+		01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DC1B5935B3003D5E41 /* Images.xcassets */; };
+		01C454E01B5935B3003D5E41 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DE1B5935B3003D5E41 /* LaunchScreen.xib */; };
+		01C454EC1B5935B3003D5E41 /* DressTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454EB1B5935B3003D5E41 /* DressTimeTests.swift */; };
+		01C454F71B593909003D5E41 /* JSONService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454F61B593909003D5E41 /* JSONService.swift */; };
+		01C454F91B5939A7003D5E41 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454F81B5939A7003D5E41 /* JSON.swift */; };
+		01C454FC1B593A18003D5E41 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454FB1B593A18003D5E41 /* LoginViewController.swift */; };
+		01C454FE1B593EB2003D5E41 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454FD1B593EB2003D5E41 /* NavigationController.swift */; };
+		01C455011B5942F4003D5E41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C454FF1B5942F4003D5E41 /* Main.storyboard */; };
+		01C455031B5946D9003D5E41 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455021B5946D9003D5E41 /* LoginService.swift */; };
+		01C455051B594D52003D5E41 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455041B594D52003D5E41 /* WeatherService.swift */; };
+		01C455071B595C54003D5E41 /* artill_clean_icons-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C455061B595C54003D5E41 /* artill_clean_icons-webfont.ttf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		01C454E61B5935B3003D5E41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01C454C51B5935B3003D5E41 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01C454CC1B5935B3003D5E41;
+			remoteInfo = DressTime;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		01C454CD1B5935B3003D5E41 /* DressTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DressTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		01C454D11B5935B3003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01C454D21B5935B3003D5E41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		01C454D51B5935B3003D5E41 /* DressTime.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DressTime.xcdatamodel; sourceTree = "<group>"; };
+		01C454D71B5935B3003D5E41 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
+		01C454DC1B5935B3003D5E41 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		01C454DF1B5935B3003D5E41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		01C454E51B5935B3003D5E41 /* DressTimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DressTimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		01C454EA1B5935B3003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01C454EB1B5935B3003D5E41 /* DressTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressTimeTests.swift; sourceTree = "<group>"; };
+		01C454F61B593909003D5E41 /* JSONService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONService.swift; sourceTree = "<group>"; };
+		01C454F81B5939A7003D5E41 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
+		01C454FB1B593A18003D5E41 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		01C454FD1B593EB2003D5E41 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		01C455001B5942F4003D5E41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		01C455021B5946D9003D5E41 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		01C455041B594D52003D5E41 /* WeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
+		01C455061B595C54003D5E41 /* artill_clean_icons-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "artill_clean_icons-webfont.ttf"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		01C454CA1B5935B3003D5E41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C454E21B5935B3003D5E41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		01C454C41B5935B3003D5E41 = {
+			isa = PBXGroup;
+			children = (
+				01C454CF1B5935B3003D5E41 /* DressTime */,
+				01C454E81B5935B3003D5E41 /* DressTimeTests */,
+				01C454CE1B5935B3003D5E41 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		01C454CE1B5935B3003D5E41 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				01C454CD1B5935B3003D5E41 /* DressTime.app */,
+				01C454E51B5935B3003D5E41 /* DressTimeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		01C454CF1B5935B3003D5E41 /* DressTime */ = {
+			isa = PBXGroup;
+			children = (
+				01C454FA1B593A03003D5E41 /* Controllers */,
+				01C454F51B5938E9003D5E41 /* WebService */,
+				01C454D21B5935B3003D5E41 /* AppDelegate.swift */,
+				01C454DC1B5935B3003D5E41 /* Images.xcassets */,
+				01C454DE1B5935B3003D5E41 /* LaunchScreen.xib */,
+				01C454FF1B5942F4003D5E41 /* Main.storyboard */,
+				01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */,
+				01C454D01B5935B3003D5E41 /* Supporting Files */,
+			);
+			path = DressTime;
+			sourceTree = "<group>";
+		};
+		01C454D01B5935B3003D5E41 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				01C454D11B5935B3003D5E41 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		01C454E81B5935B3003D5E41 /* DressTimeTests */ = {
+			isa = PBXGroup;
+			children = (
+				01C454EB1B5935B3003D5E41 /* DressTimeTests.swift */,
+				01C454E91B5935B3003D5E41 /* Supporting Files */,
+			);
+			path = DressTimeTests;
+			sourceTree = "<group>";
+		};
+		01C454E91B5935B3003D5E41 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				01C454EA1B5935B3003D5E41 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		01C454F51B5938E9003D5E41 /* WebService */ = {
+			isa = PBXGroup;
+			children = (
+				01C454F61B593909003D5E41 /* JSONService.swift */,
+				01C454F81B5939A7003D5E41 /* JSON.swift */,
+				01C455021B5946D9003D5E41 /* LoginService.swift */,
+				01C455041B594D52003D5E41 /* WeatherService.swift */,
+				01C455061B595C54003D5E41 /* artill_clean_icons-webfont.ttf */,
+			);
+			name = WebService;
+			sourceTree = "<group>";
+		};
+		01C454FA1B593A03003D5E41 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				01C454D71B5935B3003D5E41 /* TodayViewController.swift */,
+				01C454FB1B593A18003D5E41 /* LoginViewController.swift */,
+				01C454FD1B593EB2003D5E41 /* NavigationController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		01C454CC1B5935B3003D5E41 /* DressTime */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01C454EF1B5935B3003D5E41 /* Build configuration list for PBXNativeTarget "DressTime" */;
+			buildPhases = (
+				01C454C91B5935B3003D5E41 /* Sources */,
+				01C454CA1B5935B3003D5E41 /* Frameworks */,
+				01C454CB1B5935B3003D5E41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DressTime;
+			productName = DressTime;
+			productReference = 01C454CD1B5935B3003D5E41 /* DressTime.app */;
+			productType = "com.apple.product-type.application";
+		};
+		01C454E41B5935B3003D5E41 /* DressTimeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01C454F21B5935B3003D5E41 /* Build configuration list for PBXNativeTarget "DressTimeTests" */;
+			buildPhases = (
+				01C454E11B5935B3003D5E41 /* Sources */,
+				01C454E21B5935B3003D5E41 /* Frameworks */,
+				01C454E31B5935B3003D5E41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01C454E71B5935B3003D5E41 /* PBXTargetDependency */,
+			);
+			name = DressTimeTests;
+			productName = DressTimeTests;
+			productReference = 01C454E51B5935B3003D5E41 /* DressTimeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		01C454C51B5935B3003D5E41 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = Fab;
+				TargetAttributes = {
+					01C454CC1B5935B3003D5E41 = {
+						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 4K33TFL396;
+					};
+					01C454E41B5935B3003D5E41 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = 01C454CC1B5935B3003D5E41;
+					};
+				};
+			};
+			buildConfigurationList = 01C454C81B5935B3003D5E41 /* Build configuration list for PBXProject "DressTime" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 01C454C41B5935B3003D5E41;
+			productRefGroup = 01C454CE1B5935B3003D5E41 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				01C454CC1B5935B3003D5E41 /* DressTime */,
+				01C454E41B5935B3003D5E41 /* DressTimeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		01C454CB1B5935B3003D5E41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01C455011B5942F4003D5E41 /* Main.storyboard in Resources */,
+				01C455071B595C54003D5E41 /* artill_clean_icons-webfont.ttf in Resources */,
+				01C454E01B5935B3003D5E41 /* LaunchScreen.xib in Resources */,
+				01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C454E31B5935B3003D5E41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		01C454C91B5935B3003D5E41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01C454D81B5935B3003D5E41 /* TodayViewController.swift in Sources */,
+				01C455051B594D52003D5E41 /* WeatherService.swift in Sources */,
+				01C454FC1B593A18003D5E41 /* LoginViewController.swift in Sources */,
+				01C454F91B5939A7003D5E41 /* JSON.swift in Sources */,
+				01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */,
+				01C454F71B593909003D5E41 /* JSONService.swift in Sources */,
+				01C454FE1B593EB2003D5E41 /* NavigationController.swift in Sources */,
+				01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */,
+				01C455031B5946D9003D5E41 /* LoginService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C454E11B5935B3003D5E41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01C454EC1B5935B3003D5E41 /* DressTimeTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		01C454E71B5935B3003D5E41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01C454CC1B5935B3003D5E41 /* DressTime */;
+			targetProxy = 01C454E61B5935B3003D5E41 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		01C454DE1B5935B3003D5E41 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01C454DF1B5935B3003D5E41 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		01C454FF1B5942F4003D5E41 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				01C455001B5942F4003D5E41 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		01C454ED1B5935B3003D5E41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		01C454EE1B5935B3003D5E41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		01C454F01B5935B3003D5E41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = DressTime/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		01C454F11B5935B3003D5E41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = DressTime/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		01C454F31B5935B3003D5E41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DressTimeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DressTime.app/DressTime";
+			};
+			name = Debug;
+		};
+		01C454F41B5935B3003D5E41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = DressTimeTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DressTime.app/DressTime";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		01C454C81B5935B3003D5E41 /* Build configuration list for PBXProject "DressTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01C454ED1B5935B3003D5E41 /* Debug */,
+				01C454EE1B5935B3003D5E41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01C454EF1B5935B3003D5E41 /* Build configuration list for PBXNativeTarget "DressTime" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01C454F01B5935B3003D5E41 /* Debug */,
+				01C454F11B5935B3003D5E41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		01C454F21B5935B3003D5E41 /* Build configuration list for PBXNativeTarget "DressTimeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01C454F31B5935B3003D5E41 /* Debug */,
+				01C454F41B5935B3003D5E41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				01C454D51B5935B3003D5E41 /* DressTime.xcdatamodel */,
+			);
+			currentVersion = 01C454D51B5935B3003D5E41 /* DressTime.xcdatamodel */;
+			path = DressTime.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 01C454C51B5935B3003D5E41 /* Project object */;
+}

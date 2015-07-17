@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "static DressTime.LoginService.(loginMethod (DressTime.LoginService.Type) -&gt; (Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;, postCompleted : (succeeded : Swift.Bool, msg : Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;) -&gt; ()) -&gt; ()).(closure #1):LoginService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "msg">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.TodayViewController.(locationManager (DressTime.TodayViewController) -&gt; (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CLLocationManager&gt;, didUpdateLocations : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Array&lt;Swift.AnyObject&gt;&gt;) -&gt; ()).(closure #1):TodayViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "channel[&quot;location&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "(condition[&quot;code&quot;] as! String).toInt()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
