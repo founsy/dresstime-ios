@@ -43,6 +43,20 @@ class ClothesDAL {
         return [Clothe]()
     }
     
+    func delete(clothe: Clothe) {
+        // Delete it from the managedObjectContext
+        self.managedObjectContext.deleteObject(clothe)
+        var error: NSError?
+        managedObjectContext.save(&error)
+        
+        if let err = error {
+            NSLog(err.localizedFailureReason!);
+        } else {
+            NSLog("Clothe Deleted");
+        }
+
+    }
+    
     
     func save(partnerId: NSNumber, partnerName: String, type: String, subType: String, name: String, isUnis: Bool, pattern: String, cut: String, image: NSData, colors: String){
         let entityDescription = NSEntityDescription.entityForName("Clothe", inManagedObjectContext: managedObjectContext);
