@@ -53,6 +53,9 @@ class JSONService
         request.HTTPBody = NSJSONSerialization.dataWithJSONObject(params, options: nil, error: &err)
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
+        if let token: String = params["access_token"] as? String {
+            request.addValue(token, forHTTPHeaderField: "Authorization")
+        }
         
         var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
             println("Response: \(response)")

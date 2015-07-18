@@ -20,6 +20,7 @@ class ClotheDetailController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var mainColor: UIView!
+    @IBOutlet weak var colorText: UITextView!
     
     @IBAction func onClickDelete(sender: AnyObject) {
         let dal = ClothesDAL()
@@ -36,7 +37,11 @@ class ClotheDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.image = UIImage(data: currentClothe.clothe_image)
-        mainColor.backgroundColor = colorWithHexString(currentClothe.clothe_colors)
+        var color = colorWithHexString(currentClothe.clothe_colors)
+        mainColor.backgroundColor = color
+        let hexTranslator = HexColorToName()
+        var name = hexTranslator.name(color)
+        colorText.text = currentClothe.clothe_colors + " " + (name[1] as! String)
     }
     
     override func didReceiveMemoryWarning() {

@@ -296,27 +296,6 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         return resultImage
     }
     
-    func saveUIImageToFile(image: UIImage) -> String{
-        let nsDocumentDirectory = NSSearchPathDirectory.DocumentDirectory
-        let nsUserDomainMask = NSSearchPathDomainMask.UserDomainMask
-        if let paths = NSSearchPathForDirectoriesInDomains(nsDocumentDirectory, nsUserDomainMask, true) {
-            if paths.count > 0 {
-                if let dirPath = paths[0] as? String {
-                    var uuid = NSUUID().UUIDString
-                    let writePath = dirPath.stringByAppendingPathComponent("\(uuid).png")
-                    UIImagePNGRepresentation(image).writeToFile(writePath, atomically: true)
-                    return writePath
-                }
-            }
-        }
-        return ""
-    }
-    
-    func convertUIImageToBase64(image: UIImage) -> String {
-        let imageData = UIImagePNGRepresentation(image);
-        return imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
-    }
-    
     func hexStringFromColor(color: UIColor) -> String{
         let components = CGColorGetComponents(color.CGColor);
     

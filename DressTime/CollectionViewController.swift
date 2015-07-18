@@ -41,21 +41,20 @@ class CollectionViewController : NSObject, UICollectionViewDataSource, CameraOve
     @objc func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
         cell.backgroundColor = UIColor.clearColor()
-        println(indexPath.row)
+        for view in cell.subviews{
+            view.removeFromSuperview()
+        }
         if (indexPath.row == self.collection.count) {
-            println("initializing button!")
-            var addCellButton = UIButton(frame: CGRectMake(0, 0, 50, 50))
+            var addCellButton = UIButton(frame: CGRectMake(0, 0, cell.frame.width, cell.frame.height))
             addCellButton.setTitle("Add", forState: UIControlState.Normal)
             addCellButton.addTarget(self, action: "addCellButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
             addCellButton.backgroundColor = UIColor.redColor()
             cell.addSubview(addCellButton)
         } else {
-            if (cell.subviews.count > 1){
-                if let view = cell.subviews[1] as? UIButton {
-                    view.removeFromSuperview()
-                }
-            }
-            (cell as! ClothPhotoCell).imageView.image = UIImage(data: self.collection[indexPath.row].clothe_image)
+            var imageView = UIImageView(frame: CGRectMake(0, 0, cell.frame.width, cell.frame.height))
+            imageView.contentMode =  UIViewContentMode.ScaleAspectFit
+            imageView.image = UIImage(data: self.collection[indexPath.row].clothe_image)
+            cell.addSubview(imageView)
         }
         
         // Configure the cell

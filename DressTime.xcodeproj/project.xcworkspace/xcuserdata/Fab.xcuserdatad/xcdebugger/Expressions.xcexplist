@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "DressTime.HexColorToName.name (DressTime.HexColorToName)(ObjectiveC.UIColor) -&gt; Swift.Array&lt;Swift.AnyObject&gt;:HexColorToName.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.colorName[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "static DressTime.LoginService.(loginMethod (DressTime.LoginService.Type) -&gt; (Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;, postCompleted : (succeeded : Swift.Bool, msg : Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;) -&gt; ()) -&gt; ()).(closure #1):LoginService.swift">
          <PersistentStrings>
             <PersistentString
@@ -11,21 +19,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.ProfilViewController.collectionView (DressTime.ProfilViewController)(ObjectiveC.UICollectionView, cellForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UICollectionViewCell:ProfilViewController.swift">
+         contextName = "DressTime.TodayViewController.(locationManager (DressTime.TodayViewController) -&gt; (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CLLocationManager&gt;, didUpdateLocations : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Array&lt;Swift.AnyObject&gt;&gt;) -&gt; ()).(closure #1):TodayViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "indexPath.row">
+               value = "channel[&quot;location&quot;]">
             </PersistentString>
             <PersistentString
-               value = "cell.subviews[1].remove()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.ProfilViewController.viewDidLoad (DressTime.ProfilViewController)() -&gt; ():ProfilViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "mailleCollection.count">
+               value = "(condition[&quot;code&quot;] as! String).toInt()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -38,13 +38,32 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.TodayViewController.(locationManager (DressTime.TodayViewController) -&gt; (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CLLocationManager&gt;, didUpdateLocations : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Array&lt;Swift.AnyObject&gt;&gt;) -&gt; ()).(closure #1):TodayViewController.swift">
+         contextName = "DressTime.ProfilViewController.viewDidLoad (DressTime.ProfilViewController)() -&gt; ():ProfilViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "channel[&quot;location&quot;]">
+               value = "mailleCollection.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.CollectionViewController.collectionView (DressTime.CollectionViewController)(ObjectiveC.UICollectionView, cellForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UICollectionViewCell:CollectionViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.frame">
             </PersistentString>
             <PersistentString
-               value = "(condition[&quot;code&quot;] as! String).toInt()">
+               value = "cell.subviews.count ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.ProfilViewController.collectionView (DressTime.ProfilViewController)(ObjectiveC.UICollectionView, cellForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UICollectionViewCell:ProfilViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "cell.subviews[1].remove()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

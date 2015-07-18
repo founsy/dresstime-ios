@@ -12,6 +12,7 @@
 		012A21991B5AB74900CD01D3 /* DressTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A21981B5AB74900CD01D3 /* DressTimeService.swift */; };
 		012A219B1B5AB87000CD01D3 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219A1B5AB87000CD01D3 /* Profil.swift */; };
 		012A219D1B5AB89700CD01D3 /* ProfilsDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219C1B5AB89700CD01D3 /* ProfilsDAL.swift */; };
+		012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */; };
 		01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D21B5935B3003D5E41 /* AppDelegate.swift */; };
 		01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */; };
 		01C454D81B5935B3003D5E41 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D71B5935B3003D5E41 /* TodayViewController.swift */; };
@@ -87,6 +88,7 @@
 		012A21981B5AB74900CD01D3 /* DressTimeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressTimeService.swift; sourceTree = "<group>"; };
 		012A219A1B5AB87000CD01D3 /* Profil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
 		012A219C1B5AB89700CD01D3 /* ProfilsDAL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilsDAL.swift; sourceTree = "<group>"; };
+		012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColorToName.swift; sourceTree = "<group>"; };
 		01C454CD1B5935B3003D5E41 /* DressTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DressTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C454D11B5935B3003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01C454D21B5935B3003D5E41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +157,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		012A219E1B5AD87F00CD01D3 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
 		01C454C41B5935B3003D5E41 = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +188,7 @@
 		01C454CF1B5935B3003D5E41 /* DressTime */ = {
 			isa = PBXGroup;
 			children = (
+				012A219E1B5AD87F00CD01D3 /* Utils */,
 				01C455701B5A641B003D5E41 /* Resources */,
 				01C4556D1B5A601D003D5E41 /* Views */,
 				01C455121B597E1D003D5E41 /* Capture */,
@@ -470,6 +481,7 @@
 				01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */,
 				01C454F71B593909003D5E41 /* JSONService.swift in Sources */,
 				01C455111B597626003D5E41 /* Clothe.swift in Sources */,
+				012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */,
 				01C455091B59703A003D5E41 /* ProfilViewController.swift in Sources */,
 				012A21951B5A777E00CD01D3 /* CollectionViewController.swift in Sources */,
 				01C454FE1B593EB2003D5E41 /* NavigationController.swift in Sources */,
@@ -631,9 +643,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DressTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c61a436f-3d8f-4743-a9f9-84653bf3735b";
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
 			};
 			name = Debug;
@@ -643,9 +657,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DressTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c61a436f-3d8f-4743-a9f9-84653bf3735b";
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
 			};
 			name = Release;
