@@ -21,6 +21,28 @@
 		01C455031B5946D9003D5E41 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455021B5946D9003D5E41 /* LoginService.swift */; };
 		01C455051B594D52003D5E41 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455041B594D52003D5E41 /* WeatherService.swift */; };
 		01C455071B595C54003D5E41 /* artill_clean_icons-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C455061B595C54003D5E41 /* artill_clean_icons-webfont.ttf */; };
+		01C455091B59703A003D5E41 /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455081B59703A003D5E41 /* ProfilViewController.swift */; };
+		01C4550C1B597571003D5E41 /* ClothesDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4550B1B597571003D5E41 /* ClothesDAL.swift */; };
+		01C455111B597626003D5E41 /* Clothe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455101B597626003D5E41 /* Clothe.swift */; };
+		01C455181B597E60003D5E41 /* CameraOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455141B597E60003D5E41 /* CameraOverlayView.swift */; };
+		01C455191B597E60003D5E41 /* CameraSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455151B597E60003D5E41 /* CameraSessionManager.swift */; };
+		01C4553B1B597F25003D5E41 /* DominantColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 01C4553A1B597F25003D5E41 /* DominantColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		01C4554D1B597F25003D5E41 /* DominantColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C455361B597F25003D5E41 /* DominantColor.framework */; };
+		01C4554E1B597F25003D5E41 /* DominantColor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01C455361B597F25003D5E41 /* DominantColor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		01C455601B597F74003D5E41 /* ColorDifference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455561B597F74003D5E41 /* ColorDifference.swift */; };
+		01C455611B597F74003D5E41 /* ColorSpaceConversion.h in Headers */ = {isa = PBXBuildFile; fileRef = 01C455571B597F74003D5E41 /* ColorSpaceConversion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		01C455621B597F74003D5E41 /* ColorSpaceConversion.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C455581B597F74003D5E41 /* ColorSpaceConversion.m */; };
+		01C455631B597F74003D5E41 /* DominantColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455591B597F74003D5E41 /* DominantColors.swift */; };
+		01C455641B597F74003D5E41 /* INVector3.h in Headers */ = {isa = PBXBuildFile; fileRef = 01C4555A1B597F74003D5E41 /* INVector3.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		01C455651B597F74003D5E41 /* INVector3.m in Sources */ = {isa = PBXBuildFile; fileRef = 01C4555B1B597F74003D5E41 /* INVector3.m */; };
+		01C455661B597F74003D5E41 /* INVector3SwiftExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4555C1B597F74003D5E41 /* INVector3SwiftExtensions.swift */; };
+		01C455671B597F74003D5E41 /* KMeans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4555D1B597F74003D5E41 /* KMeans.swift */; };
+		01C455681B597F74003D5E41 /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4555E1B597F74003D5E41 /* Memoization.swift */; };
+		01C455691B597F74003D5E41 /* PlatformExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4555F1B597F74003D5E41 /* PlatformExtensions.swift */; };
+		01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4556B1B598AD8003D5E41 /* OverlayView.swift */; };
+		01C4556F1B5A603C003D5E41 /* ClothPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4556E1B5A603C003D5E41 /* ClothPhotoCell.swift */; };
+		01C455731B5A6438003D5E41 /* overlaygraphic.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C455711B5A6438003D5E41 /* overlaygraphic.png */; };
+		01C455741B5A6438003D5E41 /* scanbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C455721B5A6438003D5E41 /* scanbutton.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,7 +53,28 @@
 			remoteGlobalIDString = 01C454CC1B5935B3003D5E41;
 			remoteInfo = DressTime;
 		};
+		01C4554B1B597F25003D5E41 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01C454C51B5935B3003D5E41 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01C455351B597F25003D5E41;
+			remoteInfo = dominantColor;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		01C455521B597F25003D5E41 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				01C4554E1B597F25003D5E41 /* DominantColor.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		01C454CD1B5935B3003D5E41 /* DressTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DressTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -52,6 +95,28 @@
 		01C455021B5946D9003D5E41 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		01C455041B594D52003D5E41 /* WeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		01C455061B595C54003D5E41 /* artill_clean_icons-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "artill_clean_icons-webfont.ttf"; sourceTree = "<group>"; };
+		01C455081B59703A003D5E41 /* ProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilViewController.swift; sourceTree = "<group>"; };
+		01C4550B1B597571003D5E41 /* ClothesDAL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothesDAL.swift; sourceTree = "<group>"; };
+		01C455101B597626003D5E41 /* Clothe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clothe.swift; sourceTree = "<group>"; };
+		01C455141B597E60003D5E41 /* CameraOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraOverlayView.swift; sourceTree = "<group>"; };
+		01C455151B597E60003D5E41 /* CameraSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraSessionManager.swift; sourceTree = "<group>"; };
+		01C455361B597F25003D5E41 /* DominantColor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DominantColor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		01C455391B597F25003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		01C4553A1B597F25003D5E41 /* DominantColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DominantColor.h; sourceTree = "<group>"; };
+		01C455561B597F74003D5E41 /* ColorDifference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorDifference.swift; sourceTree = "<group>"; };
+		01C455571B597F74003D5E41 /* ColorSpaceConversion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorSpaceConversion.h; sourceTree = "<group>"; };
+		01C455581B597F74003D5E41 /* ColorSpaceConversion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorSpaceConversion.m; sourceTree = "<group>"; };
+		01C455591B597F74003D5E41 /* DominantColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DominantColors.swift; sourceTree = "<group>"; };
+		01C4555A1B597F74003D5E41 /* INVector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = INVector3.h; sourceTree = "<group>"; };
+		01C4555B1B597F74003D5E41 /* INVector3.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = INVector3.m; sourceTree = "<group>"; };
+		01C4555C1B597F74003D5E41 /* INVector3SwiftExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = INVector3SwiftExtensions.swift; sourceTree = "<group>"; };
+		01C4555D1B597F74003D5E41 /* KMeans.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMeans.swift; sourceTree = "<group>"; };
+		01C4555E1B597F74003D5E41 /* Memoization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Memoization.swift; sourceTree = "<group>"; };
+		01C4555F1B597F74003D5E41 /* PlatformExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformExtensions.swift; sourceTree = "<group>"; };
+		01C4556B1B598AD8003D5E41 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		01C4556E1B5A603C003D5E41 /* ClothPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothPhotoCell.swift; sourceTree = "<group>"; };
+		01C455711B5A6438003D5E41 /* overlaygraphic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overlaygraphic.png; sourceTree = "<group>"; };
+		01C455721B5A6438003D5E41 /* scanbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanbutton.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,10 +124,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01C4554D1B597F25003D5E41 /* DominantColor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		01C454E21B5935B3003D5E41 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C455321B597F25003D5E41 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -77,6 +150,7 @@
 			children = (
 				01C454CF1B5935B3003D5E41 /* DressTime */,
 				01C454E81B5935B3003D5E41 /* DressTimeTests */,
+				01C455371B597F25003D5E41 /* DominantColor */,
 				01C454CE1B5935B3003D5E41 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -86,6 +160,7 @@
 			children = (
 				01C454CD1B5935B3003D5E41 /* DressTime.app */,
 				01C454E51B5935B3003D5E41 /* DressTimeTests.xctest */,
+				01C455361B597F25003D5E41 /* DominantColor.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -93,6 +168,10 @@
 		01C454CF1B5935B3003D5E41 /* DressTime */ = {
 			isa = PBXGroup;
 			children = (
+				01C455701B5A641B003D5E41 /* Resources */,
+				01C4556D1B5A601D003D5E41 /* Views */,
+				01C455121B597E1D003D5E41 /* Capture */,
+				01C4550D1B597577003D5E41 /* DataAccessLayer */,
 				01C454FA1B593A03003D5E41 /* Controllers */,
 				01C454F51B5938E9003D5E41 /* WebService */,
 				01C454D21B5935B3003D5E41 /* AppDelegate.swift */,
@@ -148,11 +227,89 @@
 				01C454D71B5935B3003D5E41 /* TodayViewController.swift */,
 				01C454FB1B593A18003D5E41 /* LoginViewController.swift */,
 				01C454FD1B593EB2003D5E41 /* NavigationController.swift */,
+				01C455081B59703A003D5E41 /* ProfilViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
 		};
+		01C4550D1B597577003D5E41 /* DataAccessLayer */ = {
+			isa = PBXGroup;
+			children = (
+				01C455101B597626003D5E41 /* Clothe.swift */,
+				01C4550B1B597571003D5E41 /* ClothesDAL.swift */,
+			);
+			name = DataAccessLayer;
+			sourceTree = "<group>";
+		};
+		01C455121B597E1D003D5E41 /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				01C4556B1B598AD8003D5E41 /* OverlayView.swift */,
+				01C455141B597E60003D5E41 /* CameraOverlayView.swift */,
+				01C455151B597E60003D5E41 /* CameraSessionManager.swift */,
+			);
+			name = Capture;
+			sourceTree = "<group>";
+		};
+		01C455371B597F25003D5E41 /* DominantColor */ = {
+			isa = PBXGroup;
+			children = (
+				01C455561B597F74003D5E41 /* ColorDifference.swift */,
+				01C455571B597F74003D5E41 /* ColorSpaceConversion.h */,
+				01C455581B597F74003D5E41 /* ColorSpaceConversion.m */,
+				01C455591B597F74003D5E41 /* DominantColors.swift */,
+				01C4555A1B597F74003D5E41 /* INVector3.h */,
+				01C4555B1B597F74003D5E41 /* INVector3.m */,
+				01C4555C1B597F74003D5E41 /* INVector3SwiftExtensions.swift */,
+				01C4555D1B597F74003D5E41 /* KMeans.swift */,
+				01C4555E1B597F74003D5E41 /* Memoization.swift */,
+				01C4555F1B597F74003D5E41 /* PlatformExtensions.swift */,
+				01C4553A1B597F25003D5E41 /* DominantColor.h */,
+				01C455381B597F25003D5E41 /* Supporting Files */,
+			);
+			name = DominantColor;
+			path = dominantColor;
+			sourceTree = "<group>";
+		};
+		01C455381B597F25003D5E41 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				01C455391B597F25003D5E41 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		01C4556D1B5A601D003D5E41 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				01C4556E1B5A603C003D5E41 /* ClothPhotoCell.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		01C455701B5A641B003D5E41 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				01C455711B5A6438003D5E41 /* overlaygraphic.png */,
+				01C455721B5A6438003D5E41 /* scanbutton.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		01C455331B597F25003D5E41 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01C455641B597F74003D5E41 /* INVector3.h in Headers */,
+				01C4553B1B597F25003D5E41 /* DominantColor.h in Headers */,
+				01C455611B597F74003D5E41 /* ColorSpaceConversion.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
 		01C454CC1B5935B3003D5E41 /* DressTime */ = {
@@ -162,10 +319,12 @@
 				01C454C91B5935B3003D5E41 /* Sources */,
 				01C454CA1B5935B3003D5E41 /* Frameworks */,
 				01C454CB1B5935B3003D5E41 /* Resources */,
+				01C455521B597F25003D5E41 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				01C4554C1B597F25003D5E41 /* PBXTargetDependency */,
 			);
 			name = DressTime;
 			productName = DressTime;
@@ -190,12 +349,31 @@
 			productReference = 01C454E51B5935B3003D5E41 /* DressTimeTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		01C455351B597F25003D5E41 /* DominantColor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01C4554F1B597F25003D5E41 /* Build configuration list for PBXNativeTarget "DominantColor" */;
+			buildPhases = (
+				01C455311B597F25003D5E41 /* Sources */,
+				01C455321B597F25003D5E41 /* Frameworks */,
+				01C455331B597F25003D5E41 /* Headers */,
+				01C455341B597F25003D5E41 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DominantColor;
+			productName = dominantColor;
+			productReference = 01C455361B597F25003D5E41 /* DominantColor.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		01C454C51B5935B3003D5E41 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = Fab;
 				TargetAttributes = {
@@ -206,6 +384,10 @@
 					01C454E41B5935B3003D5E41 = {
 						CreatedOnToolsVersion = 6.4;
 						TestTargetID = 01C454CC1B5935B3003D5E41;
+					};
+					01C455351B597F25003D5E41 = {
+						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 4K33TFL396;
 					};
 				};
 			};
@@ -224,6 +406,7 @@
 			targets = (
 				01C454CC1B5935B3003D5E41 /* DressTime */,
 				01C454E41B5935B3003D5E41 /* DressTimeTests */,
+				01C455351B597F25003D5E41 /* DominantColor */,
 			);
 		};
 /* End PBXProject section */
@@ -233,7 +416,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01C455731B5A6438003D5E41 /* overlaygraphic.png in Resources */,
 				01C455011B5942F4003D5E41 /* Main.storyboard in Resources */,
+				01C455741B5A6438003D5E41 /* scanbutton.png in Resources */,
 				01C455071B595C54003D5E41 /* artill_clean_icons-webfont.ttf in Resources */,
 				01C454E01B5935B3003D5E41 /* LaunchScreen.xib in Resources */,
 				01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */,
@@ -241,6 +426,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		01C454E31B5935B3003D5E41 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01C455341B597F25003D5E41 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -257,12 +449,19 @@
 				01C454D81B5935B3003D5E41 /* TodayViewController.swift in Sources */,
 				01C455051B594D52003D5E41 /* WeatherService.swift in Sources */,
 				01C454FC1B593A18003D5E41 /* LoginViewController.swift in Sources */,
+				01C4556F1B5A603C003D5E41 /* ClothPhotoCell.swift in Sources */,
 				01C454F91B5939A7003D5E41 /* JSON.swift in Sources */,
 				01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */,
 				01C454F71B593909003D5E41 /* JSONService.swift in Sources */,
+				01C455111B597626003D5E41 /* Clothe.swift in Sources */,
+				01C455091B59703A003D5E41 /* ProfilViewController.swift in Sources */,
 				01C454FE1B593EB2003D5E41 /* NavigationController.swift in Sources */,
+				01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */,
+				01C455181B597E60003D5E41 /* CameraOverlayView.swift in Sources */,
 				01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */,
+				01C4550C1B597571003D5E41 /* ClothesDAL.swift in Sources */,
 				01C455031B5946D9003D5E41 /* LoginService.swift in Sources */,
+				01C455191B597E60003D5E41 /* CameraSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +473,21 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		01C455311B597F25003D5E41 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				01C455691B597F74003D5E41 /* PlatformExtensions.swift in Sources */,
+				01C455621B597F74003D5E41 /* ColorSpaceConversion.m in Sources */,
+				01C455681B597F74003D5E41 /* Memoization.swift in Sources */,
+				01C455661B597F74003D5E41 /* INVector3SwiftExtensions.swift in Sources */,
+				01C455671B597F74003D5E41 /* KMeans.swift in Sources */,
+				01C455601B597F74003D5E41 /* ColorDifference.swift in Sources */,
+				01C455631B597F74003D5E41 /* DominantColors.swift in Sources */,
+				01C455651B597F74003D5E41 /* INVector3.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -281,6 +495,11 @@
 			isa = PBXTargetDependency;
 			target = 01C454CC1B5935B3003D5E41 /* DressTime */;
 			targetProxy = 01C454E61B5935B3003D5E41 /* PBXContainerItemProxy */;
+		};
+		01C4554C1B597F25003D5E41 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01C455351B597F25003D5E41 /* DominantColor */;
+			targetProxy = 01C4554B1B597F25003D5E41 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -395,6 +614,7 @@
 				INFOPLIST_FILE = DressTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRINGS_FILE_OUTPUT_ENCODING = binary;
 			};
 			name = Debug;
 		};
@@ -406,6 +626,7 @@
 				INFOPLIST_FILE = DressTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRINGS_FILE_OUTPUT_ENCODING = binary;
 			};
 			name = Release;
 		};
@@ -443,6 +664,48 @@
 			};
 			name = Release;
 		};
+		01C455501B597F25003D5E41 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = dominantColor/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		01C455511B597F25003D5E41 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = dominantColor/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -462,6 +725,7 @@
 				01C454F11B5935B3003D5E41 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		01C454F21B5935B3003D5E41 /* Build configuration list for PBXNativeTarget "DressTimeTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +734,16 @@
 				01C454F41B5935B3003D5E41 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		01C4554F1B597F25003D5E41 /* Build configuration list for PBXNativeTarget "DominantColor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01C455501B597F25003D5E41 /* Debug */,
+				01C455511B597F25003D5E41 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

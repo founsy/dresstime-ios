@@ -1,4 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model name="Test1.xcdatamodel" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <elements/>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Clothe" representedClassName="DressTime.Clothe" syncable="YES">
+        <attribute name="clothe_colors" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clothe_cut" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clothe_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="clothe_image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="clothe_isUnis" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="clothe_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clothe_partnerid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="clothe_partnerName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clothe_pattern" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clothe_subtype" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clothe_type" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Clothe" positionX="-63" positionY="-18" width="128" height="210"/>
+    </elements>
 </model>

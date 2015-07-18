@@ -121,7 +121,7 @@
                                     <segue destination="H2a-aL-xhL" kind="show" id="uy5-a7-nit"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaN-zo-5wr">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" misplaced="YES" text="." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaN-zo-5wr">
                                 <rect key="frame" x="281" y="157" width="37" height="69"/>
                                 <fontDescription key="fontDescription" name="artillcleanweathericons-Regular" family="artill clean weather icons" pointSize="70"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -184,10 +184,10 @@
             </objects>
             <point key="canvasLocation" x="1935" y="429"/>
         </scene>
-        <!--View Controller-->
+        <!--Profil View Controller-->
         <scene sceneID="e7R-u6-Iv5">
             <objects>
-                <viewController id="H2a-aL-xhL" sceneMemberID="viewController">
+                <viewController id="H2a-aL-xhL" customClass="ProfilViewController" customModule="DressTime" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5ow-tj-c3g"/>
                         <viewControllerLayoutGuide type="bottom" id="QhV-kB-caD"/>
@@ -195,12 +195,88 @@
                     <view key="view" contentMode="scaleToFill" id="bje-MN-K8f">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Maille" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRn-c9-TWw">
+                                <rect key="frame" x="16" y="104" width="139" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Top" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hvR-hL-XXf">
+                                <rect key="frame" x="16" y="268" width="139" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="139" id="ojB-1d-P7F"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Pants" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oB5-hb-jcp">
+                                <rect key="frame" x="16" y="432" width="139" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" restorationIdentifier="mailleCollectionView" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JdU-7E-B5a">
+                                <rect key="frame" x="16" y="133" width="568" height="116"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="116" id="1KC-hb-sAB"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EQY-hl-QYp">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CustomCell" id="OJu-l9-0hg" customClass="ClothPhotoCell" customModule="DressTime" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="scanbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="fS6-ya-Gqq">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </view>
+                                        <connections>
+                                            <outlet property="imageView" destination="fS6-ya-Gqq" id="3dO-JM-a0r"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="H2a-aL-xhL" id="rZw-N1-AKq"/>
+                                    <outlet property="delegate" destination="H2a-aL-xhL" id="QaG-hK-YyY"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hvR-hL-XXf" firstAttribute="trailing" secondItem="oB5-hb-jcp" secondAttribute="trailing" id="1NE-Ey-RCU"/>
+                            <constraint firstItem="JdU-7E-B5a" firstAttribute="top" secondItem="oRn-c9-TWw" secondAttribute="bottom" constant="8" symbolic="YES" id="AQr-pD-8SH"/>
+                            <constraint firstAttribute="centerX" secondItem="JdU-7E-B5a" secondAttribute="centerX" id="BMA-GY-owR"/>
+                            <constraint firstItem="JdU-7E-B5a" firstAttribute="trailing" secondItem="bje-MN-K8f" secondAttribute="trailingMargin" id="G8N-KW-2VD"/>
+                            <constraint firstItem="hvR-hL-XXf" firstAttribute="top" secondItem="JdU-7E-B5a" secondAttribute="bottom" constant="19" id="UeC-Yw-7mW"/>
+                            <constraint firstItem="oRn-c9-TWw" firstAttribute="top" secondItem="5ow-tj-c3g" secondAttribute="bottom" constant="40" id="dZ5-rh-dY4"/>
+                            <constraint firstItem="JdU-7E-B5a" firstAttribute="top" secondItem="5ow-tj-c3g" secondAttribute="bottom" constant="69" id="dxy-Lm-nJK"/>
+                            <constraint firstItem="hvR-hL-XXf" firstAttribute="trailing" secondItem="oRn-c9-TWw" secondAttribute="trailing" id="h2f-PS-j6a"/>
+                            <constraint firstItem="JdU-7E-B5a" firstAttribute="leading" secondItem="bje-MN-K8f" secondAttribute="leadingMargin" id="jyA-hI-Ope"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mailleCollectionView" destination="JdU-7E-B5a" id="608-a5-PYR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hI8-Ym-tK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2830" y="429"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="scanbutton.png" width="60" height="30"/>
+    </resources>
 </document>

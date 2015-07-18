@@ -21,7 +21,7 @@ class TodayViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
          super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -71,6 +71,7 @@ class TodayViewController: UIViewController, CLLocationManagerDelegate {
         })
     
     }
+    
     func getValueWeatherCode(code: Int) -> String{
         switch code {
             case 0:

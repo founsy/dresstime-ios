@@ -11,6 +11,25 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "DressTime.ProfilViewController.collectionView (DressTime.ProfilViewController)(ObjectiveC.UICollectionView, cellForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UICollectionViewCell:ProfilViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "cell.subviews[1].remove()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.ProfilViewController.viewDidLoad (DressTime.ProfilViewController)() -&gt; ():ProfilViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "mailleCollection.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DressTime.TodayViewController.(locationManager (DressTime.TodayViewController) -&gt; (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CLLocationManager&gt;, didUpdateLocations : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Array&lt;Swift.AnyObject&gt;&gt;) -&gt; ()).(closure #1):TodayViewController.swift">
          <PersistentStrings>
             <PersistentString

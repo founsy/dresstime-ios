@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>dominantColor.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -18,6 +23,16 @@
 			<true/>
 		</dict>
 		<key>01C454E41B5935B3003D5E41</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>01C455351B597F25003D5E41</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>01C4553F1B597F25003D5E41</key>
 		<dict>
 			<key>primary</key>
 			<true/>
