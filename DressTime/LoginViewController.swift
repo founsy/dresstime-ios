@@ -24,15 +24,20 @@ class LoginViewController: UIViewController {
         
         LoginService.loginMethod(jsonObject, postCompleted: { (succeeded: Bool, msg: [String: AnyObject]) -> () in
             if (succeeded){
+                println(msg)
+                let dal = ProfilsDAL()
+                if let profil = dal.fetch(self.loginText.text){
+                    profil.access_token = msg["access_token"] as! String
+                    profil.refresh_token = msg["refresh_token"] as! String
+                    dal.update(profil)
+                } else {
+                    dal.save(self.loginText.text, access_token: msg["access_token"] as! String, refresh_token: msg["refresh_token"] as! String, expire_in: msg["expires_in"] as! Int, name: self.loginText.text, gender: "M", temp_unit: "C")
+                }
+                
                 dispatch_async(dispatch_get_main_queue(),  { () -> Void in
                     
                     var appDelegateTemp = UIApplication.sharedApplication().delegate;
                     appDelegateTemp!.window!!.rootViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as? UIViewController
-                    
-                    /*let todayController = TodayController()
-                    let navController = NavigationController(rootViewController: todayController)
-                    
-                    self.presentViewController(navController, animated: true, completion: nil)*/
                 })
                 
             } else {

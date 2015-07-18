@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		012A21951B5A777E00CD01D3 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A21941B5A777E00CD01D3 /* CollectionViewController.swift */; };
 		012A21971B5AA3C100CD01D3 /* ClotheDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A21961B5AA3C100CD01D3 /* ClotheDetailController.swift */; };
+		012A21991B5AB74900CD01D3 /* DressTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A21981B5AB74900CD01D3 /* DressTimeService.swift */; };
+		012A219B1B5AB87000CD01D3 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219A1B5AB87000CD01D3 /* Profil.swift */; };
+		012A219D1B5AB89700CD01D3 /* ProfilsDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219C1B5AB89700CD01D3 /* ProfilsDAL.swift */; };
 		01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D21B5935B3003D5E41 /* AppDelegate.swift */; };
 		01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */; };
 		01C454D81B5935B3003D5E41 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D71B5935B3003D5E41 /* TodayViewController.swift */; };
@@ -81,6 +84,9 @@
 /* Begin PBXFileReference section */
 		012A21941B5A777E00CD01D3 /* CollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		012A21961B5AA3C100CD01D3 /* ClotheDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClotheDetailController.swift; sourceTree = "<group>"; };
+		012A21981B5AB74900CD01D3 /* DressTimeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressTimeService.swift; sourceTree = "<group>"; };
+		012A219A1B5AB87000CD01D3 /* Profil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
+		012A219C1B5AB89700CD01D3 /* ProfilsDAL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilsDAL.swift; sourceTree = "<group>"; };
 		01C454CD1B5935B3003D5E41 /* DressTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DressTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C454D11B5935B3003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01C454D21B5935B3003D5E41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -221,6 +227,7 @@
 				01C455021B5946D9003D5E41 /* LoginService.swift */,
 				01C455041B594D52003D5E41 /* WeatherService.swift */,
 				01C455061B595C54003D5E41 /* artill_clean_icons-webfont.ttf */,
+				012A21981B5AB74900CD01D3 /* DressTimeService.swift */,
 			);
 			name = WebService;
 			sourceTree = "<group>";
@@ -241,8 +248,10 @@
 		01C4550D1B597577003D5E41 /* DataAccessLayer */ = {
 			isa = PBXGroup;
 			children = (
+				012A219A1B5AB87000CD01D3 /* Profil.swift */,
 				01C455101B597626003D5E41 /* Clothe.swift */,
 				01C4550B1B597571003D5E41 /* ClothesDAL.swift */,
+				012A219C1B5AB89700CD01D3 /* ProfilsDAL.swift */,
 			);
 			name = DataAccessLayer;
 			sourceTree = "<group>";
@@ -455,6 +464,7 @@
 				01C454D81B5935B3003D5E41 /* TodayViewController.swift in Sources */,
 				01C455051B594D52003D5E41 /* WeatherService.swift in Sources */,
 				01C454FC1B593A18003D5E41 /* LoginViewController.swift in Sources */,
+				012A219B1B5AB87000CD01D3 /* Profil.swift in Sources */,
 				01C4556F1B5A603C003D5E41 /* ClothPhotoCell.swift in Sources */,
 				01C454F91B5939A7003D5E41 /* JSON.swift in Sources */,
 				01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */,
@@ -466,8 +476,10 @@
 				01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */,
 				01C455181B597E60003D5E41 /* CameraOverlayView.swift in Sources */,
 				01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */,
+				012A219D1B5AB89700CD01D3 /* ProfilsDAL.swift in Sources */,
 				01C4550C1B597571003D5E41 /* ClothesDAL.swift in Sources */,
 				01C455031B5946D9003D5E41 /* LoginService.swift in Sources */,
+				012A21991B5AB74900CD01D3 /* DressTimeService.swift in Sources */,
 				01C455191B597E60003D5E41 /* CameraSessionManager.swift in Sources */,
 				012A21971B5AA3C100CD01D3 /* ClotheDetailController.swift in Sources */,
 			);
