@@ -19,6 +19,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "DressTime.ClothesDAL.updateClotheId (DressTime.ClothesDAL)() -&gt; ():ClothesDAL.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "clothe.clothe_id">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DressTime.TodayViewController.(locationManager (DressTime.TodayViewController) -&gt; (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CLLocationManager&gt;, didUpdateLocations : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Array&lt;Swift.AnyObject&gt;&gt;) -&gt; ()).(closure #1):TodayViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -34,6 +42,14 @@
          <PersistentStrings>
             <PersistentString
                value = "segue.destinationViewController ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static DressTime.DressTimeService.getTodayOutfits (DressTime.DressTimeService.Type)(Swift.String, style : Swift.String, todayCompleted : (succeeded : Swift.Bool, msg : Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;) -&gt; ()) -&gt; ():DressTimeService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "println(jsonObject)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -64,6 +80,17 @@
             </PersistentString>
             <PersistentString
                value = "cell.subviews[1].remove()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.TodayViewController.(updateWeather (DressTime.TodayViewController) -&gt; (Swift.Int, high : Swift.String, low : Swift.String, city : Swift.String) -&gt; ()).(closure #2):TodayViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "outfit[&quot;maille&quot;][&quot;clothe_id&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = " item.clothe_image">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

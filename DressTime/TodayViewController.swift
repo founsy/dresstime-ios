@@ -19,9 +19,13 @@ class TodayViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var lowTemp: UILabel!
     @IBOutlet weak var cityText: UILabel!
     
+    @IBOutlet weak var mailleOutfit: UIImageView!
+    @IBOutlet weak var topOutfit: UIImageView!
+    @IBOutlet weak var pantsOutfit: UIImageView!
+    
     override func viewDidLoad() {
          super.viewDidLoad()
-        
+    
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -69,7 +73,33 @@ class TodayViewController: UIViewController, CLLocationManagerDelegate {
             self.highTemp.text = high
             self.cityText.text = city
         })
-    
+        DressTimeService.getTodayOutfits("myapi", style: "casual", todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
+             dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                let clotheDal = ClothesDAL()
+                if (msg.count > 0){
+                    var elem = msg[0]
+                    if let outfit: AnyObject = elem["outfit"] {
+                        println(outfit)
+                        if let maille: AnyObject = outfit["maille"]{
+                            if let item = clotheDal.fetch(maille["clothe_id"] as! String){
+                                self.mailleOutfit.image = UIImage(data: item.clothe_image)
+                            }
+                        }
+                        if let top: AnyObject = outfit["top"]{
+                            if let item = clotheDal.fetch(top["clothe_id"] as! String){
+                                self.topOutfit.image = UIImage(data: item.clothe_image)
+                            }
+                        }
+                        if let pants: AnyObject = outfit["pants"]{
+                            if let item = clotheDal.fetch(pants["clothe_id"] as! String){
+                                self.pantsOutfit.image = UIImage(data: item.clothe_image)
+                            }
+                        }
+                    }
+                }
+            })
+        })
+        
     }
     
     func getValueWeatherCode(code: Int) -> String{

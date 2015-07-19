@@ -151,19 +151,46 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scanbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="WGb-BZ-ifr">
+                                <rect key="frame" x="69" y="289" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="2qN-hh-JJ8"/>
+                                    <constraint firstAttribute="height" constant="100" id="oTE-Fj-tQa"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scanbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="kfw-k3-t2y">
+                                <rect key="frame" x="69" y="355" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="RBF-6v-n3o"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scanbutton.png" translatesAutoresizingMaskIntoConstraints="NO" id="vB6-bk-FnV">
+                                <rect key="frame" x="69" y="418" width="100" height="100"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="WGb-BZ-ifr" firstAttribute="leading" secondItem="OoH-7u-Lug" secondAttribute="leadingMargin" constant="53" id="1fC-aX-xuq"/>
                             <constraint firstItem="XaN-zo-5wr" firstAttribute="top" secondItem="BFa-2o-eQJ" secondAttribute="bottom" constant="93" id="8uo-li-g9k"/>
+                            <constraint firstItem="F37-4s-jeS" firstAttribute="top" secondItem="vB6-bk-FnV" secondAttribute="bottom" constant="82" id="AyY-ST-xjS"/>
+                            <constraint firstItem="kfw-k3-t2y" firstAttribute="leading" secondItem="OoH-7u-Lug" secondAttribute="leadingMargin" constant="53" id="Byc-zT-ihq"/>
                             <constraint firstAttribute="centerX" secondItem="gl4-wF-AAx" secondAttribute="centerX" id="Cdz-bn-WI0"/>
+                            <constraint firstItem="vB6-bk-FnV" firstAttribute="top" secondItem="WGb-BZ-ifr" secondAttribute="bottom" constant="29" id="FN2-0R-Yah"/>
+                            <constraint firstItem="vB6-bk-FnV" firstAttribute="leading" secondItem="OoH-7u-Lug" secondAttribute="leadingMargin" constant="53" id="GoM-8c-GN7"/>
+                            <constraint firstItem="kfw-k3-t2y" firstAttribute="top" secondItem="WGb-BZ-ifr" secondAttribute="bottom" constant="-34" id="I7n-BU-o42"/>
                             <constraint firstItem="DBF-4T-Ux3" firstAttribute="leading" secondItem="OoH-7u-Lug" secondAttribute="leadingMargin" constant="60" id="K9Z-nF-k6E"/>
                             <constraint firstItem="uPm-UC-QSm" firstAttribute="top" secondItem="BFa-2o-eQJ" secondAttribute="bottom" constant="102" id="MZQ-Xk-KVE"/>
+                            <constraint firstItem="WGb-BZ-ifr" firstAttribute="leading" secondItem="DBF-4T-Ux3" secondAttribute="trailing" constant="-67" id="QF7-OQ-XD5"/>
                             <constraint firstAttribute="centerX" secondItem="XaN-zo-5wr" secondAttribute="centerX" id="YY0-4k-DiE"/>
+                            <constraint firstItem="WGb-BZ-ifr" firstAttribute="trailing" secondItem="kfw-k3-t2y" secondAttribute="trailing" id="Yca-ZP-4ZH"/>
                             <constraint firstAttribute="trailingMargin" secondItem="uPm-UC-QSm" secondAttribute="trailing" constant="68" id="eAb-4r-8H4"/>
                             <constraint firstItem="XaN-zo-5wr" firstAttribute="leading" secondItem="DBF-4T-Ux3" secondAttribute="trailing" constant="140" id="g2x-BY-2mP"/>
                             <constraint firstItem="gl4-wF-AAx" firstAttribute="top" secondItem="BFa-2o-eQJ" secondAttribute="bottom" constant="64" id="qIl-6c-ShR"/>
                             <constraint firstItem="uPm-UC-QSm" firstAttribute="leading" secondItem="XaN-zo-5wr" secondAttribute="trailing" constant="132" id="s8K-iy-ML3"/>
+                            <constraint firstItem="WGb-BZ-ifr" firstAttribute="trailing" secondItem="vB6-bk-FnV" secondAttribute="trailing" id="sNu-Ms-YoC"/>
+                            <constraint firstItem="WGb-BZ-ifr" firstAttribute="top" secondItem="OoH-7u-Lug" secondAttribute="top" constant="289" id="sh8-0Y-kcH"/>
                             <constraint firstItem="DBF-4T-Ux3" firstAttribute="top" secondItem="BFa-2o-eQJ" secondAttribute="bottom" constant="102" id="usM-24-c3Q"/>
+                            <constraint firstItem="F37-4s-jeS" firstAttribute="top" secondItem="kfw-k3-t2y" secondAttribute="bottom" constant="145" id="zR6-yc-3L2"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -178,6 +205,9 @@
                         <outlet property="highTemp" destination="uPm-UC-QSm" id="hh6-Cd-FJk"/>
                         <outlet property="iconWeather" destination="XaN-zo-5wr" id="UH6-Ib-1hW"/>
                         <outlet property="lowTemp" destination="DBF-4T-Ux3" id="0AN-ur-LoK"/>
+                        <outlet property="mailleOutfit" destination="WGb-BZ-ifr" id="CeJ-Q3-dtS"/>
+                        <outlet property="pantsOutfit" destination="vB6-bk-FnV" id="j0V-eg-ep5"/>
+                        <outlet property="topOutfit" destination="kfw-k3-t2y" id="uod-3g-Gr8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bFK-Am-LvJ" userLabel="First Responder" sceneMemberID="firstResponder"/>

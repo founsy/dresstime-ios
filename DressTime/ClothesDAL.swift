@@ -19,7 +19,7 @@ class ClothesDAL {
     }
     
     func fetch(type: String) -> [Clothe]{
-        var clothes  = [Clothe]() // Where Locations = your NSManaged Class
+        var clothes  = [Clothe]()
         
         var fetchRequest = NSFetchRequest(entityName: "Clothe")
         let predicate = NSPredicate(format: "clothe_type = %@", type)
@@ -31,6 +31,23 @@ class ClothesDAL {
         
         
         return clothes
+    }
+    
+    func fetch(clotheId: String) -> Clothe? {
+        var fetchRequest = NSFetchRequest(entityName: "Clothe")
+        let predicate = NSPredicate(format: "clothe_id = %@", clotheId)
+        
+        // Set the predicate on the fetch request
+        fetchRequest.predicate = predicate
+        
+        if let fetchResults = self.managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Clothe] {
+            if (fetchResults.count > 0){
+                return fetchResults[0]
+            } else {
+                return nil
+            }
+        }
+        return nil
     }
     
     func fetch() -> [Clothe]{
@@ -82,6 +99,24 @@ class ClothesDAL {
             NSLog("Contact Saved");
         }
     }
+    
+    func updateClotheId(){
+        var fetchedResultsController: NSFetchedResultsController?
+        var fetchRequest = NSFetchRequest(entityName: "Clothe")
+        if let fetchResults = self.managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Clothe] {
+            for clothe in fetchResults {
+                clothe.clothe_id = NSUUID().UUIDString
+            }
+        }
+        var error: NSError?
+        managedObjectContext.save(&error)
+        
+        if let err = error {
+            NSLog(err.localizedFailureReason!);
+        } else {
+            NSLog("Contact Saved");
+        }
 
+    }
 
 }

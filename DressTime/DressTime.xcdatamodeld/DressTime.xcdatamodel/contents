@@ -3,7 +3,7 @@
     <entity name="Clothe" representedClassName="DressTime.Clothe" syncable="YES">
         <attribute name="clothe_colors" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="clothe_cut" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="clothe_id" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="clothe_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="clothe_image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="clothe_isUnis" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="clothe_name" optional="YES" attributeType="String" syncable="YES"/>

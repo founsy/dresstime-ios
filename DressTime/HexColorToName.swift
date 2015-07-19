@@ -15,6 +15,7 @@ class HexColorToName {
         var color: String, rgb:[Int], hsl: [Int], uiColor: UIColor;
         for(var i = 0; i < self.colorName.count; i++)
         {
+            self.colorName[i][0] = (self.colorName[i][0] as! String).uppercaseString
             color = "#" + (self.colorName[i][0] as! String);
             uiColor = colorWithHexString(color)
             rgb = self.rgb(uiColor);
@@ -27,7 +28,7 @@ class HexColorToName {
     
     func name(uiColor: UIColor) -> [AnyObject]{
         
-        var color = hexStringFromColor(uiColor)
+        var color = hexStringFromColor(uiColor).uppercaseString
         var rgb = self.rgb(uiColor);
         var r = rgb[0], g = rgb[1], b = rgb[2];
         var hsl = self.hsl(uiColor);
@@ -129,6 +130,76 @@ class HexColorToName {
     }
     
     var colorName: [[AnyObject]] = [
+        ["293133", "Anthracite grey"],
+        ["F5F5DC", "Beige"],
+        ["000000", "Black"],
+        ["0000ff", "Blue"],
+        ["E1D4C0","Bone"],
+        ["841F27", "Brick"],
+        ["663300", "Brown"],
+        ["8C001A", "Burgundy"],
+        ["C19A6B", "Camel"],
+        ["ff7f50", "Coral"],
+        ["6495ed", "Cornflower blue"],
+        ["FFFFCC", "Cream"],
+        ["000080", "Dark blue"],
+        ["2f4f4f", "Dark grey"],
+        ["4b0082", "Dark indigo "],
+        ["096c8a", "dusty blue "],
+        ["F3EFE0", "Ecru "],
+        ["F4F7EC", "ecru-white  "],
+        ["4A7B6F", "Faded blue "],
+        ["FF77FF", "Fuchsia "],
+        ["00ff00", "Green"],
+        ["808080", "Gray"],
+        ["D3D3D3", "Grey marl"],
+        ["A5F2F3", "Ice   "],
+        ["4b0082", "Indigo"],
+        ["000F55", "Ink blue   "],
+        ["B378D3", "Lavender   "],
+        ["add8e6", "Light blue "],
+        ["98fb98", "Light green"],
+        ["d3d3d3", "Light grey "],
+        ["876bdc", "Light indigo"],
+        ["f0e68c", "Light khaki"],
+        ["ffb347", "Light orange"],
+        ["ffb6c1", "Light pink "],
+        ["FFCCCB", "Light red "],
+        ["f4a460", "Light sand "],
+        ["d2b48c", "Light tan  "],
+        ["ffffe0", "Light yellow"],
+        ["800000", "Maroon"],
+        ["2872a5", "Mid-blue"],
+        ["7d8170", "Mid-grey"],
+        ["003366", "Midnight blue"],
+        ["98ff98", "Mint"],
+        ["8C8984", "Natural"],
+        ["000080", "Navy blue"],
+        ["39FF14", "Neon green"],
+        ["d526b5", "Neon pink"],
+        ["1C6BA0", "OCEAN BLUE"],
+        ["CC7722", "Ochre "],
+        ["ffa500", "Orange"],
+        ["CCD3D1", "Pearl grey "],
+        ["19586d", "Petrol blue"],
+        ["ff69b4", "Pink  "],
+        ["551a8b", "Purple"],
+        ["ff0000", "Red   "],
+        ["80461B", "Russet"],
+        ["ff8c69", "Salmon"],
+        ["c2b280", "Sand  "],
+        ["54ff9f", "Sea green  "],
+        ["7ec0ee", "Sky blue   "],
+        ["006666", "Stone "],
+        ["d2b48c", "Tan   "],
+        ["34DDDD", "Turquoise  "],
+        ["ffffff", "White "],
+        ["ffff00", "Yellow"]
+    ]
+    
+    
+    
+    /*[
         ["000000", "Black"],
         ["000080", "Navy Blue"],
         ["0000C8", "Dark Blue"],
@@ -1695,7 +1766,7 @@ class HexColorToName {
         ["FFFFB4", "Portafino"],
         ["FFFFF0", "Ivory"],
         ["FFFFFF", "White"]
-    ]
+    ] */
 
 
 
