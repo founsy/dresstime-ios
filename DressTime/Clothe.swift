@@ -23,10 +23,9 @@ class Clothe: NSManagedObject {
     @NSManaged var clothe_image: NSData
     @NSManaged var clothe_colors: String
     
-    func toDictionnary() -> [String:AnyObject] {
+    func toDictionnary() -> NSDictionary {
         var attributes = Array(self.entity.attributesByName.keys)
         var dict = self.dictionaryWithValuesForKeys(attributes)
-        dict.removeValueForKey("clothe_image")
         return dict as! [String:AnyObject];
     }
 

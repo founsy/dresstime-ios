@@ -23,6 +23,15 @@ class TodayViewController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var topOutfit: UIImageView!
     @IBOutlet weak var pantsOutfit: UIImageView!
     
+    @IBOutlet weak var outfitCollectionView: UICollectionView!
+    
+    @IBOutlet weak var stylePicker: UIPickerView!
+    
+    var outfitDataSource: OutfitCollectionViewController!
+    
+    var styleData = ["business", "casual", "fashion", "sportwear"]
+    
+    
     override func viewDidLoad() {
          super.viewDidLoad()
     
@@ -31,6 +40,13 @@ class TodayViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
        
+        self.outfitDataSource = OutfitCollectionViewController(outfits: [[String:AnyObject]](), collectionView: outfitCollectionView)
+        self.outfitCollectionView.dataSource = self.outfitDataSource
+        self.outfitCollectionView.delegate = self.outfitDataSource
+        
+        self.stylePicker.delegate = self
+        self.stylePicker.dataSource = self
+        //sendClotheData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -38,6 +54,15 @@ class TodayViewController: UIViewController, CLLocationManagerDelegate {
         // Dispose of any resources that can be recreated.
     }
     
+    func sendClotheData(){
+        let dal = ClothesDAL()
+        let clothes = dal.fetch()
+        for clothe in clothes {
+            DressTimeService.saveClothe("myapi", clotheId: clothe.clothe_id, dressingCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
+                //println(msg)
+            })
+        }
+    }
     
     /***/
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
@@ -73,33 +98,6 @@ class TodayViewController: UIViewController, CLLocationManagerDelegate {
             self.highTemp.text = high
             self.cityText.text = city
         })
-        DressTimeService.getTodayOutfits("myapi", style: "casual", todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
-             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                let clotheDal = ClothesDAL()
-                if (msg.count > 0){
-                    var elem = msg[0]
-                    if let outfit: AnyObject = elem["outfit"] {
-                        println(outfit)
-                        if let maille: AnyObject = outfit["maille"]{
-                            if let item = clotheDal.fetch(maille["clothe_id"] as! String){
-                                self.mailleOutfit.image = UIImage(data: item.clothe_image)
-                            }
-                        }
-                        if let top: AnyObject = outfit["top"]{
-                            if let item = clotheDal.fetch(top["clothe_id"] as! String){
-                                self.topOutfit.image = UIImage(data: item.clothe_image)
-                            }
-                        }
-                        if let pants: AnyObject = outfit["pants"]{
-                            if let item = clotheDal.fetch(pants["clothe_id"] as! String){
-                                self.pantsOutfit.image = UIImage(data: item.clothe_image)
-                            }
-                        }
-                    }
-                }
-            })
-        })
-        
     }
     
     func getValueWeatherCode(code: Int) -> String{
@@ -209,6 +207,40 @@ class TodayViewController: UIViewController, CLLocationManagerDelegate {
         println(error)
     }
 
+}
 
+extension TodayViewController : UIPickerViewDataSource,UIPickerViewDelegate {
+
+    //MARK: - Delegates and data sources
+    //MARK: Data Sources
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return self.styleData.count
+    }
+    
+    //MARK: Delegates
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+        return self.styleData[row]
+    }
+    
+    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString?{
+        let titleData = self.styleData[row]
+        var myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 15.0)!,NSForegroundColorAttributeName:UIColor.blackColor()])
+        
+        return myTitle
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let titleData = self.styleData[row]
+        DressTimeService.getTodayOutfits("myapi", style: titleData, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.outfitDataSource.collection = msg
+                self.outfitCollectionView.reloadData()
+            })
+        })
+    }
+    
 }
 

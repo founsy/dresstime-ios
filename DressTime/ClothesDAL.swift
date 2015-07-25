@@ -75,10 +75,11 @@ class ClothesDAL {
     }
     
     
-    func save(partnerId: NSNumber, partnerName: String, type: String, subType: String, name: String, isUnis: Bool, pattern: String, cut: String, image: NSData, colors: String){
+    func save(clotheId: String, partnerId: NSNumber, partnerName: String, type: String, subType: String, name: String, isUnis: Bool, pattern: String, cut: String, image: NSData, colors: String){
         let entityDescription = NSEntityDescription.entityForName("Clothe", inManagedObjectContext: managedObjectContext);
         let clothe = Clothe(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext);
         
+        clothe.clothe_id = clotheId
         clothe.clothe_partnerid = partnerId
         clothe.clothe_partnerName = partnerName
         clothe.clothe_type = type

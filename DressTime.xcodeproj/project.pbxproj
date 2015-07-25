@@ -13,6 +13,8 @@
 		012A219B1B5AB87000CD01D3 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219A1B5AB87000CD01D3 /* Profil.swift */; };
 		012A219D1B5AB89700CD01D3 /* ProfilsDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219C1B5AB89700CD01D3 /* ProfilsDAL.swift */; };
 		012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */; };
+		013996401B5BB739004B2DE0 /* OutfitCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */; };
+		013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013996411B5CED57004B2DE0 /* DressingSynchro.swift */; };
 		01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D21B5935B3003D5E41 /* AppDelegate.swift */; };
 		01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */; };
 		01C454D81B5935B3003D5E41 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D71B5935B3003D5E41 /* TodayViewController.swift */; };
@@ -20,7 +22,6 @@
 		01C454E01B5935B3003D5E41 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DE1B5935B3003D5E41 /* LaunchScreen.xib */; };
 		01C454EC1B5935B3003D5E41 /* DressTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454EB1B5935B3003D5E41 /* DressTimeTests.swift */; };
 		01C454F71B593909003D5E41 /* JSONService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454F61B593909003D5E41 /* JSONService.swift */; };
-		01C454F91B5939A7003D5E41 /* JSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454F81B5939A7003D5E41 /* JSON.swift */; };
 		01C454FC1B593A18003D5E41 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454FB1B593A18003D5E41 /* LoginViewController.swift */; };
 		01C454FE1B593EB2003D5E41 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454FD1B593EB2003D5E41 /* NavigationController.swift */; };
 		01C455011B5942F4003D5E41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C454FF1B5942F4003D5E41 /* Main.storyboard */; };
@@ -89,6 +90,8 @@
 		012A219A1B5AB87000CD01D3 /* Profil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
 		012A219C1B5AB89700CD01D3 /* ProfilsDAL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilsDAL.swift; sourceTree = "<group>"; };
 		012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColorToName.swift; sourceTree = "<group>"; };
+		0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitCollectionViewController.swift; sourceTree = "<group>"; };
+		013996411B5CED57004B2DE0 /* DressingSynchro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressingSynchro.swift; sourceTree = "<group>"; };
 		01C454CD1B5935B3003D5E41 /* DressTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DressTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C454D11B5935B3003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01C454D21B5935B3003D5E41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -100,7 +103,6 @@
 		01C454EA1B5935B3003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01C454EB1B5935B3003D5E41 /* DressTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressTimeTests.swift; sourceTree = "<group>"; };
 		01C454F61B593909003D5E41 /* JSONService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONService.swift; sourceTree = "<group>"; };
-		01C454F81B5939A7003D5E41 /* JSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSON.swift; sourceTree = "<group>"; };
 		01C454FB1B593A18003D5E41 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		01C454FD1B593EB2003D5E41 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		01C455001B5942F4003D5E41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */,
+				013996411B5CED57004B2DE0 /* DressingSynchro.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -234,7 +237,6 @@
 			isa = PBXGroup;
 			children = (
 				01C454F61B593909003D5E41 /* JSONService.swift */,
-				01C454F81B5939A7003D5E41 /* JSON.swift */,
 				01C455021B5946D9003D5E41 /* LoginService.swift */,
 				01C455041B594D52003D5E41 /* WeatherService.swift */,
 				01C455061B595C54003D5E41 /* artill_clean_icons-webfont.ttf */,
@@ -252,6 +254,7 @@
 				01C455081B59703A003D5E41 /* ProfilViewController.swift */,
 				012A21941B5A777E00CD01D3 /* CollectionViewController.swift */,
 				012A21961B5AA3C100CD01D3 /* ClotheDetailController.swift */,
+				0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -477,10 +480,11 @@
 				01C454FC1B593A18003D5E41 /* LoginViewController.swift in Sources */,
 				012A219B1B5AB87000CD01D3 /* Profil.swift in Sources */,
 				01C4556F1B5A603C003D5E41 /* ClothPhotoCell.swift in Sources */,
-				01C454F91B5939A7003D5E41 /* JSON.swift in Sources */,
 				01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */,
 				01C454F71B593909003D5E41 /* JSONService.swift in Sources */,
 				01C455111B597626003D5E41 /* Clothe.swift in Sources */,
+				013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */,
+				013996401B5BB739004B2DE0 /* OutfitCollectionViewController.swift in Sources */,
 				012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */,
 				01C455091B59703A003D5E41 /* ProfilViewController.swift in Sources */,
 				012A21951B5A777E00CD01D3 /* CollectionViewController.swift in Sources */,

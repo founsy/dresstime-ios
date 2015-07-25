@@ -34,6 +34,12 @@ class LoginViewController: UIViewController {
                     dal.save(self.loginText.text, access_token: msg["access_token"] as! String, refresh_token: msg["refresh_token"] as! String, expire_in: msg["expires_in"] as! Int, name: self.loginText.text, gender: "M", temp_unit: "C")
                 }
                 
+                //Check after login, if a synchro is necessary
+                //Today, only if Local database is empty
+                //TODO - Tomorrow, syncro differential
+                let dressingSynchro = DressingSynchro(userId: self.loginText.text)
+                dressingSynchro.execute()
+                
                 dispatch_async(dispatch_get_main_queue(),  { () -> Void in
                     
                     var appDelegateTemp = UIApplication.sharedApplication().delegate;

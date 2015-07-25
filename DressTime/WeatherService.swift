@@ -16,7 +16,7 @@ class WeatherService {
         var q = "https://query.yahooapis.com/v1/public/yql?q=\(query)&format=json";
         
         var escapedQ = q.stringByAddingPercentEncodingWithAllowedCharacters(.URLQueryAllowedCharacterSet())!
-        JSONService.get(escapedQ, getCompleted: { (succeeded: Bool, result: [String: AnyObject]) -> () in
+        JSONService.get(escapedQ, params: nil, getCompleted: { (succeeded: Bool, result: [String: AnyObject]) -> () in
             weatherCompleted(succeeded: succeeded, msg: result)
         })
         

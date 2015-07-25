@@ -171,6 +171,7 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
     
     func cameraSessionReady() {
         captureManager.startCamera()
+        
     }
     
     /***************************/
@@ -180,7 +181,7 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
             if let image = imageFromSampleBuffer(sampleBuffer) {
                 self.currentImage = image
                 NSLog("Get sample")
-                self.arrayColors = image.dominantColors()
+                self.arrayColors = cropImage(image).dominantColors()
                 self.timeToScan = false
                 //self.updateColorUIView(self.arrayColors)
                 dispatch_sync(dispatch_get_main_queue(), {
@@ -197,7 +198,14 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         
     }
     
-    
+    func cropImage(image: UIImage) -> UIImage {
+        let reduceX = round(image.size.width * 0.2)
+        let reduceY = round(image.size.height * 0.2)
+        let cropRect = CGRectMake(reduceX, reduceY, image.size.width - reduceX, image.size.height - reduceY)
+        let imageRef = CGImageCreateWithImageInRect(image.CGImage, cropRect);
+        // or use the UIImage wherever you like
+        return UIImage(CGImage: imageRef)!
+    }
     /***************************/
     /* Button Actions          */
     func scanButtonPressed(sender: UIButton!) {
@@ -250,6 +258,7 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         var fractionalPage = self.scrollView.contentOffset.x / pageWidth;
         var page = lround(Double(fractionalPage));
         self.pageControl.currentPage = page;
+        self.pageSelected = page
     }
     
     //MARK: - Delegates and data sources

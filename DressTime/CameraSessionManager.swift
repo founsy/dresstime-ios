@@ -82,7 +82,6 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
     
     /* Instance Methods
     ------------------------------------------*/
-    
     func authorizeCamera() {
         AVCaptureDevice.requestAccessForMediaType(AVMediaTypeVideo, completionHandler: {
             (granted: Bool) -> Void in
@@ -107,8 +106,8 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
         videoDeviceInput = AVCaptureDeviceInput.deviceInputWithDevice(videoDevice, error: &error) as! AVCaptureDeviceInput;
         videoDevice.lockForConfiguration(&error)
         if (error == nil){
-            videoDevice.activeVideoMinFrameDuration = CMTimeMake(1, 2)
-            videoDevice.activeVideoMaxFrameDuration = CMTimeMake(1, 2)
+            videoDevice.focusMode = .AutoFocus
+            //videoDevice.exposureMode = AVCaptureExposureMode.AutoExpose
         }
         if (error == nil) {
             if session.canAddInput(videoDeviceInput) {
@@ -116,13 +115,10 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
                 success = true
             }
         }
-        
+        videoDevice.unlockForConfiguration()
         return success
     }
     
-    func addVideoConnection(){
-
-    }
     
     func addVideoOutput() {
         
@@ -173,9 +169,9 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
     func focusAndExposeAtPoint(point: CGPoint) {
         dispatch_async(sessionQueue, {
             var device: AVCaptureDevice = self.videoDeviceInput.device
-            var error: NSErrorPointer!
+            var error: NSError?
             
-            if device.lockForConfiguration(error) {
+            if device.lockForConfiguration(&error) {
                 if device.focusPointOfInterestSupported && device.isFocusModeSupported(AVCaptureFocusMode.AutoFocus) {
                     device.focusPointOfInterest = point
                     device.focusMode = AVCaptureFocusMode.AutoFocus
