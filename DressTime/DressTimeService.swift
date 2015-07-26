@@ -48,7 +48,7 @@ class DressTimeService {
     }
     
     class func saveClothe(userid: String,clotheId: String, dressingCompleted : (succeeded: Bool, msg: [[String: AnyObject]]) -> ()) {
-        var q = "http://api.drez.io/dressing"
+        var q = "http://api.drez.io/dressing/clothes/"
         
         let dal = ProfilsDAL()
         let dalClothe = ClothesDAL()
@@ -63,7 +63,6 @@ class DressTimeService {
                 dressingSeriazible.append(d)
                 
                 let jsonObject: [String: AnyObject] = [
-                    "userid": userid,
                     "dressing": dressingSeriazible,
                     "access_token": profil.access_token
                 ]
@@ -76,7 +75,7 @@ class DressTimeService {
     }
     
     class func getDressing(userid: String, clotheCompleted : (succeeded: Bool, msg: [String: AnyObject]) -> ()) {
-        var q = "http://api.drez.io/dressing/" + userid
+        var q = "http://api.drez.io/dressing/clothes/"
         
         let dal = ProfilsDAL()
         if let profil = dal.fetch(userid) {
@@ -93,7 +92,7 @@ class DressTimeService {
     }
     
     class func getClothesIdDressing(userid: String, clotheCompleted : (succeeded: Bool, idList: [String]) -> ()) {
-        var q = "http://api.drez.io/dressing/clothes/" + userid
+        var q = "http://api.drez.io/dressing/clothes/ids"
         
         let dal = ProfilsDAL()
         if let profil = dal.fetch(userid) {
@@ -119,7 +118,7 @@ class DressTimeService {
     }
     
     class func getClothe(userid: String, clotheId: String, clotheCompleted : (succeeded: Bool, clothe: AnyObject) -> ()) {
-        var q = "http://api.drez.io/dressing/clothes/" + userid + "/" + clotheId
+        var q = "http://api.drez.io/dressing/clothes/" + clotheId
         
         let dal = ProfilsDAL()
         if let profil = dal.fetch(userid) {
@@ -131,7 +130,7 @@ class DressTimeService {
                 println("Receive Clothe")
                 //TODO - Convert msg to Array<String>
                 
-                clotheCompleted(succeeded: succeeded, clothe: msg["clothe"]!)
+                clotheCompleted(succeeded: succeeded, clothe: msg)
             })
             
         }

@@ -19,12 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let profilDAL = ProfilsDAL()
         let profil = profilDAL.fetch()
-        if (profil == nil){
+        //if (profil == nil){
             var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
             var navigation = UINavigationController(rootViewController: rootController)
         
             self.window!.rootViewController = navigation;
-        }
+        //}
         return true
     }
 

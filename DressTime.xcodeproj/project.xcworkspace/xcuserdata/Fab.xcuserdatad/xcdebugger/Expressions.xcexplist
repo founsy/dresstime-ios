@@ -3,13 +3,13 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "DressTime.TodayViewController.(updateWeather (DressTime.TodayViewController) -&gt; (Swift.Int, high : Swift.String, low : Swift.String, city : Swift.String) -&gt; ()).(closure #2):TodayViewController.swift">
+         contextName = "DressTime.DressingSynchro.((updateLocalStorage in _5D4E5A99B5AE9DBB58B651F0E284D94A) (DressTime.DressingSynchro) -&gt; () -&gt; ()).(closure #1).(closure #1):DressingSynchro.swift">
          <PersistentStrings>
             <PersistentString
-               value = "outfit[&quot;maille&quot;][&quot;clothe_id&quot;]">
+               value = "msg">
             </PersistentString>
             <PersistentString
-               value = " item.clothe_image">
+               value = "clothe[&quot;clothe_partnerName&quot;]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -22,13 +22,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.CameraOverlayView.cameraSessionDidOutputSampleBuffer (DressTime.CameraOverlayView)(Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CMSampleBuffer&gt;) -&gt; ():CameraOverlayView.swift">
+         contextName = "DressTime.TodayViewController.(updateWeather (DressTime.TodayViewController) -&gt; (Swift.Int, high : Swift.String, low : Swift.String, city : Swift.String) -&gt; ()).(closure #2):TodayViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "image.size">
+               value = "outfit[&quot;maille&quot;][&quot;clothe_id&quot;]">
             </PersistentString>
             <PersistentString
-               value = "self.currentImage.size">
+               value = " item.clothe_image">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -44,10 +44,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.DressingSynchro.((updateLocalStorage in _5D4E5A99B5AE9DBB58B651F0E284D94A) (DressTime.DressingSynchro) -&gt; () -&gt; ()).(closure #1).(closure #1):DressingSynchro.swift">
+         contextName = "static DressTime.DressTimeService.getTodayOutfits (DressTime.DressTimeService.Type)(Swift.String, style : Swift.String, todayCompleted : (succeeded : Swift.Bool, msg : Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;) -&gt; ()) -&gt; ():DressTimeService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "msg">
+               value = "println(jsonObject)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -60,29 +60,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "DressTime.CameraOverlayView.cameraSessionDidOutputSampleBuffer (DressTime.CameraOverlayView)(Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CMSampleBuffer&gt;) -&gt; ():CameraOverlayView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "image.size">
+            </PersistentString>
+            <PersistentString
+               value = "self.currentImage.size">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DressTime.ProfilViewController.prepareForSegue (DressTime.ProfilViewController)(ObjectiveC.UIStoryboardSegue, sender : Swift.ImplicitlyUnwrappedOptional&lt;Swift.AnyObject&gt;) -&gt; ():ProfilViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "segue.destinationViewController ">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.ClothesDAL.updateClotheId (DressTime.ClothesDAL)() -&gt; ():ClothesDAL.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "clothe.clothe_id">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.TodayViewController.(locationManager (DressTime.TodayViewController) -&gt; (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CLLocationManager&gt;, didUpdateLocations : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Array&lt;Swift.AnyObject&gt;&gt;) -&gt; ()).(closure #1):TodayViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "channel[&quot;location&quot;]">
-            </PersistentString>
-            <PersistentString
-               value = "(condition[&quot;code&quot;] as! String).toInt()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -94,6 +86,14 @@
             </PersistentString>
             <PersistentString
                value = "cell.subviews[1].remove()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.ClothesDAL.updateClotheId (DressTime.ClothesDAL)() -&gt; ():ClothesDAL.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "clothe.clothe_id">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -120,6 +120,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "DressTime.TodayViewController.(locationManager (DressTime.TodayViewController) -&gt; (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CLLocationManager&gt;, didUpdateLocations : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Array&lt;Swift.AnyObject&gt;&gt;) -&gt; ()).(closure #1):TodayViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "channel[&quot;location&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "(condition[&quot;code&quot;] as! String).toInt()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "static DressTime.LoginService.(loginMethod (DressTime.LoginService.Type) -&gt; (Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;, postCompleted : (succeeded : Swift.Bool, msg : Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;) -&gt; ()) -&gt; ()).(closure #1):LoginService.swift">
          <PersistentStrings>
             <PersistentString
@@ -140,14 +151,6 @@
          <PersistentStrings>
             <PersistentString
                value = "currentClothe.clothe_colors">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static DressTime.DressTimeService.getTodayOutfits (DressTime.DressTimeService.Type)(Swift.String, style : Swift.String, todayCompleted : (succeeded : Swift.Bool, msg : Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;) -&gt; ()) -&gt; ():DressTimeService.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "println(jsonObject)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
