@@ -24,14 +24,17 @@ class LoginViewController: UIViewController {
         
         LoginService.loginMethod(jsonObject, postCompleted: { (succeeded: Bool, msg: [String: AnyObject]) -> () in
             if (succeeded){
-                println(msg)
                 let dal = ProfilsDAL()
                 if let profil = dal.fetch(self.loginText.text){
                     profil.access_token = msg["access_token"] as! String
                     profil.refresh_token = msg["refresh_token"] as! String
-                    dal.update(profil)
+                    profil.expire_in = msg["expires_in"] as! NSNumber
+                    if let newProfil = dal.update(profil) {
+                        SharedData.sharedInstance.currentUserId = newProfil.userid
+                    }
                 } else {
-                    dal.save(self.loginText.text, access_token: msg["access_token"] as! String, refresh_token: msg["refresh_token"] as! String, expire_in: msg["expires_in"] as! Int, name: self.loginText.text, gender: "M", temp_unit: "C")
+                    let pro = dal.save(self.loginText.text, access_token: msg["access_token"] as! String, refresh_token: msg["refresh_token"] as! String, expire_in: msg["expires_in"] as! Int, name: self.loginText.text, gender: "M", temp_unit: "C");
+                    SharedData.sharedInstance.currentUserId = pro.userid
                 }
                 
                 //Check after login, if a synchro is necessary

@@ -50,6 +50,7 @@
 		01C4556F1B5A603C003D5E41 /* ClothPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4556E1B5A603C003D5E41 /* ClothPhotoCell.swift */; };
 		01C455731B5A6438003D5E41 /* overlaygraphic.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C455711B5A6438003D5E41 /* overlaygraphic.png */; };
 		01C455741B5A6438003D5E41 /* scanbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C455721B5A6438003D5E41 /* scanbutton.png */; };
+		01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEDD1B6E714600F59D1B /* SharedData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,6 +132,7 @@
 		01C4556E1B5A603C003D5E41 /* ClothPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothPhotoCell.swift; sourceTree = "<group>"; };
 		01C455711B5A6438003D5E41 /* overlaygraphic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overlaygraphic.png; sourceTree = "<group>"; };
 		01C455721B5A6438003D5E41 /* scanbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanbutton.png; sourceTree = "<group>"; };
+		01FFCEDD1B6E714600F59D1B /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -266,6 +268,7 @@
 				01C455101B597626003D5E41 /* Clothe.swift */,
 				01C4550B1B597571003D5E41 /* ClothesDAL.swift */,
 				012A219C1B5AB89700CD01D3 /* ProfilsDAL.swift */,
+				01FFCEDD1B6E714600F59D1B /* SharedData.swift */,
 			);
 			name = DataAccessLayer;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 				013996401B5BB739004B2DE0 /* OutfitCollectionViewController.swift in Sources */,
 				012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */,
 				01C455091B59703A003D5E41 /* ProfilViewController.swift in Sources */,
+				01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */,
 				012A21951B5A777E00CD01D3 /* CollectionViewController.swift in Sources */,
 				01C454FE1B593EB2003D5E41 /* NavigationController.swift in Sources */,
 				01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */,

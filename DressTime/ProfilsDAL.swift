@@ -37,12 +37,12 @@ class ProfilsDAL {
         return nil
     }
     
-    func fetch() -> Profil? {
+    func fetch() -> [Profil]? {
         var fetchedResultsController: NSFetchedResultsController?
         var fetchRequest = NSFetchRequest(entityName: "Profil")
         if let fetchResults = self.managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Profil] {
             if (fetchResults.count > 0){
-                return fetchResults[0]
+                return fetchResults
             } else {
                 return nil
             }
@@ -50,7 +50,7 @@ class ProfilsDAL {
         return nil
     }
     
-    func save(userid: String, access_token: String, refresh_token: String, expire_in: Int, name: String, gender: String, temp_unit: String){
+    func save(userid: String, access_token: String, refresh_token: String, expire_in: Int, name: String, gender: String, temp_unit: String) -> Profil{
         let entityDescription = NSEntityDescription.entityForName("Profil", inManagedObjectContext: managedObjectContext);
         let profil = Profil(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext);
         
@@ -70,9 +70,11 @@ class ProfilsDAL {
         } else {
             NSLog("Contact Saved");
         }
+        
+        return profil
     }
     
-    func update(profil: Profil) {
+    func update(profil: Profil) -> Profil? {
         if let oldProfil = self.fetch(profil.userid) {
             
             oldProfil.userid = profil.userid
@@ -88,11 +90,13 @@ class ProfilsDAL {
             
             if let err = error {
                 NSLog(err.localizedFailureReason!);
+                return nil
             } else {
                 NSLog("Contact updated");
+                return oldProfil
             }
         } else {
-        
+            return nil
         }
     }
 }

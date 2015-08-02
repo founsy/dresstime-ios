@@ -545,6 +545,18 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Aw-HF-oIo">
+                                <rect key="frame" x="516" y="78" width="68" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68" id="sNF-BT-QaS"/>
+                                </constraints>
+                                <state key="normal" title="Logout">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onLogoutClick:" destination="H2a-aL-xhL" eventType="touchUpInside" id="z1E-7g-bz7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -556,6 +568,8 @@
                             <constraint firstAttribute="centerX" secondItem="JdU-7E-B5a" secondAttribute="centerX" id="BMA-GY-owR"/>
                             <constraint firstItem="JdU-7E-B5a" firstAttribute="trailing" secondItem="bje-MN-K8f" secondAttribute="trailingMargin" id="G8N-KW-2VD"/>
                             <constraint firstItem="hkn-r2-aza" firstAttribute="top" secondItem="hvR-hL-XXf" secondAttribute="bottom" constant="8" id="GWa-ho-qIZ"/>
+                            <constraint firstItem="8Aw-HF-oIo" firstAttribute="trailing" secondItem="bje-MN-K8f" secondAttribute="trailingMargin" id="Hiz-lg-gf5"/>
+                            <constraint firstItem="8Aw-HF-oIo" firstAttribute="top" secondItem="5ow-tj-c3g" secondAttribute="bottom" constant="14" id="Jmh-bj-gES"/>
                             <constraint firstItem="hvR-hL-XXf" firstAttribute="top" secondItem="JdU-7E-B5a" secondAttribute="bottom" constant="19" id="UeC-Yw-7mW"/>
                             <constraint firstItem="hkn-r2-aza" firstAttribute="leading" secondItem="bje-MN-K8f" secondAttribute="leadingMargin" id="Uhm-Xg-vZO"/>
                             <constraint firstItem="9xh-7I-YMd" firstAttribute="top" secondItem="oB5-hb-jcp" secondAttribute="bottom" constant="11" id="X8x-pz-w3q"/>

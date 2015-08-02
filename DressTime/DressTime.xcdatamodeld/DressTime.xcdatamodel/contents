@@ -12,6 +12,7 @@
         <attribute name="clothe_pattern" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="clothe_subtype" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="clothe_type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="profilRel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profil" syncable="YES"/>
     </entity>
     <entity name="Profil" representedClassName="DressTime.Profil" syncable="YES">
         <attribute name="access_token" optional="YES" attributeType="String" syncable="YES"/>
@@ -23,7 +24,7 @@
         <attribute name="userid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Clothe" positionX="-63" positionY="-18" width="128" height="210"/>
+        <element name="Clothe" positionX="268" positionY="-153" width="128" height="223"/>
         <element name="Profil" positionX="-63" positionY="63" width="128" height="150"/>
     </elements>
 </model>

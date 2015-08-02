@@ -13,17 +13,24 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    
+    var currentUser:Profil?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let profilDAL = ProfilsDAL()
         let profil = profilDAL.fetch()
+        
         //if (profil == nil){
             var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
             var navigation = UINavigationController(rootViewController: rootController)
         
             self.window!.rootViewController = navigation;
+        //Go back to login window
+        
+        /*var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
+        self.window?.makeKeyAndVisible()
+        self.window?.rootViewController!.presentViewController(rootController, animated: true, completion: nil) */
+
         //}
         return true
     }

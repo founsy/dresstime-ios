@@ -20,6 +20,34 @@ class ProfilViewController : UIViewController {
     
     var clotheSelected: Clothe!
     
+    @IBAction func onLogoutClick(sender: AnyObject) {
+        let profilDal = ProfilsDAL()
+        if let user = profilDal.fetch(SharedData.sharedInstance.currentUserId!) {
+            
+            let jsonObject: [String: AnyObject] = [
+                "access_token": user.access_token
+            ]
+            
+            LoginService.logoutMethod(jsonObject, getCompleted: { (succeeded: Bool, result: [String: AnyObject]) -> () in
+                if (succeeded){
+                    let dal = ProfilsDAL()
+                    let profilOld = dal.fetch(user.userid)
+                    if let profil = profilOld {
+                        profil.access_token = ""
+                        profil.refresh_token = ""
+                        profil.expire_in = 0
+                        dal.update(profil)
+                    }
+                    dispatch_async(dispatch_get_main_queue(),  { () -> Void in
+                        //Go back to login window
+                        var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
+                        self.presentViewController(rootController, animated: true, completion: nil)
+                    })
+                }
+            })
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.

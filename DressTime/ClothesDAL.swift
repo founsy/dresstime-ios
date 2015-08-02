@@ -22,7 +22,7 @@ class ClothesDAL {
         var clothes  = [Clothe]()
         
         var fetchRequest = NSFetchRequest(entityName: "Clothe")
-        let predicate = NSPredicate(format: "clothe_type = %@", type)
+        let predicate = NSPredicate(format: "clothe_type = %@ AND profilRel.userid = %@", type, SharedData.sharedInstance.currentUserId!)
         
         // Set the predicate on the fetch request
         fetchRequest.predicate = predicate
@@ -79,6 +79,8 @@ class ClothesDAL {
         let entityDescription = NSEntityDescription.entityForName("Clothe", inManagedObjectContext: managedObjectContext);
         let clothe = Clothe(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext);
         
+        let profilDal = ProfilsDAL()
+        
         clothe.clothe_id = clotheId
         clothe.clothe_partnerid = partnerId
         clothe.clothe_partnerName = partnerName
@@ -90,6 +92,7 @@ class ClothesDAL {
         clothe.clothe_cut = cut
         clothe.clothe_image = image
         clothe.clothe_colors = colors
+        clothe.profilRel = profilDal.fetch(SharedData.sharedInstance.currentUserId!)!
         
         var error: NSError?
         managedObjectContext.save(&error)

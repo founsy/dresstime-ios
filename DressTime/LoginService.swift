@@ -30,4 +30,23 @@ class LoginService {
     
     }
     
+    class func logoutMethod(params : [String: AnyObject], getCompleted : (succeeded: Bool, msg: [String: AnyObject]) -> ()){
+        JSONService.get("http://api.drez.io/auth/logout", params: params, getCompleted: { (succeeded: Bool, result: [String: AnyObject]) -> () in
+            if (succeeded){
+                var error : NSError?
+                
+                if (result["error"] != nil){
+                    getCompleted(succeeded: false, msg: result)
+                } else {
+                    getCompleted(succeeded: true, msg: result)
+                }
+                
+            } else {
+                getCompleted(succeeded: false, msg: ["error" : "Login failed."])
+            }
+            
+        })
+        
+    }
+    
 }
