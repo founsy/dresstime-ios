@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var loginText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
@@ -60,10 +60,26 @@ class LoginViewController: UIViewController {
         })
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {        
+        if(textField.returnKeyType == UIReturnKeyType.Next) {
+            let nextTag: Int = textField.tag + 1
+            let nextField: UITextField = textField.superview?.viewWithTag(nextTag) as! UITextField
+            nextField.becomeFirstResponder()
+            return true
+        }
+        else if(textField.returnKeyType == UIReturnKeyType.Go) {
+            self.onClickLoginBtn(self.view)
+            return true
+        }
+        else {
+            return false
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordText.secureTextEntry = true
+        self.navigationController?.navigationBarHidden = true
     }
     
     override func didReceiveMemoryWarning() {
