@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var loginText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
@@ -60,10 +60,21 @@ class LoginViewController: UIViewController {
         })
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {        
+        if(textField.returnKeyType == UIReturnKeyType.Go) {
+            self.onClickLoginBtn(self.view)
+            return true
+        }
+        else {
+            return false
+        }
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordText.secureTextEntry = true
+        self.navigationController?.navigationBarHidden = true
     }
     
     override func didReceiveMemoryWarning() {
