@@ -61,14 +61,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {        
-        if(textField.returnKeyType == UIReturnKeyType.Go) {
+        if(textField.returnKeyType == UIReturnKeyType.Next) {
+            let nextTag: Int = textField.tag + 1
+            let nextField: UITextField = textField.superview?.viewWithTag(nextTag) as! UITextField
+            nextField.becomeFirstResponder()
+            return true
+        }
+        else if(textField.returnKeyType == UIReturnKeyType.Go) {
             self.onClickLoginBtn(self.view)
             return true
         }
         else {
             return false
         }
-        
     }
     
     override func viewDidLoad() {
