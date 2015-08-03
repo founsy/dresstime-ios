@@ -657,6 +657,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c61a436f-3d8f-4743-a9f9-84653bf3735b";
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -671,6 +672,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c61a436f-3d8f-4743-a9f9-84653bf3735b";
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
