@@ -52,6 +52,7 @@
 		01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEDD1B6E714600F59D1B /* SharedData.swift */; };
 		01FFCEE21B7116B100F59D1B /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 01FFCEE11B7116B100F59D1B /* camera-icon.png */; };
 		01FFCEE41B71175E00F59D1B /* cross-24-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 01FFCEE31B71175E00F59D1B /* cross-24-128.png */; };
+		01FFCEE61B712A9700F59D1B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		01FFCEDD1B6E714600F59D1B /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		01FFCEE11B7116B100F59D1B /* camera-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon.png"; sourceTree = "<group>"; };
 		01FFCEE31B71175E00F59D1B /* cross-24-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-24-128.png"; sourceTree = "<group>"; };
+		01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +261,7 @@
 				012A21941B5A777E00CD01D3 /* CollectionViewController.swift */,
 				012A21961B5AA3C100CD01D3 /* ClotheDetailController.swift */,
 				0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */,
+				01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -490,6 +493,7 @@
 				01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */,
 				01C454F71B593909003D5E41 /* JSONService.swift in Sources */,
 				01C455111B597626003D5E41 /* Clothe.swift in Sources */,
+				01FFCEE61B712A9700F59D1B /* SettingsViewController.swift in Sources */,
 				013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */,
 				013996401B5BB739004B2DE0 /* OutfitCollectionViewController.swift in Sources */,
 				012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */,
