@@ -40,7 +40,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 //Check after login, if a synchro is necessary
                 //Today, only if Local database is empty
                 //TODO - Tomorrow, syncro differential
-                let dressingSynchro = DressingSynchro(userId: self.loginText.text)
+                let dressingSynchro = DressingSynchro(userId: SharedData.sharedInstance.currentUserId!)
                 dressingSynchro.execute()
                 
                 dispatch_async(dispatch_get_main_queue(),  { () -> Void in

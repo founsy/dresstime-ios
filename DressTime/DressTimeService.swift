@@ -92,7 +92,7 @@ class DressTimeService {
     }
     
     class func getClothesIdDressing(userid: String, clotheCompleted : (succeeded: Bool, idList: [String]) -> ()) {
-        var q = "http://api.drez.io/dressing/clothes/ids"
+        var q = "http://api.drez.io/dressing/clothesIds/"
         
         let dal = ProfilsDAL()
         if let profil = dal.fetch(userid) {
@@ -134,8 +134,25 @@ class DressTimeService {
             })
             
         }
-
+    }
+    
+    class func deleteClothe(userid: String, clotheId: String, clotheDelCompleted : (succeeded: Bool, clothe: AnyObject) -> ()) {
+        var q = "http://api.drez.io/dressing/clothes/" + clotheId
         
+        let dal = ProfilsDAL()
+        if let profil = dal.fetch(userid) {
+            let jsonObject: [String: AnyObject] = [
+                "access_token": profil.access_token
+            ]
+            
+            JSONService.delete(q, params: jsonObject, deleteCompleted: { (succeeded, msg) -> () in
+                println("Receive Clothe")
+                //TODO - Convert msg to Array<String>
+                
+                clotheDelCompleted(succeeded: succeeded, clothe: msg)
+            })
+            
+        }
     }
 
 }

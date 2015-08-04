@@ -151,4 +151,37 @@ class JSONService
         task.resume()
     }
     
+    
+    class func delete(url: String, params : [String: AnyObject]?, deleteCompleted:(succeeded: Bool, msg: [String: AnyObject]) -> ()) {
+        var request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        var session = NSURLSession.sharedSession()
+        request.HTTPMethod = "DELETE"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
+        if let dict = params {
+            if let token: String = dict["access_token"] as? String {
+                request.addValue("Bearer " + token, forHTTPHeaderField: "Authorization")
+            }
+        }
+        
+        var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+            var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
+            println(strData)
+            var err: NSError?
+            var json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves, error: &err) as? [String: AnyObject]
+            if(err != nil) {
+                deleteCompleted(succeeded: false, msg: ["error":"Error"])
+            } else {
+                if let parseJSON = json {
+                    deleteCompleted(succeeded: true, msg: parseJSON)
+                } else {
+                    deleteCompleted(succeeded: false, msg: ["error":"Error"])
+                }
+            }
+        })
+        
+        task.resume()
+        
+    }
 }

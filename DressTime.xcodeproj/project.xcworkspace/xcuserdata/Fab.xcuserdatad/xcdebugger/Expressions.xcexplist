@@ -39,6 +39,9 @@
                value = "Array(array) as! [String]">
             </PersistentString>
             <PersistentString
+               value = "q">
+            </PersistentString>
+            <PersistentString
                value = "(msg[&quot;list&quot;] as? NSArray)">
             </PersistentString>
          </PersistentStrings>

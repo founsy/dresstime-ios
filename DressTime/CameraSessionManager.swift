@@ -34,19 +34,20 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
     /* Class Methods
     ------------------------------------------*/
     
-    class func deviceWithMediaType(mediaType: NSString, position: AVCaptureDevicePosition) -> AVCaptureDevice {
+    class func deviceWithMediaType(mediaType: NSString, position: AVCaptureDevicePosition) -> AVCaptureDevice? {
         var devices: NSArray = AVCaptureDevice.devicesWithMediaType(mediaType as String)
-        var captureDevice: AVCaptureDevice = devices.firstObject as! AVCaptureDevice
         
-        for object:AnyObject in devices {
-            let device = object as! AVCaptureDevice
-            if (device.position == position) {
-                captureDevice = device
-                break
+        if var captureDevice = devices.firstObject as? AVCaptureDevice {
+            for object:AnyObject in devices {
+                let device = object as! AVCaptureDevice
+                if (device.position == position) {
+                    captureDevice = device
+                    break
+                }
             }
+            return captureDevice
         }
-        
-        return captureDevice
+        return nil
     }
     
     
@@ -102,20 +103,21 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
         var success: Bool = false
         var error: NSError?
         
-        var videoDevice: AVCaptureDevice = CameraSessionManager.deviceWithMediaType(AVMediaTypeVideo, position: AVCaptureDevicePosition.Back)
-        videoDeviceInput = AVCaptureDeviceInput.deviceInputWithDevice(videoDevice, error: &error) as! AVCaptureDeviceInput;
-        videoDevice.lockForConfiguration(&error)
-        if (error == nil){
-            videoDevice.focusMode = .AutoFocus
-            //videoDevice.exposureMode = AVCaptureExposureMode.AutoExpose
-        }
-        if (error == nil) {
-            if session.canAddInput(videoDeviceInput) {
-                session.addInput(videoDeviceInput)
-                success = true
+        if var videoDevice: AVCaptureDevice = CameraSessionManager.deviceWithMediaType(AVMediaTypeVideo, position: AVCaptureDevicePosition.Back) {
+            videoDeviceInput = AVCaptureDeviceInput.deviceInputWithDevice(videoDevice, error: &error) as! AVCaptureDeviceInput;
+            videoDevice.lockForConfiguration(&error)
+            if (error == nil){
+                videoDevice.focusMode = .AutoFocus
+                //videoDevice.exposureMode = AVCaptureExposureMode.AutoExpose
             }
+            if (error == nil) {
+                if session.canAddInput(videoDeviceInput) {
+                    session.addInput(videoDeviceInput)
+                    success = true
+                }
+            }
+            videoDevice.unlockForConfiguration()
         }
-        videoDevice.unlockForConfiguration()
         return success
     }
     

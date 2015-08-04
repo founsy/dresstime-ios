@@ -27,9 +27,13 @@ class OverlayView: UIView {
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
         var ct = UIGraphicsGetCurrentContext();
-        CGContextSetFillColorWithColor(ct, self.overallColor.CGColor);
+        CGContextSetBlendMode(ct, kCGBlendModeMultiply);
+        CGContextSetAlpha(ct, 0.9)
+        CGContextSetFillColorWithColor(ct, UIColor.grayColor().CGColor);
+        //
         CGContextFillRect(ct, self.bounds);
         CGContextClearRect(ct, self.rectForClearing);
+        UIGraphicsEndImageContext()
     }
 
 }

@@ -49,8 +49,9 @@
 		01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4556B1B598AD8003D5E41 /* OverlayView.swift */; };
 		01C4556F1B5A603C003D5E41 /* ClothPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4556E1B5A603C003D5E41 /* ClothPhotoCell.swift */; };
 		01C455731B5A6438003D5E41 /* overlaygraphic.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C455711B5A6438003D5E41 /* overlaygraphic.png */; };
-		01C455741B5A6438003D5E41 /* scanbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C455721B5A6438003D5E41 /* scanbutton.png */; };
 		01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEDD1B6E714600F59D1B /* SharedData.swift */; };
+		01FFCEE21B7116B100F59D1B /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 01FFCEE11B7116B100F59D1B /* camera-icon.png */; };
+		01FFCEE41B71175E00F59D1B /* cross-24-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 01FFCEE31B71175E00F59D1B /* cross-24-128.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,8 +132,9 @@
 		01C4556B1B598AD8003D5E41 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		01C4556E1B5A603C003D5E41 /* ClothPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothPhotoCell.swift; sourceTree = "<group>"; };
 		01C455711B5A6438003D5E41 /* overlaygraphic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overlaygraphic.png; sourceTree = "<group>"; };
-		01C455721B5A6438003D5E41 /* scanbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = scanbutton.png; sourceTree = "<group>"; };
 		01FFCEDD1B6E714600F59D1B /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
+		01FFCEE11B7116B100F59D1B /* camera-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon.png"; sourceTree = "<group>"; };
+		01FFCEE31B71175E00F59D1B /* cross-24-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-24-128.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -322,8 +324,9 @@
 		01C455701B5A641B003D5E41 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				01FFCEE31B71175E00F59D1B /* cross-24-128.png */,
+				01FFCEE11B7116B100F59D1B /* camera-icon.png */,
 				01C455711B5A6438003D5E41 /* overlaygraphic.png */,
-				01C455721B5A6438003D5E41 /* scanbutton.png */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -448,9 +451,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01FFCEE41B71175E00F59D1B /* cross-24-128.png in Resources */,
 				01C455731B5A6438003D5E41 /* overlaygraphic.png in Resources */,
 				01C455011B5942F4003D5E41 /* Main.storyboard in Resources */,
-				01C455741B5A6438003D5E41 /* scanbutton.png in Resources */,
+				01FFCEE21B7116B100F59D1B /* camera-icon.png in Resources */,
 				01C455071B595C54003D5E41 /* artill_clean_icons-webfont.ttf in Resources */,
 				01C454E01B5935B3003D5E41 /* LaunchScreen.xib in Resources */,
 				01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */,

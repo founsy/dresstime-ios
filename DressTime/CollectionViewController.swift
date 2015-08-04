@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CollectionViewController : NSObject, UICollectionViewDataSource, CameraOverlayViewDelegate, ClotheDetailControllerDelegate {
+class CollectionViewController : NSObject, UICollectionViewDataSource {
     
     private let reuseIdentifier = "CustomCell"
     private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
@@ -68,7 +68,17 @@ class CollectionViewController : NSObject, UICollectionViewDataSource, CameraOve
         
         self.targetVC.presentViewController(captureView, animated: true, completion: nil)
     }
-    
+}
+
+extension CollectionViewController : ClotheDetailControllerDelegate {
+    func onDeleteCloth() {
+        self.collection = clothesDAL.fetch(self.type)
+        self.collectionView.reloadData()
+    }
+}
+
+
+extension CollectionViewController : CameraOverlayViewDelegate {
     func CameraOverlayViewResult(resultCapture: [String: AnyObject]) {
         var dal = ClothesDAL()
         let clotheId = NSUUID().UUIDString
@@ -76,14 +86,9 @@ class CollectionViewController : NSObject, UICollectionViewDataSource, CameraOve
         self.collection = clothesDAL.fetch(self.type)
         self.collectionView.reloadData()
         
-        DressTimeService.saveClothe("myapi", clotheId: clotheId, dressingCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
+        DressTimeService.saveClothe(SharedData.sharedInstance.currentUserId!, clotheId: clotheId, dressingCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
             //println(msg)
         })
-    }
-    
-    func onDeleteCloth() {
-        self.collection = clothesDAL.fetch(self.type)
-        self.collectionView.reloadData()
     }
 }
 

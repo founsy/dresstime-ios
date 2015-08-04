@@ -23,10 +23,17 @@ class ClotheDetailController: UIViewController {
     @IBOutlet weak var colorText: UITextView!
     
     @IBAction func onClickDelete(sender: AnyObject) {
-        let dal = ClothesDAL()
-        dal.delete(currentClothe)
-        delegate?.onDeleteCloth!()
-        self.dismissViewControllerAnimated(true, completion: nil)
+        
+        DressTimeService.deleteClothe(SharedData.sharedInstance.currentUserId!, clotheId: currentClothe.clothe_id, clotheDelCompleted: { (succeeded, msg) -> () in
+            println("Clothe deleted")
+            let dal = ClothesDAL()
+            dal.delete(self.currentClothe)
+            dispatch_sync(dispatch_get_main_queue(), {
+                self.delegate?.onDeleteCloth!()
+                self.dismissViewControllerAnimated(true, completion: nil)
+            })
+        })
+        
     }
     
     @IBAction func onClose(sender: AnyObject) {
