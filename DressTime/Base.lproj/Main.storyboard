@@ -155,10 +155,10 @@
             </objects>
             <point key="canvasLocation" x="1145" y="429"/>
         </scene>
-        <!--Today View Controller-->
+        <!--Today-->
         <scene sceneID="hxz-9c-nil">
             <objects>
-                <viewController id="p5q-39-6Ic" customClass="TodayViewController" customModule="DressTime" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Today" id="p5q-39-6Ic" customClass="TodayViewController" customModule="DressTime" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BFa-2o-eQJ"/>
                         <viewControllerLayoutGuide type="bottom" id="F37-4s-jeS"/>
@@ -167,15 +167,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pEn-zV-Z8z">
-                                <rect key="frame" x="80" y="98" width="35" height="30"/>
-                                <state key="normal" title="Profil">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="H2a-aL-xhL" kind="show" id="uy5-a7-nit"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XaN-zo-5wr">
                                 <rect key="frame" x="281" y="157" width="37" height="69"/>
                                 <fontDescription key="fontDescription" name="artillcleanweathericons-Regular" family="artill clean weather icons" pointSize="70"/>
@@ -436,7 +427,13 @@
                             <constraint firstItem="DBF-4T-Ux3" firstAttribute="top" secondItem="BFa-2o-eQJ" secondAttribute="bottom" constant="102" id="usM-24-c3Q"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="E5v-wW-1ON"/>
+                    <navigationItem key="navigationItem" title="Today" id="E5v-wW-1ON">
+                        <barButtonItem key="leftBarButtonItem" title="Profil" id="6MU-Ox-RcX">
+                            <connections>
+                                <segue destination="H2a-aL-xhL" kind="show" id="LsP-48-RYl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="cityText" destination="gl4-wF-AAx" id="paQ-wp-NMh"/>
                         <outlet property="highTemp" destination="uPm-UC-QSm" id="hh6-Cd-FJk"/>
@@ -450,10 +447,10 @@
             </objects>
             <point key="canvasLocation" x="1935" y="429"/>
         </scene>
-        <!--Profil View Controller-->
+        <!--Profil-->
         <scene sceneID="e7R-u6-Iv5">
             <objects>
-                <viewController id="H2a-aL-xhL" customClass="ProfilViewController" customModule="DressTime" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Profil" id="H2a-aL-xhL" customClass="ProfilViewController" customModule="DressTime" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5ow-tj-c3g"/>
                         <viewControllerLayoutGuide type="bottom" id="QhV-kB-caD"/>
@@ -649,6 +646,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Profil" id="Ji1-jC-v3c">
+                        <barButtonItem key="rightBarButtonItem" title="Settings" id="Pf1-Bs-anz"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="mailleCollectionView" destination="JdU-7E-B5a" id="608-a5-PYR"/>
                         <outlet property="pantsCollectionView" destination="9xh-7I-YMd" id="ciF-Kc-Xpb"/>
@@ -662,10 +662,10 @@
             </objects>
             <point key="canvasLocation" x="2856" y="429"/>
         </scene>
-        <!--Clothe Detail Controller-->
+        <!--Capture-->
         <scene sceneID="F5B-hH-mfV">
             <objects>
-                <viewController id="4fS-I5-Chz" customClass="ClotheDetailController" customModule="DressTime" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Capture" id="4fS-I5-Chz" customClass="ClotheDetailController" customModule="DressTime" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JFl-0d-leV"/>
                         <viewControllerLayoutGuide type="bottom" id="hzX-uY-Ob5"/>
