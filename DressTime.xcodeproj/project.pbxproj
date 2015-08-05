@@ -49,6 +49,7 @@
 		01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4556B1B598AD8003D5E41 /* OverlayView.swift */; };
 		01C4556F1B5A603C003D5E41 /* ClothPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4556E1B5A603C003D5E41 /* ClothPhotoCell.swift */; };
 		01C455731B5A6438003D5E41 /* overlaygraphic.png in Resources */ = {isa = PBXBuildFile; fileRef = 01C455711B5A6438003D5E41 /* overlaygraphic.png */; };
+		01D1B86A1B71E1DC00920C64 /* AKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8691B71E1DC00920C64 /* AKViewController.m */; };
 		01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEDD1B6E714600F59D1B /* SharedData.swift */; };
 		01FFCEE21B7116B100F59D1B /* camera-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 01FFCEE11B7116B100F59D1B /* camera-icon.png */; };
 		01FFCEE41B71175E00F59D1B /* cross-24-128.png in Resources */ = {isa = PBXBuildFile; fileRef = 01FFCEE31B71175E00F59D1B /* cross-24-128.png */; };
@@ -133,6 +134,8 @@
 		01C4556B1B598AD8003D5E41 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		01C4556E1B5A603C003D5E41 /* ClothPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothPhotoCell.swift; sourceTree = "<group>"; };
 		01C455711B5A6438003D5E41 /* overlaygraphic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = overlaygraphic.png; sourceTree = "<group>"; };
+		01D1B8681B71E1DC00920C64 /* AKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AKViewController.h; path = AKPickerView/AKViewController.h; sourceTree = "<group>"; };
+		01D1B8691B71E1DC00920C64 /* AKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AKViewController.m; path = AKPickerView/AKViewController.m; sourceTree = "<group>"; };
 		01FFCEDD1B6E714600F59D1B /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		01FFCEE11B7116B100F59D1B /* camera-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "camera-icon.png"; sourceTree = "<group>"; };
 		01FFCEE31B71175E00F59D1B /* cross-24-128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross-24-128.png"; sourceTree = "<group>"; };
@@ -197,6 +200,7 @@
 		01C454CF1B5935B3003D5E41 /* DressTime */ = {
 			isa = PBXGroup;
 			children = (
+				01EAFA3D1B71E13C00835BB4 /* AKPickerView */,
 				012A219E1B5AD87F00CD01D3 /* Utils */,
 				01C455701B5A641B003D5E41 /* Resources */,
 				01C4556D1B5A601D003D5E41 /* Views */,
@@ -332,6 +336,15 @@
 				01C455711B5A6438003D5E41 /* overlaygraphic.png */,
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		01EAFA3D1B71E13C00835BB4 /* AKPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				01D1B8681B71E1DC00920C64 /* AKViewController.h */,
+				01D1B8691B71E1DC00920C64 /* AKViewController.m */,
+			);
+			name = AKPickerView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -497,6 +510,7 @@
 				013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */,
 				013996401B5BB739004B2DE0 /* OutfitCollectionViewController.swift in Sources */,
 				012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */,
+				01D1B86A1B71E1DC00920C64 /* AKViewController.m in Sources */,
 				01C455091B59703A003D5E41 /* ProfilViewController.swift in Sources */,
 				01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */,
 				012A21951B5A777E00CD01D3 /* CollectionViewController.swift in Sources */,

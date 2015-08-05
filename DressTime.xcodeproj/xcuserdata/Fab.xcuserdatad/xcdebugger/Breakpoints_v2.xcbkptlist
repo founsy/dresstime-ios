@@ -264,11 +264,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DressTime/CameraOverlayView.swift"
-            timestampString = "460393037.858569"
+            timestampString = "460447836.909391"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "357"
-            endingLineNumber = "357"
+            startingLineNumber = "436"
+            endingLineNumber = "436"
             landmarkName = "cameraSessionDidOutputSampleBuffer(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -710,11 +710,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DressTime/CameraOverlayView.swift"
-            timestampString = "460393037.858569"
+            timestampString = "460447452.946125"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "196"
+            endingLineNumber = "196"
             landmarkName = "createScanArea()"
             landmarkType = "5">
          </BreakpointContent>

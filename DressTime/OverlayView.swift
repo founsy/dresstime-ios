@@ -28,8 +28,8 @@ class OverlayView: UIView {
         super.drawRect(rect)
         var ct = UIGraphicsGetCurrentContext();
         CGContextSetBlendMode(ct, kCGBlendModeMultiply);
-        CGContextSetAlpha(ct, 0.9)
-        CGContextSetFillColorWithColor(ct, UIColor.grayColor().CGColor);
+        CGContextSetAlpha(ct, 0.4)
+        CGContextSetFillColorWithColor(ct, UIColor.blackColor().CGColor);
         //
         CGContextFillRect(ct, self.bounds);
         CGContextClearRect(ct, self.rectForClearing);

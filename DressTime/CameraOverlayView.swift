@@ -93,16 +93,24 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         }
         
         var overlayButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-        overlayButton.setImage(UIImage(named: "camera-icon.png"), forState: .Normal)
+        overlayButton.layer.cornerRadius = 70/2
+        overlayButton.backgroundColor = UIColor.whiteColor()
+        overlayButton.setImage(UIImage(named: "ScanCapture"), forState: .Normal)
         overlayButton.addTarget(self, action: "validateButtonPressed:", forControlEvents: .TouchUpInside)
         self.view.addSubview(overlayButton)
         applyBottomCenterButtonConstraints(overlayButton)
         
         var closeButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-        closeButton.setImage(UIImage(named: "cross-24-128.png"), forState: .Normal)
+        closeButton.setImage(UIImage(named: "ScanClose"), forState: .Normal)
         closeButton.addTarget(self, action: "closeButtonPressed:", forControlEvents: .TouchUpInside)
         self.view.addSubview(closeButton)
-        applyTopLeftButtonConstraints(closeButton)
+        applyTopRightButtonConstraints(closeButton)
+        
+        var flashButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        flashButton.setImage(UIImage(named: "ScanTorch"), forState: .Normal)
+        self.view.addSubview(flashButton)
+        applyBottomRightButtonConstraints(flashButton)
+        
         
         //frame: CGRectMake(250, 400, 120, 50)
         self.patternPicker = UIPickerView()
@@ -194,12 +202,12 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         let heightContraints = NSLayoutConstraint(item: view, attribute:
             .Height, relatedBy: .Equal, toItem: nil,
             attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 100)
+            constant: 70)
         
         let widthContraints = NSLayoutConstraint(item: view, attribute:
             .Width, relatedBy: .Equal, toItem: nil,
             attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 100)
+            constant: 70)
         
         let pinBottom = NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal,
             toItem: self.view, attribute: .Bottom, multiplier: 1.0, constant: -10)
@@ -254,6 +262,48 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         //we pass an array of all the contraints
         NSLayoutConstraint.activateConstraints([horizonalContraints , pinTop, heightContraints, widthContraints])
     }
+    
+    func applyTopRightButtonConstraints(view: UIView){
+        
+        //pin the slider 20 points from the left edge of the the superview
+        //from the left edge of the slider to the left edge of the superview
+        //superview X coord is at 0 therefore 0 + 20 = 20 position
+        let horizonalContraints = NSLayoutConstraint(item: view, attribute:
+            .TrailingMargin, relatedBy: .Equal, toItem: self.view,
+            attribute: .TrailingMargin, multiplier: 1.0,
+            constant: 0)
+        
+        //pin the slider 20 points from the right edge of the super view
+        //negative because we want to pin -20 points from the end of the superview.
+        //ex. if with of super view is 300, 300-20 = 280 position
+        /* let horizonal2Contraints = NSLayoutConstraint(item: view, attribute:
+        .TrailingMargin, relatedBy: .Equal, toItem: self.view,
+        attribute: .TrailingMargin, multiplier: 1.0, constant: -20)*/
+        
+        //pin 100 points from the top of the super
+        let pinTop = NSLayoutConstraint(item: view, attribute: .Top, relatedBy: .Equal,
+            toItem: self.view, attribute: .Top, multiplier: 1.0, constant: 15)
+        
+        let heightContraints = NSLayoutConstraint(item: view, attribute:
+            .Height, relatedBy: .Equal, toItem: nil,
+            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
+            constant: 40)
+        
+        let widthContraints = NSLayoutConstraint(item: view, attribute:
+            .Width, relatedBy: .Equal, toItem: nil,
+            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
+            constant: 40)
+        
+        //when using autolayout we an a view, MUST ALWAYS SET setTranslatesAutoresizingMaskIntoConstraints
+        //to false.
+        view.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+        //IOS 8
+        //activate the constrains.
+        //we pass an array of all the contraints
+        NSLayoutConstraint.activateConstraints([horizonalContraints , pinTop, heightContraints, widthContraints])
+    }
+    
     
     func applyBelowScanZone(view: UIView, x: CGFloat, nextTo: UIView?, belowTo: UIView){
         let heightContraints = NSLayoutConstraint(item: view, attribute:
@@ -347,6 +397,35 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         NSLayoutConstraint.activateConstraints([verticalContraints, horizonalContraints, heightContraints, widthContraints])
     }
     
+    func applyBottomRightButtonConstraints(view: UIView){
+        let horizonalContraints = NSLayoutConstraint(item: view, attribute:
+            .TrailingMargin, relatedBy: .Equal, toItem: self.view,
+            attribute: .TrailingMargin, multiplier: 1.0,
+            constant: 0)
+
+        let pinBottom = NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal,
+            toItem: self.view, attribute: .Bottom, multiplier: 1.0, constant: -10)
+        
+        
+        let heightContraints = NSLayoutConstraint(item: view, attribute:
+            .Height, relatedBy: .Equal, toItem: nil,
+            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
+            constant: 40)
+        
+        let widthContraints = NSLayoutConstraint(item: view, attribute:
+            .Width, relatedBy: .Equal, toItem: nil,
+            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
+            constant: 40)
+        
+        //when using autolayout we an a view, MUST ALWAYS SET setTranslatesAutoresizingMaskIntoConstraints
+        //to false.
+        view.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+        //IOS 8
+        //activate the constrains.
+        //we pass an array of all the contraints
+        NSLayoutConstraint.activateConstraints([horizonalContraints , pinBottom, heightContraints, widthContraints])
+    }
     
     /***************************/
     /* AVCameraSessionDelegate */
