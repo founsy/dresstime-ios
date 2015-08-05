@@ -66,7 +66,7 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         overlay.overallColor = UIColor.grayColor()
         self.view.addSubview(overlay)
         
-        var overlayImageView = UIImageView(image: UIImage(named: "overlaygraphic.png"))
+        var overlayImageView = UIImageView(image: UIImage(named: "ScanArea"))
         overlayImageView.frame = rect
         self.view.addSubview(overlayImageView)
         
