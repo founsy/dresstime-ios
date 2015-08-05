@@ -18,13 +18,11 @@ import AVFoundation
     optional func CameraOverlayViewResult(resultCapture: [String: AnyObject])
 }
 
-class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDataSource,UIPickerViewDelegate, CameraSessionControllerDelegate {
+class CameraOverlayView: UIViewController, CameraSessionControllerDelegate {
     
     var captureManager: CameraSessionManager!
     var scanningLabel: UILabel!
     var collectionView: UICollectionView!
-    var pageControl: UIPageControl!
-    var scrollView: UIScrollView!
     var arrayUIView: [UIView] = []
     var arrayColors:[UIColor] = []
     var timeToScan: Bool = false
@@ -33,8 +31,8 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
     var image: UIImageView!
     var skipImage: Int!
     var pageSelected: Int!
-    var patternPicker: UIPickerView!
     var typeCloth: String!
+    var pickerView: AKPickerView!
     
     var delegate: CameraOverlayViewDelegate?
     
@@ -56,10 +54,8 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
  
         self.captureManager.previewLayer.bounds = layerRect
         self.captureManager.previewLayer.position = CGPointMake(CGRectGetMidX(layerRect), CGRectGetMidY(layerRect))
-        //self.applyConstraints(self.captureManager.previewLayer)
         self.captureManager.sessionDelegate = self
         self.view.layer.addSublayer(self.captureManager.previewLayer)
-        
         
         var overlay = OverlayView(frame: layerRect)
         overlay.rectForClearing = rect
@@ -70,35 +66,45 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         overlayImageView.frame = rect
         self.view.addSubview(overlayImageView)
         
-        initScrollView(getListOfSubType(self.typeCloth))
-        initPageControl(getListOfSubType(self.typeCloth))
-
-
-        var x = rect.origin.x
-        for var i = 1; i < 4; i++ {
-            var circleView = UIView()
-            var saveCenter = circleView.center
-            circleView.layer.cornerRadius = 50 / 2.0;
-            circleView.center = saveCenter;
-            circleView.layer.borderColor = UIColor.whiteColor().CGColor
-            circleView.layer.borderWidth = 2
-            circleView.backgroundColor = UIColor.redColor()
-            self.arrayUIView.append(circleView)
-            self.view.addSubview(circleView)
-            if (i > 1) {
-                self.applyBelowScanZone(circleView, x: 10, nextTo: self.arrayUIView[i-2], belowTo: overlayImageView)
-            } else {
-                self.applyBelowScanZone(circleView, x: x, nextTo: nil, belowTo: overlayImageView)
-            }
-        }
+        var text: String = "HELP US! SWIPE FOR FIND THE RIGHT PATTERN"
+        var attributedText: NSMutableAttributedString = NSMutableAttributedString(string: text as String)
         
+        attributedText.addAttributes([NSFontAttributeName: UIFont.boldSystemFontOfSize(15)], range: NSRange(location: 9, length: 5))
+        
+        var textView = UITextView()
+        //textView.text = "HELP US! SWIPE FOR FIND THE RIGHT PATTERN";
+        textView.attributedText = attributedText
+       // textView.font = UIFont(name: "HelveticaNeue", size: 15.0)
+        textView.textColor = UIColor.whiteColor()
+        textView.textAlignment = NSTextAlignment.Center
+        textView.backgroundColor = UIColor.clearColor()
+        self.view.addSubview(textView)
+        applyTopCenterXBelow(textView, belowTo: nil, width: 200, height: 50)
+        
+        var view = UIView()
+        view.backgroundColor = UIColor.whiteColor()
+        self.view.addSubview(view)
+        applyTopCenterXBelow(view, belowTo: textView, width: 200, height: 2)
+        
+        createPickerView()
+        applyTopCenterXBelow(self.pickerView, belowTo: view, width: 300, height: 50)
+        
+        var circleSize = 50.0
+        var buttonSize = 70.0
+        var screenRect = UIScreen.mainScreen().bounds
+        
+        if  (screenRect.size.height == 480.0){
+            circleSize = 35.0
+            buttonSize = 65.0
+        }
+ 
         var overlayButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         overlayButton.layer.cornerRadius = 70/2
         overlayButton.backgroundColor = UIColor.whiteColor()
         overlayButton.setImage(UIImage(named: "ScanCapture"), forState: .Normal)
         overlayButton.addTarget(self, action: "validateButtonPressed:", forControlEvents: .TouchUpInside)
         self.view.addSubview(overlayButton)
-        applyBottomCenterButtonConstraints(overlayButton)
+        applyBottomCenterButtonConstraints(overlayButton, width: CGFloat(buttonSize))
         
         var closeButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         closeButton.setImage(UIImage(named: "ScanClose"), forState: .Normal)
@@ -108,16 +114,30 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         
         var flashButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         flashButton.setImage(UIImage(named: "ScanTorch"), forState: .Normal)
+        flashButton.addTarget(self, action: "flashButtonPressed:", forControlEvents: .TouchUpInside)
         self.view.addSubview(flashButton)
         applyBottomRightButtonConstraints(flashButton)
         
+
         
-        //frame: CGRectMake(250, 400, 120, 50)
-        self.patternPicker = UIPickerView()
-        self.patternPicker.delegate = self
-        self.patternPicker.dataSource = self
-        self.view.addSubview(self.patternPicker)
-        applyBelowScanZoneRight(self.patternPicker, belowTo: overlayImageView)
+        
+        var x = rect.origin.x
+        for var i = 0; i < 3; i++ {
+            var circleView = UIView()
+            var saveCenter = circleView.center
+            circleView.layer.cornerRadius = CGFloat(circleSize/2.0)
+            circleView.center = saveCenter;
+            circleView.layer.borderColor = UIColor.whiteColor().CGColor
+            circleView.layer.borderWidth = 2
+            circleView.backgroundColor = UIColor.redColor()
+            self.arrayUIView.append(circleView)
+            self.view.addSubview(circleView)
+            if (i > 0) {
+                self.applyBelowScanZone(circleView, x: 10, nextTo: self.arrayUIView[0], belowTo: overlayImageView, width: CGFloat(circleSize), i: i)
+            } else {
+                self.applyBelowScanZone(circleView, x: x, nextTo: nil, belowTo: overlayImageView, width: CGFloat(circleSize), i: i)
+            }
+        }
         
         self.currentPattern = 0
         
@@ -125,34 +145,22 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         
     }
     
-    func initScrollView(labels: [String]){
-        //frame: CGRectMake(150, 10, 100, 50)
-        scrollView = UIScrollView()
-        scrollView.contentSize = CGSizeMake(CGFloat(100 * labels.count), 50)
-        scrollView.showsHorizontalScrollIndicator = false
-        
-        for var i = 0; i < labels.count; i++ {
-            let x:CGFloat = (CGFloat(i) * 100.0) + 10.0
-            
-            var label = UILabel(frame: CGRectMake(x, 10, 100, 50))
-            label.textAlignment = .Center
-            label.text = labels[i]
-            scrollView.addSubview(label)
-        }
-        scrollView.delegate = self
-        self.view.addSubview(scrollView)
-        self.applyTopCenterXBelow(self.scrollView, belowTo: nil, width: CGFloat(100), height: CGFloat(50))
-    }
+    func createPickerView(){
+        self.pickerView = AKPickerView(frame: CGRectMake(0, 0, 100, 50))
+        self.pickerView.delegate = self;
+        self.pickerView.dataSource = self;
+        self.pickerView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
+        self.view.addSubview(self.pickerView)
+       
+        self.pickerView.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)! //[UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+        self.pickerView.highlightedFont =  UIFont(name: "HelveticaNeue", size:20)!
+        self.pickerView.interitemSpacing = 20.0
+        self.pickerView.textColor = UIColor.whiteColor()
+        self.pickerView.highlightedTextColor = UIColor.whiteColor()
+        //self.pickerView.fisheyeFactor = 0.001
+        self.pickerView.pickerViewStyle = AKPickerViewStyle.Wheel
+        self.pickerView.maskDisabled = false
     
-    func initPageControl(labels: [String]){
-        //frame: CGRectMake(150, 60, 100, 10)
-        pageControl = UIPageControl()
-        pageControl.numberOfPages = labels.count
-        pageControl.currentPage = 0
-        self.pageSelected = 0
-        pageControl.addTarget(self, action: "changePage:", forControlEvents: .ValueChanged)
-        self.view.addSubview(pageControl)
-        self.applyTopCenterXBelow(self.pageControl, belowTo: self.scrollView, width: CGFloat(100), height: CGFloat(10))
     }
     
     func getListOfSubType(type:String) -> [String]{
@@ -189,7 +197,7 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         var screenHeight = screenRect.size.height;
         
         var x = screenWidth * 0.08
-        var y = screenHeight * 0.12
+        var y = screenHeight * 0.2
         var width = screenWidth * 0.85
         var height = screenHeight * 0.54
         println("\(screenWidth)  \(screenHeight)") //Height: 667 - Width= 375
@@ -198,16 +206,16 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         return CGRectMake(x, y, width, height)
     }
     
-    func applyBottomCenterButtonConstraints(view: UIView){
+    func applyBottomCenterButtonConstraints(view: UIView, width: CGFloat){
         let heightContraints = NSLayoutConstraint(item: view, attribute:
             .Height, relatedBy: .Equal, toItem: nil,
             attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 70)
+            constant: width)
         
         let widthContraints = NSLayoutConstraint(item: view, attribute:
             .Width, relatedBy: .Equal, toItem: nil,
             attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 70)
+            constant: width)
         
         let pinBottom = NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal,
             toItem: self.view, attribute: .Bottom, multiplier: 1.0, constant: -10)
@@ -304,38 +312,47 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         NSLayoutConstraint.activateConstraints([horizonalContraints , pinTop, heightContraints, widthContraints])
     }
     
-    
-    func applyBelowScanZone(view: UIView, x: CGFloat, nextTo: UIView?, belowTo: UIView){
+    func applyBelowScanZone(view: UIView, x: CGFloat, nextTo: UIView?, belowTo: UIView, width: CGFloat, i: Int){
         let heightContraints = NSLayoutConstraint(item: view, attribute:
             .Height, relatedBy: .Equal, toItem: nil,
             attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 50)
+            constant: width)
         
         let widthContraints = NSLayoutConstraint(item: view, attribute:
             .Width, relatedBy: .Equal, toItem: nil,
             attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 50)
+            constant: width)
         
         let verticalContraints = NSLayoutConstraint(item: view, attribute:
             .Top, relatedBy: .Equal, toItem: belowTo,
             attribute: .Bottom, multiplier: 1.0,
             constant: 10)
         
-        var horizontalContrains = NSLayoutConstraint(item: view, attribute:
-            .LeadingMargin, relatedBy: .Equal, toItem: self.view,
-            attribute: .LeadingMargin, multiplier: 1.0,
-            constant: x)
-   
+        let horizonalContraints2 = NSLayoutConstraint(item: view, attribute:
+            .CenterX, relatedBy: .Equal, toItem: self.view,
+            attribute: .CenterX, multiplier: 1.0,
+            constant: 0)
+        
         if let nextView = nextTo {
-            horizontalContrains = NSLayoutConstraint(item: view, attribute:
-                .Leading, relatedBy: .Equal, toItem: nextView,
-                attribute: .Trailing, multiplier: 1.0,
-                constant: x)
+            var horizontalContrains :NSLayoutConstraint!
+            if (i == 1){ //Left
+                horizontalContrains = NSLayoutConstraint(item: view, attribute:
+                    .Leading, relatedBy: .Equal, toItem: nextView,
+                    attribute: .Trailing, multiplier: 1.0,
+                    constant: 40)
+            } else { //Right
+                horizontalContrains = NSLayoutConstraint(item: view, attribute:
+                    .Trailing, relatedBy: .Equal, toItem: nextView,
+                    attribute: .Leading, multiplier: 1.0,
+                    constant: -40)
+            }
+            view.setTranslatesAutoresizingMaskIntoConstraints(false)
+            NSLayoutConstraint.activateConstraints([verticalContraints, horizontalContrains, heightContraints, widthContraints])
         
+        } else {
+            view.setTranslatesAutoresizingMaskIntoConstraints(false)
+            NSLayoutConstraint.activateConstraints([verticalContraints, horizonalContraints2, heightContraints, widthContraints])
         }
-        
-        view.setTranslatesAutoresizingMaskIntoConstraints(false)
-        NSLayoutConstraint.activateConstraints([verticalContraints, horizontalContrains, heightContraints, widthContraints])
     }
     
     func applyBelowScanZoneRight(view: UIView, belowTo: UIView){
@@ -379,7 +396,7 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         var verticalContraints = NSLayoutConstraint(item: view, attribute:
             .Top, relatedBy: .Equal, toItem: self.view,
             attribute: .Top, multiplier: 1.0,
-            constant: 0)
+            constant: 15)
         
         if let below = belowTo {
             verticalContraints = NSLayoutConstraint(item: view, attribute:
@@ -387,6 +404,31 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
                 attribute: .Bottom, multiplier: 1.0,
                 constant: 0)
         }
+        
+        let horizonalContraints = NSLayoutConstraint(item: view, attribute:
+            .CenterX, relatedBy: .Equal, toItem: self.view,
+            attribute: .CenterX, multiplier: 1.0,
+            constant: 0)
+        
+        view.setTranslatesAutoresizingMaskIntoConstraints(false)
+        NSLayoutConstraint.activateConstraints([verticalContraints, horizonalContraints, heightContraints, widthContraints])
+    }
+    
+    func applyTopCenterFull(view: UIView){
+        let heightContraints = NSLayoutConstraint(item: view, attribute:
+            .Height, relatedBy: .Equal, toItem: nil,
+            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
+            constant: 50)
+        
+        let widthContraints = NSLayoutConstraint(item: view, attribute:
+            .Width, relatedBy: .Equal, toItem: nil,
+            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
+            constant: 300)
+        
+        var verticalContraints = NSLayoutConstraint(item: view, attribute:
+            .Top, relatedBy: .Equal, toItem: self.view,
+            attribute: .Top, multiplier: 1.0,
+            constant: 10)
         
         let horizonalContraints = NSLayoutConstraint(item: view, attribute:
             .CenterX, relatedBy: .Equal, toItem: self.view,
@@ -496,11 +538,15 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         self.dismissViewControllerAnimated(true, completion: nil);
     }
     
+    func flashButtonPressed(sender: UIButton!){
+        self.captureManager.toggleFlash()
+    }
+    
     func hideLabel(label: UILabel) {
         label.hidden = true
     }
     
-    
+    /*
     func changePage(pageControl: UIPageControl){
         self.pageSelected = pageControl.currentPage;
         NSLog("\( self.pageSelected )")
@@ -534,7 +580,7 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         self.currentPattern = row;
         return myTitle
     }
-    
+    */
     
     func imageFromSampleBuffer(sampleBuffer :CMSampleBufferRef) -> UIImage? {
         let imageBuffer: CVImageBufferRef = CMSampleBufferGetImageBuffer(sampleBuffer)
@@ -593,4 +639,25 @@ class CameraOverlayView: UIViewController, UIScrollViewDelegate, UIPickerViewDat
         return jsonObject
     }
 
+}
+
+extension CameraOverlayView : AKPickerViewDataSource {
+    
+    func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
+        return self.patternData.count
+    }
+    
+    func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> String {
+        return self.patternData[item]
+    }
+    
+}
+
+
+extension CameraOverlayView : AKPickerViewDelegate {
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        NSLog(self.patternData[row]);
+        self.pageSelected = row
+
+    }
 }
