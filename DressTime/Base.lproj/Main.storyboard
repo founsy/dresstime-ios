@@ -646,11 +646,49 @@
                         <segue destination="4fS-I5-Chz" kind="popoverPresentation" identifier="showClotheDetail" popoverAnchorView="bje-MN-K8f" id="DQt-Ue-Bn3">
                             <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                         </segue>
+                        <segue destination="uqY-Z2-jag" kind="show" identifier="AddClothe" id="FzN-gm-vKl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hI8-Ym-tK6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2794" y="429"/>
+            <point key="canvasLocation" x="2778" y="429"/>
+        </scene>
+        <!--Clothe Type-->
+        <scene sceneID="YAy-pn-fOu">
+            <objects>
+                <viewController title="Clothe Type" id="uqY-Z2-jag" customClass="TypeViewController" customModule="DressTime" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RUc-9W-hgi"/>
+                        <viewControllerLayoutGuide type="bottom" id="ylc-Yp-Tgx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1Cl-Hv-hAz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="LuA-A4-GHI">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="uqY-Z2-jag" id="wUg-uL-Lcy"/>
+                                    <outlet property="delegate" destination="uqY-Z2-jag" id="5h9-xX-Y6N"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LuA-A4-GHI" firstAttribute="top" secondItem="1Cl-Hv-hAz" secondAttribute="topMargin" id="2f4-Wx-0Fn"/>
+                            <constraint firstItem="ylc-Yp-Tgx" firstAttribute="top" secondItem="LuA-A4-GHI" secondAttribute="bottom" id="Vet-GA-NUg"/>
+                            <constraint firstItem="LuA-A4-GHI" firstAttribute="leading" secondItem="1Cl-Hv-hAz" secondAttribute="leading" id="ecg-3v-CpY"/>
+                            <constraint firstAttribute="trailing" secondItem="LuA-A4-GHI" secondAttribute="trailing" id="hft-1B-JRb"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tableView" destination="LuA-A4-GHI" id="1EA-wo-NuD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BGb-aN-MHR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3805" y="1199"/>
         </scene>
         <!--Settings-->
         <scene sceneID="PFr-62-DsI">
@@ -763,7 +801,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z4v-Ot-eXG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3657" y="933"/>
+            <point key="canvasLocation" x="3805" y="429"/>
         </scene>
         <!--Capture-->
         <scene sceneID="F5B-hH-mfV">
@@ -853,7 +891,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0I8-6O-451" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3573" y="-263"/>
+            <point key="canvasLocation" x="3805" y="-291"/>
         </scene>
     </scenes>
     <resources>

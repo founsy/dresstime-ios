@@ -546,42 +546,6 @@ class CameraOverlayView: UIViewController, CameraSessionControllerDelegate {
         label.hidden = true
     }
     
-    /*
-    func changePage(pageControl: UIPageControl){
-        self.pageSelected = pageControl.currentPage;
-        NSLog("\( self.pageSelected )")
-    }
-    
-    func scrollViewDidScroll(scrollView: UIScrollView) {
-        var pageWidth = self.scrollView.frame.size.width;
-        var fractionalPage = self.scrollView.contentOffset.x / pageWidth;
-        var page = lround(Double(fractionalPage));
-        self.pageControl.currentPage = page;
-        self.pageSelected = page
-    }
-    
-    //MARK: - Delegates and data sources
-    //MARK: Data Sources
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return patternData.count
-    }
-    
-    //MARK: Delegates
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
-        return patternData[row]
-    }
-    
-    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString?{
-        let titleData = patternData[row]
-        var myTitle = NSAttributedString(string: titleData, attributes: [NSFontAttributeName:UIFont(name: "Georgia", size: 15.0)!,NSForegroundColorAttributeName:UIColor.whiteColor()])
-        self.currentPattern = row;
-        return myTitle
-    }
-    */
-    
     func imageFromSampleBuffer(sampleBuffer :CMSampleBufferRef) -> UIImage? {
         let imageBuffer: CVImageBufferRef = CMSampleBufferGetImageBuffer(sampleBuffer)
         

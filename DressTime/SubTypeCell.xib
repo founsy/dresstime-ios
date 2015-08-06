@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SubTypeCell" id="jKY-aT-ro3" customClass="CustomSubTypeViewCell" customModule="DressTime" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="90"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="150" height="90"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SubTypeJumper" translatesAutoresizingMaskIntoConstraints="NO" id="hgd-4Y-MY8">
+                        <rect key="frame" x="49" y="6" width="53" height="60"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="coF-np-2AR">
+                        <rect key="frame" x="18" y="68" width="114" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="21" id="xHp-GK-VQP"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="coF-np-2AR" secondAttribute="bottom" constant="1" id="4ZY-Tg-GFu"/>
+                <constraint firstAttribute="centerX" secondItem="hgd-4Y-MY8" secondAttribute="centerX" id="F3y-Ow-d9l"/>
+                <constraint firstItem="coF-np-2AR" firstAttribute="top" secondItem="hgd-4Y-MY8" secondAttribute="bottom" constant="2" id="Mp7-1Y-EkO"/>
+                <constraint firstItem="hgd-4Y-MY8" firstAttribute="top" secondItem="jKY-aT-ro3" secondAttribute="top" constant="6" id="VVv-4g-MZF"/>
+                <constraint firstAttribute="centerX" secondItem="coF-np-2AR" secondAttribute="centerX" id="gYa-tN-ngb"/>
+                <constraint firstItem="hgd-4Y-MY8" firstAttribute="leading" secondItem="jKY-aT-ro3" secondAttribute="leading" constant="49" id="jWn-1d-gl3"/>
+                <constraint firstItem="coF-np-2AR" firstAttribute="leading" secondItem="jKY-aT-ro3" secondAttribute="leading" constant="18" id="uhY-VB-sTf"/>
+            </constraints>
+            <size key="customSize" width="223" height="160"/>
+            <connections>
+                <outlet property="imgaView" destination="hgd-4Y-MY8" id="45N-1p-I6U"/>
+                <outlet property="label" destination="coF-np-2AR" id="dsp-0M-USz"/>
+            </connections>
+            <point key="canvasLocation" x="256" y="232"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="SubTypeJumper" width="54" height="60"/>
+    </resources>
+</document>
