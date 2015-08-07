@@ -62,11 +62,6 @@ class CollectionViewController : NSObject, UICollectionViewDataSource {
     }
     
     func addCellButtonPressed() {
-       /* var captureView = CameraOverlayView()
-        captureView.delegate = self
-        captureView.typeCloth = self.type
-        
-        self.targetVC.presentViewController(captureView, animated: true, completion: nil) */
         self.targetVC.performSegueWithIdentifier("AddClothe", sender: self.targetVC)
     }
 }

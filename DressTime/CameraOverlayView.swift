@@ -31,7 +31,8 @@ class CameraOverlayView: UIViewController, CameraSessionControllerDelegate {
     var image: UIImageView!
     var skipImage: Int!
     var pageSelected: Int!
-    var typeCloth: String!
+    var typeClothe: String!
+    var subTypeClothe: String!
     var pickerView: AKPickerView!
     
     var delegate: CameraOverlayViewDelegate?
@@ -515,7 +516,7 @@ class CameraOverlayView: UIViewController, CameraSessionControllerDelegate {
     
     func validateButtonPressed(sender: UIButton!){
         if let image = self.currentImage {
-            let result = wrapResultObject(UIImageJPEGRepresentation(image, 1.0), labels: getListOfSubType(self.typeCloth))
+            let result = wrapResultObject(UIImageJPEGRepresentation(image, 1.0), labels: getListOfSubType(self.typeClothe))
             delegate?.CameraOverlayViewResult!(result)
             
         }
@@ -590,8 +591,8 @@ class CameraOverlayView: UIViewController, CameraSessionControllerDelegate {
             "clothe_id": NSUUID().UUIDString,
             "clothe_partnerid": -1,
             "clothe_partnerName": "",
-            "clothe_type": self.typeCloth,
-            "clothe_subtype": labels[self.pageSelected],
+            "clothe_type": self.typeClothe,
+            "clothe_subtype": self.subTypeClothe,
             "clothe_name": "",
             "clothe_isUnis": isUnis,
             "clothe_pattern": self.patternData[self.currentPattern],
