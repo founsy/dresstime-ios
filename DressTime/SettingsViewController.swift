@@ -26,7 +26,7 @@ class SettingsViewController : UIViewController {
             ]
             
             LoginService.logoutMethod(jsonObject, getCompleted: { (succeeded: Bool, result: [String: AnyObject]) -> () in
-                if (succeeded){
+                //if (succeeded){
                     let dal = ProfilsDAL()
                     let profilOld = dal.fetch(user.userid)
                     if let profil = profilOld {
@@ -40,7 +40,7 @@ class SettingsViewController : UIViewController {
                         var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
                         self.presentViewController(rootController, animated: true, completion: nil)
                     })
-                }
+                //}
             })
         }
 
