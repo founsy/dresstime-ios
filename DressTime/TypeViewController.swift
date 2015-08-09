@@ -13,9 +13,9 @@ class TypeViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var sectionTitleArray : NSMutableArray = NSMutableArray()
+    var sectionTitleArray : NSMutableArray = ["Maille","Top", "Pants"]
     var sectionContentDict : NSMutableDictionary = NSMutableDictionary()
-    var arrayForBool : NSMutableArray = NSMutableArray()
+    var arrayForBool : NSMutableArray = ["0","0", "0"]
     
     let labelsSubTop = ["tshirt", "shirt", "shirt-sleeve", "polo","polo-sleeve"]
     let labelsSubPants = ["jeans", "jeans-slim", "trousers-pleated", "trousers-suit", "chinos", "trousers-regular", "trousers", "trousers-slim", "bermuda", "short"]
@@ -30,12 +30,30 @@ class TypeViewController: UIViewController {
     private var currentSection = 0
     private let collectionCellWidth = 114
     private var isLoaded = false
+    private var isOpenSectionRequired = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        arrayForBool = ["0","0", "0"]
-        sectionTitleArray = ["Maille","Top", "Pants"]
+        self.view.backgroundColor = UIColor.lightGrayColor()
+        if (isOpenSectionRequired){
+            for (var i = 0; i < arrayForBool.count; i++) {
+                var collapsed = arrayForBool.objectAtIndex(i).boolValue as Bool
+                if (collapsed){
+                    var path:NSIndexPath = NSIndexPath(forItem: i, inSection: 0)
+                    self.tableView.reloadRowsAtIndexPaths([path], withRowAnimation: UITableViewRowAnimation.Fade)
+                    self.tableView.scrollToRowAtIndexPath(path, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+                    isOpenSectionRequired = false
+                    break
+                }
+            }
+        }
+    }
+    
+    func openItem(type: Int){
+        var collapsed = arrayForBool.objectAtIndex(type).boolValue as Bool
+        arrayForBool.replaceObjectAtIndex(type, withObject: !collapsed)
+        self.currentSection = type
+        isOpenSectionRequired = true
     }
 }
 
@@ -60,8 +78,8 @@ extension TypeViewController: UITableViewDelegate{
         //Open new one
         var collapsed = arrayForBool.objectAtIndex(indexPath.row).boolValue
         collapsed = !collapsed;
-            
         arrayForBool.replaceObjectAtIndex(indexPath.row, withObject: collapsed)
+        
         self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
     }

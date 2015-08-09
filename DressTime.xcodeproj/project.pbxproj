@@ -17,7 +17,6 @@
 		013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013996411B5CED57004B2DE0 /* DressingSynchro.swift */; };
 		01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D21B5935B3003D5E41 /* AppDelegate.swift */; };
 		01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */; };
-		01C454D81B5935B3003D5E41 /* TodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D71B5935B3003D5E41 /* TodayViewController.swift */; };
 		01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DC1B5935B3003D5E41 /* Images.xcassets */; };
 		01C454E01B5935B3003D5E41 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DE1B5935B3003D5E41 /* LaunchScreen.xib */; };
 		01C454EC1B5935B3003D5E41 /* DressTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454EB1B5935B3003D5E41 /* DressTimeTests.swift */; };
@@ -53,7 +52,6 @@
 		01D1B8761B72949B00920C64 /* SubTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D1B8751B72949B00920C64 /* SubTypeCell.xib */; };
 		01D1B8781B7327B000920C64 /* CustomSubTypeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */; };
 		01D1B87E1B750F6000920C64 /* TypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B87D1B750F6000920C64 /* TypeTableViewCell.swift */; };
-		01D1B8821B763D3300920C64 /* NewTodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8811B763D3300920C64 /* NewTodayViewController.swift */; };
 		01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEDD1B6E714600F59D1B /* SharedData.swift */; };
 		01FFCEE61B712A9700F59D1B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */; };
 		CD4E053F1B776987005B161B /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E053D1B776987005B161B /* FiltersViewController.swift */; };
@@ -105,7 +103,6 @@
 		01C454D11B5935B3003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01C454D21B5935B3003D5E41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		01C454D51B5935B3003D5E41 /* DressTime.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DressTime.xcdatamodel; sourceTree = "<group>"; };
-		01C454D71B5935B3003D5E41 /* TodayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewController.swift; sourceTree = "<group>"; };
 		01C454DC1B5935B3003D5E41 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		01C454DF1B5935B3003D5E41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		01C454E51B5935B3003D5E41 /* DressTimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DressTimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,7 +141,6 @@
 		01D1B8751B72949B00920C64 /* SubTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubTypeCell.xib; sourceTree = "<group>"; };
 		01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSubTypeViewCell.swift; sourceTree = "<group>"; };
 		01D1B87D1B750F6000920C64 /* TypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeTableViewCell.swift; sourceTree = "<group>"; };
-		01D1B8811B763D3300920C64 /* NewTodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTodayViewController.swift; sourceTree = "<group>"; };
 		01FFCEDD1B6E714600F59D1B /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CD4E053D1B776987005B161B /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
@@ -273,7 +269,6 @@
 			children = (
 				CD4E053D1B776987005B161B /* FiltersViewController.swift */,
 				CD4E053E1B776987005B161B /* HomeViewController.swift */,
-				01C454D71B5935B3003D5E41 /* TodayViewController.swift */,
 				01C454FB1B593A18003D5E41 /* LoginViewController.swift */,
 				01C454FD1B593EB2003D5E41 /* NavigationController.swift */,
 				01C455081B59703A003D5E41 /* ProfilViewController.swift */,
@@ -282,7 +277,6 @@
 				0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */,
 				01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */,
 				01D1B8711B726B7D00920C64 /* TypeViewController.swift */,
-				01D1B8811B763D3300920C64 /* NewTodayViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -512,7 +506,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01C454D81B5935B3003D5E41 /* TodayViewController.swift in Sources */,
 				01C455051B594D52003D5E41 /* WeatherService.swift in Sources */,
 				01C454FC1B593A18003D5E41 /* LoginViewController.swift in Sources */,
 				012A219B1B5AB87000CD01D3 /* Profil.swift in Sources */,
@@ -524,7 +517,6 @@
 				01C455111B597626003D5E41 /* Clothe.swift in Sources */,
 				01FFCEE61B712A9700F59D1B /* SettingsViewController.swift in Sources */,
 				013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */,
-				01D1B8821B763D3300920C64 /* NewTodayViewController.swift in Sources */,
 				01D1B8781B7327B000920C64 /* CustomSubTypeViewCell.swift in Sources */,
 				013996401B5BB739004B2DE0 /* OutfitCollectionViewController.swift in Sources */,
 				012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */,

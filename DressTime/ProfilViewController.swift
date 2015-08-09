@@ -20,6 +20,8 @@ class ProfilViewController : UIViewController {
     
     var clotheSelected: Clothe!
     
+    private var typeAddClothe: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -52,6 +54,30 @@ class ProfilViewController : UIViewController {
                 clotheDetail.delegate = self.pantsDataSource
             }
         }
+        
+        if (segue.identifier == "AddClothe"){
+             var addClothe = segue.destinationViewController as! TypeViewController
+            addClothe.openItem(self.typeAddClothe)
+        }
+    }
+    
+    func performSegue(type: String){
+        switch(type){
+            case "maille":
+                self.typeAddClothe = 0
+            break
+            case "top":
+                self.typeAddClothe = 1
+            break
+            case "pants":
+                self.typeAddClothe = 2
+            break
+        default:
+            self.typeAddClothe = -1
+            break
+        }
+        
+        self.performSegueWithIdentifier("AddClothe", sender: self)
     }
     
     override func didReceiveMemoryWarning() {

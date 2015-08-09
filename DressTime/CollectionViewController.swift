@@ -62,7 +62,8 @@ class CollectionViewController : NSObject, UICollectionViewDataSource {
     }
     
     func addCellButtonPressed() {
-        self.targetVC.performSegueWithIdentifier("AddClothe", sender: self.targetVC)
+        //self.targetVC.performSegueWithIdentifier("AddClothe", sender: self.targetVC)
+        (self.targetVC as! ProfilViewController).performSegue(self.type)
     }
 }
 

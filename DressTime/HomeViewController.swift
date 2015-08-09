@@ -25,7 +25,13 @@ class HomeViewController: UIViewController  {
         // Do any additional setup after loading the view, typically from a nib.
         
         // TODO: Cannot find how to make the background invisible !!!!
-        self.navigationController?.navigationBar.backgroundColor = UIColor(white: 0.0, alpha: 0.0)
+        let bar:UINavigationBar! =  self.navigationController?.navigationBar
+        
+        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        bar.shadowImage = UIImage()
+        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+        bar.tintColor = UIColor.whiteColor()
+        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.delegate = self
