@@ -12,11 +12,12 @@ import CoreLocation
 class HomeViewController: UIViewController  {
     private var locationManager: CLLocationManager = CLLocationManager()
     private var currentLocation: CLLocation!
-    
+    private var outfitDataSource: OutfitCollectionViewController!
    
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var iconLabel: UILabel!
+    @IBOutlet weak var outfitCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +31,10 @@ class HomeViewController: UIViewController  {
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
-
+        
+        self.outfitDataSource = OutfitCollectionViewController(outfits: [[String:AnyObject]](), collectionView: outfitCollectionView)
+        self.outfitCollectionView.dataSource = self.outfitDataSource
+        self.outfitCollectionView.delegate = self.outfitDataSource
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,6 +46,14 @@ class HomeViewController: UIViewController  {
         // Use to exit a view
     }
     
+    @IBAction func onMoreFiltersTouch(sender: AnyObject) {
+        var storyboard = UIStoryboard(name:"Main", bundle:nil)
+        var filtersControllers = storyboard.instantiateViewControllerWithIdentifier("filters") as! FiltersViewController
+        
+        filtersControllers.delegate = self
+        self.presentViewController(filtersControllers, animated: true, completion: nil)
+        //self.performSegueWithIdentifier("showFilterModal", sender: self)
+    }
 
 }
 
@@ -191,7 +203,8 @@ extension HomeViewController: CLLocationManagerDelegate {
 
 extension HomeViewController: FiltersViewControllerDelegate {
     func outfitsResults(outfits: [[String: AnyObject]]) {
-    
+        self.outfitDataSource.collection = outfits
+        self.outfitCollectionView.reloadData()
     }
 }
 

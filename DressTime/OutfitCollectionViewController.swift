@@ -11,7 +11,7 @@ import UIKit
 class OutfitCollectionViewController : NSObject, UICollectionViewDataSource {
     
     private let reuseIdentifier = "OutfitCell"
-    private let sectionInsets = UIEdgeInsets(top: 50.0, left: 20.0, bottom: 50.0, right: 20.0)
+    private let sectionInsets = UIEdgeInsets(top: 0.0, left: 20.0, bottom: 0.0, right: 20.0)
     
     var collection: [[String:AnyObject]]!
     var collectionView: UICollectionView
@@ -30,7 +30,7 @@ class OutfitCollectionViewController : NSObject, UICollectionViewDataSource {
     
     //2
     @objc func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.collection.count
+        return self.collection.count > 4 ? 4 : self.collection.count
     }
     
     //3
@@ -60,8 +60,9 @@ class OutfitCollectionViewController : NSObject, UICollectionViewDataSource {
                     }
                 }
                 if let rate:AnyObject = elem["matchingRate"] {
-                    var rateCell = cell.viewWithTag(4) as! UITextView
-                    rateCell.text = String(format:"%.1f", rate as! Double)
+                    if let rateCell = cell.viewWithTag(4) as? UITextView {
+                        rateCell.text = String(format:"%.1f", rate as! Double)
+                    }
                 }
             }
         }
@@ -75,15 +76,11 @@ extension OutfitCollectionViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+            var widthParent = collectionView.bounds.size.width
+            var width = widthParent/2 - 40
+            var height = (collectionView.bounds.size.height/2)-10
             
-            /*let flickrPhoto =  photoForIndexPath(indexPath)
-            //2
-            if var size = flickrPhoto.thumbnail?.size {
-            size.width += 10
-            size.height += 10
-            return size
-            } */
-            return CGSize(width: 100, height: 190)
+            return CGSize(width: width, height: height)
     }
     
     //3
