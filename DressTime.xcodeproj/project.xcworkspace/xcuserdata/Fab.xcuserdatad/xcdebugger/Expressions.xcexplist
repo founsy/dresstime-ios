@@ -71,6 +71,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "DressTime.TypeViewController.tableView (DressTime.TypeViewController)(ObjectiveC.UITableView, willDisplayCell : ObjectiveC.UITableViewCell, forRowAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ():TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DressTime.ProfilViewController.collectionView (DressTime.ProfilViewController)(ObjectiveC.UICollectionView, cellForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UICollectionViewCell:ProfilViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -85,10 +93,10 @@
          contextName = "DressTime.TypeViewController.collectionView (DressTime.TypeViewController)(ObjectiveC.UICollectionView, cellForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UICollectionViewCell:TypeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "labelsSubMaille[indexPath.row]">
+               value = "count/2">
             </PersistentString>
             <PersistentString
-               value = "self.currentSection">
+               value = "indexPath.row/2">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -169,6 +177,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "DressTime.TypeViewController.collectionView (DressTime.TypeViewController)(ObjectiveC.UICollectionView, layout : ObjectiveC.UICollectionViewLayout, sizeForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; C.CGSize:TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tableView.frame.size.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DressTime.ProfilViewController.viewDidLoad (DressTime.ProfilViewController)() -&gt; ():ProfilViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -195,6 +211,9 @@
             </PersistentString>
             <PersistentString
                value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "tableView.frame.size.width">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -258,6 +277,25 @@
          <PersistentStrings>
             <PersistentString
                value = "println(jsonObject)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.TypeTableViewCell.calculateCollectionViewHeight (DressTime.TypeTableViewCell)() -&gt; CoreGraphics.CGFloat:TypeTableViewCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.data">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.TypeViewController.collectionView (DressTime.TypeViewController)(ObjectiveC.UICollectionView, willDisplayCell : ObjectiveC.UICollectionViewCell, forItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ():TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "collectionView.numberOfItemsInSection(0)%2">
+            </PersistentString>
+            <PersistentString
+               value = "collectionView.numberOfItemsInSection(0)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

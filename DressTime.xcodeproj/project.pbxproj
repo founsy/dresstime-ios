@@ -53,6 +53,7 @@
 		01D1B8761B72949B00920C64 /* SubTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D1B8751B72949B00920C64 /* SubTypeCell.xib */; };
 		01D1B8781B7327B000920C64 /* CustomSubTypeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */; };
 		01D1B87E1B750F6000920C64 /* TypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B87D1B750F6000920C64 /* TypeTableViewCell.swift */; };
+		01D1B8821B763D3300920C64 /* NewTodayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8811B763D3300920C64 /* NewTodayViewController.swift */; };
 		01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEDD1B6E714600F59D1B /* SharedData.swift */; };
 		01FFCEE61B712A9700F59D1B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
@@ -140,6 +141,7 @@
 		01D1B8751B72949B00920C64 /* SubTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubTypeCell.xib; sourceTree = "<group>"; };
 		01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSubTypeViewCell.swift; sourceTree = "<group>"; };
 		01D1B87D1B750F6000920C64 /* TypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeTableViewCell.swift; sourceTree = "<group>"; };
+		01D1B8811B763D3300920C64 /* NewTodayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTodayViewController.swift; sourceTree = "<group>"; };
 		01FFCEDD1B6E714600F59D1B /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -271,6 +273,7 @@
 				0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */,
 				01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */,
 				01D1B8711B726B7D00920C64 /* TypeViewController.swift */,
+				01D1B8811B763D3300920C64 /* NewTodayViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				01C455111B597626003D5E41 /* Clothe.swift in Sources */,
 				01FFCEE61B712A9700F59D1B /* SettingsViewController.swift in Sources */,
 				013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */,
+				01D1B8821B763D3300920C64 /* NewTodayViewController.swift in Sources */,
 				01D1B8781B7327B000920C64 /* CustomSubTypeViewCell.swift in Sources */,
 				013996401B5BB739004B2DE0 /* OutfitCollectionViewController.swift in Sources */,
 				012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */,
