@@ -21,11 +21,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let profil = profilDAL.fetch()
         
         //if (profil == nil){
-            var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
-            var navigation = UINavigationController(rootViewController: rootController)
+        var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
+        var navigation = UINavigationController(rootViewController: rootController)
         
-            self.window!.rootViewController = navigation;
+        self.window!.rootViewController = navigation;
+        
         //Go back to login window
+        
+     /*   var storyBoard = UIStoryboard(name: "Static", bundle: nil)
+        self.window?.rootViewController = storyBoard.instantiateInitialViewController() as! UIViewController
+        self.window?.makeKeyAndVisible()*/
+        
         
         /*var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
         self.window?.makeKeyAndVisible()
