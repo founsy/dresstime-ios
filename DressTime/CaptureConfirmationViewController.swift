@@ -74,6 +74,7 @@ class CaptureConfirmationViewController: UIViewController {
         
         resultCapture["clothe_isUnis"] = isUnis
         resultCapture["clothe_pattern"] = self.patternData[self.selectedPattern]
+        resultCapture["clothe_colors"] = UIColor.hexStringFromColor(color1.backgroundColor!)
         
         var dal = ClothesDAL()
         let clotheId = NSUUID().UUIDString

@@ -562,23 +562,14 @@ class CameraViewController: UIViewController, CameraSessionControllerDelegate {
         return resultImage
     }
     
-    func hexStringFromColor(color: UIColor) -> String{
-        let components = CGColorGetComponents(color.CGColor);
-    
-        let r = components[0];
-        let g = components[1];
-        let b = components[2];
-    
-        return String(format:"%02lX%02lX%02lX", Int(r * 255), Int(g * 255), Int(b * 255))
-
-    }
-    
     func wrapResultObject(image: NSData, labels: [String]) -> [String: AnyObject]{
         var colors = ""
         
         for var i = 0; i < self.arrayColors.count && i < 3; i++ {
-            colors += ",\(hexStringFromColor(self.arrayColors[i]))"
-            
+            if (colors != ""){
+                colors+=","
+            }
+            colors += "\(UIColor.hexStringFromColor(self.arrayColors[i]))"
         }
         
         let jsonObject: [String: AnyObject] = [

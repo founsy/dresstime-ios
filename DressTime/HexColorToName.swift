@@ -33,7 +33,15 @@ extension UIColor {
         
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
     }
-
+    static func hexStringFromColor(color: UIColor) -> String{
+        let components = CGColorGetComponents(color.CGColor);
+        
+        let r = components[0];
+        let g = components[1];
+        let b = components[2];
+        
+        return String(format:"%02lX%02lX%02lX", Int(r * 255), Int(g * 255), Int(b * 255))
+    }
 }
 class HexColorToName {
    
