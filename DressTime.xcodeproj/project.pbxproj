@@ -15,6 +15,7 @@
 		012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */; };
 		013996401B5BB739004B2DE0 /* OutfitCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */; };
 		013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013996411B5CED57004B2DE0 /* DressingSynchro.swift */; };
+		0177B4E61B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */; };
 		01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D21B5935B3003D5E41 /* AppDelegate.swift */; };
 		01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */; };
 		01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DC1B5935B3003D5E41 /* Images.xcassets */; };
@@ -30,7 +31,7 @@
 		01C455091B59703A003D5E41 /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455081B59703A003D5E41 /* ProfilViewController.swift */; };
 		01C4550C1B597571003D5E41 /* ClothesDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4550B1B597571003D5E41 /* ClothesDAL.swift */; };
 		01C455111B597626003D5E41 /* Clothe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455101B597626003D5E41 /* Clothe.swift */; };
-		01C455181B597E60003D5E41 /* CameraOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455141B597E60003D5E41 /* CameraOverlayView.swift */; };
+		01C455181B597E60003D5E41 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455141B597E60003D5E41 /* CameraViewController.swift */; };
 		01C455191B597E60003D5E41 /* CameraSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455151B597E60003D5E41 /* CameraSessionManager.swift */; };
 		01C4553B1B597F25003D5E41 /* DominantColor.h in Headers */ = {isa = PBXBuildFile; fileRef = 01C4553A1B597F25003D5E41 /* DominantColor.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		01C4554D1B597F25003D5E41 /* DominantColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C455361B597F25003D5E41 /* DominantColor.framework */; };
@@ -99,6 +100,7 @@
 		012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColorToName.swift; sourceTree = "<group>"; };
 		0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitCollectionViewController.swift; sourceTree = "<group>"; };
 		013996411B5CED57004B2DE0 /* DressingSynchro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressingSynchro.swift; sourceTree = "<group>"; };
+		0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureConfirmationViewController.swift; sourceTree = "<group>"; };
 		01C454CD1B5935B3003D5E41 /* DressTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DressTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C454D11B5935B3003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01C454D21B5935B3003D5E41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -118,7 +120,7 @@
 		01C455081B59703A003D5E41 /* ProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilViewController.swift; sourceTree = "<group>"; };
 		01C4550B1B597571003D5E41 /* ClothesDAL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothesDAL.swift; sourceTree = "<group>"; };
 		01C455101B597626003D5E41 /* Clothe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clothe.swift; sourceTree = "<group>"; };
-		01C455141B597E60003D5E41 /* CameraOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraOverlayView.swift; sourceTree = "<group>"; };
+		01C455141B597E60003D5E41 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		01C455151B597E60003D5E41 /* CameraSessionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraSessionManager.swift; sourceTree = "<group>"; };
 		01C455361B597F25003D5E41 /* DominantColor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DominantColor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C455391B597F25003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -277,6 +279,8 @@
 				0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */,
 				01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */,
 				01D1B8711B726B7D00920C64 /* TypeViewController.swift */,
+				01C455141B597E60003D5E41 /* CameraViewController.swift */,
+				0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -297,7 +301,6 @@
 			isa = PBXGroup;
 			children = (
 				01C4556B1B598AD8003D5E41 /* OverlayView.swift */,
-				01C455141B597E60003D5E41 /* CameraOverlayView.swift */,
 				01C455151B597E60003D5E41 /* CameraSessionManager.swift */,
 			);
 			name = Capture;
@@ -513,6 +516,7 @@
 				01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */,
 				01D1B8701B72374100920C64 /* AKPickerView.swift in Sources */,
 				01C454F71B593909003D5E41 /* JSONService.swift in Sources */,
+				0177B4E61B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift in Sources */,
 				CD4E053F1B776987005B161B /* FiltersViewController.swift in Sources */,
 				01C455111B597626003D5E41 /* Clothe.swift in Sources */,
 				01FFCEE61B712A9700F59D1B /* SettingsViewController.swift in Sources */,
@@ -525,7 +529,7 @@
 				012A21951B5A777E00CD01D3 /* CollectionViewController.swift in Sources */,
 				01C454FE1B593EB2003D5E41 /* NavigationController.swift in Sources */,
 				01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */,
-				01C455181B597E60003D5E41 /* CameraOverlayView.swift in Sources */,
+				01C455181B597E60003D5E41 /* CameraViewController.swift in Sources */,
 				01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */,
 				012A219D1B5AB89700CD01D3 /* ProfilsDAL.swift in Sources */,
 				01D1B8721B726B7D00920C64 /* TypeViewController.swift in Sources */,
@@ -689,7 +693,7 @@
 				INFOPLIST_FILE = DressTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c61a436f-3d8f-4743-a9f9-84653bf3735b";
+				PROVISIONING_PROFILE = "404e9e69-398f-4f5b-8fe7-25882860b8bc";
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
 				SWIFT_OBJC_BRIDGING_HEADER = "DressTime/DressTime-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -705,7 +709,7 @@
 				INFOPLIST_FILE = DressTime/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c61a436f-3d8f-4743-a9f9-84653bf3735b";
+				PROVISIONING_PROFILE = "404e9e69-398f-4f5b-8fe7-25882860b8bc";
 				STRINGS_FILE_OUTPUT_ENCODING = binary;
 				SWIFT_OBJC_BRIDGING_HEADER = "DressTime/DressTime-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;

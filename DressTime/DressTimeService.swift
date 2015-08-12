@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import UIKit
 
 class DressTimeService {
     
@@ -24,7 +24,7 @@ class DressTimeService {
 
             for clothe in dressing {
                 var dict = NSMutableDictionary(dictionary: clothe.toDictionnary())
-                let colorName = hexTranslator.colorWithHexString(dict["clothe_colors"] as! String)
+                let colorName = UIColor.colorWithHexString(dict["clothe_colors"] as! String)
                 dict["clothe_colors"] = hexTranslator.name(colorName)[1] as! String
                 dict.removeObjectForKey("clothe_image")
                 var d:[String:AnyObject] = dict as NSDictionary as! [String : AnyObject]

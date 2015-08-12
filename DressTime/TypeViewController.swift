@@ -28,6 +28,7 @@ class TypeViewController: UIViewController {
     private let kCellType : String = "TypeCell"
     
     private var currentSection = 0
+    private var subTypeSelected = 0
     private let collectionCellWidth = 114
     private var isLoaded = false
     private var isOpenSectionRequired = false
@@ -54,6 +55,15 @@ class TypeViewController: UIViewController {
         arrayForBool.replaceObjectAtIndex(type, withObject: !collapsed)
         self.currentSection = type
         isOpenSectionRequired = true
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "showCapture"){
+            let captureController = segue.destinationViewController as! CameraViewController
+            //captureController.delegate = self
+            captureController.typeClothe = getType(self.currentSection)
+            captureController.subTypeClothe = getSubType(self.currentSection, subType: self.subTypeSelected)
+        }
     }
 }
 
@@ -236,13 +246,9 @@ extension TypeViewController : UICollectionViewDelegate {
         var cell = collectionView.cellForItemAtIndexPath(indexPath)
         NSLog("Nbr subviews:  \(cell?.contentView.subviews.count)")
         NSLog("\(indexPath.row)")
-        // Select operation
+        self.subTypeSelected = indexPath.row
         println("tapped on collection")
-        var captureView = CameraOverlayView()
-        captureView.delegate = self
-        captureView.typeClothe = getType(self.currentSection)
-        captureView.subTypeClothe = getSubType(self.currentSection, subType: indexPath.row)
-        self.presentViewController(captureView, animated: true, completion: nil)
+        self.performSegueWithIdentifier("showCapture", sender: self)
     }
     
     func getType(type: Int) -> String{

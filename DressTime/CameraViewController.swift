@@ -18,7 +18,7 @@ import AVFoundation
     optional func CameraOverlayViewResult(resultCapture: [String: AnyObject])
 }
 
-class CameraOverlayView: UIViewController, CameraSessionControllerDelegate {
+class CameraViewController: UIViewController, CameraSessionControllerDelegate {
     
     var captureManager: CameraSessionManager!
     var scanningLabel: UILabel!
@@ -33,7 +33,7 @@ class CameraOverlayView: UIViewController, CameraSessionControllerDelegate {
     var pageSelected: Int!
     var typeClothe: String!
     var subTypeClothe: String!
-    var pickerView: AKPickerView!
+    
     
     var delegate: CameraOverlayViewDelegate?
     
@@ -86,9 +86,6 @@ class CameraOverlayView: UIViewController, CameraSessionControllerDelegate {
         view.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(view)
         applyTopCenterXBelow(view, belowTo: textView, width: 200, height: 2)
-        
-        createPickerView()
-        applyTopCenterXBelow(self.pickerView, belowTo: view, width: 300, height: 50)
         
         var circleSize = 50.0
         var buttonSize = 70.0
@@ -144,24 +141,6 @@ class CameraOverlayView: UIViewController, CameraSessionControllerDelegate {
         
         self.skipImage = 0
         
-    }
-    
-    func createPickerView(){
-        self.pickerView = AKPickerView(frame: CGRectMake(0, 0, 100, 50))
-        self.pickerView.delegate = self;
-        self.pickerView.dataSource = self;
-        self.pickerView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
-        self.view.addSubview(self.pickerView)
-       
-        self.pickerView.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)! //[UIFont fontWithName:@"HelveticaNeue-Light" size:20];
-        self.pickerView.highlightedFont =  UIFont(name: "HelveticaNeue", size:20)!
-        self.pickerView.interitemSpacing = 20.0
-        self.pickerView.textColor = UIColor.whiteColor()
-        self.pickerView.highlightedTextColor = UIColor.whiteColor()
-        //self.pickerView.fisheyeFactor = 0.001
-        self.pickerView.pickerViewStyle = AKPickerViewStyle.Wheel
-        self.pickerView.maskDisabled = false
-    
     }
     
     func getListOfSubType(type:String) -> [String]{
@@ -515,13 +494,28 @@ class CameraOverlayView: UIViewController, CameraSessionControllerDelegate {
     }
     
     func validateButtonPressed(sender: UIButton!){
-        if let image = self.currentImage {
-            let result = wrapResultObject(UIImageJPEGRepresentation(image, 1.0), labels: getListOfSubType(self.typeClothe))
-            delegate?.CameraOverlayViewResult!(result)
-            
-        }
         self.captureManager.session.stopRunning()
-        self.dismissViewControllerAnimated(true, completion: nil);
+        self.performSegueWithIdentifier("showConfirmation", sender: self)
+    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "showConfirmation"){
+            let controller = segue.destinationViewController as! CaptureConfirmationViewController
+            if let image = self.currentImage {
+                
+                var imageWidth = image.size.width;
+                var imageHeight = image.size.height;
+                
+                var x = imageWidth * 0.08
+                var y = imageHeight * 0.2
+                var width = imageWidth * 0.85
+                var height = imageHeight * 0.54
+                
+                let cropRect = CGRectMake(x, y, width, height)
+                let imageRef = CGImageCreateWithImageInRect(image.CGImage, cropRect);
+                let result = self.wrapResultObject(UIImageJPEGRepresentation(UIImage(CGImage: imageRef)!, 1.0), labels: getListOfSubType(self.typeClothe))
+                controller.clotheObject = result
+            }
+        }
     }
     
     func updateColorUIView(arrayColors: [UIColor]){
@@ -582,11 +576,17 @@ class CameraOverlayView: UIViewController, CameraSessionControllerDelegate {
     }
     
     func wrapResultObject(image: NSData, labels: [String]) -> [String: AnyObject]{
-        var isUnis = 1;
+      /*  var isUnis = 1;
         if (self.patternData[self.currentPattern] != "plain"){
             isUnis = 0
+        }*/
+        var colors = ""
+        
+        for var i = 0; i < self.arrayColors.count && i < 3; i++ {
+            colors += ",\(hexStringFromColor(self.arrayColors[i]))"
+            
         }
-   
+        
         let jsonObject: [String: AnyObject] = [
             "clothe_id": NSUUID().UUIDString,
             "clothe_partnerid": -1,
@@ -594,35 +594,14 @@ class CameraOverlayView: UIViewController, CameraSessionControllerDelegate {
             "clothe_type": self.typeClothe,
             "clothe_subtype": self.subTypeClothe,
             "clothe_name": "",
-            "clothe_isUnis": isUnis,
-            "clothe_pattern": self.patternData[self.currentPattern],
+           /* "clothe_isUnis": isUnis,
+            "clothe_pattern": self.patternData[self.currentPattern], */
             "clothe_cut":"",
             "clothe_image": image,
-            "clothe_colors": hexStringFromColor(self.arrayColors[0])
+            "clothe_colors": colors
         ]
         
         return jsonObject
     }
 
-}
-
-extension CameraOverlayView : AKPickerViewDataSource {
-    
-    func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
-        return self.patternData.count
-    }
-    
-    func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> String {
-        return self.patternData[item]
-    }
-    
-}
-
-
-extension CameraOverlayView : AKPickerViewDelegate {
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        NSLog(self.patternData[row]);
-        self.pageSelected = row
-
-    }
 }
