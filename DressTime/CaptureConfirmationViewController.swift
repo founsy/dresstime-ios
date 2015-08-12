@@ -23,10 +23,12 @@ class CaptureConfirmationViewController: UIViewController {
     private var pickerView: AKPickerView!
     private var selectedPattern: Int = 0
     
+    var previousController: UIViewController!
     var clotheObject:[String: AnyObject]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         createPickerView()
         if let clothe = clotheObject {
             let type = clothe["clothe_type"] as! String
@@ -80,8 +82,17 @@ class CaptureConfirmationViewController: UIViewController {
         DressTimeService.saveClothe(SharedData.sharedInstance.currentUserId!, clotheId: clotheId, dressingCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
             //println(msg)
         })
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func onBackTouch(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        if let controller = self.previousController {
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+    }
+    
+
     @IBAction func onBrandTouch(sender: AnyObject) {
     }
 

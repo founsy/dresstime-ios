@@ -51,7 +51,7 @@ class CameraViewController: UIViewController, CameraSessionControllerDelegate {
         self.captureManager.addVideoPreviewLayer()
         var layerRect = self.view.layer.bounds
         var rect = self.createScanArea()
-        
+        self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
  
         self.captureManager.previewLayer.bounds = layerRect
         self.captureManager.previewLayer.position = CGPointMake(CGRectGetMidX(layerRect), CGRectGetMidY(layerRect))
@@ -104,11 +104,11 @@ class CameraViewController: UIViewController, CameraSessionControllerDelegate {
         self.view.addSubview(overlayButton)
         applyBottomCenterButtonConstraints(overlayButton, width: CGFloat(buttonSize))
         
-        var closeButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+       /* var closeButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         closeButton.setImage(UIImage(named: "ScanClose"), forState: .Normal)
         closeButton.addTarget(self, action: "closeButtonPressed:", forControlEvents: .TouchUpInside)
         self.view.addSubview(closeButton)
-        applyTopRightButtonConstraints(closeButton)
+        applyTopRightButtonConstraints(closeButton) */
         
         var flashButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
         flashButton.setImage(UIImage(named: "ScanTorch"), forState: .Normal)
@@ -454,11 +454,10 @@ class CameraViewController: UIViewController, CameraSessionControllerDelegate {
     func cameraSessionDidOutputSampleBuffer(sampleBuffer: CMSampleBuffer!) {
         if (self.skipImage == 20) {
             if let image = imageFromSampleBuffer(sampleBuffer) {
-                self.currentImage = image
+                self.currentImage = cropImage(image)
                 NSLog("Get sample")
-                self.arrayColors = cropImage(image).dominantColors()
+                self.arrayColors = self.currentImage.dominantColors()
                 self.timeToScan = false
-                //self.updateColorUIView(self.arrayColors)
                 dispatch_sync(dispatch_get_main_queue(), {
                     for i in 0..<min(self.arrayColors.count, self.arrayUIView.count) {
                         self.arrayUIView[i].backgroundColor = self.arrayColors[i]
@@ -473,14 +472,27 @@ class CameraViewController: UIViewController, CameraSessionControllerDelegate {
         
     }
     
+    func rectToCropImg(image: UIImage) -> CGRect{
+        var imageWidth = image.size.width;
+        var imageHeight = image.size.height;
+        
+        var x = imageWidth * 0.08
+        var y = imageHeight * 0.2
+        var width = imageWidth * 0.85
+        var height = imageHeight * 0.54
+        
+        return CGRectMake(x, y, width, height)
+    }
+    
     func cropImage(image: UIImage) -> UIImage {
         let reduceX = round(image.size.width * 0.2)
         let reduceY = round(image.size.height * 0.2)
-        let cropRect = CGRectMake(reduceX, reduceY, image.size.width - reduceX, image.size.height - reduceY)
+        let cropRect = rectToCropImg(image)
         let imageRef = CGImageCreateWithImageInRect(image.CGImage, cropRect);
         // or use the UIImage wherever you like
         return UIImage(CGImage: imageRef)!
     }
+    
     /***************************/
     /* Button Actions          */
     func scanButtonPressed(sender: UIButton!) {
@@ -492,45 +504,31 @@ class CameraViewController: UIViewController, CameraSessionControllerDelegate {
             arrayUIView[i].backgroundColor = UIColor.clearColor()
         }
     }
+    @IBAction func onClose(sender: AnyObject) {
+        self.captureManager.session.stopRunning()
+        self.dismissViewControllerAnimated(true, completion: nil);
+    }
     
     func validateButtonPressed(sender: UIButton!){
         self.captureManager.session.stopRunning()
+        //self.dismissViewControllerAnimated(true, completion: nil)
         self.performSegueWithIdentifier("showConfirmation", sender: self)
     }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "showConfirmation"){
             let controller = segue.destinationViewController as! CaptureConfirmationViewController
             if let image = self.currentImage {
-                
-                var imageWidth = image.size.width;
-                var imageHeight = image.size.height;
-                
-                var x = imageWidth * 0.08
-                var y = imageHeight * 0.2
-                var width = imageWidth * 0.85
-                var height = imageHeight * 0.54
-                
-                let cropRect = CGRectMake(x, y, width, height)
-                let imageRef = CGImageCreateWithImageInRect(image.CGImage, cropRect);
-                let result = self.wrapResultObject(UIImageJPEGRepresentation(UIImage(CGImage: imageRef)!, 1.0), labels: getListOfSubType(self.typeClothe))
+                let result = self.wrapResultObject(UIImageJPEGRepresentation(image, 1.0), labels: getListOfSubType(self.typeClothe))
                 controller.clotheObject = result
+                controller.previousController = self
             }
         }
     }
     
-    func updateColorUIView(arrayColors: [UIColor]){
-        NSLog("Update")
-        dispatch_async(dispatch_get_global_queue(0, 0), {
-            for i in 0..<min(self.arrayColors.count, self.arrayUIView.count) {
-                self.arrayUIView[i].backgroundColor = self.arrayColors[i]
-            }
-            self.image.image = self.currentImage
-        })
-    }
     
     func closeButtonPressed(sender: UIButton!) {
-        self.captureManager.session.stopRunning()
-        self.dismissViewControllerAnimated(true, completion: nil);
+        
     }
     
     func flashButtonPressed(sender: UIButton!){
@@ -576,10 +574,6 @@ class CameraViewController: UIViewController, CameraSessionControllerDelegate {
     }
     
     func wrapResultObject(image: NSData, labels: [String]) -> [String: AnyObject]{
-      /*  var isUnis = 1;
-        if (self.patternData[self.currentPattern] != "plain"){
-            isUnis = 0
-        }*/
         var colors = ""
         
         for var i = 0; i < self.arrayColors.count && i < 3; i++ {

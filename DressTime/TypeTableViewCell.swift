@@ -89,7 +89,7 @@ class TypeTableViewCell : UITableViewCell {
     }
     
     func calculateCollectionViewHeight() -> CGFloat {
-        let cellHeight = 100.0
+        let cellHeight = 90.0
         let height = round(Double(data.count)/2.0) * cellHeight
         return CGFloat(height)
     }

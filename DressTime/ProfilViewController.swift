@@ -56,8 +56,9 @@ class ProfilViewController : UIViewController {
         }
         
         if (segue.identifier == "AddClothe"){
-             var addClothe = segue.destinationViewController as! TypeViewController
-            addClothe.openItem(self.typeAddClothe)
+             let navController = segue.destinationViewController as! UINavigationController
+             let addClothe = navController.topViewController as! TypeViewController
+             addClothe.openItem(self.typeAddClothe)
         }
     }
     

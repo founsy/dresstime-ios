@@ -23,7 +23,6 @@ class TypeViewController: UIViewController {
     
     let bgType = ["TypeMaille", "TypeTop", "TypePants"]
     
-    private let barSize : CGFloat = 44.0
     private let kCellReuse : String = "SubTypeCell"
     private let kCellType : String = "TypeCell"
     
@@ -36,6 +35,15 @@ class TypeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightGrayColor()
+        let bar:UINavigationBar! =  self.navigationController?.navigationBar
+        
+        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        bar.shadowImage = UIImage()
+        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+        bar.tintColor = UIColor.whiteColor()
+        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.clearColor()]
+        self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        
         if (isOpenSectionRequired){
             for (var i = 0; i < arrayForBool.count; i++) {
                 var collapsed = arrayForBool.objectAtIndex(i).boolValue as Bool
@@ -49,6 +57,10 @@ class TypeViewController: UIViewController {
             }
         }
     }
+
+    @IBAction func onClose(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     func openItem(type: Int){
         var collapsed = arrayForBool.objectAtIndex(type).boolValue as Bool
@@ -60,7 +72,6 @@ class TypeViewController: UIViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "showCapture"){
             let captureController = segue.destinationViewController as! CameraViewController
-            //captureController.delegate = self
             captureController.typeClothe = getType(self.currentSection)
             captureController.subTypeClothe = getSubType(self.currentSection, subType: self.subTypeSelected)
         }
@@ -120,7 +131,8 @@ extension TypeViewController: UITableViewDataSource {
     }
    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        var height = self.tableView.bounds.height;
+        var height = self.tableView.bounds.height - 60.0
+        
         if (arrayForBool.objectAtIndex(indexPath.row).boolValue as Bool){
             return calculateCollectionViewHeight()
         } else {
