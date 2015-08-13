@@ -13,11 +13,33 @@ class HomeViewController: UIViewController  {
     private var locationManager: CLLocationManager = CLLocationManager()
     private var currentLocation: CLLocation!
     private var outfitDataSource: OutfitCollectionViewController!
-   
+    private var panGestureRecognizer: UIPanGestureRecognizer!
+    private var isHide = false
+    private var filterFrame: CGRect!
+    
+    private var datePickerView: AKPickerView?
+    private var cityPickerView: AKPickerView?
+    private var stylePickerView: AKPickerView?
+    
+    private var styles = [ "WORK - Business style", "BE CHIC - Casual style", "RELAX - Sportswear style", "PARTY - Fashion style" ]
+    private let city = ["Paris", "Maisons-Laffitte"]
+    private let date = ["Today", "Tomorrow"]
+    private let styleData = ["business", "casual", "sportwear", "fashion"]
+    
+    private var currentStyle = 0
+    
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var iconLabel: UILabel!
     @IBOutlet weak var outfitCollectionView: UICollectionView!
+    @IBOutlet weak var containerOutfit: UIVisualEffectView!
+    @IBOutlet weak var filterView: UIView!
+    @IBOutlet var mainView: UIView!
+    
+    
+    @IBOutlet weak var dateListContainer: UIView!
+    @IBOutlet weak var cityListContainer: UIView!
+    @IBOutlet weak var styleListContainer: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +63,56 @@ class HomeViewController: UIViewController  {
         self.outfitDataSource = OutfitCollectionViewController(outfits: [[String:AnyObject]](), collectionView: outfitCollectionView)
         self.outfitCollectionView.dataSource = self.outfitDataSource
         self.outfitCollectionView.delegate = self.outfitDataSource
+        
+        self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
+        self.panGestureRecognizer.delegate = self
+        self.containerOutfit.addGestureRecognizer(self.panGestureRecognizer)
+        self.filterFrame = self.filterView.frame
+        //self.filterView.roundCorners(UIRectCorner.TopLeft | UIRectCorner.TopRight, radius: 5.0)
+        
+        createPickerView(&self.datePickerView, subView: self.dateListContainer)
+        createPickerView(&self.cityPickerView, subView: self.cityListContainer)
+        createPickerView(&self.stylePickerView, subView:self.styleListContainer)
+        
+        self.filterView.layer.shadowColor = UIColor.blackColor().CGColor
+        self.filterView.layer.shadowOpacity = 0.8
+        self.filterView.layer.shadowRadius = 3.0
+        self.filterView.layer.shadowOffset = CGSizeMake(2.0, 2.0)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        //self.filterView.frame.origin.y = self.mainView.frame.height - 40.0
+        hideFilterView()
+    }
+    
+    private func createPickerView(inout picker: AKPickerView?, subView: UIView){
+        picker = AKPickerView(frame: subView.bounds)
+        picker!.delegate = self;
+        picker!.dataSource = self;
+        picker!.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
+        subView.addSubview(picker!)
+        
+        picker!.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)! //[UIFont fontWithName:@"HelveticaNeue-Light" size:20];
+        picker!.highlightedFont =  UIFont(name: "HelveticaNeue", size:20)!
+        picker!.interitemSpacing = 20.0
+        picker!.textColor = UIColor.whiteColor()
+        picker!.highlightedTextColor = UIColor.whiteColor()
+        //self.pickerView.fisheyeFactor = 0.001
+        picker!.pickerViewStyle = AKPickerViewStyle.Wheel
+        picker!.maskDisabled = false
+        
+    }
+
+    @IBAction func onGetDressedTouch(sender: AnyObject) {
+        let titleData = self.styleData[self.currentStyle]
+        DressTimeService.getTodayOutfits(SharedData.sharedInstance.currentUserId!, style: titleData, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.outfitDataSource.collection = msg
+                self.outfitCollectionView.reloadData()
+                self.hideFilterView()
+            })
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -53,12 +125,11 @@ class HomeViewController: UIViewController  {
     }
     
     @IBAction func onMoreFiltersTouch(sender: AnyObject) {
-        var storyboard = UIStoryboard(name:"Main", bundle:nil)
-        var filtersControllers = storyboard.instantiateViewControllerWithIdentifier("filters") as! FiltersViewController
-        
-        filtersControllers.delegate = self
-        self.presentViewController(filtersControllers, animated: true, completion: nil)
-        //self.performSegueWithIdentifier("showFilterModal", sender: self)
+        if (!self.isHide){
+            hideFilterView()
+        } else{
+            showFilterView()
+        }
     }
 
 }
@@ -67,7 +138,6 @@ extension HomeViewController: CLLocationManagerDelegate {
     /***/
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         self.currentLocation = locations[locations.count-1] as! CLLocation
-        
         locationManager.stopUpdatingLocation()
         WeatherService.getWeather(self.currentLocation, weatherCompleted: { (succeeded: Bool, msg: [String: AnyObject]) -> () in
             if let query:AnyObject = msg["query"] {
@@ -214,4 +284,68 @@ extension HomeViewController: FiltersViewControllerDelegate {
     }
 }
 
+extension HomeViewController: UIGestureRecognizerDelegate {
+    func handlePan(recognizer: UIPanGestureRecognizer){
+        NSLog("handlepan")
+    }
+    
+    func showFilterView(){
+        self.isHide = false
+        self.mainView.layoutIfNeeded() //// Ensures that all pending layout operations have been complete
+        UIView.beginAnimations("Show", context: nil)
+        UIView.setAnimationDuration(0.3)
+        self.filterView.frame.origin.y = self.filterFrame.origin.y
+        UIView.commitAnimations()
+    }
+    
+    func hideFilterView(){
+        if (!self.isHide){
+            self.mainView.layoutIfNeeded() //// Ensures that all pending layout operations have been complete
+            self.isHide = true
+            UIView.beginAnimations("Hide", context: nil)
+            UIView.setAnimationDuration(0.3)
+            self.filterView.frame.origin.y = self.mainView.frame.height - 40.0
+            UIView.commitAnimations()
+        }
+    }
+}
 
+extension HomeViewController: AKPickerViewDelegate, AKPickerViewDataSource {
+    func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
+        if (pickerView === self.datePickerView) {
+            return self.date.count
+        } else if (pickerView === self.cityPickerView) {
+            return self.city.count
+        } else if (pickerView === self.stylePickerView) {
+            return self.styles.count
+        }
+        return 0
+    }
+    
+    func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> String {
+        if (pickerView === self.datePickerView) {
+            return self.date[item]
+        } else if (pickerView === self.cityPickerView) {
+            return self.city[item]
+        } else if (pickerView === self.stylePickerView) {
+            return self.styles[item]
+        }
+        return ""
+    }
+    
+     func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
+         if (pickerView === self.stylePickerView) {
+            self.currentStyle = item
+        }
+        
+    }
+}
+
+extension UIView {
+    func roundCorners(corners:UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.CGPath
+        self.layer.mask = mask
+    }
+}

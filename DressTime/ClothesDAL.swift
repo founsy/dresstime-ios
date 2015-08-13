@@ -54,6 +54,9 @@ class ClothesDAL {
         
         var fetchedResultsController: NSFetchedResultsController?
         var fetchRequest = NSFetchRequest(entityName: "Clothe")
+        let predicate = NSPredicate(format: "profilRel.userid = %@", SharedData.sharedInstance.currentUserId!)
+        fetchRequest.predicate = predicate
+        
         if let fetchResults = self.managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Clothe] {
             return fetchResults
         }
