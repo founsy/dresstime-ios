@@ -14,6 +14,7 @@ class HomeViewController: UIViewController  {
     private var currentLocation: CLLocation!
     private var outfitDataSource: OutfitCollectionViewController!
     private var panGestureRecognizer: UIPanGestureRecognizer!
+    private var swipeGestureRecognizer: UISwipeGestureRecognizer!
     private var isHide = false
     private var filterFrame: CGRect!
     
@@ -64,10 +65,14 @@ class HomeViewController: UIViewController  {
         self.outfitCollectionView.dataSource = self.outfitDataSource
         self.outfitCollectionView.delegate = self.outfitDataSource
         
-        self.panGestureRecognizer = UIPanGestureRecognizer(target: self, action: "handlePan:")
-        self.panGestureRecognizer.delegate = self
-        self.containerOutfit.addGestureRecognizer(self.panGestureRecognizer)
+        self.swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "hideFilterView")
+        self.swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Down
+        var upSwipeGesture = UISwipeGestureRecognizer(target:self, action:"showFilterView")
+        upSwipeGesture.direction = UISwipeGestureRecognizerDirection.Up
+        self.filterView.addGestureRecognizer(upSwipeGesture)
+        self.filterView.addGestureRecognizer(self.swipeGestureRecognizer)
         self.filterFrame = self.filterView.frame
+        
         //self.filterView.roundCorners(UIRectCorner.TopLeft | UIRectCorner.TopRight, radius: 5.0)
         
         createPickerView(&self.datePickerView, subView: self.dateListContainer)
@@ -287,6 +292,17 @@ extension HomeViewController: FiltersViewControllerDelegate {
 extension HomeViewController: UIGestureRecognizerDelegate {
     func handlePan(recognizer: UIPanGestureRecognizer){
         NSLog("handlepan")
+        if ((recognizer.state == UIGestureRecognizerState.Changed) ||
+            (recognizer.state == UIGestureRecognizerState.Ended)){
+            var velocity = recognizer.velocityInView(self.mainView)
+            // panning down
+            if (velocity.y>0){
+                self.hideFilterView()
+            } // panning up
+            else {
+                self.showFilterView()
+            }
+        }
     }
     
     func showFilterView(){
