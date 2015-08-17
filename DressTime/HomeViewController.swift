@@ -239,47 +239,8 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
 }
 
-extension HomeViewController: FiltersViewControllerDelegate {
-    func outfitsResults(outfits: [[String: AnyObject]]) {
-        self.outfitDataSource.collection = outfits
-        self.outfitCollectionView.reloadData()
-    }
-}
-
-
-    private var gravity: UIGravityBehavior!
-    private var animator: UIDynamicAnimator!
-    private var collision: UICollisionBehavior!
 
 extension HomeViewController: UIGestureRecognizerDelegate {
-    func handlePan(recognizer: UIPanGestureRecognizer){
-        NSLog("handlepan")
-        if ((recognizer.state == UIGestureRecognizerState.Changed) ||
-            (recognizer.state == UIGestureRecognizerState.Ended)){
-            var velocity = recognizer.velocityInView(self.mainView)
-            // panning down
-            if (velocity.y>0){
-                self.hideFilterView()
-            } // panning up
-            else {
-                self.showFilterView()
-                //self.animationShow()
-            }
-        }
-    }
-    
-    func animationShow(){
-        self.filterView.frame.origin.y = self.containerOutfit.frame.origin.y
-        
-        animator = UIDynamicAnimator(referenceView: self.view)
-        gravity = UIGravityBehavior(items: [self.filterView])
-        animator.addBehavior(gravity)
-        
-        collision = UICollisionBehavior(items: [self.filterView])
-        collision.translatesReferenceBoundsIntoBoundary = true
-        // collision.addBoundaryWithIdentifier("barrier", fromPoint: CGPointMake(self.view.frame.origin.x, 350), toPoint: CGPointMake(self.view.frame.origin.x + self.view.frame.width, 350))
-        animator.addBehavior(collision)
-    }
     
     func showFilterView(){
         if (self.isHide){
@@ -314,8 +275,7 @@ extension HomeViewController: UIGestureRecognizerDelegate {
 extension HomeViewController: FilterViewDelegate {
     func onMoreFilterClick() {
         if (self.isHide){
-            //self.showFilterView()
-            self.animationShow()
+            self.showFilterView()
         } else {
             self.hideFilterView()
         }

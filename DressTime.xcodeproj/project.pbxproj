@@ -57,7 +57,6 @@
 		01D1B87E1B750F6000920C64 /* TypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B87D1B750F6000920C64 /* TypeTableViewCell.swift */; };
 		01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEDD1B6E714600F59D1B /* SharedData.swift */; };
 		01FFCEE61B712A9700F59D1B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */; };
-		CD4E053F1B776987005B161B /* FiltersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E053D1B776987005B161B /* FiltersViewController.swift */; };
 		CD4E05401B776987005B161B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E053E1B776987005B161B /* HomeViewController.swift */; };
 		CD4E05421B7769C8005B161B /* Static.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD4E05411B7769C8005B161B /* Static.storyboard */; };
 /* End PBXBuildFile section */
@@ -149,7 +148,6 @@
 		01D1B87D1B750F6000920C64 /* TypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeTableViewCell.swift; sourceTree = "<group>"; };
 		01FFCEDD1B6E714600F59D1B /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		CD4E053D1B776987005B161B /* FiltersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FiltersViewController.swift; sourceTree = "<group>"; };
 		CD4E053E1B776987005B161B /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CD4E05411B7769C8005B161B /* Static.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Static.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -274,7 +272,6 @@
 		01C454FA1B593A03003D5E41 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				CD4E053D1B776987005B161B /* FiltersViewController.swift */,
 				CD4E053E1B776987005B161B /* HomeViewController.swift */,
 				01C454FB1B593A18003D5E41 /* LoginViewController.swift */,
 				01C454FD1B593EB2003D5E41 /* NavigationController.swift */,
@@ -524,7 +521,6 @@
 				01D1B8701B72374100920C64 /* AKPickerView.swift in Sources */,
 				01C454F71B593909003D5E41 /* JSONService.swift in Sources */,
 				0177B4E61B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift in Sources */,
-				CD4E053F1B776987005B161B /* FiltersViewController.swift in Sources */,
 				01C455111B597626003D5E41 /* Clothe.swift in Sources */,
 				01FFCEE61B712A9700F59D1B /* SettingsViewController.swift in Sources */,
 				013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */,

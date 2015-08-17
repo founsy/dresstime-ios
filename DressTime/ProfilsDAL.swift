@@ -37,6 +37,23 @@ class ProfilsDAL {
         return nil
     }
     
+    func fetchLastUserConnected() -> Profil?{
+        var fetchedResultsController: NSFetchedResultsController?
+        var fetchRequest = NSFetchRequest(entityName: "Profil")
+        let predicate = NSPredicate(format: "access_token != \"\"")
+        // Set the predicate on the fetch request
+        fetchRequest.predicate = predicate
+        
+        if let fetchResults = self.managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Profil] {
+            if (fetchResults.count > 0){
+                return fetchResults[0]
+            } else {
+                return nil
+            }
+        }
+        return nil
+    }
+    
     func fetch() -> [Profil]? {
         var fetchedResultsController: NSFetchedResultsController?
         var fetchRequest = NSFetchRequest(entityName: "Profil")

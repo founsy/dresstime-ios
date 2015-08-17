@@ -18,14 +18,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         let profilDAL = ProfilsDAL()
-        let profil = profilDAL.fetch()
+        let profil = profilDAL.fetchLastUserConnected()
         
-        //if (profil == nil){
-        var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
-        var navigation = UINavigationController(rootViewController: rootController)
-        
-        self.window!.rootViewController = navigation;
-        
+        if let user = profil {
+            SharedData.sharedInstance.currentUserId = user.userid
+            getNewToken(user)
+        } else {
+            var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
+            self.window?.makeKeyAndVisible()
+            self.window?.rootViewController!.presentViewController(rootController, animated: true, completion: nil)
+        }
         //Go back to login window
         
      /*   var storyBoard = UIStoryboard(name: "Static", bundle: nil)
@@ -53,16 +55,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        NSLog("I'm enter")
+        let profilDAL = ProfilsDAL()
+        let profil = profilDAL.fetchLastUserConnected()
+        if let user = profil {
+            SharedData.sharedInstance.currentUserId = user.userid
+            getNewToken(user)
+        } else {
+            var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
+            self.window?.makeKeyAndVisible()
+            self.window?.rootViewController!.presentViewController(rootController, animated: true, completion: nil)
+        }
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        NSLog("I'm back")
     }
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
+    }
+    
+    
+    
+    private func getNewToken(user: Profil){
+        LoginService.refreshToken({ (succeeded, msg) -> () in
+            NSLog("Token Refresh")
+            let profilDAL = ProfilsDAL()
+            if (succeeded){
+                user.refresh_token = msg["refresh_token"] as! String
+                user.access_token = msg["access_token"] as! String
+                profilDAL.update(user)
+            } else {
+                user.refresh_token = ""
+                user.access_token = ""
+                profilDAL.update(user)
+                var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
+                self.window?.makeKeyAndVisible()
+                self.window?.rootViewController!.presentViewController(rootController, animated: true, completion: nil)
+            }
+        })
     }
 
     // MARK: - Core Data stack
