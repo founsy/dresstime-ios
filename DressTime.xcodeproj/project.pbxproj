@@ -16,6 +16,8 @@
 		013996401B5BB739004B2DE0 /* OutfitCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */; };
 		013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013996411B5CED57004B2DE0 /* DressingSynchro.swift */; };
 		0177B4E61B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */; };
+		017BBA5F1B80FC92003DE513 /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017BBA5E1B80FC92003DE513 /* FilterView.xib */; };
+		017BBA611B80FCF7003DE513 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017BBA601B80FCF7003DE513 /* FilterView.swift */; };
 		01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D21B5935B3003D5E41 /* AppDelegate.swift */; };
 		01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */; };
 		01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DC1B5935B3003D5E41 /* Images.xcassets */; };
@@ -101,6 +103,8 @@
 		0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitCollectionViewController.swift; sourceTree = "<group>"; };
 		013996411B5CED57004B2DE0 /* DressingSynchro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressingSynchro.swift; sourceTree = "<group>"; };
 		0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureConfirmationViewController.swift; sourceTree = "<group>"; };
+		017BBA5E1B80FC92003DE513 /* FilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
+		017BBA601B80FCF7003DE513 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 		01C454CD1B5935B3003D5E41 /* DressTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DressTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C454D11B5935B3003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01C454D21B5935B3003D5E41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -225,6 +229,7 @@
 				01C454D01B5935B3003D5E41 /* Supporting Files */,
 				01D1B86E1B7215F000920C64 /* DressTime-Bridging-Header.h */,
 				01D1B8751B72949B00920C64 /* SubTypeCell.xib */,
+				017BBA5E1B80FC92003DE513 /* FilterView.xib */,
 			);
 			path = DressTime;
 			sourceTree = "<group>";
@@ -340,6 +345,7 @@
 				01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */,
 				01C4556E1B5A603C003D5E41 /* ClothPhotoCell.swift */,
 				01D1B87D1B750F6000920C64 /* TypeTableViewCell.swift */,
+				017BBA601B80FCF7003DE513 /* FilterView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -482,6 +488,7 @@
 				01C455011B5942F4003D5E41 /* Main.storyboard in Resources */,
 				01C455071B595C54003D5E41 /* artill_clean_icons-webfont.ttf in Resources */,
 				01C454E01B5935B3003D5E41 /* LaunchScreen.xib in Resources */,
+				017BBA5F1B80FC92003DE513 /* FilterView.xib in Resources */,
 				01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */,
 				CD4E05421B7769C8005B161B /* Static.storyboard in Resources */,
 				01D1B8761B72949B00920C64 /* SubTypeCell.xib in Resources */,
@@ -521,6 +528,7 @@
 				01C455111B597626003D5E41 /* Clothe.swift in Sources */,
 				01FFCEE61B712A9700F59D1B /* SettingsViewController.swift in Sources */,
 				013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */,
+				017BBA611B80FCF7003DE513 /* FilterView.swift in Sources */,
 				01D1B8781B7327B000920C64 /* CustomSubTypeViewCell.swift in Sources */,
 				013996401B5BB739004B2DE0 /* OutfitCollectionViewController.swift in Sources */,
 				012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */,

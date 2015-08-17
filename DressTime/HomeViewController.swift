@@ -18,13 +18,6 @@ class HomeViewController: UIViewController  {
     private var isHide = false
     private var filterFrame: CGRect!
     
-    private var datePickerView: AKPickerView?
-    private var cityPickerView: AKPickerView?
-    private var stylePickerView: AKPickerView?
-    
-    private var styles = [ "WORK - Business style", "BE CHIC - Casual style", "RELAX - Sportswear style", "PARTY - Fashion style" ]
-    private let city = ["Paris", "Maisons-Laffitte"]
-    private let date = ["Today", "Tomorrow"]
     private let styleData = ["business", "casual", "sportwear", "fashion"]
     
     private var currentStyle = 0
@@ -34,13 +27,10 @@ class HomeViewController: UIViewController  {
     @IBOutlet weak var iconLabel: UILabel!
     @IBOutlet weak var outfitCollectionView: UICollectionView!
     @IBOutlet weak var containerOutfit: UIVisualEffectView!
-    @IBOutlet weak var filterView: UIView!
+    //@IBOutlet weak var filterView: UIView!
     @IBOutlet var mainView: UIView!
     
-    
-    @IBOutlet weak var dateListContainer: UIView!
-    @IBOutlet weak var cityListContainer: UIView!
-    @IBOutlet weak var styleListContainer: UIView!
+    private var filterView: FilterView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,50 +55,30 @@ class HomeViewController: UIViewController  {
         self.outfitCollectionView.dataSource = self.outfitDataSource
         self.outfitCollectionView.delegate = self.outfitDataSource
         
+        var contentViewXib: NSArray = NSBundle.mainBundle().loadNibNamed("FilterView", owner: nil, options: nil)
+        self.filterView = contentViewXib[0] as! FilterView
+        
+        self.filterView.initialize()
+        self.filterView.frame = self.containerOutfit.frame
+        
         self.swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "hideFilterView")
         self.swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Down
         var upSwipeGesture = UISwipeGestureRecognizer(target:self, action:"showFilterView")
         upSwipeGesture.direction = UISwipeGestureRecognizerDirection.Up
+        
         self.filterView.addGestureRecognizer(upSwipeGesture)
         self.filterView.addGestureRecognizer(self.swipeGestureRecognizer)
-        self.filterFrame = self.filterView.frame
-        
-        //self.filterView.roundCorners(UIRectCorner.TopLeft | UIRectCorner.TopRight, radius: 5.0)
-        
-        createPickerView(&self.datePickerView, subView: self.dateListContainer)
-        createPickerView(&self.cityPickerView, subView: self.cityListContainer)
-        createPickerView(&self.stylePickerView, subView:self.styleListContainer)
-        
-        self.filterView.layer.shadowColor = UIColor.blackColor().CGColor
-        self.filterView.layer.shadowOpacity = 0.8
-        self.filterView.layer.shadowRadius = 3.0
-        self.filterView.layer.shadowOffset = CGSizeMake(2.0, 2.0)
+        self.filterView.delegate = self
+        self.view.addSubview(self.filterView)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        //self.filterView.frame.origin.y = self.mainView.frame.height - 40.0
         hideFilterView()
+        self.filterView.filterViewContainer.roundCorners(UIRectCorner.TopLeft | UIRectCorner.TopRight, radius: 10.0)
+        self.filterView.drawIconViewCircle()
     }
     
-    private func createPickerView(inout picker: AKPickerView?, subView: UIView){
-        picker = AKPickerView(frame: subView.bounds)
-        picker!.delegate = self;
-        picker!.dataSource = self;
-        picker!.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight;
-        subView.addSubview(picker!)
-        
-        picker!.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)! //[UIFont fontWithName:@"HelveticaNeue-Light" size:20];
-        picker!.highlightedFont =  UIFont(name: "HelveticaNeue", size:20)!
-        picker!.interitemSpacing = 20.0
-        picker!.textColor = UIColor.whiteColor()
-        picker!.highlightedTextColor = UIColor.whiteColor()
-        //self.pickerView.fisheyeFactor = 0.001
-        picker!.pickerViewStyle = AKPickerViewStyle.Wheel
-        picker!.maskDisabled = false
-        
-    }
-
     @IBAction func onGetDressedTouch(sender: AnyObject) {
         let titleData = self.styleData[self.currentStyle]
         DressTimeService.getTodayOutfits(SharedData.sharedInstance.currentUserId!, style: titleData, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
@@ -124,19 +94,6 @@ class HomeViewController: UIViewController  {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    @IBAction func exitView (sender: UIStoryboardSegue) {
-        // Use to exit a view
-    }
-    
-    @IBAction func onMoreFiltersTouch(sender: AnyObject) {
-        if (!self.isHide){
-            hideFilterView()
-        } else{
-            showFilterView()
-        }
-    }
-
 }
 
 extension HomeViewController: CLLocationManagerDelegate {
@@ -289,6 +246,11 @@ extension HomeViewController: FiltersViewControllerDelegate {
     }
 }
 
+
+    private var gravity: UIGravityBehavior!
+    private var animator: UIDynamicAnimator!
+    private var collision: UICollisionBehavior!
+
 extension HomeViewController: UIGestureRecognizerDelegate {
     func handlePan(recognizer: UIPanGestureRecognizer){
         NSLog("handlepan")
@@ -301,64 +263,80 @@ extension HomeViewController: UIGestureRecognizerDelegate {
             } // panning up
             else {
                 self.showFilterView()
+                //self.animationShow()
             }
         }
     }
     
+    func animationShow(){
+        self.filterView.frame.origin.y = self.containerOutfit.frame.origin.y
+        
+        animator = UIDynamicAnimator(referenceView: self.view)
+        gravity = UIGravityBehavior(items: [self.filterView])
+        animator.addBehavior(gravity)
+        
+        collision = UICollisionBehavior(items: [self.filterView])
+        collision.translatesReferenceBoundsIntoBoundary = true
+        // collision.addBoundaryWithIdentifier("barrier", fromPoint: CGPointMake(self.view.frame.origin.x, 350), toPoint: CGPointMake(self.view.frame.origin.x + self.view.frame.width, 350))
+        animator.addBehavior(collision)
+    }
+    
     func showFilterView(){
-        self.isHide = false
-        self.mainView.layoutIfNeeded() //// Ensures that all pending layout operations have been complete
-        UIView.beginAnimations("Show", context: nil)
-        UIView.setAnimationDuration(0.3)
-        self.filterView.frame.origin.y = self.filterFrame.origin.y
-        UIView.commitAnimations()
+        if (self.isHide){
+            self.isHide = false
+            self.mainView.layoutIfNeeded() //// Ensures that all pending layout operations have been complete
+            
+            UIView.animateWithDuration(0.5, delay: 0,
+                options: .CurveEaseOut, animations: {
+                    self.filterView.frame.origin.y = self.containerOutfit.frame.origin.y
+                    self.filterView.showConstrainte(self.containerOutfit)
+                    self.filterView.alpha = 1.0
+                    self.view.layoutIfNeeded()
+            }, completion: nil)
+        }
     }
     
     func hideFilterView(){
         if (!self.isHide){
             self.mainView.layoutIfNeeded() //// Ensures that all pending layout operations have been complete
             self.isHide = true
-            UIView.beginAnimations("Hide", context: nil)
-            UIView.setAnimationDuration(0.3)
-            self.filterView.frame.origin.y = self.mainView.frame.height - 40.0
-            UIView.commitAnimations()
+            UIView.animateWithDuration(0.5, delay: 0,
+                options: .CurveEaseOut, animations: {
+                    self.filterView.frame.origin.y = self.mainView.frame.height - 40.0
+                    self.filterView.hideContrainte(self.containerOutfit)
+                    self.filterView.alpha = 0.5
+                    self.view.layoutIfNeeded()
+            }, completion: nil)
         }
     }
 }
 
-extension HomeViewController: AKPickerViewDelegate, AKPickerViewDataSource {
-    func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
-        if (pickerView === self.datePickerView) {
-            return self.date.count
-        } else if (pickerView === self.cityPickerView) {
-            return self.city.count
-        } else if (pickerView === self.stylePickerView) {
-            return self.styles.count
+extension HomeViewController: FilterViewDelegate {
+    func onMoreFilterClick() {
+        if (self.isHide){
+            //self.showFilterView()
+            self.animationShow()
+        } else {
+            self.hideFilterView()
         }
-        return 0
     }
     
-    func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> String {
-        if (pickerView === self.datePickerView) {
-            return self.date[item]
-        } else if (pickerView === self.cityPickerView) {
-            return self.city[item]
-        } else if (pickerView === self.stylePickerView) {
-            return self.styles[item]
-        }
-        return ""
+    func onGetDressedClothe(type: Int) {
+        let titleData = self.styleData[type]
+        DressTimeService.getTodayOutfits(SharedData.sharedInstance.currentUserId!, style: titleData, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.outfitDataSource.collection = msg
+                self.outfitCollectionView.reloadData()
+                self.hideFilterView()
+            })
+        })
     }
     
-     func pickerView(pickerView: AKPickerView, didSelectItem item: Int) {
-         if (pickerView === self.stylePickerView) {
-            self.currentStyle = item
-        }
-        
-    }
 }
 
 extension UIView {
     func roundCorners(corners:UIRectCorner, radius: CGFloat) {
+        
         let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
         let mask = CAShapeLayer()
         mask.path = path.CGPath

@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "DressTime.FilterView.applyConstrainte (DressTime.FilterView)(ObjectiveC.UIView) -&gt; ():FilterView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "parentView.frame.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DressTime.ProfilViewController.viewDidLoad (DressTime.ProfilViewController)() -&gt; ():ProfilViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -34,6 +42,17 @@
             </PersistentString>
             <PersistentString
                value = "cell.subviews[1].remove()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.FilterView.initialize (DressTime.FilterView)() -&gt; ():FilterView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.dateContainer">
+            </PersistentString>
+            <PersistentString
+               value = "&amp;self.datePickerView">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
