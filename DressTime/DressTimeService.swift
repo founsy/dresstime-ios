@@ -11,8 +11,8 @@ import UIKit
 
 class DressTimeService {
     
-    class func getTodayOutfits(userid: String, style: String, todayCompleted : (succeeded: Bool, msg: [[String: AnyObject]]) -> ()){
-        var q = "http://api.drez.io/zara/myoutfits"
+    class func getOutfitsByStyle(userid: String, style: String, todayCompleted : (succeeded: Bool, msg: [[String: AnyObject]]) -> ()){
+        var q = "http://api.drez.io/outfits/byStyle"
         
         let dal = ProfilsDAL()
         let dalClothe = ClothesDAL()
@@ -37,12 +37,54 @@ class DressTimeService {
                 "dressing": dressingSeriazible,
                 "access_token": profil.access_token
             ];
-            
+            println(jsonObject)
             //Cancel changes about ColorName
             dalClothe.managedObjectContext.reset()
             
             JSONService.post(jsonObject, url: q, postCompleted:  { (succeeded: Bool, result: [[String: AnyObject]]) -> () in
                     todayCompleted(succeeded: true, msg: result)
+            })
+        }
+    }
+    
+    class func getOutfitsToday(userid: String, todayCompleted : (succeeded: Bool, msg: [[String: AnyObject]]) -> ()){
+        var q = "http://api.drez.io/outfits/today"
+        
+        let dal = ProfilsDAL()
+        let dalClothe = ClothesDAL()
+        let dressing = dalClothe.fetch()
+        
+        if let profil = dal.fetch(userid) {
+            var dressingSeriazible = [[String:AnyObject]]()
+            let hexTranslator = HexColorToName()
+            
+            for clothe in dressing {
+                var dict = NSMutableDictionary(dictionary: clothe.toDictionnary())
+                let colorName = UIColor.colorWithHexString(dict["clothe_colors"] as! String)
+                dict["clothe_colors"] = hexTranslator.name(colorName)[1] as! String
+                dict.removeObjectForKey("clothe_image")
+                var d:[String:AnyObject] = dict as NSDictionary as! [String : AnyObject]
+                dressingSeriazible.append(d)
+            }
+            
+            let weatherObject: [String: String] =  [
+                "code" : SharedData.sharedInstance.weatherCode!,
+                "low" : SharedData.sharedInstance.lowTemp!,
+                "high" : SharedData.sharedInstance.highTemp!
+            ]
+            
+            let jsonObject: [String: AnyObject] = [
+                "sex": profil.gender,
+                "dressing": dressingSeriazible,
+                "weather": weatherObject,
+                "access_token": profil.access_token
+            ];
+            println(jsonObject)
+            //Cancel changes about ColorName
+            dalClothe.managedObjectContext.reset()
+            
+            JSONService.post(jsonObject, url: q, postCompleted:  { (succeeded: Bool, result: [[String: AnyObject]]) -> () in
+                todayCompleted(succeeded: true, msg: result)
             })
         }
     }

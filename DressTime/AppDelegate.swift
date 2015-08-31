@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        let profilDAL = ProfilsDAL()
+      let profilDAL = ProfilsDAL()
         let profil = profilDAL.fetchLastUserConnected()
         
         if let user = profil {
@@ -29,12 +29,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.rootViewController!.presentViewController(rootController, animated: true, completion: nil)
         }
         //Go back to login window
-        
-     /*   var storyBoard = UIStoryboard(name: "Static", bundle: nil)
+         /*
+        var storyBoard = UIStoryboard(name: "Static", bundle: nil)
         self.window?.rootViewController = storyBoard.instantiateInitialViewController() as! UIViewController
-        self.window?.makeKeyAndVisible()*/
+        self.window?.makeKeyAndVisible()
         
-        
+        */
         /*var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
         self.window?.makeKeyAndVisible()
         self.window?.rootViewController!.presentViewController(rootController, animated: true, completion: nil) */

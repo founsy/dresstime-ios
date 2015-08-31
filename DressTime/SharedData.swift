@@ -12,5 +12,10 @@ class SharedData {
     static let sharedInstance = SharedData()
     
     var currentUserId: String?
+    
+    var weatherCode: String?
+    var lowTemp: String?
+    var highTemp: String?
+    var city: String?
 
 }

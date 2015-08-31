@@ -18,7 +18,7 @@ class ClothesDAL {
         self.managedObjectContext = appDelegate.managedObjectContext!
     }
     
-    func fetch(type: String) -> [Clothe]{
+    func fetch(#type: String) -> [Clothe]{
         var clothes  = [Clothe]()
         
         var fetchRequest = NSFetchRequest(entityName: "Clothe")

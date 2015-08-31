@@ -39,29 +39,26 @@ class OutfitCollectionViewController : NSObject, UICollectionViewDataSource {
         cell.backgroundColor = UIColor.clearColor()
         if (self.collection.count > 0){
             var elem = self.collection[indexPath.row]
-            if let outfit: AnyObject = elem["outfit"] {
-                println(outfit)
-                if let maille: AnyObject = outfit["maille"]{
-                    if let item = self.clotheDal.fetch(maille["clothe_id"] as! String){
-                        var maille = cell.viewWithTag(1) as! UIImageView
-                        maille.image = UIImage(data: item.clothe_image)
+            if let outfit = elem["outfit"] as? NSArray {
+                for i in outfit {
+                    if let type = i["clothe_type"] as? NSString {
+                        let item = self.clotheDal.fetch(i["clothe_id"] as! String)
+                        
+                        if (type == "maille"){
+                            var maille = cell.viewWithTag(1) as! UIImageView
+                            maille.image = UIImage(data: item!.clothe_image)
+                        } else  if (type == "top"){
+                            var top = cell.viewWithTag(2) as! UIImageView
+                            top.image = UIImage(data: item!.clothe_image)
+                        } else if (type == "pants"){
+                            var pants = cell.viewWithTag(3) as! UIImageView
+                            pants.image = UIImage(data: item!.clothe_image)
+                        }
                     }
-                }
-                if let top: AnyObject = outfit["top"]{
-                    if let item = self.clotheDal.fetch(top["clothe_id"] as! String){
-                        var top = cell.viewWithTag(2) as! UIImageView
-                        top.image = UIImage(data: item.clothe_image)
-                    }
-                }
-                if let pants: AnyObject = outfit["pants"]{
-                    if let item = self.clotheDal.fetch(pants["clothe_id"] as! String){
-                        var pants = cell.viewWithTag(3) as! UIImageView
-                        pants.image = UIImage(data: item.clothe_image)
-                    }
-                }
-                if let rate:AnyObject = elem["matchingRate"] {
-                    if let rateCell = cell.viewWithTag(4) as? UITextView {
-                        rateCell.text = String(format:"%.1f", rate as! Double)
+                    if let rate:AnyObject = i["matchingRate"] {
+                        if let rateCell = cell.viewWithTag(4) as? UITextView {
+                            rateCell.text = String(format:"%.1f", rate as! Double)
+                        }
                     }
                 }
             }

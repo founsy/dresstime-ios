@@ -22,7 +22,7 @@ class CollectionViewController : NSObject, UICollectionViewDataSource {
     init(type: String, targetVC: UIViewController, collectionView: UICollectionView){
         self.type = type
         self.targetVC = targetVC
-        self.collection = clothesDAL.fetch(self.type)
+        self.collection = clothesDAL.fetch(type: self.type)
         self.collectionView = collectionView
         
     }
@@ -69,7 +69,7 @@ class CollectionViewController : NSObject, UICollectionViewDataSource {
 
 extension CollectionViewController : ClotheDetailControllerDelegate {
     func onDeleteCloth() {
-        self.collection = clothesDAL.fetch(self.type)
+        self.collection = clothesDAL.fetch(type: self.type)
         self.collectionView.reloadData()
     }
 }
@@ -80,7 +80,7 @@ extension CollectionViewController : CameraOverlayViewDelegate {
         var dal = ClothesDAL()
         let clotheId = NSUUID().UUIDString
         dal.save(clotheId, partnerId: resultCapture["clothe_partnerid"] as! NSNumber, partnerName: resultCapture["clothe_partnerName"] as! String, type: resultCapture["clothe_type"] as! String, subType: resultCapture["clothe_subtype"] as! String, name: resultCapture["clothe_name"] as! String, isUnis: resultCapture["clothe_isUnis"] as! Bool, pattern: resultCapture["clothe_pattern"] as! String, cut: resultCapture["clothe_cut"] as! String, image: resultCapture["clothe_image"] as! NSData, colors: resultCapture["clothe_colors"] as! String)
-        self.collection = clothesDAL.fetch(self.type)
+        self.collection = clothesDAL.fetch(type: self.type)
         self.collectionView.reloadData()
         
         DressTimeService.saveClothe(SharedData.sharedInstance.currentUserId!, clotheId: clotheId, dressingCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in

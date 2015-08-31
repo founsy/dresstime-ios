@@ -77,11 +77,22 @@ class HomeViewController: UIViewController  {
         hideFilterView()
         self.filterView.filterViewContainer.roundCorners(UIRectCorner.TopLeft | UIRectCorner.TopRight, radius: 10.0)
         self.filterView.drawIconViewCircle()
+        //loadTodayOutfits()
+    }
+    
+    func loadTodayOutfits(){
+        DressTimeService.getOutfitsToday(SharedData.sharedInstance.currentUserId!, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.outfitDataSource.collection = msg
+                self.outfitCollectionView.reloadData()
+            })
+        })
+
     }
     
     @IBAction func onGetDressedTouch(sender: AnyObject) {
         let titleData = self.styleData[self.currentStyle]
-        DressTimeService.getTodayOutfits(SharedData.sharedInstance.currentUserId!, style: titleData, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
+        DressTimeService.getOutfitsByStyle(SharedData.sharedInstance.currentUserId!, style: titleData, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.outfitDataSource.collection = msg
                 self.outfitCollectionView.reloadData()
@@ -124,10 +135,14 @@ extension HomeViewController: CLLocationManagerDelegate {
     
     func updateWeather(code:Int, high:String, low: String, city: String){
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            // Show the alert
+            SharedData.sharedInstance.weatherCode = String(code)
+            SharedData.sharedInstance.lowTemp = low
+            SharedData.sharedInstance.highTemp = high
+            SharedData.sharedInstance.city = city
             self.iconLabel.text = self.getValueWeatherCode(code)
             self.temperatureLabel.text = "\(low)° - \(high)°"
             self.cityLabel.text = city
+            self.loadTodayOutfits()
         })
     }
     
@@ -283,7 +298,7 @@ extension HomeViewController: FilterViewDelegate {
     
     func onGetDressedClothe(type: Int) {
         let titleData = self.styleData[type]
-        DressTimeService.getTodayOutfits(SharedData.sharedInstance.currentUserId!, style: titleData, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
+        DressTimeService.getOutfitsByStyle(SharedData.sharedInstance.currentUserId!, style: titleData, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.outfitDataSource.collection = msg
                 self.outfitCollectionView.reloadData()
