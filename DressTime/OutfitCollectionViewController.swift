@@ -40,24 +40,25 @@ class OutfitCollectionViewController : NSObject, UICollectionViewDataSource {
         if (self.collection.count > 0){
             var elem = self.collection[indexPath.row]
             if let outfit = elem["outfit"] as? NSArray {
-                for i in outfit {
-                    if let type = i["clothe_type"] as? NSString {
-                        let item = self.clotheDal.fetch(i["clothe_id"] as! String)
-                        
-                        if (type == "maille"){
-                            var maille = cell.viewWithTag(1) as! UIImageView
-                            maille.image = UIImage(data: item!.clothe_image)
-                        } else  if (type == "top"){
-                            var top = cell.viewWithTag(2) as! UIImageView
-                            top.image = UIImage(data: item!.clothe_image)
-                        } else if (type == "pants"){
-                            var pants = cell.viewWithTag(3) as! UIImageView
-                            pants.image = UIImage(data: item!.clothe_image)
-                        }
-                    }
-                    if let rate:AnyObject = i["matchingRate"] {
+                var k = 1;
+                for clothe in outfit {
+                    let type = clothe["clothe_type"] as! NSString
+                    let item = self.clotheDal.fetch(clothe["clothe_id"] as! String)
+                    
+                    var imageView = cell.viewWithTag(k) as! UIImageView
+                    imageView.image = UIImage(data: item!.clothe_image)
+                    
+                    if let rate:AnyObject = clothe["matchingRate"] {
                         if let rateCell = cell.viewWithTag(4) as? UITextView {
                             rateCell.text = String(format:"%.1f", rate as! Double)
+                        }
+                    }
+                    k = k+1
+                }
+                if (outfit.count < 3){
+                    for var index = outfit.count; index < 4; index++ {
+                        if let imageView = cell.viewWithTag(k) as? UIImageView {
+                            imageView.image = nil
                         }
                     }
                 }

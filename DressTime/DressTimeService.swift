@@ -31,10 +31,17 @@ class DressTimeService {
                 dressingSeriazible.append(d)
             }
             
+            let weatherObject: [String: String] =  [
+                "code" : SharedData.sharedInstance.weatherCode!,
+                "low" : SharedData.sharedInstance.lowTemp!,
+                "high" : SharedData.sharedInstance.highTemp!
+            ]
+            
             let jsonObject: [String: AnyObject] = [
                 "sex": profil.gender,
                 "style": style,
                 "dressing": dressingSeriazible,
+                "weather": weatherObject,
                 "access_token": profil.access_token
             ];
             println(jsonObject)
