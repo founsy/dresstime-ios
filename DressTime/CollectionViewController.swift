@@ -63,7 +63,7 @@ class CollectionViewController : NSObject, UICollectionViewDataSource {
     
     func addCellButtonPressed() {
         //self.targetVC.performSegueWithIdentifier("AddClothe", sender: self.targetVC)
-        (self.targetVC as! ProfilViewController).performSegue(self.type)
+        (self.targetVC as! OldProfilViewController).performSegue(self.type)
     }
 }
 
@@ -117,7 +117,7 @@ extension CollectionViewController : UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
         var cell : UICollectionViewCell = collectionView.cellForItemAtIndexPath(indexPath)!
         println(indexPath.row)
-        (self.targetVC as! ProfilViewController).clotheSelected = self.collection[indexPath.row]
+        (self.targetVC as! OldProfilViewController).clotheSelected = self.collection[indexPath.row]
         
         self.targetVC.performSegueWithIdentifier("showClotheDetail", sender: self.targetVC)
     }

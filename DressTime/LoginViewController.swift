@@ -21,7 +21,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             "username": loginText.text,
             "password": passwordText.text,
         ];
-        
+        view.endEditing(true)
         LoginService.loginMethod(jsonObject, postCompleted: { (succeeded: Bool, msg: [String: AnyObject]) -> () in
             if (succeeded){
                 let dal = ProfilsDAL()

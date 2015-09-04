@@ -18,6 +18,10 @@
 		0177B4E61B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */; };
 		017BBA5F1B80FC92003DE513 /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017BBA5E1B80FC92003DE513 /* FilterView.xib */; };
 		017BBA611B80FCF7003DE513 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017BBA601B80FCF7003DE513 /* FilterView.swift */; };
+		01A6BDD91B99C7FE00D357A3 /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDD81B99C7FE00D357A3 /* ProfilViewController.swift */; };
+		01A6BDDB1B99D26500D357A3 /* DetailTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */; };
+		01A6BDDE1B99D3E600D357A3 /* ClotheTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6BDDD1B99D3E600D357A3 /* ClotheTableCell.xib */; };
+		01A6BDE01B99D42700D357A3 /* ClotheTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDDF1B99D42700D357A3 /* ClotheTableViewCell.swift */; };
 		01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D21B5935B3003D5E41 /* AppDelegate.swift */; };
 		01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */; };
 		01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DC1B5935B3003D5E41 /* Images.xcassets */; };
@@ -30,7 +34,7 @@
 		01C455031B5946D9003D5E41 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455021B5946D9003D5E41 /* LoginService.swift */; };
 		01C455051B594D52003D5E41 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455041B594D52003D5E41 /* WeatherService.swift */; };
 		01C455071B595C54003D5E41 /* artill_clean_icons-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C455061B595C54003D5E41 /* artill_clean_icons-webfont.ttf */; };
-		01C455091B59703A003D5E41 /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455081B59703A003D5E41 /* ProfilViewController.swift */; };
+		01C455091B59703A003D5E41 /* OldProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455081B59703A003D5E41 /* OldProfilViewController.swift */; };
 		01C4550C1B597571003D5E41 /* ClothesDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4550B1B597571003D5E41 /* ClothesDAL.swift */; };
 		01C455111B597626003D5E41 /* Clothe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455101B597626003D5E41 /* Clothe.swift */; };
 		01C455181B597E60003D5E41 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455141B597E60003D5E41 /* CameraViewController.swift */; };
@@ -104,6 +108,10 @@
 		0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureConfirmationViewController.swift; sourceTree = "<group>"; };
 		017BBA5E1B80FC92003DE513 /* FilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
 		017BBA601B80FCF7003DE513 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		01A6BDD81B99C7FE00D357A3 /* ProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilViewController.swift; sourceTree = "<group>"; };
+		01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTypeViewController.swift; sourceTree = "<group>"; };
+		01A6BDDD1B99D3E600D357A3 /* ClotheTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClotheTableCell.xib; sourceTree = "<group>"; };
+		01A6BDDF1B99D42700D357A3 /* ClotheTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClotheTableViewCell.swift; sourceTree = "<group>"; };
 		01C454CD1B5935B3003D5E41 /* DressTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DressTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C454D11B5935B3003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01C454D21B5935B3003D5E41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -120,7 +128,7 @@
 		01C455021B5946D9003D5E41 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		01C455041B594D52003D5E41 /* WeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		01C455061B595C54003D5E41 /* artill_clean_icons-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "artill_clean_icons-webfont.ttf"; sourceTree = "<group>"; };
-		01C455081B59703A003D5E41 /* ProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilViewController.swift; sourceTree = "<group>"; };
+		01C455081B59703A003D5E41 /* OldProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OldProfilViewController.swift; sourceTree = "<group>"; };
 		01C4550B1B597571003D5E41 /* ClothesDAL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothesDAL.swift; sourceTree = "<group>"; };
 		01C455101B597626003D5E41 /* Clothe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clothe.swift; sourceTree = "<group>"; };
 		01C455141B597E60003D5E41 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
@@ -187,6 +195,17 @@
 			name = Utils;
 			sourceTree = "<group>";
 		};
+		01A6BDDC1B99D3C500D357A3 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				01C4556D1B5A601D003D5E41 /* Views */,
+				01D1B8751B72949B00920C64 /* SubTypeCell.xib */,
+				017BBA5E1B80FC92003DE513 /* FilterView.xib */,
+				01A6BDDD1B99D3E600D357A3 /* ClotheTableCell.xib */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
 		01C454C41B5935B3003D5E41 = {
 			isa = PBXGroup;
 			children = (
@@ -210,10 +229,10 @@
 		01C454CF1B5935B3003D5E41 /* DressTime */ = {
 			isa = PBXGroup;
 			children = (
+				01A6BDDC1B99D3C500D357A3 /* UI */,
 				01EAFA3D1B71E13C00835BB4 /* AKPickerView */,
 				012A219E1B5AD87F00CD01D3 /* Utils */,
 				01C455701B5A641B003D5E41 /* Resources */,
-				01C4556D1B5A601D003D5E41 /* Views */,
 				01C455121B597E1D003D5E41 /* Capture */,
 				01C4550D1B597577003D5E41 /* DataAccessLayer */,
 				01C454FA1B593A03003D5E41 /* Controllers */,
@@ -226,8 +245,6 @@
 				01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */,
 				01C454D01B5935B3003D5E41 /* Supporting Files */,
 				01D1B86E1B7215F000920C64 /* DressTime-Bridging-Header.h */,
-				01D1B8751B72949B00920C64 /* SubTypeCell.xib */,
-				017BBA5E1B80FC92003DE513 /* FilterView.xib */,
 			);
 			path = DressTime;
 			sourceTree = "<group>";
@@ -275,7 +292,9 @@
 				CD4E053E1B776987005B161B /* HomeViewController.swift */,
 				01C454FB1B593A18003D5E41 /* LoginViewController.swift */,
 				01C454FD1B593EB2003D5E41 /* NavigationController.swift */,
-				01C455081B59703A003D5E41 /* ProfilViewController.swift */,
+				01A6BDD81B99C7FE00D357A3 /* ProfilViewController.swift */,
+				01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */,
+				01C455081B59703A003D5E41 /* OldProfilViewController.swift */,
 				012A21941B5A777E00CD01D3 /* CollectionViewController.swift */,
 				012A21961B5AA3C100CD01D3 /* ClotheDetailController.swift */,
 				0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */,
@@ -343,6 +362,7 @@
 				01C4556E1B5A603C003D5E41 /* ClothPhotoCell.swift */,
 				01D1B87D1B750F6000920C64 /* TypeTableViewCell.swift */,
 				017BBA601B80FCF7003DE513 /* FilterView.swift */,
+				01A6BDDF1B99D42700D357A3 /* ClotheTableViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -485,6 +505,7 @@
 				01C455011B5942F4003D5E41 /* Main.storyboard in Resources */,
 				01C455071B595C54003D5E41 /* artill_clean_icons-webfont.ttf in Resources */,
 				01C454E01B5935B3003D5E41 /* LaunchScreen.xib in Resources */,
+				01A6BDDE1B99D3E600D357A3 /* ClotheTableCell.xib in Resources */,
 				017BBA5F1B80FC92003DE513 /* FilterView.xib in Resources */,
 				01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */,
 				CD4E05421B7769C8005B161B /* Static.storyboard in Resources */,
@@ -513,11 +534,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01A6BDD91B99C7FE00D357A3 /* ProfilViewController.swift in Sources */,
 				01C455051B594D52003D5E41 /* WeatherService.swift in Sources */,
 				01C454FC1B593A18003D5E41 /* LoginViewController.swift in Sources */,
 				012A219B1B5AB87000CD01D3 /* Profil.swift in Sources */,
 				01C4556F1B5A603C003D5E41 /* ClothPhotoCell.swift in Sources */,
 				01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */,
+				01A6BDDB1B99D26500D357A3 /* DetailTypeViewController.swift in Sources */,
 				01D1B8701B72374100920C64 /* AKPickerView.swift in Sources */,
 				01C454F71B593909003D5E41 /* JSONService.swift in Sources */,
 				0177B4E61B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift in Sources */,
@@ -528,11 +551,12 @@
 				01D1B8781B7327B000920C64 /* CustomSubTypeViewCell.swift in Sources */,
 				013996401B5BB739004B2DE0 /* OutfitCollectionViewController.swift in Sources */,
 				012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */,
-				01C455091B59703A003D5E41 /* ProfilViewController.swift in Sources */,
+				01C455091B59703A003D5E41 /* OldProfilViewController.swift in Sources */,
 				01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */,
 				012A21951B5A777E00CD01D3 /* CollectionViewController.swift in Sources */,
 				01C454FE1B593EB2003D5E41 /* NavigationController.swift in Sources */,
 				01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */,
+				01A6BDE01B99D42700D357A3 /* ClotheTableViewCell.swift in Sources */,
 				01C455181B597E60003D5E41 /* CameraViewController.swift in Sources */,
 				01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */,
 				012A219D1B5AB89700CD01D3 /* ProfilsDAL.swift in Sources */,
