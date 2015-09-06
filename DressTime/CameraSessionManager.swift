@@ -59,7 +59,7 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
         
         session = AVCaptureSession()
         
-        session.sessionPreset = AVCaptureSessionPresetMedium;
+        session.sessionPreset = AVCaptureSessionPresetHigh
         
         authorizeCamera();
         
@@ -193,9 +193,9 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
     }
     
     func captureImage(completion:((image: UIImage?, error: NSError?) -> Void)?) {
-        if (stillImageOutput != nil) {
-            return
-        }
+      //  if (stillImageOutput != nil) {
+      //      return
+      //  }
         
         dispatch_async(sessionQueue, {
             self.stillImageOutput.captureStillImageAsynchronouslyFromConnection(
@@ -204,15 +204,17 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
                     if ((imageDataSampleBuffer == nil || error != nil)) {
                         completion!(image:nil, error:nil)
                     }
-                    else if (imageDataSampleBuffer != nil) {
-                        var imageData: NSData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(imageDataSampleBuffer)
+                    else if let sample = imageDataSampleBuffer {
+                        var imageData: NSData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sample)
                         var image: UIImage = UIImage(data: imageData)!
-                        completion!(image:image, error:nil)
+                        var rotatedImage = UIImage(CGImage: image.CGImage, scale: 1.0, orientation: UIImageOrientation.DownMirrored)
+                        completion!(image:rotatedImage, error:nil)
                     }
                 }
             )
         })
     }
+    
     
     func addVideoPreviewLayer() {
         self.previewLayer = AVCaptureVideoPreviewLayer(session: self.session)

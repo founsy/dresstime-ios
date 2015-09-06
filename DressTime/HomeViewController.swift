@@ -46,6 +46,8 @@ class HomeViewController: UIViewController  {
         bar.tintColor = UIColor.whiteColor()
         bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
+        addProfilButtonToNavBar()
+        
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
@@ -78,6 +80,22 @@ class HomeViewController: UIViewController  {
         self.filterView.filterViewContainer.roundCorners(UIRectCorner.TopLeft | UIRectCorner.TopRight, radius: 10.0)
         self.filterView.drawIconViewCircle()
         //loadTodayOutfits()
+    }
+    
+    func addProfilButtonToNavBar(){
+    
+        var regularButton = UIButton(frame: CGRectMake(0, 0, 50.0, 50.0))
+        var historyButtonImage = UIImage(named: "profile_img")
+        regularButton.setBackgroundImage(historyButtonImage, forState: UIControlState.Normal)
+        
+        regularButton.setTitle("", forState: UIControlState.Normal)
+        regularButton.addTarget(self, action: "profilButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        var navBarButtonItem = UIBarButtonItem(customView: regularButton)
+        self.navigationItem.leftBarButtonItem = navBarButtonItem
+    }
+    
+    func profilButtonPressed(){
+        self.performSegueWithIdentifier("showProfil", sender: self)
     }
     
     func loadTodayOutfits(){

@@ -65,6 +65,10 @@ class CaptureConfirmationViewController: UIViewController {
         return arrayColors
     }
     
+    @IBAction func onBack(sender: AnyObject) {
+         self.navigationController?.popViewControllerAnimated(true)
+    }
+    
     @IBAction func onAddTouch(sender: AnyObject) {
         let resultCapture = NSMutableDictionary(dictionary: self.clotheObject!)
         var isUnis = 1;

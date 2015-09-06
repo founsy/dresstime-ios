@@ -12,6 +12,7 @@ import UIKit
 class ProfilViewController: UIViewController {
     private var clothesDAL:ClothesDAL?
     private var typeColtheSelected: String?
+    private var currentClotheOpenSelected: Int?
     
     @IBOutlet weak var mailleView: UIView!
     @IBOutlet weak var mailleImageView: UIImageView!
@@ -27,36 +28,83 @@ class ProfilViewController: UIViewController {
     @IBOutlet weak var partyButton: UIButton!
     @IBOutlet weak var relaxButton: UIButton!
 
+    @IBOutlet weak var normalMailleView: UIView!
+    @IBOutlet weak var tapLongMailleView: UIView!
+    
+    @IBOutlet weak var normalTopView: UIView!
+    @IBOutlet weak var tapLongTopView: UIView!
+    
+    @IBOutlet weak var normalBottomView: UIView!
+    @IBOutlet weak var tapLongBottomView: UIView!
+    
     @IBAction func addNewClothe(sender: AnyObject) {
         self.performSegueWithIdentifier("AddClothe", sender: self)
     }
     
+    func tapType(normalView: UIView, tapLongView: UIView, type: String){
+        if (!normalView.hidden){
+            self.typeColtheSelected = type
+            self.performSegueWithIdentifier("DetailsClothes", sender: self)
+        } else {
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                normalView.hidden = false
+                tapLongView.hidden = true
+            })
+        }
+    }
+    
+    func longPress(normalView: UIView, tapLongView: UIView){
+        if (tapLongView.hidden){
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+               tapLongView.hidden = false
+                normalView.hidden = true
+            })
+        }
+    }
+    
+    func resetLongPressed(){
+        normalMailleView.hidden = false
+        normalTopView.hidden = false
+        normalBottomView.hidden = false
+        
+        tapLongMailleView.hidden = true
+        tapLongTopView.hidden = true
+        tapLongBottomView.hidden = true
+    }
+    
     @IBAction func onMailleTap(sender: AnyObject) {
-        self.typeColtheSelected = "maille"
-        self.performSegueWithIdentifier("DetailsClothes", sender: self)
+        tapType(normalMailleView, tapLongView: tapLongMailleView, type: "maille")
     }
+    
+    @IBAction func MaillelongPressed(sender: UILongPressGestureRecognizer){
+        longPress(normalMailleView, tapLongView: tapLongMailleView)
+    }
+    
     @IBAction func onTopTap(sender: AnyObject) {
-        self.typeColtheSelected = "top"
-        self.performSegueWithIdentifier("DetailsClothes", sender: self)
-
+        tapType(normalTopView, tapLongView: tapLongTopView, type: "top")
     }
+    
+    @IBAction func ToplongPressed(sender: UILongPressGestureRecognizer){
+        longPress(normalTopView, tapLongView: tapLongTopView)
+    }
+    
     @IBAction func onBottomTap(sender: AnyObject) {
-        self.typeColtheSelected = "pants"
-        self.performSegueWithIdentifier("DetailsClothes", sender: self)
-
+        tapType(normalBottomView, tapLongView: tapLongBottomView, type: "pants")
     }
+    
+    @IBAction func BottomlongPressed(sender: UILongPressGestureRecognizer){
+        longPress(normalBottomView, tapLongView: tapLongBottomView)
+    }
+    
+    @IBAction func addClothe(sender: UIButton) {
+        self.currentClotheOpenSelected = sender.tag
+        self.performSegueWithIdentifier("AddClothe", sender: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.clothesDAL = ClothesDAL()
-        let countMaille = self.clothesDAL?.fetch(type: "maille").count
-        let countTop = self.clothesDAL?.fetch(type: "top").count
-        let countBottom = self.clothesDAL?.fetch(type: "pants").count
-        
-        numberMailleText.text = "\(countMaille!)"
-        numberTopText.text = "\(countTop!)"
-        numberBottomText.text = "\(countBottom!)"
-        
+        initData()
         workButton.layer.cornerRadius = 17.5
         workButton.layer.borderColor = UIColor.whiteColor().CGColor
         workButton.layer.borderWidth = 1.0
@@ -71,11 +119,29 @@ class ProfilViewController: UIViewController {
         
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        initData()
+        resetLongPressed()
+    }
+    
+    func initData() {
+        let countMaille = self.clothesDAL?.fetch(type: "maille").count
+        let countTop = self.clothesDAL?.fetch(type: "top").count
+        let countBottom = self.clothesDAL?.fetch(type: "pants").count
+        numberMailleText.text = "\(countMaille!)"
+        numberTopText.text = "\(countTop!)"
+        numberBottomText.text = "\(countBottom!)"
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "DetailsClothes"){
             let targetVC = segue.destinationViewController as! DetailTypeViewController
             targetVC.typeClothe = self.typeColtheSelected
+        } else if (segue.identifier == "AddClothe"){
+            let navController = segue.destinationViewController as! UINavigationController
+            let targetVC = navController.topViewController as! TypeViewController
+            targetVC.openItem(self.currentClotheOpenSelected! - 1)
         }
     }
 }

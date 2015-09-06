@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="513" id="OSz-Yh-fVj" customClass="ClotheDetailTableViewCell" customModule="DressTime" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="587" height="513"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OSz-Yh-fVj" id="5l7-0P-vlN">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5VM-r7-0QM">
+                        <rect key="frame" x="0.0" y="0.0" width="587" height="512.5"/>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdO-5H-aTt">
+                        <rect key="frame" x="0.0" y="0.0" width="587" height="35"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MY TSHIRT FOR SUMMER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eTG-mH-HgB">
+                                <rect key="frame" x="8" y="7" width="571" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CHn-3X-DW3">
+                                <rect key="frame" x="553" y="4.5" width="25" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="Sp7-BH-xvB"/>
+                                    <constraint firstAttribute="height" constant="25" id="oEm-Xl-wW3"/>
+                                </constraints>
+                                <state key="normal" image="DetailPen">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onEdit:" destination="OSz-Yh-fVj" eventType="touchUpInside" id="EGc-yr-FvN"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="b7B-Sm-g8m"/>
+                            <constraint firstAttribute="trailing" secondItem="CHn-3X-DW3" secondAttribute="trailing" constant="9" id="k80-8q-1zl"/>
+                            <constraint firstItem="eTG-mH-HgB" firstAttribute="leading" secondItem="vdO-5H-aTt" secondAttribute="leading" constant="8" id="pqo-jC-pY5"/>
+                            <constraint firstAttribute="centerY" secondItem="CHn-3X-DW3" secondAttribute="centerY" id="uAl-oR-jHf"/>
+                            <constraint firstAttribute="centerY" secondItem="eTG-mH-HgB" secondAttribute="centerY" id="usW-MG-Zqc"/>
+                            <constraint firstAttribute="trailing" secondItem="eTG-mH-HgB" secondAttribute="trailing" constant="8" id="vJa-Bn-sT5"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gHR-ia-gDR">
+                        <rect key="frame" x="214" y="461" width="157" height="30"/>
+                        <color key="backgroundColor" white="1" alpha="0.84999999999999998" colorSpace="calibratedWhite"/>
+                        <state key="normal" title="  CREATE AN OUTFIT  ">
+                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstAttribute="centerX" secondItem="gHR-ia-gDR" secondAttribute="centerX" id="8nP-Ve-B1K"/>
+                    <constraint firstItem="5VM-r7-0QM" firstAttribute="leading" secondItem="5l7-0P-vlN" secondAttribute="leadingMargin" constant="-8" id="O83-hc-Wuq"/>
+                    <constraint firstItem="vdO-5H-aTt" firstAttribute="leading" secondItem="5l7-0P-vlN" secondAttribute="leadingMargin" constant="-8" id="ViY-PW-BsZ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="vdO-5H-aTt" secondAttribute="trailing" constant="-8" id="chk-AK-lnP"/>
+                    <constraint firstItem="vdO-5H-aTt" firstAttribute="top" secondItem="5l7-0P-vlN" secondAttribute="topMargin" constant="-8" id="qZw-fR-egI"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="gHR-ia-gDR" secondAttribute="bottom" constant="13.5" id="sf9-gi-rtC"/>
+                    <constraint firstItem="5VM-r7-0QM" firstAttribute="bottom" secondItem="5l7-0P-vlN" secondAttribute="bottomMargin" constant="8" id="tBR-1q-9w1"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="5VM-r7-0QM" secondAttribute="trailing" constant="-8" id="usf-6o-TZX"/>
+                    <constraint firstItem="5VM-r7-0QM" firstAttribute="top" secondItem="5l7-0P-vlN" secondAttribute="topMargin" constant="-8" id="xY8-lQ-Z4o"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="clotheImageView" destination="5VM-r7-0QM" id="UAS-x0-Dfy"/>
+                <outlet property="clotheNameText" destination="eTG-mH-HgB" id="r0f-WE-d5o"/>
+                <outlet property="onCreateOutfit" destination="gHR-ia-gDR" id="ZRT-hA-23N"/>
+                <outlet property="topView" destination="vdO-5H-aTt" id="mMP-JV-gmm"/>
+            </connections>
+            <point key="canvasLocation" x="448.5" y="415.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="DetailPen" width="15" height="15"/>
+    </resources>
+</document>

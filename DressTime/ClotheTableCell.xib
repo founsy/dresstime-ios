@@ -23,12 +23,20 @@
                             <constraint firstAttribute="width" constant="30" id="Bdk-9T-da6"/>
                         </constraints>
                     </imageView>
+                    <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xwr-AH-CVb">
+                        <rect key="frame" x="0.0" y="0.0" width="535" height="147.5"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="xwr-AH-CVb" secondAttribute="bottom" constant="-8" id="Kxo-0B-xcf"/>
                     <constraint firstAttribute="bottomMargin" secondItem="6Eg-gQ-HHo" secondAttribute="bottom" constant="-8" id="MUJ-tf-7P9"/>
                     <constraint firstAttribute="bottomMargin" secondItem="6yD-DJ-E0G" secondAttribute="bottom" constant="0.5" id="Mm2-MS-p3C"/>
                     <constraint firstAttribute="trailingMargin" secondItem="6Eg-gQ-HHo" secondAttribute="trailing" constant="-8" id="guO-Uf-Lg7"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="xwr-AH-CVb" secondAttribute="trailing" constant="-8" id="hei-zD-ml8"/>
+                    <constraint firstItem="xwr-AH-CVb" firstAttribute="top" secondItem="IRL-SF-axc" secondAttribute="topMargin" constant="-8" id="kFZ-I4-84S"/>
+                    <constraint firstItem="xwr-AH-CVb" firstAttribute="leading" secondItem="IRL-SF-axc" secondAttribute="leadingMargin" constant="-8" id="p5h-fc-Nby"/>
                     <constraint firstAttribute="trailingMargin" secondItem="6yD-DJ-E0G" secondAttribute="trailing" constant="2" id="tuD-WF-0Iv"/>
                     <constraint firstItem="6Eg-gQ-HHo" firstAttribute="top" secondItem="IRL-SF-axc" secondAttribute="topMargin" constant="-9" id="xtQ-7y-fiE"/>
                     <constraint firstItem="6Eg-gQ-HHo" firstAttribute="leading" secondItem="IRL-SF-axc" secondAttribute="leadingMargin" constant="-8" id="zBe-LS-5VY"/>
@@ -37,6 +45,7 @@
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
+                <outlet property="blackEffect" destination="xwr-AH-CVb" id="Lnj-JI-XC7"/>
                 <outlet property="clotheImageView" destination="6Eg-gQ-HHo" id="ZaA-ZU-MTc"/>
                 <outlet property="favorisIcon" destination="6yD-DJ-E0G" id="edi-hQ-Zaf"/>
             </connections>

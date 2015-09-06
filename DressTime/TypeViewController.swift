@@ -24,7 +24,7 @@ class TypeViewController: UIViewController {
     let bgType = ["TypeMaille", "TypeTop", "TypePants"]
     
     private let kCellReuse : String = "SubTypeCell"
-    private let kCellType : String = "TypeCell"
+    private let cellTypeIdentifier : String = "TypeTableCell"
     
     private var currentSection = 0
     private var subTypeSelected = 0
@@ -43,6 +43,9 @@ class TypeViewController: UIViewController {
         bar.tintColor = UIColor.whiteColor()
         bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.clearColor()]
         self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        
+        tableView.registerNib(UINib(nibName: "TypeTableCell", bundle:nil), forCellReuseIdentifier: self.cellTypeIdentifier)
+        
         
         if (isOpenSectionRequired){
             for (var i = 0; i < arrayForBool.count; i++) {
@@ -71,7 +74,7 @@ class TypeViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "showCapture"){
-            let captureController = segue.destinationViewController as! CameraViewController
+            let captureController = segue.destinationViewController as! NewCameraViewController
             captureController.typeClothe = getType(self.currentSection)
             captureController.subTypeClothe = getSubType(self.currentSection, subType: self.subTypeSelected)
         }
@@ -144,25 +147,26 @@ extension TypeViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         NSLog("willDisplayCell \(indexPath.row)")
         var currentCell = cell as! TypeTableViewCell
+        
         currentCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, index: indexPath.row)
     
         if (arrayForBool.objectAtIndex(indexPath.row).boolValue as Bool){
-            currentCell.bgImage.image = UIImage(named: "\(bgType[indexPath.row])Full")
             currentCell.collectionWidth = self.tableView.bounds.width
             currentCell.showCollectionView()
         } else {
             var height = self.tableView.bounds.height;
-        
             //Resize cell
             currentCell.contentView.frame = CGRectMake(0, 0, tableView.frame.size.width, round(height*0.33333))
-            currentCell.bgImage.image = UIImage(named: bgType[indexPath.row])
             currentCell.hideCollectionView()
         }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         NSLog("cellForRowAtIndexPath \(indexPath.row)")
-        var cell = self.tableView.dequeueReusableCellWithIdentifier(kCellType, forIndexPath: indexPath) as! TypeTableViewCell
+        var cell = self.tableView.dequeueReusableCellWithIdentifier(cellTypeIdentifier, forIndexPath: indexPath) as! TypeTableViewCell
+        cell.bgImageView.image = UIImage(named: "\(bgType[indexPath.row])Full")
+        cell.labelTypeText.text = sectionTitleArray[indexPath.row].uppercaseString
+        cell.bgImageView.clipsToBounds = true
         cell.data = getData(self.currentSection)
     
         return cell
@@ -298,19 +302,6 @@ extension TypeViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
         return 0.0
-    }
-}
-
-extension TypeViewController : CameraOverlayViewDelegate {
-    
-    func CameraOverlayViewResult(resultCapture: [String: AnyObject]) {
-        var dal = ClothesDAL()
-        let clotheId = NSUUID().UUIDString
-        dal.save(clotheId, partnerId: resultCapture["clothe_partnerid"] as! NSNumber, partnerName: resultCapture["clothe_partnerName"] as! String, type: resultCapture["clothe_type"] as! String, subType: resultCapture["clothe_subtype"] as! String, name: resultCapture["clothe_name"] as! String, isUnis: resultCapture["clothe_isUnis"] as! Bool, pattern: resultCapture["clothe_pattern"] as! String, cut: resultCapture["clothe_cut"] as! String, image: resultCapture["clothe_image"] as! NSData, colors: resultCapture["clothe_colors"] as! String)
-
-        DressTimeService.saveClothe(SharedData.sharedInstance.currentUserId!, clotheId: clotheId, dressingCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
-            //println(msg)
-        })
     }
 }
 

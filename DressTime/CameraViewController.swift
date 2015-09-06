@@ -31,6 +31,7 @@ class CameraViewController: UIViewController, CameraSessionControllerDelegate {
     var image: UIImageView!
     var skipImage: Int!
     var pageSelected: Int!
+    
     var typeClothe: String!
     var subTypeClothe: String!
     
@@ -116,8 +117,6 @@ class CameraViewController: UIViewController, CameraSessionControllerDelegate {
         self.view.addSubview(flashButton)
         applyBottomRightButtonConstraints(flashButton)
         
-
-        
         
         var x = rect.origin.x
         for var i = 0; i < 3; i++ {
@@ -167,7 +166,6 @@ class CameraViewController: UIViewController, CameraSessionControllerDelegate {
     
     func cameraSessionReady() {
         captureManager.startCamera()
-        
     }
     
     func createScanArea() -> CGRect{

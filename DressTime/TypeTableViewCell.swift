@@ -1,8 +1,8 @@
-        //
+//
 //  TypeTableViewCell.swift
 //  DressTime
 //
-//  Created by Fab on 07/08/2015.
+//  Created by Fab on 05/09/2015.
 //  Copyright (c) 2015 Fab. All rights reserved.
 //
 
@@ -10,21 +10,24 @@ import Foundation
 import UIKit
 
 class IndexedCollectionView: UICollectionView {
-            
+    
     var indexPath: NSIndexPath!
-            
+    
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
     }
-            
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
 }
-        
-class TypeTableViewCell : UITableViewCell {
 
-    @IBOutlet var bgImage: UIImageView!
+class TypeTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var bgImageView: UIImageView!
+    @IBOutlet weak var iconImageView: UIImageView!
+    @IBOutlet weak var labelTypeText: UILabel!
+    
     var collectionView: IndexedCollectionView!
     private let kCellReuse : String = "SubTypeCell"
     private let collectionCellWidth:CGFloat = 114.0
@@ -37,12 +40,13 @@ class TypeTableViewCell : UITableViewCell {
             self.isLoaded = true
         }
     }
+
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?){
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initialize()
     }
-
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         initialize()
@@ -52,12 +56,6 @@ class TypeTableViewCell : UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-    }
-    
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
     }
     
     func initialize(){
@@ -80,11 +78,15 @@ class TypeTableViewCell : UITableViewCell {
     }
     
     func showCollectionView(){
+        self.iconImageView.hidden = true
+        self.labelTypeText.hidden = true
         self.collectionView.reloadData()
         self.collectionView.hidden = false
     }
     
     func hideCollectionView(){
+        self.iconImageView.hidden = false
+        self.labelTypeText.hidden = false
         self.collectionView.hidden = true
     }
     
@@ -117,5 +119,4 @@ class TypeTableViewCell : UITableViewCell {
         self.collectionView.tag = indexPath.section
         self.collectionView.reloadData()
     }
-
 }
