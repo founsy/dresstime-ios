@@ -12,11 +12,13 @@ import CoreLocation
 class HomeViewController: UIViewController  {
     private var locationManager: CLLocationManager = CLLocationManager()
     private var currentLocation: CLLocation!
-    private var outfitDataSource: OutfitCollectionViewController!
     private var panGestureRecognizer: UIPanGestureRecognizer!
     private var swipeGestureRecognizer: UISwipeGestureRecognizer!
     private var isHide = false
     private var filterFrame: CGRect!
+    private let cell3Identifier = "Outfit3ElemsCell"
+    private let cell2Identifier = "Outfit2ElemsCell"
+    private var outfitsCollection: [[String:AnyObject]]!
     
     private let styleData = ["business", "casual", "sportwear", "fashion"]
     
@@ -53,10 +55,6 @@ class HomeViewController: UIViewController  {
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         
-        self.outfitDataSource = OutfitCollectionViewController(outfits: [[String:AnyObject]](), collectionView: outfitCollectionView)
-        self.outfitCollectionView.dataSource = self.outfitDataSource
-        self.outfitCollectionView.delegate = self.outfitDataSource
-        
         var contentViewXib: NSArray = NSBundle.mainBundle().loadNibNamed("FilterView", owner: nil, options: nil)
         self.filterView = contentViewXib[0] as! FilterView
         
@@ -72,6 +70,11 @@ class HomeViewController: UIViewController  {
         self.filterView.addGestureRecognizer(self.swipeGestureRecognizer)
         self.filterView.delegate = self
         self.view.addSubview(self.filterView)
+        
+        self.outfitCollectionView.registerNib(UINib(nibName: "Outfit3ElemsCell", bundle:nil), forCellWithReuseIdentifier: self.cell3Identifier)
+        self.outfitCollectionView.registerNib(UINib(nibName: "Outfit2ElemsCell", bundle:nil), forCellWithReuseIdentifier: self.cell2Identifier)
+        self.outfitCollectionView.dataSource = self
+        self.outfitCollectionView.delegate = self
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -101,7 +104,7 @@ class HomeViewController: UIViewController  {
     func loadTodayOutfits(){
         DressTimeService.getOutfitsToday(SharedData.sharedInstance.currentUserId!, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.outfitDataSource.collection = msg
+                self.outfitsCollection = msg
                 self.outfitCollectionView.reloadData()
             })
         })
@@ -112,7 +115,7 @@ class HomeViewController: UIViewController  {
         let titleData = self.styleData[self.currentStyle]
         DressTimeService.getOutfitsByStyle(SharedData.sharedInstance.currentUserId!, style: titleData, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.outfitDataSource.collection = msg
+                self.outfitsCollection = msg
                 self.outfitCollectionView.reloadData()
                 self.hideFilterView()
             })
@@ -272,7 +275,6 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
 }
 
-
 extension HomeViewController: UIGestureRecognizerDelegate {
     
     func showFilterView(){
@@ -318,13 +320,51 @@ extension HomeViewController: FilterViewDelegate {
         let titleData = self.styleData[type]
         DressTimeService.getOutfitsByStyle(SharedData.sharedInstance.currentUserId!, style: titleData, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.outfitDataSource.collection = msg
+                self.outfitsCollection = msg
                 self.outfitCollectionView.reloadData()
                 self.hideFilterView()
             })
         })
     }
     
+}
+
+extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let collection = self.outfitsCollection {
+            if let error = self.outfitsCollection[0]["error"] {
+                return 0
+            } else {
+                return self.outfitsCollection.count
+            }
+        } else {
+            return 0
+        }
+    }
+    
+    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        var outfitElem = self.outfitsCollection[indexPath.row]
+        let dal = ClothesDAL()
+        var cell: OutfitElemsCollectionViewCell
+        if let outfit = outfitElem["outfit"] as? NSArray {
+            if (outfit.count == 2){
+                cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cell2Identifier, forIndexPath: indexPath) as! Outfit2ElemsCollectionViewCell
+            } else {
+                cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cell3Identifier, forIndexPath: indexPath) as! Outfit3ElemsCollectionViewCell
+                
+            }
+            for (var i = 0; i < outfit.count; i++){
+                if let clothe = dal.fetch(outfit[i]["clothe_id"] as! String) {
+                    cell.setClothe(clothe)
+                }
+            }
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+    
+
 }
 
 extension UIView {

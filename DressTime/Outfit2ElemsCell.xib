@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="a3n-h2-1bC" customClass="Outfit2ElemsCollectionViewCell" customModule="DressTime" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="320"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="200" height="320"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="07A-u1-xmb" userLabel="Top">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="180"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="180" id="usg-cZ-Qtc"/>
+                        </constraints>
+                    </imageView>
+                    <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XFk-qz-EVH" userLabel="Pants">
+                        <rect key="frame" x="0.0" y="180" width="200" height="140"/>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="XFk-qz-EVH" secondAttribute="bottom" id="3yC-Zi-h8v"/>
+                <constraint firstAttribute="trailing" secondItem="07A-u1-xmb" secondAttribute="trailing" id="Ago-oc-NhS"/>
+                <constraint firstItem="XFk-qz-EVH" firstAttribute="top" secondItem="07A-u1-xmb" secondAttribute="bottom" id="dsd-9e-RQR"/>
+                <constraint firstItem="XFk-qz-EVH" firstAttribute="leading" secondItem="a3n-h2-1bC" secondAttribute="leading" id="v9Z-J4-b8A"/>
+                <constraint firstItem="07A-u1-xmb" firstAttribute="top" secondItem="a3n-h2-1bC" secondAttribute="top" id="xjx-Ev-HmW"/>
+                <constraint firstItem="07A-u1-xmb" firstAttribute="leading" secondItem="a3n-h2-1bC" secondAttribute="leading" id="ytA-4v-3LC"/>
+                <constraint firstAttribute="trailing" secondItem="XFk-qz-EVH" secondAttribute="trailing" id="yyX-f0-pZ0"/>
+            </constraints>
+            <connections>
+                <outlet property="pantsImageView" destination="XFk-qz-EVH" id="nzS-ci-GIL"/>
+                <outlet property="topImageView" destination="07A-u1-xmb" id="1qF-br-gfl"/>
+            </connections>
+            <point key="canvasLocation" x="487" y="307"/>
+        </collectionViewCell>
+    </objects>
+</document>

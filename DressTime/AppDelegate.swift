@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let user = profil {
             SharedData.sharedInstance.currentUserId = user.userid
-            getNewToken(user)
+            //getNewToken(user)
         } else {
             var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
             self.window?.makeKeyAndVisible()
@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let profil = profilDAL.fetchLastUserConnected()
         if let user = profil {
             SharedData.sharedInstance.currentUserId = user.userid
-            getNewToken(user)
+            //getNewToken(user)
         } else {
             var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
             self.window?.makeKeyAndVisible()

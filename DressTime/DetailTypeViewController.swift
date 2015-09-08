@@ -105,15 +105,14 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath){
-        NSLog("willDisplay : \(indexPath.row)")
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        NSLog("cellForRowAtIndexPath : \(indexPath.row)")
         if (arrayForBool[indexPath.row].boolValue as Bool){
             let cell = tableView.dequeueReusableCellWithIdentifier(self.cellDetailIdentifier, forIndexPath: indexPath) as! ClotheDetailTableViewCell
             let clothe = self.clothesList![indexPath.row]
             cell.clotheImageView.image = UIImage(data: clothe.clothe_image)
+            cell.updateColors(clothe.clothe_colors as String)
             cell.roundTopCorner()
             cell.clotheImageView.clipsToBounds = true
             cell.indexPath = indexPath
@@ -124,7 +123,11 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
             let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! ClotheTableViewCell
         
             let clothe = self.clothesList![indexPath.row]
-            cell.clotheImageView.image = UIImage(data: clothe.clothe_image);
+            if let image = UIImage(data: clothe.clothe_image) {
+                NSLog("\(image.size.width) - \(image.size.height)")
+            
+                cell.clotheImageView.image = image.imageResize(CGSizeMake(360.0, 480.0))
+            }
             cell.layer.shadowOffset = CGSizeMake(3, 6);
             cell.layer.shadowColor = UIColor.blackColor().CGColor
             cell.layer.shadowRadius = 8;
@@ -142,4 +145,28 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
     
+}
+
+extension UIImage {
+    func imageResize (sizeChange:CGSize)-> UIImage{
+        var ratio = 1;
+        if (self.size.width > sizeChange.width){
+            ratio = Int(self.size.width/sizeChange.width);
+        }
+        let newWidth = self.size.width/CGFloat(ratio);
+        let newHeight = self.size.height/CGFloat(ratio);
+        
+        let newSize = CGSizeMake(newWidth, newHeight)
+        
+        let hasAlpha = false
+        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+        
+        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
+        self.drawInRect(CGRect(origin: CGPointZero, size: newSize))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return scaledImage
+    }
+
 }

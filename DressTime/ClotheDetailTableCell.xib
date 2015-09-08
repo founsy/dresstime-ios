@@ -56,13 +56,43 @@
                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         </state>
                     </button>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Gh-4o-2zf" userLabel="Color1">
+                        <rect key="frame" x="213" y="45" width="40" height="25"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="6JG-VD-Ekh"/>
+                            <constraint firstAttribute="width" constant="40" id="U4x-30-toG"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oXD-RY-y6a" userLabel="Color2">
+                        <rect key="frame" x="273" y="45" width="40" height="25"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="Ytk-sr-tzi"/>
+                            <constraint firstAttribute="height" constant="25" id="fWh-qf-slA"/>
+                        </constraints>
+                    </view>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hxK-tK-7RN" userLabel="Color3">
+                        <rect key="frame" x="333" y="45" width="40" height="25"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="UaD-MC-v91"/>
+                            <constraint firstAttribute="height" constant="25" id="gty-Ra-x9J"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="centerX" secondItem="gHR-ia-gDR" secondAttribute="centerX" id="8nP-Ve-B1K"/>
+                    <constraint firstItem="hxK-tK-7RN" firstAttribute="top" secondItem="vdO-5H-aTt" secondAttribute="bottom" constant="10" id="HRK-ce-azA"/>
+                    <constraint firstItem="7Gh-4o-2zf" firstAttribute="top" secondItem="vdO-5H-aTt" secondAttribute="bottom" constant="10" id="Loc-aL-dGe"/>
                     <constraint firstItem="5VM-r7-0QM" firstAttribute="leading" secondItem="5l7-0P-vlN" secondAttribute="leadingMargin" constant="-8" id="O83-hc-Wuq"/>
+                    <constraint firstItem="oXD-RY-y6a" firstAttribute="top" secondItem="vdO-5H-aTt" secondAttribute="bottom" constant="10" id="P82-wd-QFp"/>
+                    <constraint firstItem="hxK-tK-7RN" firstAttribute="leading" secondItem="oXD-RY-y6a" secondAttribute="trailing" constant="20" id="V51-2f-wjI"/>
                     <constraint firstItem="vdO-5H-aTt" firstAttribute="leading" secondItem="5l7-0P-vlN" secondAttribute="leadingMargin" constant="-8" id="ViY-PW-BsZ"/>
                     <constraint firstAttribute="trailingMargin" secondItem="vdO-5H-aTt" secondAttribute="trailing" constant="-8" id="chk-AK-lnP"/>
+                    <constraint firstItem="oXD-RY-y6a" firstAttribute="leading" secondItem="7Gh-4o-2zf" secondAttribute="trailing" constant="20" id="fzX-S3-YoE"/>
+                    <constraint firstAttribute="centerX" secondItem="oXD-RY-y6a" secondAttribute="centerX" id="ljO-bb-eUK"/>
                     <constraint firstItem="vdO-5H-aTt" firstAttribute="top" secondItem="5l7-0P-vlN" secondAttribute="topMargin" constant="-8" id="qZw-fR-egI"/>
                     <constraint firstAttribute="bottomMargin" secondItem="gHR-ia-gDR" secondAttribute="bottom" constant="13.5" id="sf9-gi-rtC"/>
                     <constraint firstItem="5VM-r7-0QM" firstAttribute="bottom" secondItem="5l7-0P-vlN" secondAttribute="bottomMargin" constant="8" id="tBR-1q-9w1"/>
@@ -74,6 +104,9 @@
             <connections>
                 <outlet property="clotheImageView" destination="5VM-r7-0QM" id="UAS-x0-Dfy"/>
                 <outlet property="clotheNameText" destination="eTG-mH-HgB" id="r0f-WE-d5o"/>
+                <outlet property="color1View" destination="7Gh-4o-2zf" id="5Fn-xC-Rpj"/>
+                <outlet property="color2View" destination="oXD-RY-y6a" id="pfc-tz-bZ0"/>
+                <outlet property="color3View" destination="hxK-tK-7RN" id="4C9-Lb-Bso"/>
                 <outlet property="onCreateOutfit" destination="gHR-ia-gDR" id="ZRT-hA-23N"/>
                 <outlet property="topView" destination="vdO-5H-aTt" id="mMP-JV-gmm"/>
             </connections>

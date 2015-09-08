@@ -41,7 +41,7 @@ class TypeViewController: UIViewController {
         bar.shadowImage = UIImage()
         bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
         bar.tintColor = UIColor.whiteColor()
-        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.clearColor()]
+        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.blackColor()]
         self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         
         tableView.registerNib(UINib(nibName: "TypeTableCell", bundle:nil), forCellReuseIdentifier: self.cellTypeIdentifier)

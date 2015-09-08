@@ -17,6 +17,10 @@
 		0177B4E61B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */; };
 		017BBA5F1B80FC92003DE513 /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017BBA5E1B80FC92003DE513 /* FilterView.xib */; };
 		017BBA611B80FCF7003DE513 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017BBA601B80FCF7003DE513 /* FilterView.swift */; };
+		019A784B1B9F374F001958FE /* Outfit3ElemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 019A784A1B9F374F001958FE /* Outfit3ElemsCell.xib */; };
+		019A784D1B9F3867001958FE /* Outfit2ElemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 019A784C1B9F3867001958FE /* Outfit2ElemsCell.xib */; };
+		019A784F1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A784E1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift */; };
+		019A78511B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A78501B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift */; };
 		01A6BDD91B99C7FE00D357A3 /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDD81B99C7FE00D357A3 /* ProfilViewController.swift */; };
 		01A6BDDB1B99D26500D357A3 /* DetailTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */; };
 		01A6BDDE1B99D3E600D357A3 /* ClotheTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6BDDD1B99D3E600D357A3 /* ClotheTableCell.xib */; };
@@ -108,6 +112,10 @@
 		0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureConfirmationViewController.swift; sourceTree = "<group>"; };
 		017BBA5E1B80FC92003DE513 /* FilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
 		017BBA601B80FCF7003DE513 /* FilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
+		019A784A1B9F374F001958FE /* Outfit3ElemsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Outfit3ElemsCell.xib; sourceTree = "<group>"; };
+		019A784C1B9F3867001958FE /* Outfit2ElemsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Outfit2ElemsCell.xib; sourceTree = "<group>"; };
+		019A784E1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Outfit2ElemsCollectionViewCell.swift; sourceTree = "<group>"; };
+		019A78501B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Outfit3ElemsCollectionViewCell.swift; sourceTree = "<group>"; };
 		01A6BDD81B99C7FE00D357A3 /* ProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilViewController.swift; sourceTree = "<group>"; };
 		01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTypeViewController.swift; sourceTree = "<group>"; };
 		01A6BDDD1B99D3E600D357A3 /* ClotheTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClotheTableCell.xib; sourceTree = "<group>"; };
@@ -206,6 +214,8 @@
 				01A6BDDD1B99D3E600D357A3 /* ClotheTableCell.xib */,
 				01A6BDE31B9AE9CB00D357A3 /* ClotheDetailTableCell.xib */,
 				01A6BDE51B9B352E00D357A3 /* TypeTableCell.xib */,
+				019A784A1B9F374F001958FE /* Outfit3ElemsCell.xib */,
+				019A784C1B9F3867001958FE /* Outfit2ElemsCell.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -366,6 +376,8 @@
 				01A6BDDF1B99D42700D357A3 /* ClotheTableViewCell.swift */,
 				01A6BDE11B9AE84700D357A3 /* ClotheDetailTableViewCell.swift */,
 				01A6BDE71B9B365B00D357A3 /* TypeTableViewCell.swift */,
+				019A784E1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift */,
+				019A78501B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -507,7 +519,9 @@
 			files = (
 				01C455011B5942F4003D5E41 /* Main.storyboard in Resources */,
 				01A6BDE41B9AE9CB00D357A3 /* ClotheDetailTableCell.xib in Resources */,
+				019A784B1B9F374F001958FE /* Outfit3ElemsCell.xib in Resources */,
 				01C455071B595C54003D5E41 /* artill_clean_icons-webfont.ttf in Resources */,
+				019A784D1B9F3867001958FE /* Outfit2ElemsCell.xib in Resources */,
 				01C454E01B5935B3003D5E41 /* LaunchScreen.xib in Resources */,
 				01A6BDDE1B99D3E600D357A3 /* ClotheTableCell.xib in Resources */,
 				017BBA5F1B80FC92003DE513 /* FilterView.xib in Resources */,
@@ -549,6 +563,7 @@
 				01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */,
 				01A6BDDB1B99D26500D357A3 /* DetailTypeViewController.swift in Sources */,
 				01D1B8701B72374100920C64 /* AKPickerView.swift in Sources */,
+				019A78511B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift in Sources */,
 				01C454F71B593909003D5E41 /* JSONService.swift in Sources */,
 				0177B4E61B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift in Sources */,
 				01C455111B597626003D5E41 /* Clothe.swift in Sources */,
@@ -570,6 +585,7 @@
 				CD4E05401B776987005B161B /* HomeViewController.swift in Sources */,
 				01A6BDE81B9B365B00D357A3 /* TypeTableViewCell.swift in Sources */,
 				012A21991B5AB74900CD01D3 /* DressTimeService.swift in Sources */,
+				019A784F1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift in Sources */,
 				01C455191B597E60003D5E41 /* CameraSessionManager.swift in Sources */,
 				012A21971B5AA3C100CD01D3 /* ClotheDetailController.swift in Sources */,
 			);

@@ -117,12 +117,31 @@ class ProfilViewController: UIViewController {
         relaxButton.layer.borderColor = UIColor.whiteColor().CGColor
         relaxButton.layer.borderWidth = 1.0
         
+        addProfilPicture()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         initData()
         resetLongPressed()
+    }
+    
+    private func addProfilPicture(){
+        var buttonContainer = UIView(frame: CGRectMake(0, 5, 60, 60))
+        buttonContainer.backgroundColor = UIColor.clearColor()
+        var button =  UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
+        button.frame = CGRectMake(0,0,60,60)
+        button.setBackgroundImage(UIImage(named: "profile_img"), forState: UIControlState.Normal)
+        button.addTarget(self, action: "settingProfilTap", forControlEvents: UIControlEvents.TouchUpInside)
+        buttonContainer.addSubview(button)
+        self.navigationItem.titleView = button
+        
+        
+    }
+    
+    func settingProfilTap(){
+        self.performSegueWithIdentifier("showSettings", sender: self)
     }
     
     func initData() {
@@ -141,7 +160,9 @@ class ProfilViewController: UIViewController {
         } else if (segue.identifier == "AddClothe"){
             let navController = segue.destinationViewController as! UINavigationController
             let targetVC = navController.topViewController as! TypeViewController
-            targetVC.openItem(self.currentClotheOpenSelected! - 1)
+            if let typeClothe = self.currentClotheOpenSelected {
+            targetVC.openItem(typeClothe - 1)
+            }
         }
     }
 }

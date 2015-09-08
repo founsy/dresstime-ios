@@ -198,20 +198,24 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
       //  }
         
         dispatch_async(sessionQueue, {
-            self.stillImageOutput.captureStillImageAsynchronouslyFromConnection(
-                self.stillImageOutput.connectionWithMediaType(AVMediaTypeVideo),completionHandler: {
-                    (imageDataSampleBuffer: CMSampleBuffer?, error: NSError?) -> Void in
-                    if ((imageDataSampleBuffer == nil || error != nil)) {
-                        completion!(image:nil, error:nil)
-                    }
-                    else if let sample = imageDataSampleBuffer {
-                        var imageData: NSData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sample)
-                        var image: UIImage = UIImage(data: imageData)!
-                        var rotatedImage = UIImage(CGImage: image.CGImage, scale: 1.0, orientation: UIImageOrientation.DownMirrored)
-                        completion!(image:rotatedImage, error:nil)
-                    }
+            if let connection = self.stillImageOutput.connectionWithMediaType(AVMediaTypeVideo) {
+                if (connection.enabled){
+                    self.stillImageOutput.captureStillImageAsynchronouslyFromConnection(
+                        self.stillImageOutput.connectionWithMediaType(AVMediaTypeVideo),completionHandler: {
+                            (imageDataSampleBuffer: CMSampleBuffer?, error: NSError?) -> Void in
+                            if ((imageDataSampleBuffer == nil || error != nil)) {
+                                completion!(image:nil, error:nil)
+                            }
+                            else if let sample = imageDataSampleBuffer {
+                                var imageData: NSData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sample)
+                                var image: UIImage = UIImage(data: imageData)!
+                                var rotatedImage = UIImage(CGImage: image.CGImage, scale: 1.0, orientation: UIImageOrientation.DownMirrored)
+                                completion!(image:rotatedImage, error:nil)
+                            }
+                        }
+                    )
                 }
-            )
+            }
         })
     }
     
@@ -243,15 +247,16 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
     }
     
     func toggleFlash(){
-        let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
-        if (device.hasTorch) {
-            device.lockForConfiguration(nil)
-            if (device.torchMode == AVCaptureTorchMode.On) {
-                device.torchMode = AVCaptureTorchMode.Off
-            } else {
-                device.setTorchModeOnWithLevel(1.0, error: nil)
+        if let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo) {
+            if (device.hasTorch) {
+                device.lockForConfiguration(nil)
+                if (device.torchMode == AVCaptureTorchMode.On) {
+                    device.torchMode = AVCaptureTorchMode.Off
+                } else {
+                    device.setTorchModeOnWithLevel(1.0, error: nil)
+                }
+                device.unlockForConfiguration()
             }
-            device.unlockForConfiguration()
         }
     }
     
