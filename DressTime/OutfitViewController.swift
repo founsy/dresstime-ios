@@ -1,67 +1,71 @@
 //
-//  DetailTypeViewController.swift
+//  OutfitsViewController.swift
 //  DressTime
 //
-//  Created by Fab on 04/09/2015.
+//  Created by Fab on 09/09/2015.
 //  Copyright (c) 2015 Fab. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-class DetailTypeViewController: UIViewController {
+class OutfitViewController: UIViewController {
     private let cellIdentifier : String = "ClotheTableCell"
     private let cellDetailIdentifier : String = "ClotheDetailTableCell"
-    private var clothesList: [Clothe]?
     private var arrayForBool = [Bool]()
-    private var currentSection = -1
+    private let dal = ClothesDAL()
+    private var currentSection: Int = -1
     
-    var typeClothe: String?
+    var itemIndex: Int = 0
+    var currentOutfits: NSArray!
+    var frame: CGRect?
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        initData()
+        if let fr = frame {
+            self.view.frame = frame!
+        }
         tableView.registerNib(UINib(nibName: "ClotheTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
         tableView.registerNib(UINib(nibName: "ClotheDetailTableCell", bundle:nil), forCellReuseIdentifier: self.cellDetailIdentifier)
         
         tableView!.delegate = self
         tableView!.dataSource = self
-       
+
+        initData()
     }
     
-    func initData(){
-        let dal = ClothesDAL()
-        if let type = self.typeClothe {
-            self.clothesList = dal.fetch(type: type)
-        }
-        for (var i=0; i < self.clothesList!.count; i++){
-            arrayForBool.append(false)
+    private func initData(){
+        if let outfits = self.currentOutfits {
+            for (var i=0; i < outfits.count; i++){
+                arrayForBool.append(false)
+            }
         }
     }
 }
 
-extension DetailTypeViewController: ClotheDetailTableViewCellDelegate {
+extension OutfitViewController: ClotheDetailTableViewCellDelegate {
     func onEditClothe(indexPath: NSIndexPath) {
-       if let currentClothe = self.clothesList?[indexPath.row] {
+        /*if let currentClothe = self.clothesList?[indexPath.row] {
             DressTimeService.deleteClothe(SharedData.sharedInstance.currentUserId!, clotheId: currentClothe.clothe_id, clotheDelCompleted: { (succeeded, msg) -> () in
                 println("Clothe deleted")
                 let dal = ClothesDAL()
                 dal.delete(currentClothe)
-               /* dispatch_sync(dispatch_get_main_queue(), {
-                    self.initData()
-                    self.tableView.reloadData()
+                /* dispatch_sync(dispatch_get_main_queue(), {
+                self.initData()
+                self.tableView.reloadData()
                 }) */
             })
         }
         self.clothesList!.removeAtIndex(indexPath.row)
-        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic) */
     }
 }
 
-extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
 
+extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let oldRow = self.currentSection
         self.currentSection = self.currentSection == indexPath.row ? -1 : indexPath.row
@@ -87,17 +91,17 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        var height:CGFloat = 150.0
+        var height:CGFloat = (self.tableView.bounds.height) / CGFloat(self.currentOutfits.count)
         if (arrayForBool[indexPath.row].boolValue as Bool){
-            return height*2.8
+            return height*1.4
         } else {
             return height
         }
-
+        
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        if let list = self.clothesList {
+        if let list = self.currentOutfits {
             return list.count
         } else {
             return 0
@@ -110,62 +114,38 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if (arrayForBool[indexPath.row].boolValue as Bool){
             let cell = tableView.dequeueReusableCellWithIdentifier(self.cellDetailIdentifier, forIndexPath: indexPath) as! ClotheDetailTableViewCell
-            let clothe = self.clothesList![indexPath.row]
-            cell.clotheImageView.image = UIImage(data: clothe.clothe_image)
-            cell.updateColors(clothe.clothe_colors as String)
-            cell.roundTopCorner()
-            cell.clotheImageView.clipsToBounds = true
-            cell.indexPath = indexPath
-            cell.delegate = self
+            
+            let clothe_id = self.currentOutfits[indexPath.row]["clothe_id"] as! String
+            if let clothe = dal.fetch(clothe_id) {
+                cell.clotheImageView.image = UIImage(data: clothe.clothe_image)
+                cell.updateColors(clothe.clothe_colors)
+                cell.roundTopCorner()
+                cell.clotheImageView.clipsToBounds = true
+                cell.indexPath = indexPath
+                cell.delegate = self
+            }
             return cell
         } else {
-        
-            let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! ClotheTableViewCell
-        
-            let clothe = self.clothesList![indexPath.row]
-            if let image = UIImage(data: clothe.clothe_image) {
-                NSLog("\(image.size.width) - \(image.size.height)")
             
-                cell.clotheImageView.image = image.imageResize(CGSizeMake(360.0, 480.0))
+            let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! ClotheTableViewCell
+            
+            let clothe_id = self.currentOutfits[indexPath.row]["clothe_id"] as! String
+            if let clothe = dal.fetch(clothe_id) {
+                if let image = UIImage(data: clothe.clothe_image) {
+                    NSLog("\(image.size.width) - \(image.size.height)")
+                
+                    cell.clotheImageView.image = image.imageResize(CGSizeMake(360.0, 480.0))
+                }
+                cell.layer.shadowOffset = CGSizeMake(3, 6);
+                cell.layer.shadowColor = UIColor.blackColor().CGColor
+                cell.layer.shadowRadius = 8;
+                cell.layer.shadowOpacity = 0.75;
+                cell.clotheImageView.clipsToBounds = true
+                cell.favorisIcon.clipsToBounds = true
             }
-            cell.layer.shadowOffset = CGSizeMake(3, 6);
-            cell.layer.shadowColor = UIColor.blackColor().CGColor
-            cell.layer.shadowRadius = 8;
-            cell.layer.shadowOpacity = 0.75;
-            cell.clotheImageView.clipsToBounds = true
-            cell.favorisIcon.clipsToBounds = true
-           /* if (self.currentSection > -1){
-                 cell.blackEffect.alpha = 0.5;
-            } else {
-                cell.blackEffect.alpha = 0;
-            }*/
-            return cell;
+            return cell
         }
         
         
     }
-}
-
-extension UIImage {
-    func imageResize (sizeChange:CGSize)-> UIImage{
-        var ratio = 1;
-        if (self.size.width > sizeChange.width){
-            ratio = Int(self.size.width/sizeChange.width);
-        }
-        let newWidth = self.size.width/CGFloat(ratio);
-        let newHeight = self.size.height/CGFloat(ratio);
-        
-        let newSize = CGSizeMake(newWidth, newHeight)
-        
-        let hasAlpha = false
-        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
-        
-        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
-        self.drawInRect(CGRect(origin: CGPointZero, size: newSize))
-        
-        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return scaledImage
-    }
-
 }

@@ -21,6 +21,8 @@
 		019A784D1B9F3867001958FE /* Outfit2ElemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 019A784C1B9F3867001958FE /* Outfit2ElemsCell.xib */; };
 		019A784F1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A784E1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift */; };
 		019A78511B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A78501B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift */; };
+		019A78531BA002E3001958FE /* OutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A78521BA002E3001958FE /* OutfitViewController.swift */; };
+		019A78551BA01315001958FE /* OutfitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A78541BA01315001958FE /* OutfitsViewController.swift */; };
 		01A6BDD91B99C7FE00D357A3 /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDD81B99C7FE00D357A3 /* ProfilViewController.swift */; };
 		01A6BDDB1B99D26500D357A3 /* DetailTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */; };
 		01A6BDDE1B99D3E600D357A3 /* ClotheTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6BDDD1B99D3E600D357A3 /* ClotheTableCell.xib */; };
@@ -116,6 +118,8 @@
 		019A784C1B9F3867001958FE /* Outfit2ElemsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Outfit2ElemsCell.xib; sourceTree = "<group>"; };
 		019A784E1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Outfit2ElemsCollectionViewCell.swift; sourceTree = "<group>"; };
 		019A78501B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Outfit3ElemsCollectionViewCell.swift; sourceTree = "<group>"; };
+		019A78521BA002E3001958FE /* OutfitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitViewController.swift; sourceTree = "<group>"; };
+		019A78541BA01315001958FE /* OutfitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitsViewController.swift; sourceTree = "<group>"; };
 		01A6BDD81B99C7FE00D357A3 /* ProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilViewController.swift; sourceTree = "<group>"; };
 		01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTypeViewController.swift; sourceTree = "<group>"; };
 		01A6BDDD1B99D3E600D357A3 /* ClotheTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClotheTableCell.xib; sourceTree = "<group>"; };
@@ -314,6 +318,8 @@
 				01D1B8711B726B7D00920C64 /* TypeViewController.swift */,
 				01A6BDE91B9B41A100D357A3 /* NewCameraViewController.swift */,
 				0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */,
+				019A78521BA002E3001958FE /* OutfitViewController.swift */,
+				019A78541BA01315001958FE /* OutfitsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -576,7 +582,9 @@
 				01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */,
 				01C454FE1B593EB2003D5E41 /* NavigationController.swift in Sources */,
 				01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */,
+				019A78531BA002E3001958FE /* OutfitViewController.swift in Sources */,
 				01A6BDE01B99D42700D357A3 /* ClotheTableViewCell.swift in Sources */,
+				019A78551BA01315001958FE /* OutfitsViewController.swift in Sources */,
 				01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */,
 				012A219D1B5AB89700CD01D3 /* ProfilsDAL.swift in Sources */,
 				01D1B8721B726B7D00920C64 /* TypeViewController.swift in Sources */,

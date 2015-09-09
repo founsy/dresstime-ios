@@ -35,6 +35,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "DressTime.OutfitsViewController.tableView (DressTime.OutfitsViewController)(ObjectiveC.UITableView, cellForRowAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UITableViewCell:OutfitsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "println(self.currentOutfits)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DressTime.HomeViewController.collectionView (DressTime.HomeViewController)(ObjectiveC.UICollectionView, numberOfItemsInSection : Swift.Int) -&gt; Swift.Int:HomeViewController.swift">
          <PersistentStrings>
             <PersistentString

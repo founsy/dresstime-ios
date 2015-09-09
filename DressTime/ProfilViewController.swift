@@ -128,10 +128,10 @@ class ProfilViewController: UIViewController {
     }
     
     private func addProfilPicture(){
-        var buttonContainer = UIView(frame: CGRectMake(0, 5, 60, 60))
+        var buttonContainer = UIView(frame: CGRectMake(0, 5, 40, 40))
         buttonContainer.backgroundColor = UIColor.clearColor()
         var button =  UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-        button.frame = CGRectMake(0,0,60,60)
+        button.frame = CGRectMake(0,0,40,40)
         button.setBackgroundImage(UIImage(named: "profile_img"), forState: UIControlState.Normal)
         button.addTarget(self, action: "settingProfilTap", forControlEvents: UIControlEvents.TouchUpInside)
         buttonContainer.addSubview(button)

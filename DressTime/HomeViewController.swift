@@ -44,9 +44,11 @@ class HomeViewController: UIViewController  {
         
         bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         bar.shadowImage = UIImage()
-        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3)
         bar.tintColor = UIColor.whiteColor()
         bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
+        UIApplication.sharedApplication().statusBarHidden = true
         
         addProfilButtonToNavBar()
         
@@ -87,7 +89,7 @@ class HomeViewController: UIViewController  {
     
     func addProfilButtonToNavBar(){
     
-        var regularButton = UIButton(frame: CGRectMake(0, 0, 50.0, 50.0))
+        var regularButton = UIButton(frame: CGRectMake(0, 0, 40.0, 40.0))
         var historyButtonImage = UIImage(named: "profile_img")
         regularButton.setBackgroundImage(historyButtonImage, forState: UIControlState.Normal)
         
@@ -125,6 +127,13 @@ class HomeViewController: UIViewController  {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "showOutfits"){
+            let targetVC = segue.destinationViewController as! OutfitsViewController
+            targetVC.styleOutfits = self.styleData[self.currentStyle]
+        }
     }
 }
 
@@ -364,6 +373,9 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
         return UICollectionViewCell()
     }
     
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("showOutfits", sender: self)
+    }
 
 }
 
