@@ -134,7 +134,7 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
                 if let image = UIImage(data: clothe.clothe_image) {
                     NSLog("\(image.size.width) - \(image.size.height)")
                 
-                    cell.clotheImageView.image = image.imageResize(CGSizeMake(360.0, 480.0))
+                    cell.clotheImageView.image = image.imageResize(CGSizeMake(380.0, 480.0))
                 }
                 cell.layer.shadowOffset = CGSizeMake(3, 6);
                 cell.layer.shadowColor = UIColor.blackColor().CGColor

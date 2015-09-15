@@ -10,7 +10,10 @@ import Foundation
 import UIKit
 
 class OutfitElemsCollectionViewCell: UICollectionViewCell {
-    func setClothe(clothe: Clothe){
+    var currentStyle: String?
+    
+    func setClothe(clothe: Clothe, style: String){
+        self.currentStyle = style
     }
     
     func addShadow(view: UIView){
@@ -25,21 +28,22 @@ class Outfit2ElemsCollectionViewCell: OutfitElemsCollectionViewCell {
 
     @IBOutlet weak var topImageView: UIImageView!
     @IBOutlet weak var pantsImageView: UIImageView!
+    @IBOutlet weak var styleTitle: UILabel!
     
-    override func setClothe(clothe: Clothe){
+    override func setClothe(clothe: Clothe, style: String){
+        super.setClothe(clothe, style: style)
         if let image = UIImage(data: clothe.clothe_image) {
             if (clothe.clothe_type == "top"){
                 topImageView.image = image.imageResize(CGSizeMake(360.0, 480.0))
                 self.topImageView.layer.cornerRadius = 5.0
                 self.topImageView.clipsToBounds = true
-                //addShadow(self.topImageView)
             } else if (clothe.clothe_type == "pants"){
                 pantsImageView.image = image.imageResize(CGSizeMake(360.0, 480.0))
                 self.pantsImageView.layer.cornerRadius = 5.0
                 self.pantsImageView.clipsToBounds = true
-                //addShadow(self.pantsImageView)
             }
         }
+        styleTitle.text = style.uppercaseString
     }
     
     

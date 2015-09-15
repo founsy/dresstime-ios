@@ -6,52 +6,68 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="udy-7c-kFa" customClass="Outfit3ElemsCollectionViewCell" customModule="DressTime" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="320"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" id="udy-7c-kFa" customClass="Outfit3ElemsCollectionViewCell" customModule="DressTime" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="280"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="200" height="320"/>
+                <rect key="frame" x="0.0" y="0.0" width="150" height="280"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YA0-f4-1YK" userLabel="Top">
-                        <rect key="frame" x="0.0" y="120" width="200" height="100"/>
+                        <rect key="frame" x="0.0" y="129" width="150" height="76"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="100" id="fwL-zb-Plo"/>
+                            <constraint firstAttribute="height" constant="76" id="fwL-zb-Plo"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FWK-q6-gB2" userLabel="Pants">
-                        <rect key="frame" x="0.0" y="220" width="200" height="100"/>
+                        <rect key="frame" x="0.0" y="205" width="150" height="75"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="100" id="9LV-zm-PPG"/>
+                            <constraint firstAttribute="height" constant="75" id="9LV-zm-PPG"/>
                         </constraints>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="koq-4A-7c8">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="24"/>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ujV-c1-v1B" userLabel="Maille">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="120"/>
+                        <rect key="frame" x="0.0" y="29" width="150" height="100"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="120" id="piq-cq-Caq"/>
+                            <constraint firstAttribute="height" constant="100" id="piq-cq-Caq"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
+                <constraint firstItem="koq-4A-7c8" firstAttribute="top" secondItem="udy-7c-kFa" secondAttribute="top" id="1O7-1o-CmL"/>
                 <constraint firstAttribute="trailing" secondItem="ujV-c1-v1B" secondAttribute="trailing" id="7M2-HH-Tkj"/>
                 <constraint firstItem="YA0-f4-1YK" firstAttribute="leading" secondItem="udy-7c-kFa" secondAttribute="leading" id="Awo-ni-tU1"/>
+                <constraint firstAttribute="trailing" secondItem="koq-4A-7c8" secondAttribute="trailing" id="HC8-HX-Z0Y"/>
                 <constraint firstItem="FWK-q6-gB2" firstAttribute="leading" secondItem="udy-7c-kFa" secondAttribute="leading" id="NRi-UK-VLA"/>
                 <constraint firstAttribute="bottom" secondItem="FWK-q6-gB2" secondAttribute="bottom" id="Qaa-pp-9AT"/>
+                <constraint firstItem="ujV-c1-v1B" firstAttribute="top" secondItem="koq-4A-7c8" secondAttribute="bottom" constant="5" id="Qvn-zq-kvq"/>
+                <constraint firstItem="koq-4A-7c8" firstAttribute="leading" secondItem="udy-7c-kFa" secondAttribute="leading" id="X77-ak-L1X"/>
                 <constraint firstItem="ujV-c1-v1B" firstAttribute="top" secondItem="udy-7c-kFa" secondAttribute="top" id="Y1g-8X-32I"/>
                 <constraint firstItem="FWK-q6-gB2" firstAttribute="top" secondItem="YA0-f4-1YK" secondAttribute="bottom" id="YuG-z3-H3j"/>
                 <constraint firstAttribute="trailing" secondItem="YA0-f4-1YK" secondAttribute="trailing" id="ahW-Nr-tYB"/>
                 <constraint firstItem="ujV-c1-v1B" firstAttribute="leading" secondItem="udy-7c-kFa" secondAttribute="leading" id="uPr-PL-Hkx"/>
                 <constraint firstAttribute="trailing" secondItem="FWK-q6-gB2" secondAttribute="trailing" id="xas-MD-xff"/>
             </constraints>
-            <size key="customSize" width="276" height="318"/>
+            <size key="customSize" width="276" height="301"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="Y1g-8X-32I"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="mailleImageView" destination="ujV-c1-v1B" id="nQC-cE-tfy"/>
                 <outlet property="pantsImageView" destination="FWK-q6-gB2" id="jb1-v8-ubj"/>
+                <outlet property="styleTitle" destination="koq-4A-7c8" id="tqz-nA-6LZ"/>
                 <outlet property="topImageView" destination="YA0-f4-1YK" id="oRb-zB-Xw3"/>
             </connections>
-            <point key="canvasLocation" x="521" y="399"/>
+            <point key="canvasLocation" x="521" y="378.5"/>
         </collectionViewCell>
     </objects>
 </document>

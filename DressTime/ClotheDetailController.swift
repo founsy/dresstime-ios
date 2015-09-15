@@ -19,8 +19,8 @@ class ClotheDetailController: UIViewController {
     var currentClothe: Clothe!
     
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var mainColor: UIView!
-    @IBOutlet weak var colorText: UITextView!
+    //@IBOutlet weak var mainColor: UIView!
+    //@IBOutlet weak var colorText: UITextView!
     
     @IBAction func onClickDelete(sender: AnyObject) {
         
@@ -45,10 +45,10 @@ class ClotheDetailController: UIViewController {
         super.viewDidLoad()
         imageView.image = UIImage(data: currentClothe.clothe_image)
         var color = colorWithHexString(currentClothe.clothe_colors)
-        mainColor.backgroundColor = color
+        //mainColor.backgroundColor = color
         let hexTranslator = HexColorToName()
         var name = hexTranslator.name(color)
-        colorText.text = currentClothe.clothe_colors + " " + (name[1] as! String)
+        //colorText.text = currentClothe.clothe_colors + " " + (name[1] as! String)
     }
     
     override func didReceiveMemoryWarning() {

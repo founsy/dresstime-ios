@@ -15,8 +15,9 @@ class Outfit3ElemsCollectionViewCell: OutfitElemsCollectionViewCell {
     @IBOutlet weak var mailleImageView: UIImageView!
     @IBOutlet weak var topImageView: UIImageView!
     @IBOutlet weak var pantsImageView: UIImageView!
+    @IBOutlet weak var styleTitle: UILabel!
     
-    override func setClothe(clothe: Clothe){
+    override func setClothe(clothe: Clothe, style: String){
         if let image = UIImage(data: clothe.clothe_image) {
             if (clothe.clothe_type == "maille"){
                 mailleImageView.image = image.imageResize(CGSizeMake(360.0, 480.0))
@@ -36,5 +37,6 @@ class Outfit3ElemsCollectionViewCell: OutfitElemsCollectionViewCell {
                 
             }
         }
+        styleTitle.text = style.uppercaseString
     }
 }

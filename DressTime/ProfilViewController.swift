@@ -116,28 +116,28 @@ class ProfilViewController: UIViewController {
         relaxButton.layer.cornerRadius = 17.5
         relaxButton.layer.borderColor = UIColor.whiteColor().CGColor
         relaxButton.layer.borderWidth = 1.0
-        
-        addProfilPicture()
-        
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+    private func clearNavBar(){
+        let bar:UINavigationBar! =  self.navigationController?.navigationBar
+        
+        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        bar.shadowImage = UIImage()
+        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+        bar.tintColor = UIColor.whiteColor()
+        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.clearColor()]
+    }
+    
+    override func viewWillAppear(animated: Bool){
+        super.viewWillAppear(animated)
         initData()
         resetLongPressed()
+        clearNavBar()
     }
-    
-    private func addProfilPicture(){
-        var buttonContainer = UIView(frame: CGRectMake(0, 5, 40, 40))
-        buttonContainer.backgroundColor = UIColor.clearColor()
-        var button =  UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-        button.frame = CGRectMake(0,0,40,40)
-        button.setBackgroundImage(UIImage(named: "profile_img"), forState: UIControlState.Normal)
-        button.addTarget(self, action: "settingProfilTap", forControlEvents: UIControlEvents.TouchUpInside)
-        buttonContainer.addSubview(button)
-        self.navigationItem.titleView = button
-        
-        
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        //initData()
+        //resetLongPressed()
     }
     
     func settingProfilTap(){

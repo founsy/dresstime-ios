@@ -19,6 +19,7 @@ class DetailTypeViewController: UIViewController {
     var typeClothe: String?
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var titleNav: UINavigationItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,8 @@ class DetailTypeViewController: UIViewController {
         
         tableView!.delegate = self
         tableView!.dataSource = self
-       
+        titleNav.title = "Your \(typeClothe!.uppercaseString)!"
+        blackNavBar()
     }
     
     func initData(){
@@ -39,6 +41,16 @@ class DetailTypeViewController: UIViewController {
         for (var i=0; i < self.clothesList!.count; i++){
             arrayForBool.append(false)
         }
+    }
+    
+    private func blackNavBar(){
+        let bar:UINavigationBar! =  self.navigationController?.navigationBar
+        
+        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        bar.shadowImage = UIImage()
+        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        bar.tintColor = UIColor.whiteColor()
+        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
     }
 }
 
@@ -84,6 +96,11 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
         
         self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+        
+      /*  var detail = self.storyboard!.instantiateViewControllerWithIdentifier("ClotheDetail") as! ClotheDetailController
+        detail.currentClothe = self.clothesList![indexPath.row]
+        self.presentViewController(detail, animated: true, completion: nil) */
+        
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -126,7 +143,7 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
             if let image = UIImage(data: clothe.clothe_image) {
                 NSLog("\(image.size.width) - \(image.size.height)")
             
-                cell.clotheImageView.image = image.imageResize(CGSizeMake(360.0, 480.0))
+                cell.clotheImageView.image = image.imageResize(CGSizeMake(380.0, 480.0))
             }
             cell.layer.shadowOffset = CGSizeMake(3, 6);
             cell.layer.shadowColor = UIColor.blackColor().CGColor

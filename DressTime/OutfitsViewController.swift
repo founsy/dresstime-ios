@@ -63,7 +63,7 @@ class OutfitsViewController : UIViewController {
         pageController.dataSource = self
         pageController.delegate = self
         
-        self.view.layoutIfNeeded()
+        //self.view.layoutIfNeeded()
         pageController.view.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
         
         if !controllers.isEmpty {

@@ -35,15 +35,6 @@ class TypeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightGrayColor()
-        let bar:UINavigationBar! =  self.navigationController?.navigationBar
-        
-        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        bar.shadowImage = UIImage()
-        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
-        bar.tintColor = UIColor.whiteColor()
-        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.blackColor()]
-        self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-        
         tableView.registerNib(UINib(nibName: "TypeTableCell", bundle:nil), forCellReuseIdentifier: self.cellTypeIdentifier)
         
         
@@ -59,6 +50,18 @@ class TypeViewController: UIViewController {
                 }
             }
         }
+        whiteNavBar()
+    }
+    
+    private func whiteNavBar(){
+        let bar:UINavigationBar! =  self.navigationController?.navigationBar
+        
+        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        bar.shadowImage = UIImage()
+        bar.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 1.0)
+        bar.tintColor = UIColor.blackColor()
+        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.blackColor()]
+        self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
     }
 
     @IBAction func onClose(sender: AnyObject) {
@@ -134,7 +137,7 @@ extension TypeViewController: UITableViewDataSource {
     }
    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        var height = self.tableView.bounds.height - 60.0
+        var height = self.tableView.bounds.height - self.navigationController!.navigationBar.frame.height
         
         if (arrayForBool.objectAtIndex(indexPath.row).boolValue as Bool){
             return calculateCollectionViewHeight()

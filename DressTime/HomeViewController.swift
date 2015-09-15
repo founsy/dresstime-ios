@@ -28,50 +28,19 @@ class HomeViewController: UIViewController  {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var iconLabel: UILabel!
     @IBOutlet weak var outfitCollectionView: UICollectionView!
-    @IBOutlet weak var containerOutfit: UIVisualEffectView!
     //@IBOutlet weak var filterView: UIView!
     @IBOutlet var mainView: UIView!
     
-    private var filterView: FilterView!
+    //private var filterView: FilterView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view, typically from a nib.
-        
-        // TODO: Cannot find how to make the background invisible !!!!
-        let bar:UINavigationBar! =  self.navigationController?.navigationBar
-        
-        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        bar.shadowImage = UIImage()
-        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.3)
-        bar.tintColor = UIColor.whiteColor()
-        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        
-        UIApplication.sharedApplication().statusBarHidden = true
-        
-        addProfilButtonToNavBar()
-        
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
-        
-        var contentViewXib: NSArray = NSBundle.mainBundle().loadNibNamed("FilterView", owner: nil, options: nil)
-        self.filterView = contentViewXib[0] as! FilterView
-        
-        self.filterView.initialize()
-        self.filterView.frame = self.containerOutfit.frame
-        
-        self.swipeGestureRecognizer = UISwipeGestureRecognizer(target: self, action: "hideFilterView")
-        self.swipeGestureRecognizer.direction = UISwipeGestureRecognizerDirection.Down
-        var upSwipeGesture = UISwipeGestureRecognizer(target:self, action:"showFilterView")
-        upSwipeGesture.direction = UISwipeGestureRecognizerDirection.Up
-        
-        self.filterView.addGestureRecognizer(upSwipeGesture)
-        self.filterView.addGestureRecognizer(self.swipeGestureRecognizer)
-        self.filterView.delegate = self
-        self.view.addSubview(self.filterView)
         
         self.outfitCollectionView.registerNib(UINib(nibName: "Outfit3ElemsCell", bundle:nil), forCellWithReuseIdentifier: self.cell3Identifier)
         self.outfitCollectionView.registerNib(UINib(nibName: "Outfit2ElemsCell", bundle:nil), forCellWithReuseIdentifier: self.cell2Identifier)
@@ -79,12 +48,26 @@ class HomeViewController: UIViewController  {
         self.outfitCollectionView.delegate = self
     }
     
+    private func blackNavBar(){
+        let bar:UINavigationBar! =  self.navigationController?.navigationBar
+        
+        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        bar.shadowImage = UIImage()
+        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+        bar.tintColor = UIColor.whiteColor()
+        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
+        addProfilButtonToNavBar()
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        hideFilterView()
-        self.filterView.filterViewContainer.roundCorners(UIRectCorner.TopLeft | UIRectCorner.TopRight, radius: 10.0)
-        self.filterView.drawIconViewCircle()
-        //loadTodayOutfits()
+        blackNavBar()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        blackNavBar()
     }
     
     func addProfilButtonToNavBar(){
@@ -113,17 +96,6 @@ class HomeViewController: UIViewController  {
 
     }
     
-    @IBAction func onGetDressedTouch(sender: AnyObject) {
-        let titleData = self.styleData[self.currentStyle]
-        DressTimeService.getOutfitsByStyle(SharedData.sharedInstance.currentUserId!, style: titleData, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.outfitsCollection = msg
-                self.outfitCollectionView.reloadData()
-                self.hideFilterView()
-            })
-        })
-    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -284,60 +256,6 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
 }
 
-extension HomeViewController: UIGestureRecognizerDelegate {
-    
-    func showFilterView(){
-        if (self.isHide){
-            self.isHide = false
-            self.mainView.layoutIfNeeded() //// Ensures that all pending layout operations have been complete
-            
-            UIView.animateWithDuration(0.5, delay: 0,
-                options: .CurveEaseOut, animations: {
-                    self.filterView.frame.origin.y = self.containerOutfit.frame.origin.y
-                    self.filterView.showConstrainte(self.containerOutfit)
-                    self.filterView.alpha = 1.0
-                    self.view.layoutIfNeeded()
-            }, completion: nil)
-        }
-    }
-    
-    func hideFilterView(){
-        if (!self.isHide){
-            self.mainView.layoutIfNeeded() //// Ensures that all pending layout operations have been complete
-            self.isHide = true
-            UIView.animateWithDuration(0.5, delay: 0,
-                options: .CurveEaseOut, animations: {
-                    self.filterView.frame.origin.y = self.mainView.frame.height - 40.0
-                    self.filterView.hideContrainte(self.containerOutfit)
-                    self.filterView.alpha = 0.5
-                    self.view.layoutIfNeeded()
-            }, completion: nil)
-        }
-    }
-}
-
-extension HomeViewController: FilterViewDelegate {
-    func onMoreFilterClick() {
-        if (self.isHide){
-            self.showFilterView()
-        } else {
-            self.hideFilterView()
-        }
-    }
-    
-    func onGetDressedClothe(type: Int) {
-        let titleData = self.styleData[type]
-        DressTimeService.getOutfitsByStyle(SharedData.sharedInstance.currentUserId!, style: titleData, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.outfitsCollection = msg
-                self.outfitCollectionView.reloadData()
-                self.hideFilterView()
-            })
-        })
-    }
-    
-}
-
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let collection = self.outfitsCollection {
@@ -365,7 +283,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
             }
             for (var i = 0; i < outfit.count; i++){
                 if let clothe = dal.fetch(outfit[i]["clothe_id"] as! String) {
-                    cell.setClothe(clothe)
+                    cell.setClothe(clothe, style: outfitElem["style"] as! String)
                 }
             }
             return cell

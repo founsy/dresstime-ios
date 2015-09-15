@@ -65,6 +65,7 @@ class NewCameraViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        whiteNavBar()
         drawClearRectArea()
         self.captureManager = CameraSessionManager()
         self.captureManager!.addVideoPreviewLayer()
@@ -93,6 +94,17 @@ class NewCameraViewController : UIViewController {
         self.arrayUIView.append(self.color1View)
         self.arrayUIView.append(self.color2View)
         self.arrayUIView.append(self.color3View)
+    }
+    
+    private func whiteNavBar(){
+        let bar:UINavigationBar! =  self.navigationController?.navigationBar
+        
+        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        bar.shadowImage = UIImage()
+        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+        bar.tintColor = UIColor.blackColor()
+        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.blackColor()]
+        self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
     }
     
     override func viewDidAppear(animated: Bool) {

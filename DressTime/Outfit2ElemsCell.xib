@@ -6,39 +6,57 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="a3n-h2-1bC" customClass="Outfit2ElemsCollectionViewCell" customModule="DressTime" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="200" height="320"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" id="a3n-h2-1bC" customClass="Outfit2ElemsCollectionViewCell" customModule="DressTime" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="280"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="200" height="320"/>
+                <rect key="frame" x="0.0" y="0.0" width="150" height="280"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="07A-u1-xmb" userLabel="Top">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="180"/>
+                        <rect key="frame" x="0.0" y="29" width="150" height="150"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="180" id="usg-cZ-Qtc"/>
+                            <constraint firstAttribute="height" constant="150" id="usg-cZ-Qtc"/>
                         </constraints>
                     </imageView>
                     <imageView opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XFk-qz-EVH" userLabel="Pants">
-                        <rect key="frame" x="0.0" y="180" width="200" height="140"/>
+                        <rect key="frame" x="0.0" y="179" width="150" height="101"/>
                     </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQg-Pi-Rwl">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="24"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="XFk-qz-EVH" secondAttribute="bottom" id="3yC-Zi-h8v"/>
+                <constraint firstItem="sQg-Pi-Rwl" firstAttribute="leading" secondItem="a3n-h2-1bC" secondAttribute="leading" id="5KH-Kb-zC6"/>
                 <constraint firstAttribute="trailing" secondItem="07A-u1-xmb" secondAttribute="trailing" id="Ago-oc-NhS"/>
+                <constraint firstItem="sQg-Pi-Rwl" firstAttribute="top" secondItem="a3n-h2-1bC" secondAttribute="top" id="Fk9-4F-ebz"/>
                 <constraint firstItem="XFk-qz-EVH" firstAttribute="top" secondItem="07A-u1-xmb" secondAttribute="bottom" id="dsd-9e-RQR"/>
+                <constraint firstAttribute="trailing" secondItem="sQg-Pi-Rwl" secondAttribute="trailing" id="g6U-b3-e6q"/>
+                <constraint firstItem="07A-u1-xmb" firstAttribute="top" secondItem="sQg-Pi-Rwl" secondAttribute="bottom" constant="5" id="o4R-k4-x0j"/>
                 <constraint firstItem="XFk-qz-EVH" firstAttribute="leading" secondItem="a3n-h2-1bC" secondAttribute="leading" id="v9Z-J4-b8A"/>
                 <constraint firstItem="07A-u1-xmb" firstAttribute="top" secondItem="a3n-h2-1bC" secondAttribute="top" id="xjx-Ev-HmW"/>
                 <constraint firstItem="07A-u1-xmb" firstAttribute="leading" secondItem="a3n-h2-1bC" secondAttribute="leading" id="ytA-4v-3LC"/>
                 <constraint firstAttribute="trailing" secondItem="XFk-qz-EVH" secondAttribute="trailing" id="yyX-f0-pZ0"/>
             </constraints>
+            <size key="customSize" width="200" height="359"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="xjx-Ev-HmW"/>
+                </mask>
+            </variation>
             <connections>
                 <outlet property="pantsImageView" destination="XFk-qz-EVH" id="nzS-ci-GIL"/>
+                <outlet property="styleTitle" destination="sQg-Pi-Rwl" id="siV-ho-CzK"/>
                 <outlet property="topImageView" destination="07A-u1-xmb" id="1qF-br-gfl"/>
             </connections>
-            <point key="canvasLocation" x="487" y="307"/>
+            <point key="canvasLocation" x="487" y="287"/>
         </collectionViewCell>
     </objects>
 </document>
