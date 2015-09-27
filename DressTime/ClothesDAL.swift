@@ -15,50 +15,58 @@ class ClothesDAL {
     
     init(){
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        self.managedObjectContext = appDelegate.managedObjectContext!
+        self.managedObjectContext = appDelegate.managedObjectContext
     }
     
-    func fetch(#type: String) -> [Clothe]{
+    func fetch(type type: String) -> [Clothe]{
         var clothes  = [Clothe]()
         
-        var fetchRequest = NSFetchRequest(entityName: "Clothe")
+        let fetchRequest = NSFetchRequest(entityName: "Clothe")
         let predicate = NSPredicate(format: "clothe_type = %@ AND profilRel.userid = %@", type, SharedData.sharedInstance.currentUserId!)
         
         // Set the predicate on the fetch request
         fetchRequest.predicate = predicate
         
-        clothes = self.managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as! [Clothe]
+        do {
+            clothes = try self.managedObjectContext.executeFetchRequest(fetchRequest) as! [Clothe]
+        } catch let error as NSError {
+            print(error)
+        }
         
         
         return clothes
     }
     
     func fetch(clotheId: String) -> Clothe? {
-        var fetchRequest = NSFetchRequest(entityName: "Clothe")
+        let fetchRequest = NSFetchRequest(entityName: "Clothe")
         let predicate = NSPredicate(format: "clothe_id = %@", clotheId)
         
         // Set the predicate on the fetch request
         fetchRequest.predicate = predicate
-        
-        if let fetchResults = self.managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Clothe] {
-            if (fetchResults.count > 0){
-                return fetchResults[0]
-            } else {
-                return nil
+        do {
+            if let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Clothe] {
+                if (fetchResults.count > 0){
+                    return fetchResults[0]
+                } else {
+                    return nil
+                }
             }
+        } catch let error as NSError {
+            print(error)
         }
         return nil
     }
     
     func fetch() -> [Clothe]{
-        
-        var fetchedResultsController: NSFetchedResultsController?
-        var fetchRequest = NSFetchRequest(entityName: "Clothe")
+        let fetchRequest = NSFetchRequest(entityName: "Clothe")
         let predicate = NSPredicate(format: "profilRel.userid = %@", SharedData.sharedInstance.currentUserId!)
         fetchRequest.predicate = predicate
-        
-        if let fetchResults = self.managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Clothe] {
-            return fetchResults
+        do {
+            if let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Clothe] {
+                return fetchResults
+            }
+        } catch let error as NSError {
+            print(error)
         }
         return [Clothe]()
     }
@@ -66,15 +74,13 @@ class ClothesDAL {
     func delete(clothe: Clothe) {
         // Delete it from the managedObjectContext
         self.managedObjectContext.deleteObject(clothe)
-        var error: NSError?
-        managedObjectContext.save(&error)
-        
-        if let err = error {
-            NSLog(err.localizedFailureReason!);
-        } else {
-            NSLog("Clothe Deleted");
+    
+        do {
+            try managedObjectContext.save()
+             NSLog("Clothe Deleted");
+        } catch let error as NSError {
+            print(error)
         }
-
     }
     
     
@@ -97,33 +103,31 @@ class ClothesDAL {
         clothe.clothe_colors = colors
         clothe.profilRel = profilDal.fetch(SharedData.sharedInstance.currentUserId!)!
         
-        var error: NSError?
-        managedObjectContext.save(&error)
-        
-        if let err = error {
-            NSLog(err.localizedFailureReason!);
-        } else {
+        do {
+            try managedObjectContext.save()
             NSLog("Contact Saved");
+        } catch let error as NSError {
+            NSLog(error.localizedFailureReason!);
         }
     }
     
     func updateClotheId(){
-        var fetchedResultsController: NSFetchedResultsController?
-        var fetchRequest = NSFetchRequest(entityName: "Clothe")
-        if let fetchResults = self.managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Clothe] {
-            for clothe in fetchResults {
-                clothe.clothe_id = NSUUID().UUIDString
+        let fetchRequest = NSFetchRequest(entityName: "Clothe")
+        do {
+            if let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Clothe] {
+                for clothe in fetchResults {
+                    clothe.clothe_id = NSUUID().UUIDString
+                }
             }
+        } catch let error as NSError {
+            print(error)
         }
-        var error: NSError?
-        managedObjectContext.save(&error)
-        
-        if let err = error {
-            NSLog(err.localizedFailureReason!);
-        } else {
-            NSLog("Contact Saved");
+        do {
+            try managedObjectContext.save()
+              NSLog("Contact Saved");
+        } catch let error as NSError {
+             NSLog(error.localizedFailureReason!);
         }
-
     }
 
 }

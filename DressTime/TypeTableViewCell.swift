@@ -18,7 +18,7 @@ class IndexedCollectionView: UICollectionView {
     }
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
     }
 }
 
@@ -48,7 +48,7 @@ class TypeTableViewCell: UITableViewCell {
     }
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         initialize()
     }
     
@@ -59,7 +59,7 @@ class TypeTableViewCell: UITableViewCell {
     }
     
     func initialize(){
-        var collectionLayout = UICollectionViewFlowLayout()
+        let collectionLayout = UICollectionViewFlowLayout()
         collectionLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
         collectionLayout.itemSize = CGSizeMake(self.collectionCellWidth, 90);
         collectionLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
@@ -71,7 +71,7 @@ class TypeTableViewCell: UITableViewCell {
         //collectionView.dataSource = self
         //collectionView.delegate = self
         
-        var customCell = UINib(nibName: "SubTypeCell", bundle: nil)
+        let customCell = UINib(nibName: "SubTypeCell", bundle: nil)
         self.collectionView.registerNib(customCell, forCellWithReuseIdentifier: kCellReuse)
         self.contentView.addSubview(self.collectionView)
         self.collectionView.hidden = true
@@ -98,9 +98,9 @@ class TypeTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        var collectionViewWidth = CGFloat(self.collectionCellWidth*2)
+        let collectionViewWidth = CGFloat(self.collectionCellWidth*2)
         let frame = self.contentView.bounds
-        var margin = CGFloat((frame.width - collectionViewWidth)/2)
+        let margin = CGFloat((frame.width - collectionViewWidth)/2)
         
         self.collectionView.frame = CGRectMake(margin, 10, CGFloat(self.collectionCellWidth*2), calculateCollectionViewHeight())
     }

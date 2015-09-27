@@ -14,8 +14,6 @@ class LoginService {
     class func loginMethod(params : [String: AnyObject], postCompleted : (succeeded: Bool, msg: [String: AnyObject]) -> ()){
         JSONService.post(params, url: "http://api.drez.io/oauth/token", postCompleted: { (succeeded: Bool, result: [String: AnyObject]) -> () in
              if (succeeded){
-                var error : NSError?
-                
                 if (result["error"] != nil){
                     postCompleted(succeeded: false, msg: result)
                 } else {
@@ -33,8 +31,6 @@ class LoginService {
     class func logoutMethod(params : [String: AnyObject], getCompleted : (succeeded: Bool, msg: [String: AnyObject]) -> ()){
         JSONService.get("http://api.drez.io/auth/logout", params: params, getCompleted: { (succeeded: Bool, result: [String: AnyObject]) -> () in
             if (succeeded){
-                var error : NSError?
-                
                 if (result["error"] != nil){
                     getCompleted(succeeded: false, msg: result)
                 } else {
@@ -61,8 +57,6 @@ class LoginService {
        
             JSONService.post(jsonObject, url: "http://api.drez.io/oauth/token", postCompleted: { (succeeded: Bool, result: [String: AnyObject]) -> () in
                 if (succeeded){
-                    var error : NSError?
-                    
                     if (result["error"] != nil){
                         postCompleted(succeeded: false, msg: result)
                     } else {
@@ -73,14 +67,7 @@ class LoginService {
                     postCompleted(succeeded: false, msg: ["error" : "Refresh Token expired"])
                 }
             })
-        }
-       /* var post_data = querystring.stringify({
-            client_id : CLIENT_ID,
-            client_secret : CLIENT_SECRET,
-            grant_type : 'refresh_token',
-            refresh_token : req.user.refreshToken
-        });*/
-        
+        }        
     }
     
 }

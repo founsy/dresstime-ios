@@ -17,13 +17,13 @@ extension UIColor {
             cString = (cString as NSString).substringFromIndex(1)
         }
         
-        if (count(cString) != 6) {
+        if (cString.characters.count != 6) {
             return UIColor.grayColor()
         }
         
-        var rString = (cString as NSString).substringToIndex(2)
-        var gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
-        var bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
+        let rString = (cString as NSString).substringToIndex(2)
+        let gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
+        let bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
         
         var r:CUnsignedInt = 0, g:CUnsignedInt = 0, b:CUnsignedInt = 0;
         NSScanner(string: rString).scanHexInt(&r)
@@ -62,14 +62,14 @@ class HexColorToName {
     
     func name(uiColor: UIColor) -> [AnyObject]{
         
-        var color = hexStringFromColor(uiColor).uppercaseString
+        let color = hexStringFromColor(uiColor).uppercaseString
         var rgb = self.rgb(uiColor);
-        var r = rgb[0], g = rgb[1], b = rgb[2];
+        let r = rgb[0], g = rgb[1], b = rgb[2];
         var hsl = self.hsl(uiColor);
         
-        var h = hsl[0]
-        var s = hsl[1]
-        var l = hsl[2];
+        let h = hsl[0]
+        let s = hsl[1]
+        let l = hsl[2];
         var ndf1:Double = 0
         var ndf2:Double = 0
         var ndf = 0;
@@ -77,17 +77,17 @@ class HexColorToName {
         var df = -1;
     
         for(var i = 0; i < self.colorName.count; i++){
-            var colorName = "#" + (self.colorName[i][0] as! String)
+            let colorName = "#" + (self.colorName[i][0] as! String)
             if(color == colorName) {
                 return [colorName , self.colorName[i][1], true];
             }
     
-            var r1:Double = Double(r - (self.colorName[i][2] as! Int))
-            var g1:Double = Double(g - (self.colorName[i][3]  as! Int))
-            var b1:Double = Double(b - (self.colorName[i][4] as! Int))
-            var h1:Double = Double(h - (self.colorName[i][5] as! Int))
-            var s1:Double = Double(s - (self.colorName[i][6] as! Int))
-            var l1:Double = Double(l - (self.colorName[i][7] as! Int))
+            let r1:Double = Double(r - (self.colorName[i][2] as! Int))
+            let g1:Double = Double(g - (self.colorName[i][3]  as! Int))
+            let b1:Double = Double(b - (self.colorName[i][4] as! Int))
+            let h1:Double = Double(h - (self.colorName[i][5] as! Int))
+            let s1:Double = Double(s - (self.colorName[i][6] as! Int))
+            let l1:Double = Double(l - (self.colorName[i][7] as! Int))
             
             ndf1 = pow(r1, 2) + pow(g1, 2) + pow(b1, 2);
             ndf2 = pow(h1, 2) + pow(s1, 2) + pow(l1 , 2);
@@ -113,7 +113,7 @@ class HexColorToName {
         var brightness: CGFloat = 0;
         var alpha: CGFloat = 0;
         
-        var success = color.getHue(&hue,saturation:&saturation,brightness:&brightness,alpha:&alpha);
+        _ = color.getHue(&hue,saturation:&saturation,brightness:&brightness,alpha:&alpha);
         return [Int(hue * 255), Int(saturation * 255), Int(brightness * 255)];
     }
 

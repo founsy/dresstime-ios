@@ -72,13 +72,13 @@ class HomeViewController: UIViewController  {
     
     func addProfilButtonToNavBar(){
     
-        var regularButton = UIButton(frame: CGRectMake(0, 0, 40.0, 40.0))
-        var historyButtonImage = UIImage(named: "profile_img")
+        let regularButton = UIButton(frame: CGRectMake(0, 0, 40.0, 40.0))
+        let historyButtonImage = UIImage(named: "profile_img")
         regularButton.setBackgroundImage(historyButtonImage, forState: UIControlState.Normal)
         
         regularButton.setTitle("", forState: UIControlState.Normal)
         regularButton.addTarget(self, action: "profilButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
-        var navBarButtonItem = UIBarButtonItem(customView: regularButton)
+        let navBarButtonItem = UIBarButtonItem(customView: regularButton)
         self.navigationItem.leftBarButtonItem = navBarButtonItem
     }
     
@@ -111,20 +111,23 @@ class HomeViewController: UIViewController  {
 
 extension HomeViewController: CLLocationManagerDelegate {
     /***/
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        self.currentLocation = locations[locations.count-1] as! CLLocation
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.currentLocation = locations[locations.count-1]
         locationManager.stopUpdatingLocation()
-        WeatherService.getWeather(self.currentLocation, weatherCompleted: { (succeeded: Bool, msg: [String: AnyObject]) -> () in
-            if let query:AnyObject = msg["query"] {
-                if let results:AnyObject = query["results"] {
-                    if let channel:AnyObject = results["channel"] {
-                        if let item:AnyObject = channel["item"]{
-                            if let condition: AnyObject = item["condition"]{
-                                let location:AnyObject = channel["location"] as AnyObject!
-                                let city = location["city"] as! String
-                                let forecast = item["forecast"] as! [AnyObject]
-                                let today: AnyObject = forecast[0] as AnyObject
-                                self.updateWeather((condition["code"] as! String).toInt()!, high:  today["high"] as! String, low:  today["low"] as! String, city: city)
+        WeatherService.getWeather(self.currentLocation, weatherCompleted: { (succeeded: Bool, msg: NSDictionary) -> () in
+            if let query = msg["query"] as? NSDictionary{
+                if let results = query["results"] as? NSDictionary{
+                    if let channel = results["channel"] as? NSDictionary{
+                        if let item = channel["item"] as? NSDictionary{
+                            if let condition = item["condition"] as? NSDictionary{
+                                if let location = channel["location"] as? NSDictionary {
+                                    let city = location["city"] as? String
+                                    if let forecast = item["forecast"] as? NSArray {
+                                        if let today = forecast[0] as? NSDictionary {
+                                            self.updateWeather(Int(condition["code"] as! String)!, high:  today["high"] as! String, low:  today["low"] as! String, city: city!)
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -251,15 +254,15 @@ extension HomeViewController: CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        println(error)
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print(error)
     }
 }
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let collection = self.outfitsCollection {
-            if let error = self.outfitsCollection[0]["error"] {
+        if let _ = self.outfitsCollection {
+            if let _ = self.outfitsCollection[0]["error"] {
                 return 0
             } else {
                 return self.outfitsCollection.count
@@ -282,8 +285,10 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
                 
             }
             for (var i = 0; i < outfit.count; i++){
-                if let clothe = dal.fetch(outfit[i]["clothe_id"] as! String) {
-                    cell.setClothe(clothe, style: outfitElem["style"] as! String)
+                if let outfitElement = outfit[i] as? NSDictionary {
+                    if let clothe = dal.fetch(outfitElement["clothe_id"] as! String) {
+                        cell.setClothe(clothe, style: outfitElem["style"] as! String)
+                    }
                 }
             }
             return cell

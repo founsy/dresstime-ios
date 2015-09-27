@@ -20,14 +20,14 @@ class OverlayView: UIView {
     }
 
     required init(coder aDecoder: NSCoder) {
-        super.init(coder:aDecoder)
+        super.init(coder:aDecoder)!
         self.backgroundColor =  UIColor.clearColor()
     }
     
     override func drawRect(rect: CGRect) {
         super.drawRect(rect)
-        var ct = UIGraphicsGetCurrentContext();
-        CGContextSetBlendMode(ct, kCGBlendModeMultiply);
+        let ct = UIGraphicsGetCurrentContext();
+        CGContextSetBlendMode(ct, CGBlendMode.Multiply);
         CGContextSetAlpha(ct, 0.4)
         CGContextSetFillColorWithColor(ct, UIColor.blackColor().CGColor);
         //

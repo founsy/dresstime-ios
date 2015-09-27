@@ -24,9 +24,8 @@ class OutfitViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let fr = frame {
-            self.view.frame = frame!
-        }
+        self.view.frame = frame!
+
         tableView.registerNib(UINib(nibName: "ClotheTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
         tableView.registerNib(UINib(nibName: "ClotheDetailTableCell", bundle:nil), forCellReuseIdentifier: self.cellDetailIdentifier)
         
@@ -72,10 +71,10 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
         
         //Collapse row already opened
         for (var i = 0; i < arrayForBool.count; i++) {
-            var collapsed = arrayForBool[i] as Bool
+            let collapsed = arrayForBool[i] as Bool
             if (collapsed && i != indexPath.row) {
                 arrayForBool[i] = !collapsed
-                var path:NSIndexPath = NSIndexPath(forItem: oldRow, inSection: 0)
+                let path:NSIndexPath = NSIndexPath(forItem: oldRow, inSection: 0)
                 self.tableView.reloadRowsAtIndexPaths([path], withRowAnimation:UITableViewRowAnimation.Fade)
                 break
             }
@@ -91,7 +90,7 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        var height:CGFloat = (self.tableView.bounds.height) / CGFloat(self.currentOutfits.count)
+        let height:CGFloat = (self.tableView.bounds.height) / CGFloat(self.currentOutfits.count)
         if (arrayForBool[indexPath.row].boolValue as Bool){
             return height*1.4
         } else {

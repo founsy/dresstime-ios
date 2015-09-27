@@ -18,5 +18,8 @@ class Profil: NSManagedObject {
     @NSManaged var name: String
     @NSManaged var gender: String
     @NSManaged var temp_unit: String
+    @NSManaged var atWorkStyle: String
+    @NSManaged var relaxStyle: String
+    @NSManaged var onParty: String
 
 }

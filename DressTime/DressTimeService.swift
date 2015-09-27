@@ -12,7 +12,7 @@ import UIKit
 class DressTimeService {
     
     class func getOutfitsByStyle(userid: String, style: String, todayCompleted : (succeeded: Bool, msg: [[String: AnyObject]]) -> ()){
-        var q = "http://api.drez.io/outfits/byStyle"
+        let q = "http://api.drez.io/outfits/byStyle"
         
         let dal = ProfilsDAL()
         let dalClothe = ClothesDAL()
@@ -23,11 +23,11 @@ class DressTimeService {
             let hexTranslator = HexColorToName()
 
             for clothe in dressing {
-                var dict = NSMutableDictionary(dictionary: clothe.toDictionnary())
+                let dict = NSMutableDictionary(dictionary: clothe.toDictionnary())
                 let colorName = UIColor.colorWithHexString(dict["clothe_colors"] as! String)
                 dict["clothe_colors"] = hexTranslator.name(colorName)[1] as! String
                 dict.removeObjectForKey("clothe_image")
-                var d:[String:AnyObject] = dict as NSDictionary as! [String : AnyObject]
+                let d:[String:AnyObject] = dict as NSDictionary as! [String : AnyObject]
                 dressingSeriazible.append(d)
             }
             
@@ -44,7 +44,7 @@ class DressTimeService {
                 "weather": weatherObject,
                 "access_token": profil.access_token
             ];
-            println(jsonObject)
+            print(jsonObject)
             //Cancel changes about ColorName
             dalClothe.managedObjectContext.reset()
             
@@ -55,7 +55,7 @@ class DressTimeService {
     }
     
     class func getOutfitsToday(userid: String, todayCompleted : (succeeded: Bool, msg: [[String: AnyObject]]) -> ()){
-        var q = "http://api.drez.io/outfits/today"
+        let q = "http://api.drez.io/outfits/today"
         
         let dal = ProfilsDAL()
         let dalClothe = ClothesDAL()
@@ -66,11 +66,11 @@ class DressTimeService {
             let hexTranslator = HexColorToName()
             
             for clothe in dressing {
-                var dict = NSMutableDictionary(dictionary: clothe.toDictionnary())
+                let dict = NSMutableDictionary(dictionary: clothe.toDictionnary())
                 let colorName = UIColor.colorWithHexString(dict["clothe_colors"] as! String)
                 dict["clothe_colors"] = hexTranslator.name(colorName)[1] as! String
                 dict.removeObjectForKey("clothe_image")
-                var d:[String:AnyObject] = dict as NSDictionary as! [String : AnyObject]
+                let d:[String:AnyObject] = dict as NSDictionary as! [String : AnyObject]
                 dressingSeriazible.append(d)
             }
             
@@ -86,7 +86,7 @@ class DressTimeService {
                 "weather": weatherObject,
                 "access_token": profil.access_token
             ];
-            println(jsonObject)
+            print(jsonObject)
             //Cancel changes about ColorName
             dalClothe.managedObjectContext.reset()
             
@@ -97,7 +97,7 @@ class DressTimeService {
     }
     
     class func saveClothe(userid: String,clotheId: String, dressingCompleted : (succeeded: Bool, msg: [[String: AnyObject]]) -> ()) {
-        var q = "http://api.drez.io/dressing/clothes/"
+        let q = "http://api.drez.io/dressing/clothes/"
         
         let dal = ProfilsDAL()
         let dalClothe = ClothesDAL()
@@ -105,10 +105,10 @@ class DressTimeService {
         var dressingSeriazible = [[String:AnyObject]]()
         if let clothe = dalClothe.fetch(clotheId) {
             if let profil = dal.fetch(userid) {
-                var dict = NSMutableDictionary(dictionary: clothe.toDictionnary())
+                let dict = NSMutableDictionary(dictionary: clothe.toDictionnary())
                 let image:String = (dict["clothe_image"] as! NSData).base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
                 dict["clothe_image"] = image
-                var d:[String:AnyObject] = dict as NSDictionary as! [String : AnyObject]
+                let d:[String:AnyObject] = dict as NSDictionary as! [String : AnyObject]
                 dressingSeriazible.append(d)
                 
                 let jsonObject: [String: AnyObject] = [
@@ -124,7 +124,7 @@ class DressTimeService {
     }
     
     class func getDressing(userid: String, clotheCompleted : (succeeded: Bool, msg: [String: AnyObject]) -> ()) {
-        var q = "http://api.drez.io/dressing/clothes/"
+        let q = "http://api.drez.io/dressing/clothes/"
         
         let dal = ProfilsDAL()
         if let profil = dal.fetch(userid) {
@@ -133,7 +133,7 @@ class DressTimeService {
             ]
             
             JSONService.get(q, params: jsonObject, getCompleted: { (succeeded, msg) -> () in
-                println("Receive Dressing")
+                print("Receive Dressing")
                 clotheCompleted(succeeded: succeeded, msg: msg)
             })
         
@@ -141,7 +141,7 @@ class DressTimeService {
     }
     
     class func getClothesIdDressing(userid: String, clotheCompleted : (succeeded: Bool, idList: [String]) -> ()) {
-        var q = "http://api.drez.io/dressing/clothesIds/"
+        let q = "http://api.drez.io/dressing/clothesIds/"
         
         let dal = ProfilsDAL()
         if let profil = dal.fetch(userid) {
@@ -150,12 +150,14 @@ class DressTimeService {
             ]
             
             JSONService.get(q, params: jsonObject, getCompleted: { (succeeded, msg) -> () in
-                println("Receive Dressing")
+                print("Receive Dressing")
                 //TODO - Convert msg to Array<String>
                 var idList = [String]()
-                if let array = msg["list"] as? [AnyObject]{
+                if let array = msg["list"] as? NSArray {
                     for item in array{
-                        idList.append(item["id"] as! String)
+                        if let obj = item as? NSDictionary {
+                            idList.append(obj["id"] as! String)
+                        }
                     }
                 }
                 
@@ -167,7 +169,7 @@ class DressTimeService {
     }
     
     class func getClothe(userid: String, clotheId: String, clotheCompleted : (succeeded: Bool, clothe: AnyObject) -> ()) {
-        var q = "http://api.drez.io/dressing/clothes/" + clotheId
+        let q = "http://api.drez.io/dressing/clothes/" + clotheId
         
         let dal = ProfilsDAL()
         if let profil = dal.fetch(userid) {
@@ -176,7 +178,7 @@ class DressTimeService {
             ]
             
             JSONService.get(q, params: jsonObject, getCompleted: { (succeeded, msg) -> () in
-                println("Receive Clothe")
+                print("Receive Clothe")
                 //TODO - Convert msg to Array<String>
                 
                 clotheCompleted(succeeded: succeeded, clothe: msg)
@@ -195,7 +197,7 @@ class DressTimeService {
             ]
             
             JSONService.delete(q, params: jsonObject, deleteCompleted: { (succeeded, msg) -> () in
-                println("Receive Clothe")
+                print("Receive Clothe")
                 //TODO - Convert msg to Array<String>
                 
                 clotheDelCompleted(succeeded: succeeded, clothe: msg)

@@ -35,7 +35,7 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
     ------------------------------------------*/
     
     class func deviceWithMediaType(mediaType: NSString, position: AVCaptureDevicePosition) -> AVCaptureDevice? {
-        var devices: NSArray = AVCaptureDevice.devicesWithMediaType(mediaType as String)
+        let devices: NSArray = AVCaptureDevice.devicesWithMediaType(mediaType as String)
         
         if var captureDevice = devices.firstObject as? AVCaptureDevice {
             for object:AnyObject in devices {
@@ -101,23 +101,23 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
     
     func addVideoInput() -> Bool {
         var success: Bool = false
-        var error: NSError?
-        
-        if var videoDevice: AVCaptureDevice = CameraSessionManager.deviceWithMediaType(AVMediaTypeVideo, position: AVCaptureDevicePosition.Back) {
-            videoDeviceInput = AVCaptureDeviceInput.deviceInputWithDevice(videoDevice, error: &error) as! AVCaptureDeviceInput;
-            videoDevice.lockForConfiguration(&error)
-            if (error == nil){
-                videoDevice.focusMode = .AutoFocus
-                //videoDevice.exposureMode = AVCaptureExposureMode.AutoExpose
-            }
-            if (error == nil) {
-                if session.canAddInput(videoDeviceInput) {
-                    session.addInput(videoDeviceInput)
-                    success = true
-                }
+        let videoDevice: AVCaptureDevice = CameraSessionManager.deviceWithMediaType(AVMediaTypeVideo, position: AVCaptureDevicePosition.Back)!
+        do {
+            let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice) as AVCaptureDeviceInput
+            
+            try videoDevice.lockForConfiguration()
+             videoDevice.focusMode = .AutoFocus
+
+            if session.canAddInput(videoDeviceInput) {
+                session.addInput(videoDeviceInput)
+                success = true
             }
             videoDevice.unlockForConfiguration()
+            
+        } catch let error as NSError {
+            print(error)
         }
+       
         return success
     }
     
@@ -125,7 +125,7 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
     func addVideoOutput() {
         
         videoDeviceOutput = AVCaptureVideoDataOutput()
-        videoDeviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as NSString:kCVPixelFormatType_32BGRA]
+        videoDeviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey: Int(kCVPixelFormatType_32BGRA)]
         
         videoDeviceOutput.alwaysDiscardsLateVideoFrames = true
         
@@ -147,7 +147,7 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
     
     func startCamera() {
         dispatch_async(sessionQueue, {
-            var weakSelf: CameraSessionManager? = self
+            let weakSelf: CameraSessionManager? = self
             self.runtimeErrorHandlingObserver = NSNotificationCenter.defaultCenter().addObserverForName(AVCaptureSessionRuntimeErrorNotification, object: self.sessionQueue, queue: nil, usingBlock: {
                 (note: NSNotification!) -> Void in
                 
@@ -170,10 +170,10 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
     
     func focusAndExposeAtPoint(point: CGPoint) {
         dispatch_async(sessionQueue, {
-            var device: AVCaptureDevice = self.videoDeviceInput.device
-            var error: NSError?
+            let device: AVCaptureDevice = self.videoDeviceInput.device
             
-            if device.lockForConfiguration(&error) {
+            do {
+                try device.lockForConfiguration()
                 if device.focusPointOfInterestSupported && device.isFocusModeSupported(AVCaptureFocusMode.AutoFocus) {
                     device.focusPointOfInterest = point
                     device.focusMode = AVCaptureFocusMode.AutoFocus
@@ -185,31 +185,26 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
                 }
                 
                 device.unlockForConfiguration()
-            }
-            else {
-                // TODO: Log error.
+            } catch let error as NSError{
+                print(error)
             }
         })
     }
     
     func captureImage(completion:((image: UIImage?, error: NSError?) -> Void)?) {
-      //  if (stillImageOutput != nil) {
-      //      return
-      //  }
-        
         dispatch_async(sessionQueue, {
             if let connection = self.stillImageOutput.connectionWithMediaType(AVMediaTypeVideo) {
                 if (connection.enabled){
-                    self.stillImageOutput.captureStillImageAsynchronouslyFromConnection(
-                        self.stillImageOutput.connectionWithMediaType(AVMediaTypeVideo),completionHandler: {
+                    connection.videoOrientation = AVCaptureVideoOrientation.Portrait
+                    self.stillImageOutput.captureStillImageAsynchronouslyFromConnection(connection, completionHandler: {
                             (imageDataSampleBuffer: CMSampleBuffer?, error: NSError?) -> Void in
+                        
                             if ((imageDataSampleBuffer == nil || error != nil)) {
                                 completion!(image:nil, error:nil)
-                            }
-                            else if let sample = imageDataSampleBuffer {
-                                var imageData: NSData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sample)
-                                var image: UIImage = UIImage(data: imageData)!
-                                var rotatedImage = UIImage(CGImage: image.CGImage, scale: 1.0, orientation: UIImageOrientation.DownMirrored)
+                            } else if let sample = imageDataSampleBuffer {
+                                let imageData: NSData = AVCaptureStillImageOutput.jpegStillImageNSDataRepresentation(sample)
+                                let image: UIImage = UIImage(data: imageData)!
+                                let rotatedImage = UIImage(CGImage: image.CGImage!, scale: 1.0, orientation: UIImageOrientation.DownMirrored)
                                 completion!(image:rotatedImage, error:nil)
                             }
                         }
@@ -226,13 +221,18 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
     }
     
     func addVideoIn() {
-        var videoDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
+        let videoDevice = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo)
         if ((videoDevice) != nil){
-            var error: NSError?
-            var videoIn = AVCaptureDeviceInput(device: videoDevice, error: &error)
-            if (error == nil){
-                if (self.session.canAddInput(videoIn)){
-                    self.session.addInput(videoIn)
+            var videoIn: AVCaptureInput?
+            
+            do {
+                videoIn = try AVCaptureDeviceInput(device: videoDevice)
+            } catch {
+            
+            }
+            if let v = videoIn{
+                if (self.session.canAddInput(v )){
+                    self.session.addInput(v )
                 } else {
                     NSLog("Couldn't add video input")
                 }
@@ -249,11 +249,19 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
     func toggleFlash(){
         if let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo) {
             if (device.hasTorch) {
-                device.lockForConfiguration(nil)
+                do {
+                try device.lockForConfiguration()
+                } catch {
+                }
+                
                 if (device.torchMode == AVCaptureTorchMode.On) {
                     device.torchMode = AVCaptureTorchMode.Off
                 } else {
-                    device.setTorchModeOnWithLevel(1.0, error: nil)
+                    do {
+                       try device.setTorchModeOnWithLevel(1.0)
+                    } catch {
+                    
+                    }
                 }
                 device.unlockForConfiguration()
             }

@@ -13,8 +13,8 @@ class JSONService
 {
     /** Prepares a GET request for the specified URL. */
     class func get(url: String, params : [String: AnyObject]?, getCompleted:(succeeded: Bool, msg: [String: AnyObject]) -> ()) {
-        var request = NSMutableURLRequest(URL: NSURL(string: url)!)
-        var session = NSURLSession.sharedSession()
+        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        let session = NSURLSession.sharedSession()
         request.HTTPMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -25,20 +25,17 @@ class JSONService
             }
         }
         
-        var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
-            var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println(strData)
-            var err: NSError?
-            var json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves, error: &err) as? [String: AnyObject]
-            if(err != nil) {
+        let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+            let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            print(strData)
+            var json: [String: AnyObject]?
+            do {
+                json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableLeaves) as? [String: AnyObject]
+            } catch let error as NSError {
+                print(error)
                 getCompleted(succeeded: false, msg: ["error":"Error"])
-            } else {
-                if let parseJSON = json {
-                    getCompleted(succeeded: true, msg: parseJSON)
-                } else {
-                    getCompleted(succeeded: false, msg: ["error":"Error"])
-                }
             }
+            getCompleted(succeeded: true, msg: json!)
         })
         
         task.resume()
@@ -46,39 +43,37 @@ class JSONService
     }
     
     class func post(params : [String: AnyObject], url : String, postCompleted : (succeeded: Bool, msg: [String: AnyObject]) -> ()) {
-        var request = NSMutableURLRequest(URL: NSURL(string: url)!)
-        var session = NSURLSession.sharedSession()
+        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        let session = NSURLSession.sharedSession()
         request.HTTPMethod = "POST"
         
-        var err: NSError?
-
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         if let token: String = params["access_token"] as? String {
             request.addValue("Bearer " + token, forHTTPHeaderField: "Authorization")
         }
         
-        var dict = NSMutableDictionary(dictionary: params)
+        let dict = NSMutableDictionary(dictionary: params)
         dict.removeObjectForKey("access_token")
-        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(dict, options: nil, error: &err)
-
         
-        var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
-            var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println(strData)
-            var err: NSError?
-            var json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves, error: &err) as? [String: AnyObject]
-            
-            var msg = "No message"
-            
-            // Did the JSONObjectWithData constructor return an error? If so, log the error to the console
-            if(err != nil) {
-                println(err!.localizedDescription)
-                let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
-                println("Error could not parse JSON: '\(jsonStr)'")
-                postCompleted(succeeded: false, msg: ["error":"Error"])
-            }
-            else {
+         do {
+            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions())
+         } catch let error as NSError {
+            print(error)
+        }
+        
+        let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+            if let dataSend = data {
+                let strData = NSString(data: dataSend, encoding: NSUTF8StringEncoding)
+                print(strData)
+                var json : [String: AnyObject]?
+                do {
+                  json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableLeaves) as? [String: AnyObject]
+                } catch let error as NSError {
+                    print(error)
+                    postCompleted(succeeded: false, msg: ["error":"Error"])
+                }
+
                 // The JSONObjectWithData constructor didn't return an error. But, we should still
                 // check and make sure that json has a value using optional binding.
                 if let parseJSON = json {
@@ -87,10 +82,12 @@ class JSONService
                 }
                 else {
                     // Woa, okay the json object was nil, something went worng. Maybe the server isn't running?
-                    let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    println("Error could not parse JSON: \(jsonStr)")
-                    postCompleted(succeeded: false, msg: ["error":"Error"])
+                    let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                    print("Error could not parse JSON: \(jsonStr)")
+                    
                 }
+            } else {
+                postCompleted(succeeded: false, msg: ["error":"Error"])
             }
         })
         
@@ -99,40 +96,38 @@ class JSONService
     
     
     class func post(params : [String: AnyObject], url : String, postCompleted : (succeeded: Bool, msg: [[String: AnyObject]]) -> ()) {
-        var request = NSMutableURLRequest(URL: NSURL(string: url)!)
-        var session = NSURLSession.sharedSession()
+        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        let session = NSURLSession.sharedSession()
         request.HTTPMethod = "POST"
-        
-        var err: NSError?
         
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
         if let token: String = params["access_token"] as? String {
             request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         }
-        var dict = NSMutableDictionary(dictionary: params)
+        let dict = NSMutableDictionary(dictionary: params)
         dict.removeObjectForKey("access_token")
-        request.HTTPBody = NSJSONSerialization.dataWithJSONObject(dict, options: nil, error: &err)
-
-        println(request.allHTTPHeaderFields)
+        do {
+            request.HTTPBody = try NSJSONSerialization.dataWithJSONObject(dict, options: NSJSONWritingOptions())
+        } catch let error as NSError {
+            print(error)
+        }
         
-        var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
-            println(response)
-            var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println(strData)
-            var err: NSError?
-            var json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves, error: &err) as? [[String: AnyObject]]
-            
-            var msg = "No message"
-            
-            // Did the JSONObjectWithData constructor return an error? If so, log the error to the console
-            if(err != nil) {
-                println(err!.localizedDescription)
-                let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
-                println("Error could not parse JSON: '\(jsonStr)'")
-                postCompleted(succeeded: false, msg: [["error":"Error"]])
+        print(request.allHTTPHeaderFields)
+        
+        let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+            print(response)
+            let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            print(strData)
+
+            var json : [[String: AnyObject]]?
+            do {
+                json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableLeaves) as? [[String: AnyObject]]
+            } catch let error as NSError {
+                print(error)
+                  postCompleted(succeeded: false, msg: [["error":"Error"]])
             }
-            else {
+
                 // The JSONObjectWithData constructor didn't return an error. But, we should still
                 // check and make sure that json has a value using optional binding.
                 if let parseJSON = json {
@@ -141,11 +136,10 @@ class JSONService
                 }
                 else {
                     // Woa, okay the json object was nil, something went worng. Maybe the server isn't running?
-                    let jsonStr = NSString(data: data, encoding: NSUTF8StringEncoding)
-                    println("Error could not parse JSON: \(jsonStr)")
+                    let jsonStr = NSString(data: data!, encoding: NSUTF8StringEncoding)
+                    print("Error could not parse JSON: \(jsonStr)")
                     postCompleted(succeeded: false, msg: [["error":"Error"]])
                 }
-            }
         })
         
         task.resume()
@@ -153,8 +147,8 @@ class JSONService
     
     
     class func delete(url: String, params : [String: AnyObject]?, deleteCompleted:(succeeded: Bool, msg: [String: AnyObject]) -> ()) {
-        var request = NSMutableURLRequest(URL: NSURL(string: url)!)
-        var session = NSURLSession.sharedSession()
+        let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+        let session = NSURLSession.sharedSession()
         request.HTTPMethod = "DELETE"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
@@ -165,20 +159,22 @@ class JSONService
             }
         }
         
-        var task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
-            var strData = NSString(data: data, encoding: NSUTF8StringEncoding)
-            println(strData)
-            var err: NSError?
-            var json = NSJSONSerialization.JSONObjectWithData(data, options: .MutableLeaves, error: &err) as? [String: AnyObject]
-            if(err != nil) {
-                deleteCompleted(succeeded: false, msg: ["error":"Error"])
-            } else {
-                if let parseJSON = json {
-                    deleteCompleted(succeeded: true, msg: parseJSON)
-                } else {
-                    deleteCompleted(succeeded: false, msg: ["error":"Error"])
-                }
+        let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
+            let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
+            print(strData)
+            var json : [String: AnyObject]?
+            do {
+                json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableLeaves) as? [String: AnyObject]
+            } catch let error as NSError {
+                print(error)
+                 deleteCompleted(succeeded: false, msg: ["error":"Error"])
             }
+           if let parseJSON = json {
+                    deleteCompleted(succeeded: true, msg: parseJSON)
+            } else {
+                deleteCompleted(succeeded: false, msg: ["error":"Error"])
+            }
+
         })
         
         task.resume()

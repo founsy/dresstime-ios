@@ -11,7 +11,7 @@ import UIKit
 import CoreLocation
 
 protocol HomeHeaderCellDelegate {
-    func weatherFinishing()
+    func weatherFinishing(code: String)
 }
 class HomeHeaderCell: UITableViewCell {
 
@@ -40,27 +40,32 @@ class HomeHeaderCell: UITableViewCell {
 
 extension HomeHeaderCell: CLLocationManagerDelegate {
     /***/
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        self.currentLocation = locations[locations.count-1] as! CLLocation
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        self.currentLocation = locations[locations.count-1]
         locationManager.stopUpdatingLocation()
-        WeatherService.getWeather(self.currentLocation, weatherCompleted: { (succeeded: Bool, msg: [String: AnyObject]) -> () in
-            if let query:AnyObject = msg["query"] {
-                if let results:AnyObject = query["results"] {
-                    if let channel:AnyObject = results["channel"] {
-                        if let item:AnyObject = channel["item"]{
-                            if let condition: AnyObject = item["condition"]{
-                                let location:AnyObject = channel["location"] as AnyObject!
-                                let city = location["city"] as! String
-                                let forecast = item["forecast"] as! [AnyObject]
-                                let today: AnyObject = forecast[0] as AnyObject
-                                self.updateWeather((condition["code"] as! String).toInt()!, high:  today["high"] as! String, low:  today["low"] as! String, city: city)
-                                if let del = self.delegate {
-                                    del.weatherFinishing()
+        WeatherService.getWeather(self.currentLocation, weatherCompleted: { (succeeded: Bool, msg: NSDictionary) -> () in
+            if let query = msg["query"] as? NSDictionary {
+                if let results = query["results"] as? NSDictionary {
+                        if let channel = results["channel"] as? NSDictionary{
+                            if let item = channel["item"] as? NSDictionary{
+                                if let condition = item["condition"] as? NSDictionary{
+                                    let conditionCode = condition["code"] as? String
+
+                                    if let location = channel["location"] as? NSDictionary {
+                                    
+                                        let city = location["city"] as? String
+                                        if let forecast = item["forecast"] as? [AnyObject] {
+                                            if let today = forecast[0] as? NSDictionary {
+                                                self.updateWeather(Int(conditionCode!)!, high:  today["high"] as! String, low:  today["low"] as! String, city: city!)
+                                            }
+                                        }
+                                    }
+                                    if let del = self.delegate {
+                                        del.weatherFinishing(conditionCode!)
+                                    }
                                 }
                             }
                         }
-                    }
-                    
                 }
             }
             
@@ -74,8 +79,8 @@ extension HomeHeaderCell: CLLocationManagerDelegate {
             SharedData.sharedInstance.highTemp = high
             SharedData.sharedInstance.city = city
             self.wheaterIcon.text = self.getValueWeatherCode(code)
-            self.highTempLabel.text = "\(high)°"
-            self.lowTempLabel.text = "\(low)°"
+            self.highTempLabel.text = city
+            self.lowTempLabel.text = "\(low)° - \(high)°"
             //TODO
             //self.loadTodayOutfits()
         })
@@ -184,7 +189,7 @@ extension HomeHeaderCell: CLLocationManagerDelegate {
         }
     }
     
-    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
-        println(error)
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print(error)
     }
 }

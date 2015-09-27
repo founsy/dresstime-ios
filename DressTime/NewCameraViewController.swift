@@ -15,6 +15,7 @@ class NewCameraViewController : UIViewController {
     
     private var captureManager: CameraSessionManager?
     private var currentImage: UIImage?
+    private var bufferImage: UIImage?
     private var skipImage: Int = 0
     private var arrayColors:[UIColor] = []
     private var arrayUIView: [UIView] = []
@@ -22,7 +23,7 @@ class NewCameraViewController : UIViewController {
     private let labelsSubTop = ["tshirt", "shirt", "shirt-sleeve", "polo","polo-sleeve"]
     private let labelsSubPants = ["jeans", "jeans-slim", "trousers-pleated", "trousers-suit", "chinos", "trousers-regular", "trousers", "trousers-slim", "bermuda", "short"]
     private let labelsSubMaille = ["jumper-fin","jumper-epais ","cardigan","sweater"]
-    
+    private var isCapturing = false
     
     var typeClothe: String!
     var subTypeClothe: String!
@@ -44,16 +45,20 @@ class NewCameraViewController : UIViewController {
     }
     
     @IBAction func onCapture(sender: AnyObject) {
-        self.captureManager!.captureImage { (image, error) -> Void in
-            if let err = error {
-                NSLog("Error")
-            } else {
-                self.currentImage = self.cropImage(image!)
-                NSLog("On Capture : \(self.currentImage?.size.width) - \(self.currentImage?.size.height)")
-                self.arrayColors = self.currentImage!.dominantColors()
-                self.timeToScan = false
-                self.captureManager!.session.stopRunning()
-                self.performSegueWithIdentifier("showConfirmation", sender: self)
+        if (!self.isCapturing){
+            self.isCapturing = true
+            self.captureManager!.captureImage { (image, error) -> Void in
+                self.isCapturing = false
+                if let _ = image {
+                    self.currentImage = self.cropImage(image!)
+                    NSLog("On Capture : \(self.currentImage?.size.width) - \(self.currentImage?.size.height)")
+                    self.arrayColors = self.currentImage!.dominantColors()
+                    self.timeToScan = false
+                    self.captureManager!.session.stopRunning()
+                    self.performSegueWithIdentifier("showConfirmation", sender: self)
+                } else {
+                    NSLog("Error")
+                }
             }
         }
 
@@ -76,7 +81,7 @@ class NewCameraViewController : UIViewController {
         self.captureManager!.sessionDelegate = self
         
         
-        var uiView = UIView(frame: layerRect)
+        let uiView = UIView(frame: layerRect)
         uiView.layer.addSublayer(self.captureManager!.previewLayer)
         self.view.addSubview(uiView)
         self.view.bringSubviewToFront(self.opacityView)
@@ -120,8 +125,8 @@ class NewCameraViewController : UIViewController {
         if (segue.identifier == "showConfirmation"){
             let controller = segue.destinationViewController as! CaptureConfirmationViewController
             if let image = self.currentImage {
-                let img = UIImage(CGImage: image.CGImage, scale: 1.0, orientation: UIImageOrientation.Right)
-                let result = self.wrapResultObject(UIImageJPEGRepresentation(img, 1.0), labels: getListOfSubType(self.typeClothe))
+                let img = UIImage(CGImage: image.CGImage!, scale: 1.0, orientation: UIImageOrientation.Right)
+                let result = self.wrapResultObject(UIImageJPEGRepresentation(img, 1.0)!, labels: getListOfSubType(self.typeClothe))
                 controller.clotheObject = result
                 controller.previousController = self
             }
@@ -129,23 +134,24 @@ class NewCameraViewController : UIViewController {
     }
     
     deinit {
+        self.captureManager!.session.stopRunning()
         captureManager = nil
     }
     
     private func drawClearRectArea(){
         //opacityView is a UIView of what I want to be "solid"
-        var outerPath = UIBezierPath(rect: self.view.frame)
+        let outerPath = UIBezierPath(rect: self.view.frame)
         
         //croppingView is a subview of shadowView that is laid out in interface builder using auto layout
         //croppingView is hidden.
         self.view.layoutIfNeeded()
         self.scanArea.layoutIfNeeded()
 
-        var rectPath = UIBezierPath(rect: CGRectMake(self.scanArea.frame.origin.x - 5, self.scanArea.frame.origin.y+2, self.scanArea.frame.width-5, self.scanArea.frame.height-4))
+        let rectPath = UIBezierPath(rect: CGRectMake(self.scanArea.frame.origin.x - 5, self.scanArea.frame.origin.y+2, self.scanArea.frame.width-5, self.scanArea.frame.height-4))
         outerPath.usesEvenOddFillRule = true
         outerPath.appendPath(rectPath)
         
-        var maskLayer = CAShapeLayer()
+        let maskLayer = CAShapeLayer()
         maskLayer.path = outerPath.CGPath
         maskLayer.fillRule = kCAFillRuleEvenOdd
         maskLayer.fillColor = UIColor.whiteColor().CGColor
@@ -167,7 +173,7 @@ class NewCameraViewController : UIViewController {
     }
     
     func imageFromSampleBuffer(sampleBuffer :CMSampleBufferRef) -> UIImage? {
-        let imageBuffer: CVImageBufferRef = CMSampleBufferGetImageBuffer(sampleBuffer)
+        let imageBuffer: CVImageBufferRef = CMSampleBufferGetImageBuffer(sampleBuffer)!
         
         CVPixelBufferLockBaseAddress(imageBuffer, 0)
         let baseAddress: UnsafeMutablePointer<Void> = CVPixelBufferGetBaseAddressOfPlane(imageBuffer, Int(0))
@@ -176,17 +182,17 @@ class NewCameraViewController : UIViewController {
         let width: Int = CVPixelBufferGetWidth(imageBuffer)
         let height: Int = CVPixelBufferGetHeight(imageBuffer)
         
-        let colorSpace: CGColorSpaceRef = CGColorSpaceCreateDeviceRGB()
+        let colorSpace: CGColorSpaceRef = CGColorSpaceCreateDeviceRGB()!
         
         let bitsPerCompornent:Int = 8
-        var bitmapInfo = CGBitmapInfo((CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue) as UInt32)
-        let newContext: CGContextRef = CGBitmapContextCreate(baseAddress, width, height, bitsPerCompornent, bytesPerRow, colorSpace, bitmapInfo) as CGContextRef
+        let bitmapInfo = CGBitmapInfo(rawValue: (CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue) as UInt32)
+        let newContext: CGContextRef = CGBitmapContextCreate(baseAddress, width, height, bitsPerCompornent, bytesPerRow, colorSpace, bitmapInfo.rawValue)!
         
         CGContextSaveGState(newContext)
        
-        let imageRef: CGImageRef = CGBitmapContextCreateImage(newContext)
+        let imageRef: CGImageRef = CGBitmapContextCreateImage(newContext)!
         
-        let resultImage = UIImage(CGImage: imageRef, scale: 1.0, orientation: UIImageOrientation.Up)!
+        let resultImage = UIImage(CGImage: imageRef, scale: 1.0, orientation: UIImageOrientation.Up)
         UIGraphicsEndImageContext()
         
         return resultImage
@@ -218,23 +224,19 @@ class NewCameraViewController : UIViewController {
     }
     
     func rectToCropImg(image: UIImage) -> CGRect{
-        var visibleLayerFrame = self.scanArea.frame
-        var metaRect = self.captureManager!.previewLayer.metadataOutputRectOfInterestForRect(visibleLayerFrame)
-        println("MetaRect")
-        println(metaRect)
-        var originalSize = image.size;
+        let visibleLayerFrame = self.scanArea.frame
+        let metaRect = self.captureManager!.previewLayer.metadataOutputRectOfInterestForRect(visibleLayerFrame)
+        let originalSize = image.size;
         
         var cropRect = CGRectMake( metaRect.origin.x * originalSize.width, metaRect.origin.y * originalSize.height, metaRect.size.width * originalSize.width, metaRect.size.height * originalSize.height)
         
         cropRect = CGRectIntegral(cropRect)
-        println("cropRect")
-        println(cropRect)
         return cropRect
     }
     
     private func cropImage(image: UIImage) -> UIImage {
        // println(self.scanArea.frame)
-        var rect = rectToCropImg(image)
+        let rect = rectToCropImg(image)
         //let cropRect = CGRectMake(rect.origin.x, rect.origin.y, self.scanArea.frame.width, self.scanArea.frame.height)
         
         //self.scanArea.frame// rectToCropImg(image)//self.captureManager!.previewLayer.convertRect(self.scanArea.frame, fromLayer: self.captureManager!.previewLayer)  //rectToCropImg(image)
@@ -242,7 +244,7 @@ class NewCameraViewController : UIViewController {
         
         let imageRef = CGImageCreateWithImageInRect(image.CGImage, rect);
         // or use the UIImage wherever you like
-        return UIImage(CGImage: imageRef)!
+        return UIImage(CGImage: imageRef!)
     }
     
 }
@@ -251,15 +253,14 @@ extension NewCameraViewController: CameraSessionControllerDelegate{
     func cameraSessionDidOutputSampleBuffer(sampleBuffer: CMSampleBuffer!){
         if (self.skipImage == 20) {
             if let image = imageFromSampleBuffer(sampleBuffer) {
-                self.currentImage = image//cropImage(image)
+                self.bufferImage = image//cropImage(image)
                 NSLog("Get sample")
-                self.arrayColors = self.currentImage!.dominantColors()
+                self.arrayColors = self.bufferImage!.dominantColors()
                 self.timeToScan = false
                 dispatch_sync(dispatch_get_main_queue(), {
                     for i in 0..<min(self.arrayColors.count, self.arrayUIView.count) {
                         self.arrayUIView[i].backgroundColor = self.arrayColors[i]
                     }
-                    //self.image.image = self.currentImage
                 })
             }
             self.skipImage = 0

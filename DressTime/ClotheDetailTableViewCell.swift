@@ -33,7 +33,7 @@ class ClotheDetailTableViewCell: UITableViewCell{
     var indexPath: NSIndexPath?
     
     func roundTopCorner(){
-        self.topView.roundCorners(UIRectCorner.TopLeft | UIRectCorner.TopRight, radius: 10.0)
+        self.topView.roundCorners([UIRectCorner.TopLeft,UIRectCorner.TopRight], radius: 10.0)
         self.clotheImageView.roundCorners(UIRectCorner.AllCorners, radius: 10.0)
         self.onCreateOutfit.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
         
@@ -60,7 +60,7 @@ class ClotheDetailTableViewCell: UITableViewCell{
     }
     
     private func splitHexColor(colors: String) -> [String]{
-        var arrayColors = split(colors) {$0 == ","}
+        let arrayColors = colors.componentsSeparatedByString(",")
         return arrayColors
     }
     

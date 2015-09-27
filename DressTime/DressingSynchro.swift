@@ -61,12 +61,14 @@ class DressingSynchro {
             let clotheDAL = ClothesDAL()
                 for id in self.clothesStored {
                 DressTimeService.getClothe(self.userId, clotheId: id, clotheCompleted: { (succeeded, msg) -> () in
-                    println(msg)
-                    let clothe: AnyObject = msg
-                        var image: String = clothe["clothe_image"] as! String
-                        var data: NSData = NSData(base64EncodedString: image, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
+                    print(msg)
+                    if let clothe = msg as? NSDictionary {
+                        let image: String = (clothe["clothe_image"] as? String)!
+                        let data: NSData = NSData(base64EncodedString: image, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
+                        let isUnis = clothe["clothe_isUnis"] as? Bool
                         
-                        clotheDAL.save(clothe["clothe_id"] as! String, partnerId: clothe["clothe_partnerid"] as! NSNumber, partnerName: clothe["clothe_partnerName"] as! String, type: clothe["clothe_type"] as! String, subType: clothe["clothe_subtype"] as! String, name: clothe["clothe_name"] as! String, isUnis: clothe["clothe_isUnis"] as! Bool, pattern: clothe["clothe_pattern"] as! String, cut: clothe["clothe_cut"] as! String, image: data, colors: clothe["clothe_colors"] as! String)
+                        clotheDAL.save(clothe["clothe_id"] as! String, partnerId: clothe["clothe_partnerid"] as! NSNumber, partnerName: clothe["clothe_partnerName"] as! String, type: clothe["clothe_type"] as! String, subType: clothe["clothe_subtype"] as! String, name: clothe["clothe_name"]  as! String , isUnis: isUnis!, pattern: clothe["clothe_pattern"] as! String, cut: clothe["clothe_cut"] as! String, image: data, colors: clothe["clothe_colors"] as! String)
+                    }
 
                 })
             

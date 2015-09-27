@@ -40,9 +40,9 @@ class TypeViewController: UIViewController {
         
         if (isOpenSectionRequired){
             for (var i = 0; i < arrayForBool.count; i++) {
-                var collapsed = arrayForBool.objectAtIndex(i).boolValue as Bool
+                let collapsed = arrayForBool.objectAtIndex(i).boolValue as Bool
                 if (collapsed){
-                    var path:NSIndexPath = NSIndexPath(forItem: i, inSection: 0)
+                    let path:NSIndexPath = NSIndexPath(forItem: i, inSection: 0)
                     self.tableView.reloadRowsAtIndexPaths([path], withRowAnimation: UITableViewRowAnimation.Fade)
                     self.tableView.scrollToRowAtIndexPath(path, atScrollPosition: UITableViewScrollPosition.Top, animated: true)
                     isOpenSectionRequired = false
@@ -69,7 +69,7 @@ class TypeViewController: UIViewController {
     }
     
     func openItem(type: Int){
-        var collapsed = arrayForBool.objectAtIndex(type).boolValue as Bool
+        let collapsed = arrayForBool.objectAtIndex(type).boolValue as Bool
         arrayForBool.replaceObjectAtIndex(type, withObject: !collapsed)
         self.currentSection = type
         isOpenSectionRequired = true
@@ -87,16 +87,16 @@ class TypeViewController: UIViewController {
 extension TypeViewController: UITableViewDelegate{
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        println("You selected cell #\(indexPath.row)!")
+        print("You selected cell #\(indexPath.row)!")
         let oldRow = self.currentSection
         self.currentSection = indexPath.row
         
         //Collapse row already opened
         for (var i = 0; i < arrayForBool.count; i++) {
-            var collapsed = arrayForBool.objectAtIndex(i).boolValue as Bool
+            let collapsed = arrayForBool.objectAtIndex(i).boolValue as Bool
             if (collapsed && i != indexPath.row) {
                 arrayForBool.replaceObjectAtIndex(i, withObject: !collapsed)
-                var path:NSIndexPath = NSIndexPath(forItem: oldRow, inSection: 0)
+                let path:NSIndexPath = NSIndexPath(forItem: oldRow, inSection: 0)
                 self.tableView.reloadRowsAtIndexPaths([path], withRowAnimation:UITableViewRowAnimation.Fade)
                 break
             }
@@ -137,7 +137,7 @@ extension TypeViewController: UITableViewDataSource {
     }
    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        var height = self.tableView.bounds.height - self.navigationController!.navigationBar.frame.height
+        let height = self.tableView.bounds.height - self.navigationController!.navigationBar.frame.height
         
         if (arrayForBool.objectAtIndex(indexPath.row).boolValue as Bool){
             return calculateCollectionViewHeight()
@@ -149,7 +149,7 @@ extension TypeViewController: UITableViewDataSource {
 
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         NSLog("willDisplayCell \(indexPath.row)")
-        var currentCell = cell as! TypeTableViewCell
+        let currentCell = cell as! TypeTableViewCell
         
         currentCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, index: indexPath.row)
     
@@ -157,7 +157,7 @@ extension TypeViewController: UITableViewDataSource {
             currentCell.collectionWidth = self.tableView.bounds.width
             currentCell.showCollectionView()
         } else {
-            var height = self.tableView.bounds.height;
+            let height = self.tableView.bounds.height;
             //Resize cell
             currentCell.contentView.frame = CGRectMake(0, 0, tableView.frame.size.width, round(height*0.33333))
             currentCell.hideCollectionView()
@@ -166,7 +166,7 @@ extension TypeViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         NSLog("cellForRowAtIndexPath \(indexPath.row)")
-        var cell = self.tableView.dequeueReusableCellWithIdentifier(cellTypeIdentifier, forIndexPath: indexPath) as! TypeTableViewCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier(cellTypeIdentifier, forIndexPath: indexPath) as! TypeTableViewCell
         cell.bgImageView.image = UIImage(named: "\(bgType[indexPath.row])Full")
         cell.labelTypeText.text = sectionTitleArray[indexPath.row].uppercaseString
         cell.bgImageView.clipsToBounds = true
@@ -198,7 +198,7 @@ extension TypeViewController : UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellReuse, forIndexPath: indexPath) as! CustomSubTypeViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellReuse, forIndexPath: indexPath) as! CustomSubTypeViewCell
         cell.label.text = getData(self.currentSection)![indexPath.row]
         cell.contentView.viewWithTag(100)?.removeFromSuperview()
         cell.contentView.viewWithTag(101)?.removeFromSuperview()
@@ -207,10 +207,9 @@ extension TypeViewController : UICollectionViewDataSource {
     }
     
     func addRightBorder(cell: CustomSubTypeViewCell) -> CustomSubTypeViewCell {
-        var mainViewSize = cell.bounds.size
-        var borderWidth:CGFloat = 1.0
-        var borderColor = UIColor.whiteColor()
-        var rightView = UIView(frame: CGRectMake(CGFloat(mainViewSize.width - borderWidth), 0, borderWidth, mainViewSize.height))
+        let mainViewSize = cell.bounds.size
+        let borderWidth:CGFloat = 1.0
+        let rightView = UIView(frame: CGRectMake(CGFloat(mainViewSize.width - borderWidth), 0, borderWidth, mainViewSize.height))
         rightView.tag = 100
         rightView.backgroundColor = UIColor.whiteColor()
         
@@ -220,10 +219,9 @@ extension TypeViewController : UICollectionViewDataSource {
     }
     
     func addBottomBorder(cell: CustomSubTypeViewCell) -> CustomSubTypeViewCell {
-        var mainViewSize = cell.bounds.size
-        var borderWidth:CGFloat = 1.0
-        var borderColor = UIColor.whiteColor()
-        var rightView = UIView(frame: CGRectMake(0, CGFloat(mainViewSize.height - borderWidth), mainViewSize.width, borderWidth))
+        let mainViewSize = cell.bounds.size
+        let borderWidth:CGFloat = 1.0
+        let rightView = UIView(frame: CGRectMake(0, CGFloat(mainViewSize.height - borderWidth), mainViewSize.width, borderWidth))
         rightView.tag = 101
         rightView.backgroundColor = UIColor.whiteColor()
         
@@ -262,11 +260,11 @@ extension TypeViewController : UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.deselectItemAtIndexPath(indexPath, animated: false)
-        var cell = collectionView.cellForItemAtIndexPath(indexPath)
+        let cell = collectionView.cellForItemAtIndexPath(indexPath)
         NSLog("Nbr subviews:  \(cell?.contentView.subviews.count)")
         NSLog("\(indexPath.row)")
         self.subTypeSelected = indexPath.row
-        println("tapped on collection")
+        print("tapped on collection")
         self.performSegueWithIdentifier("showCapture", sender: self)
     }
     

@@ -12,4 +12,11 @@ import UIKit
 class HomeBrandOutfitsListCell: UITableViewCell {
     let cellHeight = 300.0
 
+    @IBOutlet weak var blurView: UIVisualEffectView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    
+    override func awakeFromNib() {
+        self.blurView.layer.cornerRadius = 10
+        self.blurView.layer.masksToBounds = true
+    }
 }

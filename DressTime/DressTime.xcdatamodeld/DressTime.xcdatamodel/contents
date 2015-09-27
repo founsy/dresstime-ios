@@ -16,15 +16,18 @@
     </entity>
     <entity name="Profil" representedClassName="DressTime.Profil" syncable="YES">
         <attribute name="access_token" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="atWorkStyle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="expire_in" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="onPartyStyle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="refresh_token" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="relaxStyle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="temp_unit" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
         <element name="Clothe" positionX="268" positionY="-153" width="128" height="223"/>
-        <element name="Profil" positionX="-63" positionY="63" width="128" height="150"/>
+        <element name="Profil" positionX="-63" positionY="63" width="128" height="195"/>
     </elements>
 </model>

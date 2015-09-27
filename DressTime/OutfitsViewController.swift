@@ -36,7 +36,7 @@ class OutfitsViewController : UIViewController {
     }
 
     private func populateControllersArray() {
-        if let outfits = self.outfitsCollection {
+        if let _ = self.outfitsCollection {
             for i in 0...outfitsCollection.count-1 {
                 let controller = storyboard!.instantiateViewControllerWithIdentifier("OutfitViewController") as! OutfitViewController
                 if let outfit = self.outfitsCollection[i]["outfit"] as? NSArray {
@@ -111,8 +111,8 @@ extension OutfitsViewController: UIPageViewControllerDataSource, UIPageViewContr
         return nil
     }
     
-    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [AnyObject], transitionCompleted completed: Bool) {
-        let itemController = pageViewController.viewControllers[0] as! OutfitViewController
+    func pageViewController(pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        //let itemController = pageViewController.viewControllers[0] as! OutfitViewController
         
         //self.pageControl.currentPage = itemController.itemIndex
     }

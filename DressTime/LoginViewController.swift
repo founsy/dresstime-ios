@@ -14,18 +14,20 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordText: UITextField!
     
     @IBAction func onClickLoginBtn(sender: AnyObject) {
-        let jsonObject: [String: AnyObject] = [
-            "grant_type": "password",
-            "client_id": "android",
-            "client_secret": "SomeRandomCharsAndNumbers",
-            "username": loginText.text,
-            "password": passwordText.text,
-        ];
+        var json = [String: AnyObject]()
+        json["grant_type"] = "password"
+        json["client_id"] = "android"
+        json["client_secret"] = "SomeRandomCharsAndNumbers"
+        json["username"] = loginText.text
+        json["password"] = passwordText.text
+        
+        
+        
         view.endEditing(true)
-        LoginService.loginMethod(jsonObject, postCompleted: { (succeeded: Bool, msg: [String: AnyObject]) -> () in
+        LoginService.loginMethod(json, postCompleted: { (succeeded: Bool, msg: [String: AnyObject]) -> () in
             if (succeeded){
                 let dal = ProfilsDAL()
-                if let profil = dal.fetch(self.loginText.text){
+                if let profil = dal.fetch(self.loginText.text!){
                     profil.access_token = msg["access_token"] as! String
                     profil.refresh_token = msg["refresh_token"] as! String
                     profil.expire_in = msg["expires_in"] as! NSNumber
@@ -33,7 +35,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         SharedData.sharedInstance.currentUserId = newProfil.userid
                     }
                 } else {
-                    let pro = dal.save(self.loginText.text, access_token: msg["access_token"] as! String, refresh_token: msg["refresh_token"] as! String, expire_in: msg["expires_in"] as! Int, name: self.loginText.text, gender: "M", temp_unit: "C");
+                    let pro = dal.save(self.loginText.text!, access_token: msg["access_token"] as! String, refresh_token: msg["refresh_token"] as! String, expire_in: msg["expires_in"] as! Int, name: self.loginText.text!, gender: "M", temp_unit: "C");
                     SharedData.sharedInstance.currentUserId = pro.userid
                 }
                 
@@ -45,12 +47,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 
                 dispatch_async(dispatch_get_main_queue(),  { () -> Void in
                     
-                    var appDelegateTemp = UIApplication.sharedApplication().delegate;
-                    appDelegateTemp!.window!!.rootViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateInitialViewController() as? UIViewController
+                    let appDelegateTemp = UIApplication.sharedApplication().delegate;
+                    appDelegateTemp!.window!!.rootViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateInitialViewController()
                 })
                 
             } else {
-                var alert = UIAlertView(title: "Failed!", message: msg["error"] as? String, delegate: nil, cancelButtonTitle: "Okay.")
+                let alert = UIAlertView(title: "Failed!", message: msg["error"] as? String, delegate: nil, cancelButtonTitle: "Okay.")
                 // Move to the UI thread
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     // Show the alert

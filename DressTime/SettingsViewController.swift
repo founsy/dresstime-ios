@@ -16,6 +16,9 @@ class SettingsViewController : UIViewController {
     @IBOutlet weak var nameText: UILabel!
     @IBOutlet weak var gender: UISegmentedControl!
     @IBOutlet weak var temperature: UISegmentedControl!
+    @IBOutlet weak var atWorkView: UIView!
+    @IBOutlet weak var onPartyView: UIView!
+    @IBOutlet weak var relaxView: UIView!
     
     @IBAction func onLogout(sender: AnyObject) {
         let profilDal = ProfilsDAL()
@@ -37,7 +40,7 @@ class SettingsViewController : UIViewController {
                     }
                     dispatch_async(dispatch_get_main_queue(),  { () -> Void in
                         //Go back to login window
-                        var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
+                        let rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") 
                         self.presentViewController(rootController, animated: true, completion: nil)
                     })
                 //}
@@ -90,7 +93,10 @@ class SettingsViewController : UIViewController {
             } else {
                 temperature.selectedSegmentIndex = 1
             }
-        
         }
+        atWorkView.layer.cornerRadius = 25
+        onPartyView.layer.cornerRadius = 25
+        relaxView.layer.cornerRadius = 25
+        
     }
 }

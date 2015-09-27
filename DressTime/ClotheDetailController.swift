@@ -25,7 +25,7 @@ class ClotheDetailController: UIViewController {
     @IBAction func onClickDelete(sender: AnyObject) {
         
         DressTimeService.deleteClothe(SharedData.sharedInstance.currentUserId!, clotheId: currentClothe.clothe_id, clotheDelCompleted: { (succeeded, msg) -> () in
-            println("Clothe deleted")
+            print("Clothe deleted")
             let dal = ClothesDAL()
             dal.delete(self.currentClothe)
             dispatch_sync(dispatch_get_main_queue(), {
@@ -44,11 +44,6 @@ class ClotheDetailController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         imageView.image = UIImage(data: currentClothe.clothe_image)
-        var color = colorWithHexString(currentClothe.clothe_colors)
-        //mainColor.backgroundColor = color
-        let hexTranslator = HexColorToName()
-        var name = hexTranslator.name(color)
-        //colorText.text = currentClothe.clothe_colors + " " + (name[1] as! String)
     }
     
     override func didReceiveMemoryWarning() {
@@ -63,13 +58,13 @@ class ClotheDetailController: UIViewController {
             cString = (cString as NSString).substringFromIndex(1)
         }
         
-        if (count(cString) != 6) {
+        if (cString.characters.count != 6) {
             return UIColor.grayColor()
         }
         
-        var rString = (cString as NSString).substringToIndex(2)
-        var gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
-        var bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
+        let rString = (cString as NSString).substringToIndex(2)
+        let gString = ((cString as NSString).substringFromIndex(2) as NSString).substringToIndex(2)
+        let bString = ((cString as NSString).substringFromIndex(4) as NSString).substringToIndex(2)
         
         var r:CUnsignedInt = 0, g:CUnsignedInt = 0, b:CUnsignedInt = 0;
         NSScanner(string: rString).scanHexInt(&r)

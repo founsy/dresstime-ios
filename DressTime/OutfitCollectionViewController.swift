@@ -35,17 +35,16 @@ class OutfitCollectionViewController : NSObject, UICollectionViewDataSource {
     
     //3
     @objc func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as! UICollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath)
         cell.backgroundColor = UIColor.clearColor()
         if (self.collection.count > 0){
             var elem = self.collection[indexPath.row]
             if let outfit = elem["outfit"] as? NSArray {
                 var k = 1;
                 for clothe in outfit {
-                    let type = clothe["clothe_type"] as! NSString
                     let item = self.clotheDal.fetch(clothe["clothe_id"] as! String)
                     
-                    var imageView = cell.viewWithTag(k) as! UIImageView
+                    let imageView = cell.viewWithTag(k) as! UIImageView
                     imageView.image = UIImage(data: item!.clothe_image)
                     
                     if let rate:AnyObject = clothe["matchingRate"] {
@@ -74,9 +73,9 @@ extension OutfitCollectionViewController : UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-            var widthParent = collectionView.bounds.size.width
-            var width = widthParent/2 - 40
-            var height = (collectionView.bounds.size.height/2)-10
+            let widthParent = collectionView.bounds.size.width
+            let width = widthParent/2 - 40
+            let height = (collectionView.bounds.size.height/2)-10
             
             return CGSize(width: width, height: height)
     }
@@ -91,8 +90,7 @@ extension OutfitCollectionViewController : UICollectionViewDelegateFlowLayout {
 
 extension OutfitCollectionViewController : UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath){
-        var cell : UICollectionViewCell = collectionView.cellForItemAtIndexPath(indexPath)!
-        println(indexPath.row)
+        print(indexPath.row)
         //(self.targetVC as! ProfilViewController).clotheSelected = self.collection[indexPath.row]
         
         //self.targetVC.performSegueWithIdentifier("showClotheDetail", sender: self.targetVC)

@@ -58,7 +58,7 @@ extension DetailTypeViewController: ClotheDetailTableViewCellDelegate {
     func onEditClothe(indexPath: NSIndexPath) {
        if let currentClothe = self.clothesList?[indexPath.row] {
             DressTimeService.deleteClothe(SharedData.sharedInstance.currentUserId!, clotheId: currentClothe.clothe_id, clotheDelCompleted: { (succeeded, msg) -> () in
-                println("Clothe deleted")
+                print("Clothe deleted")
                 let dal = ClothesDAL()
                 dal.delete(currentClothe)
                /* dispatch_sync(dispatch_get_main_queue(), {
@@ -80,10 +80,10 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
         
         //Collapse row already opened
         for (var i = 0; i < arrayForBool.count; i++) {
-            var collapsed = arrayForBool[i] as Bool
+            let collapsed = arrayForBool[i] as Bool
             if (collapsed && i != indexPath.row) {
                 arrayForBool[i] = !collapsed
-                var path:NSIndexPath = NSIndexPath(forItem: oldRow, inSection: 0)
+                let path:NSIndexPath = NSIndexPath(forItem: oldRow, inSection: 0)
                 self.tableView.reloadRowsAtIndexPaths([path], withRowAnimation:UITableViewRowAnimation.Fade)
                 break
             }
@@ -104,7 +104,7 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        var height:CGFloat = 150.0
+        let height:CGFloat = 150.0
         if (arrayForBool[indexPath.row].boolValue as Bool){
             return height*2.8
         } else {

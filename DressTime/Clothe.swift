@@ -25,8 +25,8 @@ class Clothe: NSManagedObject {
     @NSManaged var profilRel: Profil
     
     func toDictionnary() -> NSDictionary {
-        var attributes = Array(self.entity.attributesByName.keys)
-        var dict = self.dictionaryWithValuesForKeys(attributes)
-        return dict as! [String:AnyObject];
+        let attributes = Array(self.entity.attributesByName.keys)
+        let dict = self.dictionaryWithValuesForKeys(attributes)
+        return dict ;
     }
 }

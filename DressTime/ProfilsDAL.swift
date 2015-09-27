@@ -15,54 +15,70 @@ class ProfilsDAL {
     
     init(){
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        self.managedObjectContext = appDelegate.managedObjectContext!
+        self.managedObjectContext = appDelegate.managedObjectContext
     }
     
     
+    
     func fetch(userId: String) -> Profil? {
-        var fetchedResultsController: NSFetchedResultsController?
-        var fetchRequest = NSFetchRequest(entityName: "Profil")
+        let fetchRequest = NSFetchRequest(entityName: "Profil")
         let predicate = NSPredicate(format: "userid = %@", userId)
         
         // Set the predicate on the fetch request
         fetchRequest.predicate = predicate
         
-        if let fetchResults = self.managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Profil] {
-            if (fetchResults.count > 0){
-                return fetchResults[0]
-            } else {
-                return nil
+        do {
+            if let list = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Profil] {
+                if (list.count > 0){
+                    return list[0]
+                } else {
+                    return nil
+                }
             }
+        } catch let error as NSError {
+            // failure
+            print("Fetch failed: \(error.localizedDescription)")
         }
+        
         return nil
     }
     
     func fetchLastUserConnected() -> Profil?{
-        var fetchedResultsController: NSFetchedResultsController?
-        var fetchRequest = NSFetchRequest(entityName: "Profil")
+        let fetchRequest = NSFetchRequest(entityName: "Profil")
         let predicate = NSPredicate(format: "access_token != \"\"")
         // Set the predicate on the fetch request
         fetchRequest.predicate = predicate
         
-        if let fetchResults = self.managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Profil] {
-            if (fetchResults.count > 0){
-                return fetchResults[0]
-            } else {
-                return nil
+        do {
+            if let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Profil] {
+                if (fetchResults.count > 0){
+                    return fetchResults[0]
+                } else {
+                    return nil
+                }
             }
+        } catch let error as NSError {
+                // failure
+                print("Fetch failed: \(error.localizedDescription)")
         }
+            
         return nil
+
     }
     
     func fetch() -> [Profil]? {
-        var fetchedResultsController: NSFetchedResultsController?
-        var fetchRequest = NSFetchRequest(entityName: "Profil")
-        if let fetchResults = self.managedObjectContext.executeFetchRequest(fetchRequest, error: nil) as? [Profil] {
-            if (fetchResults.count > 0){
-                return fetchResults
-            } else {
-                return nil
+        let fetchRequest = NSFetchRequest(entityName: "Profil")
+        do {
+            if let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Profil] {
+                if (fetchResults.count > 0){
+                    return fetchResults
+                } else {
+                    return nil
+                }
             }
+        } catch let error as NSError {
+            // failure
+            print("Fetch failed: \(error.localizedDescription)")
         }
         return nil
     }
@@ -79,13 +95,11 @@ class ProfilsDAL {
         profil.gender = gender
         profil.temp_unit = temp_unit
         
-        var error: NSError?
-        managedObjectContext.save(&error)
-        
-        if let err = error {
-            NSLog(err.localizedFailureReason!);
-        } else {
-            NSLog("Contact Saved");
+        do {
+            try managedObjectContext.save()
+             NSLog("Contact Saved");
+        } catch let error as NSError {
+             NSLog(error.localizedFailureReason!);
         }
         
         return profil
@@ -102,16 +116,14 @@ class ProfilsDAL {
             oldProfil.gender = profil.gender
             oldProfil.temp_unit = profil.temp_unit
             
-            var error: NSError?
-            managedObjectContext.save(&error)
-            
-            if let err = error {
-                NSLog(err.localizedFailureReason!);
-                return nil
-            } else {
-                NSLog("Contact updated");
+            do {
+                try managedObjectContext.save()
                 return oldProfil
+            } catch let error as NSError {
+                print(error)
+                return nil
             }
+
         } else {
             return nil
         }
