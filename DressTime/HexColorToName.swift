@@ -1,3 +1,4 @@
+
 //
 //  HexColorToName.swift
 //  DressTime
@@ -33,14 +34,18 @@ extension UIColor {
         
         return UIColor(red: CGFloat(r) / 255.0, green: CGFloat(g) / 255.0, blue: CGFloat(b) / 255.0, alpha: CGFloat(1))
     }
-    static func hexStringFromColor(color: UIColor) -> String{
-        let components = CGColorGetComponents(color.CGColor);
+    
+    func hexStringFromColor() -> String{
+        var r:CGFloat = 0
+        var g:CGFloat = 0
+        var b:CGFloat = 0
+        var a:CGFloat = 0
         
-        let r = components[0];
-        let g = components[1];
-        let b = components[2];
+        self.getRed(&r, green: &g, blue: &b, alpha: &a)
         
-        return String(format:"%02lX%02lX%02lX", Int(r * 255), Int(g * 255), Int(b * 255))
+        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        
+        return String(format:"#%06x", rgb)
     }
 }
 class HexColorToName {
@@ -129,13 +134,16 @@ class HexColorToName {
     }
     
     func hexStringFromColor(color: UIColor) -> String{
-        let components = CGColorGetComponents(color.CGColor);
+        var r:CGFloat = 0
+        var g:CGFloat = 0
+        var b:CGFloat = 0
+        var a:CGFloat = 0
         
-        let r = components[0];
-        let g = components[1];
-        let b = components[2];
+        color.getRed(&r, green: &g, blue: &b, alpha: &a)
         
-        return String(format:"#%02lX%02lX%02lX", Int(r * 255), Int(g * 255), Int(b * 255))
+        let rgb:Int = (Int)(r*255)<<16 | (Int)(g*255)<<8 | (Int)(b*255)<<0
+        
+        return String(format:"#%06x", rgb)
         
     }
     

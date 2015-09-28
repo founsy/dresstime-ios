@@ -205,7 +205,7 @@ class NewCameraViewController : UIViewController {
             if (colors != ""){
                 colors+=","
             }
-            colors += "\(UIColor.hexStringFromColor(self.arrayColors[i]))"
+            colors += self.arrayColors[i].hexStringFromColor()
         }
         
         let jsonObject: [String: AnyObject] = [

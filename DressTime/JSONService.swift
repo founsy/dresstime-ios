@@ -26,16 +26,20 @@ class JSONService
         }
         
         let task = session.dataTaskWithRequest(request, completionHandler: {data, response, error -> Void in
-            let strData = NSString(data: data!, encoding: NSUTF8StringEncoding)
-            print(strData)
-            var json: [String: AnyObject]?
-            do {
-                json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableLeaves) as? [String: AnyObject]
-            } catch let error as NSError {
-                print(error)
-                getCompleted(succeeded: false, msg: ["error":"Error"])
+            if let dataCheck = data {
+                let strData = NSString(data: dataCheck, encoding: NSUTF8StringEncoding)
+                print(strData)
+                var json: [String: AnyObject]?
+                do {
+                    json = try NSJSONSerialization.JSONObjectWithData(data!, options: .MutableLeaves) as? [String: AnyObject]
+                    getCompleted(succeeded: true, msg: json!)
+                } catch let error as NSError {
+                    print(error)
+                    getCompleted(succeeded: false, msg: ["error":"Error"])
+                }
+            } else {
+                 getCompleted(succeeded: false, msg: ["error":"Error"])
             }
-            getCompleted(succeeded: true, msg: json!)
         })
         
         task.resume()

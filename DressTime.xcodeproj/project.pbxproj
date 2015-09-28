@@ -69,6 +69,9 @@
 		01C455691B597F74003D5E41 /* PlatformExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4555F1B597F74003D5E41 /* PlatformExtensions.swift */; };
 		01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4556B1B598AD8003D5E41 /* OverlayView.swift */; };
 		01C4556F1B5A603C003D5E41 /* ClothPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4556E1B5A603C003D5E41 /* ClothPhotoCell.swift */; };
+		01C683D01BB8504500765C7F /* DetailClotheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683CF1BB8504500765C7F /* DetailClotheViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		01C683D21BB866D800765C7F /* UIColor-Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683D11BB866D800765C7F /* UIColor-Hex.swift */; settings = {ASSET_TAGS = (); }; };
+		01C683D61BB971C900765C7F /* UIImage-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683D51BB971C900765C7F /* UIImage-Extension.swift */; settings = {ASSET_TAGS = (); }; };
 		01D1B8701B72374100920C64 /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B86F1B72374100920C64 /* AKPickerView.swift */; };
 		01D1B8721B726B7D00920C64 /* TypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8711B726B7D00920C64 /* TypeViewController.swift */; };
 		01D1B8761B72949B00920C64 /* SubTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D1B8751B72949B00920C64 /* SubTypeCell.xib */; };
@@ -177,6 +180,9 @@
 		01C4555F1B597F74003D5E41 /* PlatformExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformExtensions.swift; sourceTree = "<group>"; };
 		01C4556B1B598AD8003D5E41 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		01C4556E1B5A603C003D5E41 /* ClothPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothPhotoCell.swift; sourceTree = "<group>"; };
+		01C683CF1BB8504500765C7F /* DetailClotheViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailClotheViewController.swift; sourceTree = "<group>"; };
+		01C683D11BB866D800765C7F /* UIColor-Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor-Hex.swift"; sourceTree = "<group>"; };
+		01C683D51BB971C900765C7F /* UIImage-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage-Extension.swift"; sourceTree = "<group>"; };
 		01D1B86E1B7215F000920C64 /* DressTime-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DressTime-Bridging-Header.h"; sourceTree = "<group>"; };
 		01D1B86F1B72374100920C64 /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AKPickerView.swift; path = AKPickerView/AKPickerView.swift; sourceTree = "<group>"; };
 		01D1B8711B726B7D00920C64 /* TypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeViewController.swift; sourceTree = "<group>"; };
@@ -219,6 +225,8 @@
 			children = (
 				012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */,
 				013996411B5CED57004B2DE0 /* DressingSynchro.swift */,
+				01C683D11BB866D800765C7F /* UIColor-Hex.swift */,
+				01C683D51BB971C900765C7F /* UIImage-Extension.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -343,18 +351,14 @@
 		01C454FA1B593A03003D5E41 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				01C683D41BB9151000765C7F /* Profil */,
+				01C683D31BB914E700765C7F /* Capture */,
 				014BF92B1BB171AE00319701 /* Register */,
 				CD4E053E1B776987005B161B /* HomeViewController.swift */,
 				01C454FB1B593A18003D5E41 /* LoginViewController.swift */,
 				01C454FD1B593EB2003D5E41 /* NavigationController.swift */,
-				01A6BDD81B99C7FE00D357A3 /* ProfilViewController.swift */,
-				01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */,
 				012A21961B5AA3C100CD01D3 /* ClotheDetailController.swift */,
 				0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */,
-				01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */,
-				01D1B8711B726B7D00920C64 /* TypeViewController.swift */,
-				01A6BDE91B9B41A100D357A3 /* NewCameraViewController.swift */,
-				0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */,
 				019A78521BA002E3001958FE /* OutfitViewController.swift */,
 				019A78541BA01315001958FE /* OutfitsViewController.swift */,
 				013B07841BA824D10063CCF9 /* NewHomeViewController.swift */,
@@ -430,6 +434,27 @@
 			children = (
 			);
 			name = Resources;
+			sourceTree = "<group>";
+		};
+		01C683D31BB914E700765C7F /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				01D1B8711B726B7D00920C64 /* TypeViewController.swift */,
+				01A6BDE91B9B41A100D357A3 /* NewCameraViewController.swift */,
+				0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */,
+			);
+			name = Capture;
+			sourceTree = "<group>";
+		};
+		01C683D41BB9151000765C7F /* Profil */ = {
+			isa = PBXGroup;
+			children = (
+				01A6BDD81B99C7FE00D357A3 /* ProfilViewController.swift */,
+				01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */,
+				01C683CF1BB8504500765C7F /* DetailClotheViewController.swift */,
+				01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */,
+			);
+			name = Profil;
 			sourceTree = "<group>";
 		};
 		01EAFA3D1B71E13C00835BB4 /* AKPickerView */ = {
@@ -611,6 +636,7 @@
 				014BF92F1BB171EE00319701 /* RegisterSexeViewController.swift in Sources */,
 				014BF9311BB171FD00319701 /* RegisterStyleViewController.swift in Sources */,
 				019A78511B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift in Sources */,
+				01C683D61BB971C900765C7F /* UIImage-Extension.swift in Sources */,
 				01C454F71B593909003D5E41 /* JSONService.swift in Sources */,
 				0177B4E61B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift in Sources */,
 				01C455111B597626003D5E41 /* Clothe.swift in Sources */,
@@ -619,6 +645,7 @@
 				01D1B8781B7327B000920C64 /* CustomSubTypeViewCell.swift in Sources */,
 				0175615F1BAB451100DE1EFE /* CurveArrowView.swift in Sources */,
 				013996401B5BB739004B2DE0 /* OutfitCollectionViewController.swift in Sources */,
+				01C683D21BB866D800765C7F /* UIColor-Hex.swift in Sources */,
 				012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */,
 				01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */,
 				01C454FE1B593EB2003D5E41 /* NavigationController.swift in Sources */,
@@ -633,6 +660,7 @@
 				012A219D1B5AB89700CD01D3 /* ProfilsDAL.swift in Sources */,
 				01D1B8721B726B7D00920C64 /* TypeViewController.swift in Sources */,
 				01C4550C1B597571003D5E41 /* ClothesDAL.swift in Sources */,
+				01C683D01BB8504500765C7F /* DetailClotheViewController.swift in Sources */,
 				01C455031B5946D9003D5E41 /* LoginService.swift in Sources */,
 				CD4E05401B776987005B161B /* HomeViewController.swift in Sources */,
 				01A6BDE81B9B365B00D357A3 /* TypeTableViewCell.swift in Sources */,

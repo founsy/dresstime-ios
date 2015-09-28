@@ -24,6 +24,8 @@ class ClotheDetailTableViewCell: UITableViewCell{
     @IBOutlet weak var color2View: UIView!
     @IBOutlet weak var color3View: UIView!
     
+    @IBOutlet weak var containerView: UIView!
+    
     @IBAction func onEdit(sender: AnyObject) {
         if let del = delegate {
             del.onEditClothe(indexPath!)
@@ -31,12 +33,20 @@ class ClotheDetailTableViewCell: UITableViewCell{
     }
     var delegate: ClotheDetailTableViewCellDelegate?
     var indexPath: NSIndexPath?
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        roundTopCorner()
+    }
     
     func roundTopCorner(){
-        self.topView.roundCorners([UIRectCorner.TopLeft,UIRectCorner.TopRight], radius: 10.0)
-        self.clotheImageView.roundCorners(UIRectCorner.AllCorners, radius: 10.0)
-        self.onCreateOutfit.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
+        self.clotheImageView.roundCorners([UIRectCorner.BottomLeft,UIRectCorner.BottomRight], radius: 10.0)
+        self.clotheImageView.clipsToBounds = true
         
+        self.topView.roundCorners([UIRectCorner.TopLeft,UIRectCorner.TopRight], radius: 10.0)
+        self.topView.clipsToBounds = true
+        
+        self.onCreateOutfit.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
+       
         self.color1View.layer.cornerRadius = 5.0
         self.color1View.layer.borderWidth = 1.0
         self.color1View.layer.borderColor = UIColor.whiteColor().CGColor

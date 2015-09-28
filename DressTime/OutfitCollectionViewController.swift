@@ -42,14 +42,16 @@ class OutfitCollectionViewController : NSObject, UICollectionViewDataSource {
             if let outfit = elem["outfit"] as? NSArray {
                 var k = 1;
                 for clothe in outfit {
-                    let item = self.clotheDal.fetch(clothe["clothe_id"] as! String)
-                    
-                    let imageView = cell.viewWithTag(k) as! UIImageView
-                    imageView.image = UIImage(data: item!.clothe_image)
-                    
-                    if let rate:AnyObject = clothe["matchingRate"] {
-                        if let rateCell = cell.viewWithTag(4) as? UITextView {
-                            rateCell.text = String(format:"%.1f", rate as! Double)
+                    if let clotheElem = clothe as? NSDictionary {
+                        let item = self.clotheDal.fetch(clotheElem["clothe_id"] as! String)
+                        
+                        let imageView = cell.viewWithTag(k) as! UIImageView
+                        imageView.image = UIImage(data: item!.clothe_image)!.imageWithImage(480.0)
+                        
+                        if let rate:AnyObject = clothe["matchingRate"] {
+                            if let rateCell = cell.viewWithTag(4) as? UITextView {
+                                rateCell.text = String(format:"%.1f", rate as! Double)
+                            }
                         }
                     }
                     k = k+1

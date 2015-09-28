@@ -42,6 +42,20 @@ class OutfitViewController: UIViewController {
             }
         }
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "detailClothe") {
+                let navigationController = segue.destinationViewController as! UINavigationController
+                if let detailController = navigationController.viewControllers[0] as? DetailClotheViewController {
+                    if let outfit = self.currentOutfits[self.currentSection] as? NSDictionary {
+                        let clothe_id = outfit["clothe_id"] as! String
+                        if let clothe = dal.fetch(clothe_id) {
+                            detailController.currentClothe =  clothe
+                        }
+                    }
+                }
+        }
+    }
 }
 
 extension OutfitViewController: ClotheDetailTableViewCellDelegate {
@@ -66,9 +80,9 @@ extension OutfitViewController: ClotheDetailTableViewCellDelegate {
 extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let oldRow = self.currentSection
-        self.currentSection = self.currentSection == indexPath.row ? -1 : indexPath.row
-        
+       // let oldRow = self.currentSection
+        self.currentSection = /*self.currentSection == indexPath.row ? -1 :*/ indexPath.row
+       /*
         //Collapse row already opened
         for (var i = 0; i < arrayForBool.count; i++) {
             let collapsed = arrayForBool[i] as Bool
@@ -87,6 +101,15 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
         
         self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
         self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+        */
+        print("didSelectRowAtIndexPath")
+        self.currentSection = indexPath.row
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.performSegueWithIdentifier("detailClothe", sender: self)
+        })
+        self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+        
+
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -107,9 +130,6 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath){
-    }
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if (arrayForBool[indexPath.row].boolValue as Bool){
             let cell = tableView.dequeueReusableCellWithIdentifier(self.cellDetailIdentifier, forIndexPath: indexPath) as! ClotheDetailTableViewCell
@@ -128,19 +148,21 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
             
             let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! ClotheTableViewCell
             
-            let clothe_id = self.currentOutfits[indexPath.row]["clothe_id"] as! String
-            if let clothe = dal.fetch(clothe_id) {
-                if let image = UIImage(data: clothe.clothe_image) {
-                    NSLog("\(image.size.width) - \(image.size.height)")
-                
-                    cell.clotheImageView.image = image.imageResize(CGSizeMake(380.0, 480.0))
+            if let outfit = self.currentOutfits[indexPath.row] as? NSDictionary {
+                let clothe_id = outfit["clothe_id"] as! String
+                if let clothe = dal.fetch(clothe_id) {
+                    if let image = UIImage(data: clothe.clothe_image) {
+                        NSLog("\(image.size.width) - \(image.size.height)")
+                    
+                        cell.clotheImageView.image = image.imageWithImage(480.0)
+                    }
+                    cell.layer.shadowOffset = CGSizeMake(3, 6);
+                    cell.layer.shadowColor = UIColor.blackColor().CGColor
+                    cell.layer.shadowRadius = 8;
+                    cell.layer.shadowOpacity = 0.75;
+                    cell.clotheImageView.clipsToBounds = true
+                    cell.favorisIcon.clipsToBounds = true
                 }
-                cell.layer.shadowOffset = CGSizeMake(3, 6);
-                cell.layer.shadowColor = UIColor.blackColor().CGColor
-                cell.layer.shadowRadius = 8;
-                cell.layer.shadowOpacity = 0.75;
-                cell.clotheImageView.clipsToBounds = true
-                cell.favorisIcon.clipsToBounds = true
             }
             return cell
         }

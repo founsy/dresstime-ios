@@ -52,6 +52,16 @@ class DetailTypeViewController: UIViewController {
         bar.tintColor = UIColor.whiteColor()
         bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "detailClothe") {
+            let navigationController = segue.destinationViewController as! UINavigationController
+            if let detailController = navigationController.viewControllers[0] as? DetailClotheViewController {
+                detailController.currentClothe =  self.clothesList![self.currentSection]
+            }
+
+        }
+    }
 }
 
 extension DetailTypeViewController: ClotheDetailTableViewCellDelegate {
@@ -61,10 +71,6 @@ extension DetailTypeViewController: ClotheDetailTableViewCellDelegate {
                 print("Clothe deleted")
                 let dal = ClothesDAL()
                 dal.delete(currentClothe)
-               /* dispatch_sync(dispatch_get_main_queue(), {
-                    self.initData()
-                    self.tableView.reloadData()
-                }) */
             })
         }
         self.clothesList!.removeAtIndex(indexPath.row)
@@ -75,31 +81,12 @@ extension DetailTypeViewController: ClotheDetailTableViewCellDelegate {
 extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let oldRow = self.currentSection
-        self.currentSection = self.currentSection == indexPath.row ? -1 : indexPath.row
-        
-        //Collapse row already opened
-        for (var i = 0; i < arrayForBool.count; i++) {
-            let collapsed = arrayForBool[i] as Bool
-            if (collapsed && i != indexPath.row) {
-                arrayForBool[i] = !collapsed
-                let path:NSIndexPath = NSIndexPath(forItem: oldRow, inSection: 0)
-                self.tableView.reloadRowsAtIndexPaths([path], withRowAnimation:UITableViewRowAnimation.Fade)
-                break
-            }
-        }
-        
-        //Open new one
-        var collapsed = arrayForBool[indexPath.row]
-        collapsed = !collapsed;
-        arrayForBool[indexPath.row] = collapsed
-        
-        self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        print("didSelectRowAtIndexPath")
+        self.currentSection = indexPath.row
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.performSegueWithIdentifier("detailClothe", sender: self)
+        })
         self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
-        
-      /*  var detail = self.storyboard!.instantiateViewControllerWithIdentifier("ClotheDetail") as! ClotheDetailController
-        detail.currentClothe = self.clothesList![indexPath.row]
-        self.presentViewController(detail, animated: true, completion: nil) */
         
     }
     
@@ -121,17 +108,15 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath){
-    }
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if (arrayForBool[indexPath.row].boolValue as Bool){
             let cell = tableView.dequeueReusableCellWithIdentifier(self.cellDetailIdentifier, forIndexPath: indexPath) as! ClotheDetailTableViewCell
+            cell.layer.cornerRadius = 10.0
+            cell.layer.masksToBounds = true
+            
             let clothe = self.clothesList![indexPath.row]
             cell.clotheImageView.image = UIImage(data: clothe.clothe_image)
             cell.updateColors(clothe.clothe_colors as String)
-            cell.roundTopCorner()
-            cell.clotheImageView.clipsToBounds = true
             cell.indexPath = indexPath
             cell.delegate = self
             return cell
@@ -143,7 +128,7 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
             if let image = UIImage(data: clothe.clothe_image) {
                 NSLog("\(image.size.width) - \(image.size.height)")
             
-                cell.clotheImageView.image = image.imageResize(CGSizeMake(380.0, 480.0))
+                cell.clotheImageView.image = image.imageWithImage(480.0) //image.imageResize(CGSizeMake(380.0, 480.0))
             }
             cell.layer.shadowOffset = CGSizeMake(3, 6);
             cell.layer.shadowColor = UIColor.blackColor().CGColor
@@ -151,11 +136,6 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.shadowOpacity = 0.75;
             cell.clotheImageView.clipsToBounds = true
             cell.favorisIcon.clipsToBounds = true
-           /* if (self.currentSection > -1){
-                 cell.blackEffect.alpha = 0.5;
-            } else {
-                cell.blackEffect.alpha = 0;
-            }*/
             return cell;
         }
         

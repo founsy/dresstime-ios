@@ -111,6 +111,14 @@ class ClothesDAL {
         }
     }
     
+    func update(clothe: Clothe){
+        do {
+            try clothe.managedObjectContext?.save()
+        } catch let error as NSError {
+          NSLog(error.localizedFailureReason!);
+        }
+    }
+    
     func updateClotheId(){
         let fetchRequest = NSFetchRequest(entityName: "Clothe")
         do {
