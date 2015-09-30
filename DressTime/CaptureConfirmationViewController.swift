@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import DominantColor
 
 class CaptureConfirmationViewController: UIViewController {
 
@@ -59,8 +60,24 @@ class CaptureConfirmationViewController: UIViewController {
             let type = clothe.clothe_type
             let subtype = clothe.clothe_subtype
             nameClothe.text = "\(type) - \(subtype)"
-            captureResult.image = UIImage(data: clothe.clothe_image)
-            let colors = self.splitHexColor(clothe.clothe_colors)
+            let clotheImage =  UIImage(data: clothe.clothe_image)
+            captureResult.image = clotheImage
+            
+            //Fall back if image don't have 3 main colors
+            var colors = self.splitHexColor(clothe.clothe_colors)
+            if (colors.count < 2){
+                var tempColor = ""
+                let arrayColors = clotheImage!.dominantColors()
+                for var i = 0; i < arrayColors.count && i < 3; i++ {
+                    if (tempColor != ""){
+                        tempColor += ","
+                    }
+                    tempColor += arrayColors[i].hexStringFromColor()
+                }
+                clothe.clothe_colors = tempColor
+                colors = self.splitHexColor(tempColor)
+            }
+            
             if (colors.count > 0) {
                 color1.backgroundColor = UIColor.colorWithHexString(colors[0] as String)
             }

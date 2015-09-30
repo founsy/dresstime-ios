@@ -56,6 +56,7 @@ class DetailClotheViewController: UIViewController {
         self.navigationController?.navigationBarHidden = true
         self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)
         imageView.image = UIImage(data: currentClothe.clothe_image)
+        imageView.clipsToBounds = true
         self.viewContainer.layer.cornerRadius = 10.0
         self.viewContainer.layer.masksToBounds = true
         

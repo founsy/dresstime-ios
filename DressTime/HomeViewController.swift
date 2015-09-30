@@ -1,77 +1,39 @@
 //
-//  ViewController.swift
-//  Today
+//  NewHomeViewController.swift
+//  DressTime
 //
-//  Created by yof on 08/08/2015.
-//  Copyright (c) 2015 dresstime. All rights reserved.
+//  Created by Fab on 15/09/2015.
+//  Copyright (c) 2015 Fab. All rights reserved.
 //
 
+import Foundation
 import UIKit
-import CoreLocation
 
-class HomeViewController: UIViewController  {
-    private var locationManager: CLLocationManager = CLLocationManager()
-    private var currentLocation: CLLocation!
-    private var panGestureRecognizer: UIPanGestureRecognizer!
-    private var swipeGestureRecognizer: UISwipeGestureRecognizer!
-    private var isHide = false
-    private var filterFrame: CGRect!
-    private let cell3Identifier = "Outfit3ElemsCell"
-    private let cell2Identifier = "Outfit2ElemsCell"
-    private var outfitsCollection: [[String:AnyObject]]!
+
+
+class HomeViewController: UIViewController{
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var bgView: UIImageView!
     
-    private let styleData = ["business", "casual", "sportwear", "fashion"]
+    var outfitsCell: HomeOutfitsListCell?
+    var homeHeaderCell: HomeHeaderCell?
     
-    private var currentStyle = 0
-    
-    @IBOutlet weak var cityLabel: UILabel!
-    @IBOutlet weak var temperatureLabel: UILabel!
-    @IBOutlet weak var iconLabel: UILabel!
-    @IBOutlet weak var outfitCollectionView: UICollectionView!
-    //@IBOutlet weak var filterView: UIView!
-    @IBOutlet var mainView: UIView!
-    
-    //private var filterView: FilterView!
+    private var currentStyleSelected: String?
+    private var numberOfOutfits: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view, typically from a nib.
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.delegate = self
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
-        
-        self.outfitCollectionView.registerNib(UINib(nibName: "Outfit3ElemsCell", bundle:nil), forCellWithReuseIdentifier: self.cell3Identifier)
-        self.outfitCollectionView.registerNib(UINib(nibName: "Outfit2ElemsCell", bundle:nil), forCellWithReuseIdentifier: self.cell2Identifier)
-        self.outfitCollectionView.dataSource = self
-        self.outfitCollectionView.delegate = self
-    }
-    
-    private func blackNavBar(){
-        let bar:UINavigationBar! =  self.navigationController?.navigationBar
-        
-        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        bar.shadowImage = UIImage()
-        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
-        bar.tintColor = UIColor.whiteColor()
-        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        
-        addProfilButtonToNavBar()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        blackNavBar()
+        self.tableView.dataSource = self
+        self.tableView.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        blackNavBar()
+        configNavBar()
     }
     
-    func addProfilButtonToNavBar(){
-    
+    private func addProfilButtonToNavBar(){
+        
         let regularButton = UIButton(frame: CGRectMake(0, 0, 40.0, 40.0))
         let historyButtonImage = UIImage(named: "profile_img")
         regularButton.setBackgroundImage(historyButtonImage, forState: UIControlState.Normal)
@@ -83,221 +45,152 @@ class HomeViewController: UIViewController  {
     }
     
     func profilButtonPressed(){
+        //self.performSegueWithIdentifier("showProfil", sender: self)
         self.performSegueWithIdentifier("showProfil", sender: self)
     }
     
-    func loadTodayOutfits(){
-        DressTimeService.getOutfitsToday(SharedData.sharedInstance.currentUserId!, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.outfitsCollection = msg
-                self.outfitCollectionView.reloadData()
-            })
-        })
-
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    private func configNavBar(){
+        let bar:UINavigationBar! =  self.navigationController?.navigationBar
+        
+        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        bar.shadowImage = UIImage()
+        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+        bar.tintColor = UIColor.whiteColor()
+        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
+        addProfilButtonToNavBar()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "showOutfits"){
             let targetVC = segue.destinationViewController as! OutfitsViewController
-            targetVC.styleOutfits = self.styleData[self.currentStyle]
+            targetVC.styleOutfits = self.currentStyleSelected
         }
     }
+
 }
 
-extension HomeViewController: CLLocationManagerDelegate {
-    /***/
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.currentLocation = locations[locations.count-1]
-        locationManager.stopUpdatingLocation()
-        WeatherService.getWeather(self.currentLocation, weatherCompleted: { (succeeded: Bool, msg: NSDictionary) -> () in
-            if let query = msg["query"] as? NSDictionary{
-                if let results = query["results"] as? NSDictionary{
-                    if let channel = results["channel"] as? NSDictionary{
-                        if let item = channel["item"] as? NSDictionary{
-                            if let condition = item["condition"] as? NSDictionary{
-                                if let location = channel["location"] as? NSDictionary {
-                                    let city = location["city"] as? String
-                                    if let forecast = item["forecast"] as? NSArray {
-                                        if let today = forecast[0] as? NSDictionary {
-                                            self.updateWeather(Int(condition["code"] as! String)!, high:  today["high"] as! String, low:  today["low"] as! String, city: city!)
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    
-                }
-            }
+extension HomeViewController: HomeHeaderCellDelegate {
+    func weatherFinishing(code: String) {
+        //Call HomeOutfitsListCell
+       let condition = weatherConditionByCode(Int(code)!)
+            var image: UIImage?
             
-        })
-    }
-    
-    func updateWeather(code:Int, high:String, low: String, city: String){
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            SharedData.sharedInstance.weatherCode = String(code)
-            SharedData.sharedInstance.lowTemp = low
-            SharedData.sharedInstance.highTemp = high
-            SharedData.sharedInstance.city = city
-            self.iconLabel.text = self.getValueWeatherCode(code)
-            self.temperatureLabel.text = "\(low)° - \(high)°"
-            self.cityLabel.text = city
-            self.loadTodayOutfits()
-        })
-    }
-    
-    func getValueWeatherCode(code: Int) -> String{
-        switch code {
-        case 0:
-            return ":"
-        case 1:
-            return "p"
-        case 2:
-            return "S"
-        case 3:
-            return "Q"
-        case 4:
-            return "S"
-        case 5:
-            return "W"
-        case 6:
-            return "W"
-        case 7:
-            return "W"
-        case 8:
-            return "W"
-        case 9:
-            return "I"
-        case 10:
-            return "W"
-        case 11:
-            return "I"
-        case 12:
-            return "I"
-        case 13:
-            return "I"
-        case 14:
-            return "I"
-        case 15:
-            return "W"
-        case 16:
-            return "I"
-        case 17:
-            return "W"
-        case 18:
-            return "U"
-        case 19:
-            return "Z"
-        case 20:
-            return "Z"
-        case 21:
-            return "Z"
-        case 22:
-            return "Z"
-        case 23:
-            return "Z"
-        case 24:
-            return "E"
-        case 25:
-            return "E"
-        case 26:
-            return "3"
-        case 27:
-            return "a"
-        case 28:
-            return "A"
-        case 29:
-            return "a"
-        case 30:
-            return "A"
-        case 31:
-            return "6"
-        case 32:
-            return "1"
-        case 33:
-            return "6"
-        case 34:
-            return "1"
-        case 35:
-            return "W"
-        case 36:
-            return "1"
-        case 37:
-            return "S"
-        case 38:
-            return "S"
-        case 39:
-            return "S"
-        case 40:
-            return "M"
-        case 41:
-            return "W"
-        case 42:
-            return "I"
-        case 43:
-            return "W"
-        case 44:
-            return "a"
-        case 45:
-            return "S"
-        case 46:
-            return "U"
-        case 47:
-            return "S"
-        default:
-            return "."
-        }
-    }
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print(error)
-    }
-}
-
-extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let _ = self.outfitsCollection {
-            if let _ = self.outfitsCollection[0]["error"] {
-                return 0
-            } else {
-                return self.outfitsCollection.count
-            }
-        } else {
-            return 0
-        }
-    }
-    
-    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var outfitElem = self.outfitsCollection[indexPath.row]
-        let dal = ClothesDAL()
-        var cell: OutfitElemsCollectionViewCell
-        if let outfit = outfitElem["outfit"] as? NSArray {
-            if (outfit.count == 2){
-                cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cell2Identifier, forIndexPath: indexPath) as! Outfit2ElemsCollectionViewCell
-            } else {
-                cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cell3Identifier, forIndexPath: indexPath) as! Outfit3ElemsCollectionViewCell
+            if (condition == "sunny"){
+                image = UIImage(named: "HomeBgSun")
+            
+            } else if (condition == "cloudy"){
+                image = UIImage(named: "HomeBgSun")
+                
+            } else if (condition == "rainy"){
+                image = UIImage(named: "HomeBgRain")
+                
+            } else if (condition == "windy"){
+                image = UIImage(named: "HomeBgSun")
+                
+            } else if (condition == "snowy"){
+                image = UIImage(named: "HomeBgSnow")
                 
             }
-            for (var i = 0; i < outfit.count; i++){
-                if let outfitElement = outfit[i] as? NSDictionary {
-                    if let clothe = dal.fetch(outfitElement["clothe_id"] as! String) {
-                        cell.setClothe(clothe, style: outfitElem["style"] as! String)
-                    }
-                }
-            }
-            return cell
+            print("-------------------\(condition)-------------------------")
+            dispatch_sync(dispatch_get_main_queue(), {
+                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                    self.bgView.image = image
+                })
+            });
+            print("-------------------\(condition)-------------------------")
+
+        if let outfitsCell = self.outfitsCell {
+            outfitsCell.loadTodayOutfits()
         }
-        return UICollectionViewCell()
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func weatherConditionByCode(code: Int) -> String{
+        var sun = [31, 32, 33, 34, 36]
+        var cloud = [20, 21, 22, 26, 27, 28, 29, 30, 44]
+        var rain = [1, 2, 3, 4, 6, 9, 11, 12, 17, 35, 37, 38, 39, 40, 45, 47]
+        var wind = [0, 19, 23, 24]
+        var snow = [5, 7, 8, 10, 13, 14, 15, 16, 18, 41, 42, 43, 46]
+        
+        for (var i = 0; i < sun.count; i++){
+            if (code == sun[i]){
+                return "sunny"
+            }
+        }
+        for (var i = 0; i < cloud.count; i++){
+            if (code == cloud[i]){
+                return "cloudy"
+            }
+        }
+        for (var i = 0; i < rain.count; i++){
+            if (code == rain[i]){
+                return "rainy"
+            }
+        }
+        for (var i = 0; i < wind.count; i++){
+            if (code == wind[i]){
+                return "windy"
+            }
+        }
+        for (var i = 0; i < snow.count; i++){
+            if (code == snow[i]){
+                return "snowy"
+            }
+        }
+        return ""
+    }
+}
+
+extension HomeViewController: HomeOutfitsListCellDelegate {
+    func showOutfits(currentStyle: String) {
+        self.currentStyleSelected = currentStyle
         self.performSegueWithIdentifier("showOutfits", sender: self)
+    }
+    
+    func loadedOutfits(outfitsCount: Int) {
+        self.numberOfOutfits = outfitsCount
+        self.tableView.reloadData()
+    }
+}
+
+extension HomeViewController: UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 4
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+        NSLog("\(indexPath.row)")
+        if (indexPath.row == 1){
+            self.homeHeaderCell = self.tableView.dequeueReusableCellWithIdentifier("headerCell") as? HomeHeaderCell
+            self.homeHeaderCell!.delegate = self
+            return self.homeHeaderCell!
+        } else if (indexPath.row == 2){
+            self.outfitsCell = self.tableView.dequeueReusableCellWithIdentifier("myOutfitsCell") as? HomeOutfitsListCell
+            self.outfitsCell!.delegate = self
+            return self.outfitsCell!
+        }  else if (indexPath.row == 3){
+            return self.tableView.dequeueReusableCellWithIdentifier("brandOutfitsCell") as! HomeBrandOutfitsListCell
+        }
+        return UITableViewCell()
+    }
+}
+
+extension HomeViewController: UITableViewDelegate {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if (indexPath.row == 1){
+            return 70.0
+        } else if (indexPath.row == 2){
+            if (self.numberOfOutfits > 0){
+                return 350.0
+            } else {
+                return 170.0
+            }
+           
+        } else if (indexPath.row == 3){
+            return 350.0
+        } else {
+            return 0.0
+        }
     }
 
 }

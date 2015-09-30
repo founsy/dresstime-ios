@@ -24,4 +24,25 @@ extension UIImage {
         UIGraphicsEndImageContext();
         return newImage;
     }
+
+    func imageResize (sizeChange:CGSize)-> UIImage{
+        var ratio = 1;
+        if (self.size.width > sizeChange.width){
+            ratio = Int(self.size.width/sizeChange.width);
+        }
+        let newWidth = self.size.width/CGFloat(ratio);
+        let newHeight = self.size.height/CGFloat(ratio);
+        
+        let newSize = CGSizeMake(newWidth, newHeight)
+        
+        let hasAlpha = false
+        let scale: CGFloat = 0.0 // Automatically use scale factor of main screen
+        
+        UIGraphicsBeginImageContextWithOptions(sizeChange, !hasAlpha, scale)
+        self.drawInRect(CGRect(origin: CGPointZero, size: newSize))
+        
+        let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return scaledImage
+    }
 }

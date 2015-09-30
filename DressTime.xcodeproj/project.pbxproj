@@ -7,17 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		012A21971B5AA3C100CD01D3 /* ClotheDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A21961B5AA3C100CD01D3 /* ClotheDetailController.swift */; };
 		012A21991B5AB74900CD01D3 /* DressTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A21981B5AB74900CD01D3 /* DressTimeService.swift */; };
 		012A219B1B5AB87000CD01D3 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219A1B5AB87000CD01D3 /* Profil.swift */; };
 		012A219D1B5AB89700CD01D3 /* ProfilsDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219C1B5AB89700CD01D3 /* ProfilsDAL.swift */; };
 		012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */; };
-		013996401B5BB739004B2DE0 /* OutfitCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */; };
 		013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013996411B5CED57004B2DE0 /* DressingSynchro.swift */; };
 		013B077F1BA820790063CCF9 /* HomeHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B077E1BA820790063CCF9 /* HomeHeaderCell.swift */; };
 		013B07811BA821A20063CCF9 /* HomeOutfitsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B07801BA821A20063CCF9 /* HomeOutfitsListCell.swift */; };
 		013B07831BA821C60063CCF9 /* HomeBrandOutfitsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B07821BA821C60063CCF9 /* HomeBrandOutfitsListCell.swift */; };
-		013B07851BA824D10063CCF9 /* NewHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B07841BA824D10063CCF9 /* NewHomeViewController.swift */; };
+		013B07851BA824D10063CCF9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B07841BA824D10063CCF9 /* HomeViewController.swift */; };
 		014BF92D1BB171C400319701 /* RegisterEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF92C1BB171C400319701 /* RegisterEmailViewController.swift */; };
 		014BF92F1BB171EE00319701 /* RegisterSexeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF92E1BB171EE00319701 /* RegisterSexeViewController.swift */; };
 		014BF9311BB171FD00319701 /* RegisterStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF9301BB171FD00319701 /* RegisterStyleViewController.swift */; };
@@ -46,7 +44,6 @@
 		01C454EC1B5935B3003D5E41 /* DressTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454EB1B5935B3003D5E41 /* DressTimeTests.swift */; };
 		01C454F71B593909003D5E41 /* JSONService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454F61B593909003D5E41 /* JSONService.swift */; };
 		01C454FC1B593A18003D5E41 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454FB1B593A18003D5E41 /* LoginViewController.swift */; };
-		01C454FE1B593EB2003D5E41 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454FD1B593EB2003D5E41 /* NavigationController.swift */; };
 		01C455011B5942F4003D5E41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C454FF1B5942F4003D5E41 /* Main.storyboard */; };
 		01C455031B5946D9003D5E41 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455021B5946D9003D5E41 /* LoginService.swift */; };
 		01C455051B594D52003D5E41 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455041B594D52003D5E41 /* WeatherService.swift */; };
@@ -72,13 +69,15 @@
 		01C683D01BB8504500765C7F /* DetailClotheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683CF1BB8504500765C7F /* DetailClotheViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		01C683D21BB866D800765C7F /* UIColor-Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683D11BB866D800765C7F /* UIColor-Hex.swift */; settings = {ASSET_TAGS = (); }; };
 		01C683D61BB971C900765C7F /* UIImage-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683D51BB971C900765C7F /* UIImage-Extension.swift */; settings = {ASSET_TAGS = (); }; };
+		01C683D91BBBBB7100765C7F /* TypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C683D81BBBBB7100765C7F /* TypeCell.xib */; settings = {ASSET_TAGS = (); }; };
+		01C683DC1BBBBC1700765C7F /* TypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683DB1BBBBC1700765C7F /* TypeCell.swift */; settings = {ASSET_TAGS = (); }; };
+		01C683DE1BBBBC9600765C7F /* NewProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683DD1BBBBC9600765C7F /* NewProfilViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		01D1B8701B72374100920C64 /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B86F1B72374100920C64 /* AKPickerView.swift */; };
 		01D1B8721B726B7D00920C64 /* TypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8711B726B7D00920C64 /* TypeViewController.swift */; };
 		01D1B8761B72949B00920C64 /* SubTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D1B8751B72949B00920C64 /* SubTypeCell.xib */; };
 		01D1B8781B7327B000920C64 /* CustomSubTypeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */; };
 		01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEDD1B6E714600F59D1B /* SharedData.swift */; };
 		01FFCEE61B712A9700F59D1B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */; };
-		CD4E05401B776987005B161B /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD4E053E1B776987005B161B /* HomeViewController.swift */; };
 		CD4E05421B7769C8005B161B /* Static.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD4E05411B7769C8005B161B /* Static.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -114,17 +113,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		012A21961B5AA3C100CD01D3 /* ClotheDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClotheDetailController.swift; sourceTree = "<group>"; };
 		012A21981B5AB74900CD01D3 /* DressTimeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressTimeService.swift; sourceTree = "<group>"; };
 		012A219A1B5AB87000CD01D3 /* Profil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
 		012A219C1B5AB89700CD01D3 /* ProfilsDAL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilsDAL.swift; sourceTree = "<group>"; };
 		012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColorToName.swift; sourceTree = "<group>"; };
-		0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitCollectionViewController.swift; sourceTree = "<group>"; };
 		013996411B5CED57004B2DE0 /* DressingSynchro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressingSynchro.swift; sourceTree = "<group>"; };
 		013B077E1BA820790063CCF9 /* HomeHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeHeaderCell.swift; sourceTree = "<group>"; };
 		013B07801BA821A20063CCF9 /* HomeOutfitsListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeOutfitsListCell.swift; sourceTree = "<group>"; };
 		013B07821BA821C60063CCF9 /* HomeBrandOutfitsListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBrandOutfitsListCell.swift; sourceTree = "<group>"; };
-		013B07841BA824D10063CCF9 /* NewHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewHomeViewController.swift; sourceTree = "<group>"; };
+		013B07841BA824D10063CCF9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		014BF92C1BB171C400319701 /* RegisterEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterEmailViewController.swift; sourceTree = "<group>"; };
 		014BF92E1BB171EE00319701 /* RegisterSexeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSexeViewController.swift; sourceTree = "<group>"; };
 		014BF9301BB171FD00319701 /* RegisterStyleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterStyleViewController.swift; sourceTree = "<group>"; };
@@ -157,7 +154,6 @@
 		01C454EB1B5935B3003D5E41 /* DressTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressTimeTests.swift; sourceTree = "<group>"; };
 		01C454F61B593909003D5E41 /* JSONService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONService.swift; sourceTree = "<group>"; };
 		01C454FB1B593A18003D5E41 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		01C454FD1B593EB2003D5E41 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		01C455001B5942F4003D5E41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		01C455021B5946D9003D5E41 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		01C455041B594D52003D5E41 /* WeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
@@ -183,6 +179,9 @@
 		01C683CF1BB8504500765C7F /* DetailClotheViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailClotheViewController.swift; sourceTree = "<group>"; };
 		01C683D11BB866D800765C7F /* UIColor-Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor-Hex.swift"; sourceTree = "<group>"; };
 		01C683D51BB971C900765C7F /* UIImage-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage-Extension.swift"; sourceTree = "<group>"; };
+		01C683D81BBBBB7100765C7F /* TypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TypeCell.xib; sourceTree = "<group>"; };
+		01C683DB1BBBBC1700765C7F /* TypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeCell.swift; sourceTree = "<group>"; };
+		01C683DD1BBBBC9600765C7F /* NewProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProfilViewController.swift; sourceTree = "<group>"; };
 		01D1B86E1B7215F000920C64 /* DressTime-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DressTime-Bridging-Header.h"; sourceTree = "<group>"; };
 		01D1B86F1B72374100920C64 /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AKPickerView.swift; path = AKPickerView/AKPickerView.swift; sourceTree = "<group>"; };
 		01D1B8711B726B7D00920C64 /* TypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeViewController.swift; sourceTree = "<group>"; };
@@ -190,7 +189,6 @@
 		01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSubTypeViewCell.swift; sourceTree = "<group>"; };
 		01FFCEDD1B6E714600F59D1B /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 		01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		CD4E053E1B776987005B161B /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CD4E05411B7769C8005B161B /* Static.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Static.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -255,6 +253,7 @@
 		01A6BDDC1B99D3C500D357A3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				01C683DA1BBBBC0500765C7F /* Profil */,
 				013B077D1BA820680063CCF9 /* Home */,
 				01C4556D1B5A601D003D5E41 /* Views */,
 				01D1B8751B72949B00920C64 /* SubTypeCell.xib */,
@@ -264,6 +263,7 @@
 				01A6BDE51B9B352E00D357A3 /* TypeTableCell.xib */,
 				019A784A1B9F374F001958FE /* Outfit3ElemsCell.xib */,
 				019A784C1B9F3867001958FE /* Outfit2ElemsCell.xib */,
+				01C683D81BBBBB7100765C7F /* TypeCell.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -351,17 +351,12 @@
 		01C454FA1B593A03003D5E41 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				01C683D71BB9903C00765C7F /* Outfits */,
 				01C683D41BB9151000765C7F /* Profil */,
 				01C683D31BB914E700765C7F /* Capture */,
 				014BF92B1BB171AE00319701 /* Register */,
-				CD4E053E1B776987005B161B /* HomeViewController.swift */,
 				01C454FB1B593A18003D5E41 /* LoginViewController.swift */,
-				01C454FD1B593EB2003D5E41 /* NavigationController.swift */,
-				012A21961B5AA3C100CD01D3 /* ClotheDetailController.swift */,
-				0139963F1B5BB739004B2DE0 /* OutfitCollectionViewController.swift */,
-				019A78521BA002E3001958FE /* OutfitViewController.swift */,
-				019A78541BA01315001958FE /* OutfitsViewController.swift */,
-				013B07841BA824D10063CCF9 /* NewHomeViewController.swift */,
+				013B07841BA824D10063CCF9 /* HomeViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -453,6 +448,24 @@
 				01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */,
 				01C683CF1BB8504500765C7F /* DetailClotheViewController.swift */,
 				01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */,
+				01C683DD1BBBBC9600765C7F /* NewProfilViewController.swift */,
+			);
+			name = Profil;
+			sourceTree = "<group>";
+		};
+		01C683D71BB9903C00765C7F /* Outfits */ = {
+			isa = PBXGroup;
+			children = (
+				019A78541BA01315001958FE /* OutfitsViewController.swift */,
+				019A78521BA002E3001958FE /* OutfitViewController.swift */,
+			);
+			name = Outfits;
+			sourceTree = "<group>";
+		};
+		01C683DA1BBBBC0500765C7F /* Profil */ = {
+			isa = PBXGroup;
+			children = (
+				01C683DB1BBBBC1700765C7F /* TypeCell.swift */,
 			);
 			name = Profil;
 			sourceTree = "<group>";
@@ -585,6 +598,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01C683D91BBBBB7100765C7F /* TypeCell.xib in Resources */,
 				01C455011B5942F4003D5E41 /* Main.storyboard in Resources */,
 				01A6BDE41B9AE9CB00D357A3 /* ClotheDetailTableCell.xib in Resources */,
 				019A784B1B9F374F001958FE /* Outfit3ElemsCell.xib in Resources */,
@@ -621,9 +635,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				013B07851BA824D10063CCF9 /* NewHomeViewController.swift in Sources */,
+				013B07851BA824D10063CCF9 /* HomeViewController.swift in Sources */,
 				01A6BDD91B99C7FE00D357A3 /* ProfilViewController.swift in Sources */,
 				01C455051B594D52003D5E41 /* WeatherService.swift in Sources */,
+				01C683DC1BBBBC1700765C7F /* TypeCell.swift in Sources */,
 				01C454FC1B593A18003D5E41 /* LoginViewController.swift in Sources */,
 				013B07831BA821C60063CCF9 /* HomeBrandOutfitsListCell.swift in Sources */,
 				01A6BDE21B9AE84700D357A3 /* ClotheDetailTableViewCell.swift in Sources */,
@@ -644,11 +659,10 @@
 				013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */,
 				01D1B8781B7327B000920C64 /* CustomSubTypeViewCell.swift in Sources */,
 				0175615F1BAB451100DE1EFE /* CurveArrowView.swift in Sources */,
-				013996401B5BB739004B2DE0 /* OutfitCollectionViewController.swift in Sources */,
+				01C683DE1BBBBC9600765C7F /* NewProfilViewController.swift in Sources */,
 				01C683D21BB866D800765C7F /* UIColor-Hex.swift in Sources */,
 				012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */,
 				01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */,
-				01C454FE1B593EB2003D5E41 /* NavigationController.swift in Sources */,
 				01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */,
 				019A78531BA002E3001958FE /* OutfitViewController.swift in Sources */,
 				01A6BDE01B99D42700D357A3 /* ClotheTableViewCell.swift in Sources */,
@@ -662,12 +676,10 @@
 				01C4550C1B597571003D5E41 /* ClothesDAL.swift in Sources */,
 				01C683D01BB8504500765C7F /* DetailClotheViewController.swift in Sources */,
 				01C455031B5946D9003D5E41 /* LoginService.swift in Sources */,
-				CD4E05401B776987005B161B /* HomeViewController.swift in Sources */,
 				01A6BDE81B9B365B00D357A3 /* TypeTableViewCell.swift in Sources */,
 				012A21991B5AB74900CD01D3 /* DressTimeService.swift in Sources */,
 				019A784F1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift in Sources */,
 				01C455191B597E60003D5E41 /* CameraSessionManager.swift in Sources */,
-				012A21971B5AA3C100CD01D3 /* ClotheDetailController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
