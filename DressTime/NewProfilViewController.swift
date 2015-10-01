@@ -67,8 +67,9 @@ class NewProfilViewController: UIViewController {
             NSLog("long press on table view but not on a row");
         } else if (gestureRecognizer.state == UIGestureRecognizerState.Began) {
            print(indexPath!.row)
-            self.currentClotheOpenSelected = indexPath!.row
-            self.performSegueWithIdentifier("AddClothe", sender: self)
+            if let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as? TypeCell {
+                cell.viewLongPress.hidden = false
+            }
         } else {
             print(gestureRecognizer.state)
         }
@@ -117,6 +118,10 @@ extension NewProfilViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! TypeCell
         let typeCell = self.type[indexPath.row]
         cell.backgroundImage.image = UIImage(named: "Background\(typeCell)")
+        cell.longPressLabel.text = "Add \(typeCell)"
+        cell.viewLongPress.hidden = true
+        cell.delegate = self
+        cell.indexPath = indexPath
         if (indexPath.row % 2 == 0){
             cell.leftLabel.hidden = true
             cell.leftLabelName.hidden = true
@@ -133,5 +138,12 @@ extension NewProfilViewController: UITableViewDataSource {
             cell.leftLabelName.text = typeCell
         }
         return cell
+    }
+}
+
+extension NewProfilViewController: TypeCellDelegate {
+    func onAddTypedTapped(indexPath: NSIndexPath) {
+        self.currentClotheOpenSelected = indexPath.row
+        self.performSegueWithIdentifier("AddClothe", sender: self)
     }
 }

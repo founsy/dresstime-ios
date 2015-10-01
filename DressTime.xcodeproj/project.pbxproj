@@ -232,10 +232,10 @@
 		013B077D1BA820680063CCF9 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0175615E1BAB451100DE1EFE /* CurveArrowView.swift */,
 				013B077E1BA820790063CCF9 /* HomeHeaderCell.swift */,
 				013B07801BA821A20063CCF9 /* HomeOutfitsListCell.swift */,
 				013B07821BA821C60063CCF9 /* HomeBrandOutfitsListCell.swift */,
-				0175615E1BAB451100DE1EFE /* CurveArrowView.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
