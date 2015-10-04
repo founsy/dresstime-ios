@@ -77,7 +77,6 @@
 		01D1B8761B72949B00920C64 /* SubTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D1B8751B72949B00920C64 /* SubTypeCell.xib */; };
 		01D1B8781B7327B000920C64 /* CustomSubTypeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */; };
 		01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEDD1B6E714600F59D1B /* SharedData.swift */; };
-		CD4E05421B7769C8005B161B /* Static.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD4E05411B7769C8005B161B /* Static.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,7 +186,6 @@
 		01D1B8751B72949B00920C64 /* SubTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubTypeCell.xib; sourceTree = "<group>"; };
 		01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSubTypeViewCell.swift; sourceTree = "<group>"; };
 		01FFCEDD1B6E714600F59D1B /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
-		CD4E05411B7769C8005B161B /* Static.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Static.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -299,7 +297,6 @@
 				01C454D21B5935B3003D5E41 /* AppDelegate.swift */,
 				01C454DC1B5935B3003D5E41 /* Images.xcassets */,
 				01C454DE1B5935B3003D5E41 /* LaunchScreen.xib */,
-				CD4E05411B7769C8005B161B /* Static.storyboard */,
 				01C454FF1B5942F4003D5E41 /* Main.storyboard */,
 				01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */,
 				01C454D01B5935B3003D5E41 /* Supporting Files */,
@@ -604,7 +601,6 @@
 				01C454E01B5935B3003D5E41 /* LaunchScreen.xib in Resources */,
 				01A6BDDE1B99D3E600D357A3 /* ClotheTableCell.xib in Resources */,
 				01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */,
-				CD4E05421B7769C8005B161B /* Static.storyboard in Resources */,
 				01A6BDE61B9B352E00D357A3 /* TypeTableCell.xib in Resources */,
 				01D1B8761B72949B00920C64 /* SubTypeCell.xib in Resources */,
 			);
