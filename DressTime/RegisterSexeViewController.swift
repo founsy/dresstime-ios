@@ -12,6 +12,10 @@ import UIKit
 class RegisterSexeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
+    @IBAction func onCancelTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidLoad(){
         super.viewDidLoad()
         self.tableView.dataSource = self

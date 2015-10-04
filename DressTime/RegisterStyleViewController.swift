@@ -20,6 +20,8 @@ class RegisterStyleViewController: UIViewController {
     @IBOutlet weak var businessStyle: UIImageView!
     @IBOutlet weak var casualStyle: UIImageView!
     
+    @IBOutlet weak var styleContainer: UIStackView!
+    
     private var lastLocation: CGPoint!
     private var isMoving = false
     
@@ -33,6 +35,10 @@ class RegisterStyleViewController: UIViewController {
     private var shakeAnimation: CABasicAnimation?
     
     private var currentStyleSeleted: String?
+    
+    @IBAction func onCancelTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -164,8 +170,9 @@ class RegisterStyleViewController: UIViewController {
                 NSLog("Animation go to Area")
                 animationEnd(container.center)
             } else {
+                let viewPoint = self.styleContainer.convertPoint(self.imageSelected!.frame.origin, toView: self.view)
                 NSLog("Animation go back to park area")
-                animationEnd(self.imageSelected!.center)
+                animationEnd(viewPoint)
             }
             isMoving = false
     }

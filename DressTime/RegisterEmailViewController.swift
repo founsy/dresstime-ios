@@ -7,3 +7,12 @@
 //
 
 import Foundation
+import UIKit
+
+class RegisterEmailViewController: UIViewController {
+
+    @IBAction func onCancelTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+}
