@@ -14,5 +14,8 @@ class ClotheTableViewCell: UITableViewCell{
     @IBOutlet weak var clotheImageView: UIImageView!
     @IBOutlet weak var favorisIcon: UIImageView!
     @IBOutlet weak var blackEffect: UIView!
-
+    
+    override func awakeFromNib() {
+        
+    }
 }

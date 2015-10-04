@@ -91,6 +91,11 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.layer.shadowOpacity = 0.75;
                 cell.clotheImageView.clipsToBounds = true
                 cell.favorisIcon.clipsToBounds = true
+                
+                //Remove edge insets to have full width separtor line
+                cell.preservesSuperviewLayoutMargins = false
+                cell.separatorInset = UIEdgeInsetsZero
+                cell.layoutMargins = UIEdgeInsetsZero
             }
         }
         return cell

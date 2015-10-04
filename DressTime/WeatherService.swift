@@ -16,7 +16,7 @@ class WeatherService {
         var unit = "c"
         if let userId = SharedData.sharedInstance.currentUserId {
             if let user = profilDal.fetch(userId) {
-                unit = user.temp_unit.lowercaseString
+                unit = user.temp_unit!.lowercaseString
             }
             
             let query = "select * from weather.forecast where woeid in (select woeid from geo.placefinder where text=\"\(position.coordinate.latitude),\(position.coordinate.longitude)\" and gflags=\"R\") and u=\"\(unit)\""

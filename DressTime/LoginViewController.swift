@@ -28,9 +28,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             if (succeeded){
                 let dal = ProfilsDAL()
                 if let profil = dal.fetch(self.loginText.text!){
-                    profil.access_token = msg["access_token"] as! String
-                    profil.refresh_token = msg["refresh_token"] as! String
-                    profil.expire_in = msg["expires_in"] as! NSNumber
+                    profil.access_token = msg["access_token"] as? String
+                    profil.refresh_token = msg["refresh_token"] as? String
+                    profil.expire_in = msg["expires_in"] as? NSNumber
                     if let newProfil = dal.update(profil) {
                         SharedData.sharedInstance.currentUserId = newProfil.userid
                     }

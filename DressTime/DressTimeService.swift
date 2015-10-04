@@ -38,11 +38,11 @@ class DressTimeService {
             ]
             
             let jsonObject: [String: AnyObject] = [
-                "sex": profil.gender,
+                "sex": profil.gender!,
                 "style": style,
                 "dressing": dressingSeriazible,
                 "weather": weatherObject,
-                "access_token": profil.access_token
+                "access_token": profil.access_token!
             ];
             print(jsonObject)
             //Cancel changes about ColorName
@@ -81,10 +81,10 @@ class DressTimeService {
             ]
             
             let jsonObject: [String: AnyObject] = [
-                "sex": profil.gender,
+                "sex": profil.gender!,
                 "dressing": dressingSeriazible,
                 "weather": weatherObject,
-                "access_token": profil.access_token
+                "access_token": profil.access_token!
             ];
             print(jsonObject)
             //Cancel changes about ColorName
@@ -113,7 +113,7 @@ class DressTimeService {
                 
                 let jsonObject: [String: AnyObject] = [
                     "dressing": dressingSeriazible,
-                    "access_token": profil.access_token
+                    "access_token": profil.access_token!
                 ]
                 
                 JSONService.post(jsonObject, url: q,  postCompleted : { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
@@ -129,7 +129,7 @@ class DressTimeService {
         let dal = ProfilsDAL()
         if let profil = dal.fetch(userid) {
             let jsonObject: [String: AnyObject] = [
-                "access_token": profil.access_token
+                "access_token": profil.access_token!
             ]
             
             JSONService.get(q, params: jsonObject, getCompleted: { (succeeded, msg) -> () in
@@ -146,7 +146,7 @@ class DressTimeService {
         let dal = ProfilsDAL()
         if let profil = dal.fetch(userid) {
             let jsonObject: [String: AnyObject] = [
-                "access_token": profil.access_token
+                "access_token": profil.access_token!
             ]
             
             JSONService.get(q, params: jsonObject, getCompleted: { (succeeded, msg) -> () in
@@ -174,7 +174,7 @@ class DressTimeService {
         let dal = ProfilsDAL()
         if let profil = dal.fetch(userid) {
             let jsonObject: [String: AnyObject] = [
-                "access_token": profil.access_token
+                "access_token": profil.access_token!
             ]
             
             JSONService.get(q, params: jsonObject, getCompleted: { (succeeded, msg) -> () in
@@ -188,12 +188,12 @@ class DressTimeService {
     }
     
     class func deleteClothe(userid: String, clotheId: String, clotheDelCompleted : (succeeded: Bool, clothe: AnyObject) -> ()) {
-        var q = "http://api.drez.io/dressing/clothes/" + clotheId
+        let q = "http://api.drez.io/dressing/clothes/" + clotheId
         
         let dal = ProfilsDAL()
         if let profil = dal.fetch(userid) {
             let jsonObject: [String: AnyObject] = [
-                "access_token": profil.access_token
+                "access_token": profil.access_token!
             ]
             
             JSONService.delete(q, params: jsonObject, deleteCompleted: { (succeeded, msg) -> () in

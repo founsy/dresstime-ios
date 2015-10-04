@@ -106,7 +106,7 @@ class ProfilsDAL {
     }
     
     func update(profil: Profil) -> Profil? {
-        if let oldProfil = self.fetch(profil.userid) {
+        if let oldProfil = self.fetch(profil.userid!) {
             
             oldProfil.userid = profil.userid
             oldProfil.access_token = profil.access_token
@@ -115,6 +115,10 @@ class ProfilsDAL {
             oldProfil.name = profil.name
             oldProfil.gender = profil.gender
             oldProfil.temp_unit = profil.temp_unit
+            oldProfil.email = profil.email
+            oldProfil.atWorkStyle = profil.atWorkStyle
+            oldProfil.relaxStyle = profil.relaxStyle
+            oldProfil.onPartyStyle = profil.onPartyStyle
             
             do {
                 try managedObjectContext.save()

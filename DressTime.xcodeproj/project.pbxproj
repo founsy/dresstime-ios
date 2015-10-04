@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		012A21991B5AB74900CD01D3 /* DressTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A21981B5AB74900CD01D3 /* DressTimeService.swift */; };
-		012A219B1B5AB87000CD01D3 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219A1B5AB87000CD01D3 /* Profil.swift */; };
 		012A219D1B5AB89700CD01D3 /* ProfilsDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219C1B5AB89700CD01D3 /* ProfilsDAL.swift */; };
 		012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */; };
 		013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013996411B5CED57004B2DE0 /* DressingSynchro.swift */; };
@@ -21,14 +20,14 @@
 		014BF9311BB171FD00319701 /* RegisterStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF9301BB171FD00319701 /* RegisterStyleViewController.swift */; };
 		0175615F1BAB451100DE1EFE /* CurveArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0175615E1BAB451100DE1EFE /* CurveArrowView.swift */; };
 		0177B4E61B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */; };
-		017BBA5F1B80FC92003DE513 /* FilterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 017BBA5E1B80FC92003DE513 /* FilterView.xib */; };
+		019405C31BC114A8005D6F92 /* Profil+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019405C11BC114A8005D6F92 /* Profil+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
+		019405C41BC114A8005D6F92 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019405C21BC114A8005D6F92 /* Profil.swift */; settings = {ASSET_TAGS = (); }; };
 		019A784B1B9F374F001958FE /* Outfit3ElemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 019A784A1B9F374F001958FE /* Outfit3ElemsCell.xib */; };
 		019A784D1B9F3867001958FE /* Outfit2ElemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 019A784C1B9F3867001958FE /* Outfit2ElemsCell.xib */; };
 		019A784F1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A784E1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift */; };
 		019A78511B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A78501B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift */; };
 		019A78531BA002E3001958FE /* OutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A78521BA002E3001958FE /* OutfitViewController.swift */; };
 		019A78551BA01315001958FE /* OutfitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A78541BA01315001958FE /* OutfitsViewController.swift */; };
-		01A6BDD91B99C7FE00D357A3 /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDD81B99C7FE00D357A3 /* ProfilViewController.swift */; };
 		01A6BDDB1B99D26500D357A3 /* DetailTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */; };
 		01A6BDDE1B99D3E600D357A3 /* ClotheTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6BDDD1B99D3E600D357A3 /* ClotheTableCell.xib */; };
 		01A6BDE01B99D42700D357A3 /* ClotheTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDDF1B99D42700D357A3 /* ClotheTableViewCell.swift */; };
@@ -71,13 +70,13 @@
 		01C683D61BB971C900765C7F /* UIImage-Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683D51BB971C900765C7F /* UIImage-Extension.swift */; settings = {ASSET_TAGS = (); }; };
 		01C683D91BBBBB7100765C7F /* TypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C683D81BBBBB7100765C7F /* TypeCell.xib */; settings = {ASSET_TAGS = (); }; };
 		01C683DC1BBBBC1700765C7F /* TypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683DB1BBBBC1700765C7F /* TypeCell.swift */; settings = {ASSET_TAGS = (); }; };
-		01C683DE1BBBBC9600765C7F /* NewProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683DD1BBBBC9600765C7F /* NewProfilViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		01C683DE1BBBBC9600765C7F /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683DD1BBBBC9600765C7F /* ProfilViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		01C683E01BBD72BB00765C7F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683DF1BBD72BB00765C7F /* SettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		01D1B8701B72374100920C64 /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B86F1B72374100920C64 /* AKPickerView.swift */; };
 		01D1B8721B726B7D00920C64 /* TypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8711B726B7D00920C64 /* TypeViewController.swift */; };
 		01D1B8761B72949B00920C64 /* SubTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D1B8751B72949B00920C64 /* SubTypeCell.xib */; };
 		01D1B8781B7327B000920C64 /* CustomSubTypeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */; };
 		01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEDD1B6E714600F59D1B /* SharedData.swift */; };
-		01FFCEE61B712A9700F59D1B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */; };
 		CD4E05421B7769C8005B161B /* Static.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CD4E05411B7769C8005B161B /* Static.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -114,7 +113,6 @@
 
 /* Begin PBXFileReference section */
 		012A21981B5AB74900CD01D3 /* DressTimeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressTimeService.swift; sourceTree = "<group>"; };
-		012A219A1B5AB87000CD01D3 /* Profil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
 		012A219C1B5AB89700CD01D3 /* ProfilsDAL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilsDAL.swift; sourceTree = "<group>"; };
 		012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColorToName.swift; sourceTree = "<group>"; };
 		013996411B5CED57004B2DE0 /* DressingSynchro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressingSynchro.swift; sourceTree = "<group>"; };
@@ -127,14 +125,14 @@
 		014BF9301BB171FD00319701 /* RegisterStyleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterStyleViewController.swift; sourceTree = "<group>"; };
 		0175615E1BAB451100DE1EFE /* CurveArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurveArrowView.swift; sourceTree = "<group>"; };
 		0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureConfirmationViewController.swift; sourceTree = "<group>"; };
-		017BBA5E1B80FC92003DE513 /* FilterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterView.xib; sourceTree = "<group>"; };
+		019405C11BC114A8005D6F92 /* Profil+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profil+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		019405C21BC114A8005D6F92 /* Profil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
 		019A784A1B9F374F001958FE /* Outfit3ElemsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Outfit3ElemsCell.xib; sourceTree = "<group>"; };
 		019A784C1B9F3867001958FE /* Outfit2ElemsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Outfit2ElemsCell.xib; sourceTree = "<group>"; };
 		019A784E1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Outfit2ElemsCollectionViewCell.swift; sourceTree = "<group>"; };
 		019A78501B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Outfit3ElemsCollectionViewCell.swift; sourceTree = "<group>"; };
 		019A78521BA002E3001958FE /* OutfitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitViewController.swift; sourceTree = "<group>"; };
 		019A78541BA01315001958FE /* OutfitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitsViewController.swift; sourceTree = "<group>"; };
-		01A6BDD81B99C7FE00D357A3 /* ProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilViewController.swift; sourceTree = "<group>"; };
 		01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTypeViewController.swift; sourceTree = "<group>"; };
 		01A6BDDD1B99D3E600D357A3 /* ClotheTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClotheTableCell.xib; sourceTree = "<group>"; };
 		01A6BDDF1B99D42700D357A3 /* ClotheTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClotheTableViewCell.swift; sourceTree = "<group>"; };
@@ -181,14 +179,14 @@
 		01C683D51BB971C900765C7F /* UIImage-Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage-Extension.swift"; sourceTree = "<group>"; };
 		01C683D81BBBBB7100765C7F /* TypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TypeCell.xib; sourceTree = "<group>"; };
 		01C683DB1BBBBC1700765C7F /* TypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeCell.swift; sourceTree = "<group>"; };
-		01C683DD1BBBBC9600765C7F /* NewProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProfilViewController.swift; sourceTree = "<group>"; };
+		01C683DD1BBBBC9600765C7F /* ProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilViewController.swift; sourceTree = "<group>"; };
+		01C683DF1BBD72BB00765C7F /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		01D1B86E1B7215F000920C64 /* DressTime-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DressTime-Bridging-Header.h"; sourceTree = "<group>"; };
 		01D1B86F1B72374100920C64 /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AKPickerView.swift; path = AKPickerView/AKPickerView.swift; sourceTree = "<group>"; };
 		01D1B8711B726B7D00920C64 /* TypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeViewController.swift; sourceTree = "<group>"; };
 		01D1B8751B72949B00920C64 /* SubTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubTypeCell.xib; sourceTree = "<group>"; };
 		01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSubTypeViewCell.swift; sourceTree = "<group>"; };
 		01FFCEDD1B6E714600F59D1B /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
-		01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		CD4E05411B7769C8005B161B /* Static.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Static.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -257,7 +255,6 @@
 				013B077D1BA820680063CCF9 /* Home */,
 				01C4556D1B5A601D003D5E41 /* Views */,
 				01D1B8751B72949B00920C64 /* SubTypeCell.xib */,
-				017BBA5E1B80FC92003DE513 /* FilterView.xib */,
 				01A6BDDD1B99D3E600D357A3 /* ClotheTableCell.xib */,
 				01A6BDE31B9AE9CB00D357A3 /* ClotheDetailTableCell.xib */,
 				01A6BDE51B9B352E00D357A3 /* TypeTableCell.xib */,
@@ -364,7 +361,8 @@
 		01C4550D1B597577003D5E41 /* DataAccessLayer */ = {
 			isa = PBXGroup;
 			children = (
-				012A219A1B5AB87000CD01D3 /* Profil.swift */,
+				019405C11BC114A8005D6F92 /* Profil+CoreDataProperties.swift */,
+				019405C21BC114A8005D6F92 /* Profil.swift */,
 				01C455101B597626003D5E41 /* Clothe.swift */,
 				01C4550B1B597571003D5E41 /* ClothesDAL.swift */,
 				012A219C1B5AB89700CD01D3 /* ProfilsDAL.swift */,
@@ -444,11 +442,10 @@
 		01C683D41BB9151000765C7F /* Profil */ = {
 			isa = PBXGroup;
 			children = (
-				01A6BDD81B99C7FE00D357A3 /* ProfilViewController.swift */,
 				01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */,
 				01C683CF1BB8504500765C7F /* DetailClotheViewController.swift */,
-				01FFCEE51B712A9600F59D1B /* SettingsViewController.swift */,
-				01C683DD1BBBBC9600765C7F /* NewProfilViewController.swift */,
+				01C683DD1BBBBC9600765C7F /* ProfilViewController.swift */,
+				01C683DF1BBD72BB00765C7F /* SettingsViewController.swift */,
 			);
 			name = Profil;
 			sourceTree = "<group>";
@@ -606,7 +603,6 @@
 				019A784D1B9F3867001958FE /* Outfit2ElemsCell.xib in Resources */,
 				01C454E01B5935B3003D5E41 /* LaunchScreen.xib in Resources */,
 				01A6BDDE1B99D3E600D357A3 /* ClotheTableCell.xib in Resources */,
-				017BBA5F1B80FC92003DE513 /* FilterView.xib in Resources */,
 				01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */,
 				CD4E05421B7769C8005B161B /* Static.storyboard in Resources */,
 				01A6BDE61B9B352E00D357A3 /* TypeTableCell.xib in Resources */,
@@ -636,15 +632,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				013B07851BA824D10063CCF9 /* HomeViewController.swift in Sources */,
-				01A6BDD91B99C7FE00D357A3 /* ProfilViewController.swift in Sources */,
 				01C455051B594D52003D5E41 /* WeatherService.swift in Sources */,
 				01C683DC1BBBBC1700765C7F /* TypeCell.swift in Sources */,
 				01C454FC1B593A18003D5E41 /* LoginViewController.swift in Sources */,
 				013B07831BA821C60063CCF9 /* HomeBrandOutfitsListCell.swift in Sources */,
 				01A6BDE21B9AE84700D357A3 /* ClotheDetailTableViewCell.swift in Sources */,
-				012A219B1B5AB87000CD01D3 /* Profil.swift in Sources */,
 				01C4556F1B5A603C003D5E41 /* ClothPhotoCell.swift in Sources */,
 				01A6BDEA1B9B41A100D357A3 /* NewCameraViewController.swift in Sources */,
+				01C683E01BBD72BB00765C7F /* SettingsViewController.swift in Sources */,
 				01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */,
 				01A6BDDB1B99D26500D357A3 /* DetailTypeViewController.swift in Sources */,
 				01D1B8701B72374100920C64 /* AKPickerView.swift in Sources */,
@@ -655,15 +650,16 @@
 				01C454F71B593909003D5E41 /* JSONService.swift in Sources */,
 				0177B4E61B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift in Sources */,
 				01C455111B597626003D5E41 /* Clothe.swift in Sources */,
-				01FFCEE61B712A9700F59D1B /* SettingsViewController.swift in Sources */,
+				019405C31BC114A8005D6F92 /* Profil+CoreDataProperties.swift in Sources */,
 				013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */,
 				01D1B8781B7327B000920C64 /* CustomSubTypeViewCell.swift in Sources */,
 				0175615F1BAB451100DE1EFE /* CurveArrowView.swift in Sources */,
-				01C683DE1BBBBC9600765C7F /* NewProfilViewController.swift in Sources */,
+				01C683DE1BBBBC9600765C7F /* ProfilViewController.swift in Sources */,
 				01C683D21BB866D800765C7F /* UIColor-Hex.swift in Sources */,
 				012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */,
 				01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */,
 				01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */,
+				019405C41BC114A8005D6F92 /* Profil.swift in Sources */,
 				019A78531BA002E3001958FE /* OutfitViewController.swift in Sources */,
 				01A6BDE01B99D42700D357A3 /* ClotheTableViewCell.swift in Sources */,
 				019A78551BA01315001958FE /* OutfitsViewController.swift in Sources */,
@@ -778,7 +774,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -817,7 +813,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -832,6 +828,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DressTime/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.dresstime.DressTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -849,6 +846,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = DressTime/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.dresstime.DressTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";

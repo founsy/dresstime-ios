@@ -3,7 +3,7 @@
 //  DressTime
 //
 //  Created by Fab on 17/07/2015.
-//  Copyright (c) 2015 Fab. All rights reserved.
+//  Copyright (c) 2015 Fab. All rights reserved.  
 //
 
 import UIKit
@@ -86,8 +86,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSLog("Token Refresh")
             let profilDAL = ProfilsDAL()
             if (succeeded){
-                user.refresh_token = msg["refresh_token"] as! String
-                user.access_token = msg["access_token"] as! String
+                user.refresh_token = msg["refresh_token"] as? String
+                user.access_token = msg["access_token"] as? String
                 profilDAL.update(user)
             } else {
                 user.refresh_token = ""

@@ -52,7 +52,7 @@ class LoginService {
                 "grant_type": "refresh_token",
                 "client_id": "android",
                 "client_secret": "SomeRandomCharsAndNumbers",
-                "refresh_token":  profil.refresh_token
+                "refresh_token":  profil.refresh_token!
             ];
        
             JSONService.post(jsonObject, url: "http://api.drez.io/oauth/token", postCompleted: { (succeeded: Bool, result: [String: AnyObject]) -> () in

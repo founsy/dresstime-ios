@@ -13,7 +13,7 @@ class DetailTypeViewController: UIViewController {
     private let cellIdentifier : String = "ClotheTableCell"
     private var clothesList: [Clothe]?
     private var currentSection = -1
-    private let height:CGFloat = 150.0
+    private let height:CGFloat = 190.0
     
     var typeClothe: String?
     
@@ -27,7 +27,7 @@ class DetailTypeViewController: UIViewController {
         
         tableView!.delegate = self
         tableView!.dataSource = self
-        titleNav.title = "Your \(typeClothe!.uppercaseString)!"
+        titleNav.title = "My \(typeClothe!.uppercaseString)!"
         blackNavBar()
     }
     
@@ -43,7 +43,7 @@ class DetailTypeViewController: UIViewController {
         
         bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         bar.shadowImage = UIImage()
-        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
         bar.tintColor = UIColor.whiteColor()
         bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
     }
@@ -104,7 +104,7 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return self.height
     }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         if let list = self.clothesList {
             return list.count
@@ -128,6 +128,11 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
         cell.layer.shadowOpacity = 0.75;
         cell.clotheImageView.clipsToBounds = true
         cell.favorisIcon.clipsToBounds = true
+        
+        //Remove edge insets to have full width separtor line
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsetsZero
         return cell;
     }
 }

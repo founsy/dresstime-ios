@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Automatic">
     <entity name="Clothe" representedClassName="DressTime.Clothe" syncable="YES">
         <attribute name="clothe_colors" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="clothe_cut" optional="YES" attributeType="String" syncable="YES"/>
@@ -17,10 +17,13 @@
     <entity name="Profil" representedClassName="DressTime.Profil" syncable="YES">
         <attribute name="access_token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="atWorkStyle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="expire_in" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numberPts" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="onPartyStyle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="refresh_token" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="relaxStyle" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="temp_unit" optional="YES" attributeType="String" syncable="YES"/>
@@ -28,6 +31,6 @@
     </entity>
     <elements>
         <element name="Clothe" positionX="268" positionY="-153" width="128" height="223"/>
-        <element name="Profil" positionX="-63" positionY="63" width="128" height="195"/>
+        <element name="Profil" positionX="-63" positionY="63" width="128" height="240"/>
     </elements>
 </model>

@@ -151,7 +151,7 @@ class RegisterStyleViewController: UIViewController {
             let touch = touches.first
                 let location = touch!.locationInView(self.view)
                 self.tempUIImage!.center = CGPointMake(location.x, location.y)
-                NSLog("Moved Icon \(location.x) \(location.y)")
+            
         }
         
     }
