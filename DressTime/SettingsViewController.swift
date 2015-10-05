@@ -135,13 +135,19 @@ class SettingsViewController: UIViewController {
             
             if let style = user.onPartyStyle {
                 initStyleSelected(style, containerName: "onParty")
+                self.onPartyImage = self.tempUIImage
+                self.onPartySelected = self.tempUIImage?.accessibilityIdentifier
             }
             if let style = user.relaxStyle {
                 initStyleSelected(style, containerName: "relax")
+                self.relaxImage = self.tempUIImage
+                 self.relaxSelected = self.tempUIImage?.accessibilityIdentifier
             }
 
             if let style = user.atWorkStyle{
                 initStyleSelected(style, containerName: "atWork")
+                self.atWorkImage = self.tempUIImage
+                self.atWorkSelected = self.tempUIImage?.accessibilityIdentifier
             }
 
         }
@@ -160,13 +166,13 @@ class SettingsViewController: UIViewController {
         }
         
         if (selectedStyle == "sportwear"){
-            self.tempUIImage = createTempImageView(self.sportwearStyle)
+            self.tempUIImage = createTempImageView(self.sportwearStyle, location: nil)
         } else if (selectedStyle == "business"){
-            self.tempUIImage = createTempImageView(self.businessStyle)
+            self.tempUIImage = createTempImageView(self.businessStyle, location: nil)
         } else if (selectedStyle == "fashion"){
-            self.tempUIImage = createTempImageView(self.fashionStyle)
+            self.tempUIImage = createTempImageView(self.fashionStyle, location: nil)
         } else if (selectedStyle == "casual"){
-            self.tempUIImage = createTempImageView(self.casualChicStyle)
+            self.tempUIImage = createTempImageView(self.casualChicStyle, location: nil)
         }
         let points = self.containerView.convertRect(container!.frame, toView: self.view)
         let center = CGPointMake(CGRectGetMidX(points), CGRectGetMidY(points))
@@ -176,30 +182,32 @@ class SettingsViewController: UIViewController {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        // Remember original location
-        if let tempImage = self.tempUIImage {
-            tempImage.layer.removeAllAnimations()
-        }
-        
-        let touch = touches.first
-        let location = touch!.locationInView(self.view)
-        
-        if let icon = self.whichStyleSelected(location) {
-            NSLog("Frame of selected icon \(icon.frame.origin.x) \(icon.frame.origin.y)")
-            self.imageSelected = icon
-            self.tempUIImage = self.createTempImageView(icon)
-            self.view.addSubview(self.tempUIImage!)
-            isMoving = true
-            NSLog("Start to move")
-        }
-        
-        //Inside a container?
-        if let tempImage = self.whichSelectedStyle(location) {
-            let viewPoint = tempImage.convertPoint(location, fromView: self.view)
-            if tempImage.pointInside(viewPoint, withEvent: nil) {
-                self.tempUIImage = tempImage
+        if (!self.isMoving){
+            // Remember original location
+            if let tempImage = self.tempUIImage {
+                tempImage.layer.removeAllAnimations()
+            }
+            
+            let touch = touches.first
+            let location = touch!.locationInView(self.view)
+            
+            if let icon = self.whichStyleSelected(location) {
+                NSLog("Frame of selected icon \(icon.frame.origin.x) \(icon.frame.origin.y)")
+                self.imageSelected = icon
+                self.tempUIImage = self.createTempImageView(icon, location: location)
+                self.view.addSubview(self.tempUIImage!)
                 isMoving = true
-                NSLog("Start to move temp")
+                NSLog("Start to move")
+            }
+            
+            //Inside a container?
+            if let tempImage = self.whichSelectedStyle(location) {
+                let viewPoint = tempImage.convertPoint(location, fromView: self.view)
+                if tempImage.pointInside(viewPoint, withEvent: nil) {
+                    self.tempUIImage = tempImage
+                    isMoving = true
+                    NSLog("Start to move temp")
+                }
             }
         }
     }
@@ -223,68 +231,39 @@ class SettingsViewController: UIViewController {
             let center = CGPointMake(CGRectGetMidX(points), CGRectGetMidY(points))
             animationEnd(center)
         } else {
+            let viewPoint = whichStyle(self.tempUIImage!)
             NSLog("Animation go back to park area")
-            NSLog("Moved Icon \(self.imageSelected!.frame.origin.x) \(self.imageSelected!.frame.origin.y)")
-            let points = self.view.convertRect(self.imageSelected!.frame, toView: self.stackStyleView)
-            let center = CGPointMake(CGRectGetMidX(points), CGRectGetMidY(points))
-            NSLog("Moved Icon \(center.x) \(center.y)")
-            animationEnd(center)
+            self.view.layoutIfNeeded()
+            if let point = viewPoint {
+                animationPark(CGPointMake(point.x - 15.0, point.y - 5.0))
+            }
         }
          self.currentStyleSelected = nil
-        isMoving = false
     }
     
     private func animationEnd(destination: CGPoint){
-        CATransaction.begin()
-        CATransaction.setCompletionBlock({
+        
+        UIView.animateWithDuration(0.5, animations: {
             self.tempUIImage!.center = destination
+            }, completion: { animationFinished in
+                // when complete, remove the square from the parent view
+               self.tempUIImage!.center = destination
+                self.isMoving = false
+        })
+    }
+    
+    private func animationPark(destination: CGPoint){
+        
+        UIView.animateWithDuration(0.5, animations: {
+            self.tempUIImage!.center = destination
+            }, completion: { animationFinished in
+                // when complete, remove the square from the parent view
+                self.tempUIImage!.removeFromSuperview()
+                self.isMoving = false
         })
         
-        self.positionAnimation = CABasicAnimation()
-        self.positionAnimation!.keyPath = "position"
-        self.positionAnimation!.fillMode = kCAFillModeForwards
-        //animation.additive = true
-        self.positionAnimation!.removedOnCompletion = false
-        self.positionAnimation!.fromValue = NSValue(CGPoint:self.tempUIImage!.center)
-        self.positionAnimation!.toValue = NSValue(CGPoint:destination)
-        self.positionAnimation!.duration = 0.3
-        self.positionAnimation!.beginTime = 0.0
-        self.positionAnimation!.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        
-        self.shakeAnimation = CABasicAnimation()
-        self.shakeAnimation!.keyPath = "position"
-        let point1 = CGPointMake(destination.x - 5, destination.y)
-        let point2 = CGPointMake(destination.x + 5, destination.y)
-        self.shakeAnimation!.fromValue = NSValue(CGPoint:point1)
-        self.shakeAnimation!.toValue = NSValue(CGPoint:point2)
-        self.shakeAnimation!.autoreverses = true
-        self.shakeAnimation!.repeatCount = 5
-        self.shakeAnimation!.duration = 0.1
-        self.shakeAnimation!.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        self.shakeAnimation!.beginTime = 0.3
-        
-        let scaleAnimation = CABasicAnimation()
-        scaleAnimation.keyPath = "transform.scale"
-        //scaleAnimation.autoreverses = true
-        scaleAnimation.fromValue = 0.5
-        scaleAnimation.toValue = 1.1
-        scaleAnimation.duration = 0.5
-        scaleAnimation.beginTime = 0.3
-        self.shakeAnimation!.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        
-        let group = CAAnimationGroup()
-        group.removedOnCompletion = false
-        //group.fillMode = kCAFillModeForwards
-        group.animations = [self.positionAnimation!, self.shakeAnimation!, scaleAnimation]
-        group.duration = 0.8
-        group.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        group.beginTime = CACurrentMediaTime()
-        
-        self.tempUIImage!.layer.addAnimation(group, forKey: nil)
-        
-        CATransaction.commit()
     }
-
+    
     private func whichStyleSelected(location: CGPoint) -> UIImageView? {
         var viewPoint = sportwearStyle.convertPoint(location, fromView: self.view)
         if sportwearStyle.pointInside(viewPoint, withEvent: nil) {
@@ -356,9 +335,27 @@ class SettingsViewController: UIViewController {
         return nil
     }
     
-    private func createTempImageView(imageToClone: UIImageView) -> UIImageView {
+    
+    private func whichStyle(image: UIImageView) -> CGPoint? {
+        if (image.accessibilityIdentifier == "sportwear"){
+            return sportwearStyle.convertPoint(sportwearStyle.center, toView: self.view)
+        } else if (image.accessibilityIdentifier == "fashion"){
+            return fashionStyle.convertPoint(fashionStyle.center, toView: self.view)
+        } else if (image.accessibilityIdentifier == "business"){
+            return businessStyle.convertPoint(businessStyle.center, toView: self.view)
+        } else if (image.accessibilityIdentifier == "casual"){
+            return casualChicStyle.convertPoint(casualChicStyle.center, toView: self.view)
+        }
+        return nil
+    }
+    
+    private func createTempImageView(imageToClone: UIImageView, location: CGPoint?) -> UIImageView {
         let temp = UIImageView(frame: imageToClone.frame)
+        if let loc = location {
+            temp.center = loc
+        }
         temp.image = imageToClone.image
+        temp.accessibilityIdentifier = imageToClone.accessibilityIdentifier
         return temp
         
     }

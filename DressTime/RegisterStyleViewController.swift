@@ -54,6 +54,7 @@ class RegisterStyleViewController: UIViewController {
     private func createTempImageView(imageToClone: UIImageView) -> UIImageView {
         let temp = UIImageView(frame: imageToClone.frame)
         temp.image = imageToClone.image
+        temp.accessibilityIdentifier = imageToClone.accessibilityIdentifier
         return temp
         
     }
@@ -74,6 +75,19 @@ class RegisterStyleViewController: UIViewController {
         viewPoint = casualStyle.convertPoint(location, fromView: self.view)
         if casualStyle.pointInside(viewPoint, withEvent: nil) {
             return casualStyle
+        }
+        return nil
+    }
+    
+    private func whichStyle(image: UIImageView) -> CGPoint? {
+        if (image.accessibilityIdentifier == "sportwear"){
+            return sportwearStyle.convertPoint(sportwearStyle.center, toView: self.view)
+        } else if (image.accessibilityIdentifier == "fashion"){
+            return partyStyle.convertPoint(partyStyle.center, toView: self.view)
+        } else if (image.accessibilityIdentifier == "business"){
+            return businessStyle.convertPoint(businessStyle.center, toView: self.view)
+        } else if (image.accessibilityIdentifier == "casual"){
+            return casualStyle.convertPoint(casualStyle.center, toView: self.view)
         }
         return nil
     }
@@ -117,10 +131,6 @@ class RegisterStyleViewController: UIViewController {
             }
         }
         return nil
-    }
-    
-    private func whichAreaToPark(image: UIImageView){
-        
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
@@ -170,15 +180,26 @@ class RegisterStyleViewController: UIViewController {
                 NSLog("Animation go to Area")
                 animationEnd(container.center)
             } else {
-                let viewPoint = self.styleContainer.convertPoint(self.imageSelected!.frame.origin, toView: self.view)
+                let viewPoint = whichStyle(self.tempUIImage!)
                 NSLog("Animation go back to park area")
-                animationEnd(viewPoint)
+                self.view.layoutIfNeeded()
+                if let point = viewPoint {
+                    animationPark(CGPointMake(point.x - 15.0, point.y - 5.0))
+                }
             }
             isMoving = false
     }
     
-    func animationEnd(destination: CGPoint){
-        CATransaction.begin()
+    private func animationEnd(destination: CGPoint){
+        UIView.animateWithDuration(0.5, animations: {
+            self.tempUIImage!.center = destination
+            }, completion: { animationFinished in
+                // when complete, remove the square from the parent view
+                self.tempUIImage!.center = destination
+        })
+
+
+       /* CATransaction.begin()
         CATransaction.setCompletionBlock({
             self.tempUIImage!.center = destination
         })
@@ -225,7 +246,19 @@ class RegisterStyleViewController: UIViewController {
         
         self.tempUIImage!.layer.addAnimation(group, forKey: nil)
         
-        CATransaction.commit()
+        CATransaction.commit() */
     }
+    
+    func animationPark(destination: CGPoint){
+        
+        UIView.animateWithDuration(1.0, animations: {
+                self.tempUIImage!.center = destination
+            }, completion: { animationFinished in
+                // when complete, remove the square from the parent view
+                self.tempUIImage!.removeFromSuperview()
+        })
+
+    }
+
     
 }

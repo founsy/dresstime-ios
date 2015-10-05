@@ -452,6 +452,7 @@
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconArea" translatesAutoresizingMaskIntoConstraints="NO" id="GC6-Cv-Z3b">
                                 <rect key="frame" x="205" y="141" width="80" height="80"/>
+                                <accessibility key="accessibilityConfiguration" identifier="onParty"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="FBt-zP-oLO"/>
                                     <constraint firstAttribute="width" constant="80" id="qYL-Nt-ad7"/>
@@ -459,6 +460,7 @@
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconArea" translatesAutoresizingMaskIntoConstraints="NO" id="6p2-e6-t9Q">
                                 <rect key="frame" x="29" y="142" width="80" height="80"/>
+                                <accessibility key="accessibilityConfiguration" identifier="atWork"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="oPm-B2-11S"/>
                                     <constraint firstAttribute="height" constant="80" id="y4U-k1-xKu"/>
@@ -466,6 +468,7 @@
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconArea" translatesAutoresizingMaskIntoConstraints="NO" id="To3-dj-Baa">
                                 <rect key="frame" x="120" y="270" width="80" height="80"/>
+                                <accessibility key="accessibilityConfiguration" identifier="relax"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="pXo-LW-zCJ"/>
                                     <constraint firstAttribute="width" constant="80" id="uQ4-da-x8u"/>
@@ -479,6 +482,7 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="IconSportwearStyle" translatesAutoresizingMaskIntoConstraints="NO" id="oFk-FU-b7d">
                                                 <rect key="frame" x="10" y="5" width="60" height="60"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="sportwear"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="43N-pD-FWs"/>
                                                     <constraint firstAttribute="height" constant="60" id="WRC-be-FOO"/>
@@ -506,6 +510,7 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="IconFashionStyle" translatesAutoresizingMaskIntoConstraints="NO" id="Vim-mk-HT2">
                                                 <rect key="frame" x="10" y="5" width="60" height="60"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="fashion"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="7IH-K5-dgY"/>
                                                     <constraint firstAttribute="width" constant="60" id="8DJ-GI-fzF"/>
@@ -533,6 +538,7 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="IconBusinessStyle" translatesAutoresizingMaskIntoConstraints="NO" id="Olq-ep-WNw">
                                                 <rect key="frame" x="10" y="5" width="60" height="60"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="business"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="60" id="uNg-Bj-4aQ"/>
                                                     <constraint firstAttribute="height" constant="60" id="waf-BH-5tb"/>
@@ -560,6 +566,7 @@
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="IconCasualStyle" translatesAutoresizingMaskIntoConstraints="NO" id="nts-UC-gik">
                                                 <rect key="frame" x="10" y="5" width="60" height="60"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="casual"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="60" id="345-uz-YK9"/>
                                                     <constraint firstAttribute="width" constant="60" id="Xpu-5a-HSQ"/>
@@ -1530,6 +1537,7 @@
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="IconSportwearStyle" translatesAutoresizingMaskIntoConstraints="NO" id="G3S-yl-hdj">
                                                         <rect key="frame" x="17" y="5" width="60" height="59.5"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="sportwear"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="cak-dw-qc2"/>
                                                             <constraint firstAttribute="width" constant="60" id="z0M-Ql-raj"/>
@@ -1563,6 +1571,7 @@
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="IconFashionStyle" translatesAutoresizingMaskIntoConstraints="NO" id="peV-eu-uLs">
                                                         <rect key="frame" x="16" y="5" width="60" height="60"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="fashion"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="VGB-8y-E8L"/>
                                                             <constraint firstAttribute="width" constant="60" id="Yh2-sH-BZj"/>
@@ -1584,6 +1593,7 @@
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="IconBusinessStyle" translatesAutoresizingMaskIntoConstraints="NO" id="NJt-eQ-Ha2">
                                                         <rect key="frame" x="17" y="5" width="60" height="60"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="business"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="KaI-va-qgZ"/>
                                                             <constraint firstAttribute="width" constant="60" id="hvl-iT-avs"/>
@@ -1617,6 +1627,7 @@
                                                     </label>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="IconCasualStyle" translatesAutoresizingMaskIntoConstraints="NO" id="QyC-n5-cmc">
                                                         <rect key="frame" x="16" y="5" width="60" height="60"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="casual"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="2r5-Ms-OS9"/>
                                                             <constraint firstAttribute="width" constant="60" id="W3z-DV-cVu"/>
@@ -1651,6 +1662,7 @@
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconArea" translatesAutoresizingMaskIntoConstraints="NO" id="hDd-ZU-06V">
                                                 <rect key="frame" x="151" y="135" width="72" height="72"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="relax"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="72" id="f72-7b-LAg"/>
                                                     <constraint firstAttribute="width" constant="72" id="qhE-1z-kt8"/>
@@ -1658,6 +1670,7 @@
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconArea" translatesAutoresizingMaskIntoConstraints="NO" id="nxq-Im-URV">
                                                 <rect key="frame" x="262" y="54" width="72" height="72"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="onParty"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="72" id="0zY-y8-WvP"/>
                                                     <constraint firstAttribute="height" constant="72" id="b1N-uW-aBp"/>
@@ -1683,6 +1696,7 @@
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="IconArea" translatesAutoresizingMaskIntoConstraints="NO" id="KnZ-Ok-Aec">
                                                 <rect key="frame" x="51" y="54" width="72" height="72"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="atWork"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="72" id="F4M-D4-30q"/>
                                                     <constraint firstAttribute="width" constant="72" id="jnk-3E-p7E"/>
@@ -1771,7 +1785,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kMr-Kk-P7Y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3778.5" y="-292.5"/>
+            <point key="canvasLocation" x="3734.5" y="-244.5"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="sDv-dD-8xr">
