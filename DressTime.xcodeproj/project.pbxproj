@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		012182ED1BC4EA570019631B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012182E41BC4EA270019631B /* Alamofire.framework */; };
+		012182EE1BC4EA570019631B /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012182E41BC4EA270019631B /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		012182F41BC4EE090019631B /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012182F31BC4EE090019631B /* LoginService.swift */; settings = {ASSET_TAGS = (); }; };
+		012182F81BC4F3AE0019631B /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012182F71BC4F3AE0019631B /* SwiftyJSON.swift */; settings = {ASSET_TAGS = (); }; };
 		012A21991B5AB74900CD01D3 /* DressTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A21981B5AB74900CD01D3 /* DressTimeService.swift */; };
 		012A219D1B5AB89700CD01D3 /* ProfilsDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219C1B5AB89700CD01D3 /* ProfilsDAL.swift */; };
 		012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */; };
@@ -15,17 +19,20 @@
 		013B07811BA821A20063CCF9 /* HomeOutfitsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B07801BA821A20063CCF9 /* HomeOutfitsListCell.swift */; };
 		013B07831BA821C60063CCF9 /* HomeBrandOutfitsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B07821BA821C60063CCF9 /* HomeBrandOutfitsListCell.swift */; };
 		013B07851BA824D10063CCF9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B07841BA824D10063CCF9 /* HomeViewController.swift */; };
+		014373251BCCD3CA00443F66 /* OutfitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014373241BCCD3CA00443F66 /* OutfitCell.xib */; settings = {ASSET_TAGS = (); }; };
+		0143732B1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0143732A1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
+		0143732D1BCCE21C00443F66 /* outfitsBrandToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 0143732C1BCCE21C00443F66 /* outfitsBrandToday.json */; settings = {ASSET_TAGS = (); }; };
 		014BF92D1BB171C400319701 /* RegisterEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF92C1BB171C400319701 /* RegisterEmailViewController.swift */; };
 		014BF92F1BB171EE00319701 /* RegisterSexeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF92E1BB171EE00319701 /* RegisterSexeViewController.swift */; };
 		014BF9311BB171FD00319701 /* RegisterStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF9301BB171FD00319701 /* RegisterStyleViewController.swift */; };
 		0175615F1BAB451100DE1EFE /* CurveArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0175615E1BAB451100DE1EFE /* CurveArrowView.swift */; };
 		0177B4E61B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */; };
+		017F39061BC51777002E6FE7 /* login.json in Resources */ = {isa = PBXBuildFile; fileRef = 017F39051BC51777002E6FE7 /* login.json */; settings = {ASSET_TAGS = (); }; };
+		017F39081BC517D4002E6FE7 /* ReadJsonFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017F39071BC517D4002E6FE7 /* ReadJsonFile.swift */; settings = {ASSET_TAGS = (); }; };
+		017F390A1BC54514002E6FE7 /* logout.json in Resources */ = {isa = PBXBuildFile; fileRef = 017F39091BC54514002E6FE7 /* logout.json */; settings = {ASSET_TAGS = (); }; };
+		017F390C1BC54523002E6FE7 /* refreshToken.json in Resources */ = {isa = PBXBuildFile; fileRef = 017F390B1BC54523002E6FE7 /* refreshToken.json */; settings = {ASSET_TAGS = (); }; };
 		019405C31BC114A8005D6F92 /* Profil+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019405C11BC114A8005D6F92 /* Profil+CoreDataProperties.swift */; settings = {ASSET_TAGS = (); }; };
 		019405C41BC114A8005D6F92 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019405C21BC114A8005D6F92 /* Profil.swift */; settings = {ASSET_TAGS = (); }; };
-		019A784B1B9F374F001958FE /* Outfit3ElemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 019A784A1B9F374F001958FE /* Outfit3ElemsCell.xib */; };
-		019A784D1B9F3867001958FE /* Outfit2ElemsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 019A784C1B9F3867001958FE /* Outfit2ElemsCell.xib */; };
-		019A784F1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A784E1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift */; };
-		019A78511B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A78501B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift */; };
 		019A78531BA002E3001958FE /* OutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A78521BA002E3001958FE /* OutfitViewController.swift */; };
 		019A78551BA01315001958FE /* OutfitsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A78541BA01315001958FE /* OutfitsViewController.swift */; };
 		01A6BDDB1B99D26500D357A3 /* DetailTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */; };
@@ -36,15 +43,22 @@
 		01A6BDE61B9B352E00D357A3 /* TypeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6BDE51B9B352E00D357A3 /* TypeTableCell.xib */; };
 		01A6BDE81B9B365B00D357A3 /* TypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDE71B9B365B00D357A3 /* TypeTableViewCell.swift */; };
 		01A6BDEA1B9B41A100D357A3 /* NewCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDE91B9B41A100D357A3 /* NewCameraViewController.swift */; };
+		01C2AE541BC550C500F7D4C2 /* weatherOld.json in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE531BC550C500F7D4C2 /* weatherOld.json */; settings = {ASSET_TAGS = (); }; };
+		01C2AE5A1BC5591200F7D4C2 /* outfitsByStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE591BC5591200F7D4C2 /* outfitsByStyle.json */; settings = {ASSET_TAGS = (); }; };
+		01C2AE5C1BC6407600F7D4C2 /* outfitsToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE5B1BC6407600F7D4C2 /* outfitsToday.json */; settings = {ASSET_TAGS = (); }; };
+		01C2AE5E1BC7931F00F7D4C2 /* WeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE5D1BC7931F00F7D4C2 /* WeatherCell.xib */; settings = {ASSET_TAGS = (); }; };
+		01C2AE601BC794D400F7D4C2 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2AE5F1BC794D400F7D4C2 /* WeatherCell.swift */; settings = {ASSET_TAGS = (); }; };
+		01C2AE621BC7DA3300F7D4C2 /* weather.json in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE611BC7DA3300F7D4C2 /* weather.json */; settings = {ASSET_TAGS = (); }; };
+		01C2AE641BC7DD3200F7D4C2 /* WeatherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2AE631BC7DD3200F7D4C2 /* WeatherWrapper.swift */; settings = {ASSET_TAGS = (); }; };
+		01C2AE681BC7E20C00F7D4C2 /* currentWeather.json in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE671BC7E20C00F7D4C2 /* currentWeather.json */; settings = {ASSET_TAGS = (); }; };
+		01C2AE6C1BCA532400F7D4C2 /* NewSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2AE6B1BCA532400F7D4C2 /* NewSettingsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D21B5935B3003D5E41 /* AppDelegate.swift */; };
 		01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */; };
 		01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DC1B5935B3003D5E41 /* Images.xcassets */; };
 		01C454E01B5935B3003D5E41 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DE1B5935B3003D5E41 /* LaunchScreen.xib */; };
 		01C454EC1B5935B3003D5E41 /* DressTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454EB1B5935B3003D5E41 /* DressTimeTests.swift */; };
-		01C454F71B593909003D5E41 /* JSONService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454F61B593909003D5E41 /* JSONService.swift */; };
 		01C454FC1B593A18003D5E41 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454FB1B593A18003D5E41 /* LoginViewController.swift */; };
 		01C455011B5942F4003D5E41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C454FF1B5942F4003D5E41 /* Main.storyboard */; };
-		01C455031B5946D9003D5E41 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455021B5946D9003D5E41 /* LoginService.swift */; };
 		01C455051B594D52003D5E41 /* WeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C455041B594D52003D5E41 /* WeatherService.swift */; };
 		01C455071B595C54003D5E41 /* artill_clean_icons-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01C455061B595C54003D5E41 /* artill_clean_icons-webfont.ttf */; };
 		01C4550C1B597571003D5E41 /* ClothesDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4550B1B597571003D5E41 /* ClothesDAL.swift */; };
@@ -76,10 +90,55 @@
 		01D1B8721B726B7D00920C64 /* TypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8711B726B7D00920C64 /* TypeViewController.swift */; };
 		01D1B8761B72949B00920C64 /* SubTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D1B8751B72949B00920C64 /* SubTypeCell.xib */; };
 		01D1B8781B7327B000920C64 /* CustomSubTypeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */; };
+		01E167ED1BC3E700008D3A0C /* SettingsStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E167EC1BC3E700008D3A0C /* SettingsStyleCell.swift */; settings = {ASSET_TAGS = (); }; };
+		01E167F11BC3EA3D008D3A0C /* SettingsSexCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E167F01BC3EA3D008D3A0C /* SettingsSexCell.swift */; settings = {ASSET_TAGS = (); }; };
+		01E167F31BC3EA4B008D3A0C /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E167F21BC3EA4B008D3A0C /* SettingsHeaderCell.swift */; settings = {ASSET_TAGS = (); }; };
 		01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEDD1B6E714600F59D1B /* SharedData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		012182E31BC4EA270019631B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 012182DB1BC4EA270019631B /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F8111E3319A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS";
+		};
+		012182E51BC4EA270019631B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 012182DB1BC4EA270019631B /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4DD67C0B1A5C55C900ED2280;
+			remoteInfo = "Alamofire OSX";
+		};
+		012182E71BC4EA270019631B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 012182DB1BC4EA270019631B /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = E4202FE01B667AA100C997FB;
+			remoteInfo = "Alamofire watchOS";
+		};
+		012182E91BC4EA270019631B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 012182DB1BC4EA270019631B /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F8111E3E19A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS Tests";
+		};
+		012182EB1BC4EA270019631B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 012182DB1BC4EA270019631B /* Alamofire.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = F829C6B21A7A94F100A2CD59;
+			remoteInfo = "Alamofire OSX Tests";
+		};
+		012182EF1BC4EA570019631B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 012182DB1BC4EA270019631B /* Alamofire.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
+			remoteInfo = "Alamofire iOS";
+		};
 		01C454E61B5935B3003D5E41 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 01C454C51B5935B3003D5E41 /* Project object */;
@@ -104,6 +163,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				01C4554E1B597F25003D5E41 /* DominantColor.framework in Embed Frameworks */,
+				012182EE1BC4EA570019631B /* Alamofire.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -111,6 +171,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		012182DB1BC4EA270019631B /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
+		012182F31BC4EE090019631B /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		012182F71BC4F3AE0019631B /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		012A21981B5AB74900CD01D3 /* DressTimeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressTimeService.swift; sourceTree = "<group>"; };
 		012A219C1B5AB89700CD01D3 /* ProfilsDAL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilsDAL.swift; sourceTree = "<group>"; };
 		012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColorToName.swift; sourceTree = "<group>"; };
@@ -119,17 +182,20 @@
 		013B07801BA821A20063CCF9 /* HomeOutfitsListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeOutfitsListCell.swift; sourceTree = "<group>"; };
 		013B07821BA821C60063CCF9 /* HomeBrandOutfitsListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBrandOutfitsListCell.swift; sourceTree = "<group>"; };
 		013B07841BA824D10063CCF9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		014373241BCCD3CA00443F66 /* OutfitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutfitCell.xib; sourceTree = "<group>"; };
+		0143732A1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitCollectionViewCell.swift; sourceTree = "<group>"; };
+		0143732C1BCCE21C00443F66 /* outfitsBrandToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = outfitsBrandToday.json; sourceTree = "<group>"; };
 		014BF92C1BB171C400319701 /* RegisterEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterEmailViewController.swift; sourceTree = "<group>"; };
 		014BF92E1BB171EE00319701 /* RegisterSexeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSexeViewController.swift; sourceTree = "<group>"; };
 		014BF9301BB171FD00319701 /* RegisterStyleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterStyleViewController.swift; sourceTree = "<group>"; };
 		0175615E1BAB451100DE1EFE /* CurveArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurveArrowView.swift; sourceTree = "<group>"; };
 		0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureConfirmationViewController.swift; sourceTree = "<group>"; };
+		017F39051BC51777002E6FE7 /* login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login.json; sourceTree = "<group>"; };
+		017F39071BC517D4002E6FE7 /* ReadJsonFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadJsonFile.swift; sourceTree = "<group>"; };
+		017F39091BC54514002E6FE7 /* logout.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = logout.json; sourceTree = "<group>"; };
+		017F390B1BC54523002E6FE7 /* refreshToken.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refreshToken.json; sourceTree = "<group>"; };
 		019405C11BC114A8005D6F92 /* Profil+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profil+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		019405C21BC114A8005D6F92 /* Profil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
-		019A784A1B9F374F001958FE /* Outfit3ElemsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Outfit3ElemsCell.xib; sourceTree = "<group>"; };
-		019A784C1B9F3867001958FE /* Outfit2ElemsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Outfit2ElemsCell.xib; sourceTree = "<group>"; };
-		019A784E1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Outfit2ElemsCollectionViewCell.swift; sourceTree = "<group>"; };
-		019A78501B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Outfit3ElemsCollectionViewCell.swift; sourceTree = "<group>"; };
 		019A78521BA002E3001958FE /* OutfitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitViewController.swift; sourceTree = "<group>"; };
 		019A78541BA01315001958FE /* OutfitsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitsViewController.swift; sourceTree = "<group>"; };
 		01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTypeViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +206,15 @@
 		01A6BDE51B9B352E00D357A3 /* TypeTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TypeTableCell.xib; sourceTree = "<group>"; };
 		01A6BDE71B9B365B00D357A3 /* TypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeTableViewCell.swift; sourceTree = "<group>"; };
 		01A6BDE91B9B41A100D357A3 /* NewCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCameraViewController.swift; sourceTree = "<group>"; };
+		01C2AE531BC550C500F7D4C2 /* weatherOld.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weatherOld.json; sourceTree = "<group>"; };
+		01C2AE591BC5591200F7D4C2 /* outfitsByStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = outfitsByStyle.json; sourceTree = "<group>"; };
+		01C2AE5B1BC6407600F7D4C2 /* outfitsToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = outfitsToday.json; sourceTree = "<group>"; };
+		01C2AE5D1BC7931F00F7D4C2 /* WeatherCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherCell.xib; sourceTree = "<group>"; };
+		01C2AE5F1BC794D400F7D4C2 /* WeatherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
+		01C2AE611BC7DA3300F7D4C2 /* weather.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weather.json; sourceTree = "<group>"; };
+		01C2AE631BC7DD3200F7D4C2 /* WeatherWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherWrapper.swift; sourceTree = "<group>"; };
+		01C2AE671BC7E20C00F7D4C2 /* currentWeather.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = currentWeather.json; sourceTree = "<group>"; };
+		01C2AE6B1BCA532400F7D4C2 /* NewSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSettingsTableViewController.swift; sourceTree = "<group>"; };
 		01C454CD1B5935B3003D5E41 /* DressTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DressTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C454D11B5935B3003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01C454D21B5935B3003D5E41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -149,10 +224,8 @@
 		01C454E51B5935B3003D5E41 /* DressTimeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DressTimeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C454EA1B5935B3003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01C454EB1B5935B3003D5E41 /* DressTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressTimeTests.swift; sourceTree = "<group>"; };
-		01C454F61B593909003D5E41 /* JSONService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONService.swift; sourceTree = "<group>"; };
 		01C454FB1B593A18003D5E41 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		01C455001B5942F4003D5E41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		01C455021B5946D9003D5E41 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		01C455041B594D52003D5E41 /* WeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherService.swift; sourceTree = "<group>"; };
 		01C455061B595C54003D5E41 /* artill_clean_icons-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "artill_clean_icons-webfont.ttf"; sourceTree = "<group>"; };
 		01C4550B1B597571003D5E41 /* ClothesDAL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothesDAL.swift; sourceTree = "<group>"; };
@@ -185,6 +258,9 @@
 		01D1B8711B726B7D00920C64 /* TypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeViewController.swift; sourceTree = "<group>"; };
 		01D1B8751B72949B00920C64 /* SubTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubTypeCell.xib; sourceTree = "<group>"; };
 		01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSubTypeViewCell.swift; sourceTree = "<group>"; };
+		01E167EC1BC3E700008D3A0C /* SettingsStyleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsStyleCell.swift; sourceTree = "<group>"; };
+		01E167F01BC3EA3D008D3A0C /* SettingsSexCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSexCell.swift; sourceTree = "<group>"; };
+		01E167F21BC3EA4B008D3A0C /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
 		01FFCEDD1B6E714600F59D1B /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -194,6 +270,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C4554D1B597F25003D5E41 /* DominantColor.framework in Frameworks */,
+				012182ED1BC4EA570019631B /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,6 +291,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		012182DA1BC4EA1F0019631B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				012182DB1BC4EA270019631B /* Alamofire.xcodeproj */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		012182DC1BC4EA270019631B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				012182E41BC4EA270019631B /* Alamofire.framework */,
+				012182E61BC4EA270019631B /* Alamofire.framework */,
+				012182E81BC4EA270019631B /* Alamofire.framework */,
+				012182EA1BC4EA270019631B /* Alamofire iOS Tests.xctest */,
+				012182EC1BC4EA270019631B /* Alamofire OSX Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		012A219E1B5AD87F00CD01D3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +318,7 @@
 				013996411B5CED57004B2DE0 /* DressingSynchro.swift */,
 				01C683D11BB866D800765C7F /* UIColor-Hex.swift */,
 				01C683D51BB971C900765C7F /* UIImage-Extension.swift */,
+				01C2AE631BC7DD3200F7D4C2 /* WeatherWrapper.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -232,6 +330,7 @@
 				013B077E1BA820790063CCF9 /* HomeHeaderCell.swift */,
 				013B07801BA821A20063CCF9 /* HomeOutfitsListCell.swift */,
 				013B07821BA821C60063CCF9 /* HomeBrandOutfitsListCell.swift */,
+				01C2AE5F1BC794D400F7D4C2 /* WeatherCell.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -246,6 +345,22 @@
 			name = Register;
 			sourceTree = "<group>";
 		};
+		017F39041BC51762002E6FE7 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				017F39051BC51777002E6FE7 /* login.json */,
+				017F39091BC54514002E6FE7 /* logout.json */,
+				017F390B1BC54523002E6FE7 /* refreshToken.json */,
+				01C2AE531BC550C500F7D4C2 /* weatherOld.json */,
+				01C2AE591BC5591200F7D4C2 /* outfitsByStyle.json */,
+				01C2AE5B1BC6407600F7D4C2 /* outfitsToday.json */,
+				01C2AE611BC7DA3300F7D4C2 /* weather.json */,
+				01C2AE671BC7E20C00F7D4C2 /* currentWeather.json */,
+				0143732C1BCCE21C00443F66 /* outfitsBrandToday.json */,
+			);
+			name = Data;
+			sourceTree = "<group>";
+		};
 		01A6BDDC1B99D3C500D357A3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -256,9 +371,8 @@
 				01A6BDDD1B99D3E600D357A3 /* ClotheTableCell.xib */,
 				01A6BDE31B9AE9CB00D357A3 /* ClotheDetailTableCell.xib */,
 				01A6BDE51B9B352E00D357A3 /* TypeTableCell.xib */,
-				019A784A1B9F374F001958FE /* Outfit3ElemsCell.xib */,
-				019A784C1B9F3867001958FE /* Outfit2ElemsCell.xib */,
-				01C683D81BBBBB7100765C7F /* TypeCell.xib */,
+				01C2AE5D1BC7931F00F7D4C2 /* WeatherCell.xib */,
+				014373241BCCD3CA00443F66 /* OutfitCell.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -286,6 +400,8 @@
 		01C454CF1B5935B3003D5E41 /* DressTime */ = {
 			isa = PBXGroup;
 			children = (
+				017F39041BC51762002E6FE7 /* Data */,
+				012182DA1BC4EA1F0019631B /* Frameworks */,
 				01A6BDDC1B99D3C500D357A3 /* UI */,
 				01EAFA3D1B71E13C00835BB4 /* AKPickerView */,
 				012A219E1B5AD87F00CD01D3 /* Utils */,
@@ -333,11 +449,12 @@
 		01C454F51B5938E9003D5E41 /* WebService */ = {
 			isa = PBXGroup;
 			children = (
-				01C454F61B593909003D5E41 /* JSONService.swift */,
-				01C455021B5946D9003D5E41 /* LoginService.swift */,
+				012182F71BC4F3AE0019631B /* SwiftyJSON.swift */,
 				01C455041B594D52003D5E41 /* WeatherService.swift */,
 				01C455061B595C54003D5E41 /* artill_clean_icons-webfont.ttf */,
 				012A21981B5AB74900CD01D3 /* DressTimeService.swift */,
+				012182F31BC4EE090019631B /* LoginService.swift */,
+				017F39071BC517D4002E6FE7 /* ReadJsonFile.swift */,
 			);
 			name = WebService;
 			sourceTree = "<group>";
@@ -413,8 +530,7 @@
 				01A6BDDF1B99D42700D357A3 /* ClotheTableViewCell.swift */,
 				01A6BDE11B9AE84700D357A3 /* ClotheDetailTableViewCell.swift */,
 				01A6BDE71B9B365B00D357A3 /* TypeTableViewCell.swift */,
-				019A784E1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift */,
-				019A78501B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift */,
+				0143732A1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -443,6 +559,7 @@
 				01C683CF1BB8504500765C7F /* DetailClotheViewController.swift */,
 				01C683DD1BBBBC9600765C7F /* ProfilViewController.swift */,
 				01C683DF1BBD72BB00765C7F /* SettingsViewController.swift */,
+				01C2AE6B1BCA532400F7D4C2 /* NewSettingsTableViewController.swift */,
 			);
 			name = Profil;
 			sourceTree = "<group>";
@@ -459,7 +576,11 @@
 		01C683DA1BBBBC0500765C7F /* Profil */ = {
 			isa = PBXGroup;
 			children = (
+				01C683D81BBBBB7100765C7F /* TypeCell.xib */,
 				01C683DB1BBBBC1700765C7F /* TypeCell.swift */,
+				01E167EC1BC3E700008D3A0C /* SettingsStyleCell.swift */,
+				01E167F01BC3EA3D008D3A0C /* SettingsSexCell.swift */,
+				01E167F21BC3EA4B008D3A0C /* SettingsHeaderCell.swift */,
 			);
 			name = Profil;
 			sourceTree = "<group>";
@@ -501,6 +622,7 @@
 			);
 			dependencies = (
 				01C4554C1B597F25003D5E41 /* PBXTargetDependency */,
+				012182F01BC4EA570019631B /* PBXTargetDependency */,
 			);
 			name = DressTime;
 			productName = DressTime;
@@ -578,6 +700,12 @@
 			mainGroup = 01C454C41B5935B3003D5E41;
 			productRefGroup = 01C454CE1B5935B3003D5E41 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 012182DC1BC4EA270019631B /* Products */;
+					ProjectRef = 012182DB1BC4EA270019631B /* Alamofire.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				01C454CC1B5935B3003D5E41 /* DressTime */,
@@ -587,6 +715,44 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		012182E41BC4EA270019631B /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = 012182E31BC4EA270019631B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		012182E61BC4EA270019631B /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = 012182E51BC4EA270019631B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		012182E81BC4EA270019631B /* Alamofire.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Alamofire.framework;
+			remoteRef = 012182E71BC4EA270019631B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		012182EA1BC4EA270019631B /* Alamofire iOS Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Alamofire iOS Tests.xctest";
+			remoteRef = 012182E91BC4EA270019631B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		012182EC1BC4EA270019631B /* Alamofire OSX Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Alamofire OSX Tests.xctest";
+			remoteRef = 012182EB1BC4EA270019631B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		01C454CB1B5935B3003D5E41 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -595,14 +761,23 @@
 				01C683D91BBBBB7100765C7F /* TypeCell.xib in Resources */,
 				01C455011B5942F4003D5E41 /* Main.storyboard in Resources */,
 				01A6BDE41B9AE9CB00D357A3 /* ClotheDetailTableCell.xib in Resources */,
-				019A784B1B9F374F001958FE /* Outfit3ElemsCell.xib in Resources */,
 				01C455071B595C54003D5E41 /* artill_clean_icons-webfont.ttf in Resources */,
-				019A784D1B9F3867001958FE /* Outfit2ElemsCell.xib in Resources */,
+				0143732D1BCCE21C00443F66 /* outfitsBrandToday.json in Resources */,
+				01C2AE5A1BC5591200F7D4C2 /* outfitsByStyle.json in Resources */,
+				01C2AE681BC7E20C00F7D4C2 /* currentWeather.json in Resources */,
+				01C2AE541BC550C500F7D4C2 /* weatherOld.json in Resources */,
+				017F390A1BC54514002E6FE7 /* logout.json in Resources */,
+				017F390C1BC54523002E6FE7 /* refreshToken.json in Resources */,
 				01C454E01B5935B3003D5E41 /* LaunchScreen.xib in Resources */,
+				01C2AE5C1BC6407600F7D4C2 /* outfitsToday.json in Resources */,
+				014373251BCCD3CA00443F66 /* OutfitCell.xib in Resources */,
 				01A6BDDE1B99D3E600D357A3 /* ClotheTableCell.xib in Resources */,
 				01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */,
+				01C2AE621BC7DA3300F7D4C2 /* weather.json in Resources */,
+				01C2AE5E1BC7931F00F7D4C2 /* WeatherCell.xib in Resources */,
 				01A6BDE61B9B352E00D357A3 /* TypeTableCell.xib in Resources */,
 				01D1B8761B72949B00920C64 /* SubTypeCell.xib in Resources */,
+				017F39061BC51777002E6FE7 /* login.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -629,21 +804,24 @@
 			files = (
 				013B07851BA824D10063CCF9 /* HomeViewController.swift in Sources */,
 				01C455051B594D52003D5E41 /* WeatherService.swift in Sources */,
+				012182F41BC4EE090019631B /* LoginService.swift in Sources */,
 				01C683DC1BBBBC1700765C7F /* TypeCell.swift in Sources */,
 				01C454FC1B593A18003D5E41 /* LoginViewController.swift in Sources */,
 				013B07831BA821C60063CCF9 /* HomeBrandOutfitsListCell.swift in Sources */,
 				01A6BDE21B9AE84700D357A3 /* ClotheDetailTableViewCell.swift in Sources */,
 				01C4556F1B5A603C003D5E41 /* ClothPhotoCell.swift in Sources */,
+				01C2AE641BC7DD3200F7D4C2 /* WeatherWrapper.swift in Sources */,
+				01C2AE6C1BCA532400F7D4C2 /* NewSettingsTableViewController.swift in Sources */,
 				01A6BDEA1B9B41A100D357A3 /* NewCameraViewController.swift in Sources */,
 				01C683E01BBD72BB00765C7F /* SettingsViewController.swift in Sources */,
 				01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */,
 				01A6BDDB1B99D26500D357A3 /* DetailTypeViewController.swift in Sources */,
+				0143732B1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift in Sources */,
 				01D1B8701B72374100920C64 /* AKPickerView.swift in Sources */,
+				01E167ED1BC3E700008D3A0C /* SettingsStyleCell.swift in Sources */,
 				014BF92F1BB171EE00319701 /* RegisterSexeViewController.swift in Sources */,
 				014BF9311BB171FD00319701 /* RegisterStyleViewController.swift in Sources */,
-				019A78511B9F38F6001958FE /* Outfit3ElemsCollectionViewCell.swift in Sources */,
 				01C683D61BB971C900765C7F /* UIImage-Extension.swift in Sources */,
-				01C454F71B593909003D5E41 /* JSONService.swift in Sources */,
 				0177B4E61B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift in Sources */,
 				01C455111B597626003D5E41 /* Clothe.swift in Sources */,
 				019405C31BC114A8005D6F92 /* Profil+CoreDataProperties.swift in Sources */,
@@ -655,11 +833,14 @@
 				012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */,
 				01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */,
 				01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */,
+				017F39081BC517D4002E6FE7 /* ReadJsonFile.swift in Sources */,
 				019405C41BC114A8005D6F92 /* Profil.swift in Sources */,
 				019A78531BA002E3001958FE /* OutfitViewController.swift in Sources */,
 				01A6BDE01B99D42700D357A3 /* ClotheTableViewCell.swift in Sources */,
+				01E167F11BC3EA3D008D3A0C /* SettingsSexCell.swift in Sources */,
 				019A78551BA01315001958FE /* OutfitsViewController.swift in Sources */,
 				013B07811BA821A20063CCF9 /* HomeOutfitsListCell.swift in Sources */,
+				01E167F31BC3EA4B008D3A0C /* SettingsHeaderCell.swift in Sources */,
 				01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */,
 				013B077F1BA820790063CCF9 /* HomeHeaderCell.swift in Sources */,
 				014BF92D1BB171C400319701 /* RegisterEmailViewController.swift in Sources */,
@@ -667,10 +848,10 @@
 				01D1B8721B726B7D00920C64 /* TypeViewController.swift in Sources */,
 				01C4550C1B597571003D5E41 /* ClothesDAL.swift in Sources */,
 				01C683D01BB8504500765C7F /* DetailClotheViewController.swift in Sources */,
-				01C455031B5946D9003D5E41 /* LoginService.swift in Sources */,
 				01A6BDE81B9B365B00D357A3 /* TypeTableViewCell.swift in Sources */,
 				012A21991B5AB74900CD01D3 /* DressTimeService.swift in Sources */,
-				019A784F1B9F38E3001958FE /* Outfit2ElemsCollectionViewCell.swift in Sources */,
+				01C2AE601BC794D400F7D4C2 /* WeatherCell.swift in Sources */,
+				012182F81BC4F3AE0019631B /* SwiftyJSON.swift in Sources */,
 				01C455191B597E60003D5E41 /* CameraSessionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -701,6 +882,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		012182F01BC4EA570019631B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "Alamofire iOS";
+			targetProxy = 012182EF1BC4EA570019631B /* PBXContainerItemProxy */;
+		};
 		01C454E71B5935B3003D5E41 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 01C454CC1B5935B3003D5E41 /* DressTime */;
@@ -823,6 +1009,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = DressTime/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -841,6 +1028,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = DressTime/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

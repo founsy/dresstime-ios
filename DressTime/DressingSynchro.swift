@@ -39,10 +39,10 @@ class DressingSynchro {
     
     private func isDressingBackup(getCompleted: ()){
         //Check if a backup dressing exist on server-side
-        DressTimeService.getClothesIdDressing(self.userId, clotheCompleted: { (succeeded, msg) -> () in
-            self.clothesStored = msg
+        DressTimeService().GetClothesIdDressing { (isSuccess, object) -> Void in
+            //self.clothesStored = object
             getCompleted
-        })
+        }
     }
     
     
@@ -55,11 +55,11 @@ class DressingSynchro {
     //Update Local DataBase
     //TODO - Need To update - 1 Call by Clothe too much
     private func updateLocalStorage(){
-        DressTimeService.getClothesIdDressing(self.userId, clotheCompleted: { (succeeded, msg) -> () in
-            self.clothesStored = msg
+        DressTimeService().GetClothesIdDressing { (isSuccess, object) -> Void in
+           /* self.clothesStored = msg
             
             let clotheDAL = ClothesDAL()
-                for id in self.clothesStored {
+            for id in self.clothesStored {
                 DressTimeService.getClothe(self.userId, clotheId: id, clotheCompleted: { (succeeded, msg) -> () in
                     print(msg)
                     if let clothe = msg as? NSDictionary {
@@ -69,11 +69,11 @@ class DressingSynchro {
                         
                         clotheDAL.save(clothe["clothe_id"] as! String, partnerId: clothe["clothe_partnerid"] as! NSNumber, partnerName: clothe["clothe_partnerName"] as! String, type: clothe["clothe_type"] as! String, subType: clothe["clothe_subtype"] as! String, name: clothe["clothe_name"]  as! String , isUnis: isUnis!, pattern: clothe["clothe_pattern"] as! String, cut: clothe["clothe_cut"] as! String, image: data, colors: clothe["clothe_colors"] as! String)
                     }
-
+                    
                 })
-            
-            }
-        })
+                
+            }*/
+        }
     }
     
     

@@ -2,72 +2,131 @@
 //  LoginService.swift
 //  DressTime
 //
-//  Created by Fab on 17/07/2015.
-//  Copyright (c) 2015 Fab. All rights reserved.
+//  Created by Fab on 07/10/2015.
+//  Copyright © 2015 Fab. All rights reserved.
 //
 
 import Foundation
+import Alamofire
 
 class LoginService {
-
-
-    class func loginMethod(params : [String: AnyObject], postCompleted : (succeeded: Bool, msg: [String: AnyObject]) -> ()){
-        JSONService.post(params, url: "http://api.drez.io/oauth/token", postCompleted: { (succeeded: Bool, result: [String: AnyObject]) -> () in
-             if (succeeded){
-                if (result["error"] != nil){
-                    postCompleted(succeeded: false, msg: result)
-                } else {
-                    postCompleted(succeeded: true, msg: result)
-                }
-
-             } else {
-                postCompleted(succeeded: false, msg: ["error" : "Login failed."])
-            }
-            
-        })
+    let base_url = "http://api.drez.io/oauth/"
+    let isDebug = true
+    let clientId = "android"
+    let grantTypePassword = "password"
+    let grantTypeRefresh = "refresh_token"
+    let clientSecret = "SomeRandomCharsAndNumbers"
     
-    }
     
-    class func logoutMethod(params : [String: AnyObject], getCompleted : (succeeded: Bool, msg: [String: AnyObject]) -> ()){
-        JSONService.get("http://api.drez.io/auth/logout", params: params, getCompleted: { (succeeded: Bool, result: [String: AnyObject]) -> () in
-            if (succeeded){
-                if (result["error"] != nil){
-                    getCompleted(succeeded: false, msg: result)
-                } else {
-                    getCompleted(succeeded: true, msg: result)
-                }
-                
+    func Login(login: String, password: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        if (login == "jacky@dresstime.io" || login == "cathy@dresstime.io"){
+            if let nsdata = ReadJsonFile().readFile("login"){
+                _ = NSString(data: nsdata, encoding:NSUTF8StringEncoding)
+                let json = JSON(data: nsdata)
+                completion(isSuccess: true, object:json)
             } else {
-                getCompleted(succeeded: false, msg: ["error" : "Login failed."])
+                completion(isSuccess: false, object: "")
             }
-            
-        })
+        } else {
+            self.login(login, password: password, completion: completion)
+        }
     }
     
-    class func refreshToken(postCompleted : (succeeded: Bool, msg: [String: AnyObject]) -> ()){
-        var jsonObject: [String: AnyObject]
-        let profilDAL = ProfilsDAL()
-        if let profil = profilDAL.fetchLastUserConnected() {
-            jsonObject = [
-                "grant_type": "refresh_token",
-                "client_id": "android",
-                "client_secret": "SomeRandomCharsAndNumbers",
-                "refresh_token":  profil.refresh_token!
-            ];
-       
-            JSONService.post(jsonObject, url: "http://api.drez.io/oauth/token", postCompleted: { (succeeded: Bool, result: [String: AnyObject]) -> () in
-                if (succeeded){
-                    if (result["error"] != nil){
-                        postCompleted(succeeded: false, msg: result)
-                    } else {
-                        postCompleted(succeeded: true, msg: result)
-                    }
-                    
-                } else {
-                    postCompleted(succeeded: false, msg: ["error" : "Refresh Token expired"])
-                }
-            })
-        }        
+    func Logout(access_token: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        if (Mock.isMockable()){
+            if let nsdata = ReadJsonFile().readFile("logout"){
+                let str = NSString(data: nsdata, encoding:NSUTF8StringEncoding)
+                print(str)
+                let json = JSON(data: nsdata)
+                completion(isSuccess: true, object:json)
+            } else {
+                completion(isSuccess: false, object: "")
+            }
+        } else {
+            self.logout(access_token, completion: completion)
+        }
     }
     
+    func RefreshToken(refreshToken: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        if (Mock.isMockable()){
+            if let nsdata = ReadJsonFile().readFile("refreshToken"){
+                let str = NSString(data: nsdata, encoding:NSUTF8StringEncoding)
+                print(str)
+                let json = JSON(data: nsdata)
+                completion(isSuccess: true, object:json)
+            } else {
+                completion(isSuccess: false, object: "")
+            }
+        } else {
+            self.refreshToken(refreshToken, completion: completion)
+        }
+    }
+    
+    /*************************************/
+    /*           PRIVATE FUNCTION        */
+    /*************************************/
+    
+    //POST
+    private func login(login: String, password: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        let parameters = [
+            "grant_type" : self.grantTypePassword,
+            "client_id" : self.clientId,
+            "client_secret" : self.clientSecret,
+            "username" : login,
+            "password" : password
+        ]
+        let path = base_url + "token"
+        Alamofire.request(.POST, path, parameters: parameters, encoding: .JSON).responseJSON { response in
+            if response.result.isSuccess {
+                print(response.result.value)
+                let jsonDic = JSON(response.result.value!)
+                completion(isSuccess: true, object: jsonDic)
+            } else {
+                completion(isSuccess: false, object: "")
+            }
+        }
+    }
+    
+    //GET
+    private func logout(accessToken: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        let parameters = [
+            "access_token" : accessToken
+        ];
+        let path = base_url + "logout"
+        Alamofire.request(.GET, path, parameters: parameters, encoding: .JSON).responseJSON { (response) -> Void in
+            if response.result.isSuccess {
+                print(response.result.value)
+                let jsonDic = JSON(response.result.value!)
+                completion(isSuccess: true, object: jsonDic)
+            } else {
+                completion(isSuccess: false, object: "")
+            }
+        }
+    }
+    
+    private func refreshToken(refreshToken: String, completion:(isSuccess: Bool, object: JSON) -> Void) {
+        let parameters = [
+            "grant_type" : self.grantTypeRefresh,
+            "client_id" : self.clientId,
+            "client_secret" : self.clientSecret,
+            "refresh_token" : refreshToken
+        ]
+        let path = base_url + "token"
+        Alamofire.request(.POST, path, parameters: parameters, encoding: .JSON).responseJSON { response in
+            if response.result.isSuccess {
+                print(response.result.value)
+                let jsonDic = JSON(response.result.value!)
+                completion(isSuccess: true, object: jsonDic)
+            } else {
+                completion(isSuccess: false, object: "")
+            }
+        }
+
+    }
+}
+
+public class Mock {
+    static func isMockable() -> Bool{
+       return (SharedData.sharedInstance.currentUserId == "jacky@dresstime.io" || SharedData.sharedInstance.currentUserId == "cathy@dresstime.io")
+    }
 }

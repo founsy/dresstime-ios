@@ -38,8 +38,7 @@ class DetailClotheViewController: UIViewController {
     
     
     @IBAction func onClickDelete(sender: AnyObject) {
-        
-        DressTimeService.deleteClothe(SharedData.sharedInstance.currentUserId!, clotheId: currentClothe.clothe_id, clotheDelCompleted: { (succeeded, msg) -> () in
+        DressTimeService().DeleteClothe(currentClothe.clothe_id) { (isSuccess, object) -> Void in
             print("Clothe deleted")
             let dal = ClothesDAL()
             dal.delete(self.currentClothe)
@@ -47,8 +46,7 @@ class DetailClotheViewController: UIViewController {
                 //self.delegate?.onDeleteCloth!()
                 self.dismissViewControllerAnimated(true, completion: nil)
             })
-        })
-        
+        }
     }
     
     override func viewDidLoad() {

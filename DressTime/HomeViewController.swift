@@ -17,6 +17,7 @@ class HomeViewController: UIViewController{
     
     var outfitsCell: HomeOutfitsListCell?
     var homeHeaderCell: HomeHeaderCell?
+    var brandOutfitsCell: HomeBrandOutfitsListCell?
     
     private var currentStyleSelected: String?
     private var numberOfOutfits: Int = 0
@@ -44,6 +45,23 @@ class HomeViewController: UIViewController{
         self.navigationItem.leftBarButtonItem = navBarButtonItem
     }
     
+    private func addAddButtonToNavBar(){
+        
+        let regularButton = UIButton(frame: CGRectMake(0, 0, 35.0, 35.0))
+        let historyButtonImage = UIImage(named: "AddIcon")
+        regularButton.setBackgroundImage(historyButtonImage, forState: UIControlState.Normal)
+        
+        regularButton.setTitle("", forState: UIControlState.Normal)
+        regularButton.addTarget(self, action: "addButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        let navBarButtonItem = UIBarButtonItem(customView: regularButton)
+        self.navigationItem.rightBarButtonItem = navBarButtonItem
+    }
+    
+    func addButtonPressed(){
+        //self.performSegueWithIdentifier("showProfil", sender: self)
+        self.performSegueWithIdentifier("AddClothe", sender: self)
+    }
+    
     func profilButtonPressed(){
         //self.performSegueWithIdentifier("showProfil", sender: self)
         self.performSegueWithIdentifier("showProfil", sender: self)
@@ -54,11 +72,12 @@ class HomeViewController: UIViewController{
         
         bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         bar.shadowImage = UIImage()
-        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+        bar.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.20)
         bar.tintColor = UIColor.whiteColor()
         bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
         addProfilButtonToNavBar()
+        addAddButtonToNavBar()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -91,53 +110,57 @@ extension HomeViewController: HomeHeaderCellDelegate {
             } else if (condition == "snowy"){
                 image = UIImage(named: "HomeBgSnow")
                 
+            } else {
+                image = UIImage(named: "HomeBgSun")
             }
             print("-------------------\(condition)-------------------------")
-            dispatch_sync(dispatch_get_main_queue(), {
+           dispatch_async(dispatch_get_main_queue(), {
+                self.navigationItem.title = SharedData.sharedInstance.city
                 UIView.animateWithDuration(0.2, animations: { () -> Void in
                     self.bgView.image = image
                 })
-            });
+            })
             print("-------------------\(condition)-------------------------")
-
+        
         if let outfitsCell = self.outfitsCell {
             outfitsCell.loadTodayOutfits()
+        }
+        if let outfitsBrandCell = self.brandOutfitsCell {
+            outfitsBrandCell.loadTodayBrandOutfits()
         }
     }
     
     func weatherConditionByCode(code: Int) -> String{
-        var sun = [31, 32, 33, 34, 36]
-        var cloud = [20, 21, 22, 26, 27, 28, 29, 30, 44]
-        var rain = [1, 2, 3, 4, 6, 9, 11, 12, 17, 35, 37, 38, 39, 40, 45, 47]
-        var wind = [0, 19, 23, 24]
-        var snow = [5, 7, 8, 10, 13, 14, 15, 16, 18, 41, 42, 43, 46]
+        //2xx Thunderstorm
+        //3xx Drizzle
+        //5xx Rain
+        //6xx Snow
+        //7xx Atmosphere
+        //800 sunny
+        //80x Clouds
+        //9xx Extreme
         
-        for (var i = 0; i < sun.count; i++){
-            if (code == sun[i]){
-                return "sunny"
-            }
+        
+        if (code >= 200 && code < 300){
+            return "windy"
+        } else if (code >= 300 && code < 400){
+            return "rainy"
+        } else if (code >= 500 && code < 600){
+            return "rainy"
+        } else if (code >= 600 && code < 700){
+            return "snowy"
+        } else if (code >= 700 && code < 800){
+            return ""
+        } else if (code == 800 ){
+            return "sunny"
+        } else if (code >= 800 && code < 900){
+            return "cloudy"
+        } else if (code >= 900){
+            return ""
+        } else {
+            return ""
         }
-        for (var i = 0; i < cloud.count; i++){
-            if (code == cloud[i]){
-                return "cloudy"
-            }
-        }
-        for (var i = 0; i < rain.count; i++){
-            if (code == rain[i]){
-                return "rainy"
-            }
-        }
-        for (var i = 0; i < wind.count; i++){
-            if (code == wind[i]){
-                return "windy"
-            }
-        }
-        for (var i = 0; i < snow.count; i++){
-            if (code == snow[i]){
-                return "snowy"
-            }
-        }
-        return ""
+
     }
 }
 
@@ -148,6 +171,18 @@ extension HomeViewController: HomeOutfitsListCellDelegate {
     }
     
     func loadedOutfits(outfitsCount: Int) {
+        self.numberOfOutfits = outfitsCount
+        self.tableView.reloadData()
+    }
+}
+
+extension HomeViewController: HomeBrandOutfitsListCelllDelegate {
+    func showBrandOutfits(currentStyle: String) {
+        self.currentStyleSelected = currentStyle
+        self.performSegueWithIdentifier("showOutfits", sender: self)
+    }
+    
+    func loadedBrandOutfits(outfitsCount: Int) {
         self.numberOfOutfits = outfitsCount
         self.tableView.reloadData()
     }
@@ -169,7 +204,10 @@ extension HomeViewController: UITableViewDataSource {
             self.outfitsCell!.delegate = self
             return self.outfitsCell!
         }  else if (indexPath.row == 3){
-            return self.tableView.dequeueReusableCellWithIdentifier("brandOutfitsCell") as! HomeBrandOutfitsListCell
+            self.brandOutfitsCell = self.tableView.dequeueReusableCellWithIdentifier("brandOutfitsCell") as? HomeBrandOutfitsListCell
+            self.brandOutfitsCell!.delegate = self
+            return self.brandOutfitsCell!
+
         }
         return UITableViewCell()
     }
@@ -178,7 +216,7 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if (indexPath.row == 1){
-            return 70.0
+            return 92.0
         } else if (indexPath.row == 2){
             if (self.numberOfOutfits > 0){
                 return 350.0

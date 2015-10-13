@@ -23,6 +23,10 @@ class ProfilViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonAddClothe: UIButton!
     
+    @IBAction func onStyleTapped(sender: AnyObject) {
+        self.performSegueWithIdentifier("showStyle", sender: self)
+    }
+    
     @IBAction func onProfilPictureTapped(sender: AnyObject) {
         self.performSegueWithIdentifier("showSettings", sender: self)
     }
@@ -62,7 +66,11 @@ class ProfilViewController: UIViewController {
             if let typeClothe = self.currentClotheOpenSelected {
                 targetVC.openItem(typeClothe)
             }
+        } else if (segue.identifier == "showStyle"){
+            let targetVC = segue.destinationViewController as! RegisterStyleViewController
+            targetVC.currentUserId = SharedData.sharedInstance.currentUserId
         }
+        
     }
     
     func longPressedHandle(gestureRecognizer: UILongPressGestureRecognizer){

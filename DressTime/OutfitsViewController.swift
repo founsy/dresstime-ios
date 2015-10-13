@@ -16,7 +16,7 @@ class OutfitsViewController : UIViewController {
     private var currentSection: Int = 0
     
     var styleOutfits: String?
-    var outfitsCollection: [[String:AnyObject]]!
+    var outfitsCollection: JSON?
 
 
     //@IBOutlet weak var pageControl: UIPageControl!
@@ -36,17 +36,16 @@ class OutfitsViewController : UIViewController {
     }
 
     private func populateControllersArray() {
-        if let _ = self.outfitsCollection {
-            for i in 0...outfitsCollection.count-1 {
+        if let outfits = self.outfitsCollection {
+            for (key, subJson):(String, JSON) in outfits {
                 let controller = storyboard!.instantiateViewControllerWithIdentifier("OutfitViewController") as! OutfitViewController
-                if let outfit = self.outfitsCollection[i]["outfit"] as? NSArray {
-                    controller.currentOutfits = outfit
-                }
-                controller.itemIndex = i
+                controller.currentOutfits = subJson["outfit"].arrayObject
+                controller.itemIndex = Int(key)!
                 self.view.layoutIfNeeded()
                 controller.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
                 
                 controllers.append(controller)
+
             }
         }
     }
@@ -77,7 +76,17 @@ class OutfitsViewController : UIViewController {
     }
     
     private func loadOutfitsByStyle(){
-        DressTimeService.getOutfitsByStyle(SharedData.sharedInstance.currentUserId!, style: styleOutfits!) { (succeeded, msg) -> () in
+        DressTimeService().GetOutfitsByStyle(styleOutfits!) { (isSuccess, object) -> Void in
+            if (isSuccess){
+                self.outfitsCollection = object
+                self.currentSection = 0
+                self.populateControllersArray()
+                self.createPageViewController()
+
+            }
+        }
+        
+       /* DressTimeService.getOutfitsByStyle(SharedData.sharedInstance.currentUserId!, style: styleOutfits!) { (succeeded, msg) -> () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.outfitsCollection = msg
                 self.currentSection = 0
@@ -85,7 +94,7 @@ class OutfitsViewController : UIViewController {
                 //self.setupPageControl()
                 self.createPageViewController()
             })
-        }
+        } */
     }
 
 }

@@ -58,10 +58,9 @@ class DetailTypeViewController: UIViewController {
     
     private func deleteClothe(indexPath: NSIndexPath){
         if let currentClothe = self.clothesList?[indexPath.row] {
-            DressTimeService.deleteClothe(SharedData.sharedInstance.currentUserId!, clotheId: currentClothe.clothe_id, clotheDelCompleted: { (succeeded, msg) -> () in
+            DressTimeService().DeleteClothe(currentClothe.clothe_id, completion: { (isSuccess, object) -> Void in
                 print("Clothe deleted")
-                let dal = ClothesDAL()
-                dal.delete(currentClothe)
+                ClothesDAL().delete(currentClothe)
             })
         }
         self.clothesList!.removeAtIndex(indexPath.row)

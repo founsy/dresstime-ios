@@ -156,9 +156,9 @@ class CaptureConfirmationViewController: UIViewController {
         let clotheId = NSUUID().UUIDString
         dal.save(clotheId, partnerId: resultCapture["clothe_partnerid"] as! NSNumber, partnerName: resultCapture["clothe_partnerName"] as! String, type: resultCapture["clothe_type"] as! String, subType: resultCapture["clothe_subtype"] as! String, name: resultCapture["clothe_name"] as! String, isUnis: resultCapture["clothe_isUnis"] as! Bool, pattern: resultCapture["clothe_pattern"] as! String, cut: resultCapture["clothe_cut"] as! String, image: resultCapture["clothe_image"] as! NSData, colors: resultCapture["clothe_colors"] as! String)
         
-        DressTimeService.saveClothe(SharedData.sharedInstance.currentUserId!, clotheId: clotheId, dressingCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
-            //println(msg)
-        })
+        DressTimeService().SaveClothe(clotheId) { (isSuccess, object) -> Void in
+            print("Save Clothe")
+        }
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

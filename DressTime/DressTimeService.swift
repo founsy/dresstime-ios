@@ -8,17 +8,129 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
 class DressTimeService {
+    let baseUrlOutfits = "http://api.drez.io/outfits/"
+    let baseUrlDressing = "http://api.drez.io/dressing/"
     
-    class func getOutfitsByStyle(userid: String, style: String, todayCompleted : (succeeded: Bool, msg: [[String: AnyObject]]) -> ()){
-        let q = "http://api.drez.io/outfits/byStyle"
-        
+    func GetOutfitsByStyle(style: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        if (Mock.isMockable()){
+            if let nsdata = ReadJsonFile().readFile("outfitsByStyle"){
+                let json = JSON(data: nsdata)
+                completion(isSuccess: true, object:json[style])
+            } else {
+                completion(isSuccess: false, object: "")
+            }
+        } else {
+            self.getOutfitsByStyle(style, completion: completion)
+        }
+    }
+    
+    func GetOutfitsToday(completion: (isSuccess: Bool, object: JSON) -> Void){
+        if (Mock.isMockable()){
+            if let nsdata = ReadJsonFile().readFile("outfitsToday"){
+                let json = JSON(data: nsdata)
+                completion(isSuccess: true, object:json)
+            } else {
+                completion(isSuccess: false, object: "")
+            }
+        } else {
+            self.getOutfitsToday(completion)
+        }
+    }
+    
+    func GetBrandOutfitsToday(completion: (isSuccess: Bool, object: JSON) -> Void){
+        //if (Mock.isMockable()){
+            if let nsdata = ReadJsonFile().readFile("outfitsBrandToday"){
+                let json = JSON(data: nsdata)
+                completion(isSuccess: true, object:json)
+            } else {
+                completion(isSuccess: false, object: "")
+            }
+      /*  } else {
+            self.getOutfitsToday(completion)
+        } */
+    }
+
+    
+    
+    func SaveClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        if (Mock.isMockable()){
+            if let nsdata = ReadJsonFile().readFile("outfitsToday"){
+                let json = JSON(data: nsdata)
+                completion(isSuccess: true, object:json)
+            } else {
+                completion(isSuccess: false, object: "")
+            }
+        } else {
+            self.saveClothe(clotheId, completion: completion)
+        }
+    }
+    
+    func GetDressing(completion: (isSuccess: Bool, object: JSON) -> Void){
+        if (Mock.isMockable()){
+            if let nsdata = ReadJsonFile().readFile("outfitsToday"){
+                let json = JSON(data: nsdata)
+                completion(isSuccess: true, object:json)
+            } else {
+                completion(isSuccess: false, object: "")
+            }
+        } else {
+            self.getDressing(completion)
+        }
+    }
+    
+    func GetClothesIdDressing(completion: (isSuccess: Bool, object: JSON) -> Void){
+        if (Mock.isMockable()){
+            if let nsdata = ReadJsonFile().readFile("outfitsToday"){
+                let json = JSON(data: nsdata)
+                completion(isSuccess: true, object:json)
+            } else {
+                completion(isSuccess: false, object: "")
+            }
+        } else {
+            self.getClothesIdDressing(completion)
+        }
+    }
+    
+    func GetClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        if (Mock.isMockable()){
+            if let nsdata = ReadJsonFile().readFile("outfitsToday"){
+                let json = JSON(data: nsdata)
+                completion(isSuccess: true, object:json)
+            } else {
+                completion(isSuccess: false, object: "")
+            }
+        } else {
+            self.getClothe(clotheId, completion: completion)
+        }
+    }
+    
+    func DeleteClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        if (Mock.isMockable()){
+            if let nsdata = ReadJsonFile().readFile("outfitsToday"){
+                let json = JSON(data: nsdata)
+                completion(isSuccess: true, object:json)
+            } else {
+                completion(isSuccess: false, object: "")
+            }
+        } else {
+            self.deleteClothe(clotheId, completion: completion)
+        }
+
+    }
+    
+    /*************************************/
+    /*           PRIVATE FUNCTION        */
+    /*************************************/
+    
+    private func getOutfitsByStyle(style: String, completion: (isSuccess: Bool, object: JSON) -> Void){
         let dal = ProfilsDAL()
-        let dalClothe = ClothesDAL()
-        let dressing = dalClothe.fetch()
-        
-        if let profil = dal.fetch(userid) {
+        if let profil = dal.fetch(SharedData.sharedInstance.currentUserId!) {
+            let dalClothe = ClothesDAL()
+            let dressing = dalClothe.fetch()
+            
             var dressingSeriazible = [[String:AnyObject]]()
             let hexTranslator = HexColorToName()
 
@@ -31,37 +143,47 @@ class DressTimeService {
                 dressingSeriazible.append(d)
             }
             
-            let weatherObject: [String: String] =  [
+            let weatherObject =  [
                 "code" : SharedData.sharedInstance.weatherCode!,
                 "low" : SharedData.sharedInstance.lowTemp!,
                 "high" : SharedData.sharedInstance.highTemp!
             ]
             
-            let jsonObject: [String: AnyObject] = [
-                "sex": profil.gender!,
-                "style": style,
-                "dressing": dressingSeriazible,
-                "weather": weatherObject,
-                "access_token": profil.access_token!
-            ];
-            print(jsonObject)
+            let parameters = [
+                "sex" : profil.gender!,
+                "style" : style,
+                "dressing" : dressingSeriazible,
+                "weather" : weatherObject
+            ]
+           
+            
+            let path = baseUrlOutfits + "byStyle"
+
+            let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            Alamofire.request(.POST, path, parameters: parameters as? [String : AnyObject], encoding: .JSON, headers: headers).responseJSON { response in
+                if response.result.isSuccess {
+                    print(response.result.value)
+                    let jsonDic = JSON(response.result.value!)
+                    completion(isSuccess: true, object: jsonDic)
+                } else {
+                    completion(isSuccess: false, object: "")
+                }
+            }
             //Cancel changes about ColorName
             dalClothe.managedObjectContext.reset()
             
-            JSONService.post(jsonObject, url: q, postCompleted:  { (succeeded: Bool, result: [[String: AnyObject]]) -> () in
-                    todayCompleted(succeeded: true, msg: result)
-            })
+            
+        } else {
+            completion(isSuccess: false, object: "")
         }
     }
     
-    class func getOutfitsToday(userid: String, todayCompleted : (succeeded: Bool, msg: [[String: AnyObject]]) -> ()){
-        let q = "http://api.drez.io/outfits/today"
-        
+    private func getOutfitsToday(completion: (isSuccess: Bool, object: JSON) -> Void){
         let dal = ProfilsDAL()
-        let dalClothe = ClothesDAL()
-        let dressing = dalClothe.fetch()
-        
-        if let profil = dal.fetch(userid) {
+        if let profil = dal.fetch(SharedData.sharedInstance.currentUserId!) {
+            let dalClothe = ClothesDAL()
+            let dressing = dalClothe.fetch()
+            
             var dressingSeriazible = [[String:AnyObject]]()
             let hexTranslator = HexColorToName()
             
@@ -73,137 +195,148 @@ class DressTimeService {
                 let d:[String:AnyObject] = dict as NSDictionary as! [String : AnyObject]
                 dressingSeriazible.append(d)
             }
+           
             
-            let weatherObject: [String: String] =  [
+            let weatherObject =  [
                 "code" : SharedData.sharedInstance.weatherCode!,
                 "low" : SharedData.sharedInstance.lowTemp!,
                 "high" : SharedData.sharedInstance.highTemp!
             ]
             
-            let jsonObject: [String: AnyObject] = [
-                "sex": profil.gender!,
-                "dressing": dressingSeriazible,
-                "weather": weatherObject,
-                "access_token": profil.access_token!
-            ];
-            print(jsonObject)
+            let parameters = [
+                "sex" : profil.gender!,
+                "dressing" : dressingSeriazible,
+                "weather" : weatherObject
+            ]
+            
+           
+            let path = baseUrlOutfits + "today"
+            
+            let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            Alamofire.request(.POST, path, parameters: parameters as? [String : AnyObject], encoding: .JSON, headers: headers).responseJSON { response in
+                print(response.result.value)
+                if response.result.isSuccess {
+                    let jsonDic = JSON(response.result.value!)
+                    completion(isSuccess: true, object: jsonDic)
+                } else {
+                    completion(isSuccess: false, object: "")
+                }
+            }
             //Cancel changes about ColorName
             dalClothe.managedObjectContext.reset()
             
-            JSONService.post(jsonObject, url: q, postCompleted:  { (succeeded: Bool, result: [[String: AnyObject]]) -> () in
-                todayCompleted(succeeded: true, msg: result)
-            })
+        } else {
+            completion(isSuccess: false, object: "")
         }
     }
     
-    class func saveClothe(userid: String,clotheId: String, dressingCompleted : (succeeded: Bool, msg: [[String: AnyObject]]) -> ()) {
-        let q = "http://api.drez.io/dressing/clothes/"
-        
-        let dal = ProfilsDAL()
-        let dalClothe = ClothesDAL()
-        
-        var dressingSeriazible = [[String:AnyObject]]()
-        if let clothe = dalClothe.fetch(clotheId) {
-            if let profil = dal.fetch(userid) {
+    private func saveClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        if let clothe = ClothesDAL().fetch(clotheId) {
+            if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
+                var dressingSeriazible = [[String:AnyObject]]()
+                
                 let dict = NSMutableDictionary(dictionary: clothe.toDictionnary())
                 let image:String = (dict["clothe_image"] as! NSData).base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
                 dict["clothe_image"] = image
                 let d:[String:AnyObject] = dict as NSDictionary as! [String : AnyObject]
                 dressingSeriazible.append(d)
                 
-                let jsonObject: [String: AnyObject] = [
-                    "dressing": dressingSeriazible,
-                    "access_token": profil.access_token!
+                let parameters = [
+                    "dressing" : dressingSeriazible
                 ]
                 
-                JSONService.post(jsonObject, url: q,  postCompleted : { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
-                    dressingCompleted(succeeded: true, msg: msg)
-                })
-            }
-        }
-    }
-    
-    class func getDressing(userid: String, clotheCompleted : (succeeded: Bool, msg: [String: AnyObject]) -> ()) {
-        let q = "http://api.drez.io/dressing/clothes/"
-        
-        let dal = ProfilsDAL()
-        if let profil = dal.fetch(userid) {
-            let jsonObject: [String: AnyObject] = [
-                "access_token": profil.access_token!
-            ]
-            
-            JSONService.get(q, params: jsonObject, getCompleted: { (succeeded, msg) -> () in
-                print("Receive Dressing")
-                clotheCompleted(succeeded: succeeded, msg: msg)
-            })
-        
-        }
-    }
-    
-    class func getClothesIdDressing(userid: String, clotheCompleted : (succeeded: Bool, idList: [String]) -> ()) {
-        let q = "http://api.drez.io/dressing/clothesIds/"
-        
-        let dal = ProfilsDAL()
-        if let profil = dal.fetch(userid) {
-            let jsonObject: [String: AnyObject] = [
-                "access_token": profil.access_token!
-            ]
-            
-            JSONService.get(q, params: jsonObject, getCompleted: { (succeeded, msg) -> () in
-                print("Receive Dressing")
-                //TODO - Convert msg to Array<String>
-                var idList = [String]()
-                if let array = msg["list"] as? NSArray {
-                    for item in array{
-                        if let obj = item as? NSDictionary {
-                            idList.append(obj["id"] as! String)
-                        }
+                let path = baseUrlDressing + "clothes/"
+                let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+                Alamofire.request(.POST, path, parameters: parameters, encoding: .JSON, headers: headers).responseJSON { response in
+                    if response.result.isSuccess {
+                        print(response.result.value)
+                        let jsonDic = JSON(response.result.value!)
+                        completion(isSuccess: true, object: jsonDic)
+                    } else {
+                        completion(isSuccess: false, object: "")
                     }
                 }
-                
-                clotheCompleted(succeeded: succeeded, idList: idList )
-            })
-            
+            }
         }
-        
+        completion(isSuccess: false, object: "")
     }
     
-    class func getClothe(userid: String, clotheId: String, clotheCompleted : (succeeded: Bool, clothe: AnyObject) -> ()) {
-        let q = "http://api.drez.io/dressing/clothes/" + clotheId
-        
-        let dal = ProfilsDAL()
-        if let profil = dal.fetch(userid) {
-            let jsonObject: [String: AnyObject] = [
-                "access_token": profil.access_token!
-            ]
-            
-            JSONService.get(q, params: jsonObject, getCompleted: { (succeeded, msg) -> () in
-                print("Receive Clothe")
-                //TODO - Convert msg to Array<String>
-                
-                clotheCompleted(succeeded: succeeded, clothe: msg)
-            })
-            
+    private func getDressing(completion: (isSuccess: Bool, object: JSON) -> Void){
+        if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
+            let path = baseUrlDressing + "clothes/"
+            let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).responseJSON { response in
+                if response.result.isSuccess {
+                    print(response.result.value)
+                    let jsonDic = JSON(response.result.value!)
+                    completion(isSuccess: true, object: jsonDic)
+                } else {
+                    completion(isSuccess: false, object: "")
+                }
+            }
         }
+        completion(isSuccess: false, object: "")
     }
     
-    class func deleteClothe(userid: String, clotheId: String, clotheDelCompleted : (succeeded: Bool, clothe: AnyObject) -> ()) {
-        let q = "http://api.drez.io/dressing/clothes/" + clotheId
-        
-        let dal = ProfilsDAL()
-        if let profil = dal.fetch(userid) {
-            let jsonObject: [String: AnyObject] = [
-                "access_token": profil.access_token!
-            ]
-            
-            JSONService.delete(q, params: jsonObject, deleteCompleted: { (succeeded, msg) -> () in
-                print("Receive Clothe")
-                //TODO - Convert msg to Array<String>
-                
-                clotheDelCompleted(succeeded: succeeded, clothe: msg)
-            })
-            
+    private func getClothesIdDressing(completion: (isSuccess: Bool, object: JSON) -> Void){
+        if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
+            let path = baseUrlDressing + "clothesIds/"
+            let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).responseJSON { response in
+                if response.result.isSuccess {
+                    print(response.result.value)
+                    let jsonDic = JSON(response.result.value!)
+                    completion(isSuccess: true, object: jsonDic)
+                        /* //TODO - Convert msg to Array<String>
+                        var idList = [String]()
+                        if let array = msg["list"] as? NSArray {
+                            for item in array{
+                                if let obj = item as? NSDictionary {
+                                    idList.append(obj["id"] as! String)
+                                }
+                            }
+                        }*/
+                } else {
+                    completion(isSuccess: false, object: "")
+                }
+            }
         }
+        completion(isSuccess: false, object: "")
+    }
+    
+    private func getClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
+            let path = baseUrlDressing + "clothes/" + clotheId
+            
+            let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).responseJSON { response in
+                if response.result.isSuccess {
+                    print(response.result.value)
+                    let jsonDic = JSON(response.result.value!)
+                    completion(isSuccess: true, object: jsonDic)
+                } else {
+                    completion(isSuccess: false, object: "")
+                }
+            }
+        }
+        completion(isSuccess: false, object: "")
     }
 
+    private func deleteClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
+            let path = baseUrlDressing + "clothes/" + clotheId
+            
+            let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            Alamofire.request(.DELETE, path, encoding: .JSON, headers: headers).responseJSON { response in
+                if response.result.isSuccess {
+                    print(response.result.value)
+                    let jsonDic = JSON(response.result.value!)
+                    completion(isSuccess: true, object: jsonDic)
+                } else {
+                    completion(isSuccess: false, object: "")
+                }
+            }
+        }
+        completion(isSuccess: false, object: "")
+    }
 }

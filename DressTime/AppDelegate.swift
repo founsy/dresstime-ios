@@ -82,22 +82,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     private func getNewToken(user: Profil){
-        LoginService.refreshToken({ (succeeded, msg) -> () in
-            NSLog("Token Refresh")
-            let profilDAL = ProfilsDAL()
-            if (succeeded){
-                user.refresh_token = msg["refresh_token"] as? String
-                user.access_token = msg["access_token"] as? String
-                profilDAL.update(user)
-            } else {
-                user.refresh_token = ""
-                user.access_token = ""
-                profilDAL.update(user)
-                let rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController")
-                self.window?.makeKeyAndVisible()
-                self.window?.rootViewController!.presentViewController(rootController, animated: true, completion: nil)
+        let profilDAL = ProfilsDAL()
+        if let user = profilDAL.fetch(SharedData.sharedInstance.currentUserId!) {
+            LoginService().RefreshToken(user.refresh_token!) { (isSuccess, object) -> Void in
+                if (isSuccess){
+                    user.refresh_token = object["refresh_token"].string
+                    user.access_token = object["access_token"].string
+                    profilDAL.update(user)
+                } else {
+                    user.refresh_token = ""
+                    user.access_token = ""
+                    profilDAL.update(user)
+                    let rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController")
+                    self.window?.makeKeyAndVisible()
+                    self.window?.rootViewController!.presentViewController(rootController, animated: true, completion: nil)
+                }
             }
-        })
+        }
     }
 
     // MARK: - Core Data stack

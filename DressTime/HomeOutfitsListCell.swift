@@ -21,52 +21,43 @@ class HomeOutfitsListCell: UITableViewCell {
     @IBOutlet weak var curveArrow: CurveArrowView!
     @IBOutlet weak var mainView: UIVisualEffectView!
     
-    private let cell3Identifier = "Outfit3ElemsCell"
-    private let cell2Identifier = "Outfit2ElemsCell"
-    var outfitsCollection: [[String:AnyObject]]!
-    
-    let cellHeight = 300.0
+    private let cellIdentifier = "OutfitCell"
+    var outfitsCollection: JSON?
     
     var delegate: HomeOutfitsListCellDelegate?
     
     override func awakeFromNib() {
-        self.outfitCollectionView.registerNib(UINib(nibName: "Outfit3ElemsCell", bundle:nil), forCellWithReuseIdentifier: self.cell3Identifier)
-        self.outfitCollectionView.registerNib(UINib(nibName: "Outfit2ElemsCell", bundle:nil), forCellWithReuseIdentifier: self.cell2Identifier)
+        self.outfitCollectionView.registerNib(UINib(nibName: "OutfitCell", bundle:nil), forCellWithReuseIdentifier: self.cellIdentifier)
         self.outfitCollectionView.dataSource = self
         self.outfitCollectionView.delegate = self
-        self.blurView.layer.cornerRadius = 10
-        self.blurView.layer.masksToBounds = true
     }
     
     func loadTodayOutfits(){
-        DressTimeService.getOutfitsToday(SharedData.sharedInstance.currentUserId!, todayCompleted: { (succeeded: Bool, msg: [[String: AnyObject]]) -> () in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.outfitsCollection = msg
-                if (self.outfitsCollection.count == 0){
-                    self.emptyView.hidden = false
-                    self.mainView.hidden = true
-                } else {
-                    self.emptyView.hidden = true
-                    self.mainView.hidden = false
-                    self.outfitCollectionView.reloadData()
-                }
+        DressTimeService().GetOutfitsToday { (isSuccess, object) -> Void in
+            if (isSuccess){
+                self.outfitsCollection = object
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    if (self.outfitsCollection!.count == 0){
+                        self.emptyView.hidden = false
+                        self.mainView.hidden = true
+                    } else {
+                        self.emptyView.hidden = true
+                        self.mainView.hidden = false
+                        self.outfitCollectionView.reloadData()
+                    }
+                })
                 if let del = self.delegate {
-                    del.loadedOutfits(self.outfitsCollection.count)
+                    del.loadedOutfits(self.outfitsCollection!.count)
                 }
-            })
-        })
-        
+            }
+        }
     }
 }
 
 extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let collection = self.outfitsCollection {
-            if let _ = collection[0]["error"] {
-                return 0
-            } else {
-                return collection.count
-            }
+            return collection.count
         } else {
             return 0
         }
@@ -74,33 +65,27 @@ extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDeleg
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var outfitElem = self.outfitsCollection[indexPath.row]
+        var outfitElem = self.outfitsCollection![indexPath.row]
         let dal = ClothesDAL()
-        var cell: OutfitElemsCollectionViewCell
-        if let outfit = outfitElem["outfit"] as? NSArray {
-            if (outfit.count == 2){
-                cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cell2Identifier, forIndexPath: indexPath) as! Outfit2ElemsCollectionViewCell
-            } else {
-                cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cell3Identifier, forIndexPath: indexPath) as! Outfit3ElemsCollectionViewCell
-                
-            }
+        var cell: OutfitCollectionViewCell
+        let outfit = outfitElem["outfit"]
+            cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! OutfitCollectionViewCell
+            cell.removeOldImages()
+            
             for (var i = 0; i < outfit.count; i++){
-                if let outfitElement = outfit[i] as? NSDictionary {
-                    if let clothe = dal.fetch(outfitElement["clothe_id"] as! String) {
-                        cell.setClothe(clothe, style: outfitElem["style"] as! String)
-                    }
+                let clothe_id = outfit[i]["clothe_id"].string
+                if let clothe = dal.fetch(clothe_id!) {
+                    let style = outfitElem["style"].string
+                    cell.setClothe(clothe, style: style!, rate: outfitElem["matchingRate"].int!)
                 }
-            }
-            return cell
         }
-        return UICollectionViewCell()
+        return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let del = self.delegate {
-            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! OutfitElemsCollectionViewCell
+            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! OutfitCollectionViewCell
             del.showOutfits(cell.currentStyle!)
         }
     }
-    
 }
