@@ -23,7 +23,7 @@ class OutfitCollectionViewCell: UICollectionViewCell {
         pointText.layer.borderWidth = 1.0
         pointText.layer.masksToBounds = true
     }
-    
+        
     func setClothe(clothe: Clothe, style: String, rate: Int){
         if let image = UIImage(data: clothe.clothe_image) {
             let imageView = UIImageView()

@@ -17,6 +17,7 @@ class OutfitsViewController : UIViewController {
     
     var styleOutfits: String?
     var outfitsCollection: JSON?
+    var currentWeather: Weather?
 
 
     //@IBOutlet weak var pageControl: UIPageControl!
@@ -76,7 +77,7 @@ class OutfitsViewController : UIViewController {
     }
     
     private func loadOutfitsByStyle(){
-        DressTimeService().GetOutfitsByStyle(styleOutfits!) { (isSuccess, object) -> Void in
+        DressTimeService().GetOutfitsByStyle(styleOutfits!, weather: self.currentWeather!) { (isSuccess, object) -> Void in
             if (isSuccess){
                 self.outfitsCollection = object
                 self.currentSection = 0

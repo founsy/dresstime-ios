@@ -8,32 +8,68 @@
 
 import Foundation
 
+class Weather {
+    var code: Int?
+    var temp: Int?
+    var tempMin: Int?
+    var tempMax: Int?
+    var time: String?
+    var hour: Int?
+    var city: String?
+    var icon: String?
+}
+
+
 class WeatherWrapper {
-    
     
     func wrapListWeather(current: JSON, forecast: JSON) -> [Weather]{
         var list = [Weather]()
         list.append(wrapToWeather(current, time: "Now"))
-        if let data = getFrame() {
-            for (var i=0; i < data.count; i++){
-                var time = ""
-                if (data[i] == 2) {
-                    time = "afternoon"
-                } else if (data[i] == 4) {
-                    time = "tonight"
-                } else if (data[i] == 8) {
-                    time = "tom. morning"
-                } else if (data[i] == 10) {
-                    time = "tom. afternoon"
+        if let data = getTimeFrame() {
+            var time = "", i = 0
+            for (key, subjson) in forecast["list"]{
+                let hour = getHour(subjson["dt_txt"].stringValue)
+                if (hour == data[i]){
+                    if (data[i] == 9) {
+                        time = "morning"
+                    } else if (data[i] == 15) {
+                        time = "afternoon"
+                    } else if (data[i] == 21) {
+                        time = "tonight"
+                    }
+                    
+                    list.append(wrapToWeather(subjson, time: time))
+                    i++
+                    if (i>1) {
+                        break;
+                    }
                 }
-                list.append(wrapToWeather(forecast["list"][data[i]], time: time))
             }
         }
         return list
     }
     
+    func getHour(dateStr: String) -> Int{
+        let date = dateStr.toDateTime()!
+        let calendar = NSCalendar.currentCalendar()
+        calendar.timeZone = NSTimeZone(name: "UTC")!
+        let components = calendar.components([NSCalendarUnit.Hour], fromDate: date)
+        return components.hour
+    }
+    
     func wrapToWeather(json: JSON, time: String)-> Weather {
+        let calendar = NSCalendar.currentCalendar()
+        var date = NSDate(timeIntervalSince1970: Double(json["dt"].floatValue))
+        if let dateStr = json["dt_txt"].string {
+            date = dateStr.toDateTime()!
+            calendar.timeZone = NSTimeZone(name: "UTC")!
+        }
+        let components = calendar.components([NSCalendarUnit.Hour], fromDate: date)
+        let hour = components.hour
+        
+        
         let weather = Weather()
+        weather.hour = hour
         weather.time = time
         weather.temp = json["main"]["temp"].int
         weather.tempMin = json["main"]["temp_min"].int
@@ -54,21 +90,21 @@ class WeatherWrapper {
         return weather
     }
     
-    func getFrame() -> [Int]?{
+    func getTimeFrame() -> [Int]?{
         let date = NSDate()
         let calendar = NSCalendar.currentCalendar()
         let components = calendar.components([NSCalendarUnit.Hour,NSCalendarUnit.Minute], fromDate: date)
         let hour = components.hour
         
-        if (hour > 6 && hour < 12){
-            //Afternoon & Tonight
-            return [2, 4]
-        } else if (hour > 12 && hour < 18) {
-            //Tonight & Tomorrow Morning (9h)
-            return [4, 8]
-        } else if (hour > 18) {
-            //Tomorrow Morning and Tomorrow Afternoon
-             return [8, 10]
+        if (hour >= 0 && hour < 12){
+            //Afternoon(15h) & Tonight(21h)
+            return [15, 21]
+        } else if (hour >= 12 && hour < 18) {
+            //Tonight(21h) & Tomorrow Morning (9h)
+            return [21, 9]
+        } else if (hour >= 18) {
+            //Tomorrow Morning (9h) and Tomorrow Afternoon(15h)
+             return [9, 15]
         }
         return nil
     }
@@ -157,4 +193,23 @@ class WeatherWrapper {
         [961,"violent storm","E","E"  ],
         [962,"hurricane","E","E"  ]
     ]
+}
+
+extension String
+{
+    func toDateTime() -> NSDate?
+    {
+        //Create Date Formatter
+        let dateFormatter = NSDateFormatter()
+        
+        //Specify Format of String to Parse
+        dateFormatter.dateFormat = "yyyy-MM-dd kk:mm:ss"//this your string date format
+        dateFormatter.timeZone = NSTimeZone(name: "UTC")
+        
+        //Parse into NSDate
+        let dateFromString = dateFormatter.dateFromString(self)
+        
+        //Return Parsed Date
+        return dateFromString
+    }
 }

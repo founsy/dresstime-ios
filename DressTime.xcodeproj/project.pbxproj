@@ -22,6 +22,7 @@
 		014373251BCCD3CA00443F66 /* OutfitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014373241BCCD3CA00443F66 /* OutfitCell.xib */; settings = {ASSET_TAGS = (); }; };
 		0143732B1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0143732A1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		0143732D1BCCE21C00443F66 /* outfitsBrandToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 0143732C1BCCE21C00443F66 /* outfitsBrandToday.json */; settings = {ASSET_TAGS = (); }; };
+		0143732F1BCE2A6000443F66 /* DressTimeBL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0143732E1BCE2A6000443F66 /* DressTimeBL.swift */; settings = {ASSET_TAGS = (); }; };
 		014BF92D1BB171C400319701 /* RegisterEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF92C1BB171C400319701 /* RegisterEmailViewController.swift */; };
 		014BF92F1BB171EE00319701 /* RegisterSexeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF92E1BB171EE00319701 /* RegisterSexeViewController.swift */; };
 		014BF9311BB171FD00319701 /* RegisterStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF9301BB171FD00319701 /* RegisterStyleViewController.swift */; };
@@ -185,6 +186,7 @@
 		014373241BCCD3CA00443F66 /* OutfitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutfitCell.xib; sourceTree = "<group>"; };
 		0143732A1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitCollectionViewCell.swift; sourceTree = "<group>"; };
 		0143732C1BCCE21C00443F66 /* outfitsBrandToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = outfitsBrandToday.json; sourceTree = "<group>"; };
+		0143732E1BCE2A6000443F66 /* DressTimeBL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressTimeBL.swift; sourceTree = "<group>"; };
 		014BF92C1BB171C400319701 /* RegisterEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterEmailViewController.swift; sourceTree = "<group>"; };
 		014BF92E1BB171EE00319701 /* RegisterSexeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSexeViewController.swift; sourceTree = "<group>"; };
 		014BF9301BB171FD00319701 /* RegisterStyleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterStyleViewController.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				01C683D11BB866D800765C7F /* UIColor-Hex.swift */,
 				01C683D51BB971C900765C7F /* UIImage-Extension.swift */,
 				01C2AE631BC7DD3200F7D4C2 /* WeatherWrapper.swift */,
+				0143732E1BCE2A6000443F66 /* DressTimeBL.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -832,6 +835,7 @@
 				01C683D21BB866D800765C7F /* UIColor-Hex.swift in Sources */,
 				012A21A01B5AD88F00CD01D3 /* HexColorToName.swift in Sources */,
 				01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */,
+				0143732F1BCE2A6000443F66 /* DressTimeBL.swift in Sources */,
 				01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */,
 				017F39081BC517D4002E6FE7 /* ReadJsonFile.swift in Sources */,
 				019405C41BC114A8005D6F92 /* Profil.swift in Sources */,

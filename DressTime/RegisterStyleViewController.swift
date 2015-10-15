@@ -40,14 +40,36 @@ class RegisterStyleViewController: UIViewController {
     
     var currentUserId: String?
 
+    @IBOutlet weak var onValidateButton: UIButton!
+    @IBOutlet weak var labelText: UILabel!
+    
     @IBAction func onCancelTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    @IBAction func onSaveTapped(sender: AnyObject) {
+        if let userId = currentUserId {
+            let dal = ProfilsDAL()
+            if let profil = dal.fetch(userId) {
+                profil.atWorkStyle = self.atWorkSelected
+                profil.onPartyStyle = self.onPartySelected
+                profil.relaxStyle = self.relaxSelected
+                dal.update(profil)
+            }
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         //lastLocation = homeIcon.center
+        if (currentUserId != nil){
+            onValidateButton.titleLabel?.text = "VALIDATE MY MODIFICATION"
+            labelText.text = "PICK YOUR OWN STYLE"
+        } else {
+            onValidateButton.titleLabel?.text = "LET'S SEE MY NEW DRESSING"
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -176,16 +198,19 @@ class RegisterStyleViewController: UIViewController {
         var viewPoint = containerRelax.convertPoint(location, fromView: self.view)
         if containerRelax.pointInside(viewPoint, withEvent: nil){
             self.relaxImage = self.tempUIImage
+            self.relaxSelected = self.tempUIImage?.accessibilityIdentifier
             return containerRelax
         }
         viewPoint = containerAtWork.convertPoint(location, fromView: self.view)
         if containerAtWork.pointInside(viewPoint, withEvent: nil){
             self.atWorkImage = self.tempUIImage
+            self.atWorkSelected = self.tempUIImage?.accessibilityIdentifier
             return containerAtWork
         }
         viewPoint = containerOnParty.convertPoint(location, fromView: self.view)
         if containerOnParty.pointInside(viewPoint, withEvent: nil){
             self.onPartyImage = self.tempUIImage
+            self.onPartySelected = self.tempUIImage?.accessibilityIdentifier
             return containerOnParty
         }
         return nil
@@ -245,7 +270,6 @@ class RegisterStyleViewController: UIViewController {
             let touch = touches.first
                 let location = touch!.locationInView(self.view)
                 self.tempUIImage!.center = CGPointMake(location.x, location.y)
-            
         }
         
     }

@@ -23,8 +23,11 @@ class HomeOutfitsListCell: UITableViewCell {
     
     private let cellIdentifier = "OutfitCell"
     var outfitsCollection: JSON?
-    
+    let BL = DressTimeBL()
+    let service = DressTimeService()
     var delegate: HomeOutfitsListCellDelegate?
+    private var dayMoment: [String]?
+    private var styleByMoment: [String]?
     
     override func awakeFromNib() {
         self.outfitCollectionView.registerNib(UINib(nibName: "OutfitCell", bundle:nil), forCellWithReuseIdentifier: self.cellIdentifier)
@@ -32,8 +35,11 @@ class HomeOutfitsListCell: UITableViewCell {
         self.outfitCollectionView.delegate = self
     }
     
-    func loadTodayOutfits(){
-        DressTimeService().GetOutfitsToday { (isSuccess, object) -> Void in
+    func loadTodayOutfits(weather: Weather){
+        self.dayMoment = BL.getDayMoment(weather.hour!)
+        self.styleByMoment = BL.getStyleByMoment(self.dayMoment!)
+        
+        service.GetOutfitsToday(self.styleByMoment!, weather: weather) { (isSuccess, object) -> Void in
             if (isSuccess){
                 self.outfitsCollection = object
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -43,7 +49,9 @@ class HomeOutfitsListCell: UITableViewCell {
                     } else {
                         self.emptyView.hidden = true
                         self.mainView.hidden = false
-                        self.outfitCollectionView.reloadData()
+                        self.outfitCollectionView.performBatchUpdates({ () -> Void in
+                            self.outfitCollectionView.reloadSections(NSIndexSet(index: 0))
+                            }, completion: nil)
                     }
                 })
                 if let del = self.delegate {
@@ -52,6 +60,8 @@ class HomeOutfitsListCell: UITableViewCell {
             }
         }
     }
+    
+    
 }
 
 extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -75,8 +85,8 @@ extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDeleg
             for (var i = 0; i < outfit.count; i++){
                 let clothe_id = outfit[i]["clothe_id"].string
                 if let clothe = dal.fetch(clothe_id!) {
-                    let style = outfitElem["style"].string
-                    cell.setClothe(clothe, style: style!, rate: outfitElem["matchingRate"].int!)
+                    let style = BL.getMomentByStyle(self.dayMoment!, style: outfitElem["style"].stringValue) //outfitElem["style"].string
+                    cell.setClothe(clothe, style: style, rate: outfitElem["matchingRate"].int!)
                 }
         }
         return cell

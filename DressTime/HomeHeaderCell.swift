@@ -11,17 +11,7 @@ import UIKit
 import CoreLocation
 
 protocol HomeHeaderCellDelegate {
-    func weatherFinishing(code: String)
-}
-
-class Weather {
-    var code: Int?
-    var temp: Int?
-    var tempMin: Int?
-    var tempMax: Int?
-    var time: String?
-    var city: String?
-    var icon: String?
+    func weatherFinishing(weather: Weather)
 }
 
 class HomeHeaderCell: UITableViewCell {
@@ -91,7 +81,7 @@ extension HomeHeaderCell: UICollectionViewDelegateFlowLayout {
         return UIEdgeInsetsMake(0.0, inset, 0.0, 0.0);
     }
 }
-extension HomeHeaderCell: UICollectionViewDelegate{
+extension HomeHeaderCell: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         var cell = collectionView.cellForItemAtIndexPath(indexPath) as! WeatherCell
         cell.viewContainer.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.25)
@@ -101,6 +91,10 @@ extension HomeHeaderCell: UICollectionViewDelegate{
         cell.viewContainer.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.0)
         
         self.selectedWeather = indexPath.row
+        if let del = self.delegate {
+            //Return current weather
+            del.weatherFinishing( self.weatherList[self.selectedWeather])
+        }
         
     }
 
@@ -148,7 +142,8 @@ extension HomeHeaderCell: CLLocationManagerDelegate {
                     })
                     self.updateWeather(self.weatherList[0].code!, high: String(self.weatherList[0].tempMax!), low: String(self.weatherList[0].tempMin!), city: self.weatherList[0].city!)
                     if let del = self.delegate {
-                        del.weatherFinishing(String(self.weatherList[0].code!))
+                        //Return current weather
+                        del.weatherFinishing(self.weatherList[0])
                     }
                 }
             })

@@ -77,7 +77,7 @@ class WeatherService {
             
             Alamofire.request(.GET, query).responseJSON { (response) -> Void in
                 if response.result.isSuccess {
-                    print(response.result.value)
+                    //print(response.result.value)
                     let jsonDic = JSON(response.result.value!)
                     completion(isSuccess: true, object: jsonDic)
                 } else {
@@ -104,7 +104,7 @@ class WeatherService {
             
             Alamofire.request(.GET, query).responseJSON { (response) -> Void in
                 if response.result.isSuccess {
-                    print(response.result.value)
+                    //print(response.result.value)
                     let jsonDic = JSON(response.result.value!)
                     completion(isSuccess: true, object: jsonDic)
                 } else {

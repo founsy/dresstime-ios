@@ -22,6 +22,8 @@ class HomeViewController: UIViewController{
     private var currentStyleSelected: String?
     private var numberOfOutfits: Int = 0
     
+    private var currentWeather: Weather?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
@@ -84,46 +86,48 @@ class HomeViewController: UIViewController{
         if (segue.identifier == "showOutfits"){
             let targetVC = segue.destinationViewController as! OutfitsViewController
             targetVC.styleOutfits = self.currentStyleSelected
+            targetVC.currentWeather = self.currentWeather
         }
     }
 
 }
 
 extension HomeViewController: HomeHeaderCellDelegate {
-    func weatherFinishing(code: String) {
+    func weatherFinishing(weather: Weather) {
         //Call HomeOutfitsListCell
-       let condition = weatherConditionByCode(Int(code)!)
-            var image: UIImage?
+        self.currentWeather = weather
+        let condition = weatherConditionByCode(Int(weather.code!))
+        var image: UIImage?
+        
+        if (condition == "sunny"){
+            image = UIImage(named: "HomeBgSun")
+        
+        } else if (condition == "cloudy"){
+            image = UIImage(named: "HomeBgSun")
             
-            if (condition == "sunny"){
-                image = UIImage(named: "HomeBgSun")
+        } else if (condition == "rainy"){
+            image = UIImage(named: "HomeBgRain")
             
-            } else if (condition == "cloudy"){
-                image = UIImage(named: "HomeBgSun")
-                
-            } else if (condition == "rainy"){
-                image = UIImage(named: "HomeBgRain")
-                
-            } else if (condition == "windy"){
-                image = UIImage(named: "HomeBgSun")
-                
-            } else if (condition == "snowy"){
-                image = UIImage(named: "HomeBgSnow")
-                
-            } else {
-                image = UIImage(named: "HomeBgSun")
-            }
-            print("-------------------\(condition)-------------------------")
-           dispatch_async(dispatch_get_main_queue(), {
-                self.navigationItem.title = SharedData.sharedInstance.city
-                UIView.animateWithDuration(0.2, animations: { () -> Void in
-                    self.bgView.image = image
-                })
+        } else if (condition == "windy"){
+            image = UIImage(named: "HomeBgSun")
+            
+        } else if (condition == "snowy"){
+            image = UIImage(named: "HomeBgSnow")
+            
+        } else {
+            image = UIImage(named: "HomeBgSun")
+        }
+        print("-------------------\(condition)-------------------------")
+        dispatch_async(dispatch_get_main_queue(), {
+            self.navigationItem.title = SharedData.sharedInstance.city
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                self.bgView.image = image
             })
-            print("-------------------\(condition)-------------------------")
+        })
+        print("-------------------\(condition)-------------------------")
         
         if let outfitsCell = self.outfitsCell {
-            outfitsCell.loadTodayOutfits()
+            outfitsCell.loadTodayOutfits(self.currentWeather!)
         }
         if let outfitsBrandCell = self.brandOutfitsCell {
             outfitsBrandCell.loadTodayBrandOutfits()
