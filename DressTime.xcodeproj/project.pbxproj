@@ -19,6 +19,8 @@
 		013B07811BA821A20063CCF9 /* HomeOutfitsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B07801BA821A20063CCF9 /* HomeOutfitsListCell.swift */; };
 		013B07831BA821C60063CCF9 /* HomeBrandOutfitsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B07821BA821C60063CCF9 /* HomeBrandOutfitsListCell.swift */; };
 		013B07851BA824D10063CCF9 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B07841BA824D10063CCF9 /* HomeViewController.swift */; };
+		013B64641BD23D9700176098 /* ClotheScrollTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013B64631BD23D9700176098 /* ClotheScrollTableCell.xib */; settings = {ASSET_TAGS = (); }; };
+		013B646A1BD23EC300176098 /* ClotheScrollTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B64691BD23EC300176098 /* ClotheScrollTableCell.swift */; settings = {ASSET_TAGS = (); }; };
 		014373251BCCD3CA00443F66 /* OutfitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014373241BCCD3CA00443F66 /* OutfitCell.xib */; settings = {ASSET_TAGS = (); }; };
 		0143732B1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0143732A1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift */; settings = {ASSET_TAGS = (); }; };
 		0143732D1BCCE21C00443F66 /* outfitsBrandToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 0143732C1BCCE21C00443F66 /* outfitsBrandToday.json */; settings = {ASSET_TAGS = (); }; };
@@ -183,6 +185,8 @@
 		013B07801BA821A20063CCF9 /* HomeOutfitsListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeOutfitsListCell.swift; sourceTree = "<group>"; };
 		013B07821BA821C60063CCF9 /* HomeBrandOutfitsListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeBrandOutfitsListCell.swift; sourceTree = "<group>"; };
 		013B07841BA824D10063CCF9 /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		013B64631BD23D9700176098 /* ClotheScrollTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClotheScrollTableCell.xib; sourceTree = "<group>"; };
+		013B64691BD23EC300176098 /* ClotheScrollTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClotheScrollTableCell.swift; sourceTree = "<group>"; };
 		014373241BCCD3CA00443F66 /* OutfitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutfitCell.xib; sourceTree = "<group>"; };
 		0143732A1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitCollectionViewCell.swift; sourceTree = "<group>"; };
 		0143732C1BCCE21C00443F66 /* outfitsBrandToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = outfitsBrandToday.json; sourceTree = "<group>"; };
@@ -376,6 +380,7 @@
 				01A6BDE51B9B352E00D357A3 /* TypeTableCell.xib */,
 				01C2AE5D1BC7931F00F7D4C2 /* WeatherCell.xib */,
 				014373241BCCD3CA00443F66 /* OutfitCell.xib */,
+				013B64631BD23D9700176098 /* ClotheScrollTableCell.xib */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -534,6 +539,7 @@
 				01A6BDE11B9AE84700D357A3 /* ClotheDetailTableViewCell.swift */,
 				01A6BDE71B9B365B00D357A3 /* TypeTableViewCell.swift */,
 				0143732A1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift */,
+				013B64691BD23EC300176098 /* ClotheScrollTableCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -762,6 +768,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C683D91BBBBB7100765C7F /* TypeCell.xib in Resources */,
+				013B64641BD23D9700176098 /* ClotheScrollTableCell.xib in Resources */,
 				01C455011B5942F4003D5E41 /* Main.storyboard in Resources */,
 				01A6BDE41B9AE9CB00D357A3 /* ClotheDetailTableCell.xib in Resources */,
 				01C455071B595C54003D5E41 /* artill_clean_icons-webfont.ttf in Resources */,
@@ -846,6 +853,7 @@
 				013B07811BA821A20063CCF9 /* HomeOutfitsListCell.swift in Sources */,
 				01E167F31BC3EA4B008D3A0C /* SettingsHeaderCell.swift in Sources */,
 				01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */,
+				013B646A1BD23EC300176098 /* ClotheScrollTableCell.swift in Sources */,
 				013B077F1BA820790063CCF9 /* HomeHeaderCell.swift in Sources */,
 				014BF92D1BB171C400319701 /* RegisterEmailViewController.swift in Sources */,
 				012A219D1B5AB89700CD01D3 /* ProfilsDAL.swift in Sources */,

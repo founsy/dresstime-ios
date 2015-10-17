@@ -23,7 +23,9 @@ class DressTimeService {
                 completion(isSuccess: false, object: "")
             }
         } else {
-            self.getOutfits([style], weather:weather, completion: completion)
+            var styles = [String]()
+            styles.append(style)
+            self.getOutfits(styles, weather:weather, completion: completion)
         }
     }
     

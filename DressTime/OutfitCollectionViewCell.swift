@@ -16,6 +16,7 @@ class OutfitCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imageContainer: UIStackView!
     
     var currentStyle: String?
+    var outfitStyle: String?
     
     override func awakeFromNib() {
         pointText.layer.borderColor = UIColor.whiteColor().CGColor

@@ -16,16 +16,16 @@ class OutfitViewController: UIViewController {
     
     var itemIndex: Int = 0
     var currentOutfits: NSArray!
-    var frame: CGRect?
     
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.frame = frame!
+        //self.view.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
 
-        tableView.registerNib(UINib(nibName: "ClotheTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
-
+        //tableView.registerNib(UINib(nibName: "ClotheTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
+        tableView.registerNib(UINib(nibName: "ClotheScrollTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
+        
         tableView!.delegate = self
         tableView!.dataSource = self
     }
@@ -57,12 +57,10 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
             self.performSegueWithIdentifier("detailClothe", sender: self)
         })
         self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
-        
-
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let height:CGFloat = (self.tableView.bounds.height) / CGFloat(self.currentOutfits.count)
+        let height:CGFloat = (tableView.frame.height-20.0) / CGFloat(self.currentOutfits.count)
         return height
     }
     
@@ -75,14 +73,32 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! ClotheTableViewCell
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! ClotheScrollTableCell
         if let outfit = self.currentOutfits[indexPath.row] as? NSDictionary {
+            let type = outfit["clothe_type"] as! String
+            let clothe_id = outfit["clothe_id"] as! String
+            
+            let collection = dal.fetch(type: type)
+            cell.clotheCollection = collection
+            cell.currentOutfit =  dal.fetch(clothe_id)
+            cell.setupScrollView(cell.contentView.bounds.size.width, height: cell.contentView.bounds.size.height)
+            cell.layer.shadowOffset = CGSizeMake(3, 6);
+            cell.layer.shadowColor = UIColor.blackColor().CGColor
+            cell.layer.shadowRadius = 8;
+            cell.layer.shadowOpacity = 0.75;
+            
+            //Remove edge insets to have full width separtor line
+            cell.preservesSuperviewLayoutMargins = false
+            cell.separatorInset = UIEdgeInsetsZero
+            cell.layoutMargins = UIEdgeInsetsZero
+        }
+        
+        
+       /* if let outfit = self.currentOutfits[indexPath.row] as? NSDictionary {
             let clothe_id = outfit["clothe_id"] as! String
             if let clothe = dal.fetch(clothe_id) {
                 if let image = UIImage(data: clothe.clothe_image) {
                     NSLog("\(image.size.width) - \(image.size.height)")
-                
                     cell.clotheImageView.image = image.imageWithImage(480.0)
                 }
                 cell.layer.shadowOffset = CGSizeMake(3, 6);
@@ -97,7 +113,7 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.separatorInset = UIEdgeInsetsZero
                 cell.layoutMargins = UIEdgeInsetsZero
             }
-        }
+        } */
         return cell
     }
 }

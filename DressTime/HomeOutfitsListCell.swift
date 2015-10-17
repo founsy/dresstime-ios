@@ -11,7 +11,7 @@ import UIKit
 
 protocol HomeOutfitsListCellDelegate {
     func loadedOutfits(outfitsCount: Int)
-    func showOutfits(currentStyle: String)
+    func showOutfits(outfit: JSON)
 }
 
 class HomeOutfitsListCell: UITableViewCell {
@@ -86,6 +86,7 @@ extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDeleg
                 let clothe_id = outfit[i]["clothe_id"].string
                 if let clothe = dal.fetch(clothe_id!) {
                     let style = BL.getMomentByStyle(self.dayMoment!, style: outfitElem["style"].stringValue) //outfitElem["style"].string
+                    cell.outfitStyle =  outfitElem["style"].stringValue
                     cell.setClothe(clothe, style: style, rate: outfitElem["matchingRate"].int!)
                 }
         }
@@ -94,8 +95,8 @@ extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let del = self.delegate {
-            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! OutfitCollectionViewCell
-            del.showOutfits(cell.currentStyle!)
+            let outfitElem = self.outfitsCollection![indexPath.row]
+            del.showOutfits(outfitElem)
         }
     }
 }

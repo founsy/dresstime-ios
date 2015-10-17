@@ -65,10 +65,11 @@ class RegisterStyleViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         //lastLocation = homeIcon.center
         if (currentUserId != nil){
-            onValidateButton.titleLabel?.text = "VALIDATE MY MODIFICATION"
+            onValidateButton.setTitle("VALIDATE MY MODIFICATION", forState: UIControlState.Normal)
             labelText.text = "PICK YOUR OWN STYLE"
         } else {
             onValidateButton.titleLabel?.text = "LET'S SEE MY NEW DRESSING"
+            onValidateButton.setTitle("LET'S SEE MY NEW DRESSING", forState: UIControlState.Normal)
         }
     }
     

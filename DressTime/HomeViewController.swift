@@ -20,6 +20,7 @@ class HomeViewController: UIViewController{
     var brandOutfitsCell: HomeBrandOutfitsListCell?
     
     private var currentStyleSelected: String?
+    private var outfitSelected: JSON?
     private var numberOfOutfits: Int = 0
     
     private var currentWeather: Weather?
@@ -86,8 +87,14 @@ class HomeViewController: UIViewController{
         if (segue.identifier == "showOutfits"){
             let targetVC = segue.destinationViewController as! OutfitsViewController
             targetVC.styleOutfits = self.currentStyleSelected
+            targetVC.outfit = self.outfitSelected
             targetVC.currentWeather = self.currentWeather
         }
+        if (segue.identifier == "showOutfit"){
+            let targetVC = segue.destinationViewController as! OutfitViewController
+            targetVC.currentOutfits = self.outfitSelected!["outfit"].arrayObject
+        }
+
     }
 
 }
@@ -169,9 +176,9 @@ extension HomeViewController: HomeHeaderCellDelegate {
 }
 
 extension HomeViewController: HomeOutfitsListCellDelegate {
-    func showOutfits(currentStyle: String) {
-        self.currentStyleSelected = currentStyle
-        self.performSegueWithIdentifier("showOutfits", sender: self)
+    func showOutfits(outfit: JSON) {
+        self.outfitSelected = outfit
+        self.performSegueWithIdentifier("showOutfit", sender: self)
     }
     
     func loadedOutfits(outfitsCount: Int) {

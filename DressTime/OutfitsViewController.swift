@@ -16,7 +16,7 @@ class OutfitsViewController : UIViewController {
     private var currentSection: Int = 0
     
     var styleOutfits: String?
-    var outfitsCollection: JSON?
+    var outfit: JSON?
     var currentWeather: Weather?
 
 
@@ -33,28 +33,19 @@ class OutfitsViewController : UIViewController {
         pageViewController?.delegate = self
         pageViewController?.dataSource = self
         
-        loadOutfitsByStyle()
+        self.populateControllersArray()
+        self.createPageViewController()
     }
 
     private func populateControllersArray() {
-        if let outfits = self.outfitsCollection {
-            for (key, subJson):(String, JSON) in outfits {
-                let controller = storyboard!.instantiateViewControllerWithIdentifier("OutfitViewController") as! OutfitViewController
-                controller.currentOutfits = subJson["outfit"].arrayObject
-                controller.itemIndex = Int(key)!
-                self.view.layoutIfNeeded()
-                controller.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-                
-                controllers.append(controller)
-
-            }
-        }
-    }
-
-    private func setupPageControl() {
-       /* if let outfits = self.outfitsCollection {
-            self.pageControl.numberOfPages = outfits.count
-        } */
+        let controller = storyboard!.instantiateViewControllerWithIdentifier("OutfitViewController") as! OutfitViewController
+        controller.currentOutfits = outfit!["outfit"].arrayObject
+        controller.itemIndex = Int(1)
+        self.view.layoutIfNeeded()
+        //controller.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
+        
+        controllers.append(controller)
+        
     }
 
     private func createPageViewController() {
@@ -75,29 +66,6 @@ class OutfitsViewController : UIViewController {
         self.view.addSubview(pageViewController!.view)
         pageViewController!.didMoveToParentViewController(self)
     }
-    
-    private func loadOutfitsByStyle(){
-        DressTimeService().GetOutfitsByStyle(styleOutfits!, weather: self.currentWeather!) { (isSuccess, object) -> Void in
-            if (isSuccess){
-                self.outfitsCollection = object
-                self.currentSection = 0
-                self.populateControllersArray()
-                self.createPageViewController()
-
-            }
-        }
-        
-       /* DressTimeService.getOutfitsByStyle(SharedData.sharedInstance.currentUserId!, style: styleOutfits!) { (succeeded, msg) -> () in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.outfitsCollection = msg
-                self.currentSection = 0
-                self.populateControllersArray()
-                //self.setupPageControl()
-                self.createPageViewController()
-            })
-        } */
-    }
-
 }
 
 extension OutfitsViewController: UIPageViewControllerDataSource, UIPageViewControllerDelegate {
