@@ -34,10 +34,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     profil.expire_in = object["expires_in"].float
                     if let newProfil = dal.update(profil) {
                         SharedData.sharedInstance.currentUserId = newProfil.userid
+                        SharedData.sharedInstance.sexe = newProfil.gender
                     }
                 } else {
                     let pro = dal.save(self.loginText.text!, access_token:  object["access_token"].string!, refresh_token: object["refresh_token"].string!, expire_in: object["expires_in"].int!, name: self.loginText.text!, gender: "M", temp_unit: "C");
                     SharedData.sharedInstance.currentUserId = pro.userid
+                    SharedData.sharedInstance.sexe = pro.gender
                 }
                 
                 //Check after login, if a synchro is necessary

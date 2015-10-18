@@ -101,21 +101,22 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
     
     func addVideoInput() -> Bool {
         var success: Bool = false
-        let videoDevice: AVCaptureDevice = CameraSessionManager.deviceWithMediaType(AVMediaTypeVideo, position: AVCaptureDevicePosition.Back)!
-        do {
-            let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice) as AVCaptureDeviceInput
-            
-            try videoDevice.lockForConfiguration()
-             videoDevice.focusMode = .AutoFocus
+        if let videoDevice: AVCaptureDevice = CameraSessionManager.deviceWithMediaType(AVMediaTypeVideo, position: AVCaptureDevicePosition.Back) {
+            do {
+                let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice) as AVCaptureDeviceInput
+                
+                try videoDevice.lockForConfiguration()
+                 videoDevice.focusMode = .AutoFocus
 
-            if session.canAddInput(videoDeviceInput) {
-                session.addInput(videoDeviceInput)
-                success = true
+                if session.canAddInput(videoDeviceInput) {
+                    session.addInput(videoDeviceInput)
+                    success = true
+                }
+                videoDevice.unlockForConfiguration()
+                
+            } catch let error as NSError {
+                print(error)
             }
-            videoDevice.unlockForConfiguration()
-            
-        } catch let error as NSError {
-            print(error)
         }
        
         return success

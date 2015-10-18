@@ -13,14 +13,12 @@ class TypeViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
-    var sectionTitleArray : NSMutableArray = ["Maille","Top", "Pants"]
+    private let types = SharedData.sharedInstance.getType(SharedData.sharedInstance.sexe!)
+    private var subTypes = Array<Array<String>>()
+    
     var sectionContentDict : NSMutableDictionary = NSMutableDictionary()
-    var arrayForBool : NSMutableArray = ["0","0", "0"]
-    
-    let labelsSubTop = ["tshirt", "shirt", "shirt-sleeve", "polo","polo-sleeve"]
-    let labelsSubPants = ["jeans", "jeans-slim", "trousers-pleated", "trousers-suit", "chinos", "trousers-regular", "trousers", "trousers-slim", "bermuda", "short"]
-    let labelsSubMaille = ["jumper-fin","jumper-epais ","cardigan","sweater"]
-    
+    var arrayForBool = NSMutableArray()
+
     let bgType = ["TypeMaille", "TypeTop", "TypePants"]
     
     private let kCellReuse : String = "SubTypeCell"
@@ -36,11 +34,11 @@ class TypeViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightGrayColor()
         tableView.registerNib(UINib(nibName: "TypeTableCell", bundle:nil), forCellReuseIdentifier: self.cellTypeIdentifier)
-        
+        initSubType()
         
         if (isOpenSectionRequired){
             for (var i = 0; i < arrayForBool.count; i++) {
-                let collapsed = arrayForBool.objectAtIndex(i).boolValue as Bool
+                let collapsed = arrayForBool[i] as! Bool
                 if (collapsed){
                     let path:NSIndexPath = NSIndexPath(forItem: i, inSection: 0)
                     self.tableView.reloadRowsAtIndexPaths([path], withRowAnimation: UITableViewRowAnimation.Fade)
@@ -50,36 +48,34 @@ class TypeViewController: UIViewController {
                 }
             }
         }
-        whiteNavBar()
     }
     
-    private func whiteNavBar(){
-        let bar:UINavigationBar! =  self.navigationController?.navigationBar
+    private func initSubType(){
+        self.subTypes = Array<Array<String>>()
+        for (var i = 0; i < self.types.count; i++){
+            self.subTypes.append(SharedData.sharedInstance.getSubType(self.types[i]))
+            self.arrayForBool.addObject("0")
+        }
         
-        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        bar.shadowImage = UIImage()
-        bar.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 1.0)
-        bar.tintColor = UIColor.blackColor()
-        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.blackColor()]
-        self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        
     }
 
     @IBAction func onClose(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func openItem(type: Int){
-        let collapsed = arrayForBool.objectAtIndex(type).boolValue as Bool
-        arrayForBool.replaceObjectAtIndex(type, withObject: !collapsed)
-        self.currentSection = type
+    func openItem(typeIndex: Int){
+        let collapsed = arrayForBool[typeIndex] as! Bool
+        arrayForBool.replaceObjectAtIndex(typeIndex, withObject: !collapsed)
+        self.currentSection = typeIndex
         isOpenSectionRequired = true
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "showCapture"){
             let captureController = segue.destinationViewController as! NewCameraViewController
-            captureController.typeClothe = getType(self.currentSection)
-            captureController.subTypeClothe = getSubType(self.currentSection, subType: self.subTypeSelected)
+            captureController.typeClothe = self.types[self.currentSection].lowercaseString
+            captureController.subTypeClothe = self.subTypes[self.currentSection][self.subTypeSelected]
         }
     }
 }
@@ -115,25 +111,11 @@ extension TypeViewController: UITableViewDelegate{
 extension TypeViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return sectionTitleArray.count
+        return self.types.count
     }
     
     func calculateCollectionViewHeight() -> CGFloat {
-        let cellHeight = 100.0
-        
-        var height = 0.0
-        switch(self.currentSection) {
-        case 0:
-            height = round(Double(labelsSubMaille.count)/2.0) * cellHeight
-        case 1:
-           height = round(Double(labelsSubTop.count)/2.0) * cellHeight
-        case 2:
-           height =  round(Double(labelsSubPants.count)/2.0) * cellHeight
-        default:
-            height = 0
-            break
-        }
-        return CGFloat(height)
+        return ceil(CGFloat(self.subTypes[self.currentSection].count)/2.0) * 100.0
     }
    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -148,7 +130,6 @@ extension TypeViewController: UITableViewDataSource {
     }
 
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        NSLog("willDisplayCell \(indexPath.row)")
         let currentCell = cell as! TypeTableViewCell
         
         currentCell.setCollectionViewDataSourceDelegate(dataSourceDelegate: self, index: indexPath.row)
@@ -165,12 +146,11 @@ extension TypeViewController: UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        NSLog("cellForRowAtIndexPath \(indexPath.row)")
         let cell = self.tableView.dequeueReusableCellWithIdentifier(cellTypeIdentifier, forIndexPath: indexPath) as! TypeTableViewCell
         cell.bgImageView.image = UIImage(named: "\(bgType[indexPath.row])Full")
-        cell.labelTypeText.text = sectionTitleArray[indexPath.row].uppercaseString
+        cell.labelTypeText.text = self.types[indexPath.row].uppercaseString
         cell.bgImageView.clipsToBounds = true
-        cell.data = getData(self.currentSection)
+        cell.data = self.subTypes[self.currentSection]
     
         return cell
     }
@@ -199,7 +179,7 @@ extension TypeViewController : UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellReuse, forIndexPath: indexPath) as! CustomSubTypeViewCell
-        cell.label.text = getData(self.currentSection)![indexPath.row]
+        cell.label.text = self.subTypes[self.currentSection][indexPath.row]
         cell.contentView.viewWithTag(100)?.removeFromSuperview()
         cell.contentView.viewWithTag(101)?.removeFromSuperview()
 
@@ -235,24 +215,7 @@ extension TypeViewController : UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let datas = getData(self.currentSection) {
-            return datas.count
-        } else {
-            return 0
-        }
-    }
-    
-    func getData(section: Int) -> [String]?{
-        switch(section){
-        case 0:
-            return self.labelsSubMaille
-        case 1:
-            return self.labelsSubTop
-        case 2:
-            return self.labelsSubPants
-        default:
-            return nil
-        }
+        return self.subTypes[self.currentSection].count
     }
 }
 
@@ -260,29 +223,12 @@ extension TypeViewController : UICollectionViewDelegate {
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         collectionView.deselectItemAtIndexPath(indexPath, animated: false)
-        let cell = collectionView.cellForItemAtIndexPath(indexPath)
-        NSLog("Nbr subviews:  \(cell?.contentView.subviews.count)")
-        NSLog("\(indexPath.row)")
         self.subTypeSelected = indexPath.row
-        print("tapped on collection")
         self.performSegueWithIdentifier("showCapture", sender: self)
     }
-    
-    func getType(type: Int) -> String{
-        switch(type){
-        case 0:
-            return "maille"
-        case 1:
-            return "top"
-        case 2:
-            return "pants"
-        default:
-            return ""
-        }
-    }
-    
+
     func getSubType(type: Int, subType: Int) -> String {
-        return getData(type)![subType]
+        return self.subTypes[type][subType]
         
     }
 }

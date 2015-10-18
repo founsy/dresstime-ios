@@ -28,7 +28,10 @@ class DetailTypeViewController: UIViewController {
         tableView!.delegate = self
         tableView!.dataSource = self
         titleNav.title = "My \(typeClothe!.uppercaseString)!"
-        blackNavBar()
+        
+        //Remove Title of Back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        
     }
     
     func initData(){
@@ -36,16 +39,6 @@ class DetailTypeViewController: UIViewController {
         if let type = self.typeClothe {
             self.clothesList = dal.fetch(type: type)
         }
-    }
-    
-    private func blackNavBar(){
-        let bar:UINavigationBar! =  self.navigationController?.navigationBar
-        
-        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        bar.shadowImage = UIImage()
-        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.5)
-        bar.tintColor = UIColor.whiteColor()
-        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
     }
     
     private func openEditClotheView(indexPath: NSIndexPath){

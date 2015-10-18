@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let user = profil {
             SharedData.sharedInstance.currentUserId = user.userid
+            SharedData.sharedInstance.sexe = user.gender
             //getNewToken(user)
         } else {
             let rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController")

@@ -70,6 +70,10 @@ class DetailClotheViewController: UIViewController {
         
         self.clotheName.text = self.currentClothe.clothe_name
         self.updateColors(currentClothe.clothe_colors)
+        
+        //Remove Title of Back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        
     }
     
     override func viewDidAppear(animated: Bool) {

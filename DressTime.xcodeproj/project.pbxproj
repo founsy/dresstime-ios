@@ -54,7 +54,7 @@
 		01C2AE621BC7DA3300F7D4C2 /* weather.json in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE611BC7DA3300F7D4C2 /* weather.json */; settings = {ASSET_TAGS = (); }; };
 		01C2AE641BC7DD3200F7D4C2 /* WeatherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2AE631BC7DD3200F7D4C2 /* WeatherWrapper.swift */; settings = {ASSET_TAGS = (); }; };
 		01C2AE681BC7E20C00F7D4C2 /* currentWeather.json in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE671BC7E20C00F7D4C2 /* currentWeather.json */; settings = {ASSET_TAGS = (); }; };
-		01C2AE6C1BCA532400F7D4C2 /* NewSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2AE6B1BCA532400F7D4C2 /* NewSettingsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		01C2AE6C1BCA532400F7D4C2 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2AE6B1BCA532400F7D4C2 /* SettingsTableViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D21B5935B3003D5E41 /* AppDelegate.swift */; };
 		01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */; };
 		01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DC1B5935B3003D5E41 /* Images.xcassets */; };
@@ -220,7 +220,7 @@
 		01C2AE611BC7DA3300F7D4C2 /* weather.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weather.json; sourceTree = "<group>"; };
 		01C2AE631BC7DD3200F7D4C2 /* WeatherWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherWrapper.swift; sourceTree = "<group>"; };
 		01C2AE671BC7E20C00F7D4C2 /* currentWeather.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = currentWeather.json; sourceTree = "<group>"; };
-		01C2AE6B1BCA532400F7D4C2 /* NewSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewSettingsTableViewController.swift; sourceTree = "<group>"; };
+		01C2AE6B1BCA532400F7D4C2 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		01C454CD1B5935B3003D5E41 /* DressTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DressTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C454D11B5935B3003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01C454D21B5935B3003D5E41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -568,7 +568,7 @@
 				01C683CF1BB8504500765C7F /* DetailClotheViewController.swift */,
 				01C683DD1BBBBC9600765C7F /* ProfilViewController.swift */,
 				01C683DF1BBD72BB00765C7F /* SettingsViewController.swift */,
-				01C2AE6B1BCA532400F7D4C2 /* NewSettingsTableViewController.swift */,
+				01C2AE6B1BCA532400F7D4C2 /* SettingsTableViewController.swift */,
 			);
 			name = Profil;
 			sourceTree = "<group>";
@@ -821,7 +821,7 @@
 				01A6BDE21B9AE84700D357A3 /* ClotheDetailTableViewCell.swift in Sources */,
 				01C4556F1B5A603C003D5E41 /* ClothPhotoCell.swift in Sources */,
 				01C2AE641BC7DD3200F7D4C2 /* WeatherWrapper.swift in Sources */,
-				01C2AE6C1BCA532400F7D4C2 /* NewSettingsTableViewController.swift in Sources */,
+				01C2AE6C1BCA532400F7D4C2 /* SettingsTableViewController.swift in Sources */,
 				01A6BDEA1B9B41A100D357A3 /* NewCameraViewController.swift in Sources */,
 				01C683E01BBD72BB00765C7F /* SettingsViewController.swift in Sources */,
 				01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */,

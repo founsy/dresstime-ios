@@ -128,13 +128,13 @@ class RegisterStyleViewController: UIViewController {
         }
         
         if (selectedStyle == "sportwear"){
-            self.tempUIImage = createTempImageView(self.sportwearStyle, location: nil)
+            self.tempUIImage = createTempImageView(self.sportwearStyle, location: nil, isInit: true)
         } else if (selectedStyle == "business"){
-            self.tempUIImage = createTempImageView(self.businessStyle, location: nil)
+            self.tempUIImage = createTempImageView(self.businessStyle, location: nil, isInit: true)
         } else if (selectedStyle == "fashion"){
-            self.tempUIImage = createTempImageView(self.partyStyle, location: nil)
+            self.tempUIImage = createTempImageView(self.partyStyle, location: nil, isInit: true)
         } else if (selectedStyle == "casual"){
-            self.tempUIImage = createTempImageView(self.casualStyle, location: nil)
+            self.tempUIImage = createTempImageView(self.casualStyle, location: nil, isInit: true)
         }
         
         let points = container!.superview!.convertRect(container!.frame, toView: nil)
@@ -146,17 +146,36 @@ class RegisterStyleViewController: UIViewController {
     }
     
     
-    private func createTempImageView(imageToClone: UIImageView, location: CGPoint?) -> UIImageView {
+    private func createTempImageView(imageToClone: UIImageView, location: CGPoint?, isInit: Bool = false) -> UIImageView {
         let temp = UIImageView(frame: imageToClone.frame)
         if let loc = location {
             temp.center = loc
         }
-        temp.image = imageToClone.image
+        
+        if (isInit){
+            temp.image = UIImage(named: getImageNameSelected(imageToClone.accessibilityIdentifier!))
+        } else {
+            temp.image = imageToClone.image
+        }
         temp.accessibilityIdentifier = imageToClone.accessibilityIdentifier
         return temp
         
     }
 
+    private func getImageNameSelected(style: String) -> String{
+        var name = ""
+        if (style == "sportwear"){
+            name = "IconSportwearStyleSelected"
+        } else if (style == "fashion"){
+            name = "IconFashionStyleSelected"
+        } else if (style == "business"){
+            name = "IconBusinessStyleSelected"
+        } else if (style == "casual"){
+            name = "IconeCasualStyleSelected"
+        }
+        return name
+
+    }
     
     private func whichStyleSelected(location: CGPoint) -> UIImageView? {
         var viewPoint = sportwearStyle.convertPoint(location, fromView: self.view)
@@ -303,6 +322,7 @@ class RegisterStyleViewController: UIViewController {
             }, completion: { animationFinished in
                 // when complete, remove the square from the parent view
                 self.tempUIImage!.center = destination
+                self.tempUIImage!.image = UIImage(named: self.getImageNameSelected(self.tempUIImage!.accessibilityIdentifier!))
                 self.isMoving = false
         })
     }

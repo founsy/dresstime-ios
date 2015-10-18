@@ -27,7 +27,7 @@ class WeatherWrapper {
         list.append(wrapToWeather(current, time: "Now"))
         if let data = getTimeFrame() {
             var time = "", i = 0
-            for (key, subjson) in forecast["list"]{
+            for (_, subjson) in forecast["list"]{
                 let hour = getHour(subjson["dt_txt"].stringValue)
                 if (hour == data[i]){
                     if (data[i] == 9) {

@@ -11,7 +11,7 @@ import UIKit
 
 class ProfilViewController: UIViewController {
     let cellIdentifier = "profilTypeCell"
-    var type = ["Maille", "Top", "Pants"]
+    private var type = [String]()
     var countType:Array<String>?
     
     private var typeColtheSelected: String?
@@ -34,26 +34,26 @@ class ProfilViewController: UIViewController {
         self.currentClotheOpenSelected = nil
         self.performSegueWithIdentifier("AddClothe", sender: self)
     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        initData()
         let longPressedGesture = UILongPressGestureRecognizer(target: self, action: "longPressedHandle:")
         longPressedGesture.minimumPressDuration = 1.0
-        //longPressedGesture.delegate = self
         tableView.addGestureRecognizer(longPressedGesture)
         tableView.registerNib(UINib(nibName: "TypeCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
         
         tableView!.delegate = self
         tableView!.dataSource = self
         buttonAddClothe.layer.cornerRadius = 17.5
-        
+
+        //Remove Title of Back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "PROFILE", style: .Plain, target: nil, action: nil)
     }
     
     override func viewWillAppear(animated: Bool){
         super.viewWillAppear(animated)
+        self.type = SharedData.sharedInstance.getType(SharedData.sharedInstance.sexe!)
         initData()
-        //resetLongPressed()
-        clearNavBar()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -93,8 +93,8 @@ class ProfilViewController: UIViewController {
         var totalClothe = 0
         let dal = ClothesDAL()
         countType = Array<String>()
-        for (var i = 0; i < type.count; i++){
-            let typeCell = type[i].lowercaseString
+        for (var i = 0; i < self.type.count; i++){
+            let typeCell = self.type[i].lowercaseString
             let count = dal.fetch(type: typeCell).count
             totalClothe = totalClothe + count
             countType?.append("\(count)")
@@ -108,16 +108,6 @@ class ProfilViewController: UIViewController {
         if let user = profilDal.fetch(SharedData.sharedInstance.currentUserId!) {
             self.nameLabel.text = user.name
         }
-    }
-    
-    private func clearNavBar(){
-        let bar:UINavigationBar! =  self.navigationController?.navigationBar
-        
-        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        bar.shadowImage = UIImage()
-        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
-        bar.tintColor = UIColor.whiteColor()
-        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.clearColor()]
     }
 }
 

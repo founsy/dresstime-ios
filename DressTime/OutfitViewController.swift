@@ -21,13 +21,12 @@ class OutfitViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //self.view.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-
-        //tableView.registerNib(UINib(nibName: "ClotheTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
         tableView.registerNib(UINib(nibName: "ClotheScrollTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
         
         tableView!.delegate = self
         tableView!.dataSource = self
+        //Remove Title of Back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "HOME", style: .Plain, target: nil, action: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -92,28 +91,7 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
             cell.separatorInset = UIEdgeInsetsZero
             cell.layoutMargins = UIEdgeInsetsZero
         }
-        
-        
-       /* if let outfit = self.currentOutfits[indexPath.row] as? NSDictionary {
-            let clothe_id = outfit["clothe_id"] as! String
-            if let clothe = dal.fetch(clothe_id) {
-                if let image = UIImage(data: clothe.clothe_image) {
-                    NSLog("\(image.size.width) - \(image.size.height)")
-                    cell.clotheImageView.image = image.imageWithImage(480.0)
-                }
-                cell.layer.shadowOffset = CGSizeMake(3, 6);
-                cell.layer.shadowColor = UIColor.blackColor().CGColor
-                cell.layer.shadowRadius = 8;
-                cell.layer.shadowOpacity = 0.75;
-                cell.clotheImageView.clipsToBounds = true
-                cell.favorisIcon.clipsToBounds = true
-                
-                //Remove edge insets to have full width separtor line
-                cell.preservesSuperviewLayoutMargins = false
-                cell.separatorInset = UIEdgeInsetsZero
-                cell.layoutMargins = UIEdgeInsetsZero
-            }
-        } */
+
         return cell
     }
 }

@@ -61,12 +61,10 @@ class HomeViewController: UIViewController{
     }
     
     func addButtonPressed(){
-        //self.performSegueWithIdentifier("showProfil", sender: self)
         self.performSegueWithIdentifier("AddClothe", sender: self)
     }
     
     func profilButtonPressed(){
-        //self.performSegueWithIdentifier("showProfil", sender: self)
         self.performSegueWithIdentifier("showProfil", sender: self)
     }
     
@@ -230,13 +228,13 @@ extension HomeViewController: UITableViewDelegate {
             return 92.0
         } else if (indexPath.row == 2){
             if (self.numberOfOutfits > 0){
-                return 350.0
+                return 300.0
             } else {
                 return 170.0
             }
            
         } else if (indexPath.row == 3){
-            return 350.0
+            return 300.0
         } else {
             return 0.0
         }

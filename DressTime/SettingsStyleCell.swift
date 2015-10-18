@@ -200,7 +200,6 @@ class SettingsStyleCell: UITableViewCell {
         } else if (selectedStyle == "casual"){
             self.tempUIImage = createTempImageView(self.casualChicStyle, location: nil)
         }
-        let points = self.containerView.convertRect(container!.frame, fromView: self)
         
         self.tempUIImage!.center = container!.center
         self.containerView.addSubview(self.tempUIImage!)

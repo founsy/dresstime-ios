@@ -9,10 +9,15 @@
 import Foundation
 import UIKit
 
+protocol SettingsTableViewControllerDelegate {
+    func onSexeChange(sexe: String)
+}
 
-class NewSettingsTableViewController: UITableViewController {
+class SettingsTableViewController: UITableViewController {
     
     var user: Profil?
+    var delegate: SettingsTableViewControllerDelegate?
+    
     
     @IBOutlet weak var womenButton: UIButton!
     @IBOutlet weak var menButton: UIButton!
@@ -29,6 +34,13 @@ class NewSettingsTableViewController: UITableViewController {
         self.menSelected = !self.menSelected
         createBorderButton(menButton, isSelected: self.menSelected)
         createBorderButton(womenButton, isSelected: !self.menSelected)
+        if let del = delegate {
+            var sexe = "F"
+            if (self.menSelected){
+                sexe = "M"
+            }
+            del.onSexeChange(sexe)
+        }
     }
     
     override func viewDidLoad() {
@@ -102,7 +114,7 @@ class NewSettingsTableViewController: UITableViewController {
     }
 }
 
-extension NewSettingsTableViewController: UITextFieldDelegate {
+extension SettingsTableViewController: UITextFieldDelegate {
     func textFieldShouldReturn(textField: UITextField) -> Bool  {
         textField.resignFirstResponder()
         return true

@@ -936,6 +936,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "TypeViewController.calculateCollectionViewHeight() -&gt; CGFloat:TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "ceil(CGFloat(self.subTypes[self.currentSection].count)/2.0)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DressTime.TypeViewController.sectionHeaderTapped (DressTime.TypeViewController)(ObjectiveC.UITapGestureRecognizer) -&gt; ():TypeViewController.swift">
          <PersistentStrings>
             <PersistentString

@@ -14,7 +14,7 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     private var user: Profil?
-    private var tableViewController: NewSettingsTableViewController?
+    private var tableViewController: SettingsTableViewController?
    
     @IBOutlet weak var backgroundView: UIImageView!
     
@@ -26,6 +26,9 @@ class SettingsViewController: UIViewController {
                 } else {
                     userSaving.gender = "F"
                 }
+                //Update SharedData
+                SharedData.sharedInstance.sexe = userSaving.gender
+                
                 if (vc.temperatureField.selectedSegmentIndex == 0){
                     userSaving.temp_unit = "C"
                 } else {
@@ -76,15 +79,34 @@ class SettingsViewController: UIViewController {
         
         if let user = profilDal.fetch(SharedData.sharedInstance.currentUserId!) {
             self.user = user
+            changeBackground(self.user!.gender!)
         }
+        //Remove Title of Back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Profile", style: .Plain, target: nil, action: nil)
         
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "settingTableView"){
-            tableViewController = segue.destinationViewController as? NewSettingsTableViewController
+            tableViewController = segue.destinationViewController as? SettingsTableViewController
+            tableViewController?.delegate = self
         }
     }
     
+    private func changeBackground(sex: String){
+        dispatch_async(dispatch_get_main_queue(),  { () -> Void in
+            if (sex == "M"){
+                self.backgroundView.image = UIImage(named: "ProfilsSettingBgdMen")
+            } else {
+                self.backgroundView.image = UIImage(named: "ProfilsSettingBgdWomen")
+            }
+        })
+    }
+}
+
+extension SettingsViewController: SettingsTableViewControllerDelegate {
+    func onSexeChange(sexe: String){
+        changeBackground(sexe)
+    }
 }
 
