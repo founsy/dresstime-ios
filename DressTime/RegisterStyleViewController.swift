@@ -171,7 +171,7 @@ class RegisterStyleViewController: UIViewController {
         } else if (style == "business"){
             name = "IconBusinessStyleSelected"
         } else if (style == "casual"){
-            name = "IconeCasualStyleSelected"
+            name = "IconCasualStyleSelected"
         }
         return name
 

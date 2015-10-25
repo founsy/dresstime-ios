@@ -14,7 +14,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="554" height="156.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1BY-Uf-rc2">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1BY-Uf-rc2">
                         <rect key="frame" x="0.0" y="0.0" width="554" height="156.5"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBI-Rb-9mX">
@@ -90,6 +90,7 @@
                     <constraint firstItem="1BY-Uf-rc2" firstAttribute="top" secondItem="bX7-it-jCQ" secondAttribute="topMargin" constant="-8" id="zHD-zm-Vwi"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.92156862750000001" green="0.68627450980000004" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="addTypedButton" destination="WOU-Zh-OLE" id="Obs-ye-1TE"/>
                 <outlet property="backgroundImage" destination="1BY-Uf-rc2" id="mnD-PG-Fvu"/>

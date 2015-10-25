@@ -73,6 +73,12 @@ class SettingsTableViewController: UITableViewController {
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        //Remove Title of Back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Profile", style: .Plain, target: nil, action: nil)
+    }
+    
     override func viewDidLayoutSubviews(){
         applyStyleTextView(nameField)
         applyStyleTextView(emailField)

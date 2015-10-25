@@ -83,17 +83,19 @@ extension HomeHeaderCell: UICollectionViewDelegateFlowLayout {
 }
 extension HomeHeaderCell: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        var cell = collectionView.cellForItemAtIndexPath(indexPath) as! WeatherCell
-        cell.viewContainer.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.25)
+       if (self.selectedWeather != indexPath.row){
+            var cell = collectionView.cellForItemAtIndexPath(indexPath) as! WeatherCell
+            cell.viewContainer.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.25)
         
-        let indexPathSelected = NSIndexPath(forRow: self.selectedWeather, inSection: indexPath.section)
-        cell = collectionView.cellForItemAtIndexPath(indexPathSelected) as! WeatherCell
-        cell.viewContainer.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.0)
+            let indexPathSelected = NSIndexPath(forRow: self.selectedWeather, inSection: indexPath.section)
+            cell = collectionView.cellForItemAtIndexPath(indexPathSelected) as! WeatherCell
+            cell.viewContainer.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.0)
         
-        self.selectedWeather = indexPath.row
-        if let del = self.delegate {
-            //Return current weather
-            del.weatherFinishing( self.weatherList[self.selectedWeather])
+            self.selectedWeather = indexPath.row
+            if let del = self.delegate {
+                //Return current weather
+                del.weatherFinishing( self.weatherList[self.selectedWeather])
+            }
         }
         
     }

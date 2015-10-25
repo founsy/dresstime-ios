@@ -17,6 +17,7 @@ class SettingsViewController: UIViewController {
     private var tableViewController: SettingsTableViewController?
    
     @IBOutlet weak var backgroundView: UIImageView!
+    @IBOutlet weak var saveButton: UIButton!
     
     @IBAction func onSaveTapped(sender: AnyObject) {
         if let userSaving = self.user {
@@ -81,9 +82,12 @@ class SettingsViewController: UIViewController {
             self.user = user
             changeBackground(self.user!.gender!)
         }
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Profile", style: .Plain, target: nil, action: nil)
-        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -28,10 +28,12 @@ class DetailTypeViewController: UIViewController {
         tableView!.delegate = self
         tableView!.dataSource = self
         titleNav.title = "My \(typeClothe!.uppercaseString)!"
-        
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         //Remove Title of Back button
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-        
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Profile", style: .Plain, target: nil, action: nil)
     }
     
     func initData(){

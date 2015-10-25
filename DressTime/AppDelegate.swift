@@ -29,18 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.makeKeyAndVisible()
             self.window?.rootViewController!.presentViewController(rootController, animated: true, completion: nil)
         }
-        //Go back to login window
-         /*
-        var storyBoard = UIStoryboard(name: "Static", bundle: nil)
-        self.window?.rootViewController = storyBoard.instantiateInitialViewController() as! UIViewController
-        self.window?.makeKeyAndVisible()
-        
-        */
-        /*var rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController") as! UIViewController
-        self.window?.makeKeyAndVisible()
-        self.window?.rootViewController!.presentViewController(rootController, animated: true, completion: nil) */
-
-        //}
         return true
     }
 

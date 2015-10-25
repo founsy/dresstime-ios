@@ -168,7 +168,11 @@ class DressTimeService {
             let path = baseUrlOutfits
 
             let headers = ["Authorization": "Bearer \(profil.access_token!)"]
-            Alamofire.request(.POST, path, parameters: parameters as? [String : AnyObject], encoding: .JSON, headers: headers).responseJSON { response in
+            
+            //AuthorizationManager.startRequest(.POST, path, parameters: parameters as? [String : AnyObject], encoding: .JSON, headers: headers)
+            
+            
+            Alamofire.request(.POST, path, parameters: parameters as? [String : AnyObject], encoding: .JSON, headers: headers).validate().responseJSON { response in
                 if response.result.isSuccess {
                     print(response.result.value)
                     let jsonDic = JSON(response.result.value!)

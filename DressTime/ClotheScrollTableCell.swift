@@ -28,7 +28,8 @@ class ClotheScrollTableCell: UITableViewCell {
             for (var i = 0; i < collection.count; i++){
                 let imageView = UIImageView(frame: CGRectMake(CGFloat(i)*width, 0, width, height))
                 imageView.contentMode = .Top
-                imageView.image = UIImage(data: collection[i].clothe_image)!.imageWithImage(480.0)
+                let image = UIImage(data: collection[i].clothe_image)!
+                imageView.image = image.imageWithImage(width)
                 imageView.backgroundColor = UIColor.clearColor()
                 imageView.clipsToBounds = true
                 self.scrollView.addSubview(imageView)

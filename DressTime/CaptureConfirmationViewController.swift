@@ -39,6 +39,8 @@ class CaptureConfirmationViewController: UIViewController {
         }
     }
     
+    //TODO - Cut subtype-cut 
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +67,7 @@ class CaptureConfirmationViewController: UIViewController {
             
             //Fall back if image don't have 3 main colors
             var colors = self.splitHexColor(clothe.clothe_colors)
-            if (colors.count < 2){
+            //if (colors.count < 2){
                 var tempColor = ""
                 let arrayColors = clotheImage!.dominantColors()
                 for var i = 0; i < arrayColors.count && i < 3; i++ {
@@ -76,7 +78,7 @@ class CaptureConfirmationViewController: UIViewController {
                 }
                 clothe.clothe_colors = tempColor
                 colors = self.splitHexColor(tempColor)
-            }
+            //}
             
             if (colors.count > 0) {
                 color1.backgroundColor = UIColor.colorWithHexString(colors[0] as String)

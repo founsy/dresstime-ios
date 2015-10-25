@@ -39,7 +39,7 @@ class HomeViewController: UIViewController{
     private func addProfilButtonToNavBar(){
         
         let regularButton = UIButton(frame: CGRectMake(0, 0, 40.0, 40.0))
-        let historyButtonImage = UIImage(named: "profile_img")
+        let historyButtonImage = UIImage(named: "ProfilImage")
         regularButton.setBackgroundImage(historyButtonImage, forState: UIControlState.Normal)
         
         regularButton.setTitle("", forState: UIControlState.Normal)
@@ -77,22 +77,26 @@ class HomeViewController: UIViewController{
         bar.tintColor = UIColor.whiteColor()
         bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
+        //Remove Title of Back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        
         addProfilButtonToNavBar()
         addAddButtonToNavBar()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "showOutfits"){
-            let targetVC = segue.destinationViewController as! OutfitsViewController
-            targetVC.styleOutfits = self.currentStyleSelected
-            targetVC.outfit = self.outfitSelected
-            targetVC.currentWeather = self.currentWeather
-        }
         if (segue.identifier == "showOutfit"){
             let targetVC = segue.destinationViewController as! OutfitViewController
             targetVC.currentOutfits = self.outfitSelected!["outfit"].arrayObject
         }
 
+    }
+    
+    private func setTitleNavBar(city: String){
+        let myView = NSBundle.mainBundle().loadNibNamed("TitleNavBar", owner: self, options: nil)[0] as! TitleNavBar
+        myView.frame = CGRectMake(0, 0, 300, 30)
+        myView.cityLabel.text = city
+        self.navigationItem.titleView = myView;
     }
 
 }
@@ -124,7 +128,7 @@ extension HomeViewController: HomeHeaderCellDelegate {
         }
         print("-------------------\(condition)-------------------------")
         dispatch_async(dispatch_get_main_queue(), {
-            self.navigationItem.title = SharedData.sharedInstance.city
+            self.setTitleNavBar(SharedData.sharedInstance.city!)
             UIView.animateWithDuration(0.2, animations: { () -> Void in
                 self.bgView.image = image
             })

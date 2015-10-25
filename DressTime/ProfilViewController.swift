@@ -44,16 +44,15 @@ class ProfilViewController: UIViewController {
         
         tableView!.delegate = self
         tableView!.dataSource = self
-        buttonAddClothe.layer.cornerRadius = 17.5
-
-        //Remove Title of Back button
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "PROFILE", style: .Plain, target: nil, action: nil)
+        buttonAddClothe.layer.cornerRadius = 20.0
     }
     
     override func viewWillAppear(animated: Bool){
         super.viewWillAppear(animated)
         self.type = SharedData.sharedInstance.getType(SharedData.sharedInstance.sexe!)
         initData()
+        //Remove Title of Back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "PROFILE", style: .Plain, target: nil, action: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -113,7 +112,7 @@ class ProfilViewController: UIViewController {
 
 extension ProfilViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        return 150.0
+        return 200.0
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -131,7 +130,7 @@ extension ProfilViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! TypeCell
         let typeCell = self.type[indexPath.row]
-        cell.backgroundImage.image = UIImage(named: "Background\(typeCell)")
+        cell.backgroundImage.image = UIImage(named: "Background\(typeCell)\(SharedData.sharedInstance.sexe!.uppercaseString)")
         cell.longPressLabel.text = "Add \(typeCell)"
         cell.viewLongPress.hidden = true
         cell.delegate = self
@@ -151,6 +150,12 @@ extension ProfilViewController: UITableViewDataSource {
             cell.leftLabel.text = self.countType![indexPath.row]
             cell.leftLabelName.text = typeCell
         }
+        
+        //Remove edge insets to have full width separtor line
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsetsZero
+        
         return cell
     }
 }

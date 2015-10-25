@@ -14,15 +14,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordText: UITextField!
     
     @IBAction func onClickLoginBtn(sender: AnyObject) {
-        var json = [String: AnyObject]()
-        json["grant_type"] = "password"
-        json["client_id"] = "android"
-        json["client_secret"] = "SomeRandomCharsAndNumbers"
-        json["username"] = loginText.text
-        json["password"] = passwordText.text
-        
-        
-        
         view.endEditing(true)
         LoginService().Login(loginText.text!, password: passwordText.text!) { (isSuccess, object) -> Void in
             if (isSuccess){
@@ -63,44 +54,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
 
         }
-        
-        
-     /*   LoginService.loginMethod(json, postCompleted: { (succeeded: Bool, msg: [String: AnyObject]) -> () in
-            if (succeeded){
-                let dal = ProfilsDAL()
-                if let profil = dal.fetch(self.loginText.text!){
-                    profil.access_token = msg["access_token"] as? String
-                    profil.refresh_token = msg["refresh_token"] as? String
-                    profil.expire_in = msg["expires_in"] as? NSNumber
-                    if let newProfil = dal.update(profil) {
-                        SharedData.sharedInstance.currentUserId = newProfil.userid
-                    }
-                } else {
-                    let pro = dal.save(self.loginText.text!, access_token: msg["access_token"] as! String, refresh_token: msg["refresh_token"] as! String, expire_in: msg["expires_in"] as! Int, name: self.loginText.text!, gender: "M", temp_unit: "C");
-                    SharedData.sharedInstance.currentUserId = pro.userid
-                }
-                
-                //Check after login, if a synchro is necessary
-                //Today, only if Local database is empty
-                //TODO - Tomorrow, syncro differential
-                let dressingSynchro = DressingSynchro(userId: SharedData.sharedInstance.currentUserId!)
-                dressingSynchro.execute()
-                
-                dispatch_async(dispatch_get_main_queue(),  { () -> Void in
-                    
-                    let appDelegateTemp = UIApplication.sharedApplication().delegate;
-                    appDelegateTemp!.window!!.rootViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateInitialViewController()
-                })
-                
-            } else {
-                let alert = UIAlertView(title: "Failed!", message: msg["error"] as? String, delegate: nil, cancelButtonTitle: "Okay.")
-                // Move to the UI thread
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    // Show the alert
-                    alert.show()
-                })
-            }
-        }) */
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {        

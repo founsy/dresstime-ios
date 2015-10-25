@@ -38,13 +38,21 @@
          contextName = "static DressTime.WeatherService.(getWeather (DressTime.WeatherService.Type) -&gt; (ObjectiveC.CLLocation, weatherCompleted : (succeeded : Swift.Bool, msg : Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;) -&gt; ()) -&gt; ()).(closure #1):WeatherService.swift">
       </ContextState>
       <ContextState
+         contextName = "NewOufitCell.createClotheView(Clothe, rect : CGRect) -&gt; ():NewOutfitCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "rect">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "OutfitViewController.tableView(UITableView, heightForRowAtIndexPath : NSIndexPath) -&gt; CGFloat:OutfitViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.tableView.frame.height">
+               value = " self.view.layoutIfNeeded()">
             </PersistentString>
             <PersistentString
-               value = " self.view.layoutIfNeeded()">
+               value = "self.tableView.frame.height">
             </PersistentString>
             <PersistentString
                value = "self.currentOutfits.count">
@@ -99,10 +107,10 @@
          contextName = "DressTime.LoginViewController.(onClickLoginBtn (DressTime.LoginViewController) -&gt; (Swift.AnyObject) -&gt; ()).(closure #1):LoginViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "newProfil.access_token">
+               value = "profil.access_token">
             </PersistentString>
             <PersistentString
-               value = "profil.access_token">
+               value = "newProfil.access_token">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -153,6 +161,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "TypeViewController.openItem(Int) -&gt; ():TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " arrayForBool[typeIndex].boolValue">
+            </PersistentString>
+            <PersistentString
+               value = "arrayForBool.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DressTime.FilterView.applyConstrainte (DressTime.FilterView)(ObjectiveC.UIView) -&gt; ():FilterView.swift">
          <PersistentStrings>
             <PersistentString
@@ -172,7 +191,16 @@
          contextName = "DressTimeService.((getOutfits in _3F9FBDEE54AB84ACC9699628EA4A9769)(DressTimeService) -&gt; ([String], weather : Weather, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ()).(closure #1):DressTimeService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "print(response)">
+               value = "profil.refresh_token">
+            </PersistentString>
+            <PersistentString
+               value = "response.response?.statusCode">
+            </PersistentString>
+            <PersistentString
+               value = "profil.access_token">
+            </PersistentString>
+            <PersistentString
+               value = "dal">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -194,10 +222,10 @@
                value = "container!.superview!.convertRect(container!.frame, fromView: self.contentView)">
             </PersistentString>
             <PersistentString
-               value = "container!.frame">
+               value = "container!.convertRect(container!.frame, toView: self.containerView)">
             </PersistentString>
             <PersistentString
-               value = "container!.convertRect(container!.frame, toView: self.containerView)">
+               value = "container!.frame">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -213,10 +241,10 @@
          contextName = "ClotheScrollTableCell.setupScrollView() -&gt; ():ClotheScrollTableCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.scrollView.bounds.size.height">
+               value = "self.scrollView.bounds.size.width">
             </PersistentString>
             <PersistentString
-               value = "self.scrollView.bounds.size.width">
+               value = "self.scrollView.bounds.size.height">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -225,6 +253,14 @@
          <PersistentStrings>
             <PersistentString
                value = "self.relaxSelected ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressingSynchro.(isDressingEmpty in _5D4E5A99B5AE9DBB58B651F0E284D94A)() -&gt; Bool:DressingSynchro.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.clothesLocal.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -257,7 +293,7 @@
                value = "currentOutfit?.clothe_id">
             </PersistentString>
             <PersistentString
-               value = "collection[i].clothe_id">
+               value = "width">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -339,10 +375,10 @@
                value = "round(Double(labelsSubTop.count)/2.0)">
             </PersistentString>
             <PersistentString
-               value = "height">
+               value = "labelsSubTop.count">
             </PersistentString>
             <PersistentString
-               value = "labelsSubTop.count">
+               value = "height">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -366,19 +402,25 @@
          contextName = "HomeOutfitsListCell.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:HomeOutfitsListCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.dayMoment[indexPath.row]">
+               value = "outfit[i][&quot;clothe_id&quot;].string">
+            </PersistentString>
+            <PersistentString
+               value = "clothe.clothe_type">
             </PersistentString>
             <PersistentString
                value = "outfit[&quot;style&quot;].string">
             </PersistentString>
             <PersistentString
-               value = "outfit[i][&quot;clothe_id&quot;].string">
-            </PersistentString>
-            <PersistentString
                value = "print(outfit[i][&quot;clothe_id&quot;].stringValue)">
             </PersistentString>
             <PersistentString
-               value = "self.dayMoment![indexPath.row]">
+               value = "211 - 65">
+            </PersistentString>
+            <PersistentString
+               value = "cell.frame.height">
+            </PersistentString>
+            <PersistentString
+               value = "i*width">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -394,10 +436,13 @@
          contextName = "WeatherWrapper.wrapToWeather(JSON, time : String) -&gt; Weather:WeatherWrapper.swift">
          <PersistentStrings>
             <PersistentString
-               value = "json[&quot;dt_txt&quot;].stringValue.toDateTime()">
+               value = "json[&quot;weather&quot;][0][&quot;id&quot;].int">
             </PersistentString>
             <PersistentString
                value = " components.hour">
+            </PersistentString>
+            <PersistentString
+               value = "json[&quot;dt&quot;].floatValue">
             </PersistentString>
             <PersistentString
                value = "NSDate(timeIntervalSince1970: Double(json[&quot;dt&quot;].floatValue))">
@@ -473,10 +518,10 @@
          contextName = "SettingsStyleCell.(whichContainerSelected in _CBC7436A3C00BE231BF4F51C764CF409)(CGPoint) -&gt; UIImageView?:SettingsStyleCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.contentView.convertPoint(location, fromView: self)">
+               value = "atWorkContainer.frame">
             </PersistentString>
             <PersistentString
-               value = "atWorkContainer.frame">
+               value = "self.contentView.convertPoint(location, fromView: self)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -496,6 +541,14 @@
          <PersistentStrings>
             <PersistentString
                value = "NSDate(timeIntervalSince1970: 1445277600)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressingSynchro.(updateMockableLocalstorage in _5D4E5A99B5AE9DBB58B651F0E284D94A)() -&gt; ():DressingSynchro.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(json)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -604,6 +657,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ProfilViewController.onAddTypedTapped(NSIndexPath) -&gt; ():ProfilViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "NewLoginService.Login(String, password : String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():NewLoginService.swift">
          <PersistentStrings>
             <PersistentString
@@ -667,10 +728,10 @@
          contextName = "DressTimeService.(getOutfitsByStyle in _3F9FBDEE54AB84ACC9699628EA4A9769)(String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():DressTimeService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "print(&quot;Bearer \(profil.access_token!)&quot;)">
+               value = "profil.access_token">
             </PersistentString>
             <PersistentString
-               value = "profil.access_token">
+               value = "print(&quot;Bearer \(profil.access_token!)&quot;)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -765,27 +826,21 @@
          contextName = "HomeOutfitsListCell.(loadTodayOutfits(HomeOutfitsListCell) -&gt; () -&gt; ()).(closure #1):HomeOutfitsListCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "print(object[0])">
+               value = "object.count">
             </PersistentString>
             <PersistentString
                value = "object[0]">
             </PersistentString>
             <PersistentString
-               value = "object.count">
+               value = "print(object[0])">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "WeatherWrapper.wrapListWeather(JSON, forecast : JSON) -&gt; [Weather]:WeatherWrapper.swift">
+         contextName = "OutfitViewController.(onDressUpTapped(OutfitViewController) -&gt; (AnyObject) -&gt; ()).(closure #1):OutfitViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "print(subjson)">
-            </PersistentString>
-            <PersistentString
-               value = "data[i]">
-            </PersistentString>
-            <PersistentString
-               value = "subjson[&quot;dt_txt&quot;].stringValue">
+               value = "UIScreen.mainScreen().bounds.size.height/2.0">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -800,6 +855,20 @@
             </PersistentString>
             <PersistentString
                value = "user.userid">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WeatherWrapper.wrapListWeather(JSON, forecast : JSON) -&gt; [Weather]:WeatherWrapper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(subjson)">
+            </PersistentString>
+            <PersistentString
+               value = "data[i]">
+            </PersistentString>
+            <PersistentString
+               value = "subjson[&quot;dt_txt&quot;].stringValue">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -955,10 +1024,10 @@
          contextName = "HomeHeaderCell.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:HomeHeaderCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = " NSNumberFormatter().numberFromString(weather.temp!).integerValue">
+               value = "weather.temp!">
             </PersistentString>
             <PersistentString
-               value = "weather.temp!">
+               value = " NSNumberFormatter().numberFromString(weather.temp!).integerValue">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -36,7 +36,7 @@ class SharedData {
             case "Pants":
                 return ["jeans", "jeans-slim", "trousers-pleated", "trousers-suit", "chinos", "trousers-regular", "trousers", "trousers-slim", "bermuda", "short"]
             case "Dress":
-                return []
+                return ["skirt"]
             default:
                 return []
         }

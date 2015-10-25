@@ -19,7 +19,7 @@ class TypeViewController: UIViewController {
     var sectionContentDict : NSMutableDictionary = NSMutableDictionary()
     var arrayForBool = NSMutableArray()
 
-    let bgType = ["TypeMaille", "TypeTop", "TypePants"]
+    let bgType = ["TypeMaille", "TypeTop", "TypePants", "TypeDress"]
     
     private let kCellReuse : String = "SubTypeCell"
     private let cellTypeIdentifier : String = "TypeTableCell"
@@ -34,11 +34,13 @@ class TypeViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightGrayColor()
         tableView.registerNib(UINib(nibName: "TypeTableCell", bundle:nil), forCellReuseIdentifier: self.cellTypeIdentifier)
-        initSubType()
+        if (arrayForBool.count == 0){
+            initSubType()
+        }
         
         if (isOpenSectionRequired){
             for (var i = 0; i < arrayForBool.count; i++) {
-                let collapsed = arrayForBool[i] as! Bool
+                let collapsed = arrayForBool[i].boolValue!
                 if (collapsed){
                     let path:NSIndexPath = NSIndexPath(forItem: i, inSection: 0)
                     self.tableView.reloadRowsAtIndexPaths([path], withRowAnimation: UITableViewRowAnimation.Fade)
@@ -65,7 +67,10 @@ class TypeViewController: UIViewController {
     }
     
     func openItem(typeIndex: Int){
-        let collapsed = arrayForBool[typeIndex] as! Bool
+        if (arrayForBool.count == 0){
+            initSubType()
+        }
+        let collapsed = arrayForBool[typeIndex].boolValue
         arrayForBool.replaceObjectAtIndex(typeIndex, withObject: !collapsed)
         self.currentSection = typeIndex
         isOpenSectionRequired = true
@@ -147,11 +152,17 @@ extension TypeViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         let cell = self.tableView.dequeueReusableCellWithIdentifier(cellTypeIdentifier, forIndexPath: indexPath) as! TypeTableViewCell
-        cell.bgImageView.image = UIImage(named: "\(bgType[indexPath.row])Full")
+        cell.bgImageView.image = UIImage(named: "\(bgType[indexPath.row])\(SharedData.sharedInstance.sexe!.uppercaseString)")
         cell.labelTypeText.text = self.types[indexPath.row].uppercaseString
+        cell.iconImageView.image = UIImage(named: "Type\(self.types[indexPath.row])Icon")
         cell.bgImageView.clipsToBounds = true
         cell.data = self.subTypes[self.currentSection]
-    
+        
+        //Remove edge insets to have full width separtor line
+        cell.preservesSuperviewLayoutMargins = false
+        cell.separatorInset = UIEdgeInsetsZero
+        cell.layoutMargins = UIEdgeInsetsZero
+        
         return cell
     }
 }
@@ -179,6 +190,7 @@ extension TypeViewController : UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellReuse, forIndexPath: indexPath) as! CustomSubTypeViewCell
+        cell.imgaView.image = UIImage(named: "SubType\(self.subTypes[self.currentSection])")
         cell.label.text = self.subTypes[self.currentSection][indexPath.row]
         cell.contentView.viewWithTag(100)?.removeFromSuperview()
         cell.contentView.viewWithTag(101)?.removeFromSuperview()
@@ -206,6 +218,7 @@ extension TypeViewController : UICollectionViewDataSource {
         rightView.backgroundColor = UIColor.whiteColor()
         
         cell.contentView.addSubview(rightView)
+        
         
         return cell
     }

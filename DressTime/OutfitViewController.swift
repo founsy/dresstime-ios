@@ -17,16 +17,64 @@ class OutfitViewController: UIViewController {
     var itemIndex: Int = 0
     var currentOutfits: NSArray!
     
+    @IBOutlet weak var checkImage: UIImageView!
+    @IBOutlet weak var labelButton: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    
+    @IBOutlet weak var backgroudView: UIView!
+    @IBOutlet weak var dressupButton: UIButton!
+    @IBAction func onDressUpTapped(sender: AnyObject) {
+        let originFrame = self.dressupButton.layer.frame
+        let originImgFrame =  self.checkImage.frame
+        let originLabelFrame =  self.labelButton.frame
+        
+        UIView.animateAndChainWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: [ .CurveEaseOut], animations: {
+            
+            self.dressupButton.layer.cornerRadius = 62.5
+            self.dressupButton.layer.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 62.5, UIScreen.mainScreen().bounds.size.height/2.0 - 62.5, 125, 125)
+            
+            
+            
+            self.labelButton.alpha = 0
+            self.labelButton.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 32.5, UIScreen.mainScreen().bounds.size.height/2.0 - 32.5, 75, 75)
+            
+            self.checkImage.alpha = 1
+            self.checkImage.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 32.5, UIScreen.mainScreen().bounds.size.height/2.0 - 32.5, 75, 75)
+            
+            self.backgroudView.alpha = 0.4
+            }){ (finish) -> Void in
+                //self.labelButton.text = "OUTFIT OF THE DAY"
+            }.animateWithDuration(0.5, delay: 0.5, options: .CurveEaseOut, animations: { () -> Void in
+                
+                self.dressupButton.layer.cornerRadius = 0.0
+                self.dressupButton.layer.frame = originFrame
+                self.dressupButton.backgroundColor = UIColor(red: 4/255, green: 128/255, blue: 64/255, alpha: 1)
+               
+                self.checkImage.layer.frame = originImgFrame
+                self.checkImage.alpha = 0
+                
+                               self.labelButton.frame = originLabelFrame
+                
+                self.backgroudView.alpha = 0.0
+                }){ (finish) -> Void in
+                    self.labelButton.alpha = 1
+                    self.labelButton.text = "OUTFIT OF THE DAY"
+                }
+
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.registerNib(UINib(nibName: "ClotheScrollTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
         
         tableView!.delegate = self
         tableView!.dataSource = self
+           }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "HOME", style: .Plain, target: nil, action: nil)
+
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -60,7 +108,13 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let height:CGFloat = (tableView.frame.height-20.0) / CGFloat(self.currentOutfits.count)
-        return height
+        
+        if let list = self.currentOutfits {
+            if (indexPath.row == list.count - 1){
+                return height + 45.0
+            }
+        }
+        return height - 25.0
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{

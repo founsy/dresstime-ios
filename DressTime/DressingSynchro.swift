@@ -21,7 +21,11 @@ class DressingSynchro {
     
     func execute(){
         if (isDressingEmpty()){
-            updateLocalStorage()
+            if (Mock.isMockable()){
+                updateMockableLocalstorage()
+            } else {
+                updateLocalStorage()
+            }
         } else {
             isDressingBackup({ () -> () in
                 self.diffBetweenBackEnd();
@@ -55,26 +59,41 @@ class DressingSynchro {
     //Update Local DataBase
     //TODO - Need To update - 1 Call by Clothe too much
     private func updateLocalStorage(){
-        DressTimeService().GetClothesIdDressing { (isSuccess, object) -> Void in
-           /* self.clothesStored = msg
+        let dressTimeSvc = DressTimeService()
+        dressTimeSvc.GetClothesIdDressing { (isSuccess, object) -> Void in
+           self.clothesStored = object.arrayObject as! [String]
             
             let clotheDAL = ClothesDAL()
             for id in self.clothesStored {
-                DressTimeService.getClothe(self.userId, clotheId: id, clotheCompleted: { (succeeded, msg) -> () in
-                    print(msg)
-                    if let clothe = msg as? NSDictionary {
-                        let image: String = (clothe["clothe_image"] as? String)!
+                dressTimeSvc.GetClothe(id, completion: { (succeeded, clothe) -> () in
+                    if (succeeded) {
+                        let image: String = clothe["clothe_image"].stringValue
                         let data: NSData = NSData(base64EncodedString: image, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
-                        let isUnis = clothe["clothe_isUnis"] as? Bool
+                        let isUnis = clothe["clothe_isUnis"].boolValue
                         
-                        clotheDAL.save(clothe["clothe_id"] as! String, partnerId: clothe["clothe_partnerid"] as! NSNumber, partnerName: clothe["clothe_partnerName"] as! String, type: clothe["clothe_type"] as! String, subType: clothe["clothe_subtype"] as! String, name: clothe["clothe_name"]  as! String , isUnis: isUnis!, pattern: clothe["clothe_pattern"] as! String, cut: clothe["clothe_cut"] as! String, image: data, colors: clothe["clothe_colors"] as! String)
+                        clotheDAL.save(clothe["clothe_id"].stringValue, partnerId: clothe["clothe_partnerid"].floatValue, partnerName: clothe["clothe_partnerName"].stringValue, type: clothe["clothe_type"] .stringValue, subType: clothe["clothe_subtype"].stringValue, name: clothe["clothe_name"].stringValue , isUnis: isUnis, pattern: clothe["clothe_pattern"].stringValue, cut: clothe["clothe_cut"].stringValue, image: data, colors: clothe["clothe_colors"].stringValue)
                     }
                     
                 })
                 
-            }*/
+            }
         }
     }
     
-    
+    private func updateMockableLocalstorage(){
+        if let nsdata = ReadJsonFile().readFile(SharedData.sharedInstance.currentUserId!){
+            let json = JSON(data: nsdata)
+            let clotheDAL = ClothesDAL()
+            
+            for (_, clothe) in json {
+                let image: String = clothe["clothe_image"].stringValue
+                let data: NSData = NSData(base64EncodedString: image, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
+                let isUnis = clothe["clothe_isUnis"].boolValue
+                
+                clotheDAL.save(clothe["clothe_id"].stringValue, partnerId: clothe["clothe_partnerid"].floatValue, partnerName: clothe["clothe_partnerName"].stringValue, type: clothe["clothe_type"] .stringValue, subType: clothe["clothe_subtype"].stringValue, name: clothe["clothe_name"].stringValue , isUnis: isUnis, pattern: clothe["clothe_pattern"].stringValue, cut: clothe["clothe_cut"].stringValue, image: data, colors: clothe["clothe_colors"].stringValue)
+            }
+        }
+    }
+
+
 }
