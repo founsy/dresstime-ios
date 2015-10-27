@@ -1,0 +1,24 @@
+/* 
+  Localizable.strings
+  DressTime
+
+  Created by Fab on 26/10/2015.
+  Copyright © 2015 Fab. All rights reserved.
+*/
+
+"Now" = "Now";
+"Afternoon" = "Afternoon";
+"Morning" = "Morning";
+"Tonight" = "Tonight";
+
+/* OutfitViewController */
+"HOME" = "HOME";
+"OUTFIT OF THE DAY" = "OUTFIT OF THE DAY";
+
+/* Detail Type View Controller */
+"Edit" =  "Edit";
+"Delete" = "Delete";
+"Profile" = "Profile";
+
+/* ProfilViewController */
+"PROFILE" = "PROFILE";

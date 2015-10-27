@@ -123,6 +123,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "HomeBrandOutfitsListCell.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:HomeBrandOutfitsListCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "outfitElem[&quot;matchingRate&quot;].int">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DressTime.ProfilViewController.viewDidLoad (DressTime.ProfilViewController)() -&gt; ():ProfilViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -157,6 +165,17 @@
          <PersistentStrings>
             <PersistentString
                value = "println(self.currentOutfits)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTimeService.GetOutfitsToday([String], weather : Weather, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():DressTimeService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(json[&quot;morning&quot;])">
+            </PersistentString>
+            <PersistentString
+               value = "weather.time">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -436,7 +455,7 @@
          contextName = "WeatherWrapper.wrapToWeather(JSON, time : String) -&gt; Weather:WeatherWrapper.swift">
          <PersistentStrings>
             <PersistentString
-               value = "json[&quot;weather&quot;][0][&quot;id&quot;].int">
+               value = " json[&quot;city&quot;]">
             </PersistentString>
             <PersistentString
                value = " components.hour">
@@ -522,6 +541,17 @@
             </PersistentString>
             <PersistentString
                value = "self.contentView.convertPoint(location, fromView: self)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UIImage.imageResize(CGSize) -&gt; UIImage:UIImage-Extension.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.size.width">
+            </PersistentString>
+            <PersistentString
+               value = "self.size.height">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

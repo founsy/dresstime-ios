@@ -35,6 +35,7 @@ class HomeViewController: UIViewController{
         super.viewWillAppear(animated)
         configNavBar()
     }
+
     
     private func addProfilButtonToNavBar(){
         
@@ -139,7 +140,7 @@ extension HomeViewController: HomeHeaderCellDelegate {
             outfitsCell.loadTodayOutfits(self.currentWeather!)
         }
         if let outfitsBrandCell = self.brandOutfitsCell {
-            outfitsBrandCell.loadTodayBrandOutfits()
+            outfitsBrandCell.loadTodayBrandOutfits(self.currentWeather!)
         }
     }
     

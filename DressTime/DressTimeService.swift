@@ -31,10 +31,15 @@ class DressTimeService {
     
     func GetOutfitsToday(styles: [String], weather: Weather, completion: (isSuccess: Bool, object: JSON) -> Void){
         if (Mock.isMockable()){
-            if let nsdata = ReadJsonFile().readFile("outfitsToday"){
+            if let nsdata = ReadJsonFile().readFile("\(SharedData.sharedInstance.currentUserId!)-OutfitsToday"){
+                print(weather)
                 let json = JSON(data: nsdata)
                 var newJSON = [JSON]()
-                for (_, subjson) in json {
+                var moment = weather.time!.lowercaseString
+                if (moment == "now"){
+                      moment = WeatherWrapper().getNameByTime(weather.hour!).lowercaseString
+                }
+                for (_, subjson) in json[moment] {
                     if (subjson["style"].stringValue == styles[0] || subjson["style"].stringValue == styles[1]){
                         newJSON.append(subjson)
                     }
@@ -50,7 +55,7 @@ class DressTimeService {
     
     func GetBrandOutfitsToday(completion: (isSuccess: Bool, object: JSON) -> Void){
         //if (Mock.isMockable()){
-            if let nsdata = ReadJsonFile().readFile("outfitsBrandToday"){
+            if let nsdata = ReadJsonFile().readFile("\(SharedData.sharedInstance.currentUserId!)-OutfitsBrandToday"){
                 let json = JSON(data: nsdata)
                 completion(isSuccess: true, object:json)
             } else {

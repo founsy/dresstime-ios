@@ -52,7 +52,7 @@ class ProfilViewController: UIViewController {
         self.type = SharedData.sharedInstance.getType(SharedData.sharedInstance.sexe!)
         initData()
         //Remove Title of Back button
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "PROFILE", style: .Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("PROFILE", comment: ""), style: .Plain, target: nil, action: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

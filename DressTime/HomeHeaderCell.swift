@@ -59,7 +59,7 @@ extension HomeHeaderCell: UICollectionViewDataSource {
         }
         let weather = weatherList[indexPath.row]
         cell.weatherIcon.text = weather.icon!
-        cell.timeText.text = weather.time
+        cell.timeText.text = NSLocalizedString(weather.time!, comment: "")
         let temperature:Int = weather.temp!
         cell.temperatureText.text = "\(temperature)°"
         

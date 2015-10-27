@@ -26,9 +26,9 @@ extension UIImage {
     }
 
     func imageResize (sizeChange:CGSize)-> UIImage{
-        var ratio = 1;
+        var ratio:CGFloat = 1.0
         if (self.size.width > sizeChange.width){
-            ratio = Int(self.size.width/sizeChange.width);
+            ratio = self.size.width/sizeChange.width
         }
         let newWidth = self.size.width/CGFloat(ratio);
         let newHeight = self.size.height/CGFloat(ratio);

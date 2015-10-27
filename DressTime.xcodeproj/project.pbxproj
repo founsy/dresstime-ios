@@ -23,7 +23,7 @@
 		013B646A1BD23EC300176098 /* ClotheScrollTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B64691BD23EC300176098 /* ClotheScrollTableCell.swift */; };
 		014373251BCCD3CA00443F66 /* OutfitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 014373241BCCD3CA00443F66 /* OutfitCell.xib */; };
 		0143732B1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0143732A1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift */; };
-		0143732D1BCCE21C00443F66 /* outfitsBrandToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 0143732C1BCCE21C00443F66 /* outfitsBrandToday.json */; };
+		0143732D1BCCE21C00443F66 /* jacky@dresstime.io-OutfitsBrandToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 0143732C1BCCE21C00443F66 /* jacky@dresstime.io-OutfitsBrandToday.json */; };
 		0143732F1BCE2A6000443F66 /* DressTimeBL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0143732E1BCE2A6000443F66 /* DressTimeBL.swift */; };
 		014BF92D1BB171C400319701 /* RegisterEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF92C1BB171C400319701 /* RegisterEmailViewController.swift */; };
 		014BF92F1BB171EE00319701 /* RegisterSexeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF92E1BB171EE00319701 /* RegisterSexeViewController.swift */; };
@@ -79,6 +79,8 @@
 		019405C31BC114A8005D6F92 /* Profil+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019405C11BC114A8005D6F92 /* Profil+CoreDataProperties.swift */; };
 		019405C41BC114A8005D6F92 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019405C21BC114A8005D6F92 /* Profil.swift */; };
 		019A78531BA002E3001958FE /* OutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A78521BA002E3001958FE /* OutfitViewController.swift */; };
+		019F76451BDE0CF3007E6A3E /* cathy@dresstime.io-OutfitsToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 019F76441BDE0CF3007E6A3E /* cathy@dresstime.io-OutfitsToday.json */; };
+		019F764C1BDE0FE5007E6A3E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 019F764E1BDE0FE5007E6A3E /* Localizable.strings */; };
 		01A6BDDB1B99D26500D357A3 /* DetailTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */; };
 		01A6BDDE1B99D3E600D357A3 /* ClotheTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6BDDD1B99D3E600D357A3 /* ClotheTableCell.xib */; };
 		01A6BDE01B99D42700D357A3 /* ClotheTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDDF1B99D42700D357A3 /* ClotheTableViewCell.swift */; };
@@ -88,9 +90,9 @@
 		01A6BDE81B9B365B00D357A3 /* TypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDE71B9B365B00D357A3 /* TypeTableViewCell.swift */; };
 		01A6BDEA1B9B41A100D357A3 /* NewCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDE91B9B41A100D357A3 /* NewCameraViewController.swift */; };
 		01AE7C011BD616BC00728EA4 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AE7C001BD616BC00728EA4 /* AuthorizationManager.swift */; };
-		01C2AE541BC550C500F7D4C2 /* weatherOld.json in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE531BC550C500F7D4C2 /* weatherOld.json */; };
+		01B06B781BDF69BF004C17B2 /* cathy@dresstime.io-OutfitsBrandToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 01B06B771BDF69BF004C17B2 /* cathy@dresstime.io-OutfitsBrandToday.json */; };
 		01C2AE5A1BC5591200F7D4C2 /* outfitsByStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE591BC5591200F7D4C2 /* outfitsByStyle.json */; };
-		01C2AE5C1BC6407600F7D4C2 /* outfitsToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE5B1BC6407600F7D4C2 /* outfitsToday.json */; };
+		01C2AE5C1BC6407600F7D4C2 /* jacky@dresstime.io-OutfitsToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE5B1BC6407600F7D4C2 /* jacky@dresstime.io-OutfitsToday.json */; };
 		01C2AE5E1BC7931F00F7D4C2 /* WeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE5D1BC7931F00F7D4C2 /* WeatherCell.xib */; };
 		01C2AE601BC794D400F7D4C2 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C2AE5F1BC794D400F7D4C2 /* WeatherCell.swift */; };
 		01C2AE621BC7DA3300F7D4C2 /* weather.json in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE611BC7DA3300F7D4C2 /* weather.json */; };
@@ -231,7 +233,7 @@
 		013B64691BD23EC300176098 /* ClotheScrollTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClotheScrollTableCell.swift; sourceTree = "<group>"; };
 		014373241BCCD3CA00443F66 /* OutfitCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OutfitCell.xib; sourceTree = "<group>"; };
 		0143732A1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitCollectionViewCell.swift; sourceTree = "<group>"; };
-		0143732C1BCCE21C00443F66 /* outfitsBrandToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = outfitsBrandToday.json; sourceTree = "<group>"; };
+		0143732C1BCCE21C00443F66 /* jacky@dresstime.io-OutfitsBrandToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jacky@dresstime.io-OutfitsBrandToday.json"; sourceTree = "<group>"; };
 		0143732E1BCE2A6000443F66 /* DressTimeBL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressTimeBL.swift; sourceTree = "<group>"; };
 		014BF92C1BB171C400319701 /* RegisterEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterEmailViewController.swift; sourceTree = "<group>"; };
 		014BF92E1BB171EE00319701 /* RegisterSexeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSexeViewController.swift; sourceTree = "<group>"; };
@@ -289,6 +291,11 @@
 		019405C11BC114A8005D6F92 /* Profil+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profil+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		019405C21BC114A8005D6F92 /* Profil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
 		019A78521BA002E3001958FE /* OutfitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitViewController.swift; sourceTree = "<group>"; };
+		019F76441BDE0CF3007E6A3E /* cathy@dresstime.io-OutfitsToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "cathy@dresstime.io-OutfitsToday.json"; sourceTree = "<group>"; };
+		019F764A1BDE0FC6007E6A3E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		019F764B1BDE0FC6007E6A3E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		019F764F1BDE1013007E6A3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		019F76501BDE1018007E6A3E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		01A6BDDA1B99D26500D357A3 /* DetailTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTypeViewController.swift; sourceTree = "<group>"; };
 		01A6BDDD1B99D3E600D357A3 /* ClotheTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClotheTableCell.xib; sourceTree = "<group>"; };
 		01A6BDDF1B99D42700D357A3 /* ClotheTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClotheTableViewCell.swift; sourceTree = "<group>"; };
@@ -298,9 +305,9 @@
 		01A6BDE71B9B365B00D357A3 /* TypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeTableViewCell.swift; sourceTree = "<group>"; };
 		01A6BDE91B9B41A100D357A3 /* NewCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCameraViewController.swift; sourceTree = "<group>"; };
 		01AE7C001BD616BC00728EA4 /* AuthorizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
-		01C2AE531BC550C500F7D4C2 /* weatherOld.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weatherOld.json; sourceTree = "<group>"; };
+		01B06B771BDF69BF004C17B2 /* cathy@dresstime.io-OutfitsBrandToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "cathy@dresstime.io-OutfitsBrandToday.json"; sourceTree = "<group>"; };
 		01C2AE591BC5591200F7D4C2 /* outfitsByStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = outfitsByStyle.json; sourceTree = "<group>"; };
-		01C2AE5B1BC6407600F7D4C2 /* outfitsToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = outfitsToday.json; sourceTree = "<group>"; };
+		01C2AE5B1BC6407600F7D4C2 /* jacky@dresstime.io-OutfitsToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "jacky@dresstime.io-OutfitsToday.json"; sourceTree = "<group>"; };
 		01C2AE5D1BC7931F00F7D4C2 /* WeatherCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherCell.xib; sourceTree = "<group>"; };
 		01C2AE5F1BC794D400F7D4C2 /* WeatherCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
 		01C2AE611BC7DA3300F7D4C2 /* weather.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = weather.json; sourceTree = "<group>"; };
@@ -484,17 +491,14 @@
 		017F39041BC51762002E6FE7 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				0180A3B51BDCB38800EDF565 /* cathy@dresstime.io.json */,
-				0180A3B61BDCB38800EDF565 /* jacky@dresstime.io.json */,
+				01B06B761BDF697F004C17B2 /* Jacky */,
+				01B06B751BDF6974004C17B2 /* Cathy */,
 				017F39051BC51777002E6FE7 /* login.json */,
 				017F39091BC54514002E6FE7 /* logout.json */,
 				017F390B1BC54523002E6FE7 /* refreshToken.json */,
-				01C2AE531BC550C500F7D4C2 /* weatherOld.json */,
 				01C2AE591BC5591200F7D4C2 /* outfitsByStyle.json */,
-				01C2AE5B1BC6407600F7D4C2 /* outfitsToday.json */,
 				01C2AE611BC7DA3300F7D4C2 /* weather.json */,
 				01C2AE671BC7E20C00F7D4C2 /* currentWeather.json */,
-				0143732C1BCCE21C00443F66 /* outfitsBrandToday.json */,
 			);
 			name = Data;
 			sourceTree = "<group>";
@@ -538,6 +542,26 @@
 				0180A3AD1BDA0A5000EDF565 /* NewOutfitCell.xib */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		01B06B751BDF6974004C17B2 /* Cathy */ = {
+			isa = PBXGroup;
+			children = (
+				0180A3B51BDCB38800EDF565 /* cathy@dresstime.io.json */,
+				019F76441BDE0CF3007E6A3E /* cathy@dresstime.io-OutfitsToday.json */,
+				01B06B771BDF69BF004C17B2 /* cathy@dresstime.io-OutfitsBrandToday.json */,
+			);
+			name = Cathy;
+			sourceTree = "<group>";
+		};
+		01B06B761BDF697F004C17B2 /* Jacky */ = {
+			isa = PBXGroup;
+			children = (
+				0180A3B61BDCB38800EDF565 /* jacky@dresstime.io.json */,
+				0143732C1BCCE21C00443F66 /* jacky@dresstime.io-OutfitsBrandToday.json */,
+				01C2AE5B1BC6407600F7D4C2 /* jacky@dresstime.io-OutfitsToday.json */,
+			);
+			name = Jacky;
 			sourceTree = "<group>";
 		};
 		01C454C41B5935B3003D5E41 = {
@@ -586,6 +610,7 @@
 			isa = PBXGroup;
 			children = (
 				01C454D11B5935B3003D5E41 /* Info.plist */,
+				019F764E1BDE0FE5007E6A3E /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -859,6 +884,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 01C454C41B5935B3003D5E41;
 			productRefGroup = 01C454CE1B5935B3003D5E41 /* Products */;
@@ -927,27 +953,29 @@
 				0164464F1BDCE5FD00E2434B /* LoadingView.xib in Resources */,
 				0180A3B81BDCB38800EDF565 /* jacky@dresstime.io.json in Resources */,
 				01A6BDE41B9AE9CB00D357A3 /* ClotheDetailTableCell.xib in Resources */,
+				01B06B781BDF69BF004C17B2 /* cathy@dresstime.io-OutfitsBrandToday.json in Resources */,
 				01C455071B595C54003D5E41 /* artill_clean_icons-webfont.ttf in Resources */,
-				0143732D1BCCE21C00443F66 /* outfitsBrandToday.json in Resources */,
+				0143732D1BCCE21C00443F66 /* jacky@dresstime.io-OutfitsBrandToday.json in Resources */,
 				0180A3B71BDCB38800EDF565 /* cathy@dresstime.io.json in Resources */,
 				01C2AE5A1BC5591200F7D4C2 /* outfitsByStyle.json in Resources */,
 				0180A3AE1BDA0A5000EDF565 /* NewOutfitCell.xib in Resources */,
 				01C2AE681BC7E20C00F7D4C2 /* currentWeather.json in Resources */,
 				0183F3081BD8E71800691238 /* Info.plist in Resources */,
-				01C2AE541BC550C500F7D4C2 /* weatherOld.json in Resources */,
 				0164461A1BDCC00B00E2434B /* TitleNavBar.xib in Resources */,
 				017F390A1BC54514002E6FE7 /* logout.json in Resources */,
 				017F390C1BC54523002E6FE7 /* refreshToken.json in Resources */,
 				01C454E01B5935B3003D5E41 /* LaunchScreen.xib in Resources */,
 				0183F3091BD8E71800691238 /* LICENSE in Resources */,
-				01C2AE5C1BC6407600F7D4C2 /* outfitsToday.json in Resources */,
+				01C2AE5C1BC6407600F7D4C2 /* jacky@dresstime.io-OutfitsToday.json in Resources */,
 				014373251BCCD3CA00443F66 /* OutfitCell.xib in Resources */,
 				0164464C1BDCE5FD00E2434B /* Info.plist in Resources */,
 				01A6BDDE1B99D3E600D357A3 /* ClotheTableCell.xib in Resources */,
 				01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */,
 				01C2AE621BC7DA3300F7D4C2 /* weather.json in Resources */,
 				01C2AE5E1BC7931F00F7D4C2 /* WeatherCell.xib in Resources */,
+				019F764C1BDE0FE5007E6A3E /* Localizable.strings in Resources */,
 				01A6BDE61B9B352E00D357A3 /* TypeTableCell.xib in Resources */,
+				019F76451BDE0CF3007E6A3E /* cathy@dresstime.io-OutfitsToday.json in Resources */,
 				01D1B8761B72949B00920C64 /* SubTypeCell.xib in Resources */,
 				017F39061BC51777002E6FE7 /* login.json in Resources */,
 			);
@@ -1108,10 +1136,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		019F764E1BDE0FE5007E6A3E /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				019F764F1BDE1013007E6A3E /* en */,
+				019F76501BDE1018007E6A3E /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		01C454DE1B5935B3003D5E41 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
 				01C454DF1B5935B3003D5E41 /* Base */,
+				019F764A1BDE0FC6007E6A3E /* fr */,
 			);
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
@@ -1120,6 +1158,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				01C455001B5942F4003D5E41 /* Base */,
+				019F764B1BDE0FC6007E6A3E /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

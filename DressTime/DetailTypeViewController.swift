@@ -27,13 +27,14 @@ class DetailTypeViewController: UIViewController {
         
         tableView!.delegate = self
         tableView!.dataSource = self
+        //TODO Manage Localization
         titleNav.title = "My \(typeClothe!.uppercaseString)!"
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //Remove Title of Back button
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Profile", style: .Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Profile", comment: ""), style: .Plain, target: nil, action: nil)
     }
     
     func initData(){
@@ -80,12 +81,12 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let editAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Edit") { (action, indexPath) -> Void in
+        let editAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: NSLocalizedString("Edit", comment: "")) { (action, indexPath) -> Void in
                 self.openEditClotheView(indexPath)
         }
         editAction.backgroundColor = UIColor.blueColor()
         
-        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "Delete") { (action, indexPath) -> Void in
+        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: NSLocalizedString("Delete", comment: "")) { (action, indexPath) -> Void in
             self.deleteClothe(indexPath)
         }
         return [deleteAction, editAction]

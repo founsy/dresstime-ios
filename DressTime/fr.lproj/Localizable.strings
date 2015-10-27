@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  DressTime
+
+  Created by Fab on 26/10/2015.
+  Copyright © 2015 Fab. All rights reserved.
+*/
+
+"Now" = "Maintenant";
+"Afternoon" = "Après-midi";
+"Morning" = "Matin";
+"Tonight" = "Soir";

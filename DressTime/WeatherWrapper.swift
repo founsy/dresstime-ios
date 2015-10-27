@@ -31,14 +31,17 @@ class WeatherWrapper {
                 let hour = getHour(subjson["dt_txt"].stringValue)
                 if (hour == data[i]){
                     if (data[i] == 9) {
-                        time = "morning"
+                        time = "Morning"
                     } else if (data[i] == 15) {
-                        time = "afternoon"
+                        time = "Afternoon"
                     } else if (data[i] == 21) {
-                        time = "tonight"
+                        time = "Tonight"
                     }
-                    
-                    list.append(wrapToWeather(subjson, time: time))
+                    let weather = wrapToWeather(subjson, time: time)
+                    if let city = forecast["city"]["name"].string {
+                        weather.city = city
+                    }
+                    list.append(weather)
                     i++
                     if (i>1) {
                         break;
@@ -59,7 +62,7 @@ class WeatherWrapper {
     
     func wrapToWeather(json: JSON, time: String)-> Weather {
         let calendar = NSCalendar.currentCalendar()
-        var date = NSDate(timeIntervalSince1970: Double(json["dt"].floatValue))
+        var date = NSDate()/*NSDate(timeIntervalSince1970: Double(json["dt"].floatValue))*/
         if let dateStr = json["dt_txt"].string {
             date = dateStr.toDateTime()!
             calendar.timeZone = NSTimeZone(name: "UTC")!
@@ -77,15 +80,11 @@ class WeatherWrapper {
         weather.code = json["weather"][0]["id"].int
         weather.icon = codeToFont(json["weather"][0]["id"].int!)
        
-        //Forecast
-        if let city = json["city"]["name"].string {
+        //Current
+        if let city = json["name"].string {
             weather.city = city
-        } else {
-            //Current
-            if let city = json["name"].string {
-                weather.city = city
-            }
         }
+        
         
         return weather
     }
@@ -117,6 +116,21 @@ class WeatherWrapper {
         }
         return "."
     }
+    
+    func getNameByTime(hour: Int) -> String {
+        if (hour >= 0 && hour < 12){
+            //Afternoon(15h) & Tonight(21h)
+            return "Morning"
+        } else if (hour >= 12 && hour < 18) {
+            //Tonight(21h) & Tomorrow Morning (9h)
+            return "Afternoon"
+        } else if (hour >= 18) {
+            //Tomorrow Morning (9h) and Tomorrow Afternoon(15h)
+            return "Tonight"
+        }
+        return ""
+    }
+
     
     let transcodeValue = [
         [200,"thunderstorm with light rain","S","S"  ],

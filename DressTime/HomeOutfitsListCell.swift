@@ -77,7 +77,6 @@ extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         var outfitElem = self.outfitsCollection![indexPath.row]
         let dal = ClothesDAL()
-        //var cell: OutfitCollectionViewCell
         var cell: NewOufitCell
         let outfit = outfitElem["outfit"]
         cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! NewOufitCell

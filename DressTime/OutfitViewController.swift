@@ -57,7 +57,7 @@ class OutfitViewController: UIViewController {
                 self.backgroudView.alpha = 0.0
                 }){ (finish) -> Void in
                     self.labelButton.alpha = 1
-                    self.labelButton.text = "OUTFIT OF THE DAY"
+                    self.labelButton.text = NSLocalizedString("OUTFIT OF THE DAY", comment : "")
                 }
 
     }
@@ -73,7 +73,7 @@ class OutfitViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //Remove Title of Back button
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "HOME", style: .Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("HOME", comment: ""), style: .Plain, target: nil, action: nil)
 
     }
     

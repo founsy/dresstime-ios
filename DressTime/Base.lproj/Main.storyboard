@@ -407,7 +407,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RegisterBgIntro" translatesAutoresizingMaskIntoConstraints="NO" id="KYj-FF-sxh">
-                                <rect key="frame" x="0.0" y="-44" width="320" height="548"/>
+                                <rect key="frame" x="0.0" y="-65" width="320" height="569"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="at work" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zyK-5i-nrp">
                                 <rect key="frame" x="41" y="114" width="56.5" height="20.5"/>
@@ -617,7 +617,7 @@
                             <constraint firstItem="To3-dj-Baa" firstAttribute="top" secondItem="2b0-wl-GQF" secondAttribute="bottom" constant="5" id="QhA-Qz-Ziy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2Bc-6E-S9v" secondAttribute="trailing" constant="25" id="QnI-Ov-1is"/>
                             <constraint firstItem="hiD-nf-Ixr" firstAttribute="top" secondItem="lET-x2-jJ8" secondAttribute="bottom" constant="5" id="Ycm-hh-ea0"/>
-                            <constraint firstItem="KYj-FF-sxh" firstAttribute="top" secondItem="lkB-tO-8f0" secondAttribute="bottom" constant="-44" id="YeK-aP-aDh"/>
+                            <constraint firstItem="KYj-FF-sxh" firstAttribute="top" secondItem="lkB-tO-8f0" secondAttribute="bottom" constant="-65" id="YeK-aP-aDh"/>
                             <constraint firstAttribute="centerX" secondItem="rub-mc-uUY" secondAttribute="centerX" id="ZXd-rV-KFv"/>
                             <constraint firstItem="I6j-Mn-s2L" firstAttribute="top" secondItem="hiD-nf-Ixr" secondAttribute="bottom" constant="4" id="aBM-cu-j1W"/>
                             <constraint firstItem="lET-x2-jJ8" firstAttribute="top" secondItem="To3-dj-Baa" secondAttribute="bottom" constant="25" id="c5E-uV-bqD"/>
@@ -1839,16 +1839,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Hgt-4r-v2z">
-                                <rect key="frame" x="0.0" y="19" width="600" height="581"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Hgt-4r-v2z">
+                                <rect key="frame" x="0.0" y="-1" width="600" height="601"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <view key="tableFooterView" alpha="0.0" contentMode="scaleToFill" id="2hr-Zg-Wmn">
+                                    <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
                             </tableView>
-                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2hr-Zg-Wmn">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cBA-MB-qiW" customClass="SpringButton" customModule="DressTime" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="555" width="600" height="45"/>
                                 <color key="backgroundColor" red="0.98431372549999996" green="0.72941176470000002" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
@@ -1888,20 +1889,16 @@
                         <constraints>
                             <constraint firstItem="cBA-MB-qiW" firstAttribute="leading" secondItem="MPQ-0R-lky" secondAttribute="leadingMargin" constant="-20" id="0dp-uM-i4t"/>
                             <constraint firstItem="oyN-Rt-CIM" firstAttribute="leading" secondItem="cBA-MB-qiW" secondAttribute="leading" id="6Fz-3T-SjS"/>
-                            <constraint firstItem="2hr-Zg-Wmn" firstAttribute="top" secondItem="jT3-jV-pVG" secondAttribute="bottom" id="FRy-Ns-czQ"/>
                             <constraint firstItem="Iq1-yc-QOZ" firstAttribute="centerX" secondItem="cBA-MB-qiW" secondAttribute="centerX" id="H7L-kl-SQj"/>
                             <constraint firstItem="GrL-uF-K30" firstAttribute="top" secondItem="cBA-MB-qiW" secondAttribute="bottom" id="ON4-Km-Hu9"/>
                             <constraint firstItem="Hgt-4r-v2z" firstAttribute="leading" secondItem="MPQ-0R-lky" secondAttribute="leading" id="P9Q-9s-Eqt"/>
                             <constraint firstAttribute="trailing" secondItem="Hgt-4r-v2z" secondAttribute="trailing" id="W28-CV-TR6"/>
                             <constraint firstItem="GrL-uF-K30" firstAttribute="top" secondItem="Hgt-4r-v2z" secondAttribute="bottom" id="Y3A-h0-p6T"/>
-                            <constraint firstItem="GrL-uF-K30" firstAttribute="top" secondItem="2hr-Zg-Wmn" secondAttribute="bottom" id="bXk-k4-8Qg"/>
                             <constraint firstItem="cBA-MB-qiW" firstAttribute="top" secondItem="Hgt-4r-v2z" secondAttribute="bottom" id="bfM-S0-MFe"/>
-                            <constraint firstItem="2hr-Zg-Wmn" firstAttribute="leading" secondItem="MPQ-0R-lky" secondAttribute="leading" id="co4-lx-bMi"/>
                             <constraint firstItem="oyN-Rt-CIM" firstAttribute="centerY" secondItem="cBA-MB-qiW" secondAttribute="centerY" id="f8q-ix-baA"/>
-                            <constraint firstItem="Hgt-4r-v2z" firstAttribute="top" secondItem="jT3-jV-pVG" secondAttribute="top" constant="-45" id="hCe-1V-XUz"/>
+                            <constraint firstItem="Hgt-4r-v2z" firstAttribute="top" secondItem="jT3-jV-pVG" secondAttribute="top" constant="-65" id="hCe-1V-XUz"/>
                             <constraint firstItem="GrL-uF-K30" firstAttribute="top" secondItem="Hgt-4r-v2z" secondAttribute="bottom" id="hEZ-lh-2PX"/>
                             <constraint firstItem="oyN-Rt-CIM" firstAttribute="centerX" secondItem="cBA-MB-qiW" secondAttribute="centerX" id="nG8-gQ-Sb6"/>
-                            <constraint firstAttribute="trailing" secondItem="2hr-Zg-Wmn" secondAttribute="trailing" id="wtm-VA-ZeV"/>
                             <constraint firstAttribute="trailingMargin" secondItem="cBA-MB-qiW" secondAttribute="trailing" constant="-20" id="xjj-1o-cp5"/>
                             <constraint firstItem="Iq1-yc-QOZ" firstAttribute="centerY" secondItem="cBA-MB-qiW" secondAttribute="centerY" id="xln-uG-Nwj"/>
                         </constraints>
@@ -2298,8 +2295,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="PqT-cY-1Tt"/>
-        <segue reference="kVe-Bv-4uq"/>
         <segue reference="GLC-Uz-kuT"/>
         <segue reference="Mz3-Xd-4Oh"/>
+        <segue reference="kVe-Bv-4uq"/>
     </inferredMetricsTieBreakers>
 </document>

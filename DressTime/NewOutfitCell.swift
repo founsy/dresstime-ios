@@ -38,6 +38,30 @@ class NewOufitCell: UICollectionViewCell {
         containerView.addSubview(view)
     }
     
+    func setBrandClothe(image: String, style: String, rate: Int, rect: CGRect){
+        if let data: NSData = NSData(base64EncodedString: image, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters) {
+            
+            let view = UIView(frame: rect)
+            view.backgroundColor = UIColor.clearColor()
+            view.roundCorners(UIRectCorner.AllCorners, radius: 3.0)
+            view.clipsToBounds = true
+            
+            view.layer.masksToBounds = false
+            view.layer.shadowOffset = CGSizeMake(-15, 20)
+            view.layer.shadowRadius = 5
+            view.layer.shadowOpacity = 0.5
+            view.layer.shadowPath = UIBezierPath(rect: self.bounds).CGPath
+            
+            let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
+            imageView.image = UIImage(data: data)!.imageResize(CGSizeMake(rect.size.width, 160.0))
+            imageView.contentMode = .Top
+            imageView.clipsToBounds = true
+            view.addSubview(imageView)
+            containerView.addSubview(view)
+        }
+        
+    }
+    
     func removeOldImages(){
         for var item in containerView.subviews {
             item.removeFromSuperview()
