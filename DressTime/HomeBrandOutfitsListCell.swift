@@ -9,20 +9,18 @@
 import Foundation
 import UIKit
 
-protocol HomeBrandOutfitsListCelllDelegate {
+protocol HomeBrandOutfitsListCellDelegate {
     func loadedBrandOutfits(outfitsCount: Int)
     func showBrandOutfits(currentStyle: String)
 }
 
 class HomeBrandOutfitsListCell: UITableViewCell {
-    let cellHeight = 300.0
-
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var collectionView: UICollectionView!
     
     private let cellIdentifier = "NewOutfitCell"
     var outfitsCollection: JSON?
-    var delegate: HomeOutfitsListCellDelegate?
+    var delegate: HomeBrandOutfitsListCellDelegate?
     private var dayMoment: [String]?
     private var styleByMoment: [String]?
     private let BL = DressTimeBL()
@@ -44,7 +42,7 @@ class HomeBrandOutfitsListCell: UITableViewCell {
                     self.collectionView.reloadData()
                 })
                 if let del = self.delegate {
-                    del.loadedOutfits(self.outfitsCollection!.count)
+                    del.loadedBrandOutfits(self.outfitsCollection!.count)
                 }
             }
         }
@@ -55,7 +53,7 @@ extension HomeBrandOutfitsListCell: UICollectionViewDataSource, UICollectionView
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let collection = self.outfitsCollection {
             return collection.count
-        } else {
+        } else {    
             return 0
         }
     }
@@ -65,22 +63,20 @@ extension HomeBrandOutfitsListCell: UICollectionViewDataSource, UICollectionView
         var outfitElem = self.outfitsCollection![indexPath.row]
         var cell: NewOufitCell
         let outfit = outfitElem["outfit"]
-        let dal = ClothesDAL()
         cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! NewOufitCell
         cell.removeOldImages()
         var j = 1
         
         for (var i = outfit.count-1; i >= 0 ; i--){
-            let style = BL.getMomentByStyle(self.dayMoment!, style: outfitElem["style"].stringValue) //outfitElem["style"].string
-            cell.styleLabel.text = style
-                
             let width:CGFloat = cell.containerView.frame.width
             var height:CGFloat = CGFloat(cell.containerView.frame.height/CGFloat(outfit.count))
             let x:CGFloat = 0
             var y:CGFloat = 0
             if (i == 0){
                 y = 0
-                if (outfit.count == 2){
+                if (outfit.count == 1){
+                    height = cell.containerView.frame.height
+                } else if (outfit.count == 2){
                     height = 110
                 } else {
                     height = 80
@@ -104,15 +100,15 @@ extension HomeBrandOutfitsListCell: UICollectionViewDataSource, UICollectionView
             let rect = CGRectMake(x, y, width, height)
             j++
             let clothe_image = outfit[i]["clothe_image"].string
-            cell.setBrandClothe(clothe_image!, style: style, rate: outfitElem["matchingRate"].intValue, rect: rect)
+            cell.setBrandClothe(clothe_image!, partnerName: outfit[i]["clothe_partnerName"].stringValue, rate: outfitElem["matchingRate"].intValue, rect: rect)
         }
         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        /*if let del = self.delegate {
-            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! OutfitCollectionViewCell
-            del.showOutfits(cell.currentStyle!)
-        } */
+        if let del = self.delegate {
+            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! NewOufitCell
+            del.showBrandOutfits("")
+        }
     }
 }

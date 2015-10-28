@@ -138,7 +138,7 @@ class RegisterStyleViewController: UIViewController {
         }
         
         let points = container!.superview!.convertRect(container!.frame, toView: nil)
-        let center = CGPointMake(CGRectGetMidX(points) + right, CGRectGetMidY(points) - 22.5)
+        let center = CGPointMake(CGRectGetMidX(points) + right, CGRectGetMidY(points) - 30)
 
         self.tempUIImage!.center = center
         self.view.addSubview(self.tempUIImage!)
@@ -297,7 +297,7 @@ class RegisterStyleViewController: UIViewController {
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         let touch = touches.first
         let location = touch!.locationInView(touch!.window)
-            
+        if (isMoving){
             if let container = self.whichContainerSelected(location) {
                 NSLog("Animation go to Area")
                 animationEnd(container.center)
@@ -312,6 +312,7 @@ class RegisterStyleViewController: UIViewController {
                 }
             }
             self.currentStyleSelected = nil
+        }
     }
     
 

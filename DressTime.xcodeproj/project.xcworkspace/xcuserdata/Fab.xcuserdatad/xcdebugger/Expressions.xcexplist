@@ -104,6 +104,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "HomeBrandOutfitsListCell.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:HomeBrandOutfitsListCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "outfit.count">
+            </PersistentString>
+            <PersistentString
+               value = "outfitElem[&quot;matchingRate&quot;].int">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DressTime.LoginViewController.(onClickLoginBtn (DressTime.LoginViewController) -&gt; (Swift.AnyObject) -&gt; ()).(closure #1):LoginViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -119,14 +130,6 @@
          <PersistentStrings>
             <PersistentString
                value = "SharedData.sharedInstance.weatherCode">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "HomeBrandOutfitsListCell.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:HomeBrandOutfitsListCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "outfitElem[&quot;matchingRate&quot;].int">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -310,6 +313,12 @@
          <PersistentStrings>
             <PersistentString
                value = "currentOutfit?.clothe_id">
+            </PersistentString>
+            <PersistentString
+               value = "UIScreen.mainScreen().bounds.size.height">
+            </PersistentString>
+            <PersistentString
+               value = "self.selectedPage">
             </PersistentString>
             <PersistentString
                value = "width">
@@ -534,17 +543,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SettingsStyleCell.(whichContainerSelected in _CBC7436A3C00BE231BF4F51C764CF409)(CGPoint) -&gt; UIImageView?:SettingsStyleCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "atWorkContainer.frame">
-            </PersistentString>
-            <PersistentString
-               value = "self.contentView.convertPoint(location, fromView: self)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "UIImage.imageResize(CGSize) -&gt; UIImage:UIImage-Extension.swift">
          <PersistentStrings>
             <PersistentString
@@ -552,6 +550,17 @@
             </PersistentString>
             <PersistentString
                value = "self.size.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SettingsStyleCell.(whichContainerSelected in _CBC7436A3C00BE231BF4F51C764CF409)(CGPoint) -&gt; UIImageView?:SettingsStyleCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "atWorkContainer.frame">
+            </PersistentString>
+            <PersistentString
+               value = "self.contentView.convertPoint(location, fromView: self)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -86,10 +86,7 @@ extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDeleg
         for (var i = outfit.count-1; i >= 0 ; i--){
             let clothe_id = outfit[i]["clothe_id"].string
             if let clothe = dal.fetch(clothe_id!) {
-                let style = BL.getMomentByStyle(self.dayMoment!, style: outfitElem["style"].stringValue) //outfitElem["style"].string
-                //cell.outfitStyle =  outfitElem["style"].stringValue
-                //cell.setClothe(clothe, style: style, rate: outfitElem["matchingRate"].int!)
-                cell.styleLabel.text = style
+                let style = BL.getMomentByStyle(self.dayMoment!, style: outfitElem["style"].stringValue)
                 
                 let width:CGFloat = cell.containerView.frame.width
                 var height:CGFloat = CGFloat(cell.containerView.frame.height/CGFloat(outfit.count))
@@ -97,7 +94,9 @@ extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDeleg
                 var y:CGFloat = 0
                 if (i == 0){
                     y = 0
-                    if (outfit.count == 2){
+                    if (outfit.count == 1){
+                        height = cell.containerView.frame.height
+                    } else if (outfit.count == 2){
                         height = 110
                     } else {
                         height = 80
@@ -121,7 +120,7 @@ extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDeleg
                 let rect = CGRectMake(x, y, width, height)
                 j++
                 
-                cell.createClotheView(clothe, rect: rect)
+                cell.createClotheView(clothe, style:style, rect: rect)
             }
         }
         return cell

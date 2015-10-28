@@ -81,8 +81,20 @@ class NewCameraViewController : UIViewController {
         self.captureManager!.sessionDelegate = self
         
         
+     /*   var replicatorLayer = CAReplicatorLayer()
+        
+        var rect = CGRectMake(self.scanArea.frame.origin.x - 5, self.scanArea.frame.origin.y+2, self.scanArea.frame.width-5, self.scanArea.frame.height-4)
+        
+        replicatorLayer.frame = CGRectMake(0, 0, self.scanArea.frame.width-5, self.scanArea.frame.height-4)
+        replicatorLayer.instanceCount = 1 */
+        
+        
         let uiView = UIView(frame: layerRect)
         uiView.layer.addSublayer(self.captureManager!.previewLayer)
+        
+       /* replicatorLayer.addSublayer(self.captureManager!.previewLayer)
+        uiView.layer.addSublayer(replicatorLayer)*/
+        
         self.view.addSubview(uiView)
         self.view.bringSubviewToFront(self.opacityView)
         
@@ -131,6 +143,10 @@ class NewCameraViewController : UIViewController {
                 controller.previousController = self
             }
         }
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
     deinit {
@@ -237,11 +253,6 @@ class NewCameraViewController : UIViewController {
     private func cropImage(image: UIImage) -> UIImage {
        // println(self.scanArea.frame)
         let rect = rectToCropImg(image)
-        //let cropRect = CGRectMake(rect.origin.x, rect.origin.y, self.scanArea.frame.width, self.scanArea.frame.height)
-        
-        //self.scanArea.frame// rectToCropImg(image)//self.captureManager!.previewLayer.convertRect(self.scanArea.frame, fromLayer: self.captureManager!.previewLayer)  //rectToCropImg(image)
-        //println(cropRect)
-        
         let imageRef = CGImageCreateWithImageInRect(image.CGImage, rect);
         // or use the UIImage wherever you like
         return UIImage(CGImage: imageRef!)
@@ -253,8 +264,7 @@ extension NewCameraViewController: CameraSessionControllerDelegate{
     func cameraSessionDidOutputSampleBuffer(sampleBuffer: CMSampleBuffer!){
         if (self.skipImage == 20) {
             if let image = imageFromSampleBuffer(sampleBuffer) {
-                self.bufferImage = image//cropImage(image)
-                NSLog("Get sample")
+                self.bufferImage = cropImage(image)
                 self.arrayColors = self.bufferImage!.dominantColors()
                 self.timeToScan = false
                 dispatch_sync(dispatch_get_main_queue(), {

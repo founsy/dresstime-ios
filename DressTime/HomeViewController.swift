@@ -29,11 +29,20 @@ class HomeViewController: UIViewController{
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        
+        let addStatusBar = UIView()
+        addStatusBar.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 20);
+        addStatusBar.backgroundColor =  UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.20)
+        
+        UIApplication.sharedApplication().delegate!.window!!.rootViewController!.view.addSubview(addStatusBar)
+        
+        ActivityLoader.shared.showProgressView(view)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         configNavBar()
+        UIApplication.sharedApplication().statusBarHidden = false // for status bar hide
     }
 
     
@@ -190,15 +199,16 @@ extension HomeViewController: HomeOutfitsListCellDelegate {
     }
 }
 
-extension HomeViewController: HomeBrandOutfitsListCelllDelegate {
+extension HomeViewController: HomeBrandOutfitsListCellDelegate {
     func showBrandOutfits(currentStyle: String) {
         self.currentStyleSelected = currentStyle
-        self.performSegueWithIdentifier("showOutfits", sender: self)
+        self.performSegueWithIdentifier("showShoppingList", sender: self)
     }
     
     func loadedBrandOutfits(outfitsCount: Int) {
         self.numberOfOutfits = outfitsCount
         self.tableView.reloadData()
+        ActivityLoader.shared.hideProgressView()
     }
 }
 

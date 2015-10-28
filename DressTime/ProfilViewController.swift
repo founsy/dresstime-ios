@@ -53,6 +53,8 @@ class ProfilViewController: UIViewController {
         initData()
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("PROFILE", comment: ""), style: .Plain, target: nil, action: nil)
+        UIApplication.sharedApplication().statusBarHidden = false // for status bar hide
+        
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

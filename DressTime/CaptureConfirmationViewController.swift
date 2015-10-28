@@ -105,6 +105,11 @@ class CaptureConfirmationViewController: UIViewController {
         super.viewDidAppear(animated)
     }
     
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     private func whiteNavBar(){
         let bar:UINavigationBar! =  self.navigationController?.navigationBar
         self.navigationController?.navigationBarHidden = false

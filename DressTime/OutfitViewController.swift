@@ -12,16 +12,17 @@ import UIKit
 class OutfitViewController: UIViewController {
     private let cellIdentifier : String = "ClotheTableCell"
     private let dal = ClothesDAL()
-    private var currentSection: Int = -1
+    private var currentClothe: Clothe?
     
     var itemIndex: Int = 0
     var currentOutfits: NSArray!
-    
+    private var number = 0
     @IBOutlet weak var checkImage: UIImageView!
     @IBOutlet weak var labelButton: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var backgroudView: UIView!
     @IBOutlet weak var dressupButton: UIButton!
+    
     @IBAction func onDressUpTapped(sender: AnyObject) {
         let originFrame = self.dressupButton.layer.frame
         let originImgFrame =  self.checkImage.frame
@@ -52,59 +53,64 @@ class OutfitViewController: UIViewController {
                 self.checkImage.layer.frame = originImgFrame
                 self.checkImage.alpha = 0
                 
-                               self.labelButton.frame = originLabelFrame
+                self.labelButton.frame = originLabelFrame
                 
                 self.backgroudView.alpha = 0.0
                 }){ (finish) -> Void in
                     self.labelButton.alpha = 1
                     self.labelButton.text = NSLocalizedString("OUTFIT OF THE DAY", comment : "")
                 }
-
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.registerNib(UINib(nibName: "ClotheScrollTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
-        
         tableView!.delegate = self
         tableView!.dataSource = self
-           }
+        ActivityLoader.shared.showProgressView(view)
+    }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("HOME", comment: ""), style: .Plain, target: nil, action: nil)
-
+        
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.number = self.currentOutfits!.count
+        self.tableView.reloadData()
+        ActivityLoader.shared.hideProgressView()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "detailClothe") {
-                let navigationController = segue.destinationViewController as! UINavigationController
-                if let detailController = navigationController.viewControllers[0] as? DetailClotheViewController {
-                    if let outfit = self.currentOutfits[self.currentSection] as? NSDictionary {
-                        let clothe_id = outfit["clothe_id"] as! String
-                        if let clothe = dal.fetch(clothe_id) {
-                            detailController.currentClothe =  clothe
-                        }
-                    }
-                }
+            let navigationController = segue.destinationViewController as! UINavigationController
+            if let detailController = navigationController.viewControllers[0] as? DetailClotheViewController {
+                detailController.currentClothe =  self.currentClothe
+            }
         }
+    }
+}
+
+extension OutfitViewController: ClotheScrollTableCellDelegate {
+    func didSelectedClothe(clothe: Clothe){
+        self.currentClothe = clothe
+        self.performSegueWithIdentifier("detailClothe", sender: self)
     }
 }
 
 
 extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.currentSection = indexPath.row
-    
-        print("didSelectRowAtIndexPath")
-        self.currentSection = indexPath.row
+    /*func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //self.currentSection = indexPath.row
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             self.performSegueWithIdentifier("detailClothe", sender: self)
         })
-        self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
-    }
+    }*/
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let height:CGFloat = (tableView.frame.height-20.0) / CGFloat(self.currentOutfits.count)
@@ -114,15 +120,15 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
                 return height + 45.0
             }
         }
-        return height - 25.0
+        if (self.currentOutfits.count == 1){
+            return tableView.frame.height
+        } else {
+            return height - 25.0
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        if let list = self.currentOutfits {
-            return list.count
-        } else {
-            return 0
-        }
+        return self.number
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -135,6 +141,7 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
             cell.clotheCollection = collection
             cell.currentOutfit =  dal.fetch(clothe_id)
             cell.setupScrollView(cell.contentView.bounds.size.width, height: cell.contentView.bounds.size.height)
+            cell.delegate = self
             cell.layer.shadowOffset = CGSizeMake(3, 6);
             cell.layer.shadowColor = UIColor.blackColor().CGColor
             cell.layer.shadowRadius = 8;

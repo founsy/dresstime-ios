@@ -137,6 +137,7 @@
 		01D1B8721B726B7D00920C64 /* TypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8711B726B7D00920C64 /* TypeViewController.swift */; };
 		01D1B8761B72949B00920C64 /* SubTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D1B8751B72949B00920C64 /* SubTypeCell.xib */; };
 		01D1B8781B7327B000920C64 /* CustomSubTypeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */; };
+		01D626AE1BE0DE8E009FF6B6 /* ActivityLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D626AD1BE0DE8E009FF6B6 /* ActivityLoader.swift */; };
 		01E167ED1BC3E700008D3A0C /* SettingsStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E167EC1BC3E700008D3A0C /* SettingsStyleCell.swift */; };
 		01E167F11BC3EA3D008D3A0C /* SettingsSexCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E167F01BC3EA3D008D3A0C /* SettingsSexCell.swift */; };
 		01E167F31BC3EA4B008D3A0C /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E167F21BC3EA4B008D3A0C /* SettingsHeaderCell.swift */; };
@@ -357,6 +358,7 @@
 		01D1B8711B726B7D00920C64 /* TypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeViewController.swift; sourceTree = "<group>"; };
 		01D1B8751B72949B00920C64 /* SubTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SubTypeCell.xib; sourceTree = "<group>"; };
 		01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSubTypeViewCell.swift; sourceTree = "<group>"; };
+		01D626AD1BE0DE8E009FF6B6 /* ActivityLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityLoader.swift; sourceTree = "<group>"; };
 		01E167EC1BC3E700008D3A0C /* SettingsStyleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsStyleCell.swift; sourceTree = "<group>"; };
 		01E167F01BC3EA3D008D3A0C /* SettingsSexCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSexCell.swift; sourceTree = "<group>"; };
 		01E167F21BC3EA4B008D3A0C /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
@@ -720,6 +722,7 @@
 				0143732A1BCCD5AA00443F66 /* OutfitCollectionViewCell.swift */,
 				013B64691BD23EC300176098 /* ClotheScrollTableCell.swift */,
 				0180A3B31BDA0B0800EDF565 /* NewOutfitCell.swift */,
+				01D626AD1BE0DE8E009FF6B6 /* ActivityLoader.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1077,6 +1080,7 @@
 				01D1B8721B726B7D00920C64 /* TypeViewController.swift in Sources */,
 				0183F30B1BD8E71800691238 /* RBBLinearInterpolation.swift in Sources */,
 				016446541BDCE5FD00E2434B /* SpringButton.swift in Sources */,
+				01D626AE1BE0DE8E009FF6B6 /* ActivityLoader.swift in Sources */,
 				01C4550C1B597571003D5E41 /* ClothesDAL.swift in Sources */,
 				016446471BDCE5FD00E2434B /* DesignableTabBarController.swift in Sources */,
 				01AE7C011BD616BC00728EA4 /* AuthorizationManager.swift in Sources */,

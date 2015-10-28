@@ -19,7 +19,7 @@
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xwr-AH-CVb">
                         <rect key="frame" x="0.0" y="0.5" width="600" height="147.5"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FavoriteIcon" translatesAutoresizingMaskIntoConstraints="NO" id="6yD-DJ-E0G">
                         <rect key="frame" x="560" y="109" width="30" height="30"/>

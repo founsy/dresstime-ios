@@ -18,7 +18,7 @@ class NewOufitCell: UICollectionViewCell {
         
     }
     
-    func createClotheView(clothe: Clothe, rect: CGRect){
+    func createClotheView(clothe: Clothe, style: String,  rect: CGRect){
         let view = UIView(frame: rect)
         view.backgroundColor = UIColor.clearColor()
         view.roundCorners(UIRectCorner.AllCorners, radius: 3.0)
@@ -31,14 +31,25 @@ class NewOufitCell: UICollectionViewCell {
         view.layer.shadowPath = UIBezierPath(rect: self.bounds).CGPath
         
         let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
-        imageView.image = UIImage(data: clothe.clothe_image)!.imageResize(CGSizeMake(rect.size.width, 160.0))
-        imageView.contentMode = .Top
+        var img = UIImage(data: clothe.clothe_image)!
+        
+        var mode = UIViewContentMode.Top
+        if (rect.size.height != containerView.frame.size.height){
+            img = img.imageResize(CGSizeMake(rect.size.width, 160.0))
+        } else {
+            mode = UIViewContentMode.ScaleToFill
+        }
+        
+        imageView.image = img
+        imageView.contentMode = mode
         imageView.clipsToBounds = true
         view.addSubview(imageView)
         containerView.addSubview(view)
+        
+        self.styleLabel.text = style
     }
     
-    func setBrandClothe(image: String, style: String, rate: Int, rect: CGRect){
+    func setBrandClothe(image: String, partnerName: String, rate: Int, rect: CGRect){
         if let data: NSData = NSData(base64EncodedString: image, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters) {
             
             let view = UIView(frame: rect)
@@ -53,11 +64,22 @@ class NewOufitCell: UICollectionViewCell {
             view.layer.shadowPath = UIBezierPath(rect: self.bounds).CGPath
             
             let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
-            imageView.image = UIImage(data: data)!.imageResize(CGSizeMake(rect.size.width, 160.0))
-            imageView.contentMode = .Top
+            var img = UIImage(data: data)!
+            
+            var mode = UIViewContentMode.Top
+            if (rect.size.height != containerView.frame.size.height){
+                img = img.imageResize(CGSizeMake(rect.size.width, 160.0))
+            } else {
+                mode = UIViewContentMode.ScaleToFill
+            }
+            
+            imageView.image = img
+            imageView.contentMode = mode
             imageView.clipsToBounds = true
             view.addSubview(imageView)
             containerView.addSubview(view)
+            
+            self.styleLabel.text = partnerName
         }
         
     }

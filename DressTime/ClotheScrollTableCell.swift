@@ -9,22 +9,41 @@
 import Foundation
 import UIKit
 
+protocol ClotheScrollTableCellDelegate {
+    func didSelectedClothe(clothe: Clothe)
+}
+
 class ClotheScrollTableCell: UITableViewCell {
     
     @IBOutlet weak var scrollView: UIScrollView!
     
     var clotheCollection: [Clothe]?
     var currentOutfit: Clothe?
+    var delegate: ClotheScrollTableCellDelegate?
+    
+    private var selectedPage = 0
     
     override func awakeFromNib() {
         self.scrollView.pagingEnabled = true
         self.scrollView.delegate = self
+        
+        var singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "singleTapped:")
+        singleTapGestureRecognizer.numberOfTapsRequired = 1
+        singleTapGestureRecognizer.enabled = true
+        singleTapGestureRecognizer.cancelsTouchesInView = false
+        scrollView.addGestureRecognizer(singleTapGestureRecognizer)
+    }
+    
+    func singleTapped(sender: UITapGestureRecognizer) {
+        if let del = self.delegate {
+            del.didSelectedClothe(clotheCollection![self.selectedPage])
+        }
+        
     }
     
     func setupScrollView(width: CGFloat, height: CGFloat){
         if let collection = self.clotheCollection {
             self.scrollView.contentSize = CGSizeMake(width * CGFloat(collection.count), height)
-            var selectedPage = 0
             for (var i = 0; i < collection.count; i++){
                 let imageView = UIImageView(frame: CGRectMake(CGFloat(i)*width, 0, width, height))
                 imageView.contentMode = .Top
@@ -34,10 +53,10 @@ class ClotheScrollTableCell: UITableViewCell {
                 imageView.clipsToBounds = true
                 self.scrollView.addSubview(imageView)
                 if (collection[i].clothe_id == currentOutfit?.clothe_id){
-                    selectedPage = i
+                    self.selectedPage = i
                 }
             }
-            self.scrollView.setContentOffset(CGPointMake(CGFloat(selectedPage)*width, 0), animated: false)
+            self.scrollView.setContentOffset(CGPointMake(CGFloat(self.selectedPage)*width, 0), animated: false)
         }
     }
 
@@ -47,7 +66,7 @@ extension ClotheScrollTableCell: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         let pageWidth = scrollView.frame.size.width;
         let page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
-        NSLog("Current page -> %d",page);
+        self.selectedPage = Int(page)
         let xoffset = page * self.scrollView.bounds.size.width;
         self.scrollView.contentOffset = CGPointMake(xoffset, 0);
     }

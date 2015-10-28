@@ -52,6 +52,11 @@ class TypeViewController: UIViewController {
         }
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(true);
+        UIApplication.sharedApplication().statusBarHidden=true; // for status bar hide
+    }
+    
     private func initSubType(){
         self.subTypes = Array<Array<String>>()
         for (var i = 0; i < self.types.count; i++){
