@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3Ai-JY-fPU" customClass="BrandClotheCell" customModule="DressTime" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="195" height="225"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="195" height="225"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maille2" translatesAutoresizingMaskIntoConstraints="NO" id="Gov-0m-fhH">
+                        <rect key="frame" x="0.0" y="0.0" width="195" height="225"/>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="brandHM" translatesAutoresizingMaskIntoConstraints="NO" id="uBT-Er-KBO">
+                        <rect key="frame" x="5" y="5" width="41" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="41" id="tah-l9-FSf"/>
+                            <constraint firstAttribute="height" constant="40" id="zt8-aY-C4y"/>
+                        </constraints>
+                    </imageView>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EgR-2T-fFB">
+                        <rect key="frame" x="150" y="5" width="40" height="40"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="49,90€" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kfi-TR-eTy">
+                                <rect key="frame" x="1.5" y="13.5" width="38" height="13.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="kfi-TR-eTy" firstAttribute="centerX" secondItem="EgR-2T-fFB" secondAttribute="centerX" id="0hg-qH-kBA"/>
+                            <constraint firstAttribute="height" constant="40" id="AjW-0H-pVD"/>
+                            <constraint firstItem="kfi-TR-eTy" firstAttribute="centerY" secondItem="EgR-2T-fFB" secondAttribute="centerY" id="DTW-k7-atl"/>
+                            <constraint firstAttribute="trailing" secondItem="kfi-TR-eTy" secondAttribute="trailing" constant="1" id="ZRU-4X-1yO"/>
+                            <constraint firstAttribute="width" constant="40" id="bkm-th-2il"/>
+                            <constraint firstItem="kfi-TR-eTy" firstAttribute="centerY" secondItem="EgR-2T-fFB" secondAttribute="centerY" constant="2" id="kCn-gj-iSE"/>
+                            <constraint firstItem="kfi-TR-eTy" firstAttribute="leading" secondItem="EgR-2T-fFB" secondAttribute="leading" constant="1" id="ypa-dC-MOS"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="0hg-qH-kBA"/>
+                                <exclude reference="kCn-gj-iSE"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addBtn" translatesAutoresizingMaskIntoConstraints="NO" id="XD8-Nm-45K">
+                        <rect key="frame" x="155" y="185" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="sng-B5-m0K"/>
+                            <constraint firstAttribute="height" constant="30" id="x4T-zl-Sic"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sadBtn" translatesAutoresizingMaskIntoConstraints="NO" id="FdS-DW-rU4">
+                        <rect key="frame" x="10" y="185" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="2DJ-Do-R4v"/>
+                            <constraint firstAttribute="width" constant="30" id="Xz9-fZ-h1B"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="XD8-Nm-45K" secondAttribute="bottom" constant="10" id="2F3-km-4iw"/>
+                <constraint firstItem="Gov-0m-fhH" firstAttribute="leading" secondItem="3Ai-JY-fPU" secondAttribute="leading" id="9Pi-ik-DZv"/>
+                <constraint firstItem="uBT-Er-KBO" firstAttribute="top" secondItem="3Ai-JY-fPU" secondAttribute="top" constant="5" id="9Z3-U6-Ej6"/>
+                <constraint firstAttribute="trailing" secondItem="XD8-Nm-45K" secondAttribute="trailing" constant="10" id="IP2-bG-edp"/>
+                <constraint firstItem="Gov-0m-fhH" firstAttribute="top" secondItem="3Ai-JY-fPU" secondAttribute="top" id="ZK2-TX-iGM"/>
+                <constraint firstItem="uBT-Er-KBO" firstAttribute="leading" secondItem="3Ai-JY-fPU" secondAttribute="leading" constant="5" id="bZR-5F-oLH"/>
+                <constraint firstAttribute="trailing" secondItem="Gov-0m-fhH" secondAttribute="trailing" id="gzG-G7-cCd"/>
+                <constraint firstAttribute="trailing" secondItem="EgR-2T-fFB" secondAttribute="trailing" constant="5" id="myz-uM-ypH"/>
+                <constraint firstItem="FdS-DW-rU4" firstAttribute="leading" secondItem="3Ai-JY-fPU" secondAttribute="leading" constant="10" id="oTV-hn-GNn"/>
+                <constraint firstItem="EgR-2T-fFB" firstAttribute="top" secondItem="3Ai-JY-fPU" secondAttribute="top" constant="5" id="qNA-9S-ZcG"/>
+                <constraint firstAttribute="bottom" secondItem="Gov-0m-fhH" secondAttribute="bottom" id="soY-ze-Tia"/>
+                <constraint firstAttribute="bottom" secondItem="FdS-DW-rU4" secondAttribute="bottom" constant="10" id="t24-I4-yAS"/>
+            </constraints>
+            <connections>
+                <outlet property="brandIcon" destination="uBT-Er-KBO" id="WIc-py-Z0o"/>
+                <outlet property="priceLabel" destination="kfi-TR-eTy" id="sHh-Vw-S8o"/>
+                <outlet property="priceView" destination="EgR-2T-fFB" id="K7V-6y-Kb5"/>
+            </connections>
+            <point key="canvasLocation" x="341" y="169"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="addBtn" width="30" height="30"/>
+        <image name="brandHM" width="43" height="42"/>
+        <image name="maille2" width="194" height="225"/>
+        <image name="sadBtn" width="30" height="30"/>
+    </resources>
+</document>

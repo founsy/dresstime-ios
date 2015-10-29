@@ -118,24 +118,34 @@ extension HomeViewController: HomeHeaderCellDelegate {
         let condition = weatherConditionByCode(Int(weather.code!))
         var image: UIImage?
         
-        if (condition == "sunny"){
-            image = UIImage(named: "HomeBgSun")
-        
-        } else if (condition == "cloudy"){
-            image = UIImage(named: "HomeBgSun")
+        if (condition == "storm"){
+            image = UIImage(named: "HomeBgStorm")
             
-        } else if (condition == "rainy"){
+        } else if (condition == "drizzle"){
             image = UIImage(named: "HomeBgRain")
             
-        } else if (condition == "windy"){
-            image = UIImage(named: "HomeBgSun")
+        } else if (condition == "rainy"){
+            image = UIImage(named: "HomeBgRain2")
             
         } else if (condition == "snowy"){
             image = UIImage(named: "HomeBgSnow")
             
+        } else if (condition == "atmosphere"){
+            image = UIImage(named: "HomeBgAtmosphere")
+            
+        } else if (condition == "sunny"){
+            image = UIImage(named: "HomeBgSun")
+            
+        } else if (condition == "cloudy"){
+            image = UIImage(named: "HomeBgCloud")
+            
+        } else if (condition == "extreme"){
+            image = UIImage(named: "HomeBgTornado")
+            
         } else {
             image = UIImage(named: "HomeBgSun")
         }
+        
         print("-------------------\(condition)-------------------------")
         dispatch_async(dispatch_get_main_queue(), {
             self.setTitleNavBar(SharedData.sharedInstance.city!)
@@ -165,21 +175,21 @@ extension HomeViewController: HomeHeaderCellDelegate {
         
         
         if (code >= 200 && code < 300){
-            return "windy"
+            return "storm"
         } else if (code >= 300 && code < 400){
-            return "rainy"
+            return "drizzle"
         } else if (code >= 500 && code < 600){
             return "rainy"
         } else if (code >= 600 && code < 700){
             return "snowy"
         } else if (code >= 700 && code < 800){
-            return ""
+            return "atmosphere"
         } else if (code == 800 ){
             return "sunny"
         } else if (code >= 800 && code < 900){
             return "cloudy"
         } else if (code >= 900){
-            return ""
+            return "extreme"
         } else {
             return ""
         }
