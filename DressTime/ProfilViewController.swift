@@ -9,18 +9,18 @@
 import Foundation
 import UIKit
 
-class ProfilViewController: UIViewController {
+class ProfilViewController: UITableViewController {
     let cellIdentifier = "profilTypeCell"
     private var type = [String]()
     var countType:Array<String>?
     
     private var typeColtheSelected: String?
     private var currentClotheOpenSelected: Int?
-
     
+    @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var numberClothes: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var tableView: UITableView!
+   // @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonAddClothe: UIButton!
     
     @IBAction func onStyleTapped(sender: AnyObject) {
@@ -30,6 +30,7 @@ class ProfilViewController: UIViewController {
     @IBAction func onProfilPictureTapped(sender: AnyObject) {
         self.performSegueWithIdentifier("showSettings", sender: self)
     }
+    
     @IBAction func onAddClotheTapped(sender: AnyObject) {
         self.currentClotheOpenSelected = nil
         self.performSegueWithIdentifier("AddClothe", sender: self)
@@ -39,22 +40,48 @@ class ProfilViewController: UIViewController {
         super.viewDidLoad()
         let longPressedGesture = UILongPressGestureRecognizer(target: self, action: "longPressedHandle:")
         longPressedGesture.minimumPressDuration = 1.0
-        tableView.addGestureRecognizer(longPressedGesture)
-        tableView.registerNib(UINib(nibName: "TypeCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
         
-        tableView!.delegate = self
-        tableView!.dataSource = self
+        self.tableView.addGestureRecognizer(longPressedGesture)
+        self.tableView.registerNib(UINib(nibName: "TypeCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
         buttonAddClothe.layer.cornerRadius = 20.0
+        
     }
     
     override func viewWillAppear(animated: Bool){
         super.viewWillAppear(animated)
         self.type = SharedData.sharedInstance.getType(SharedData.sharedInstance.sexe!)
         initData()
+        setValueProfil()
+        self.tableView.contentInset = UIEdgeInsetsMake(-65.0, 0, 0, 0);
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("PROFILE", comment: ""), style: .Plain, target: nil, action: nil)
         UIApplication.sharedApplication().statusBarHidden = false // for status bar hide
         
+    }
+    
+   /* private let kImageOriginHight:CGFloat = 240.0
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        var yOffset  = scrollView.contentOffset.y;
+        var yPosition = self.navigationController!.navigationBar.frame.origin.y + self.navigationController!.navigationBar.frame.size.height;
+        
+        print(yOffset)
+        if (yOffset > kImageOriginHight) {
+            self.tableView.contentInset = UIEdgeInsetsMake(yPosition + kImageOriginHight, self.tableView.contentInset.left, self.tableView.contentInset.bottom, self.tableView.contentInset.right)
+        } else {
+            self.tableView.contentInset = UIEdgeInsetsMake(-65.0, 0, 0.0, 0)
+        }
+    }*/
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        var headerFrame = self.headerView.frame;
+        var yOffset = scrollView.contentOffset.y;
+        headerFrame.origin.y = max(0, yOffset);
+        self.headerView.frame = headerFrame;
+    
+        // If the user is pulling down on the top of the scroll view, adjust the scroll indicator appropriately
+        var height = CGRectGetHeight(headerFrame);
+        if (yOffset > 0.0) {
+            self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(abs(yOffset) + height, 0, 0, 0);
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -100,7 +127,8 @@ class ProfilViewController: UIViewController {
             totalClothe = totalClothe + count
             countType?.append("\(count)")
         }
-        self.numberClothes.text = "\(totalClothe) Clothes"
+        self.numberClothes.text = "\(totalClothe)"
+        self.tableView.reloadData()
     }
     
     private func setValueProfil(){
@@ -112,24 +140,24 @@ class ProfilViewController: UIViewController {
     }
 }
 
-extension ProfilViewController: UITableViewDelegate {
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+extension ProfilViewController {
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 200.0
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.typeColtheSelected = self.type[indexPath.row].lowercaseString
         self.performSegueWithIdentifier("DetailsClothes", sender: self)
     }
 }
 
-extension ProfilViewController: UITableViewDataSource {
+extension ProfilViewController {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.type.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! TypeCell
         let typeCell = self.type[indexPath.row]
         cell.backgroundImage.image = UIImage(named: "Background\(typeCell)\(SharedData.sharedInstance.sexe!.uppercaseString)")

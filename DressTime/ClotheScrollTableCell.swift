@@ -20,6 +20,7 @@ class ClotheScrollTableCell: UITableViewCell {
     var clotheCollection: [Clothe]?
     var currentOutfit: Clothe?
     var delegate: ClotheScrollTableCellDelegate?
+    var numberOfClothesAssos = 0
     
     private var selectedPage = 0
     
@@ -27,7 +28,7 @@ class ClotheScrollTableCell: UITableViewCell {
         self.scrollView.pagingEnabled = true
         self.scrollView.delegate = self
         
-        var singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "singleTapped:")
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "singleTapped:")
         singleTapGestureRecognizer.numberOfTapsRequired = 1
         singleTapGestureRecognizer.enabled = true
         singleTapGestureRecognizer.cancelsTouchesInView = false
@@ -46,7 +47,11 @@ class ClotheScrollTableCell: UITableViewCell {
             self.scrollView.contentSize = CGSizeMake(width * CGFloat(collection.count), height)
             for (var i = 0; i < collection.count; i++){
                 let imageView = UIImageView(frame: CGRectMake(CGFloat(i)*width, 0, width, height))
-                imageView.contentMode = .Top
+                if (numberOfClothesAssos == 1){
+                    imageView.contentMode = .ScaleToFill
+                } else {
+                    imageView.contentMode = .Top
+                }
                 let image = UIImage(data: collection[i].clothe_image)!
                 imageView.image = image.imageWithImage(width)
                 imageView.backgroundColor = UIColor.clearColor()

@@ -67,10 +67,6 @@ class SettingsTableViewController: UITableViewController {
         emailField.delegate = self
         currentPasswordField.delegate = self
         newPasswordField.delegate = self
-        
-        createBorderButton(menButton, isSelected: self.menSelected)
-        createBorderButton(womenButton, isSelected: !self.menSelected)
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -84,6 +80,8 @@ class SettingsTableViewController: UITableViewController {
         applyStyleTextView(emailField)
         applyStyleTextView(currentPasswordField)
         applyStyleTextView(newPasswordField)
+        createBorderButton(menButton, isSelected: self.menSelected)
+        createBorderButton(womenButton, isSelected: !self.menSelected)
 
     }
     

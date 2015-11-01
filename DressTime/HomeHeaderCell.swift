@@ -53,9 +53,9 @@ extension HomeHeaderCell: UICollectionViewDataSource {
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! WeatherCell
         if (indexPath.row == self.selectedWeather){
-            cell.viewContainer.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.25)
+            cell.viewContainer.backgroundColor = UIColor(red: 235.0/255.0, green: 175.0/255.0, blue: 73.0/255.0, alpha: 0.8)
         } else {
-            cell.viewContainer.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.0)
+            cell.viewContainer.backgroundColor = UIColor(red: 235.0/255.0, green: 175.0/255.0, blue: 73.0/255.0, alpha: 0.0)
         }
         let weather = weatherList[indexPath.row]
         cell.weatherIcon.text = weather.icon!
@@ -85,11 +85,11 @@ extension HomeHeaderCell: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
        if (self.selectedWeather != indexPath.row){
             var cell = collectionView.cellForItemAtIndexPath(indexPath) as! WeatherCell
-            cell.viewContainer.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.25)
+            cell.viewContainer.backgroundColor = UIColor(red: 235.0/255.0, green: 175.0/255.0, blue: 73.0/255.0, alpha: 0.8)
         
             let indexPathSelected = NSIndexPath(forRow: self.selectedWeather, inSection: indexPath.section)
             cell = collectionView.cellForItemAtIndexPath(indexPathSelected) as! WeatherCell
-            cell.viewContainer.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.0)
+            cell.viewContainer.backgroundColor = UIColor(red: 235.0/255.0, green: 175.0/255.0, blue: 73.0/255.0, alpha: 0.0)
         
             self.selectedWeather = indexPath.row
             if let del = self.delegate {

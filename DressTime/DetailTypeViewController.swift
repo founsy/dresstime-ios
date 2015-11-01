@@ -122,7 +122,6 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
         cell.layer.shadowRadius = 8;
         cell.layer.shadowOpacity = 0.75;
         cell.clotheImageView.clipsToBounds = true
-        cell.favorisIcon.clipsToBounds = true
         
         //Remove edge insets to have full width separtor line
         cell.preservesSuperviewLayoutMargins = false

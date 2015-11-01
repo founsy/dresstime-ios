@@ -33,8 +33,6 @@ class OutfitViewController: UIViewController {
             self.dressupButton.layer.cornerRadius = 62.5
             self.dressupButton.layer.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 62.5, UIScreen.mainScreen().bounds.size.height/2.0 - 62.5, 125, 125)
             
-            
-            
             self.labelButton.alpha = 0
             self.labelButton.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 32.5, UIScreen.mainScreen().bounds.size.height/2.0 - 32.5, 75, 75)
             
@@ -65,8 +63,6 @@ class OutfitViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.registerNib(UINib(nibName: "ClotheScrollTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
-        tableView!.delegate = self
-        tableView!.dataSource = self
         ActivityLoader.shared.showProgressView(view)
     }
     
@@ -74,12 +70,13 @@ class OutfitViewController: UIViewController {
         super.viewWillAppear(animated)
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("HOME", comment: ""), style: .Plain, target: nil, action: nil)
-        
-        
-    }
+            }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        tableView!.delegate = self
+        tableView!.dataSource = self
+
         self.number = self.currentOutfits!.count
         self.tableView.reloadData()
         ActivityLoader.shared.hideProgressView()
@@ -140,6 +137,7 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
             let collection = dal.fetch(type: type)
             cell.clotheCollection = collection
             cell.currentOutfit =  dal.fetch(clothe_id)
+            cell.numberOfClothesAssos = self.currentOutfits.count
             cell.setupScrollView(cell.contentView.bounds.size.width, height: cell.contentView.bounds.size.height)
             cell.delegate = self
             cell.layer.shadowOffset = CGSizeMake(3, 6);

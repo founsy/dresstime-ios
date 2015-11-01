@@ -30,15 +30,71 @@ class SharedData {
     func getSubType(type: String) -> [String] {
         switch type {
             case "Maille":
-                return ["jumper-fin","jumper-epais ","cardigan","sweater"]
+                return ["jumper-fin","jumper-epais","cardigan","sweater"]
             case "Top":
                 return ["tshirt", "shirt", "shirt-sleeve", "polo","polo-sleeve"]
             case "Pants":
                 return ["jeans", "jeans-slim", "trousers-pleated", "trousers-suit", "chinos", "trousers-regular", "trousers", "trousers-slim", "bermuda", "short"]
             case "Dress":
-                return ["skirt"]
+                return ["skirt", "skirt-long", "skirt-mini", "dress", "dress-party"]
             default:
                 return []
+        }
+    }
+    
+    func subTypeToImage(subtype: String) -> String {
+        switch subtype {
+            case "jumper-fin":
+                return "jumperThin"
+            case "jumper-epais":
+                return "jumperThin"
+            case "cardigan":
+                return ""
+            case "sweater":
+                return "pull"
+            case "tshirt":
+                return "tshirt"
+            case "shirt":
+                return "shirtLong"
+            case "shirt-sleeve":
+                return ""
+            case "polo":
+                return "polo"
+            case "polo-sleeve":
+                return "polo"
+            case "jeans":
+                return "jean"
+            case "jeans-slim":
+                return "jeanSkinny"
+            case "trousers-pleated":
+                return "pantsDarts"
+            case "trousers-suit":
+                return "pantsSuit"
+            case "chinos":
+                return "pantsChino"
+            case "trousers-regular":
+                return "pants2"
+            case "trousers":
+                return "pants"
+            case "trousers-slim":
+                return "pantsSlim"
+            case "bermuda":
+                return "bermuda"
+            case "short":
+                return "shortJean"
+            case "skirt":
+                return "skirt2"
+            case "skirt-long":
+                return "skirt1"
+            case "skirt-mini":
+                return "skirt3"
+            case "dress":
+                return "dress2"
+            case "dress-party":
+                return "dress"
+        default:
+                return ""
+        
         }
     }
 }

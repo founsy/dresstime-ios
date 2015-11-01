@@ -129,12 +129,13 @@ extension TypeViewController: UITableViewDataSource {
     }
    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let height = self.tableView.bounds.height - self.navigationController!.navigationBar.frame.height
+        //let height = self.tableView.bounds.height - self.navigationController!.navigationBar.frame.height
         
         if (arrayForBool.objectAtIndex(indexPath.row).boolValue as Bool){
-            return calculateCollectionViewHeight()
+            let height = calculateCollectionViewHeight()
+            return height > 230.0 ? height : 230.0
         } else {
-            return round(height*0.33333)
+            return 230.0//round(height*0.33333)
         }
 
     }
@@ -158,7 +159,7 @@ extension TypeViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         let cell = self.tableView.dequeueReusableCellWithIdentifier(cellTypeIdentifier, forIndexPath: indexPath) as! TypeTableViewCell
         cell.bgImageView.image = UIImage(named: "\(bgType[indexPath.row])\(SharedData.sharedInstance.sexe!.uppercaseString)")
-        cell.labelTypeText.text = self.types[indexPath.row].uppercaseString
+        cell.labelTypeText.text = NSLocalizedString(self.types[indexPath.row], comment: "").uppercaseString
         cell.iconImageView.image = UIImage(named: "Type\(self.types[indexPath.row])Icon")
         cell.bgImageView.clipsToBounds = true
         cell.data = self.subTypes[self.currentSection]
@@ -195,8 +196,8 @@ extension TypeViewController : UICollectionViewDataSource {
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(kCellReuse, forIndexPath: indexPath) as! CustomSubTypeViewCell
-        cell.imgaView.image = UIImage(named: "SubType\(self.subTypes[self.currentSection])")
-        cell.label.text = self.subTypes[self.currentSection][indexPath.row]
+        cell.imgaView.image = UIImage(named: SharedData.sharedInstance.subTypeToImage(self.subTypes[self.currentSection][indexPath.row]))
+        cell.label.text = NSLocalizedString(self.subTypes[self.currentSection][indexPath.row], comment: "")
         cell.contentView.viewWithTag(100)?.removeFromSuperview()
         cell.contentView.viewWithTag(101)?.removeFromSuperview()
 

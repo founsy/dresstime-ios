@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14F27" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F1021" minimumToolsVersion="Automatic">
     <entity name="Clothe" representedClassName="DressTime.Clothe" syncable="YES">
         <attribute name="clothe_colors" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="clothe_cut" optional="YES" attributeType="String" syncable="YES"/>
@@ -30,7 +30,7 @@
         <attribute name="userid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Clothe" positionX="268" positionY="-153" width="128" height="223"/>
+        <element name="Clothe" positionX="268" positionY="-153" width="128" height="225"/>
         <element name="Profil" positionX="-63" positionY="63" width="128" height="240"/>
     </elements>
 </model>

@@ -17,42 +17,33 @@
                     <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6Eg-gQ-HHo">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="147.5"/>
                     </imageView>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xwr-AH-CVb">
-                        <rect key="frame" x="0.0" y="0.5" width="600" height="147.5"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </view>
-                    <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FavoriteIcon" translatesAutoresizingMaskIntoConstraints="NO" id="6yD-DJ-E0G">
-                        <rect key="frame" x="560" y="109" width="30" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="30" id="AUQ-4d-eLN"/>
-                            <constraint firstAttribute="width" constant="30" id="Bdk-9T-da6"/>
-                        </constraints>
-                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpa-9b-Nbh">
+                        <rect key="frame" x="571" y="117" width="21" height="22"/>
+                        <state key="normal" image="loveIconOFF"/>
+                        <connections>
+                            <action selector="onFavoriteTapped:" destination="XZT-Nf-INu" eventType="touchUpInside" id="SPX-CI-hkR"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="xwr-AH-CVb" secondAttribute="bottom" id="Kxo-0B-xcf"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="zpa-9b-Nbh" secondAttribute="trailing" id="Jis-nT-koD"/>
                     <constraint firstAttribute="bottom" secondItem="6Eg-gQ-HHo" secondAttribute="bottom" id="MUJ-tf-7P9"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="6yD-DJ-E0G" secondAttribute="bottom" constant="0.5" id="Mm2-MS-p3C"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="zpa-9b-Nbh" secondAttribute="bottom" constant="0.5" id="XJx-aD-gPM"/>
                     <constraint firstAttribute="trailing" secondItem="6Eg-gQ-HHo" secondAttribute="trailing" id="guO-Uf-Lg7"/>
-                    <constraint firstAttribute="trailing" secondItem="xwr-AH-CVb" secondAttribute="trailing" id="hei-zD-ml8"/>
-                    <constraint firstItem="xwr-AH-CVb" firstAttribute="top" secondItem="IRL-SF-axc" secondAttribute="top" id="kFZ-I4-84S"/>
-                    <constraint firstItem="xwr-AH-CVb" firstAttribute="leading" secondItem="IRL-SF-axc" secondAttribute="leading" id="p5h-fc-Nby"/>
-                    <constraint firstAttribute="trailing" secondItem="6yD-DJ-E0G" secondAttribute="trailing" constant="10" id="tuD-WF-0Iv"/>
                     <constraint firstItem="6Eg-gQ-HHo" firstAttribute="top" secondItem="IRL-SF-axc" secondAttribute="top" id="xtQ-7y-fiE"/>
                     <constraint firstAttribute="leading" secondItem="6Eg-gQ-HHo" secondAttribute="leading" id="zBe-LS-5VY"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="blackEffect" destination="xwr-AH-CVb" id="Lnj-JI-XC7"/>
                 <outlet property="clotheImageView" destination="6Eg-gQ-HHo" id="ZaA-ZU-MTc"/>
-                <outlet property="favorisIcon" destination="6yD-DJ-E0G" id="edi-hQ-Zaf"/>
+                <outlet property="favoriteButton" destination="zpa-9b-Nbh" id="dAA-MV-Gv7"/>
             </connections>
             <point key="canvasLocation" x="169.5" y="399"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="FavoriteIcon" width="21" height="20"/>
+        <image name="loveIconOFF" width="21" height="20"/>
     </resources>
 </document>

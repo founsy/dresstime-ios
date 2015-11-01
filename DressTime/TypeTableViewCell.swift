@@ -27,6 +27,8 @@ class TypeTableViewCell: UITableViewCell {
     @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var labelTypeText: UILabel!
+    @IBOutlet weak var blurView: UIVisualEffectView!
+    @IBOutlet weak var blackView: UIView!
     
     var collectionView: IndexedCollectionView!
     private let kCellReuse : String = "SubTypeCell"
@@ -82,12 +84,16 @@ class TypeTableViewCell: UITableViewCell {
         self.labelTypeText.hidden = true
         self.collectionView.reloadData()
         self.collectionView.hidden = false
+        //self.blurView.hidden = false
+        self.blackView.hidden = false
     }
     
     func hideCollectionView(){
         self.iconImageView.hidden = false
         self.labelTypeText.hidden = false
         self.collectionView.hidden = true
+        //self.blurView.hidden = true
+         self.blackView.hidden = true
     }
     
     func calculateCollectionViewHeight() -> CGFloat {

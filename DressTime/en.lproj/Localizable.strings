@@ -22,3 +22,33 @@
 
 /* ProfilViewController */
 "PROFILE" = "PROFILE";
+
+/* TypeViewController */
+"Maille" = "Maille";
+"Dress" = "Dress";
+"Top" = "Top";
+"Pants" = "Pants";
+"jumper-fin" = "Jumper Thin";
+"jumper-epais" = "Jumper";
+"cardigan" = "Cardigan";
+"sweater" = "Sweater";
+"tshirt" = "T-shirt";
+"shirt" = "Shirt";
+"shirt-sleeve" = "Shirt Sleeve";
+"polo" = "Polo";
+"polo-sleeve" = "Polo Sleeve";
+"jeans" = "Jean";
+"jeans-slim" = "Jean Slim";
+"trousers-pleated" = "Pleated";
+"trousers-suit" = "Suit";
+"chinos" = "Chino";
+"trousers-regular" = "Regular";
+"trousers" = "Normal";
+"trousers-slim" = "Slim";
+"bermuda" = "Bermuda";
+"short" = "Short";
+"skirt" = "Skirt";
+"skirt-long" = "Long Skirt";
+"skirt-mini" = "Mini Skirt";
+"dress" = "Dress";
+"dress-party" = "Party Dress";

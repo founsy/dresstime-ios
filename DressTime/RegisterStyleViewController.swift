@@ -38,6 +38,8 @@ class RegisterStyleViewController: UIViewController {
     private var imageSelected: UIImageView?
     private var currentStyleSelected: String?
     
+    private var confirmationView: ConfirmSave?
+    
     var currentUserId: String?
 
     @IBOutlet weak var onValidateButton: UIButton!
@@ -56,14 +58,25 @@ class RegisterStyleViewController: UIViewController {
                 profil.onPartyStyle = self.onPartySelected
                 profil.relaxStyle = self.relaxSelected
                 dal.update(profil)
+                
+                self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
+                self.view.bringSubviewToFront(self.confirmationView!)
+                UIView.animateAndChainWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: {
+                    self.confirmationView?.alpha = 1
+                    self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
+                    }, completion:  nil).animateWithDuration(0.2, animations: { () -> Void in
+                        self.confirmationView?.alpha = 0
+                        self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
+                        }, completion: { (finish) -> Void in
+                            
+                    })
+                
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        //lastLocation = homeIcon.center
         if (currentUserId != nil){
             onValidateButton.setTitle("VALIDATE MY MODIFICATION", forState: UIControlState.Normal)
             labelText.text = "PICK YOUR OWN STYLE"
@@ -71,17 +84,23 @@ class RegisterStyleViewController: UIViewController {
             onValidateButton.titleLabel?.text = "LET'S SEE MY NEW DRESSING"
             onValidateButton.setTitle("LET'S SEE MY NEW DRESSING", forState: UIControlState.Normal)
         }
+        
+        self.confirmationView = NSBundle.mainBundle().loadNibNamed("ConfirmSave", owner: self, options: nil)[0] as? ConfirmSave
+        self.confirmationView!.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 50, UIScreen.mainScreen().bounds.size.height/2.0 - 50, 100, 160)
+        self.confirmationView!.alpha = 0
+        self.confirmationView!.layer.cornerRadius = 50
+        
+        self.view.addSubview(self.confirmationView!)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if let _ = currentUserId {
-            self.view.setNeedsUpdateConstraints()
-            self.view.updateConstraintsIfNeeded()
             self.view.setNeedsLayout()
             self.view.layoutIfNeeded()
             initData()
         }
+
     }
     
     override func didReceiveMemoryWarning() {

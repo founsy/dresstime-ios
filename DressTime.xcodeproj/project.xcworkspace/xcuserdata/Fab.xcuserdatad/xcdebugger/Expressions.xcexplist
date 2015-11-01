@@ -309,6 +309,17 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "TypeViewController.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.subTypes[self.currentSection][indexPath.row]">
+            </PersistentString>
+            <PersistentString
+               value = " NSLocalizedString(self.subTypes[self.currentSection][indexPath.row], comment: &quot;&quot;)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ClotheScrollTableCell.setupScrollView(CGFloat, height : CGFloat) -&gt; ():ClotheScrollTableCell.swift">
          <PersistentStrings>
             <PersistentString
@@ -358,6 +369,9 @@
       <ContextState
          contextName = "RegisterStyleViewController.viewDidLoad() -&gt; ():RegisterStyleViewController.swift">
          <PersistentStrings>
+            <PersistentString
+               value = "self.confirmationView!.frame">
+            </PersistentString>
             <PersistentString
                value = "self.currentUserId">
             </PersistentString>
@@ -572,6 +586,14 @@
             </PersistentString>
             <PersistentString
                value = "self.currentImage.size">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "OutfitViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:OutfitViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.number">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -805,6 +827,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "TypeSelectionCell.(createBorderButton in _E75CDD17C72D1D1EA0D37963F3DDFC10)(UIButton, isSelected : Bool) -&gt; ():TypeSelectionCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "btn.frame.size.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "OutfitsViewController.(loadOutfitsByStyle in _41EA043F4A7C0CFFB95A291D9AD51DD8)() -&gt; ():OutfitsViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -812,14 +842,6 @@
             </PersistentString>
             <PersistentString
                value = "styleOutfits">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.TypeViewController.collectionView (DressTime.TypeViewController)(ObjectiveC.UICollectionView, layout : ObjectiveC.UICollectionViewLayout, sizeForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; C.CGSize:TypeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.tableView.frame.size.width">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -850,6 +872,14 @@
          <PersistentStrings>
             <PersistentString
                value = "self.colorName[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.TypeViewController.collectionView (DressTime.TypeViewController)(ObjectiveC.UICollectionView, layout : ObjectiveC.UICollectionViewLayout, sizeForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; C.CGSize:TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tableView.frame.size.width">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1137,6 +1167,14 @@
             </PersistentString>
             <PersistentString
                value = "self">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressingSynchro.((updateLocalStorage in _5D4E5A99B5AE9DBB58B651F0E284D94A)(DressingSynchro) -&gt; () -&gt; ()).(closure #1):DressingSynchro.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "isSuccess">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

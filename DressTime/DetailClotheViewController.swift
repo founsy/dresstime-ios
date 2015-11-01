@@ -20,6 +20,7 @@ class DetailClotheViewController: UIViewController {
     @IBOutlet weak var color3View: UIView!
     @IBOutlet weak var clotheName: UILabel!
     
+    @IBOutlet weak var createOutfitButton: UIButton!
     @IBOutlet weak var onTap: UIButton!
     
     @IBAction func onTapped(sender: AnyObject) {
@@ -70,6 +71,9 @@ class DetailClotheViewController: UIViewController {
         
         self.clotheName.text = self.currentClothe.clothe_name
         self.updateColors(currentClothe.clothe_colors)
+        
+        self.createOutfitButton.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
+        
         
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)

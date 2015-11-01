@@ -15,11 +15,13 @@ import UIKit
 class SettingsViewController: UIViewController {
     private var user: Profil?
     private var tableViewController: SettingsTableViewController?
-   
+    private var confirmationView: ConfirmSave?
+    
     @IBOutlet weak var backgroundView: UIImageView!
     @IBOutlet weak var saveButton: UIButton!
     
     @IBAction func onSaveTapped(sender: AnyObject) {
+        
         if let userSaving = self.user {
             if let vc = tableViewController {
                 if (vc.menSelected){
@@ -44,8 +46,18 @@ class SettingsViewController: UIViewController {
                 }
                 let profilDal = ProfilsDAL()
                 profilDal.update(userSaving)
+                self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
+                
+                UIView.animateAndChainWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: {
+                    self.confirmationView?.alpha = 1
+                    self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
+                }, completion:  nil).animateWithDuration(0.2, animations: { () -> Void in
+                    self.confirmationView?.alpha = 0
+                    self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
+                    }, completion: { (finish) -> Void in
+
+                })
             }
-            
         }
     }
     
@@ -76,12 +88,20 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-       let profilDal = ProfilsDAL()
+        let profilDal = ProfilsDAL()
         
         if let user = profilDal.fetch(SharedData.sharedInstance.currentUserId!) {
             self.user = user
             changeBackground(self.user!.gender!)
         }
+        
+        self.confirmationView = NSBundle.mainBundle().loadNibNamed("ConfirmSave", owner: self, options: nil)[0] as? ConfirmSave
+        self.confirmationView!.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 50, UIScreen.mainScreen().bounds.size.height/2.0 - 50, 100, 100)
+        self.confirmationView!.alpha = 0
+        self.confirmationView!.layer.cornerRadius = 50
+        
+        self.view.addSubview(self.confirmationView!)
+
     }
     
     override func viewWillAppear(animated: Bool) {

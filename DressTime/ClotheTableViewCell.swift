@@ -10,12 +10,30 @@ import Foundation
 import UIKit
 
 class ClotheTableViewCell: UITableViewCell{
-
+    
+    var isFavorite = false
+    
+    @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var clotheImageView: UIImageView!
     @IBOutlet weak var favorisIcon: UIImageView!
-    @IBOutlet weak var blackEffect: UIView!
+    
+    @IBAction func onFavoriteTapped(sender: UIButton) {
+        if (favoriteButton.selected){
+            favoriteButton.selected = false
+            isFavorite = false
+            favoriteButton.setImage(UIImage(named: "loveIconOFF"), forState: UIControlState.Normal)
+        } else {
+            favoriteButton.selected = true
+            isFavorite = true
+            favoriteButton.setImage(UIImage(named: "loveIconON"), forState: UIControlState.Selected)
+        }
+    }
     
     override func awakeFromNib() {
-        
+        if (isFavorite){
+            favoriteButton.imageView?.image = UIImage(named: "loveIconON")
+        } else {
+            favoriteButton.imageView?.image = UIImage(named: "loveIconOFF")
+        }
     }
 }
