@@ -6,6 +6,11 @@
   Copyright © 2015 Fab. All rights reserved.
 */
 
+/* LoginViewController */
+"loginErrTitle" = "Failed!";
+"loginErrMessage" = "Error during the login the processs";
+"loginErrButton" = "Okay.";
+
 "Now" = "Maintenant";
 "Afternoon" = "Après-midi";
 "Morning" = "Matin";

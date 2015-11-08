@@ -31,7 +31,7 @@ class ClotheScrollTableCell: UITableViewCell {
         let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "singleTapped:")
         singleTapGestureRecognizer.numberOfTapsRequired = 1
         singleTapGestureRecognizer.enabled = true
-        singleTapGestureRecognizer.cancelsTouchesInView = false
+        //singleTapGestureRecognizer.cancelsTouchesInView = false
         scrollView.addGestureRecognizer(singleTapGestureRecognizer)
     }
     
@@ -39,24 +39,20 @@ class ClotheScrollTableCell: UITableViewCell {
         if let del = self.delegate {
             del.didSelectedClothe(clotheCollection![self.selectedPage])
         }
-        
     }
     
     func setupScrollView(width: CGFloat, height: CGFloat){
         if let collection = self.clotheCollection {
             self.scrollView.contentSize = CGSizeMake(width * CGFloat(collection.count), height)
             for (var i = 0; i < collection.count; i++){
-                let imageView = UIImageView(frame: CGRectMake(CGFloat(i)*width, 0, width, height))
-                if (numberOfClothesAssos == 1){
-                    imageView.contentMode = .ScaleToFill
-                } else {
-                    imageView.contentMode = .Top
-                }
+                let view = NSBundle.mainBundle().loadNibNamed("ClotheTableCell", owner: self, options: nil)[0] as! ClotheTableViewCell
+                view.frame = CGRectMake(CGFloat(i)*width, 0, width, height)
                 let image = UIImage(data: collection[i].clothe_image)!
-                imageView.image = image.imageWithImage(width)
-                imageView.backgroundColor = UIColor.clearColor()
-                imageView.clipsToBounds = true
-                self.scrollView.addSubview(imageView)
+                view.initFavoriteButton(collection[i].clothe_favorite)
+                view.clotheImageView.image = image.imageWithImage(width)
+                view.clotheImageView.backgroundColor = UIColor.clearColor()
+                view.clotheImageView.clipsToBounds = true
+                self.scrollView.addSubview(view)
                 if (collection[i].clothe_id == currentOutfit?.clothe_id){
                     self.selectedPage = i
                 }

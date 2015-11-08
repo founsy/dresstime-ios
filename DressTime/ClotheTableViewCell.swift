@@ -9,9 +9,13 @@
 import Foundation
 import UIKit
 
+protocol ClotheTableViewCellDelegate {
+    func onFavoriteClick(isFavorite: Bool)
+}
+
 class ClotheTableViewCell: UITableViewCell{
     
-    var isFavorite = false
+    var clothe: Clothe?
     
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var clotheImageView: UIImageView!
@@ -20,16 +24,25 @@ class ClotheTableViewCell: UITableViewCell{
     @IBAction func onFavoriteTapped(sender: UIButton) {
         if (favoriteButton.selected){
             favoriteButton.selected = false
-            isFavorite = false
             favoriteButton.setImage(UIImage(named: "loveIconOFF"), forState: UIControlState.Normal)
         } else {
             favoriteButton.selected = true
-            isFavorite = true
             favoriteButton.setImage(UIImage(named: "loveIconON"), forState: UIControlState.Selected)
+        }
+        if let clo = self.clothe {
+            let dal = ClothesDAL()
+            clo.clothe_favorite = favoriteButton.selected
+
+            dal.update(clo)
         }
     }
     
     override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    func initFavoriteButton(isFavorite: Bool){
+        favoriteButton.selected = isFavorite
         if (isFavorite){
             favoriteButton.imageView?.image = UIImage(named: "loveIconON")
         } else {

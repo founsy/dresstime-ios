@@ -113,10 +113,10 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
     
         let clothe = self.clothesList![indexPath.row]
         if let image = UIImage(data: clothe.clothe_image) {
-            NSLog("\(image.size.width) - \(image.size.height)")
-        
             cell.clotheImageView.image = image.imageWithImage(480.0)
         }
+        cell.initFavoriteButton(clothe.clothe_favorite)
+        cell.clothe = clothe
         cell.layer.shadowOffset = CGSizeMake(3, 6);
         cell.layer.shadowColor = UIColor.blackColor().CGColor
         cell.layer.shadowRadius = 8;
@@ -127,6 +127,7 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
         cell.preservesSuperviewLayoutMargins = false
         cell.separatorInset = UIEdgeInsetsZero
         cell.layoutMargins = UIEdgeInsetsZero
+        
         return cell;
     }
 }

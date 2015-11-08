@@ -83,6 +83,7 @@
             </constraints>
             <connections>
                 <outlet property="brandIcon" destination="uBT-Er-KBO" id="WIc-py-Z0o"/>
+                <outlet property="imageView" destination="Gov-0m-fhH" id="Wu8-o8-TNi"/>
                 <outlet property="priceLabel" destination="kfi-TR-eTy" id="sHh-Vw-S8o"/>
                 <outlet property="priceView" destination="EgR-2T-fFB" id="K7V-6y-Kb5"/>
             </connections>

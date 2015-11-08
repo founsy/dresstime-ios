@@ -19,7 +19,7 @@ class LoginService {
     
     
     func Login(login: String, password: String, completion: (isSuccess: Bool, object: JSON) -> Void){
-        if (login == "jacky@dresstime.io" || login == "cathy@dresstime.io"){
+        if (login.lowercaseString == "alexandre" || login.lowercaseString == "juliette"){
             if let nsdata = ReadJsonFile().readFile("login"){
                 _ = NSString(data: nsdata, encoding:NSUTF8StringEncoding)
                 let json = JSON(data: nsdata)
@@ -77,12 +77,19 @@ class LoginService {
         ]
         let path = base_url + "token"
         Alamofire.request(.POST, path, parameters: parameters, encoding: .JSON).responseJSON { response in
-            if response.result.isSuccess {
+            var statusCode = 200
+            if let httpError = response.result.error {
+                statusCode = httpError.code
+            } else { //no errors
+                statusCode = (response.response?.statusCode)!
+            }
+            
+            if statusCode == 200 {
                 print(response.result.value)
                 let jsonDic = JSON(response.result.value!)
                 completion(isSuccess: true, object: jsonDic)
             } else {
-                completion(isSuccess: false, object: "")
+                completion(isSuccess: false, object: JSON("Error \(statusCode)"))
             }
         }
     }
@@ -125,8 +132,9 @@ class LoginService {
     }
 }
 
+
 public class Mock {
     static func isMockable() -> Bool{
-       return (SharedData.sharedInstance.currentUserId == "jacky@dresstime.io" || SharedData.sharedInstance.currentUserId == "cathy@dresstime.io")
+       return (SharedData.sharedInstance.currentUserId?.lowercaseString == "alexandre" || SharedData.sharedInstance.currentUserId?.lowercaseString == "juliette")
     }
 }

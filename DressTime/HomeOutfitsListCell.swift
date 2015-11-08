@@ -60,8 +60,6 @@ class HomeOutfitsListCell: UITableViewCell {
             }
         }
     }
-    
-    
 }
 
 extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDelegate {
@@ -92,29 +90,21 @@ extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDeleg
                 var height:CGFloat = CGFloat(cell.containerView.frame.height/CGFloat(outfit.count))
                 let x:CGFloat = 0
                 var y:CGFloat = 0
+                
+                if (outfit.count == 1){
+                    height = cell.containerView.frame.height
+                } else if (outfit.count == 2){
+                    height = 186.6
+                } else {
+                    height = 143.3
+                }
+                
                 if (i == 0){
                     y = 0
-                    if (outfit.count == 1){
-                        height = cell.containerView.frame.height
-                    } else if (outfit.count == 2){
-                        height = 110
-                    } else {
-                        height = 80
-                    }
-                    
+                } else if (outfit.count-1 == i) {
+                    y = cell.containerView.frame.height - height
                 } else {
-                    if (outfit.count == 2){
-                        height = 90
-                    } else {
-                        height = 65
-                    }
-                    
-                    if (i == (outfit.count-1)){
-                        y = cell.containerView.frame.height - (height * CGFloat(j))
-                    } else {
-                        y = cell.containerView.frame.height - (height * CGFloat(j)) + 10.0
-                    }
-                    
+                    y = cell.containerView.frame.height - (height * CGFloat(j)) + (height/2.0)
                 }
                 
                 let rect = CGRectMake(x, y, width, height)

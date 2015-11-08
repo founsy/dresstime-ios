@@ -17,8 +17,12 @@
                     <imageView userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6Eg-gQ-HHo">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="147.5"/>
                     </imageView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpa-9b-Nbh">
-                        <rect key="frame" x="571" y="117" width="21" height="22"/>
+                    <button opaque="NO" tag="9993" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpa-9b-Nbh">
+                        <rect key="frame" x="542" y="89" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="aU8-tH-tf1"/>
+                            <constraint firstAttribute="height" constant="50" id="nbf-Jf-HT1"/>
+                        </constraints>
                         <state key="normal" image="loveIconOFF"/>
                         <connections>
                             <action selector="onFavoriteTapped:" destination="XZT-Nf-INu" eventType="touchUpInside" id="SPX-CI-hkR"/>
@@ -40,7 +44,7 @@
                 <outlet property="clotheImageView" destination="6Eg-gQ-HHo" id="ZaA-ZU-MTc"/>
                 <outlet property="favoriteButton" destination="zpa-9b-Nbh" id="dAA-MV-Gv7"/>
             </connections>
-            <point key="canvasLocation" x="169.5" y="399"/>
+            <point key="canvasLocation" x="169" y="399"/>
         </tableViewCell>
     </objects>
     <resources>

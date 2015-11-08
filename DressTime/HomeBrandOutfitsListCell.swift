@@ -58,13 +58,20 @@ extension HomeBrandOutfitsListCell: UICollectionViewDataSource, UICollectionView
         }
     }
     
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        let newCell = cell as! NewOufitCell
+        
+    }
+    
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var outfitElem = self.outfitsCollection![indexPath.row]
         var cell: NewOufitCell
-        let outfit = outfitElem["outfit"]
         cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! NewOufitCell
         cell.removeOldImages()
+        var outfitElem = self.outfitsCollection![indexPath.row]
+        let outfit = outfitElem["outfit"]
+        cell.setNeedsLayout()
+        cell.layoutIfNeeded()
         var j = 1
         
         for (var i = outfit.count-1; i >= 0 ; i--){
@@ -102,6 +109,8 @@ extension HomeBrandOutfitsListCell: UICollectionViewDataSource, UICollectionView
             let clothe_image = outfit[i]["clothe_image"].string
             cell.setBrandClothe(clothe_image!, partnerName: outfit[i]["clothe_partnerName"].stringValue, rate: outfitElem["matchingRate"].intValue, rect: rect)
         }
+
+        
         return cell
     }
     

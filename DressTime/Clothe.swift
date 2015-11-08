@@ -22,6 +22,7 @@ class Clothe: NSManagedObject {
     @NSManaged var clothe_pattern: String
     @NSManaged var clothe_subtype: String
     @NSManaged var clothe_type: String
+    @NSManaged var clothe_favorite: Bool
     @NSManaged var profilRel: Profil
     
     func toDictionnary() -> NSDictionary {

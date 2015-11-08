@@ -163,7 +163,7 @@ class NewCameraViewController : UIViewController {
         self.view.layoutIfNeeded()
         self.scanArea.layoutIfNeeded()
 
-        let rectPath = UIBezierPath(rect: CGRectMake(self.scanArea.frame.origin.x - 5, self.scanArea.frame.origin.y+2, self.scanArea.frame.width-5, self.scanArea.frame.height-4))
+        let rectPath = UIBezierPath(rect: CGRectMake(self.scanArea.frame.origin.x + 2, self.scanArea.frame.origin.y + 2, self.scanArea.frame.width - 4, self.scanArea.frame.height + 11))
         outerPath.usesEvenOddFillRule = true
         outerPath.appendPath(rectPath)
         

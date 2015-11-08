@@ -62,10 +62,11 @@ class DressingSynchro {
         let dressTimeSvc = DressTimeService()
         dressTimeSvc.GetClothesIdDressing { (isSuccess, object) -> Void in
             if (isSuccess){
-                self.clothesStored = object.arrayObject as! [String]
+                //self.clothesStored = object.arrayObject
                 
                 let clotheDAL = ClothesDAL()
-                for id in self.clothesStored {
+                for (var i = 0; i < object.arrayValue.count; i++) {
+                    let id = object.arrayValue[i]["id"].stringValue
                     dressTimeSvc.GetClothe(id, completion: { (succeeded, clothe) -> () in
                         if (succeeded) {
                             let image: String = clothe["clothe_image"].stringValue

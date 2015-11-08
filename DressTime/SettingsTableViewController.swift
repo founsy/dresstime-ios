@@ -22,6 +22,7 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var womenButton: UIButton!
     @IBOutlet weak var menButton: UIButton!
     
+    @IBOutlet weak var profilImage: UIImageView!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var temperatureField: UISegmentedControl!
@@ -67,6 +68,7 @@ class SettingsTableViewController: UITableViewController {
         emailField.delegate = self
         currentPasswordField.delegate = self
         newPasswordField.delegate = self
+        profilImage.image = UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)")
     }
     
     override func viewWillAppear(animated: Bool) {

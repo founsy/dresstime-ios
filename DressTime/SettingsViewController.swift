@@ -44,8 +44,13 @@ class SettingsViewController: UIViewController {
                 if let name = vc.nameField.text {
                     userSaving.name = name
                 }
-                let profilDal = ProfilsDAL()
-                profilDal.update(userSaving)
+                
+                UserService().GetBrandOutfitsToday(userSaving, completion: { (isSuccess, object) -> Void in
+                    let profilDal = ProfilsDAL()
+                    profilDal.update(userSaving)
+
+                })
+                
                 self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
                 
                 UIView.animateAndChainWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: {

@@ -20,7 +20,6 @@ class OutfitViewController: UIViewController {
     @IBOutlet weak var checkImage: UIImageView!
     @IBOutlet weak var labelButton: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var backgroudView: UIView!
     @IBOutlet weak var dressupButton: UIButton!
     
     @IBAction func onDressUpTapped(sender: AnyObject) {
@@ -39,7 +38,7 @@ class OutfitViewController: UIViewController {
             self.checkImage.alpha = 1
             self.checkImage.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 32.5, UIScreen.mainScreen().bounds.size.height/2.0 - 32.5, 75, 75)
             
-            self.backgroudView.alpha = 0.4
+            //self.backgroudView.alpha = 0.4
             }){ (finish) -> Void in
                 //self.labelButton.text = "OUTFIT OF THE DAY"
             }.animateWithDuration(0.5, delay: 0.5, options: .CurveEaseOut, animations: { () -> Void in
@@ -53,7 +52,7 @@ class OutfitViewController: UIViewController {
                 
                 self.labelButton.frame = originLabelFrame
                 
-                self.backgroudView.alpha = 0.0
+                //self.backgroudView.alpha = 0.0
                 }){ (finish) -> Void in
                     self.labelButton.alpha = 1
                     self.labelButton.text = NSLocalizedString("OUTFIT OF THE DAY", comment : "")

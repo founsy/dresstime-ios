@@ -49,7 +49,7 @@ class HomeViewController: UIViewController{
     private func addProfilButtonToNavBar(){
         
         let regularButton = UIButton(frame: CGRectMake(0, 0, 40.0, 40.0))
-        let historyButtonImage = UIImage(named: "ProfilImage")
+        let historyButtonImage = UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)")
         regularButton.setBackgroundImage(historyButtonImage, forState: UIControlState.Normal)
         
         regularButton.setTitle("", forState: UIControlState.Normal)
@@ -253,7 +253,7 @@ extension HomeViewController: UITableViewDelegate {
             return 92.0
         } else if (indexPath.row == 2){
             if (self.numberOfOutfits > 0){
-                return 300.0
+                return 370.0
             } else {
                 return 170.0
             }

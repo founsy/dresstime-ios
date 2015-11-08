@@ -7,20 +7,20 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="ywa-0s-aG6" customClass="NewOufitCell" customModule="DressTime" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="140" height="220"/>
+            <rect key="frame" x="0.0" y="0.0" width="185" height="305"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="140" height="220"/>
+                <rect key="frame" x="0.0" y="0.0" width="185" height="305"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zUK-OC-8Dl">
-                        <rect key="frame" x="0.0" y="0.0" width="140" height="16"/>
-                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                        <rect key="frame" x="0.0" y="0.0" width="185" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tti-gJ-ufU">
-                        <rect key="frame" x="0.0" y="23" width="140" height="195"/>
+                        <rect key="frame" x="0.0" y="23" width="185" height="280"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
@@ -36,12 +36,12 @@
                 <constraint firstAttribute="trailing" secondItem="zUK-OC-8Dl" secondAttribute="trailing" id="nPE-8w-HId"/>
                 <constraint firstItem="tti-gJ-ufU" firstAttribute="top" secondItem="zUK-OC-8Dl" secondAttribute="bottom" constant="7" id="pDd-uC-vT1"/>
             </constraints>
-            <size key="customSize" width="145" height="285"/>
+            <size key="customSize" width="145" height="365"/>
             <connections>
                 <outlet property="containerView" destination="tti-gJ-ufU" id="0vD-UV-HeK"/>
                 <outlet property="styleLabel" destination="zUK-OC-8Dl" id="aut-If-mYB"/>
             </connections>
-            <point key="canvasLocation" x="365" y="293"/>
+            <point key="canvasLocation" x="364.5" y="332.5"/>
         </collectionViewCell>
     </objects>
 </document>

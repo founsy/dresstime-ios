@@ -12,6 +12,8 @@ import UIKit
 class ShoppingViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
+    private var brandClotheCell: ClotheSelectionCell?
+    private var matchClotheCell: ClotheMatchSelectionCell?
     
     private let cellIdentifier = "BrandClotheCell"
     
@@ -20,10 +22,23 @@ class ShoppingViewController: UIViewController {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+        ActivityLoader.shared.showProgressView(view)
+        loadBrandClothe()
     }
     
      override func viewDidLayoutSubviews() {
         //slider.frame = CGRectMake(0, 0, rangeSlider.frame.width, 18)
+    }
+    
+    private func loadBrandClothe(){
+        let service = DressTimeService()
+        service.GetBrandClothes() { (isSuccess, object) -> Void in
+            if (isSuccess){
+                self.brandClotheCell?.brandClothe = object
+                self.brandClotheCell?.collectionView.reloadData()
+            }
+            ActivityLoader.shared.hideProgressView()
+        }
     }
 }
 
@@ -38,7 +53,11 @@ extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
         } else if (indexPath.row == 5){
             return 150.0
         }else {
-            return 44.0
+            if (UIScreen.mainScreen().bounds.height == 736){
+                return 55.0
+            } else {
+                return 44.0
+            }
         }
 
     }
@@ -59,20 +78,40 @@ extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
         if (indexPath.row == 0){
             return self.tableView.dequeueReusableCellWithIdentifier("textHeader")! as UITableViewCell
         } else if (indexPath.row == 1){
-            return self.tableView.dequeueReusableCellWithIdentifier("typeSelection")! as! TypeSelectionCell
+            let typeCell = self.tableView.dequeueReusableCellWithIdentifier("typeSelection")! as! TypeSelectionCell
+            typeCell.delegate = self
+            return typeCell
         } else if (indexPath.row == 2){
             return self.tableView.dequeueReusableCellWithIdentifier("priceSelection")! as! PriceSelectionCell
         } else if (indexPath.row == 3){
-            return self.tableView.dequeueReusableCellWithIdentifier("clotheSelection")! as! ClotheSelectionCell
+            self.brandClotheCell = self.tableView.dequeueReusableCellWithIdentifier("clotheSelection")! as? ClotheSelectionCell
+            self.brandClotheCell?.delegate = self
+            return self.brandClotheCell!
         } else if (indexPath.row == 4){
             return self.tableView.dequeueReusableCellWithIdentifier("textCell")! as UITableViewCell
         } else if (indexPath.row == 5){
-            return self.tableView.dequeueReusableCellWithIdentifier("clotheMatchSelection")! as! ClotheMatchSelectionCell
+            self.matchClotheCell = self.tableView.dequeueReusableCellWithIdentifier("clotheMatchSelection")! as? ClotheMatchSelectionCell
+            return self.matchClotheCell!
         } else {
             return UITableViewCell()
         }
 
 
 
+    }
+}
+
+extension ShoppingViewController: TypeSelectionCellDelegate {
+    func onSelectedType(typeSelected: String) {
+        self.brandClotheCell?.selectedType = typeSelected
+        self.brandClotheCell?.collectionView.reloadData()
+    }
+}
+
+
+extension ShoppingViewController: ClotheSelectionCellDelegate {
+    func onSelectedBrandClothe(myClothes: JSON) {
+        self.matchClotheCell?.clothes = myClothes;
+        self.matchClotheCell?.collectionView.reloadData()
     }
 }

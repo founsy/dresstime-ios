@@ -14,45 +14,54 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordText: UITextField!
     
     @IBAction func onClickLoginBtn(sender: AnyObject) {
-        view.endEditing(true)
-        LoginService().Login(loginText.text!, password: passwordText.text!) { (isSuccess, object) -> Void in
-            if (isSuccess){
-                let dal = ProfilsDAL()
-                
-                if let profil = dal.fetch(self.loginText.text!){
-                    profil.access_token = object["access_token"].string
-                    profil.refresh_token = object["refresh_token"].string
-                    profil.expire_in = object["expires_in"].float
-                    if let newProfil = dal.update(profil) {
-                        SharedData.sharedInstance.currentUserId = newProfil.userid
-                        SharedData.sharedInstance.sexe = newProfil.gender
+        if let login = loginText.text {
+            if let password = passwordText.text {
+                view.endEditing(true)
+                LoginService().Login(login, password: password) { (isSuccess, object) -> Void in
+                    if (isSuccess){
+                        let dal = ProfilsDAL()
+                        
+                        if let profil = dal.fetch(object["user"]["username"].string!.lowercaseString){
+                            profil.access_token = object["access_token"].string
+                            profil.refresh_token = object["refresh_token"].string
+                            profil.expire_in = object["expires_in"].float
+                            if let newProfil = dal.update(profil) {
+                                SharedData.sharedInstance.currentUserId = newProfil.userid
+                                SharedData.sharedInstance.sexe = newProfil.gender
+                            }
+                        } else {
+                            let pro = dal.save(object["user"]["username"].string!, email: object["user"]["email"].string!, access_token:  object["access_token"].string!, refresh_token: object["refresh_token"].string!, expire_in: object["expires_in"].int!, name: object["user"]["displayName"].string!, gender: object["user"]["gender"].string!, temp_unit: object["user"]["tempUnit"].string!);
+                            
+                            pro.atWorkStyle = object["user"]["atWorkStyle"].string
+                            pro.onPartyStyle = object["user"]["onPartyStyle"].string
+                            pro.relaxStyle = object["user"]["relaxStyle"].string
+                            dal.update(pro)
+                            
+                            SharedData.sharedInstance.currentUserId = pro.userid
+                            SharedData.sharedInstance.sexe = pro.gender
+                        }
+                        
+                        //Check after login, if a synchro is necessary
+                        //Today, only if Local database is empty
+                        //TODO - Tomorrow, syncro differential
+                        let dressingSynchro = DressingSynchro(userId: SharedData.sharedInstance.currentUserId!)
+                        dressingSynchro.execute()
+                        
+                        dispatch_async(dispatch_get_main_queue(),  { () -> Void in
+                            let appDelegateTemp = UIApplication.sharedApplication().delegate;
+                            appDelegateTemp!.window!!.rootViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateInitialViewController()
+                        })
+                    } else {
+                        let alert = UIAlertView(title: NSLocalizedString("loginErrTitle", comment: ""), message: NSLocalizedString("loginErrMessage", comment: ""), delegate: nil, cancelButtonTitle: NSLocalizedString("loginErrButton", comment: ""))
+                        // Move to the UI thread
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            // Show the alert
+                            alert.show()
+                        })
                     }
-                } else {
-                    let pro = dal.save(self.loginText.text!, access_token:  object["access_token"].string!, refresh_token: object["refresh_token"].string!, expire_in: object["expires_in"].int!, name: self.loginText.text!, gender: "M", temp_unit: "C");
-                    SharedData.sharedInstance.currentUserId = pro.userid
-                    SharedData.sharedInstance.sexe = pro.gender
-                }
-                
-                //Check after login, if a synchro is necessary
-                //Today, only if Local database is empty
-                //TODO - Tomorrow, syncro differential
-                let dressingSynchro = DressingSynchro(userId: SharedData.sharedInstance.currentUserId!)
-                dressingSynchro.execute()
-                
-                dispatch_async(dispatch_get_main_queue(),  { () -> Void in
                     
-                    let appDelegateTemp = UIApplication.sharedApplication().delegate;
-                    appDelegateTemp!.window!!.rootViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateInitialViewController()
-                })
-            } else {
-                let alert = UIAlertView(title: "Failed!", message:"Error during the login the processs", delegate: nil, cancelButtonTitle: "Okay.")
-                // Move to the UI thread
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    // Show the alert
-                    alert.show()
-                })
+                }
             }
-
         }
     }
     

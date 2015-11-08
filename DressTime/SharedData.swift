@@ -12,7 +12,7 @@ class SharedData {
     static let sharedInstance = SharedData()
     
     var currentUserId: String?
-    var sexe: String?
+    var sexe: String? = "M"
     
     var weatherCode: String?
     var lowTemp: String?
@@ -47,9 +47,9 @@ class SharedData {
             case "jumper-fin":
                 return "jumperThin"
             case "jumper-epais":
-                return "jumperThin"
+                return "jumper"
             case "cardigan":
-                return ""
+                return "cardigan"
             case "sweater":
                 return "pull"
             case "tshirt":
@@ -57,9 +57,9 @@ class SharedData {
             case "shirt":
                 return "shirtLong"
             case "shirt-sleeve":
-                return ""
+                return "shirtSleeve"
             case "polo":
-                return "polo"
+                return "poloLong"
             case "polo-sleeve":
                 return "polo"
             case "jeans":

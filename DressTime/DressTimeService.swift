@@ -13,21 +13,7 @@ import Alamofire
 class DressTimeService {
     let baseUrlOutfits = "http://api.drez.io/outfits/"
     let baseUrlDressing = "http://api.drez.io/dressing/"
-    
-    func GetOutfitsByStyle(style: String, weather: Weather, completion: (isSuccess: Bool, object: JSON) -> Void){
-        if (Mock.isMockable()){
-            if let nsdata = ReadJsonFile().readFile("outfitsByStyle"){
-                let json = JSON(data: nsdata)
-                completion(isSuccess: true, object:json[style])
-            } else {
-                completion(isSuccess: false, object: "")
-            }
-        } else {
-            var styles = [String]()
-            styles.append(style)
-            self.getOutfits(styles, weather:weather, completion: completion)
-        }
-    }
+    let baseUrlBrand = "http://api.drez.io/brand/"
     
     func GetOutfitsToday(styles: [String], weather: Weather, completion: (isSuccess: Bool, object: JSON) -> Void){
         if (Mock.isMockable()){
@@ -53,20 +39,45 @@ class DressTimeService {
         }
     }
     
-    func GetBrandOutfitsToday(completion: (isSuccess: Bool, object: JSON) -> Void){
-        //if (Mock.isMockable()){
-            if let nsdata = ReadJsonFile().readFile("\(SharedData.sharedInstance.currentUserId!)-OutfitsBrandToday"){
+    func GetBrandClothes(completion: (isSuccess: Bool, object: JSON) -> Void){
+        if (Mock.isMockable()){
+            var nameFile = ""
+            if (SharedData.sharedInstance.sexe == "M") {
+                nameFile = "alexandre-OutfitsBrandToday"
+            } else {
+                nameFile = "juliette-OutfitsBrandToday"
+            }
+            if let nsdata = ReadJsonFile().readFile(nameFile){
                 let json = JSON(data: nsdata)
                 completion(isSuccess: true, object:json)
             } else {
                 completion(isSuccess: false, object: "")
             }
-      /*  } else {
-            self.getOutfitsToday(completion)
+       } else {
+            self.getBrandClothes(completion)
+        }
+    }
+
+    func GetBrandOutfitsToday(completion: (isSuccess: Bool, object: JSON) -> Void){
+        //if (Mock.isMockable()){
+        var nameFile = ""
+        if (SharedData.sharedInstance.sexe == "M") {
+            nameFile = "alexandre-OutfitsBrandToday"
+        } else {
+            nameFile = "juliette-OutfitsBrandToday"
+        }
+        if let nsdata = ReadJsonFile().readFile(nameFile){
+            let json = JSON(data: nsdata)
+            completion(isSuccess: true, object:json)
+        } else {
+            completion(isSuccess: false, object: "")
+        }
+
+        /*  } else {
+        self.getOutfitsToday(completion)
         } */
     }
 
-    
     
     func SaveClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
         if (Mock.isMockable()){
@@ -146,7 +157,7 @@ class DressTimeService {
             
             var dressingSeriazible = [[String:AnyObject]]()
             let hexTranslator = HexColorToName()
-
+            
             for clothe in dressing {
                 let dict = NSMutableDictionary(dictionary: clothe.toDictionnary())
                 let colorName = UIColor.colorWithHexString(dict["clothe_colors"] as! String)
@@ -168,10 +179,10 @@ class DressTimeService {
                 "dressing" : dressingSeriazible,
                 "weather" : weatherObject
             ]
-           
+            
             
             let path = baseUrlOutfits
-
+            
             let headers = ["Authorization": "Bearer \(profil.access_token!)"]
             
             //AuthorizationManager.startRequest(.POST, path, parameters: parameters as? [String : AnyObject], encoding: .JSON, headers: headers)
@@ -194,44 +205,11 @@ class DressTimeService {
             completion(isSuccess: false, object: "")
         }
     }
-    
-    private func getOutfitsToday(styles: [String], weather: Weather, completion: (isSuccess: Bool, object: JSON) -> Void){
+    private func getBrandClothes(completion: (isSuccess: Bool, object: JSON) -> Void){
         let dal = ProfilsDAL()
         if let profil = dal.fetch(SharedData.sharedInstance.currentUserId!) {
-            let dalClothe = ClothesDAL()
-            let dressing = dalClothe.fetch()
-            
-            var dressingSeriazible = [[String:AnyObject]]()
-            let hexTranslator = HexColorToName()
-            
-            for clothe in dressing {
-                let dict = NSMutableDictionary(dictionary: clothe.toDictionnary())
-                let colorName = UIColor.colorWithHexString(dict["clothe_colors"] as! String)
-                dict["clothe_colors"] = hexTranslator.name(colorName)[1] as! String
-                dict.removeObjectForKey("clothe_image")
-                let d:[String:AnyObject] = dict as NSDictionary as! [String : AnyObject]
-                dressingSeriazible.append(d)
-            }
-           
-            
-            let weatherObject =  [
-                "code" : weather.code!,
-                "low" : weather.tempMin!,
-                "high" : weather.tempMax!
-            ]
-            
-            let parameters = [
-                "sex" : profil.gender!,
-                "dressing" : dressingSeriazible,
-                "weather" : weatherObject
-            ]
-            
-           
-            let path = baseUrlOutfits + "today"
-            
             let headers = ["Authorization": "Bearer \(profil.access_token!)"]
-            Alamofire.request(.POST, path, parameters: parameters as? [String : AnyObject], encoding: .JSON, headers: headers).responseJSON { response in
-                print(response.result.value)
+            Alamofire.request(.GET, "http://api.drez.io/brand/", parameters: nil, encoding: .JSON, headers: headers).responseJSON { response in
                 if response.result.isSuccess {
                     let jsonDic = JSON(response.result.value!)
                     completion(isSuccess: true, object: jsonDic)
@@ -239,9 +217,6 @@ class DressTimeService {
                     completion(isSuccess: false, object: "")
                 }
             }
-            //Cancel changes about ColorName
-            dalClothe.managedObjectContext.reset()
-            
         } else {
             completion(isSuccess: false, object: "")
         }

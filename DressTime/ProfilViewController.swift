@@ -22,6 +22,7 @@ class ProfilViewController: UITableViewController {
     @IBOutlet weak var nameLabel: UILabel!
    // @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonAddClothe: UIButton!
+    @IBOutlet weak var profilButton: UIButton!
     
     @IBAction func onStyleTapped(sender: AnyObject) {
         self.performSegueWithIdentifier("showStyle", sender: self)
@@ -44,6 +45,8 @@ class ProfilViewController: UITableViewController {
         self.tableView.addGestureRecognizer(longPressedGesture)
         self.tableView.registerNib(UINib(nibName: "TypeCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
         buttonAddClothe.layer.cornerRadius = 20.0
+        
+        profilButton.setImage(UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)"), forState: .Normal)
         
     }
     
@@ -161,7 +164,7 @@ extension ProfilViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! TypeCell
         let typeCell = self.type[indexPath.row]
         cell.backgroundImage.image = UIImage(named: "Background\(typeCell)\(SharedData.sharedInstance.sexe!.uppercaseString)")
-        cell.longPressLabel.text = "Add \(typeCell)"
+        cell.longPressLabel.text = "Add \(NSLocalizedString(typeCell, comment: ""))"
         cell.viewLongPress.hidden = true
         cell.delegate = self
         cell.indexPath = indexPath
@@ -171,14 +174,14 @@ extension ProfilViewController {
             cell.rightLabel.hidden = false
             cell.rightLabelName.hidden = false
             cell.rightLabel.text = self.countType![indexPath.row]
-            cell.rightLabelName.text = typeCell
+            cell.rightLabelName.text = NSLocalizedString(typeCell, comment: "").uppercaseString
         } else {
             cell.leftLabel.hidden = false
             cell.leftLabelName.hidden = false
             cell.rightLabel.hidden = true
             cell.rightLabelName.hidden = true
             cell.leftLabel.text = self.countType![indexPath.row]
-            cell.leftLabelName.text = typeCell
+            cell.leftLabelName.text = NSLocalizedString(typeCell, comment: "").uppercaseString
         }
         
         //Remove edge insets to have full width separtor line

@@ -47,6 +47,12 @@ class CaptureConfirmationViewController: UIViewController {
         whiteNavBar()
         self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         createPickerView()
+        brandButton.layer.cornerRadius = 30.0
+        setColorStyle(color1)
+        setColorStyle(color2)
+        setColorStyle(color3)
+        applyStyleTextView(nameClothe)
+        
         if let clothe = self.clotheObject {
             let type = clothe["clothe_type"] as! String
             let subtype = clothe["clothe_subtype"] as! String
@@ -108,6 +114,21 @@ class CaptureConfirmationViewController: UIViewController {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+    
+    private func setColorStyle(color: UIView){
+        color.layer.cornerRadius = 5.0
+        color.layer.borderWidth = 1.0
+        color.layer.borderColor = UIColor.whiteColor().CGColor
+    }
+    
+    private func applyStyleTextView(textField: UITextField){
+        let bottomLine = CALayer()
+        bottomLine.frame = CGRectMake(0.0, textField.frame.height - 1, textField.frame.width, 1.0)
+        bottomLine.backgroundColor = UIColor.whiteColor().CGColor
+        textField.borderStyle = UITextBorderStyle.None
+        textField.layer.addSublayer(bottomLine)
+        textField.layer.masksToBounds = true
     }
     
     private func whiteNavBar(){

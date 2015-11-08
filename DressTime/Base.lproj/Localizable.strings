@@ -6,6 +6,11 @@
   Copyright © 2015 Fab. All rights reserved.
 */
 
+/* LoginViewController */
+"loginErrTitle" = "Failed!";
+"loginErrMessage" = "Error during the login the processs";
+"loginErrButton" = "Okay.";
+
 "Now" = "Now";
 "Afternoon" = "Afternoon";
 "Morning" = "Morning";
@@ -24,31 +29,31 @@
 "PROFILE" = "PROFILE";
 
 /* TypeViewController */
-"Maille" = "Maille";
-"Dress" = "Dress";
-"Top" = "Top";
+"Maille" = "Mailles";
+"Dress" = "Dresses";
+"Top" = "Tops";
 "Pants" = "Pants";
-"jumper-fin" = "Jumper Thin";
-"jumper-epais" = "Jumper";
-"cardigan" = "Cardigan";
-"sweater" = "Sweater";
-"tshirt" = "T-shirt";
-"shirt" = "Shirt";
-"shirt-sleeve" = "Shirt Sleeve";
-"polo" = "Polo";
-"polo-sleeve" = "Polo Sleeve";
-"jeans" = "Jeans";
-"jeans-slim" = "Jeans Slim";
-"trousers-pleated" = "Trousers Pleated";
-"trousers-suit" = "Suit";
-"chinos" = "Chinos";
-"trousers-regular" = "Regular";
-"trousers" = "Normal";
-"trousers-slim" = "Slim";
-"bermuda" = "Bermuda";
-"short" = "Short";
-"skirt" = "Skirt";
-"skirt-long" = "Long Skirt";
-"skirt-mini" = "Mini Skirt";
-"dress" = "Dress";
-"dress-party" = "Party Dress";
+"jumper-fin" = "jumper thin";
+"jumper-epais" = "jumper";
+"cardigan" = "cardigan";
+"sweater" = "sweater";
+"tshirt" = "t-shirt";
+"shirt" = "shirt";
+"shirt-sleeve" = "shirt sleeve";
+"polo" = "polo";
+"polo-sleeve" = "polo sleeve";
+"jeans" = "jean";
+"jeans-slim" = "jean slim";
+"trousers-pleated" = "pleated";
+"trousers-suit" = "suit";
+"chinos" = "chino";
+"trousers-regular" = "regular";
+"trousers" = "normal";
+"trousers-slim" = "slim";
+"bermuda" = "bermuda";
+"short" = "short";
+"skirt" = "skirt";
+"skirt-long" = "long skirt";
+"skirt-mini" = "mini skirt";
+"dress" = "dress";
+"dress-party" = "party dress";

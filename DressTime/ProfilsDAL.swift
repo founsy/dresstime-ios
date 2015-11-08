@@ -83,7 +83,8 @@ class ProfilsDAL {
         return nil
     }
     
-    func save(userid: String, access_token: String, refresh_token: String, expire_in: Int, name: String, gender: String, temp_unit: String) -> Profil{
+    func save(userid: String, email: String, access_token: String, refresh_token: String, expire_in: Int, name: String, gender: String, temp_unit: String) -> Profil{
+        
         let entityDescription = NSEntityDescription.entityForName("Profil", inManagedObjectContext: managedObjectContext);
         let profil = Profil(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext);
         
@@ -94,6 +95,7 @@ class ProfilsDAL {
         profil.name = name
         profil.gender = gender
         profil.temp_unit = temp_unit
+        profil.email = email
         
         do {
             try managedObjectContext.save()

@@ -9,8 +9,14 @@
 import Foundation
 import UIKit
 
+protocol TypeSelectionCellDelegate {
+    func onSelectedType(typeSelected: String)
+}
+
 class TypeSelectionCell: UITableViewCell {
     @IBOutlet var buttonType: [UIButton]!
+    
+    var delegate: TypeSelectionCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -29,6 +35,9 @@ class TypeSelectionCell: UITableViewCell {
         removeBorder()
         btn.selected = true
         createBorder(btn)
+        if let del = self.delegate {
+            del.onSelectedType(btn.accessibilityIdentifier!)
+        }
     }
     
     private func createBorder(btn: UIButton){
