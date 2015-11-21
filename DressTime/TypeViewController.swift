@@ -83,7 +83,7 @@ class TypeViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "showCapture"){
-            let captureController = segue.destinationViewController as! NewCameraViewController
+            let captureController = segue.destinationViewController as! CameraViewController
             captureController.typeClothe = self.types[self.currentSection].lowercaseString
             captureController.subTypeClothe = self.subTypes[self.currentSection][self.subTypeSelected]
         }

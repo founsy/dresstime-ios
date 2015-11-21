@@ -1,148 +1,171 @@
 //
-//  CameraOverlayView.swift
-//  CustomCamera
+//  NewCameraViewController.swift
+//  DressTime
 //
-//  Created by Fab on 11/07/2015.
-//
+//  Created by Fab on 05/09/2015.
+//  Copyright (c) 2015 Fab. All rights reserved.
 //
 
 import Foundation
 import UIKit
-import QuartzCore
-import CoreMedia
-import DominantColor
 import AVFoundation
+import DominantColor
 
-
-@objc protocol CameraOverlayViewDelegate {
-    optional func CameraOverlayViewResult(resultCapture: [String: AnyObject])
-}
-
-class CameraViewController: UIViewController, CameraSessionControllerDelegate {
+class CameraViewController : UIViewController {
     
-    var captureManager: CameraSessionManager!
-    var scanningLabel: UILabel!
-    var collectionView: UICollectionView!
-    var arrayUIView: [UIView] = []
-    var arrayColors:[UIColor] = []
-    var timeToScan: Bool = false
-    var currentImage: UIImage!
-    var currentPattern: Int!
-    var image: UIImageView!
-    var skipImage: Int!
-    var pageSelected: Int!
+    private var captureManager: CameraSessionManager?
+    private var currentImage: UIImage?
+    private var bufferImage: UIImage?
+    private var skipImage: Int = 0
+    private var arrayColors:[UIColor] = []
+    private var arrayUIView: [UIView] = []
+    private var timeToScan: Bool = false
+    private let labelsSubTop = ["tshirt", "shirt", "shirt-sleeve", "polo","polo-sleeve"]
+    private let labelsSubPants = ["jeans", "jeans-slim", "trousers-pleated", "trousers-suit", "chinos", "trousers-regular", "trousers", "trousers-slim", "bermuda", "short"]
+    private let labelsSubMaille = ["jumper-fin","jumper-epais ","cardigan","sweater"]
+    private var isCapturing = false
     
     var typeClothe: String!
     var subTypeClothe: String!
     
+    @IBOutlet weak var scanArea: UIImageView!
+    @IBOutlet weak var color1View: UIView!
+    @IBOutlet weak var color3View: UIView!
+    @IBOutlet weak var color2View: UIView!
+    @IBOutlet weak var opacityView: UIView!
     
-    var delegate: CameraOverlayViewDelegate?
+    @IBAction func onBackButton(sender: AnyObject) {
+        self.captureManager!.session.stopRunning()
+        self.navigationController?.popViewControllerAnimated(true)
+    }
     
-    let patternData = ["plain", "Hstripe", "Vstripe", "check", "gingham", "jacquard", "printed", "unisTouchImprime", "floral"]
-    let labelsSubTop = ["tshirt", "shirt", "shirt-sleeve", "polo","polo-sleeve"]
-    let labelsSubPants = ["jeans", "jeans-slim", "trousers-pleated", "trousers-suit", "chinos", "trousers-regular", "trousers", "trousers-slim", "bermuda", "short"]
-    let labelsSubMaille = ["jumper-fin","jumper-epais ","cardigan","sweater"]
+    @IBAction func onClose(sender: AnyObject) {
+        self.captureManager!.session.stopRunning()
+        self.dismissViewControllerAnimated(true, completion: nil);
+    }
     
+    @IBAction func onCapture(sender: AnyObject) {
+        if (!self.isCapturing){
+            self.isCapturing = true
+            self.captureManager!.captureImage { (image, error) -> Void in
+                self.isCapturing = false
+                if let _ = image {
+                    self.currentImage = self.cropImage(image!)
+                    self.arrayColors = self.currentImage!.dominantColors()
+                    self.timeToScan = false
+                    self.captureManager!.session.stopRunning()
+                    self.performSegueWithIdentifier("showConfirmation", sender: self)
+                } else {
+                    NSLog("Error")
+                }
+            }
+        }
+
+    }
     
+    @IBAction func onLight(sender: AnyObject) {
+        self.captureManager!.toggleFlash()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        whiteNavBar()
+        drawClearRectArea()
+        
         self.captureManager = CameraSessionManager()
-        self.captureManager.addVideoPreviewLayer()
-        var layerRect = self.view.layer.bounds
-        var rect = self.createScanArea()
-        self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
- 
-        self.captureManager.previewLayer.bounds = layerRect
-        self.captureManager.previewLayer.position = CGPointMake(CGRectGetMidX(layerRect), CGRectGetMidY(layerRect))
-        self.captureManager.sessionDelegate = self
-        self.view.layer.addSublayer(self.captureManager.previewLayer)
+        self.captureManager!.addVideoPreviewLayer()
+        let layerRect = self.view.layer.bounds
         
-        var overlay = OverlayView(frame: layerRect)
-        overlay.rectForClearing = rect
-        overlay.overallColor = UIColor.grayColor()
-        self.view.addSubview(overlay)
+        self.captureManager!.previewLayer.bounds = layerRect
+        self.captureManager!.previewLayer.position = CGPointMake(CGRectGetMidX(layerRect), CGRectGetMidY(layerRect))
+        self.captureManager!.sessionDelegate = self
         
-        var overlayImageView = UIImageView(image: UIImage(named: "ScanArea"))
-        overlayImageView.frame = rect
-        self.view.addSubview(overlayImageView)
+        let uiView = UIView(frame: layerRect)
+        uiView.layer.addSublayer(self.captureManager!.previewLayer)
         
-        var text: String = "HELP US! SWIPE FOR FIND THE RIGHT PATTERN"
-        var attributedText: NSMutableAttributedString = NSMutableAttributedString(string: text as String)
+        self.view.addSubview(uiView)
+        self.view.bringSubviewToFront(self.opacityView)
         
-        attributedText.addAttributes([NSFontAttributeName: UIFont.boldSystemFontOfSize(15)], range: NSRange(location: 9, length: 5))
+        self.color1View.layer.cornerRadius = 10.0
+        self.color1View.layer.borderWidth = 1.0
+        self.color1View.layer.borderColor = UIColor.whiteColor().CGColor
+        self.color2View.layer.cornerRadius = 10.0
+        self.color2View.layer.borderWidth = 1.0
+        self.color2View.layer.borderColor = UIColor.whiteColor().CGColor
+        self.color3View.layer.cornerRadius = 10.0
+        self.color3View.layer.borderWidth = 1.0
+        self.color3View.layer.borderColor = UIColor.whiteColor().CGColor
         
-        var textView = UITextView()
-        //textView.text = "HELP US! SWIPE FOR FIND THE RIGHT PATTERN";
-        textView.attributedText = attributedText
-       // textView.font = UIFont(name: "HelveticaNeue", size: 15.0)
-        textView.textColor = UIColor.whiteColor()
-        textView.textAlignment = NSTextAlignment.Center
-        textView.backgroundColor = UIColor.clearColor()
-        self.view.addSubview(textView)
-        applyTopCenterXBelow(textView, belowTo: nil, width: 200, height: 50)
-        
-        var view = UIView()
-        view.backgroundColor = UIColor.whiteColor()
-        self.view.addSubview(view)
-        applyTopCenterXBelow(view, belowTo: textView, width: 200, height: 2)
-        
-        var circleSize = 50.0
-        var buttonSize = 70.0
-        var screenRect = UIScreen.mainScreen().bounds
-        
-        if  (screenRect.size.height == 480.0){
-            circleSize = 35.0
-            buttonSize = 65.0
-        }
- 
-        var overlayButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-        overlayButton.layer.cornerRadius = 70/2
-        overlayButton.backgroundColor = UIColor.whiteColor()
-        overlayButton.setImage(UIImage(named: "ScanCapture"), forState: .Normal)
-        overlayButton.addTarget(self, action: "validateButtonPressed:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(overlayButton)
-        applyBottomCenterButtonConstraints(overlayButton, width: CGFloat(buttonSize))
-        
-       /* var closeButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-        closeButton.setImage(UIImage(named: "ScanClose"), forState: .Normal)
-        closeButton.addTarget(self, action: "closeButtonPressed:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(closeButton)
-        applyTopRightButtonConstraints(closeButton) */
-        
-        var flashButton = UIButton.buttonWithType(UIButtonType.Custom) as! UIButton
-        flashButton.setImage(UIImage(named: "ScanTorch"), forState: .Normal)
-        flashButton.addTarget(self, action: "flashButtonPressed:", forControlEvents: .TouchUpInside)
-        self.view.addSubview(flashButton)
-        applyBottomRightButtonConstraints(flashButton)
-        
-        
-        var x = rect.origin.x
-        for var i = 0; i < 3; i++ {
-            var circleView = UIView()
-            var saveCenter = circleView.center
-            circleView.layer.cornerRadius = CGFloat(circleSize/2.0)
-            circleView.center = saveCenter;
-            circleView.layer.borderColor = UIColor.whiteColor().CGColor
-            circleView.layer.borderWidth = 2
-            circleView.backgroundColor = UIColor.redColor()
-            self.arrayUIView.append(circleView)
-            self.view.addSubview(circleView)
-            if (i > 0) {
-                self.applyBelowScanZone(circleView, x: 10, nextTo: self.arrayUIView[0], belowTo: overlayImageView, width: CGFloat(circleSize), i: i)
-            } else {
-                self.applyBelowScanZone(circleView, x: x, nextTo: nil, belowTo: overlayImageView, width: CGFloat(circleSize), i: i)
-            }
-        }
-        
-        self.currentPattern = 0
-        
-        self.skipImage = 0
-        
+        self.arrayUIView.append(self.color1View)
+        self.arrayUIView.append(self.color2View)
+        self.arrayUIView.append(self.color3View)
+  
     }
     
-    func getListOfSubType(type:String) -> [String]{
+    private func whiteNavBar(){
+        let bar:UINavigationBar! =  self.navigationController?.navigationBar
+        
+        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        bar.shadowImage = UIImage()
+        bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
+        bar.tintColor = UIColor.blackColor()
+        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.blackColor()]
+        self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+    }
+    
+
+    override func viewDidAppear(animated: Bool) {
+        self.captureManager!.startCamera()
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "showConfirmation"){
+            let controller = segue.destinationViewController as! CaptureConfirmationViewController
+            if let image = self.currentImage {
+                let img = UIImage(CGImage: image.CGImage!, scale: 1.0, orientation: UIImageOrientation.Right)
+                let result = self.wrapResultObject(UIImageJPEGRepresentation(img, 1.0)!, labels: getListOfSubType(self.typeClothe))
+                controller.clotheObject = result
+                controller.previousController = self
+            }
+        }
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
+    deinit {
+        self.captureManager!.session.stopRunning()
+        captureManager = nil
+    }
+    
+    private func drawClearRectArea(){
+        //opacityView is a UIView of what I want to be "solid"
+        let outerPath = UIBezierPath(rect: self.view.frame)
+        
+        //croppingView is a subview of shadowView that is laid out in interface builder using auto layout
+        //croppingView is hidden.
+        self.view.layoutIfNeeded()
+        self.scanArea.layoutIfNeeded()
+
+        let rectPath = UIBezierPath(rect: CGRectMake(self.scanArea.frame.origin.x + 2, self.scanArea.frame.origin.y + 2, self.scanArea.frame.width - 4, self.scanArea.frame.height + 11))
+        outerPath.usesEvenOddFillRule = true
+        outerPath.appendPath(rectPath)
+        
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = outerPath.CGPath
+        maskLayer.fillRule = kCAFillRuleEvenOdd
+        maskLayer.fillColor = UIColor.whiteColor().CGColor
+        
+        self.opacityView.layer.mask = maskLayer
+    
+    }
+    
+    private func getListOfSubType(type:String) -> [String]{
         if (type == "top"){
             return self.labelsSubTop
         } else if (type == "maille") {
@@ -154,391 +177,8 @@ class CameraViewController: UIViewController, CameraSessionControllerDelegate {
         }
     }
     
-    deinit {
-        captureManager = nil;
-        scanningLabel = nil;
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func cameraSessionReady() {
-        captureManager.startCamera()
-    }
-    
-    func createScanArea() -> CGRect{
-        
-        var screenRect = UIScreen.mainScreen().bounds
-        var screenWidth = screenRect.size.width;
-        var screenHeight = screenRect.size.height;
-        
-        var x = screenWidth * 0.08
-        var y = screenHeight * 0.2
-        var width = screenWidth * 0.85
-        var height = screenHeight * 0.54
-        println("\(screenWidth)  \(screenHeight)") //Height: 667 - Width= 375
-        
-       // x: 30, y: 80, width : 320, height : 360
-        return CGRectMake(x, y, width, height)
-    }
-    
-    func applyBottomCenterButtonConstraints(view: UIView, width: CGFloat){
-        let heightContraints = NSLayoutConstraint(item: view, attribute:
-            .Height, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: width)
-        
-        let widthContraints = NSLayoutConstraint(item: view, attribute:
-            .Width, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: width)
-        
-        let pinBottom = NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal,
-            toItem: self.view, attribute: .Bottom, multiplier: 1.0, constant: -10)
-        
-        let horizonalContraints = NSLayoutConstraint(item: view, attribute:
-            .CenterX, relatedBy: .Equal, toItem: self.view,
-            attribute: .CenterX, multiplier: 1.0,
-            constant: 0)
-        
-        view.setTranslatesAutoresizingMaskIntoConstraints(false)
-        NSLayoutConstraint.activateConstraints([horizonalContraints , pinBottom, heightContraints, widthContraints])
-        
-    }
-    
-    func applyTopLeftButtonConstraints(view: UIView){
-        
-        //pin the slider 20 points from the left edge of the the superview
-        //from the left edge of the slider to the left edge of the superview
-        //superview X coord is at 0 therefore 0 + 20 = 20 position
-        let horizonalContraints = NSLayoutConstraint(item: view, attribute:
-            .LeadingMargin, relatedBy: .Equal, toItem: self.view,
-            attribute: .LeadingMargin, multiplier: 1.0,
-            constant: 20)
-        
-        //pin the slider 20 points from the right edge of the super view
-        //negative because we want to pin -20 points from the end of the superview.
-        //ex. if with of super view is 300, 300-20 = 280 position
-       /* let horizonal2Contraints = NSLayoutConstraint(item: view, attribute:
-            .TrailingMargin, relatedBy: .Equal, toItem: self.view,
-            attribute: .TrailingMargin, multiplier: 1.0, constant: -20)*/
-        
-        //pin 100 points from the top of the super
-        let pinTop = NSLayoutConstraint(item: view, attribute: .Top, relatedBy: .Equal,
-            toItem: self.view, attribute: .Top, multiplier: 1.0, constant: 20)
-        
-        let heightContraints = NSLayoutConstraint(item: view, attribute:
-            .Height, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 40)
-        
-        let widthContraints = NSLayoutConstraint(item: view, attribute:
-            .Width, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 40)
-        
-        //when using autolayout we an a view, MUST ALWAYS SET setTranslatesAutoresizingMaskIntoConstraints
-        //to false.
-        view.setTranslatesAutoresizingMaskIntoConstraints(false)
-        
-        //IOS 8
-        //activate the constrains.
-        //we pass an array of all the contraints
-        NSLayoutConstraint.activateConstraints([horizonalContraints , pinTop, heightContraints, widthContraints])
-    }
-    
-    func applyTopRightButtonConstraints(view: UIView){
-        
-        //pin the slider 20 points from the left edge of the the superview
-        //from the left edge of the slider to the left edge of the superview
-        //superview X coord is at 0 therefore 0 + 20 = 20 position
-        let horizonalContraints = NSLayoutConstraint(item: view, attribute:
-            .TrailingMargin, relatedBy: .Equal, toItem: self.view,
-            attribute: .TrailingMargin, multiplier: 1.0,
-            constant: 0)
-        
-        //pin the slider 20 points from the right edge of the super view
-        //negative because we want to pin -20 points from the end of the superview.
-        //ex. if with of super view is 300, 300-20 = 280 position
-        /* let horizonal2Contraints = NSLayoutConstraint(item: view, attribute:
-        .TrailingMargin, relatedBy: .Equal, toItem: self.view,
-        attribute: .TrailingMargin, multiplier: 1.0, constant: -20)*/
-        
-        //pin 100 points from the top of the super
-        let pinTop = NSLayoutConstraint(item: view, attribute: .Top, relatedBy: .Equal,
-            toItem: self.view, attribute: .Top, multiplier: 1.0, constant: 15)
-        
-        let heightContraints = NSLayoutConstraint(item: view, attribute:
-            .Height, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 40)
-        
-        let widthContraints = NSLayoutConstraint(item: view, attribute:
-            .Width, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 40)
-        
-        //when using autolayout we an a view, MUST ALWAYS SET setTranslatesAutoresizingMaskIntoConstraints
-        //to false.
-        view.setTranslatesAutoresizingMaskIntoConstraints(false)
-        
-        //IOS 8
-        //activate the constrains.
-        //we pass an array of all the contraints
-        NSLayoutConstraint.activateConstraints([horizonalContraints , pinTop, heightContraints, widthContraints])
-    }
-    
-    func applyBelowScanZone(view: UIView, x: CGFloat, nextTo: UIView?, belowTo: UIView, width: CGFloat, i: Int){
-        let heightContraints = NSLayoutConstraint(item: view, attribute:
-            .Height, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: width)
-        
-        let widthContraints = NSLayoutConstraint(item: view, attribute:
-            .Width, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: width)
-        
-        let verticalContraints = NSLayoutConstraint(item: view, attribute:
-            .Top, relatedBy: .Equal, toItem: belowTo,
-            attribute: .Bottom, multiplier: 1.0,
-            constant: 10)
-        
-        let horizonalContraints2 = NSLayoutConstraint(item: view, attribute:
-            .CenterX, relatedBy: .Equal, toItem: self.view,
-            attribute: .CenterX, multiplier: 1.0,
-            constant: 0)
-        
-        if let nextView = nextTo {
-            var horizontalContrains :NSLayoutConstraint!
-            if (i == 1){ //Left
-                horizontalContrains = NSLayoutConstraint(item: view, attribute:
-                    .Leading, relatedBy: .Equal, toItem: nextView,
-                    attribute: .Trailing, multiplier: 1.0,
-                    constant: 40)
-            } else { //Right
-                horizontalContrains = NSLayoutConstraint(item: view, attribute:
-                    .Trailing, relatedBy: .Equal, toItem: nextView,
-                    attribute: .Leading, multiplier: 1.0,
-                    constant: -40)
-            }
-            view.setTranslatesAutoresizingMaskIntoConstraints(false)
-            NSLayoutConstraint.activateConstraints([verticalContraints, horizontalContrains, heightContraints, widthContraints])
-        
-        } else {
-            view.setTranslatesAutoresizingMaskIntoConstraints(false)
-            NSLayoutConstraint.activateConstraints([verticalContraints, horizonalContraints2, heightContraints, widthContraints])
-        }
-    }
-    
-    func applyBelowScanZoneRight(view: UIView, belowTo: UIView){
-        let heightContraints = NSLayoutConstraint(item: view, attribute:
-            .Height, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 50)
-        
-        let widthContraints = NSLayoutConstraint(item: view, attribute:
-            .Width, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 120)
-        
-        let verticalContraints = NSLayoutConstraint(item: view, attribute:
-            .Top, relatedBy: .Equal, toItem: belowTo,
-            attribute: .Bottom, multiplier: 1.0,
-            constant: 10)
-        
-        let horizonalContraints = NSLayoutConstraint(item: view, attribute:
-            .TrailingMargin, relatedBy: .Equal, toItem: self.view,
-            attribute: .TrailingMargin, multiplier: 1.0,
-            constant: 10)
-
-        
-        view.setTranslatesAutoresizingMaskIntoConstraints(false)
-        NSLayoutConstraint.activateConstraints([verticalContraints, horizonalContraints, heightContraints, widthContraints])
-
-    }
-    
-    func applyTopCenterXBelow(view: UIView, belowTo: UIView?, width: CGFloat, height: CGFloat){
-        let heightContraints = NSLayoutConstraint(item: view, attribute:
-            .Height, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: height)
-        
-        let widthContraints = NSLayoutConstraint(item: view, attribute:
-            .Width, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: width)
-        
-        var verticalContraints = NSLayoutConstraint(item: view, attribute:
-            .Top, relatedBy: .Equal, toItem: self.view,
-            attribute: .Top, multiplier: 1.0,
-            constant: 15)
-        
-        if let below = belowTo {
-            verticalContraints = NSLayoutConstraint(item: view, attribute:
-                .Top, relatedBy: .Equal, toItem: below,
-                attribute: .Bottom, multiplier: 1.0,
-                constant: 0)
-        }
-        
-        let horizonalContraints = NSLayoutConstraint(item: view, attribute:
-            .CenterX, relatedBy: .Equal, toItem: self.view,
-            attribute: .CenterX, multiplier: 1.0,
-            constant: 0)
-        
-        view.setTranslatesAutoresizingMaskIntoConstraints(false)
-        NSLayoutConstraint.activateConstraints([verticalContraints, horizonalContraints, heightContraints, widthContraints])
-    }
-    
-    func applyTopCenterFull(view: UIView){
-        let heightContraints = NSLayoutConstraint(item: view, attribute:
-            .Height, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 50)
-        
-        let widthContraints = NSLayoutConstraint(item: view, attribute:
-            .Width, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 300)
-        
-        var verticalContraints = NSLayoutConstraint(item: view, attribute:
-            .Top, relatedBy: .Equal, toItem: self.view,
-            attribute: .Top, multiplier: 1.0,
-            constant: 10)
-        
-        let horizonalContraints = NSLayoutConstraint(item: view, attribute:
-            .CenterX, relatedBy: .Equal, toItem: self.view,
-            attribute: .CenterX, multiplier: 1.0,
-            constant: 0)
-        
-        view.setTranslatesAutoresizingMaskIntoConstraints(false)
-        NSLayoutConstraint.activateConstraints([verticalContraints, horizonalContraints, heightContraints, widthContraints])
-    }
-    
-    func applyBottomRightButtonConstraints(view: UIView){
-        let horizonalContraints = NSLayoutConstraint(item: view, attribute:
-            .TrailingMargin, relatedBy: .Equal, toItem: self.view,
-            attribute: .TrailingMargin, multiplier: 1.0,
-            constant: 0)
-
-        let pinBottom = NSLayoutConstraint(item: view, attribute: .Bottom, relatedBy: .Equal,
-            toItem: self.view, attribute: .Bottom, multiplier: 1.0, constant: -10)
-        
-        
-        let heightContraints = NSLayoutConstraint(item: view, attribute:
-            .Height, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 40)
-        
-        let widthContraints = NSLayoutConstraint(item: view, attribute:
-            .Width, relatedBy: .Equal, toItem: nil,
-            attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0,
-            constant: 40)
-        
-        //when using autolayout we an a view, MUST ALWAYS SET setTranslatesAutoresizingMaskIntoConstraints
-        //to false.
-        view.setTranslatesAutoresizingMaskIntoConstraints(false)
-        
-        //IOS 8
-        //activate the constrains.
-        //we pass an array of all the contraints
-        NSLayoutConstraint.activateConstraints([horizonalContraints , pinBottom, heightContraints, widthContraints])
-    }
-    
-    /***************************/
-    /* AVCameraSessionDelegate */
-    func cameraSessionDidOutputSampleBuffer(sampleBuffer: CMSampleBuffer!) {
-        if (self.skipImage == 20) {
-            if let image = imageFromSampleBuffer(sampleBuffer) {
-                self.currentImage = cropImage(image)
-                NSLog("Get sample")
-                self.arrayColors = self.currentImage.dominantColors()
-                self.timeToScan = false
-                dispatch_sync(dispatch_get_main_queue(), {
-                    for i in 0..<min(self.arrayColors.count, self.arrayUIView.count) {
-                        self.arrayUIView[i].backgroundColor = self.arrayColors[i]
-                    }
-                   //self.image.image = self.currentImage
-                })
-            }
-            self.skipImage = 0
-        } else {
-            self.skipImage = self.skipImage + 1
-        }
-        
-    }
-    
-    func rectToCropImg(image: UIImage) -> CGRect{
-        var imageWidth = image.size.width;
-        var imageHeight = image.size.height;
-        
-        var x = imageWidth * 0.08
-        var y = imageHeight * 0.2
-        var width = imageWidth * 0.85
-        var height = imageHeight * 0.54
-        
-        return CGRectMake(x, y, width, height)
-    }
-    
-    func cropImage(image: UIImage) -> UIImage {
-        let reduceX = round(image.size.width * 0.2)
-        let reduceY = round(image.size.height * 0.2)
-        let cropRect = rectToCropImg(image)
-        let imageRef = CGImageCreateWithImageInRect(image.CGImage, cropRect);
-        // or use the UIImage wherever you like
-        return UIImage(CGImage: imageRef)!
-    }
-    
-    /***************************/
-    /* Button Actions          */
-    func scanButtonPressed(sender: UIButton!) {
-        //self.scanningLabel.hidden = false
-        let delay = 1.0 * Double(NSEC_PER_SEC)
-        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        self.timeToScan = true
-        for var i = 0; i < arrayUIView.count; i++ {
-            arrayUIView[i].backgroundColor = UIColor.clearColor()
-        }
-    }
-    @IBAction func onClose(sender: AnyObject) {
-        self.captureManager.session.stopRunning()
-        self.dismissViewControllerAnimated(true, completion: nil);
-    }
-    
-    func validateButtonPressed(sender: UIButton!){
-        self.captureManager.session.stopRunning()
-        //self.dismissViewControllerAnimated(true, completion: nil)
-        self.performSegueWithIdentifier("showConfirmation", sender: self)
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "showConfirmation"){
-            let controller = segue.destinationViewController as! CaptureConfirmationViewController
-            if let image = self.currentImage {
-                let result = self.wrapResultObject(UIImageJPEGRepresentation(image, 1.0), labels: getListOfSubType(self.typeClothe))
-                controller.clotheObject = result
-                controller.previousController = self
-            }
-        }
-    }
-    
-    
-    func closeButtonPressed(sender: UIButton!) {
-        
-    }
-    
-    func flashButtonPressed(sender: UIButton!){
-        self.captureManager.toggleFlash()
-    }
-    
-    func hideLabel(label: UILabel) {
-        label.hidden = true
-    }
-    
     func imageFromSampleBuffer(sampleBuffer :CMSampleBufferRef) -> UIImage? {
-        let imageBuffer: CVImageBufferRef = CMSampleBufferGetImageBuffer(sampleBuffer)
+        let imageBuffer: CVImageBufferRef = CMSampleBufferGetImageBuffer(sampleBuffer)!
         
         CVPixelBufferLockBaseAddress(imageBuffer, 0)
         let baseAddress: UnsafeMutablePointer<Void> = CVPixelBufferGetBaseAddressOfPlane(imageBuffer, Int(0))
@@ -547,27 +187,30 @@ class CameraViewController: UIViewController, CameraSessionControllerDelegate {
         let width: Int = CVPixelBufferGetWidth(imageBuffer)
         let height: Int = CVPixelBufferGetHeight(imageBuffer)
         
-        let colorSpace: CGColorSpaceRef = CGColorSpaceCreateDeviceRGB()
+        let colorSpace: CGColorSpaceRef = CGColorSpaceCreateDeviceRGB()!
         
         let bitsPerCompornent:Int = 8
-        var bitmapInfo = CGBitmapInfo((CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue) as UInt32)
-        let newContext: CGContextRef = CGBitmapContextCreate(baseAddress, width, height, bitsPerCompornent, bytesPerRow, colorSpace, bitmapInfo) as CGContextRef
+        let bitmapInfo = CGBitmapInfo(rawValue: (CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue) as UInt32)
+        let newContext: CGContextRef = CGBitmapContextCreate(baseAddress, width, height, bitsPerCompornent, bytesPerRow, colorSpace, bitmapInfo.rawValue)!
         
-        let imageRef: CGImageRef = CGBitmapContextCreateImage(newContext)
-        let resultImage = UIImage(CGImage: imageRef, scale: 1.0, orientation: UIImageOrientation.Up)!
+        CGContextSaveGState(newContext)
+       
+        let imageRef: CGImageRef = CGBitmapContextCreateImage(newContext)!
+        
+        let resultImage = UIImage(CGImage: imageRef, scale: 1.0, orientation: UIImageOrientation.Up)
         UIGraphicsEndImageContext()
         
         return resultImage
     }
     
-    func wrapResultObject(image: NSData, labels: [String]) -> [String: AnyObject]{
+    private func wrapResultObject(image: NSData, labels: [String]) -> [String: AnyObject]{
         var colors = ""
         
         for var i = 0; i < self.arrayColors.count && i < 3; i++ {
             if (colors != ""){
                 colors+=","
             }
-            colors += "\(UIColor.hexStringFromColor(self.arrayColors[i]))"
+            colors += self.arrayColors[i].hexStringFromColor()
         }
         
         let jsonObject: [String: AnyObject] = [
@@ -577,8 +220,6 @@ class CameraViewController: UIViewController, CameraSessionControllerDelegate {
             "clothe_type": self.typeClothe,
             "clothe_subtype": self.subTypeClothe,
             "clothe_name": "",
-           /* "clothe_isUnis": isUnis,
-            "clothe_pattern": self.patternData[self.currentPattern], */
             "clothe_cut":"",
             "clothe_image": image,
             "clothe_colors": colors
@@ -586,5 +227,49 @@ class CameraViewController: UIViewController, CameraSessionControllerDelegate {
         
         return jsonObject
     }
+    
+    func rectToCropImg(image: UIImage) -> CGRect{
+        let visibleLayerFrame = self.scanArea.frame
+        let metaRect = self.captureManager!.previewLayer.metadataOutputRectOfInterestForRect(visibleLayerFrame)
+        let originalSize = image.size;
+        
+        var cropRect = CGRectMake( metaRect.origin.x * originalSize.width, metaRect.origin.y * originalSize.height, metaRect.size.width * originalSize.width, metaRect.size.height * originalSize.height)
+        
+        cropRect = CGRectIntegral(cropRect)
+        return cropRect
+    }
+    
+    private func cropImage(image: UIImage) -> UIImage {
+       // println(self.scanArea.frame)
+        let rect = rectToCropImg(image)
+        let imageRef = CGImageCreateWithImageInRect(image.CGImage, rect);
+        // or use the UIImage wherever you like
+        return UIImage(CGImage: imageRef!)
+    }
+    
+}
 
+extension CameraViewController: CameraSessionControllerDelegate{
+    func cameraSessionDidOutputSampleBuffer(sampleBuffer: CMSampleBuffer!){
+        if (self.skipImage == 20) {
+            if let image = imageFromSampleBuffer(sampleBuffer) {
+                self.bufferImage = cropImage(image)
+                self.arrayColors = self.bufferImage!.dominantColors()
+                self.timeToScan = false
+                dispatch_sync(dispatch_get_main_queue(), {
+                    for i in 0..<min(self.arrayColors.count, self.arrayUIView.count) {
+                        self.arrayUIView[i].backgroundColor = self.arrayColors[i]
+                    }
+                })
+            }
+            self.skipImage = 0
+        } else {
+            self.skipImage = self.skipImage + 1
+        }
+
+    }
+    func cameraSessionReady(){
+        //self.captureManager!.toggleFlash()
+        //self.captureManager!.startCamera()
+    }
 }

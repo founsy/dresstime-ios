@@ -59,7 +59,7 @@ extension HomeBrandOutfitsListCell: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        let newCell = cell as! NewOufitCell
+        _ = cell as! NewOufitCell
         
     }
     

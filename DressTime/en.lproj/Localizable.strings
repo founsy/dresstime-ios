@@ -58,3 +58,14 @@
 "skirt-mini" = "mini skirt";
 "dress" = "dress";
 "dress-party" = "party dress";
+
+/*Capture*/
+"plain" = "plain";
+"Hstripe" = "h stripes";
+"Vstripe" = "v striples";
+"check" = "check";
+"gingham" = "gingham";
+"jacquard" = "jacquard";
+"printed" = "printed";
+"unisTouchImprime" = "printed touch";
+"floral" = "floral";

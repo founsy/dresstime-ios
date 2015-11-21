@@ -14,6 +14,10 @@ import UIKit
 class HomeViewController: UIViewController{
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bgView: UIImageView!
+    @IBOutlet weak var emptyView: UIVisualEffectView!
+    @IBOutlet weak var animationImageView: UIImageView!
+    @IBOutlet weak var bubbleImageView: UIImageView!
+    @IBOutlet weak var shoppingBarButton: UIBarButtonItem!
     
     var outfitsCell: HomeOutfitsListCell?
     var homeHeaderCell: HomeHeaderCell?
@@ -22,6 +26,8 @@ class HomeViewController: UIViewController{
     private var currentStyleSelected: String?
     private var outfitSelected: JSON?
     private var numberOfOutfits: Int = 0
+    private var numberOfClothes: Int = 0
+    private var arrowImageView: UIImageView?
     
     private var currentWeather: Weather?
     
@@ -29,22 +35,52 @@ class HomeViewController: UIViewController{
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        
-        let addStatusBar = UIView()
-        addStatusBar.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 20);
-        addStatusBar.backgroundColor =  UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.20)
-        
-        UIApplication.sharedApplication().delegate!.window!!.rootViewController!.view.addSubview(addStatusBar)
-        
-        ActivityLoader.shared.showProgressView(view)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         configNavBar()
         UIApplication.sharedApplication().statusBarHidden = false // for status bar hide
+        
+        self.numberOfClothes = ClothesDAL().numberOfClothes()
+        if (self.numberOfClothes > 0){
+            ActivityLoader.shared.showProgressView(view)
+            self.emptyView.hidden = true
+            shoppingBarButton.enabled = true
+            shoppingBarButton.tintColor = nil
+            
+            if let outfitsCell = self.outfitsCell {
+                outfitsCell.loadTodayOutfits(self.currentWeather!)
+            }
+            if let outfitsBrandCell = self.brandOutfitsCell {
+                outfitsBrandCell.loadTodayBrandOutfits(self.currentWeather!)
+            }
+            
+        } else {
+            self.emptyView.hidden = false
+            
+            self.animationImageView.animationImages = self.loadAnimateImage()
+            self.animationImageView.animationDuration = 3.5
+            self.animationImageView.startAnimating()
+            
+            shoppingBarButton.enabled = false
+            shoppingBarButton.tintColor = UIColor.clearColor()
+        }
+    }   
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        createArrowImageView()
+        
     }
-
+    
+    private func createArrowImageView(){
+        self.arrowImageView = UIImageView(image: UIImage(named: "arrowIcon"))
+        let p = self.bubbleImageView.convertPoint(self.bubbleImageView.frame.origin, toView: self.view)
+        self.arrowImageView!.frame = CGRectMake(bubbleImageView.frame.width + bubbleImageView.frame.origin.x, 64, 64.0, p.y - 64.0)
+        self.arrowImageView!.hidden = (self.numberOfClothes > 0)
+        self.view.addSubview(self.arrowImageView!)
+    }
     
     private func addProfilButtonToNavBar(){
         
@@ -81,17 +117,18 @@ class HomeViewController: UIViewController{
     private func configNavBar(){
         let bar:UINavigationBar! =  self.navigationController?.navigationBar
         
-        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        bar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
         bar.shadowImage = UIImage()
-        bar.backgroundColor = UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 0.20)
         bar.tintColor = UIColor.whiteColor()
+        self.navigationController?.view.backgroundColor = UIColor.clearColor()
         bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        
+
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-        
+
         addProfilButtonToNavBar()
         addAddButtonToNavBar()
+       
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -107,6 +144,23 @@ class HomeViewController: UIViewController{
         myView.frame = CGRectMake(0, 0, 300, 30)
         myView.cityLabel.text = city
         self.navigationItem.titleView = myView;
+    }
+    
+    private func loadAnimateImage() -> [UIImage] {
+        let imagesListArray :NSMutableArray = []
+        for position in 0...296{
+            var i = String(position)
+            if (i.characters.count == 1){
+                i = "00" + i
+            } else if (i.characters.count == 2){
+                i =  "0" + i
+            }
+            
+            let strImageName : String = "men_00\(i).png"
+            let image  = UIImage(named:strImageName)
+            imagesListArray.addObject(image!)
+        }
+        return imagesListArray as AnyObject as! [UIImage]
     }
 
 }
@@ -146,14 +200,12 @@ extension HomeViewController: HomeHeaderCellDelegate {
             image = UIImage(named: "HomeBgSun")
         }
         
-        print("-------------------\(condition)-------------------------")
         dispatch_async(dispatch_get_main_queue(), {
             self.setTitleNavBar(SharedData.sharedInstance.city!)
             UIView.animateWithDuration(0.2, animations: { () -> Void in
                 self.bgView.image = image
             })
         })
-        print("-------------------\(condition)-------------------------")
         
         if let outfitsCell = self.outfitsCell {
             outfitsCell.loadTodayOutfits(self.currentWeather!)
@@ -224,12 +276,17 @@ extension HomeViewController: HomeBrandOutfitsListCellDelegate {
 
 extension HomeViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        if (self.numberOfClothes > 0){
+            return 4
+        } else {
+            return 2
+        }
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         NSLog("\(indexPath.row)")
-        if (indexPath.row == 1){
+        if (indexPath.row == 1) {
             self.homeHeaderCell = self.tableView.dequeueReusableCellWithIdentifier("headerCell") as? HomeHeaderCell
             self.homeHeaderCell!.delegate = self
             return self.homeHeaderCell!
@@ -252,19 +309,13 @@ extension HomeViewController: UITableViewDelegate {
         if (indexPath.row == 1){
             return 92.0
         } else if (indexPath.row == 2){
-            if (self.numberOfOutfits > 0){
-                return 370.0
-            } else {
-                return 170.0
-            }
-           
+            return 370.0
         } else if (indexPath.row == 3){
             return 300.0
         } else {
             return 0.0
         }
     }
-
 }
 
 extension UIView {

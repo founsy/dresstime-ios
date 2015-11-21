@@ -14,62 +14,38 @@ class OutfitViewController: UIViewController {
     private let dal = ClothesDAL()
     private var currentClothe: Clothe?
     
-    var itemIndex: Int = 0
+    private var confirmationView: ConfirmSave?
+    
     var currentOutfits: NSArray!
     private var number = 0
-    @IBOutlet weak var checkImage: UIImageView!
-    @IBOutlet weak var labelButton: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dressupButton: UIButton!
     
     @IBAction func onDressUpTapped(sender: AnyObject) {
-        let originFrame = self.dressupButton.layer.frame
-        let originImgFrame =  self.checkImage.frame
-        let originLabelFrame =  self.labelButton.frame
+        self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
         
-        UIView.animateAndChainWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: [ .CurveEaseOut], animations: {
-            
-            self.dressupButton.layer.cornerRadius = 62.5
-            self.dressupButton.layer.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 62.5, UIScreen.mainScreen().bounds.size.height/2.0 - 62.5, 125, 125)
-            
-            self.labelButton.alpha = 0
-            self.labelButton.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 32.5, UIScreen.mainScreen().bounds.size.height/2.0 - 32.5, 75, 75)
-            
-            self.checkImage.alpha = 1
-            self.checkImage.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 32.5, UIScreen.mainScreen().bounds.size.height/2.0 - 32.5, 75, 75)
-            
-            //self.backgroudView.alpha = 0.4
-            }){ (finish) -> Void in
-                //self.labelButton.text = "OUTFIT OF THE DAY"
-            }.animateWithDuration(0.5, delay: 0.5, options: .CurveEaseOut, animations: { () -> Void in
-                
-                self.dressupButton.layer.cornerRadius = 0.0
-                self.dressupButton.layer.frame = originFrame
-                self.dressupButton.backgroundColor = UIColor(red: 4/255, green: 128/255, blue: 64/255, alpha: 1)
-               
-                self.checkImage.layer.frame = originImgFrame
-                self.checkImage.alpha = 0
-                
-                self.labelButton.frame = originLabelFrame
-                
-                //self.backgroudView.alpha = 0.0
-                }){ (finish) -> Void in
-                    self.labelButton.alpha = 1
-                    self.labelButton.text = NSLocalizedString("OUTFIT OF THE DAY", comment : "")
-                }
+        UIView.animateAndChainWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: {
+            self.confirmationView?.alpha = 1
+            self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
+            }, completion:  nil).animateWithDuration(0.2, animations: { () -> Void in
+                self.confirmationView?.alpha = 0
+                self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
+                }, completion: { (finish) -> Void in
+                    
+            })
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.registerNib(UINib(nibName: "ClotheScrollTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
-        ActivityLoader.shared.showProgressView(view)
+       ActivityLoader.shared.showProgressView(view)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("HOME", comment: ""), style: .Plain, target: nil, action: nil)
-            }
+    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -78,6 +54,18 @@ class OutfitViewController: UIViewController {
 
         self.number = self.currentOutfits!.count
         self.tableView.reloadData()
+        
+        self.confirmationView = NSBundle.mainBundle().loadNibNamed("ConfirmSave", owner: self, options: nil)[0] as? ConfirmSave
+        print(self.confirmationView!.frame)
+        print(UIScreen.mainScreen().bounds)
+        self.confirmationView!.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 50, UIScreen.mainScreen().bounds.size.height/2.0 - 50 - 65, 100, 100)
+        print(self.confirmationView!.frame)
+        self.confirmationView!.alpha = 0
+        self.confirmationView!.layer.cornerRadius = 50
+        
+        self.view.addSubview(self.confirmationView!)
+
+        
         ActivityLoader.shared.hideProgressView()
     }
     
@@ -100,27 +88,9 @@ extension OutfitViewController: ClotheScrollTableCellDelegate {
 
 
 extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    /*func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //self.currentSection = indexPath.row
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.performSegueWithIdentifier("detailClothe", sender: self)
-        })
-    }*/
-    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let height:CGFloat = (tableView.frame.height-20.0) / CGFloat(self.currentOutfits.count)
-        
-        if let list = self.currentOutfits {
-            if (indexPath.row == list.count - 1){
-                return height + 45.0
-            }
-        }
-        if (self.currentOutfits.count == 1){
-            return tableView.frame.height
-        } else {
-            return height - 25.0
-        }
+        let height:CGFloat = (tableView.frame.height) / CGFloat(self.currentOutfits.count)
+        return height
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -137,17 +107,13 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
             cell.clotheCollection = collection
             cell.currentOutfit =  dal.fetch(clothe_id)
             cell.numberOfClothesAssos = self.currentOutfits.count
-            cell.setupScrollView(cell.contentView.bounds.size.width, height: cell.contentView.bounds.size.height)
+            cell.setupScrollView(cell.contentView.frame.width, height: cell.contentView.frame.height)
             cell.delegate = self
+            
             cell.layer.shadowOffset = CGSizeMake(3, 6);
             cell.layer.shadowColor = UIColor.blackColor().CGColor
             cell.layer.shadowRadius = 8;
             cell.layer.shadowOpacity = 0.75;
-            
-            //Remove edge insets to have full width separtor line
-            cell.preservesSuperviewLayoutMargins = false
-            cell.separatorInset = UIEdgeInsetsZero
-            cell.layoutMargins = UIEdgeInsetsZero
         }
 
         return cell

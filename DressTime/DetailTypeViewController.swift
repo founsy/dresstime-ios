@@ -20,6 +20,10 @@ class DetailTypeViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var titleNav: UINavigationItem!
     
+    @IBOutlet weak var emptyView: UIView!
+    @IBOutlet weak var emptyViewLabel: UILabel!
+    @IBOutlet weak var emptyViewButton: UIButton!
+    @IBOutlet weak var emptyViewImage: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
         initData()
@@ -29,6 +33,18 @@ class DetailTypeViewController: UIViewController {
         tableView!.dataSource = self
         //TODO Manage Localization
         titleNav.title = "My \(typeClothe!.uppercaseString)!"
+        
+        emptyViewButton.layer.cornerRadius = 10.0
+        emptyViewButton.layer.borderColor = UIColor.whiteColor().CGColor
+        emptyViewButton.layer.borderWidth = 1.0
+        emptyViewImage.image = UIImage(named: "underwearIcon\(SharedData.sharedInstance.sexe!.uppercaseString)")
+        if (clothesList?.count > 0){
+            self.emptyView.hidden = true
+            self.tableView.hidden = false
+        } else {
+            self.emptyView.hidden = false
+            self.tableView.hidden = true
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -54,7 +70,7 @@ class DetailTypeViewController: UIViewController {
     
     private func deleteClothe(indexPath: NSIndexPath){
         if let currentClothe = self.clothesList?[indexPath.row] {
-            DressTimeService().DeleteClothe(currentClothe.clothe_id, completion: { (isSuccess, object) -> Void in
+            DressingService().DeleteClothe(currentClothe.clothe_id, completion: { (isSuccess, object) -> Void in
                 print("Clothe deleted")
                 ClothesDAL().delete(currentClothe)
             })

@@ -19,22 +19,26 @@ class NewOufitCell: UICollectionViewCell {
     }
     
     private func applyPlainShadow(view: UIView) {
-        var layer = view.layer
-        
+        let layer = view.layer
+        let shadowPath = UIBezierPath(roundedRect: view.bounds, cornerRadius: layer.cornerRadius)
+        layer.masksToBounds = false
         layer.shadowColor = UIColor.blackColor().CGColor
-        layer.shadowOffset = CGSize(width: 0, height: 10)
-        layer.shadowOpacity = 0.4
-        layer.shadowRadius = 5
+        //layer.shadowOffset = CGSizeMake(0, 10)
+        layer.shadowOpacity = 1
+        layer.shadowRadius = 4
+        layer.shouldRasterize = false
+        layer.shadowPath = shadowPath.CGPath
     }
 
     
     func createClotheView(clothe: Clothe, style: String,  rect: CGRect){
+        self.styleLabel.text = style.uppercaseString
+        
         let view = UIView(frame: rect)
         view.backgroundColor = UIColor.clearColor()
         view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
-        applyPlainShadow(view)
+        view.layer.masksToBounds = true
         
-        let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
         var img = UIImage(data: clothe.clothe_image)!
         
         var mode = UIViewContentMode.Top
@@ -44,15 +48,13 @@ class NewOufitCell: UICollectionViewCell {
             mode = UIViewContentMode.ScaleToFill
         }
         
-         applyPlainShadow(imageView)
-        
+        let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
         imageView.image = img
         imageView.contentMode = mode
-        imageView.clipsToBounds = true
+
+        applyPlainShadow(view)
         view.addSubview(imageView)
         containerView.addSubview(view)
-        
-        self.styleLabel.text = style.uppercaseString
     }
     
     func setBrandClothe(image: String, partnerName: String, rate: Int, rect: CGRect){
@@ -65,12 +67,18 @@ class NewOufitCell: UICollectionViewCell {
             
             view.layer.masksToBounds = false
             view.layer.shadowOffset = CGSizeMake(0, 20)
-            view.layer.shadowRadius = 4
-            view.layer.shadowOpacity = 0.5
+            view.layer.shadowRadius = 8
+            view.layer.shadowOpacity = 1
             view.layer.shadowColor = UIColor.blackColor().CGColor
             view.layer.shadowPath = UIBezierPath(rect: self.bounds).CGPath
             
             let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
+            imageView.layer.masksToBounds = false
+            view.layer.shadowOffset = CGSizeMake(0, 20)
+            imageView.layer.shadowRadius = 8
+            imageView.layer.shadowOpacity = 1
+            imageView.layer.shadowColor = UIColor.blackColor().CGColor
+            imageView.layer.shadowPath = UIBezierPath(rect: self.bounds).CGPath
             var img = UIImage(data: data)!
             
             var mode = UIViewContentMode.Top

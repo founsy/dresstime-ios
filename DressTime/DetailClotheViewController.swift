@@ -39,7 +39,7 @@ class DetailClotheViewController: UIViewController {
     
     
     @IBAction func onClickDelete(sender: AnyObject) {
-        DressTimeService().DeleteClothe(currentClothe.clothe_id) { (isSuccess, object) -> Void in
+        DressingService().DeleteClothe(currentClothe.clothe_id) { (isSuccess, object) -> Void in
             print("Clothe deleted")
             let dal = ClothesDAL()
             dal.delete(self.currentClothe)

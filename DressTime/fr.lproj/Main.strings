@@ -3,7 +3,7 @@
 "0hT-Z0-i9G.title" = "Your clothes!";
 
 /* Class = "UILabel"; text = "#OOTD"; ObjectID = "1fl-Xh-GfK"; */
-"1fl-Xh-GfK.text" = "#OOTD";
+"1fl-Xh-GfK.text" = "Outfits Of The Day";
 
 /* Class = "UILabel"; text = "on party"; ObjectID = "2Bc-6E-S9v"; */
 "2Bc-6E-S9v.text" = "on party";
@@ -129,7 +129,7 @@
 "Y11-0F-X5P.title" = "DressTime";
 
 /* Class = "UILabel"; text = "Nice shoot! Can you confirme us everything is alright ?"; ObjectID = "YH8-gs-zqw"; */
-"YH8-gs-zqw.text" = "Nice shoot! Can you confirme us everything is alright ?";
+"YH8-gs-zqw.text" = "Nice shoot! Everything is alright ?";
 
 /* Class = "UINavigationController"; title = "Detail Clothe Navigation"; ObjectID = "YjD-kx-zf5"; */
 "YjD-kx-zf5.title" = "Detail Clothe Navigation";
@@ -216,7 +216,7 @@
 "wRP-wE-6jT.title" = "Home";
 
 /* Class = "UILabel"; text = "Select the main pattern by swipping, it will be helpful !"; ObjectID = "weu-eW-K1s"; */
-"weu-eW-K1s.text" = "Select the main pattern by swipping, it will be helpful !";
+"weu-eW-K1s.text" = "THE  PATTERN";
 
 /* Class = "UILabel"; text = "Business"; ObjectID = "x4F-FV-acr"; */
 "x4F-FV-acr.text" = "Business";

@@ -16,11 +16,10 @@ protocol HomeOutfitsListCellDelegate {
 
 class HomeOutfitsListCell: UITableViewCell {
     @IBOutlet weak var outfitCollectionView: UICollectionView!
-    @IBOutlet weak var emptyView: UIView!
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var curveArrow: CurveArrowView!
-    @IBOutlet weak var mainView: UIVisualEffectView!
-    
+    @IBOutlet weak var mainView: UIView!
+
     private let cellIdentifier = "NewOutfitCell"
     var outfitsCollection: JSON?
     let BL = DressTimeBL()
@@ -43,16 +42,9 @@ class HomeOutfitsListCell: UITableViewCell {
             if (isSuccess){
                 self.outfitsCollection = object
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    if (self.outfitsCollection!.count == 0){
-                        self.emptyView.hidden = false
-                        self.mainView.hidden = true
-                    } else {
-                        self.emptyView.hidden = true
-                        self.mainView.hidden = false
-                        self.outfitCollectionView.performBatchUpdates({ () -> Void in
-                            self.outfitCollectionView.reloadSections(NSIndexSet(index: 0))
-                            }, completion: nil)
-                    }
+                    self.outfitCollectionView.performBatchUpdates({ () -> Void in
+                        self.outfitCollectionView.reloadSections(NSIndexSet(index: 0))
+                        }, completion: nil)
                 })
                 if let del = self.delegate {
                     del.loadedOutfits(self.outfitsCollection!.count)

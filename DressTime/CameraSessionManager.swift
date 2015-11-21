@@ -71,10 +71,17 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
             self.addVideoOutput()
             self.addStillImageOutput()
             self.session.commitConfiguration()
+            self.startCamera()
             dispatch_sync(dispatch_get_main_queue(),{
                 self.cameraSessionReady()
             })
         })
+    }
+    
+    deinit {
+        self.session.stopRunning()
+        self.previewLayer = nil
+        self.session = nil
     }
     
     func cameraSessionReady(){
@@ -106,8 +113,9 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
                 let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice) as AVCaptureDeviceInput
                 
                 try videoDevice.lockForConfiguration()
-                 videoDevice.focusMode = .AutoFocus
-
+                videoDevice.focusMode = .AutoFocus
+                videoDevice.flashMode = AVCaptureFlashMode.Auto
+                
                 if session.canAddInput(videoDeviceInput) {
                     session.addInput(videoDeviceInput)
                     success = true
@@ -248,31 +256,32 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
     }
     
     func toggleFlash(){
-        if let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo) {
-            if (device.hasTorch) {
-                do {
-                try device.lockForConfiguration()
-                } catch {
-                }
-                
-                if (device.torchMode == AVCaptureTorchMode.On) {
-                    device.torchMode = AVCaptureTorchMode.Off
-                } else {
+        dispatch_async(sessionQueue, {
+            if let device = AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo) {
+                if (device.hasTorch) {
                     do {
-                       try device.setTorchModeOnWithLevel(1.0)
+                        try device.lockForConfiguration()
                     } catch {
-                    
                     }
+                    
+                    if (device.torchMode == AVCaptureTorchMode.On) {
+                        device.torchMode = AVCaptureTorchMode.Off
+                    } else {
+                        do {
+                            try device.setTorchModeOnWithLevel(1.0)
+                        } catch {
+                            
+                        }
+                    }
+                    device.unlockForConfiguration()
                 }
-                device.unlockForConfiguration()
             }
-        }
+        })
     }
     
     
     /* AVCaptureVideoDataOutput Delegate
     ------------------------------------------*/
-    
     func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
         if (connection.supportsVideoOrientation){
             //connection.videoOrientation = AVCaptureVideoOrientation.PortraitUpsideDown

@@ -15,7 +15,8 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1BY-Uf-rc2">
-                        <rect key="frame" x="0.0" y="0.0" width="554" height="156.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="555" height="156.5"/>
+                        <color key="backgroundColor" red="0.98431372549999996" green="0.72941176470000002" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fBI-Rb-9mX">
                         <rect key="frame" x="43" y="55" width="98" height="45.5"/>
@@ -71,8 +72,9 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="1BY-Uf-rc2" secondAttribute="trailing" id="19b-YK-gfX"/>
+                    <constraint firstAttribute="trailing" secondItem="1BY-Uf-rc2" secondAttribute="trailing" constant="-1" id="19b-YK-gfX"/>
                     <constraint firstItem="oc2-ep-KyF" firstAttribute="centerY" secondItem="bX7-it-jCQ" secondAttribute="centerY" id="8pn-53-XAT"/>
                     <constraint firstItem="c45-Uu-J92" firstAttribute="centerX" secondItem="fBI-Rb-9mX" secondAttribute="centerX" id="90y-Kb-IuO"/>
                     <constraint firstAttribute="trailing" secondItem="8xK-G4-4bT" secondAttribute="trailing" id="Nar-u0-7Sr"/>
@@ -90,7 +92,7 @@
                     <constraint firstItem="1BY-Uf-rc2" firstAttribute="top" secondItem="bX7-it-jCQ" secondAttribute="top" id="zHD-zm-Vwi"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.92156862750000001" green="0.68627450980000004" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="addTypedButton" destination="WOU-Zh-OLE" id="Obs-ye-1TE"/>
                 <outlet property="backgroundImage" destination="1BY-Uf-rc2" id="mnD-PG-Fvu"/>

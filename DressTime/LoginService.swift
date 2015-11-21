@@ -20,7 +20,7 @@ class LoginService {
     
     func Login(login: String, password: String, completion: (isSuccess: Bool, object: JSON) -> Void){
         if (login.lowercaseString == "alexandre" || login.lowercaseString == "juliette"){
-            if let nsdata = ReadJsonFile().readFile("login"){
+            if let nsdata = ReadJsonFile().readFile("\(login.lowercaseString)-login"){
                 _ = NSString(data: nsdata, encoding:NSUTF8StringEncoding)
                 let json = JSON(data: nsdata)
                 completion(isSuccess: true, object:json)

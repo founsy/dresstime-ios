@@ -55,7 +55,7 @@ extension HomeHeaderCell: UICollectionViewDataSource {
         if (indexPath.row == self.selectedWeather){
             cell.viewContainer.backgroundColor = UIColor(red: 235.0/255.0, green: 175.0/255.0, blue: 73.0/255.0, alpha: 0.8)
         } else {
-            cell.viewContainer.backgroundColor = UIColor(red: 235.0/255.0, green: 175.0/255.0, blue: 73.0/255.0, alpha: 0.0)
+            cell.viewContainer.backgroundColor = UIColor(red: 235.0/255.0, green: 175.0/255.0, blue: 73.0/255.0, alpha: 0.2)
         }
         let weather = weatherList[indexPath.row]
         cell.weatherIcon.text = weather.icon!
@@ -66,9 +66,13 @@ extension HomeHeaderCell: UICollectionViewDataSource {
         return cell
     }
     
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        return CGSize(width: collectionView.bounds.size.width/3, height: 75);
+    }
+    
 }
 
-extension HomeHeaderCell: UICollectionViewDelegateFlowLayout {
+/*extension HomeHeaderCell: UICollectionViewDelegateFlowLayout {
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         print(section)
         // Add inset to the collection view if there are not enough cells to fill the width.
@@ -80,7 +84,7 @@ extension HomeHeaderCell: UICollectionViewDelegateFlowLayout {
         inset = max(inset, 0.0);
         return UIEdgeInsetsMake(0.0, inset, 0.0, 0.0);
     }
-}
+}*/
 extension HomeHeaderCell: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
        if (self.selectedWeather != indexPath.row){
@@ -89,7 +93,7 @@ extension HomeHeaderCell: UICollectionViewDelegate {
         
             let indexPathSelected = NSIndexPath(forRow: self.selectedWeather, inSection: indexPath.section)
             cell = collectionView.cellForItemAtIndexPath(indexPathSelected) as! WeatherCell
-            cell.viewContainer.backgroundColor = UIColor(red: 235.0/255.0, green: 175.0/255.0, blue: 73.0/255.0, alpha: 0.0)
+            cell.viewContainer.backgroundColor = UIColor(red: 235.0/255.0, green: 175.0/255.0, blue: 73.0/255.0, alpha: 0.2)
         
             self.selectedWeather = indexPath.row
             if let del = self.delegate {

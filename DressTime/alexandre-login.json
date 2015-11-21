@@ -1,0 +1,14 @@
+{ "access_token" : "ae4b577743e3be09623009950bcca9f13807da21184e253f38bdc4e85441dc3b",
+    "expires_in" : 3600, "refresh_token" : "50b925fc31073fcc7ae51fdaa259c27f78028a6e3861fa3f7226e69710293ce7",
+    "token_type" : "Bearer",
+    "user" : {
+        "username" : "alexandre",
+        "email" : "aleandre@dresstime.io",
+        "gender" : "M",
+        "tempUnit" : "C",
+        "displayName" : "Alexandre",
+        "atWorkStyle" : "fashion",
+        "onPartyStyle": "fashion",
+        "relaxStyle": "casual"
+    }
+}

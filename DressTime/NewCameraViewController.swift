@@ -72,6 +72,7 @@ class NewCameraViewController : UIViewController {
         super.viewDidLoad()
         whiteNavBar()
         drawClearRectArea()
+        
         self.captureManager = CameraSessionManager()
         self.captureManager!.addVideoPreviewLayer()
         let layerRect = self.view.layer.bounds
@@ -80,20 +81,8 @@ class NewCameraViewController : UIViewController {
         self.captureManager!.previewLayer.position = CGPointMake(CGRectGetMidX(layerRect), CGRectGetMidY(layerRect))
         self.captureManager!.sessionDelegate = self
         
-        
-     /*   var replicatorLayer = CAReplicatorLayer()
-        
-        var rect = CGRectMake(self.scanArea.frame.origin.x - 5, self.scanArea.frame.origin.y+2, self.scanArea.frame.width-5, self.scanArea.frame.height-4)
-        
-        replicatorLayer.frame = CGRectMake(0, 0, self.scanArea.frame.width-5, self.scanArea.frame.height-4)
-        replicatorLayer.instanceCount = 1 */
-        
-        
         let uiView = UIView(frame: layerRect)
         uiView.layer.addSublayer(self.captureManager!.previewLayer)
-        
-       /* replicatorLayer.addSublayer(self.captureManager!.previewLayer)
-        uiView.layer.addSublayer(replicatorLayer)*/
         
         self.view.addSubview(uiView)
         self.view.bringSubviewToFront(self.opacityView)
@@ -111,6 +100,7 @@ class NewCameraViewController : UIViewController {
         self.arrayUIView.append(self.color1View)
         self.arrayUIView.append(self.color2View)
         self.arrayUIView.append(self.color3View)
+  
     }
     
     private func whiteNavBar(){
@@ -124,13 +114,13 @@ class NewCameraViewController : UIViewController {
         self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
     }
     
+
     override func viewDidAppear(animated: Bool) {
-        self.captureManager!.session.startRunning()
+        self.captureManager!.startCamera()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -280,6 +270,7 @@ extension NewCameraViewController: CameraSessionControllerDelegate{
 
     }
     func cameraSessionReady(){
-        self.captureManager!.startCamera()
+        //self.captureManager!.toggleFlash()
+        //self.captureManager!.startCamera()
     }
 }

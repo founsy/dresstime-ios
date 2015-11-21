@@ -33,6 +33,8 @@ class ClotheScrollTableCell: UITableViewCell {
         singleTapGestureRecognizer.enabled = true
         //singleTapGestureRecognizer.cancelsTouchesInView = false
         scrollView.addGestureRecognizer(singleTapGestureRecognizer)
+        
+        self.scrollView.clipsToBounds = true
     }
     
     func singleTapped(sender: UITapGestureRecognizer) {
@@ -46,7 +48,7 @@ class ClotheScrollTableCell: UITableViewCell {
             self.scrollView.contentSize = CGSizeMake(width * CGFloat(collection.count), height)
             for (var i = 0; i < collection.count; i++){
                 let view = NSBundle.mainBundle().loadNibNamed("ClotheTableCell", owner: self, options: nil)[0] as! ClotheTableViewCell
-                view.frame = CGRectMake(CGFloat(i)*width, 0, width, height)
+                view.frame = CGRectMake(CGFloat(i)*width, 0, width, height+1)
                 let image = UIImage(data: collection[i].clothe_image)!
                 view.initFavoriteButton(collection[i].clothe_favorite)
                 view.clotheImageView.image = image.imageWithImage(width)

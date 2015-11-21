@@ -30,6 +30,7 @@
 		014BF92D1BB171C400319701 /* RegisterEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF92C1BB171C400319701 /* RegisterEmailViewController.swift */; };
 		014BF92F1BB171EE00319701 /* RegisterSexeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF92E1BB171EE00319701 /* RegisterSexeViewController.swift */; };
 		014BF9311BB171FD00319701 /* RegisterStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF9301BB171FD00319701 /* RegisterStyleViewController.swift */; };
+		0162FFB81BFA58E100B19D61 /* UIColor+Dresstime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0162FFB71BFA58E100B19D61 /* UIColor+Dresstime.swift */; };
 		0164461A1BDCC00B00E2434B /* TitleNavBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016446191BDCC00B00E2434B /* TitleNavBar.xib */; };
 		016446201BDCC0BA00E2434B /* TitleNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0164461F1BDCC0BA00E2434B /* TitleNavBar.swift */; };
 		016446401BDCE5FD00E2434B /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016446221BDCE5FD00E2434B /* AsyncButton.swift */; };
@@ -63,7 +64,10 @@
 		0164465C1BDCE5FD00E2434B /* UnwindSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0164463F1BDCE5FD00E2434B /* UnwindSegue.swift */; };
 		0175615F1BAB451100DE1EFE /* CurveArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0175615E1BAB451100DE1EFE /* CurveArrowView.swift */; };
 		0177B4E61B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */; };
-		017F39061BC51777002E6FE7 /* login.json in Resources */ = {isa = PBXBuildFile; fileRef = 017F39051BC51777002E6FE7 /* login.json */; };
+		0178DFB21BF3553700B50811 /* PatternView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0178DFB11BF3553700B50811 /* PatternView.xib */; };
+		0178DFB41BF355BA00B50811 /* PatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0178DFB31BF355BA00B50811 /* PatternView.swift */; };
+		0178DFB61BF3C97C00B50811 /* DressingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0178DFB51BF3C97C00B50811 /* DressingService.swift */; };
+		017F39061BC51777002E6FE7 /* alexandre-login.json in Resources */ = {isa = PBXBuildFile; fileRef = 017F39051BC51777002E6FE7 /* alexandre-login.json */; };
 		017F39081BC517D4002E6FE7 /* ReadJsonFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017F39071BC517D4002E6FE7 /* ReadJsonFile.swift */; };
 		017F390A1BC54514002E6FE7 /* logout.json in Resources */ = {isa = PBXBuildFile; fileRef = 017F39091BC54514002E6FE7 /* logout.json */; };
 		017F390C1BC54523002E6FE7 /* refreshToken.json in Resources */ = {isa = PBXBuildFile; fileRef = 017F390B1BC54523002E6FE7 /* refreshToken.json */; };
@@ -98,7 +102,7 @@
 		01A6BDE01B99D42700D357A3 /* ClotheTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDDF1B99D42700D357A3 /* ClotheTableViewCell.swift */; };
 		01A6BDE61B9B352E00D357A3 /* TypeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A6BDE51B9B352E00D357A3 /* TypeTableCell.xib */; };
 		01A6BDE81B9B365B00D357A3 /* TypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDE71B9B365B00D357A3 /* TypeTableViewCell.swift */; };
-		01A6BDEA1B9B41A100D357A3 /* NewCameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDE91B9B41A100D357A3 /* NewCameraViewController.swift */; };
+		01A6BDEA1B9B41A100D357A3 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDE91B9B41A100D357A3 /* CameraViewController.swift */; };
 		01AE7C011BD616BC00728EA4 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AE7C001BD616BC00728EA4 /* AuthorizationManager.swift */; };
 		01B06B781BDF69BF004C17B2 /* juliette-OutfitsBrandToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 01B06B771BDF69BF004C17B2 /* juliette-OutfitsBrandToday.json */; };
 		01C2AE5A1BC5591200F7D4C2 /* outfitsByStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE591BC5591200F7D4C2 /* outfitsByStyle.json */; };
@@ -134,7 +138,6 @@
 		01C455671B597F74003D5E41 /* KMeans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4555D1B597F74003D5E41 /* KMeans.swift */; };
 		01C455681B597F74003D5E41 /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4555E1B597F74003D5E41 /* Memoization.swift */; };
 		01C455691B597F74003D5E41 /* PlatformExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4555F1B597F74003D5E41 /* PlatformExtensions.swift */; };
-		01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4556B1B598AD8003D5E41 /* OverlayView.swift */; };
 		01C4556F1B5A603C003D5E41 /* ClothPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C4556E1B5A603C003D5E41 /* ClothPhotoCell.swift */; };
 		01C683D01BB8504500765C7F /* DetailClotheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683CF1BB8504500765C7F /* DetailClotheViewController.swift */; };
 		01C683D21BB866D800765C7F /* UIColor-Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683D11BB866D800765C7F /* UIColor-Hex.swift */; };
@@ -152,6 +155,7 @@
 		01E167ED1BC3E700008D3A0C /* SettingsStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E167EC1BC3E700008D3A0C /* SettingsStyleCell.swift */; };
 		01E167F11BC3EA3D008D3A0C /* SettingsSexCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E167F01BC3EA3D008D3A0C /* SettingsSexCell.swift */; };
 		01E167F31BC3EA4B008D3A0C /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E167F21BC3EA4B008D3A0C /* SettingsHeaderCell.swift */; };
+		01E7CDC21BF10B7F00B45F03 /* juliette-login.json in Resources */ = {isa = PBXBuildFile; fileRef = 01E7CDC11BF10B7F00B45F03 /* juliette-login.json */; };
 		01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FFCEDD1B6E714600F59D1B /* SharedData.swift */; };
 /* End PBXBuildFile section */
 
@@ -253,6 +257,7 @@
 		014BF92C1BB171C400319701 /* RegisterEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterEmailViewController.swift; sourceTree = "<group>"; };
 		014BF92E1BB171EE00319701 /* RegisterSexeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSexeViewController.swift; sourceTree = "<group>"; };
 		014BF9301BB171FD00319701 /* RegisterStyleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterStyleViewController.swift; sourceTree = "<group>"; };
+		0162FFB71BFA58E100B19D61 /* UIColor+Dresstime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Dresstime.swift"; sourceTree = "<group>"; };
 		016446191BDCC00B00E2434B /* TitleNavBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleNavBar.xib; sourceTree = "<group>"; };
 		0164461F1BDCC0BA00E2434B /* TitleNavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleNavBar.swift; sourceTree = "<group>"; };
 		016446221BDCE5FD00E2434B /* AsyncButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
@@ -287,7 +292,10 @@
 		0164463F1BDCE5FD00E2434B /* UnwindSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UnwindSegue.swift; sourceTree = "<group>"; };
 		0175615E1BAB451100DE1EFE /* CurveArrowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurveArrowView.swift; sourceTree = "<group>"; };
 		0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaptureConfirmationViewController.swift; sourceTree = "<group>"; };
-		017F39051BC51777002E6FE7 /* login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = login.json; sourceTree = "<group>"; };
+		0178DFB11BF3553700B50811 /* PatternView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PatternView.xib; sourceTree = "<group>"; };
+		0178DFB31BF355BA00B50811 /* PatternView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PatternView.swift; sourceTree = "<group>"; };
+		0178DFB51BF3C97C00B50811 /* DressingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressingService.swift; sourceTree = "<group>"; };
+		017F39051BC51777002E6FE7 /* alexandre-login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "alexandre-login.json"; sourceTree = "<group>"; };
 		017F39071BC517D4002E6FE7 /* ReadJsonFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReadJsonFile.swift; sourceTree = "<group>"; };
 		017F39091BC54514002E6FE7 /* logout.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = logout.json; sourceTree = "<group>"; };
 		017F390B1BC54523002E6FE7 /* refreshToken.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = refreshToken.json; sourceTree = "<group>"; };
@@ -326,7 +334,7 @@
 		01A6BDDF1B99D42700D357A3 /* ClotheTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClotheTableViewCell.swift; sourceTree = "<group>"; };
 		01A6BDE51B9B352E00D357A3 /* TypeTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TypeTableCell.xib; sourceTree = "<group>"; };
 		01A6BDE71B9B365B00D357A3 /* TypeTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeTableViewCell.swift; sourceTree = "<group>"; };
-		01A6BDE91B9B41A100D357A3 /* NewCameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCameraViewController.swift; sourceTree = "<group>"; };
+		01A6BDE91B9B41A100D357A3 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		01AE7C001BD616BC00728EA4 /* AuthorizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		01B06B771BDF69BF004C17B2 /* juliette-OutfitsBrandToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "juliette-OutfitsBrandToday.json"; sourceTree = "<group>"; };
 		01C2AE591BC5591200F7D4C2 /* outfitsByStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = outfitsByStyle.json; sourceTree = "<group>"; };
@@ -366,7 +374,6 @@
 		01C4555D1B597F74003D5E41 /* KMeans.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMeans.swift; sourceTree = "<group>"; };
 		01C4555E1B597F74003D5E41 /* Memoization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Memoization.swift; sourceTree = "<group>"; };
 		01C4555F1B597F74003D5E41 /* PlatformExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformExtensions.swift; sourceTree = "<group>"; };
-		01C4556B1B598AD8003D5E41 /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		01C4556E1B5A603C003D5E41 /* ClothPhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothPhotoCell.swift; sourceTree = "<group>"; };
 		01C683CF1BB8504500765C7F /* DetailClotheViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailClotheViewController.swift; sourceTree = "<group>"; };
 		01C683D11BB866D800765C7F /* UIColor-Hex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor-Hex.swift"; sourceTree = "<group>"; };
@@ -386,6 +393,7 @@
 		01E167EC1BC3E700008D3A0C /* SettingsStyleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsStyleCell.swift; sourceTree = "<group>"; };
 		01E167F01BC3EA3D008D3A0C /* SettingsSexCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSexCell.swift; sourceTree = "<group>"; };
 		01E167F21BC3EA4B008D3A0C /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
+		01E7CDC11BF10B7F00B45F03 /* juliette-login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "juliette-login.json"; sourceTree = "<group>"; };
 		01FFCEDD1B6E714600F59D1B /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -444,6 +452,7 @@
 		012A219E1B5AD87F00CD01D3 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				0162FFB71BFA58E100B19D61 /* UIColor+Dresstime.swift */,
 				012A219F1B5AD88F00CD01D3 /* HexColorToName.swift */,
 				013996411B5CED57004B2DE0 /* DressingSynchro.swift */,
 				01C683D11BB866D800765C7F /* UIColor-Hex.swift */,
@@ -515,12 +524,20 @@
 			path = Spring;
 			sourceTree = "<group>";
 		};
+		0178DFAC1BF3552400B50811 /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				0178DFB11BF3553700B50811 /* PatternView.xib */,
+				0178DFB31BF355BA00B50811 /* PatternView.swift */,
+			);
+			name = Capture;
+			sourceTree = "<group>";
+		};
 		017F39041BC51762002E6FE7 /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				01B06B761BDF697F004C17B2 /* Jacky */,
 				01B06B751BDF6974004C17B2 /* Cathy */,
-				017F39051BC51777002E6FE7 /* login.json */,
 				017F39091BC54514002E6FE7 /* logout.json */,
 				017F390B1BC54523002E6FE7 /* refreshToken.json */,
 				01C2AE591BC5591200F7D4C2 /* outfitsByStyle.json */,
@@ -579,6 +596,7 @@
 		01A6BDDC1B99D3C500D357A3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				0178DFAC1BF3552400B50811 /* Capture */,
 				0187FA1F1BE2048B0060FFA8 /* Shopping */,
 				01C683DA1BBBBC0500765C7F /* Profil */,
 				013B077D1BA820680063CCF9 /* Home */,
@@ -598,6 +616,7 @@
 		01B06B751BDF6974004C17B2 /* Cathy */ = {
 			isa = PBXGroup;
 			children = (
+				01E7CDC11BF10B7F00B45F03 /* juliette-login.json */,
 				0180A3B51BDCB38800EDF565 /* juliette.json */,
 				019F76441BDE0CF3007E6A3E /* juliette-OutfitsToday.json */,
 				01B06B771BDF69BF004C17B2 /* juliette-OutfitsBrandToday.json */,
@@ -608,6 +627,7 @@
 		01B06B761BDF697F004C17B2 /* Jacky */ = {
 			isa = PBXGroup;
 			children = (
+				017F39051BC51777002E6FE7 /* alexandre-login.json */,
 				0180A3B61BDCB38800EDF565 /* alexandre.json */,
 				0143732C1BCCE21C00443F66 /* alexandre-OutfitsBrandToday.json */,
 				01C2AE5B1BC6407600F7D4C2 /* alexandre-OutfitsToday.json */,
@@ -694,6 +714,7 @@
 				017F39071BC517D4002E6FE7 /* ReadJsonFile.swift */,
 				01AE7C001BD616BC00728EA4 /* AuthorizationManager.swift */,
 				01DC16E51BEE543E0016D294 /* UserService.swift */,
+				0178DFB51BF3C97C00B50811 /* DressingService.swift */,
 			);
 			name = WebService;
 			sourceTree = "<group>";
@@ -728,7 +749,6 @@
 		01C455121B597E1D003D5E41 /* Capture */ = {
 			isa = PBXGroup;
 			children = (
-				01C4556B1B598AD8003D5E41 /* OverlayView.swift */,
 				01C455151B597E60003D5E41 /* CameraSessionManager.swift */,
 			);
 			name = Capture;
@@ -789,7 +809,7 @@
 			isa = PBXGroup;
 			children = (
 				01D1B8711B726B7D00920C64 /* TypeViewController.swift */,
-				01A6BDE91B9B41A100D357A3 /* NewCameraViewController.swift */,
+				01A6BDE91B9B41A100D357A3 /* CameraViewController.swift */,
 				0177B4E51B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift */,
 			);
 			name = Capture;
@@ -1002,6 +1022,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				01C683D91BBBBB7100765C7F /* TypeCell.xib in Resources */,
+				01E7CDC21BF10B7F00B45F03 /* juliette-login.json in Resources */,
 				013B64641BD23D9700176098 /* ClotheScrollTableCell.xib in Resources */,
 				01C455011B5942F4003D5E41 /* Main.storyboard in Resources */,
 				01A4FAC71BE36A94009DEAA8 /* ClotheCell.xib in Resources */,
@@ -1028,12 +1049,13 @@
 				01A6BDDE1B99D3E600D357A3 /* ClotheTableCell.xib in Resources */,
 				01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */,
 				01C2AE621BC7DA3300F7D4C2 /* weather.json in Resources */,
+				0178DFB21BF3553700B50811 /* PatternView.xib in Resources */,
 				01C2AE5E1BC7931F00F7D4C2 /* WeatherCell.xib in Resources */,
 				019F764C1BDE0FE5007E6A3E /* Localizable.strings in Resources */,
 				01A6BDE61B9B352E00D357A3 /* TypeTableCell.xib in Resources */,
 				019F76451BDE0CF3007E6A3E /* juliette-OutfitsToday.json in Resources */,
 				01D1B8761B72949B00920C64 /* SubTypeCell.xib in Resources */,
-				017F39061BC51777002E6FE7 /* login.json in Resources */,
+				017F39061BC51777002E6FE7 /* alexandre-login.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1072,7 +1094,7 @@
 				0164465B1BDCE5FD00E2434B /* TransitionZoom.swift in Sources */,
 				01C2AE641BC7DD3200F7D4C2 /* WeatherWrapper.swift in Sources */,
 				01C2AE6C1BCA532400F7D4C2 /* SettingsTableViewController.swift in Sources */,
-				01A6BDEA1B9B41A100D357A3 /* NewCameraViewController.swift in Sources */,
+				01A6BDEA1B9B41A100D357A3 /* CameraViewController.swift in Sources */,
 				01C683E01BBD72BB00765C7F /* SettingsViewController.swift in Sources */,
 				016446561BDCE5FD00E2434B /* SpringLabel.swift in Sources */,
 				016446531BDCE5FD00E2434B /* SpringAnimation.swift in Sources */,
@@ -1088,6 +1110,7 @@
 				01D1B8701B72374100920C64 /* AKPickerView.swift in Sources */,
 				01E167ED1BC3E700008D3A0C /* SettingsStyleCell.swift in Sources */,
 				0187FA231BE2065E0060FFA8 /* BrandClotheCell.swift in Sources */,
+				0162FFB81BFA58E100B19D61 /* UIColor+Dresstime.swift in Sources */,
 				014BF92F1BB171EE00319701 /* RegisterSexeViewController.swift in Sources */,
 				014BF9311BB171FD00319701 /* RegisterStyleViewController.swift in Sources */,
 				016446581BDCE5FD00E2434B /* SpringTextView.swift in Sources */,
@@ -1114,10 +1137,10 @@
 				016446451BDCE5FD00E2434B /* DesignableImageView.swift in Sources */,
 				01FFCEDE1B6E714600F59D1B /* SharedData.swift in Sources */,
 				0143732F1BCE2A6000443F66 /* DressTimeBL.swift in Sources */,
-				01C4556C1B598AD8003D5E41 /* OverlayView.swift in Sources */,
 				0183F30C1BD8E71800691238 /* RBBSpringAnimation.swift in Sources */,
 				017F39081BC517D4002E6FE7 /* ReadJsonFile.swift in Sources */,
 				019405C41BC114A8005D6F92 /* Profil.swift in Sources */,
+				0178DFB61BF3C97C00B50811 /* DressingService.swift in Sources */,
 				0187FA171BE144800060FFA8 /* RangeSlider.swift in Sources */,
 				019A78531BA002E3001958FE /* OutfitViewController.swift in Sources */,
 				0183F3061BD8E71800691238 /* EAAnimationDelayed.swift in Sources */,
@@ -1155,6 +1178,7 @@
 				016446411BDCE5FD00E2434B /* AsyncImageView.swift in Sources */,
 				012182F81BC4F3AE0019631B /* SwiftyJSON.swift in Sources */,
 				01C455191B597E60003D5E41 /* CameraSessionManager.swift in Sources */,
+				0178DFB41BF355BA00B50811 /* PatternView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

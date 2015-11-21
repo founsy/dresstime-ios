@@ -22,19 +22,19 @@
                         <rect key="frame" x="37" y="0.0" width="75" height="75"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B87-jj-J58">
-                                <rect key="frame" x="0.0" y="30" width="75" height="14.5"/>
+                                <rect key="frame" x="0.0" y="34.5" width="75" height="14.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LjL-SN-980">
-                                <rect key="frame" x="0.0" y="47.5" width="75" height="18"/>
+                                <rect key="frame" x="0.0" y="52" width="75" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="ILK-xH-ZGZ">
-                                <rect key="frame" x="0.0" y="0.0" width="75" height="28"/>
+                                <rect key="frame" x="0.0" y="3" width="75" height="34.5"/>
                                 <fontDescription key="fontDescription" name="artillcleanweathericons-Regular" family="artill clean weather icons" pointSize="40"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -43,15 +43,15 @@
                         <color key="backgroundColor" white="0.0" alpha="0.14999999999999999" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="LjL-SN-980" secondAttribute="trailing" id="28n-lA-vwX"/>
-                            <constraint firstItem="B87-jj-J58" firstAttribute="centerY" secondItem="LBR-Qv-RDB" secondAttribute="centerY" id="AaJ-FN-YN4"/>
+                            <constraint firstItem="B87-jj-J58" firstAttribute="centerY" secondItem="LBR-Qv-RDB" secondAttribute="centerY" constant="4" id="AaJ-FN-YN4"/>
                             <constraint firstItem="LjL-SN-980" firstAttribute="leading" secondItem="LBR-Qv-RDB" secondAttribute="leading" id="FRR-TO-RRg"/>
                             <constraint firstAttribute="height" constant="75" id="JTC-2P-wcl"/>
                             <constraint firstItem="B87-jj-J58" firstAttribute="leading" secondItem="LBR-Qv-RDB" secondAttribute="leading" id="Kco-FP-mks"/>
                             <constraint firstAttribute="width" constant="75" id="LDw-Uv-U2u"/>
-                            <constraint firstItem="ILK-xH-ZGZ" firstAttribute="top" secondItem="LBR-Qv-RDB" secondAttribute="top" id="PiX-AL-fh7"/>
+                            <constraint firstItem="ILK-xH-ZGZ" firstAttribute="top" secondItem="LBR-Qv-RDB" secondAttribute="top" constant="3" id="PiX-AL-fh7"/>
                             <constraint firstAttribute="trailing" secondItem="B87-jj-J58" secondAttribute="trailing" id="QYN-zC-E5f"/>
                             <constraint firstItem="LjL-SN-980" firstAttribute="top" secondItem="B87-jj-J58" secondAttribute="bottom" constant="3" id="Xl5-hZ-Y4C"/>
-                            <constraint firstItem="B87-jj-J58" firstAttribute="top" secondItem="ILK-xH-ZGZ" secondAttribute="bottom" constant="2" id="Y5w-oH-fIT"/>
+                            <constraint firstItem="B87-jj-J58" firstAttribute="top" secondItem="ILK-xH-ZGZ" secondAttribute="bottom" constant="-3" id="Y5w-oH-fIT"/>
                             <constraint firstItem="ILK-xH-ZGZ" firstAttribute="leading" secondItem="LBR-Qv-RDB" secondAttribute="leading" id="bz1-g1-1uJ"/>
                             <constraint firstItem="ILK-xH-ZGZ" firstAttribute="centerX" secondItem="LBR-Qv-RDB" secondAttribute="centerX" id="cZu-VK-fKL"/>
                             <constraint firstAttribute="trailing" secondItem="ILK-xH-ZGZ" secondAttribute="trailing" id="j2S-kM-eN9"/>

@@ -28,6 +28,7 @@ Protocols to specify the number and type of contents.
     func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int
     optional func pickerView(pickerView: AKPickerView, titleForItem item: Int) -> String
     optional func pickerView(pickerView: AKPickerView, imageForItem item: Int) -> UIImage
+    optional func pickerView(pickerView: AKPickerView, viewForItem item: Int) -> UIView
 }
 
 // MARK: AKPickerViewDelegate
@@ -54,9 +55,10 @@ private protocol AKCollectionViewLayoutDelegate {
 /**
 Private. A subclass of UICollectionViewCell used in AKPickerView's collection view.
 */
-private class AKCollectionViewCell: UICollectionViewCell {
+class AKCollectionViewCell: UICollectionViewCell {
     var label: UILabel!
     var imageView: UIImageView!
+    var view: UIView!
     var font = UIFont.systemFontOfSize(UIFont.systemFontSize())
     var highlightedFont = UIFont.systemFontOfSize(UIFont.systemFontSize())
     var _selected: Bool = false {
@@ -90,6 +92,12 @@ private class AKCollectionViewCell: UICollectionViewCell {
         self.imageView.contentMode = .Center
         self.imageView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         self.contentView.addSubview(self.imageView)
+        
+        self.view = UIView(frame: self.contentView.bounds)
+        self.view.backgroundColor = UIColor.clearColor()
+        self.view.contentMode = .Center
+        self.view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        self.contentView.addSubview(self.view)
     }
     
     init() {
@@ -296,7 +304,7 @@ public class AKPickerView: UIView, UICollectionViewDataSource, UICollectionViewD
     
     // MARK: Private Properties
     /// Private. A UICollectionView which shows contents on cells.
-    private var collectionView: UICollectionView!
+    var collectionView: UICollectionView!
     /// Private. An intercepter to hook UICollectionViewDelegate then throw it picker view and its delegate
     private var intercepter: AKPickerViewDelegateIntercepter!
     /// Private. A UICollectionViewFlowLayout used in picker view's collection view.
@@ -533,6 +541,10 @@ public class AKPickerView: UIView, UICollectionViewDataSource, UICollectionViewD
             }
         } else if let image = self.dataSource?.pickerView?(self, imageForItem: indexPath.item) {
             cell.imageView.image = image
+        } else if let view = self.dataSource?.pickerView?(self, viewForItem: indexPath.item) {
+            cell.view.bounds =  CGRect(origin: CGPointZero, size: view.frame.size)
+            cell.view.subviews.forEach({ $0.removeFromSuperview() })
+            cell.view.addSubview(view)
         }
         cell._selected = (indexPath.item == self.selectedItem)
         return cell
@@ -548,6 +560,12 @@ public class AKPickerView: UIView, UICollectionViewDataSource, UICollectionViewD
             }
         } else if let image = self.dataSource?.pickerView?(self, imageForItem: indexPath.item) {
             size.width += image.size.width
+        }  else if let view = self.dataSource?.pickerView?(self, viewForItem: indexPath.item) {
+            if let patternView = view as? PatternView {
+                size.width += self.sizeForString(patternView.patternLabel.text!).width > 70 ? self.sizeForString(patternView.patternLabel.text!).width : 70
+            } else {
+                size.width += view.frame.size.width
+            }
         }
         return size
     }

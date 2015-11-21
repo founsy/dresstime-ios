@@ -16,13 +16,15 @@ class ProfilViewController: UITableViewController {
     
     private var typeColtheSelected: String?
     private var currentClotheOpenSelected: Int?
+    private var headerView: UIView!
     
-    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var numberClothes: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
-   // @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var buttonAddClothe: UIButton!
     @IBOutlet weak var profilButton: UIButton!
+    
+    private var kTableHeaderHeight:CGFloat = 390.0
     
     @IBAction func onStyleTapped(sender: AnyObject) {
         self.performSegueWithIdentifier("showStyle", sender: self)
@@ -44,10 +46,19 @@ class ProfilViewController: UITableViewController {
         
         self.tableView.addGestureRecognizer(longPressedGesture)
         self.tableView.registerNib(UINib(nibName: "TypeCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
+        headerView = self.tableView.tableHeaderView
+        self.tableView.tableHeaderView = nil
+        self.tableView.addSubview(headerView)
+        self.tableView.contentInset = UIEdgeInsets(top: kTableHeaderHeight, left: 0, bottom: 0, right: 0)
+        self.tableView.contentOffset = CGPoint(x: 0, y: -kTableHeaderHeight)
+        updateHeaderView()
+        
         buttonAddClothe.layer.cornerRadius = 20.0
         
-        profilButton.setImage(UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)"), forState: .Normal)
-        
+        profilButton.layer.shadowColor = UIColor.blackColor().CGColor
+        profilButton.layer.shadowOffset = CGSizeMake(0, 1)
+        profilButton.layer.shadowOpacity = 0.50
+        profilButton.layer.shadowRadius = 4
     }
     
     override func viewWillAppear(animated: Bool){
@@ -55,36 +66,28 @@ class ProfilViewController: UITableViewController {
         self.type = SharedData.sharedInstance.getType(SharedData.sharedInstance.sexe!)
         initData()
         setValueProfil()
-        self.tableView.contentInset = UIEdgeInsetsMake(-65.0, 0, 0, 0);
+        
+        profilButton.setImage(UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)"), forState: .Normal)
+        backgroundImage.image = UIImage(named: "BackgroundHeader\(SharedData.sharedInstance.sexe!.uppercaseString)")
+        
+        
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("PROFILE", comment: ""), style: .Plain, target: nil, action: nil)
         UIApplication.sharedApplication().statusBarHidden = false // for status bar hide
         
     }
     
-   /* private let kImageOriginHight:CGFloat = 240.0
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
-        var yOffset  = scrollView.contentOffset.y;
-        var yPosition = self.navigationController!.navigationBar.frame.origin.y + self.navigationController!.navigationBar.frame.size.height;
-        
-        print(yOffset)
-        if (yOffset > kImageOriginHight) {
-            self.tableView.contentInset = UIEdgeInsetsMake(yPosition + kImageOriginHight, self.tableView.contentInset.left, self.tableView.contentInset.bottom, self.tableView.contentInset.right)
-        } else {
-            self.tableView.contentInset = UIEdgeInsetsMake(-65.0, 0, 0.0, 0)
+    private func updateHeaderView(){
+        var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: tableView.bounds.width, height: kTableHeaderHeight)
+        if  tableView.contentOffset.y < -kTableHeaderHeight {
+            headerRect.origin.y = tableView.contentOffset.y
+            headerRect.size.height = -tableView.contentOffset.y
         }
-    }*/
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
-        var headerFrame = self.headerView.frame;
-        var yOffset = scrollView.contentOffset.y;
-        headerFrame.origin.y = max(0, yOffset);
-        self.headerView.frame = headerFrame;
+        headerView.frame = headerRect
+    }
     
-        // If the user is pulling down on the top of the scroll view, adjust the scroll indicator appropriately
-        var height = CGRectGetHeight(headerFrame);
-        if (yOffset > 0.0) {
-            self.tableView.scrollIndicatorInsets = UIEdgeInsetsMake(abs(yOffset) + height, 0, 0, 0);
-        }
+    override func scrollViewDidScroll(scrollView: UIScrollView) {
+        updateHeaderView()
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -142,6 +145,7 @@ class ProfilViewController: UITableViewController {
         }
     }
 }
+
 
 extension ProfilViewController {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {

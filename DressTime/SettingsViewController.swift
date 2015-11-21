@@ -45,7 +45,7 @@ class SettingsViewController: UIViewController {
                     userSaving.name = name
                 }
                 
-                UserService().GetBrandOutfitsToday(userSaving, completion: { (isSuccess, object) -> Void in
+                UserService().UpdateUser(userSaving, completion: { (isSuccess, object) -> Void in
                     let profilDal = ProfilsDAL()
                     profilDal.update(userSaving)
 
@@ -99,20 +99,28 @@ class SettingsViewController: UIViewController {
             self.user = user
             changeBackground(self.user!.gender!)
         }
-        
-        self.confirmationView = NSBundle.mainBundle().loadNibNamed("ConfirmSave", owner: self, options: nil)[0] as? ConfirmSave
-        self.confirmationView!.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 50, UIScreen.mainScreen().bounds.size.height/2.0 - 50, 100, 100)
-        self.confirmationView!.alpha = 0
-        self.confirmationView!.layer.cornerRadius = 50
-        
-        self.view.addSubview(self.confirmationView!)
-
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Profile", style: .Plain, target: nil, action: nil)
+       
+        
+
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.confirmationView = NSBundle.mainBundle().loadNibNamed("ConfirmSave", owner: self, options: nil)[0] as? ConfirmSave
+        print(self.confirmationView!.frame)
+        print(UIScreen.mainScreen().bounds)
+        self.confirmationView!.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 50, UIScreen.mainScreen().bounds.size.height/2.0 - 50 - 65, 100, 100)
+        print(self.confirmationView!.frame)
+        self.confirmationView!.alpha = 0
+        self.confirmationView!.layer.cornerRadius = 50
+        
+        self.view.addSubview(self.confirmationView!)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

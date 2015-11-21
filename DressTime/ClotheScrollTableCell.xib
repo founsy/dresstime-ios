@@ -2,12 +2,11 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="151" id="WHF-lU-fzN" customClass="ClotheScrollTableCell" customModule="DressTime" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="151" id="WHF-lU-fzN" customClass="ClotheScrollTableCell" customModule="DressTime" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="497" height="151"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WHF-lU-fzN" id="AUG-M9-SoE">
@@ -19,10 +18,10 @@
                     </scrollView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="ZZc-qJ-Wbf" firstAttribute="leading" secondItem="AUG-M9-SoE" secondAttribute="leadingMargin" constant="-8" id="4Hk-ml-gqV"/>
-                    <constraint firstItem="ZZc-qJ-Wbf" firstAttribute="top" secondItem="AUG-M9-SoE" secondAttribute="topMargin" constant="-8" id="AlO-dJ-xID"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="ZZc-qJ-Wbf" secondAttribute="trailing" constant="-8" id="LI8-9N-hQ2"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="ZZc-qJ-Wbf" secondAttribute="bottom" constant="-8" id="LYI-Zu-xZT"/>
+                    <constraint firstItem="ZZc-qJ-Wbf" firstAttribute="leading" secondItem="AUG-M9-SoE" secondAttribute="leading" id="4Hk-ml-gqV"/>
+                    <constraint firstItem="ZZc-qJ-Wbf" firstAttribute="top" secondItem="AUG-M9-SoE" secondAttribute="top" id="AlO-dJ-xID"/>
+                    <constraint firstAttribute="trailing" secondItem="ZZc-qJ-Wbf" secondAttribute="trailing" id="LI8-9N-hQ2"/>
+                    <constraint firstAttribute="bottom" secondItem="ZZc-qJ-Wbf" secondAttribute="bottom" id="LYI-Zu-xZT"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

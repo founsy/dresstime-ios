@@ -42,6 +42,10 @@ class RegisterStyleViewController: UIViewController {
     
     var currentUserId: String?
 
+    var email: String?
+    var password: String?
+    var sexe: String?
+    
     @IBOutlet weak var onValidateButton: UIButton!
     @IBOutlet weak var labelText: UILabel!
     
@@ -51,6 +55,7 @@ class RegisterStyleViewController: UIViewController {
     
     
     @IBAction func onSaveTapped(sender: AnyObject) {
+        //Edit Mode
         if let userId = currentUserId {
             let dal = ProfilsDAL()
             if let profil = dal.fetch(userId) {
@@ -72,6 +77,28 @@ class RegisterStyleViewController: UIViewController {
                     })
                 
             }
+        } else {
+            //Create Model
+            let dal = ProfilsDAL()
+            let profil = dal.save(email!, email: email!, access_token: "", refresh_token: "", expire_in: 3600, name: "", gender: sexe!, temp_unit: "C")
+            profil.atWorkStyle = self.atWorkSelected
+            profil.onPartyStyle = self.onPartySelected
+            profil.relaxStyle = self.relaxSelected
+            dal.update(profil)
+            UserService().CreateUser(profil, password: password!, completion: { (isSuccess, object) -> Void in
+                if (isSuccess){
+                    UIView.animateAndChainWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: {
+                        self.confirmationView?.alpha = 1
+                        self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
+                        }, completion:  nil).animateWithDuration(0.2, animations: { () -> Void in
+                            self.confirmationView?.alpha = 0
+                            self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
+                            }, completion: { (finish) -> Void in
+                                self.dismissViewControllerAnimated(true, completion: nil)
+                        })
+                }
+            })
+
         }
     }
     

@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 
 class RegisterSexeViewController: UIViewController {
+    var email: String?
+    var password: String?
+    private var sexe: String?
+    
     @IBOutlet weak var tableView: UITableView!
     
     @IBAction func onCancelTapped(sender: AnyObject) {
@@ -20,6 +24,16 @@ class RegisterSexeViewController: UIViewController {
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "selectStyle"){
+            if let viewController = segue.destinationViewController as? RegisterStyleViewController {
+                viewController.email = self.email
+                viewController.password = self.password
+                viewController.sexe = self.sexe
+            }
+        }
     }
 }
 
@@ -42,6 +56,15 @@ extension RegisterSexeViewController: UITableViewDataSource {
 extension RegisterSexeViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return self.tableView.frame.height/2
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if (indexPath.row == 0){
+            sexe = "F"
+        } else if (indexPath.row == 1){
+            sexe = "M"
+        }
+        self.performSegueWithIdentifier("selectStyle", sender: self)
     }
     
 }

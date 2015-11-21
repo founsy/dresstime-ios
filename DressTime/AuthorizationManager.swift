@@ -85,7 +85,7 @@ public class AuthorizationManager: Manager {
     {
         let cachedTask: CachedTask = { [weak self] URLResponse, data, error in
             if let strongSelf = self {
-                if let error = error {
+                if let _ = error {
                     //failure?(URLResponse, data, error)
                 } else {
                     strongSelf.startRequest(

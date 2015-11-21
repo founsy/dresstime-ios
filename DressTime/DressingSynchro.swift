@@ -43,7 +43,7 @@ class DressingSynchro {
     
     private func isDressingBackup(getCompleted: ()){
         //Check if a backup dressing exist on server-side
-        DressTimeService().GetClothesIdDressing { (isSuccess, object) -> Void in
+        DressingService().GetClothesIdDressing { (isSuccess, object) -> Void in
             //self.clothesStored = object
             getCompleted
         }
@@ -59,15 +59,15 @@ class DressingSynchro {
     //Update Local DataBase
     //TODO - Need To update - 1 Call by Clothe too much
     private func updateLocalStorage(){
-        let dressTimeSvc = DressTimeService()
-        dressTimeSvc.GetClothesIdDressing { (isSuccess, object) -> Void in
+        let dressingSvc = DressingService()
+         dressingSvc.GetClothesIdDressing { (isSuccess, object) -> Void in
             if (isSuccess){
                 //self.clothesStored = object.arrayObject
                 
                 let clotheDAL = ClothesDAL()
                 for (var i = 0; i < object.arrayValue.count; i++) {
                     let id = object.arrayValue[i]["id"].stringValue
-                    dressTimeSvc.GetClothe(id, completion: { (succeeded, clothe) -> () in
+                    dressingSvc.GetClothe(id, completion: { (succeeded, clothe) -> () in
                         if (succeeded) {
                             let image: String = clothe["clothe_image"].stringValue
                             let data: NSData = NSData(base64EncodedString: image, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!

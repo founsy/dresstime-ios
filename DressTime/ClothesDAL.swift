@@ -71,6 +71,20 @@ class ClothesDAL {
         return [Clothe]()
     }
     
+    func numberOfClothes() -> Int {
+        let fetchRequest = NSFetchRequest(entityName: "Clothe")
+        let predicate = NSPredicate(format: "profilRel.userid = %@", SharedData.sharedInstance.currentUserId!)
+        fetchRequest.predicate = predicate
+        do {
+            if let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Clothe] {
+                return fetchResults.count
+            }
+        } catch let error as NSError {
+            print(error)
+        }
+        return 0
+    }
+    
     func delete(clothe: Clothe) {
         // Delete it from the managedObjectContext
         self.managedObjectContext.deleteObject(clothe)
