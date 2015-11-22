@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol DressingSynchroDelegate {
+    func syncDidFinish()
+}
+
 class DressingSynchro {
 
     private var
@@ -15,18 +19,22 @@ class DressingSynchro {
     clothesLocal: [Clothe]!,
     clothesStored: [String]!
     
+    var delagate: DressingSynchroDelegate?
+    
     init(userId: String){
         self.userId = userId
     }
     
-    func execute(){
+    func execute(completion: (isNeeded: Bool) -> Void){
         if (isDressingEmpty()){
             if (Mock.isMockable()){
                 updateMockableLocalstorage()
             } else {
                 updateLocalStorage()
             }
+            completion(isNeeded: true)
         } else {
+            completion(isNeeded: false)
             isDressingBackup({ () -> () in
                 self.diffBetweenBackEnd();
             }())
@@ -60,10 +68,9 @@ class DressingSynchro {
     //TODO - Need To update - 1 Call by Clothe too much
     private func updateLocalStorage(){
         let dressingSvc = DressingService()
+         var numberSync = 0
          dressingSvc.GetClothesIdDressing { (isSuccess, object) -> Void in
             if (isSuccess){
-                //self.clothesStored = object.arrayObject
-                
                 let clotheDAL = ClothesDAL()
                 for (var i = 0; i < object.arrayValue.count; i++) {
                     let id = object.arrayValue[i]["id"].stringValue
@@ -74,10 +81,20 @@ class DressingSynchro {
                             let isUnis = clothe["clothe_isUnis"].boolValue
                             
                             clotheDAL.save(clothe["clothe_id"].stringValue, partnerId: clothe["clothe_partnerid"].floatValue, partnerName: clothe["clothe_partnerName"].stringValue, type: clothe["clothe_type"] .stringValue, subType: clothe["clothe_subtype"].stringValue, name: clothe["clothe_name"].stringValue , isUnis: isUnis, pattern: clothe["clothe_pattern"].stringValue, cut: clothe["clothe_cut"].stringValue, image: data, colors: clothe["clothe_colors"].stringValue)
+                            numberSync++
                         }
-                        
+                        if (numberSync >= object.arrayValue.count){
+                            if let del = self.delagate{
+                                del.syncDidFinish()
+                            }
+                        }
                     })
-                    
+                }
+                if (object.arrayValue.count == 0){
+                    if let del = self.delagate{
+                        del.syncDidFinish()
+                    }
+
                 }
             }
         }

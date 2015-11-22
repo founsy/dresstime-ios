@@ -30,6 +30,7 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
     
     var sessionDelegate: CameraSessionControllerDelegate?
     
+    var controller: UIViewController?
     
     /* Class Methods
     ------------------------------------------*/
@@ -82,6 +83,7 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
         self.session.stopRunning()
         self.previewLayer = nil
         self.session = nil
+        self.controller = nil
     }
     
     func cameraSessionReady(){
@@ -95,13 +97,9 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
             (granted: Bool) -> Void in
             // If permission hasn't been granted, notify the user.
             if !granted {
-                dispatch_async(dispatch_get_main_queue(), {
-                    UIAlertView(
-                        title: "Could not use camera!",
-                        message: "This application does not have permission to use camera. Please update your privacy settings.",
-                        delegate: self,
-                        cancelButtonTitle: "OK").show()
-                })
+                let alert = UIAlertController(title: "Could not use camera!", message: "This application does not have permission to use camera. Please update your privacy settings.", preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .Default) { _ in })
+                self.controller?.presentViewController(alert, animated: true){}
             }
         });
     }

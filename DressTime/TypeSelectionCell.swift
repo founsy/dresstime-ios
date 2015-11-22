@@ -51,7 +51,7 @@ class TypeSelectionCell: UITableViewCell {
     private func removeBorder(){
         for (var i = 0; i < buttonType.count; i++){
             buttonType[i].selected = false
-            for var subView in buttonType[i].subviews {
+            for subView in buttonType[i].subviews {
                 if (!subView.isKindOfClass(UILabel)){
                     subView.removeFromSuperview()
                 }

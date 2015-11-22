@@ -16,8 +16,6 @@ class WeatherService {
     func GetWeather(position: CLLocation, completion: (isSuccess: Bool, object: JSON) -> Void) {
         if (Mock.isMockable()){
             if let nsdata = ReadJsonFile().readFile("weather"){
-                let str = NSString(data: nsdata, encoding:NSUTF8StringEncoding)
-                print(str)
                 let json = JSON(data: nsdata)
                 completion(isSuccess: true, object:json)
             } else {
@@ -32,9 +30,7 @@ class WeatherService {
     func GetCurrentWeather(position: CLLocation, completion: (isSuccess: Bool, object: JSON) -> Void) {
         if (Mock.isMockable()){
             if let nsdata = ReadJsonFile().readFile("currentWeather"){
-                _ = NSString(data: nsdata, encoding:NSUTF8StringEncoding)
                 let json = JSON(data: nsdata)
-                print(json)
                 completion(isSuccess: true, object:json)
             } else {
                 completion(isSuccess: false, object: "")
@@ -48,8 +44,6 @@ class WeatherService {
     func GetForecastWeather(position: CLLocation, completion: (isSuccess: Bool, object: JSON) -> Void) {
         if (Mock.isMockable()){
             if let nsdata = ReadJsonFile().readFile("weather"){
-                let str = NSString(data: nsdata, encoding:NSUTF8StringEncoding)
-                print(str)
                 let json = JSON(data: nsdata)
                 completion(isSuccess: true, object:json)
             } else {

@@ -3,83 +3,45 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <mutableArray key="artill_clean_icons-webfont.ttf">
-            <string>artillcleanweathericons-Regular</string>
-        </mutableArray>
-    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="mJa-Nn-TNp" customClass="OutfitCollectionViewCell" customModule="DressTime" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="150" height="280"/>
+        <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" id="ywa-0s-aG6" customClass="OufitCell" customModule="DressTime" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="185" height="305"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="150" height="280"/>
+                <rect key="frame" x="0.0" y="0.0" width="185" height="305"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ts-TD-75w">
-                        <rect key="frame" x="8" y="8" width="21" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="8qN-lO-Id1"/>
-                            <constraint firstAttribute="width" constant="21" id="ocY-WB-NDc"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OXw-2L-RBw">
-                        <rect key="frame" x="125" y="8" width="25" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="QzG-mO-IYU"/>
-                            <constraint firstAttribute="width" constant="25" id="V31-ze-MkS"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="artillcleanweathericons-Regular" family="artill clean weather icons" pointSize="27"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hXo-2W-rvJ">
-                        <rect key="frame" x="0.0" y="34" width="150" height="246"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </stackView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m5a-c2-gIP">
-                        <rect key="frame" x="39" y="8" width="76" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="pbp-DG-Tcs"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zUK-OC-8Dl">
+                        <rect key="frame" x="0.0" y="0.0" width="185" height="16"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tti-gJ-ufU">
+                        <rect key="frame" x="0.0" y="23" width="185" height="280"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="m5a-c2-gIP" firstAttribute="leading" secondItem="1ts-TD-75w" secondAttribute="trailing" constant="10" id="2Bz-hP-0gZ"/>
-                <constraint firstAttribute="trailing" secondItem="hXo-2W-rvJ" secondAttribute="trailing" id="BY5-ha-DRq"/>
-                <constraint firstItem="hXo-2W-rvJ" firstAttribute="top" secondItem="m5a-c2-gIP" secondAttribute="top" constant="5" id="EQA-Fj-rwA"/>
-                <constraint firstItem="OXw-2L-RBw" firstAttribute="leading" secondItem="m5a-c2-gIP" secondAttribute="trailing" constant="10" id="JDn-Wb-ItU"/>
-                <constraint firstAttribute="trailing" secondItem="OXw-2L-RBw" secondAttribute="trailing" id="KgX-5P-sjU"/>
-                <constraint firstItem="1ts-TD-75w" firstAttribute="leading" secondItem="mJa-Nn-TNp" secondAttribute="leading" constant="8" id="Nno-aC-mGt"/>
-                <constraint firstItem="m5a-c2-gIP" firstAttribute="top" secondItem="mJa-Nn-TNp" secondAttribute="top" constant="8" id="Pka-a6-9ZE"/>
-                <constraint firstAttribute="bottom" secondItem="hXo-2W-rvJ" secondAttribute="bottom" id="PqQ-x4-yJh"/>
-                <constraint firstItem="1ts-TD-75w" firstAttribute="centerY" secondItem="m5a-c2-gIP" secondAttribute="centerY" id="aGx-u6-7v6"/>
-                <constraint firstItem="hXo-2W-rvJ" firstAttribute="leading" secondItem="mJa-Nn-TNp" secondAttribute="leading" id="c0j-kY-igV"/>
-                <constraint firstItem="OXw-2L-RBw" firstAttribute="centerY" secondItem="m5a-c2-gIP" secondAttribute="centerY" id="dFq-Oc-dSQ"/>
-                <constraint firstItem="hXo-2W-rvJ" firstAttribute="top" secondItem="m5a-c2-gIP" secondAttribute="bottom" constant="5" id="eSe-h2-YMg"/>
+                <constraint firstAttribute="bottom" secondItem="tti-gJ-ufU" secondAttribute="bottom" constant="2" id="0GU-PG-1DY"/>
+                <constraint firstAttribute="trailing" secondItem="tti-gJ-ufU" secondAttribute="trailing" id="6Qi-85-zdp"/>
+                <constraint firstItem="zUK-OC-8Dl" firstAttribute="leading" secondItem="ywa-0s-aG6" secondAttribute="leading" id="8rO-nO-J7B"/>
+                <constraint firstItem="tti-gJ-ufU" firstAttribute="leading" secondItem="ywa-0s-aG6" secondAttribute="leading" id="QQI-NJ-abH"/>
+                <constraint firstItem="zUK-OC-8Dl" firstAttribute="top" secondItem="ywa-0s-aG6" secondAttribute="top" id="cdG-hj-RM9"/>
+                <constraint firstAttribute="trailing" secondItem="zUK-OC-8Dl" secondAttribute="trailing" id="nPE-8w-HId"/>
+                <constraint firstItem="tti-gJ-ufU" firstAttribute="top" secondItem="zUK-OC-8Dl" secondAttribute="bottom" constant="7" id="pDd-uC-vT1"/>
             </constraints>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="EQA-Fj-rwA"/>
-                </mask>
-            </variation>
+            <size key="customSize" width="145" height="365"/>
             <connections>
-                <outlet property="imageContainer" destination="hXo-2W-rvJ" id="wCq-GU-Bxw"/>
-                <outlet property="pointText" destination="1ts-TD-75w" id="CVc-AV-gfL"/>
-                <outlet property="styleText" destination="m5a-c2-gIP" id="tcF-Pf-mCl"/>
-                <outlet property="weatherIcon" destination="OXw-2L-RBw" id="4ST-vc-yDA"/>
+                <outlet property="containerView" destination="tti-gJ-ufU" id="0vD-UV-HeK"/>
+                <outlet property="styleLabel" destination="zUK-OC-8Dl" id="aut-If-mYB"/>
             </connections>
-            <point key="canvasLocation" x="338" y="285"/>
+            <point key="canvasLocation" x="364.5" y="332.5"/>
         </collectionViewCell>
     </objects>
 </document>

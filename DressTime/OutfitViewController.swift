@@ -56,10 +56,7 @@ class OutfitViewController: UIViewController {
         self.tableView.reloadData()
         
         self.confirmationView = NSBundle.mainBundle().loadNibNamed("ConfirmSave", owner: self, options: nil)[0] as? ConfirmSave
-        print(self.confirmationView!.frame)
-        print(UIScreen.mainScreen().bounds)
         self.confirmationView!.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 50, UIScreen.mainScreen().bounds.size.height/2.0 - 50 - 65, 100, 100)
-        print(self.confirmationView!.frame)
         self.confirmationView!.alpha = 0
         self.confirmationView!.layer.cornerRadius = 50
         

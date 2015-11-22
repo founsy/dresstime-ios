@@ -44,20 +44,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         //Check after login, if a synchro is necessary
                         //Today, only if Local database is empty
                         //TODO - Tomorrow, syncro differential
-                        let dressingSynchro = DressingSynchro(userId: SharedData.sharedInstance.currentUserId!)
-                        dressingSynchro.execute()
+                        ActivityLoader.shared.showProgressView(self.view)
                         
-                        dispatch_async(dispatch_get_main_queue(),  { () -> Void in
-                            let appDelegateTemp = UIApplication.sharedApplication().delegate;
-                            appDelegateTemp!.window!!.rootViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateInitialViewController()
+                        let dressingSynchro = DressingSynchro(userId: SharedData.sharedInstance.currentUserId!)
+                        dressingSynchro.delagate = self
+                        dressingSynchro.execute({ (isNeeded) -> Void in
+                            if (!isNeeded){
+                                self.goToHome()
+                            }
                         })
+                        
+                        
                     } else {
-                        let alert = UIAlertView(title: NSLocalizedString("loginErrTitle", comment: ""), message: NSLocalizedString("loginErrMessage", comment: ""), delegate: nil, cancelButtonTitle: NSLocalizedString("loginErrButton", comment: ""))
-                        // Move to the UI thread
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            // Show the alert
-                            alert.show()
-                        })
+                        let alert = UIAlertController(title: NSLocalizedString("loginErrTitle", comment: ""), message: NSLocalizedString("loginErrMessage", comment: ""), preferredStyle: .Alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("loginErrButton", comment: ""), style: .Default) { _ in })
+                        self.presentViewController(alert, animated: true){}
                     }
                     
                 }
@@ -92,5 +93,21 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-    
+    private func goToHome(){
+        ActivityLoader.shared.hideProgressView()
+        dispatch_async(dispatch_get_main_queue(),  { () -> Void in
+            
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
+            appDelegate.window?.rootViewController = initialViewController
+            appDelegate.window?.makeKeyAndVisible()
+        })
+    }
+}
+
+extension LoginViewController: DressingSynchroDelegate {
+    func syncDidFinish() {
+        goToHome()
+    }
 }

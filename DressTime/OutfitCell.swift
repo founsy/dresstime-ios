@@ -1,5 +1,5 @@
 //
-//  NewOutfitCell.swift
+//  OufitCell.swift
 //  DressTime
 //
 //  Created by Fab on 23/10/2015.
@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class NewOufitCell: UICollectionViewCell {
+class OufitCell: UICollectionViewCell {
     
     @IBOutlet weak var styleLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
@@ -57,6 +57,20 @@ class NewOufitCell: UICollectionViewCell {
         containerView.addSubview(view)
     }
     
+    func setLoadNecessaryImage(imageNamed: String, rect: CGRect){
+        let view = UIView(frame: rect)
+        view.backgroundColor = UIColor.dressTimeOrange()
+        view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
+        view.layer.masksToBounds = true
+        let img = UIImage(named: imageNamed)!
+        let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
+        imageView.image = img
+        imageView.contentMode = UIViewContentMode.Bottom
+        view.addSubview(imageView)
+        applyPlainShadow(view)
+        containerView.addSubview(view)
+    }
+    
     func setBrandClothe(image: String, partnerName: String, rate: Int, rect: CGRect){
         if let data: NSData = NSData(base64EncodedString: image, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters) {
             
@@ -100,7 +114,7 @@ class NewOufitCell: UICollectionViewCell {
     }
     
     func removeOldImages(){
-        for var item in containerView.subviews {
+        for item in containerView.subviews {
             item.removeFromSuperview()
         }
     }

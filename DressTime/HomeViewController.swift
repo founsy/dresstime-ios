@@ -44,7 +44,6 @@ class HomeViewController: UIViewController{
         
         self.numberOfClothes = ClothesDAL().numberOfClothes()
         if (self.numberOfClothes > 0){
-            ActivityLoader.shared.showProgressView(view)
             self.emptyView.hidden = true
             shoppingBarButton.enabled = true
             shoppingBarButton.tintColor = nil
@@ -71,7 +70,22 @@ class HomeViewController: UIViewController{
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         createArrowImageView()
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "showOutfit"){
+            let targetVC = segue.destinationViewController as! OutfitViewController
+            targetVC.currentOutfits = self.outfitSelected!["outfit"].arrayObject
+        }
         
+    }
+    
+    func addButtonPressed(){
+        self.performSegueWithIdentifier("AddClothe", sender: self)
+    }
+    
+    func profilButtonPressed(){
+        self.performSegueWithIdentifier("showProfil", sender: self)
     }
     
     private func createArrowImageView(){
@@ -83,7 +97,6 @@ class HomeViewController: UIViewController{
     }
     
     private func addProfilButtonToNavBar(){
-        
         let regularButton = UIButton(frame: CGRectMake(0, 0, 40.0, 40.0))
         let historyButtonImage = UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)")
         regularButton.setBackgroundImage(historyButtonImage, forState: UIControlState.Normal)
@@ -95,7 +108,6 @@ class HomeViewController: UIViewController{
     }
     
     private func addAddButtonToNavBar(){
-        
         let regularButton = UIButton(frame: CGRectMake(0, 0, 35.0, 35.0))
         let historyButtonImage = UIImage(named: "AddIcon")
         regularButton.setBackgroundImage(historyButtonImage, forState: UIControlState.Normal)
@@ -104,14 +116,6 @@ class HomeViewController: UIViewController{
         regularButton.addTarget(self, action: "addButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
         let navBarButtonItem = UIBarButtonItem(customView: regularButton)
         self.navigationItem.rightBarButtonItem = navBarButtonItem
-    }
-    
-    func addButtonPressed(){
-        self.performSegueWithIdentifier("AddClothe", sender: self)
-    }
-    
-    func profilButtonPressed(){
-        self.performSegueWithIdentifier("showProfil", sender: self)
     }
     
     private func configNavBar(){
@@ -129,14 +133,6 @@ class HomeViewController: UIViewController{
         addProfilButtonToNavBar()
         addAddButtonToNavBar()
        
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "showOutfit"){
-            let targetVC = segue.destinationViewController as! OutfitViewController
-            targetVC.currentOutfits = self.outfitSelected!["outfit"].arrayObject
-        }
-
     }
     
     private func setTitleNavBar(city: String){
@@ -162,7 +158,6 @@ class HomeViewController: UIViewController{
         }
         return imagesListArray as AnyObject as! [UIImage]
     }
-
 }
 
 extension HomeViewController: HomeHeaderCellDelegate {
@@ -257,7 +252,6 @@ extension HomeViewController: HomeOutfitsListCellDelegate {
     
     func loadedOutfits(outfitsCount: Int) {
         self.numberOfOutfits = outfitsCount
-        self.tableView.reloadData()
     }
 }
 
@@ -269,8 +263,6 @@ extension HomeViewController: HomeBrandOutfitsListCellDelegate {
     
     func loadedBrandOutfits(outfitsCount: Int) {
         self.numberOfOutfits = outfitsCount
-        self.tableView.reloadData()
-        ActivityLoader.shared.hideProgressView()
     }
 }
 
@@ -281,11 +273,10 @@ extension HomeViewController: UITableViewDataSource {
         } else {
             return 2
         }
-        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        NSLog("\(indexPath.row)")
+        NSLog("Load home tableview \(indexPath.row)")
         if (indexPath.row == 1) {
             self.homeHeaderCell = self.tableView.dequeueReusableCellWithIdentifier("headerCell") as? HomeHeaderCell
             self.homeHeaderCell!.delegate = self
@@ -315,15 +306,5 @@ extension HomeViewController: UITableViewDelegate {
         } else {
             return 0.0
         }
-    }
-}
-
-extension UIView {
-    func roundCorners(corners:UIRectCorner, radius: CGFloat) {
-        
-        let path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.CGPath
-        self.layer.mask = mask
     }
 }

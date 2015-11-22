@@ -72,19 +72,6 @@ extension HomeHeaderCell: UICollectionViewDataSource {
     
 }
 
-/*extension HomeHeaderCell: UICollectionViewDelegateFlowLayout {
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        print(section)
-        // Add inset to the collection view if there are not enough cells to fill the width.
-        let cellSpacing:CGFloat = (collectionViewLayout as! UICollectionViewFlowLayout).minimumLineSpacing;
-        let cellWidth:CGFloat =  (collectionViewLayout as! UICollectionViewFlowLayout).itemSize.width;
-        let cellCount:Int = collectionView.numberOfItemsInSection(section)
-        var inset = (collectionView.bounds.size.width - (CGFloat(cellCount) * (cellWidth + cellSpacing))) * 0.5;
-        
-        inset = max(inset, 0.0);
-        return UIEdgeInsetsMake(0.0, inset, 0.0, 0.0);
-    }
-}*/
 extension HomeHeaderCell: UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
        if (self.selectedWeather != indexPath.row){

@@ -73,6 +73,7 @@ class CameraViewController : UIViewController {
         drawClearRectArea()
         
         self.captureManager = CameraSessionManager()
+        self.captureManager?.controller = self
         self.captureManager!.addVideoPreviewLayer()
         let layerRect = self.view.layer.bounds
         

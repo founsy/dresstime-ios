@@ -110,7 +110,7 @@ class SettingsTableViewController: UITableViewController {
         
         let lineView = UIView(frame: CGRectMake(0, btn.frame.size.height - height!, btn.frame.size.width, height!))
         lineView.backgroundColor = color!
-        for var subView in btn.subviews {
+        for subView in btn.subviews {
             if (!subView.isKindOfClass(UILabel)){
                 subView.removeFromSuperview()
             }

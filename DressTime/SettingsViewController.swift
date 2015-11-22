@@ -80,13 +80,14 @@ class SettingsViewController: UIViewController {
                     dal.update(profil)
                 }
                 dispatch_async(dispatch_get_main_queue(),  { () -> Void in
-                    //Go back to login window
                     let rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController")
-                    self.presentViewController(rootController, animated: true, completion: nil)
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    appDelegate.window!.makeKeyAndVisible()
+                    appDelegate.window!.rootViewController = rootController
+                    self.navigationController?.popToRootViewControllerAnimated(false)
                 })
             })
         }
-        
     }
 
     

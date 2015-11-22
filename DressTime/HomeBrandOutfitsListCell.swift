@@ -18,20 +18,24 @@ class HomeBrandOutfitsListCell: UITableViewCell {
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var collectionView: UICollectionView!
     
-    private let cellIdentifier = "NewOutfitCell"
-    var outfitsCollection: JSON?
-    var delegate: HomeBrandOutfitsListCellDelegate?
+    private let cellIdentifier = "OutfitCell"
+    private var outfitsCollection: JSON?
     private var dayMoment: [String]?
     private var styleByMoment: [String]?
     private let BL = DressTimeBL()
+    private let loading = ActivityLoader()
+    
+    var delegate: HomeBrandOutfitsListCellDelegate?
+    
     
     override func awakeFromNib() {
-        self.collectionView.registerNib(UINib(nibName: "NewOutfitCell", bundle:nil), forCellWithReuseIdentifier: self.cellIdentifier)
+        self.collectionView.registerNib(UINib(nibName: "OutfitCell", bundle:nil), forCellWithReuseIdentifier: self.cellIdentifier)
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
     }
     
     func loadTodayBrandOutfits(weather: Weather){
+        self.loading.showProgressView(self.contentView)
         self.dayMoment = BL.getDayMoment(weather.hour!)
         self.styleByMoment = BL.getStyleByMoment(self.dayMoment!)
         
@@ -45,6 +49,7 @@ class HomeBrandOutfitsListCell: UITableViewCell {
                     del.loadedBrandOutfits(self.outfitsCollection!.count)
                 }
             }
+            self.loading.hideProgressView()
         }
     }
 }
@@ -58,15 +63,9 @@ extension HomeBrandOutfitsListCell: UICollectionViewDataSource, UICollectionView
         }
     }
     
-    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        _ = cell as! NewOufitCell
-        
-    }
-    
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var cell: NewOufitCell
-        cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! NewOufitCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! OufitCell
         cell.removeOldImages()
         var outfitElem = self.outfitsCollection![indexPath.row]
         let outfit = outfitElem["outfit"]
@@ -116,7 +115,6 @@ extension HomeBrandOutfitsListCell: UICollectionViewDataSource, UICollectionView
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         if let del = self.delegate {
-            let cell = collectionView.cellForItemAtIndexPath(indexPath) as! NewOufitCell
             del.showBrandOutfits("")
         }
     }

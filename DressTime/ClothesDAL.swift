@@ -20,20 +20,19 @@ class ClothesDAL {
     
     func fetch(type type: String) -> [Clothe]{
         var clothes  = [Clothe]()
-        
-        let fetchRequest = NSFetchRequest(entityName: "Clothe")
-        let predicate = NSPredicate(format: "clothe_type = %@ AND profilRel.userid = %@", type, SharedData.sharedInstance.currentUserId!)
-        
-        // Set the predicate on the fetch request
-        fetchRequest.predicate = predicate
-        
-        do {
-            clothes = try self.managedObjectContext.executeFetchRequest(fetchRequest) as! [Clothe]
-        } catch let error as NSError {
-            print(error)
+        if let userId = SharedData.sharedInstance.currentUserId {
+            let fetchRequest = NSFetchRequest(entityName: "Clothe")
+            let predicate = NSPredicate(format: "clothe_type = %@ AND profilRel.userid = %@", type, userId)
+            
+            // Set the predicate on the fetch request
+            fetchRequest.predicate = predicate
+            
+            do {
+                clothes = try self.managedObjectContext.executeFetchRequest(fetchRequest) as! [Clothe]
+            } catch let error as NSError {
+                print(error)
+            }
         }
-        
-        
         return clothes
     }
     
@@ -72,15 +71,19 @@ class ClothesDAL {
     }
     
     func numberOfClothes() -> Int {
-        let fetchRequest = NSFetchRequest(entityName: "Clothe")
-        let predicate = NSPredicate(format: "profilRel.userid = %@", SharedData.sharedInstance.currentUserId!)
-        fetchRequest.predicate = predicate
-        do {
-            if let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Clothe] {
-                return fetchResults.count
+        if let userId = SharedData.sharedInstance.currentUserId {
+            let fetchRequest = NSFetchRequest(entityName: "Clothe")
+            let predicate = NSPredicate(format: "profilRel.userid = %@", userId)
+            fetchRequest.predicate = predicate
+            do {
+                if let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Clothe] {
+                    return fetchResults.count
+                }
+            } catch let error as NSError {
+                print(error)
+                return 0
             }
-        } catch let error as NSError {
-            print(error)
+            return 0
         }
         return 0
     }

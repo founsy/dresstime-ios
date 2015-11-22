@@ -16,17 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var currentUser:Profil?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+         NSLog("didFinishLaunchingWithOptions")
         let profilDAL = ProfilsDAL()
         let profil = profilDAL.fetchLastUserConnected()
         
         if let user = profil {
             SharedData.sharedInstance.currentUserId = user.userid
             SharedData.sharedInstance.sexe = user.gender
-            //getNewToken(user)
-        } else {
-            let rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController")
+            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
+            self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
-            self.window?.rootViewController!.presentViewController(rootController, animated: true, completion: nil)
         }
         return true
     }
@@ -43,22 +44,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-        NSLog("I'm enter")
-        let profilDAL = ProfilsDAL()
-        let profil = profilDAL.fetchLastUserConnected()
-        if let user = profil {
-            SharedData.sharedInstance.currentUserId = user.userid
-            //getNewToken(user)
-        } else {
-            let rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController")
-            self.window?.makeKeyAndVisible()
-            self.window?.rootViewController!.presentViewController(rootController, animated: true, completion: nil)
-        }
+        NSLog("applicationWillEnterForeground")
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        NSLog("I'm back")
+        NSLog("applicationDidBecomeActive")
     }
 
     func applicationWillTerminate(application: UIApplication) {

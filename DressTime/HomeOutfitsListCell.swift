@@ -20,27 +20,40 @@ class HomeOutfitsListCell: UITableViewCell {
     @IBOutlet weak var curveArrow: CurveArrowView!
     @IBOutlet weak var mainView: UIView!
 
-    private let cellIdentifier = "NewOutfitCell"
-    var outfitsCollection: JSON?
-    let BL = DressTimeBL()
-    let service = DressTimeService()
-    var delegate: HomeOutfitsListCellDelegate?
+    private let cellIdentifier = "OutfitCell"
+    private var outfitsCollection: JSON?
+    private var clothesCollection: [Clothe]?
+    
+    private let BL = DressTimeBL()
+    private let service = DressTimeService()
     private var dayMoment: [String]?
     private var styleByMoment: [String]?
     
+    private var isEnoughOutfits = true
+    
+    private let loading = ActivityLoader()
+    
+    var delegate: HomeOutfitsListCellDelegate?
+
     override func awakeFromNib() {
-        self.outfitCollectionView.registerNib(UINib(nibName: "NewOutfitCell", bundle:nil), forCellWithReuseIdentifier: self.cellIdentifier)
+        self.outfitCollectionView.registerNib(UINib(nibName: "OutfitCell", bundle:nil), forCellWithReuseIdentifier: self.cellIdentifier)
         self.outfitCollectionView.dataSource = self
         self.outfitCollectionView.delegate = self
     }
     
     func loadTodayOutfits(weather: Weather){
+        self.loading.showProgressView(self.contentView)
         self.dayMoment = BL.getDayMoment(weather.hour!)
         self.styleByMoment = BL.getStyleByMoment(self.dayMoment!)
         
         service.GetOutfitsToday(self.styleByMoment!, weather: weather) { (isSuccess, object) -> Void in
             if (isSuccess){
                 self.outfitsCollection = object
+                if (self.outfitsCollection?.count == 0){
+                    self.isEnoughOutfits = false
+                    self.notEnoughOutfit()
+                }
+                
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.outfitCollectionView.performBatchUpdates({ () -> Void in
                         self.outfitCollectionView.reloadSections(NSIndexSet(index: 0))
@@ -50,29 +63,30 @@ class HomeOutfitsListCell: UITableViewCell {
                     del.loadedOutfits(self.outfitsCollection!.count)
                 }
             }
-        }
-    }
-}
-
-extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let collection = self.outfitsCollection {
-            return collection.count
-        } else {
-            return 0
+            self.loading.hideProgressView()
         }
     }
     
-    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        var outfitElem = self.outfitsCollection![indexPath.row]
-        let dal = ClothesDAL()
-        var cell: NewOufitCell
-        let outfit = outfitElem["outfit"]
-        cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! NewOufitCell
-        cell.removeOldImages()
+    private func notEnoughOutfit(){
+        //Not enough outfit so create my own
+        let clotheDAL = ClothesDAL()
+        let tops = clotheDAL.fetch(type: "top")
+        let pants = clotheDAL.fetch(type: "pants")
+        self.clothesCollection = [Clothe]()
+         //Pick 1 top if available -> Create a outfit with 2 elem
+        if (tops.count > 0){
+            self.clothesCollection!.append(tops[0])
+        }
+         //Pick 1 bottom if available -> Create a outfit with 2 elem
+        if (pants.count > 0){
+            self.clothesCollection!.append(pants[0])
+        }
+    }
+    
+    private func createOutfitView(outfitElem: JSON, cell: OufitCell){
         var j = 1
-        
+        let outfit = outfitElem["outfit"]
+        let dal = ClothesDAL()
         for (var i = outfit.count-1; i >= 0 ; i--){
             let clothe_id = outfit[i]["clothe_id"].string
             if let clothe = dal.fetch(clothe_id!) {
@@ -104,6 +118,48 @@ extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDeleg
                 
                 cell.createClotheView(clothe, style:style, rect: rect)
             }
+        }
+    }
+    
+    private func createClotheView(clothe: Clothe, cell: OufitCell){
+        let width:CGFloat = cell.containerView.frame.width
+        let height:CGFloat = 186.6
+        let x:CGFloat = 0
+        let y:CGFloat = 0
+        let rect = CGRectMake(x, y, width, height)
+        if (clothe.clothe_type == "top"){
+            cell.setLoadNecessaryImage("underwearIconM", rect: CGRectMake(x, cell.containerView.frame.height - height, width, height))
+            cell.createClotheView(clothe, style:"", rect: rect)
+        }
+        if (clothe.clothe_type == "pants"){
+            cell.setLoadNecessaryImage("underwearIconM", rect: rect)
+            cell.createClotheView(clothe, style:"", rect: CGRectMake(x, cell.containerView.frame.height - height, width, height))
+        }
+    }
+}
+
+extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if let collection = self.outfitsCollection {
+            if (isEnoughOutfits) {
+                return collection.count
+            } else if let collection = self.clothesCollection {
+                return collection.count
+            }
+        }
+        return 0
+    }
+    
+    // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! OufitCell
+        cell.removeOldImages()
+        if (isEnoughOutfits){
+            let outfitElem = self.outfitsCollection![indexPath.row]
+            createOutfitView(outfitElem, cell: cell)
+        } else {
+            let clothe = self.clothesCollection![indexPath.row]
+            createClotheView(clothe, cell: cell)
         }
         return cell
     }
