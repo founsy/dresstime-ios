@@ -33,13 +33,14 @@ class HomeViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configNavBar()
+        
         self.tableView.dataSource = self
         self.tableView.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        configNavBar()
         UIApplication.sharedApplication().statusBarHidden = false // for status bar hide
         
         self.numberOfClothes = ClothesDAL().numberOfClothes()
@@ -47,15 +48,9 @@ class HomeViewController: UIViewController{
             self.emptyView.hidden = true
             shoppingBarButton.enabled = true
             shoppingBarButton.tintColor = nil
-            
-            if let outfitsCell = self.outfitsCell {
-                outfitsCell.loadTodayOutfits(self.currentWeather!)
-            }
-            if let outfitsBrandCell = self.brandOutfitsCell {
-                outfitsBrandCell.loadTodayBrandOutfits(self.currentWeather!)
-            }
-            
+            self.tableView.reloadData()
         } else {
+            self.tableView.reloadData()
             self.emptyView.hidden = false
             
             self.animationImageView.animationImages = self.loadAnimateImage()
@@ -69,7 +64,18 @@ class HomeViewController: UIViewController{
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        createArrowImageView()
+        if (self.numberOfClothes == 0){
+            createArrowImageView()
+        }
+        
+        if let weather = self.currentWeather {
+            if let outfitsCell = self.outfitsCell {
+                outfitsCell.loadTodayOutfits(weather)
+            }
+            if let outfitsBrandCell = self.brandOutfitsCell {
+                outfitsBrandCell.loadTodayBrandOutfits(weather)
+            }
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -77,7 +83,6 @@ class HomeViewController: UIViewController{
             let targetVC = segue.destinationViewController as! OutfitViewController
             targetVC.currentOutfits = self.outfitSelected!["outfit"].arrayObject
         }
-        
     }
     
     func addButtonPressed(){
@@ -89,6 +94,9 @@ class HomeViewController: UIViewController{
     }
     
     private func createArrowImageView(){
+        if let imageView = self.arrowImageView {
+            imageView.removeFromSuperview()
+        }
         self.arrowImageView = UIImageView(image: UIImage(named: "arrowIcon"))
         let p = self.bubbleImageView.convertPoint(self.bubbleImageView.frame.origin, toView: self.view)
         self.arrowImageView!.frame = CGRectMake(bubbleImageView.frame.width + bubbleImageView.frame.origin.x, 64, 64.0, p.y - 64.0)

@@ -165,9 +165,11 @@ extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if let del = self.delegate {
-            let outfitElem = self.outfitsCollection![indexPath.row]
-            del.showOutfits(outfitElem)
+        if isEnoughOutfits {
+            if let del = self.delegate {
+                let outfitElem = self.outfitsCollection![indexPath.row]
+                del.showOutfits(outfitElem)
+            }
         }
     }
 }

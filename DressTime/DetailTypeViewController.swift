@@ -24,13 +24,15 @@ class DetailTypeViewController: UIViewController {
     @IBOutlet weak var emptyViewLabel: UILabel!
     @IBOutlet weak var emptyViewButton: UIButton!
     @IBOutlet weak var emptyViewImage: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        initData()
+        
         tableView.registerNib(UINib(nibName: "ClotheTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
         
         tableView!.delegate = self
         tableView!.dataSource = self
+        self.tableView.tableFooterView = UIView(frame: CGRectZero)
         //TODO Manage Localization
         titleNav.title = "My \(typeClothe!.uppercaseString)!"
         
@@ -38,6 +40,12 @@ class DetailTypeViewController: UIViewController {
         emptyViewButton.layer.borderColor = UIColor.whiteColor().CGColor
         emptyViewButton.layer.borderWidth = 1.0
         emptyViewImage.image = UIImage(named: "underwearIcon\(SharedData.sharedInstance.sexe!.uppercaseString)")
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        initData()
+        tableView.reloadData()
         if (clothesList?.count > 0){
             self.emptyView.hidden = true
             self.tableView.hidden = false
@@ -45,10 +53,7 @@ class DetailTypeViewController: UIViewController {
             self.emptyView.hidden = false
             self.tableView.hidden = true
         }
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
+
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Profile", comment: ""), style: .Plain, target: nil, action: nil)
     }
@@ -77,7 +82,13 @@ class DetailTypeViewController: UIViewController {
         }
         self.clothesList!.removeAtIndex(indexPath.row)
         self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-    }
+        if (clothesList?.count > 0){
+            self.emptyView.hidden = true
+            self.tableView.hidden = false
+        } else {
+            self.emptyView.hidden = false
+            self.tableView.hidden = true
+        }    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "detailClothe") {

@@ -123,6 +123,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "HomeViewController.viewDidAppear(Bool) -&gt; ():HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.currentWeather">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DressTime.TypeViewController.collectionView (DressTime.TypeViewController)(ObjectiveC.UICollectionView, layout : ObjectiveC.UICollectionViewLayout, sizeForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; C.CGSize:TypeViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -618,6 +626,14 @@
             </PersistentString>
             <PersistentString
                value = "print(response)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeViewController.viewWillAppear(Bool) -&gt; ():HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " self.numberOfClothes">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
