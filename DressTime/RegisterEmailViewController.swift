@@ -18,92 +18,72 @@ class RegisterEmailViewController: UIViewController {
     @IBOutlet weak var onShowPasswordTap: UIButton!
     
     private var email:String = ""
-    private var password: String = ""
-    
-    private var isEmailStep = true
-    
-    @IBAction func onHidePasswordTapped(sender: AnyObject) {
-        if (emailText.secureTextEntry) {
-            emailText.secureTextEntry = false
-            hidePasswordButton.setImage(UIImage(named: "eyesclosdIcon"), forState: .Normal)
-        } else {
-            emailText.secureTextEntry = true
-            hidePasswordButton.setImage(UIImage(named: "eyesopen"), forState: .Normal)
-        }
-    }
-    
+    private var isWrong = false
+   
     @IBAction func onCancelTapped(sender: AnyObject) {
-        if (isEmailStep){
-            self.dismissViewControllerAnimated(true, completion: nil)
-        } else {
-            showEmail()
-            isEmailStep = true
-        }
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func onCreateButtonTapped(sender: AnyObject) {
         //Validate Email et go to step 2 choose password if email password
-        if (email == ""){
-            if let emailTemp = emailText.text {
-                if (isValidEmail(emailTemp) && emailTemp != "barack.obama@usa.gov"){
-                    email = emailTemp
-                    isEmailStep = false
-                    showPassword()
-                } else {
-                    //Show error
-                }
+        if let emailTemp = emailText.text {
+            if (isValidEmail(emailTemp)){
+                email = emailTemp
+                isWrong = false
+                self.performSegueWithIdentifier("selectPassword", sender: self)
+            } else {
+                //Show error
+                let alert = UIAlertController(title: NSLocalizedString("loginErrTitle", comment: ""), message: NSLocalizedString("loginErrMessage", comment: ""), preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("loginErrButton", comment: ""), style: .Default) { _ in })
+                self.presentViewController(alert, animated: true){}
             }
-        } else if (email != "") {
-            if let passwordTemp = emailText.text {
-                if (passwordTemp != "MySecurePassword2015"){
-                    password = passwordTemp
-                    self.performSegueWithIdentifier("selectSexe", sender: self)
-                }
-            }
-        
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        showEmail()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+        configNavBar()
+        emailText.attributedPlaceholder = NSAttributedString(string:"barack.obama@usa.gov",
+            attributes:[NSForegroundColorAttributeName: UIColor(red: 255, green: 255, blue: 255, alpha: 0.60),
+                NSFontAttributeName: UIFont.italicSystemFontOfSize(15.0)])
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        emailText.text = email
     }
     
     override func viewDidLayoutSubviews(){
         applyStyleTextView(emailText)
-        createAccountButton.layer.borderColor = UIColor.whiteColor().CGColor
-        createAccountButton.layer.borderWidth = 1.0
-        createAccountButton.layer.cornerRadius = 10.0
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "selectSexe") {
-            if let viewController = segue.destinationViewController as? RegisterSexeViewController {
+        if (segue.identifier == "selectPassword") {
+            if let viewController = segue.destinationViewController as? RegisterPasswordViewController {
                 viewController.email = email
-                viewController.password = password
             }
         }
     }
     
-    private func showPassword(){
-        textLabel.text = "PASSWORD"
-        emailText.text = "MySecurePassword2015"
-        hidePasswordButton.hidden = false
-        emailText.secureTextEntry = true
-        hidePasswordButton.setImage(UIImage(named: "eyesopen"), forState: .Normal)
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
     
-    private func showEmail(){
-        textLabel.text = "YOUR EMAIL"
-        emailText.text = email == "" ? "barack.obama@usa.gov" : email
-        email = ""
-        password = ""
-        hidePasswordButton.hidden = true
-        emailText.secureTextEntry = false
-        view.endEditing(true)
+    private func configNavBar(){
+        let bar:UINavigationBar! =  self.navigationController?.navigationBar
+        
+        bar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        bar.shadowImage = UIImage()
+        bar.tintColor = UIColor.whiteColor()
+        self.navigationController?.view.backgroundColor = UIColor.clearColor()
+        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
+        //Remove Title of Back button
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
     }
-
     
     private func applyStyleTextView(textField: UITextField){
         let bottomLine = CALayer()
@@ -121,4 +101,5 @@ class RegisterEmailViewController: UIViewController {
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluateWithObject(testStr)
     }
+    
 }

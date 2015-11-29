@@ -68,49 +68,16 @@ extension HomeBrandOutfitsListCell: UICollectionViewDataSource, UICollectionView
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! OufitCell
         cell.removeOldImages()
         var outfitElem = self.outfitsCollection![indexPath.row]
-        let outfit = outfitElem["outfit"]
         cell.setNeedsLayout()
         cell.layoutIfNeeded()
-        var j = 1
-        
-        for (var i = outfit.count-1; i >= 0 ; i--){
-            let width:CGFloat = cell.containerView.frame.width
-            var height:CGFloat = CGFloat(cell.containerView.frame.height/CGFloat(outfit.count))
-            let x:CGFloat = 0
-            var y:CGFloat = 0
-            if (i == 0){
-                y = 0
-                if (outfit.count == 1){
-                    height = cell.containerView.frame.height
-                } else if (outfit.count == 2){
-                    height = 110
-                } else {
-                    height = 80
-                }
-                
-            } else {
-                if (outfit.count == 2){
-                    height = 90
-                } else {
-                    height = 65
-                }
-                
-                if (i == (outfit.count-1)){
-                    y = cell.containerView.frame.height - (height * CGFloat(j))
-                } else {
-                    y = cell.containerView.frame.height - (height * CGFloat(j)) + 10.0
-                }
-                
-            }
-            
-            let rect = CGRectMake(x, y, width, height)
-            j++
-            let clothe_image = outfit[i]["clothe_image"].string
-            cell.setBrandClothe(clothe_image!, partnerName: outfit[i]["clothe_partnerName"].stringValue, rate: outfitElem["matchingRate"].intValue, rect: rect)
-        }
-
-        
-        return cell
+        let width:CGFloat = cell.containerView.frame.width
+        let height:CGFloat = cell.containerView.frame.height
+        let x:CGFloat = 0
+        let y:CGFloat = 0
+        let rect = CGRectMake(x, y, width, height)
+        let clothe_image = outfitElem["clothe_image"].string
+        cell.setBrandClothe(clothe_image!, partnerName: outfitElem["clothe_partnerName"].stringValue, rate: 0, rect: rect)
+         return cell
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {

@@ -96,7 +96,11 @@ class DressingSynchro {
                     }
 
                 }
-            }
+            } /*else {
+                if let del = self.delagate{
+                    del.syncDidFinish()
+                }
+            }*/
         }
     }
     
@@ -111,6 +115,10 @@ class DressingSynchro {
                 let isUnis = clothe["clothe_isUnis"].boolValue
                 
                 clotheDAL.save(clothe["clothe_id"].stringValue, partnerId: clothe["clothe_partnerid"].floatValue, partnerName: clothe["clothe_partnerName"].stringValue, type: clothe["clothe_type"] .stringValue, subType: clothe["clothe_subtype"].stringValue, name: clothe["clothe_name"].stringValue , isUnis: isUnis, pattern: clothe["clothe_pattern"].stringValue, cut: clothe["clothe_cut"].stringValue, image: data, colors: clothe["clothe_colors"].stringValue)
+            }
+            
+            if let del = self.delagate{
+                del.syncDidFinish()
             }
         }
     }

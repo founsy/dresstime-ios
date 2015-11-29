@@ -17,6 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         if let login = loginText.text {
             if let password = passwordText.text {
                 view.endEditing(true)
+                ActivityLoader.shared.showProgressView(self.view)
                 LoginService().Login(login, password: password) { (isSuccess, object) -> Void in
                     if (isSuccess){
                         let dal = ProfilsDAL()
@@ -44,8 +45,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         //Check after login, if a synchro is necessary
                         //Today, only if Local database is empty
                         //TODO - Tomorrow, syncro differential
-                        ActivityLoader.shared.showProgressView(self.view)
-                        
                         let dressingSynchro = DressingSynchro(userId: SharedData.sharedInstance.currentUserId!)
                         dressingSynchro.delagate = self
                         dressingSynchro.execute({ (isNeeded) -> Void in
@@ -56,6 +55,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         
                         
                     } else {
+                        ActivityLoader.shared.hideProgressView()
                         let alert = UIAlertController(title: NSLocalizedString("loginErrTitle", comment: ""), message: NSLocalizedString("loginErrMessage", comment: ""), preferredStyle: .Alert)
                         alert.addAction(UIAlertAction(title: NSLocalizedString("loginErrButton", comment: ""), style: .Default) { _ in })
                         self.presentViewController(alert, animated: true){}
@@ -88,6 +88,17 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.navigationBarHidden = true
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let alreadyLaunch = defaults.boolForKey("alreadyLaunch")
+        if (!alreadyLaunch) {
+            defaults.setValue(true, forKey: "alreadyLaunch")
+            //Display Tutorial
+            self.performSegueWithIdentifier("showTutorial", sender: self)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -96,7 +107,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     private func goToHome(){
         ActivityLoader.shared.hideProgressView()
         dispatch_async(dispatch_get_main_queue(),  { () -> Void in
-            
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
@@ -108,6 +118,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
 extension LoginViewController: DressingSynchroDelegate {
     func syncDidFinish() {
-        goToHome()
+        dispatch_async(dispatch_get_main_queue(),  { () -> Void in
+            self.goToHome()
+        })
     }
 }

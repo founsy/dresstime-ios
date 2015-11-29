@@ -20,6 +20,7 @@
 /* OutfitViewController */
 "HOME" = "HOME";
 "OUTFIT OF THE DAY" = "OUTFIT OF THE DAY";
+"SOMETHING MISSING" = "SOMETHING IS MISSING .. NO ?";
 
 /* Detail Type View Controller */
 "Edit" =  "Edit";
@@ -62,10 +63,20 @@
 /*Capture*/
 "plain" = "plain";
 "Hstripe" = "h stripes";
-"Vstripe" = "v striples";
+"Vstripe" = "v stripes";
 "check" = "check";
 "gingham" = "gingham";
 "jacquard" = "jacquard";
 "printed" = "printed";
 "unisTouchImprime" = "printed touch";
 "floral" = "floral";
+
+/* Tutorial */
+
+"CAPTURE" = "CAPTURE";
+"CHECK" = "CHECK";
+"GET" = "GET";
+"YOUR CLOTHES" = "YOUR CLOTHES";
+"THAT IT MATCHES" = "THAT IT MATCHES";
+"SMART OUTFITS" = "SMART OUTFITS";
+"SMART SHOPPING LIST" = "SMART SHOPPING LIST";

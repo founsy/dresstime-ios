@@ -3,13 +3,48 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "AKPickerView.collectionView(UICollectionView, layout : UICollectionViewLayout, sizeForItemAtIndexPath : NSIndexPath) -&gt; CGSize:AKPickerView.swift">
+         contextName = "ProfilViewController.viewDidLoad() -&gt; ():ProfilViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "view.frame.size.width">
+               value = "headerView.frame">
             </PersistentString>
             <PersistentString
-               value = "self.sizeForString(patternView.patternLabel.text!).width">
+               value = "backgroundImage.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.NewCameraViewController.(drawClearRectArea in _914A6D1CD2687E25CD60B2523796137A) (DressTime.NewCameraViewController)() -&gt; ():NewCameraViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "scanArea.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.HomeOutfitsListCell.collectionView (DressTime.HomeOutfitsListCell)(ObjectiveC.UICollectionView, didSelectItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ():HomeOutfitsListCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.currentStyle">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "OutfitsViewController.(loadOutfitsByStyle in _41EA043F4A7C0CFFB95A291D9AD51DD8)() -&gt; ():OutfitsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "BL.getDayMoment(currentWeather!.hour!)">
+            </PersistentString>
+            <PersistentString
+               value = "styleOutfits">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfilViewController.prepareForSegue(UIStoryboardSegue, sender : AnyObject?) -&gt; ():ProfilViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "segue.identifier">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -25,51 +60,32 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.NewCameraViewController.(drawClearRectArea in _914A6D1CD2687E25CD60B2523796137A) (DressTime.NewCameraViewController)() -&gt; ():NewCameraViewController.swift">
+         contextName = "DressingSynchro.(updateMockableLocalstorage in _5D4E5A99B5AE9DBB58B651F0E284D94A)() -&gt; ():DressingSynchro.swift">
          <PersistentStrings>
             <PersistentString
-               value = "scanArea.frame">
+               value = "print(json)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.FilterView.initialize (DressTime.FilterView)() -&gt; ():FilterView.swift">
+         contextName = "HomeHeaderCell.collectionView(UICollectionView, numberOfItemsInSection : Int) -&gt; Int:HomeHeaderCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.dateContainer">
-            </PersistentString>
-            <PersistentString
-               value = "&amp;self.datePickerView">
+               value = "self.weatherList.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.ClothesDAL.fetch (DressTime.ClothesDAL)(Swift.String) -&gt; Swift.Array&lt;DressTime.Clothe&gt;:ClothesDAL.swift">
+         contextName = "static DressTime.DressTimeService.(getClothesIdDressing (DressTime.DressTimeService.Type) -&gt; (Swift.String, clotheCompleted : (succeeded : Swift.Bool, idList : Swift.Array&lt;Swift.String&gt;) -&gt; ()) -&gt; ()).(closure #1):DressTimeService.swift">
          <PersistentStrings>
             <PersistentString
-               value = " SharedData.sharedInstance.currentUser.userid">
+               value = "Array(array) as! [String]">
             </PersistentString>
             <PersistentString
-               value = "clothes.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.CollectionViewController.collectionView (DressTime.CollectionViewController)(ObjectiveC.UICollectionView, cellForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UICollectionViewCell:CollectionViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "cell.frame">
+               value = "q">
             </PersistentString>
             <PersistentString
-               value = "cell.subviews.count ">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.NewHomeViewController.weatherFinishing (DressTime.NewHomeViewController)() -&gt; ():NewHomeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "SharedData.sharedInstance.weatherCode">
+               value = "(msg[&quot;list&quot;] as? NSArray)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -82,32 +98,105 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTimeService.(getOutfitsToday in _3F9FBDEE54AB84ACC9699628EA4A9769)((isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():DressTimeService.swift">
+         contextName = "SettingsViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:SettingsViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "profil.gender">
-            </PersistentString>
-            <PersistentString
-               value = "print(profil)">
+               value = "indexPath.row">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.HomeViewController.showContainerView (DressTime.HomeViewController)() -&gt; ():HomeViewController.swift">
+         contextName = "DetailTypeViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:DetailTypeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.containerFrame">
+               value = "clothe.clothe_favorite">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "TypeViewController.openItem(Int) -&gt; ():TypeViewController.swift">
+         contextName = "TypeViewController.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:TypeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = " arrayForBool[typeIndex].boolValue">
+               value = "self.subTypes[self.currentSection][indexPath.row]">
             </PersistentString>
             <PersistentString
-               value = "arrayForBool.count">
+               value = " NSLocalizedString(self.subTypes[self.currentSection][indexPath.row], comment: &quot;&quot;)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CaptureConfirmationViewController.(applySelect in _3252D31F8E4653D5950B80A77EB70229)(Int) -&gt; ():CaptureConfirmationViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.patternData[j]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.ProfilViewController.collectionView (DressTime.ProfilViewController)(ObjectiveC.UICollectionView, cellForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UICollectionViewCell:ProfilViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "cell.subviews[1].remove()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewRegisterStyleViewContainer.(createCloneImage in _679001B8745959EB780324EBC29F2E1E)(UIImageView, location : CGPoint?) -&gt; UIImageView:NewRegisterStyleViewContainer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "loc.x">
+            </PersistentString>
+            <PersistentString
+               value = "newImage.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.TypeViewController.tableView (DressTime.TypeViewController)(ObjectiveC.UITableView, viewForHeaderInSection : Swift.Int) -&gt; Swift.Optional&lt;ObjectiveC.UIView&gt;:TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "arrayForBool.objectAtIndex(section).boolValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.LoginViewController.(onClickLoginBtn (DressTime.LoginViewController) -&gt; (Swift.AnyObject) -&gt; ()).(closure #1):LoginViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "profil.access_token">
+            </PersistentString>
+            <PersistentString
+               value = "newProfil.access_token">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "OutfitViewController.viewDidAppear(Bool) -&gt; ():OutfitViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tableView.bounds">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UIImage.imageResize(CGSize) -&gt; UIImage:UIImage-Extension.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.size.width">
+            </PersistentString>
+            <PersistentString
+               value = "self.size.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RegisterStyleViewController.(whichContainerSelected in _886C7AE956072BECE6D1576B06A28A46)(CGPoint) -&gt; UIImageView?:RegisterStyleViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.relaxSelected ">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -123,86 +212,203 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "HomeViewController.viewDidAppear(Bool) -&gt; ():HomeViewController.swift">
+         contextName = "OutfitViewController.viewDidLoad() -&gt; ():OutfitViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.currentWeather">
+               value = "self.currentOutfits.count">
+            </PersistentString>
+            <PersistentString
+               value = "self.tableView.frame.height">
+            </PersistentString>
+            <PersistentString
+               value = "self.view.frame.height">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.TypeViewController.collectionView (DressTime.TypeViewController)(ObjectiveC.UICollectionView, layout : ObjectiveC.UICollectionViewLayout, sizeForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; C.CGSize:TypeViewController.swift">
+         contextName = "DressTimeService.GetOutfitsByStyle(String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():DressTimeService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.tableView.frame.size.width">
+               value = "json">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTimeService.(getBrandClothes in _3F9FBDEE54AB84ACC9699628EA4A9769)((isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():DressTimeService.swift">
+         contextName = "HomeViewController.viewWillAppear(Bool) -&gt; ():HomeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "path">
-            </PersistentString>
-            <PersistentString
-               value = "print(path)">
+               value = " self.numberOfClothes">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTimeService.((getOutfits in _3F9FBDEE54AB84ACC9699628EA4A9769)(DressTimeService) -&gt; ([String], weather : Weather, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ()).(closure #1):DressTimeService.swift">
+         contextName = "RegisterStyleViewController.(createTempImageView in _886C7AE956072BECE6D1576B06A28A46)(UIImageView) -&gt; UIImageView:RegisterStyleViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "profil.refresh_token">
-            </PersistentString>
-            <PersistentString
-               value = "response.response?.statusCode">
-            </PersistentString>
-            <PersistentString
-               value = "profil.access_token">
-            </PersistentString>
-            <PersistentString
-               value = "dal">
+               value = "temp.constraints">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "TypeSelectionCell.(createBorderButton in _E75CDD17C72D1D1EA0D37963F3DDFC10)(UIButton, isSelected : Bool) -&gt; ():TypeSelectionCell.swift">
+         contextName = "RegisterStyleViewController.(whichStyle in _886C7AE956072BECE6D1576B06A28A46)(UIImageView) -&gt; CGPoint?:RegisterStyleViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "btn.frame.size.width">
+               value = "image.center">
+            </PersistentString>
+            <PersistentString
+               value = "image.frame.origin">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "OutfitViewController.(onDressUpTapped(OutfitViewController) -&gt; (AnyObject) -&gt; ()).(closure #1):OutfitViewController.swift">
+         contextName = "CaptureConfirmationViewController.pickerView(AKPickerView, didSelectItem : Int) -&gt; ():CaptureConfirmationViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "UIScreen.mainScreen().bounds.size.height/2.0">
+               value = "cell.subviews.count">
+            </PersistentString>
+            <PersistentString
+               value = "(cell.subviews[0].subviews[0] as! PatternView)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SettingsViewController.onSaveTapped(AnyObject) -&gt; ():SettingsViewController.swift">
+         contextName = "static DressTimeService.(getClothesIdDressing(DressTimeService.Type) -&gt; (String, clotheCompleted : (succeeded : Bool, idList : [String]) -&gt; ()) -&gt; ()).(closure #1):DressTimeService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.confirmationView.frame">
+               value = "item[&quot;id&quot;] as String">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.AppDelegate.(application (DressTime.AppDelegate) -&gt; (ObjectiveC.UIApplication, didFinishLaunchingWithOptions : Swift.Optional&lt;Swift.Dictionary&lt;ObjectiveC.NSObject, Swift.AnyObject&gt;&gt;) -&gt; Swift.Bool).(closure #1):AppDelegate.swift">
+         contextName = "HomeHeaderCell.collectionView(UICollectionView, didSelectItemAtIndexPath : NSIndexPath) -&gt; ():HomeHeaderCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "msg[&quot;refresh_token&quot;] as! String">
+               value = "self.weatherList[self.selectedWeather]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.HomeOutfitsListCell.collectionView (DressTime.HomeOutfitsListCell)(ObjectiveC.UICollectionView, didSelectItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ():HomeOutfitsListCell.swift">
+         contextName = "DressTime.TodayViewController.(updateWeather (DressTime.TodayViewController) -&gt; (Swift.Int, high : Swift.String, low : Swift.String, city : Swift.String) -&gt; ()).(closure #2):TodayViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "cell.currentStyle">
+               value = "outfit[&quot;maille&quot;][&quot;clothe_id&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = " item.clothe_image">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ClotheSelectionCell.collectionView(UICollectionView, numberOfItemsInSection : Int) -&gt; Int:ClotheSelectionCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " clothes.count">
+            </PersistentString>
+            <PersistentString
+               value = "clothes[0][&quot;brandClothe&quot;][&quot;clothe_type&quot;].stringValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeOutfitsListCell.(createClotheView in _93EE669A28786630E981580C71297921)(Clothe, cell : OufitCell) -&gt; ():HomeOutfitsListCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.containerView.frame.height - height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ClotheSelectionCell.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:ClotheSelectionCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.ProfilViewController.viewDidLoad (DressTime.ProfilViewController)() -&gt; ():ProfilViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "mailleCollection.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WeatherService.((getForecastWeather in _858750E29D673418FBFC48EBC1E2C077)(WeatherService) -&gt; (CLLocation, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ()).(closure #1):WeatherService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " print(response.response)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.FilterView.initialize (DressTime.FilterView)() -&gt; ():FilterView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.dateContainer">
+            </PersistentString>
+            <PersistentString
+               value = "&amp;self.datePickerView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.NewHomeViewController.prepareForSegue (DressTime.NewHomeViewController)(ObjectiveC.UIStoryboardSegue, sender : Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ():NewHomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.currentStyleSelected">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.CameraOverlayView.cameraSessionDidOutputSampleBuffer (DressTime.CameraOverlayView)(Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CMSampleBuffer&gt;) -&gt; ():CameraOverlayView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "image.size">
+            </PersistentString>
+            <PersistentString
+               value = "self.currentImage.size">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static DressTime.WeatherService.(getWeather (DressTime.WeatherService.Type) -&gt; (ObjectiveC.CLLocation, weatherCompleted : (succeeded : Swift.Bool, msg : Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;) -&gt; ()) -&gt; ()).(closure #1):WeatherService.swift">
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.HomeViewController.handlePan (DressTime.HomeViewController)(ObjectiveC.UIPanGestureRecognizer) -&gt; ():HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "recognizer.state">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.OutfitCollectionViewController.collectionView (DressTime.OutfitCollectionViewController)(ObjectiveC.UICollectionView, cellForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UICollectionViewCell:OutfitCollectionViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "pants.frame">
+            </PersistentString>
+            <PersistentString
+               value = "self.collection.count">
+            </PersistentString>
+            <PersistentString
+               value = "outfit.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewSettingsViewController.viewDidLoad() -&gt; ():NewSettingsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "user.onPartySelected">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.ProfilViewController.prepareForSegue (DressTime.ProfilViewController)(ObjectiveC.UIStoryboardSegue, sender : Swift.ImplicitlyUnwrappedOptional&lt;Swift.AnyObject&gt;) -&gt; ():ProfilViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "segue.destinationViewController ">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -215,6 +421,80 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "DressTime.TypeViewController.collectionView (DressTime.TypeViewController)(ObjectiveC.UICollectionView, cellForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UICollectionViewCell:TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "count/2">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.row/2">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.HomeHeaderCell.locationManager (DressTime.HomeHeaderCell)(Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CLLocationManager&gt;, didUpdateLocations : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Array&lt;Swift.AnyObject&gt;&gt;) -&gt; ():HomeHeaderCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.currentLocation">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SettingsStyleCell.(whichContainerSelected in _CBC7436A3C00BE231BF4F51C764CF409)(CGPoint) -&gt; UIImageView?:SettingsStyleCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "atWorkContainer.frame">
+            </PersistentString>
+            <PersistentString
+               value = "self.contentView.convertPoint(location, fromView: self)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static DressTime.LoginService.(loginMethod (DressTime.LoginService.Type) -&gt; (Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;, postCompleted : (succeeded : Swift.Bool, msg : Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;) -&gt; ()) -&gt; ()).(closure #1):LoginService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "msg">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "SettingsStyleCell.touchesBegan(Set&lt;UITouch&gt;, withEvent : UIEvent?) -&gt; ():SettingsStyleCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.containerView.convertRect(self.atWorkContainer.frame, fromView: self)">
+            </PersistentString>
+            <PersistentString
+               value = "self.superview">
+            </PersistentString>
+            <PersistentString
+               value = "self.atWorkContainer.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static DressTime.DressTimeService.(getClothe (DressTime.DressTimeService.Type) -&gt; (Swift.String, clotheId : Swift.String, clotheCompleted : (succeeded : Swift.Bool, clothe : Swift.AnyObject) -&gt; ()) -&gt; ()).(closure #1):DressTimeService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "msg[&quot;clothe&quot;] as! String">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.TypeViewController.tableView (DressTime.TypeViewController)(ObjectiveC.UITableView, cellForRowAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UITableViewCell:TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.bgImage">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+            <PersistentString
+               value = "tableView.frame.size.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "OutfitViewController.tableView(UITableView, numberOfRowsInSection : Int) -&gt; Int:OutfitViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -223,10 +503,372 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "WeatherWrapper.wrapListWeather(JSON, forecast : JSON) -&gt; [Weather]:WeatherWrapper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(subjson)">
+            </PersistentString>
+            <PersistentString
+               value = "data[i]">
+            </PersistentString>
+            <PersistentString
+               value = "subjson[&quot;dt_txt&quot;].stringValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RegisterStyleViewController.viewDidLoad() -&gt; ():RegisterStyleViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.confirmationView!.frame">
+            </PersistentString>
+            <PersistentString
+               value = "self.currentUserId">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.TypeViewController.calculateCollectionViewHeigh (DressTime.TypeViewController)() -&gt; CoreGraphics.CGFloat:TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "round(Double(labelsSubTop.count)/2.0)">
+            </PersistentString>
+            <PersistentString
+               value = "labelsSubTop.count">
+            </PersistentString>
+            <PersistentString
+               value = "height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "UserService.((createUser in _FB3E589A3D30C8483E90F674004580CD)(UserService) -&gt; (Profil, password : String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ()).(closure #1):UserService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(response)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeHeaderCell.(locationManager(HomeHeaderCell) -&gt; (CLLocationManager, didUpdateLocations : [CLLocation]) -&gt; ()).(closure #1).(closure #1):HomeHeaderCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.weatherList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ShoppingViewController.((loadBrandClothe in _B32BF079880571CE877C037BDB9BB455)(ShoppingViewController) -&gt; () -&gt; ()).(closure #1):ShoppingViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.brandClotheCell!.brandClothe">
+            </PersistentString>
+            <PersistentString
+               value = "print(object)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CameraSessionManager.addVideoInput() -&gt; Bool:CameraSessionManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "CameraSessionManager">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewLoginService.(Login(NewLoginService) -&gt; (String, password : String) -&gt; ()).(closure #1):NewLoginService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "response.data.valueForKey(&quot;access_token&quot;)">
+            </PersistentString>
+            <PersistentString
+               value = "response.result.value">
+            </PersistentString>
+            <PersistentString
+               value = "JSON[&quot;access_token&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "access_token as String">
+            </PersistentString>
+            <PersistentString
+               value = "response.result">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static Mock.isMockable() -&gt; Bool:LoginService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "SharedData.sharedInstance.currentUserId?">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewRegisterStyleViewContainer.(isAreaEmpty in _679001B8745959EB780324EBC29F2E1E)(UIImageView) -&gt; Bool:NewRegisterStyleViewContainer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "container.accessibilityIdentifier">
+            </PersistentString>
+            <PersistentString
+               value = "self.atWorkSelected">
+            </PersistentString>
+            <PersistentString
+               value = "self.relaxSelected!.isEmpty">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LoginViewController.(onClickLoginBtn(LoginViewController) -&gt; (AnyObject) -&gt; ()).(closure #1):LoginViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "pro.gender">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.HomeViewController.showContainerView (DressTime.HomeViewController)() -&gt; ():HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.containerFrame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.ClotheDetailController.viewDidLoad (DressTime.ClotheDetailController)() -&gt; ():ClotheDetailController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentClothe.clothe_colors">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.ClothesDAL.fetch (DressTime.ClothesDAL)() -&gt; Swift.Array&lt;DressTime.Clothe&gt;:ClothesDAL.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "fetchResults.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.TodayViewController.(locationManager (DressTime.TodayViewController) -&gt; (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CLLocationManager&gt;, didUpdateLocations : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Array&lt;Swift.AnyObject&gt;&gt;) -&gt; ()).(closure #1):TodayViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "channel[&quot;location&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "(condition[&quot;code&quot;] as! String).toInt()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.HexColorToName.name (DressTime.HexColorToName)(ObjectiveC.UIColor) -&gt; Swift.Array&lt;Swift.AnyObject&gt;:HexColorToName.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.colorName[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ClotheSelectionCell.numberOfItemsInPickerView(AKPickerView) -&gt; Int:ClotheSelectionCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.selectedClothe!.count">
+            </PersistentString>
+            <PersistentString
+               value = "selectedType">
+            </PersistentString>
+            <PersistentString
+               value = "self.brandClothe">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "String.toDateTime() -&gt; NSDate:WeatherWrapper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+            <PersistentString
+               value = "self">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTimeService.((getOutfitsToday in _3F9FBDEE54AB84ACC9699628EA4A9769)(DressTimeService) -&gt; ((isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ()).(closure #1):DressTimeService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(response.request)">
+            </PersistentString>
+            <PersistentString
+               value = "print(response)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewRegisterStyleViewContainer.(whichStyle in _679001B8745959EB780324EBC29F2E1E)(UITouch) -&gt; ():NewRegisterStyleViewContainer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "touch.view.accessibilityIdentifier">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "OutfitViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:OutfitViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.currentOutfits">
+            </PersistentString>
+            <PersistentString
+               value = "outfit[&quot;clothe_type&quot;]!.string">
+            </PersistentString>
+            <PersistentString
+               value = "self.currentOutfits[indexPath.row] as? JSON">
+            </PersistentString>
+            <PersistentString
+               value = "cell.contentView.bounds.size.height">
+            </PersistentString>
+            <PersistentString
+               value = "cell.contentView.bounds.size.width">
+            </PersistentString>
+            <PersistentString
+               value = "outfit">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ClotheSelectionCell.(applySelect in _41CE891D5E44AAF29B0437B6183FC655)(Int) -&gt; ():ClotheSelectionCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "view.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HexColorToName.hexStringFromColor(UIColor) -&gt; String:HexColorToName.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "Int(b * 255)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RegisterStyleViewController.onSaveTapped(AnyObject) -&gt; ():RegisterStyleViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.atWorkSelected">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "OutfitsViewController.(populateControllersArray in _41EA043F4A7C0CFFB95A291D9AD51DD8)() -&gt; ():OutfitsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "outfits.count">
+            </PersistentString>
+            <PersistentString
+               value = "self.outfitsCollection[0]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RegisterStyleViewController.touchesEnded(Set&lt;UITouch&gt;, withEvent : UIEvent?) -&gt; ():RegisterStyleViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tempUIImage!.center">
+            </PersistentString>
+            <PersistentString
+               value = "self.casualStyle.convertPoint(self.casualStyle.center, toView: self.view)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewRegisterStyleViewContainer.(setStyleForArea in _679001B8745959EB780324EBC29F2E1E)(UIImageView, style : String) -&gt; ():NewRegisterStyleViewContainer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "container.accessibilityIdentifier">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.TypeViewController.tableView (DressTime.TypeViewController)(ObjectiveC.UITableView, heightForHeaderInSection : Swift.Int) -&gt; CoreGraphics.CGFloat:TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tableview.bounds.height">
+            </PersistentString>
+            <PersistentString
+               value = "round(height*0.33333)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeViewController.(createArrowImageView in _F0FEB500489D9228EB52A9BCCA599548)() -&gt; ():HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " p.y">
+            </PersistentString>
+            <PersistentString
+               value = " bubbleImageView.frame.origin.y">
+            </PersistentString>
+            <PersistentString
+               value = "self.arrowImageView!.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CaptureConfirmationViewController.pickerView(AKPickerView, viewForItem : Int) -&gt; UIView:CaptureConfirmationViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "pickerView.sizeForString(self.patternData[7])">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.HomeViewController.viewDidLoad (DressTime.HomeViewController)() -&gt; ():HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.containerFrame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.ProfilViewController.onLogoutClick (DressTime.ProfilViewController)(Swift.AnyObject) -&gt; ():ProfilViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "AppDelegate.CurrentUser.currentUser.userid">
+            </PersistentString>
+            <PersistentString
+               value = "user.userid">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewLoginService.((login in _842E7303190A5B28BB95827F907B63C1)(NewLoginService) -&gt; (String, password : String) -&gt; ()).(closure #1):NewLoginService.swift">
+      </ContextState>
+      <ContextState
          contextName = "HomeHeaderCell.updateWeather(Int, high : String, low : String, city : String) -&gt; ():HomeHeaderCell.swift">
          <PersistentStrings>
             <PersistentString
                value = "SharedData.sharedInstance.weatherCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ClotheMatchSelectionCell.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:ClotheMatchSelectionCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(clothesMatched)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTimeService.(getOutfitsByStyle in _3F9FBDEE54AB84ACC9699628EA4A9769)(String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():DressTimeService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "profil.access_token">
+            </PersistentString>
+            <PersistentString
+               value = "print(&quot;Bearer \(profil.access_token!)&quot;)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -239,10 +881,16 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.DetailTypeViewController.tableView (DressTime.DetailTypeViewController)(ObjectiveC.UITableView, numberOfRowsInSection : Swift.Int) -&gt; Swift.Int:DetailTypeViewController.swift">
+         contextName = "HomeOutfitsListCell.loadTodayOutfits(Weather) -&gt; ():HomeOutfitsListCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "list.count">
+               value = " self.dayMoment">
+            </PersistentString>
+            <PersistentString
+               value = "self.contentView.frame">
+            </PersistentString>
+            <PersistentString
+               value = "weather.hour!">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -255,10 +903,29 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "LoginViewController.(onClickLoginBtn(LoginViewController) -&gt; (AnyObject) -&gt; ()).(closure #1).(closure #1):LoginViewController.swift">
+         contextName = "HomeOutfitsListCell.collectionView(UICollectionView, didSelectItemAtIndexPath : NSIndexPath) -&gt; ():HomeOutfitsListCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.navigationController!.viewControllers">
+               value = "self.typeClothe">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WeatherWrapper.getHour(Double) -&gt; Int:WeatherWrapper.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "components.hour">
+            </PersistentString>
+            <PersistentString
+               value = "NSTimeZone.localTimeZone().secondsFromGMT">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTimeBL.getStyleByMoment([String]) -&gt; [String]:DressTimeBL.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "profil.atWorkStyle">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -289,177 +956,35 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.TypeViewController.collectionView (DressTime.TypeViewController)(ObjectiveC.UICollectionView, cellForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UICollectionViewCell:TypeViewController.swift">
+         contextName = "ClotheScrollTableCell.singleTapped(UITapGestureRecognizer) -&gt; ():ClotheScrollTableCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "count/2">
+               value = "sender.view!.tag">
             </PersistentString>
             <PersistentString
-               value = "indexPath.row/2">
+               value = "sender.view!">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "OutfitsViewController.(populateControllersArray in _41EA043F4A7C0CFFB95A291D9AD51DD8)() -&gt; ():OutfitsViewController.swift">
+         contextName = "DressTimeService.(getOutfitsToday in _3F9FBDEE54AB84ACC9699628EA4A9769)((isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():DressTimeService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "outfits.count">
+               value = "profil.gender">
             </PersistentString>
             <PersistentString
-               value = "self.outfitsCollection[0]">
+               value = "print(profil)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "HomeHeaderCell.(locationManager(HomeHeaderCell) -&gt; (CLLocationManager, didUpdateLocations : [CLLocation]) -&gt; ()).(closure #1).(closure #1):HomeHeaderCell.swift">
+         contextName = "TypeViewController.openItem(Int) -&gt; ():TypeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.weatherList">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.ProfilViewController.collectionView (DressTime.ProfilViewController)(ObjectiveC.UICollectionView, cellForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UICollectionViewCell:ProfilViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "indexPath.row">
+               value = " arrayForBool[typeIndex].boolValue">
             </PersistentString>
             <PersistentString
-               value = "cell.subviews[1].remove()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "WeatherService.((getForecastWeather in _858750E29D673418FBFC48EBC1E2C077)(WeatherService) -&gt; (CLLocation, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ()).(closure #1):WeatherService.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = " print(response.response)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserService.(createUser in _FB3E589A3D30C8483E90F674004580CD)(Profil, password : String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():UserService.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "print(parameters)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.DetailTypeViewController.viewDidLoad (DressTime.DetailTypeViewController)() -&gt; ():DetailTypeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "titleNav.title">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CaptureConfirmationViewController.pickerView(AKPickerView, viewForItem : Int) -&gt; UIView:CaptureConfirmationViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "pickerView.sizeForString(self.patternData[7])">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "WeatherWrapper.wrapListWeather(JSON, forecast : JSON) -&gt; [Weather]:WeatherWrapper.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "print(subjson)">
-            </PersistentString>
-            <PersistentString
-               value = "data[i]">
-            </PersistentString>
-            <PersistentString
-               value = "subjson[&quot;dt_txt&quot;].stringValue">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.TypeViewController.tableView (DressTime.TypeViewController)(ObjectiveC.UITableView, viewForHeaderInSection : Swift.Int) -&gt; Swift.Optional&lt;ObjectiveC.UIView&gt;:TypeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "arrayForBool.objectAtIndex(section).boolValue">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "OutfitViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:OutfitViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.currentOutfits">
-            </PersistentString>
-            <PersistentString
-               value = "outfit[&quot;clothe_type&quot;]!.string">
-            </PersistentString>
-            <PersistentString
-               value = "self.currentOutfits[indexPath.row] as? JSON">
-            </PersistentString>
-            <PersistentString
-               value = "cell.contentView.bounds.size.height">
-            </PersistentString>
-            <PersistentString
-               value = "cell.contentView.bounds.size.width">
-            </PersistentString>
-            <PersistentString
-               value = "outfit">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ClotheSelectionCell.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:ClotheSelectionCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "indexPath.row">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserService.((createUser in _FB3E589A3D30C8483E90F674004580CD)(UserService) -&gt; (Profil, password : String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ()).(closure #1):UserService.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "print(response)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "HomeOutfitsListCell.loadTodayOutfits(Weather) -&gt; ():HomeOutfitsListCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = " self.dayMoment">
-            </PersistentString>
-            <PersistentString
-               value = "self.contentView.frame">
-            </PersistentString>
-            <PersistentString
-               value = "weather.hour!">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "OutfitsViewController.(loadOutfitsByStyle in _41EA043F4A7C0CFFB95A291D9AD51DD8)() -&gt; ():OutfitsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "BL.getDayMoment(currentWeather!.hour!)">
-            </PersistentString>
-            <PersistentString
-               value = "styleOutfits">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.HomeViewController.handlePan (DressTime.HomeViewController)(ObjectiveC.UIPanGestureRecognizer) -&gt; ():HomeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "recognizer.state">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "LoginViewController.(onClickLoginBtn(LoginViewController) -&gt; (AnyObject) -&gt; ()).(closure #1):LoginViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "pro.gender">
+               value = "arrayForBool.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -472,72 +997,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.NewHomeViewController.prepareForSegue (DressTime.NewHomeViewController)(ObjectiveC.UIStoryboardSegue, sender : Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ():NewHomeViewController.swift">
+         contextName = "DressTime.OutfitsViewController.tableView (DressTime.OutfitsViewController)(ObjectiveC.UITableView, cellForRowAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UITableViewCell:OutfitsViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.currentStyleSelected">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.TypeViewController.collectionView (DressTime.TypeViewController)(ObjectiveC.UICollectionView, willDisplayCell : ObjectiveC.UICollectionViewCell, forItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ():TypeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "collectionView.numberOfItemsInSection(0)%2">
-            </PersistentString>
-            <PersistentString
-               value = "collectionView.numberOfItemsInSection(0)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.TypeViewController.sectionHeaderTapped (DressTime.TypeViewController)(ObjectiveC.UITapGestureRecognizer) -&gt; ():TypeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "indexPath.section">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "NewOufitCell.createClotheView(Clothe, rect : CGRect) -&gt; ():NewOutfitCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "rect">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ClotheMatchSelectionCell.collectionView(UICollectionView, numberOfItemsInSection : Int) -&gt; Int:ClotheMatchSelectionCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "print(clothesMatched)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "RegisterStyleViewController.(initStyleSelected in _886C7AE956072BECE6D1576B06A28A46)(String, containerName : String) -&gt; ():RegisterStyleViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "container!.center">
-            </PersistentString>
-            <PersistentString
-               value = "container!.superview!.convertPoint(container!.frame.origin, toView: nil)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.HomeViewController.viewDidLoad (DressTime.HomeViewController)() -&gt; ():HomeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.containerFrame">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ProfilViewController.onAddTypedTapped(NSIndexPath) -&gt; ():ProfilViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "indexPath.row">
+               value = "println(self.currentOutfits)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -559,13 +1022,21 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "HomeHeaderCell.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:HomeHeaderCell.swift">
+         contextName = "DressTimeService.((getOutfitsByStyle in _3F9FBDEE54AB84ACC9699628EA4A9769)(DressTimeService) -&gt; (String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ()).(closure #1):DressTimeService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "weather.temp!">
+               value = "print(response.request)">
             </PersistentString>
             <PersistentString
-               value = " NSNumberFormatter().numberFromString(weather.temp!).integerValue">
+               value = "profil.access_token">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeOutfitsListCell.collectionView(UICollectionView, numberOfItemsInSection : Int) -&gt; Int:HomeOutfitsListCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.outfitsCollection">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -578,228 +1049,40 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.TodayViewController.(locationManager (DressTime.TodayViewController) -&gt; (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CLLocationManager&gt;, didUpdateLocations : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Array&lt;Swift.AnyObject&gt;&gt;) -&gt; ()).(closure #1):TodayViewController.swift">
+         contextName = "UserService.(createUser in _FB3E589A3D30C8483E90F674004580CD)(Profil, password : String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():UserService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "channel[&quot;location&quot;]">
-            </PersistentString>
-            <PersistentString
-               value = "(condition[&quot;code&quot;] as! String).toInt()">
+               value = "print(parameters)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressingSynchro.(updateMockableLocalstorage in _5D4E5A99B5AE9DBB58B651F0E284D94A)() -&gt; ():DressingSynchro.swift">
+         contextName = "HomeViewController.showOutfits(HomeOutfitsListCell, outfit : JSON?) -&gt; ():HomeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "print(json)">
+               value = "self.typeClothe">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "NewLoginService.Login(String, password : String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():NewLoginService.swift">
+         contextName = "HomeBrandOutfitsListCell.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:HomeBrandOutfitsListCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "JSON(data: nsdata)">
+               value = "outfit.count">
             </PersistentString>
             <PersistentString
-               value = "NSString(data: nsdate, encoding:NSUTF8StringEncoding)">
-            </PersistentString>
-            <PersistentString
-               value = "JSON(data: str)">
+               value = "outfitElem[&quot;matchingRate&quot;].int">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "HomeOutfitsListCell.awakeFromNib() -&gt; ():HomeOutfitsListCell.swift">
+         contextName = "DressTimeService.(getBrandClothes in _3F9FBDEE54AB84ACC9699628EA4A9769)((isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():DressTimeService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.contentView.frame">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTimeService.((getOutfitsToday in _3F9FBDEE54AB84ACC9699628EA4A9769)(DressTimeService) -&gt; ((isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ()).(closure #1):DressTimeService.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "print(response.request)">
+               value = "path">
             </PersistentString>
             <PersistentString
-               value = "print(response)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "HomeViewController.viewWillAppear(Bool) -&gt; ():HomeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = " self.numberOfClothes">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ClotheScrollTableCell.setupScrollView(CGFloat, height : CGFloat) -&gt; ():ClotheScrollTableCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "currentOutfit?.clothe_id">
-            </PersistentString>
-            <PersistentString
-               value = "UIScreen.mainScreen().bounds.size.height">
-            </PersistentString>
-            <PersistentString
-               value = "self.selectedPage">
-            </PersistentString>
-            <PersistentString
-               value = "width">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.TypeViewController.calculateCollectionViewHeigh (DressTime.TypeViewController)() -&gt; CoreGraphics.CGFloat:TypeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "round(Double(labelsSubTop.count)/2.0)">
-            </PersistentString>
-            <PersistentString
-               value = "labelsSubTop.count">
-            </PersistentString>
-            <PersistentString
-               value = "height">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "WeatherService.GetCurrentWeather(CLLocation, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():WeatherService.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "json[&quot;main&quot;][&quot;temp&quot;].float">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTimeService.GetOutfitsByStyle(String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():DressTimeService.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "json">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.ClotheDetailController.viewDidLoad (DressTime.ClotheDetailController)() -&gt; ():ClotheDetailController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "currentClothe.clothe_colors">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.ClothesDAL.fetch (DressTime.ClothesDAL)() -&gt; Swift.Array&lt;DressTime.Clothe&gt;:ClothesDAL.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "fetchResults.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.TypeTableViewCell.calculateCollectionViewHeight (DressTime.TypeTableViewCell)() -&gt; CoreGraphics.CGFloat:TypeTableViewCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.data">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static DressTime.WeatherService.(getWeather (DressTime.WeatherService.Type) -&gt; (ObjectiveC.CLLocation, weatherCompleted : (succeeded : Swift.Bool, msg : Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;) -&gt; ()) -&gt; ()).(closure #1):WeatherService.swift">
-      </ContextState>
-      <ContextState
-         contextName = "RegisterStyleViewController.touchesEnded(Set&lt;UITouch&gt;, withEvent : UIEvent?) -&gt; ():RegisterStyleViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.tempUIImage!.center">
-            </PersistentString>
-            <PersistentString
-               value = "self.casualStyle.convertPoint(self.casualStyle.center, toView: self.view)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "OutfitViewController.viewDidAppear(Bool) -&gt; ():OutfitViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.tableView.bounds">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ClotheSelectionCell.collectionView(UICollectionView, didSelectItemAtIndexPath : NSIndexPath) -&gt; ():ClotheSelectionCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "print(selected[indexPath.row])">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CaptureConfirmationViewController.pickerView(AKPickerView, didSelectItem : Int) -&gt; ():CaptureConfirmationViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "cell.subviews.count">
-            </PersistentString>
-            <PersistentString
-               value = "(cell.subviews[0].subviews[0] as! PatternView)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "HexColorToName.hexStringFromColor(UIColor) -&gt; String:HexColorToName.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "Int(b * 255)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.TypeViewController.tableView (DressTime.TypeViewController)(ObjectiveC.UITableView, heightForHeaderInSection : Swift.Int) -&gt; CoreGraphics.CGFloat:TypeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.tableview.bounds.height">
-            </PersistentString>
-            <PersistentString
-               value = "round(height*0.33333)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "OutfitsViewController.((loadOutfitsByStyle in _41EA043F4A7C0CFFB95A291D9AD51DD8)(OutfitsViewController) -&gt; () -&gt; ()).(closure #1):OutfitsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "styleOutfits">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "HomeViewController.addBlurEffect() -&gt; ():HomeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "print(bounds)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "TypeViewController.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:TypeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.subTypes[self.currentSection][indexPath.row]">
-            </PersistentString>
-            <PersistentString
-               value = " NSLocalizedString(self.subTypes[self.currentSection][indexPath.row], comment: &quot;&quot;)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressingSynchro.(isDressingEmpty in _5D4E5A99B5AE9DBB58B651F0E284D94A)() -&gt; Bool:DressingSynchro.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.clothesLocal.count">
+               value = "print(path)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -810,48 +1093,73 @@
                value = "isSuccess">
             </PersistentString>
             <PersistentString
-               value = "object">
-            </PersistentString>
-            <PersistentString
                value = " object.arrayValue.count">
             </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTimeService.(getOutfitsByStyle in _3F9FBDEE54AB84ACC9699628EA4A9769)(String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():DressTimeService.swift">
-         <PersistentStrings>
             <PersistentString
-               value = "profil.access_token">
-            </PersistentString>
-            <PersistentString
-               value = "print(&quot;Bearer \(profil.access_token!)&quot;)">
+               value = "object">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.TodayViewController.(updateWeather (DressTime.TodayViewController) -&gt; (Swift.Int, high : Swift.String, low : Swift.String, city : Swift.String) -&gt; ()).(closure #2):TodayViewController.swift">
+         contextName = "AKPickerView.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:AKPickerView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "outfit[&quot;maille&quot;][&quot;clothe_id&quot;]">
-            </PersistentString>
-            <PersistentString
-               value = " item.clothe_image">
+               value = "cell.view.frame">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "RegisterStyleViewController.(createTempImageView in _886C7AE956072BECE6D1576B06A28A46)(UIImageView) -&gt; UIImageView:RegisterStyleViewController.swift">
+         contextName = "DressTime.CameraViewController.prepareForSegue (DressTime.CameraViewController)(ObjectiveC.UIStoryboardSegue, sender : Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ():CameraViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "temp.constraints">
+               value = "self.typeClothe">
+            </PersistentString>
+            <PersistentString
+               value = "self.subTypeClothe">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "SettingsViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:SettingsViewController.swift">
+         contextName = "DressTime.TypeViewController.collectionView (DressTime.TypeViewController)(ObjectiveC.UICollectionView, willDisplayCell : ObjectiveC.UICollectionViewCell, forItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ():TypeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "indexPath.row">
+               value = "collectionView.numberOfItemsInSection(0)%2">
+            </PersistentString>
+            <PersistentString
+               value = "collectionView.numberOfItemsInSection(0)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeHeaderCell.(locationManager(HomeHeaderCell) -&gt; (CLLocationManager, didUpdateLocations : [CLLocation]) -&gt; ()).(closure #1):HomeHeaderCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "today[&quot;high&quot;].string">
+            </PersistentString>
+            <PersistentString
+               value = "self.weatherList[0]">
+            </PersistentString>
+            <PersistentString
+               value = "today[&quot;low&quot;].string">
+            </PersistentString>
+            <PersistentString
+               value = "object[&quot;query&quot;][&quot;results&quot;][&quot;channel&quot;][&quot;item&quot;][&quot;condition&quot;][&quot;code&quot;].string">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LoginViewController.(onClickLoginBtn(LoginViewController) -&gt; (AnyObject) -&gt; ()).(closure #1).(closure #1):LoginViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.navigationController!.viewControllers">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewOufitCell.createClotheView(Clothe, rect : CGRect) -&gt; ():NewOutfitCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "rect">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -864,175 +1172,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "NewLoginService.(Login(NewLoginService) -&gt; (String, password : String) -&gt; ()).(closure #1):NewLoginService.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "response.data.valueForKey(&quot;access_token&quot;)">
-            </PersistentString>
-            <PersistentString
-               value = "response.result.value">
-            </PersistentString>
-            <PersistentString
-               value = "JSON[&quot;access_token&quot;]">
-            </PersistentString>
-            <PersistentString
-               value = "access_token as String">
-            </PersistentString>
-            <PersistentString
-               value = "response.result">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CameraSessionManager.addVideoInput() -&gt; Bool:CameraSessionManager.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "CameraSessionManager">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UIImage.imageResize(CGSize) -&gt; UIImage:UIImage-Extension.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.size.width">
-            </PersistentString>
-            <PersistentString
-               value = "self.size.height">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "SettingsStyleCell.(whichContainerSelected in _CBC7436A3C00BE231BF4F51C764CF409)(CGPoint) -&gt; UIImageView?:SettingsStyleCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "atWorkContainer.frame">
-            </PersistentString>
-            <PersistentString
-               value = "self.contentView.convertPoint(location, fromView: self)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.LoginViewController.(onClickLoginBtn (DressTime.LoginViewController) -&gt; (Swift.AnyObject) -&gt; ()).(closure #1):LoginViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "profil.access_token">
-            </PersistentString>
-            <PersistentString
-               value = "newProfil.access_token">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ClotheScrollTableCell.setupScrollView() -&gt; ():ClotheScrollTableCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.scrollView.bounds.size.width">
-            </PersistentString>
-            <PersistentString
-               value = "self.scrollView.bounds.size.height">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.TypeViewController.tableView (DressTime.TypeViewController)(ObjectiveC.UITableView, cellForRowAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UITableViewCell:TypeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "cell.bgImage">
-            </PersistentString>
-            <PersistentString
-               value = "indexPath.row">
-            </PersistentString>
-            <PersistentString
-               value = "tableView.frame.size.width">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "CaptureConfirmationViewController.(applySelect in _3252D31F8E4653D5950B80A77EB70229)(Int) -&gt; ():CaptureConfirmationViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.patternData[j]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static DressTime.DressTimeService.getTodayOutfits (DressTime.DressTimeService.Type)(Swift.String, style : Swift.String, todayCompleted : (succeeded : Swift.Bool, msg : Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;&gt;) -&gt; ()) -&gt; ():DressTimeService.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "profil.gender">
-            </PersistentString>
-            <PersistentString
-               value = "dressingSeriazible[0][&quot;clothe_colors&quot;]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "RegisterStyleViewController.viewDidLoad() -&gt; ():RegisterStyleViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.confirmationView!.frame">
-            </PersistentString>
-            <PersistentString
-               value = "self.currentUserId">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "ClotheScrollTableCell.awakeFromNib() -&gt; ():ClotheScrollTableCell.swift">
          <PersistentStrings>
             <PersistentString
                value = "clotheCollection">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ProfilViewController.viewDidLoad() -&gt; ():ProfilViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "headerView.frame">
-            </PersistentString>
-            <PersistentString
-               value = "print(self.tableView.tableHeaderView)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static DressTime.LoginService.(loginMethod (DressTime.LoginService.Type) -&gt; (Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;, postCompleted : (succeeded : Swift.Bool, msg : Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;) -&gt; ()) -&gt; ()).(closure #1):LoginService.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "msg">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "RegisterStyleViewController.(whichStyle in _886C7AE956072BECE6D1576B06A28A46)(UIImageView) -&gt; CGPoint?:RegisterStyleViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "image.center">
-            </PersistentString>
-            <PersistentString
-               value = "image.frame.origin">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ClotheSelectionCell.collectionView(UICollectionView, numberOfItemsInSection : Int) -&gt; Int:ClotheSelectionCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = " clothes.count">
-            </PersistentString>
-            <PersistentString
-               value = "clothes[0][&quot;brandClothe&quot;][&quot;clothe_type&quot;].stringValue">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.FilterView.applyConstrainte (DressTime.FilterView)(ObjectiveC.UIView) -&gt; ():FilterView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "parentView.frame.height">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1045,17 +1188,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.TypeViewController.collectionView (DressTime.TypeViewController)(ObjectiveC.UICollectionView, numberOfItemsInSection : Swift.Int) -&gt; Swift.Int:TypeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "section">
-            </PersistentString>
-            <PersistentString
-               value = "self.labelsSubTop.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "WeatherWrapper.getHour(String) -&gt; Int:WeatherWrapper.swift">
          <PersistentStrings>
             <PersistentString
@@ -1063,36 +1195,6 @@
             </PersistentString>
             <PersistentString
                value = "data">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "WeatherWrapper.getHour(Double) -&gt; Int:WeatherWrapper.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "components.hour">
-            </PersistentString>
-            <PersistentString
-               value = "NSTimeZone.localTimeZone().secondsFromGMT">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.CameraOverlayView.cameraSessionDidOutputSampleBuffer (DressTime.CameraOverlayView)(Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CMSampleBuffer&gt;) -&gt; ():CameraOverlayView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "image.size">
-            </PersistentString>
-            <PersistentString
-               value = "self.currentImage.size">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "AKPickerView.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:AKPickerView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "cell.view.frame">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1117,178 +1219,6 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DetailTypeViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:DetailTypeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "clothe.clothe_favorite">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "String.toDateTime() -&gt; NSDate:WeatherWrapper.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "">
-            </PersistentString>
-            <PersistentString
-               value = "self">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "NewSettingsViewController.viewDidLoad() -&gt; ():NewSettingsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "user.onPartySelected">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "HomeBrandOutfitsListCell.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:HomeBrandOutfitsListCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "outfit.count">
-            </PersistentString>
-            <PersistentString
-               value = "outfitElem[&quot;matchingRate&quot;].int">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "OutfitViewController.viewDidLoad() -&gt; ():OutfitViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.currentOutfits.count">
-            </PersistentString>
-            <PersistentString
-               value = "self.tableView.frame.height">
-            </PersistentString>
-            <PersistentString
-               value = "self.view.frame.height">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "SettingsStyleCell.touchesBegan(Set&lt;UITouch&gt;, withEvent : UIEvent?) -&gt; ():SettingsStyleCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.containerView.convertRect(self.atWorkContainer.frame, fromView: self)">
-            </PersistentString>
-            <PersistentString
-               value = "self.superview">
-            </PersistentString>
-            <PersistentString
-               value = "self.atWorkContainer.frame">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.CameraViewController.prepareForSegue (DressTime.CameraViewController)(ObjectiveC.UIStoryboardSegue, sender : Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ():CameraViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.typeClothe">
-            </PersistentString>
-            <PersistentString
-               value = "self.subTypeClothe">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "HomeHeaderCell.collectionView(UICollectionView, numberOfItemsInSection : Int) -&gt; Int:HomeHeaderCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.weatherList.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.OutfitsViewController.tableView (DressTime.OutfitsViewController)(ObjectiveC.UITableView, cellForRowAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UITableViewCell:OutfitsViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "println(self.currentOutfits)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "RegisterStyleViewController.(whichContainerSelected in _886C7AE956072BECE6D1576B06A28A46)(CGPoint) -&gt; UIImageView?:RegisterStyleViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.relaxSelected ">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.HomeHeaderCell.locationManager (DressTime.HomeHeaderCell)(Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.CLLocationManager&gt;, didUpdateLocations : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Array&lt;Swift.AnyObject&gt;&gt;) -&gt; ():HomeHeaderCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.currentLocation">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTimeBL.getStyleByMoment([String]) -&gt; [String]:DressTimeBL.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "profil.atWorkStyle">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.OutfitCollectionViewController.collectionView (DressTime.OutfitCollectionViewController)(ObjectiveC.UICollectionView, cellForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UICollectionViewCell:OutfitCollectionViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "pants.frame">
-            </PersistentString>
-            <PersistentString
-               value = "self.collection.count">
-            </PersistentString>
-            <PersistentString
-               value = "outfit.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static DressTime.DressTimeService.(getClothesIdDressing (DressTime.DressTimeService.Type) -&gt; (Swift.String, clotheCompleted : (succeeded : Swift.Bool, idList : Swift.Array&lt;Swift.String&gt;) -&gt; ()) -&gt; ()).(closure #1):DressTimeService.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "Array(array) as! [String]">
-            </PersistentString>
-            <PersistentString
-               value = "q">
-            </PersistentString>
-            <PersistentString
-               value = "(msg[&quot;list&quot;] as? NSArray)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "HomeOutfitsListCell.collectionView(UICollectionView, numberOfItemsInSection : Int) -&gt; Int:HomeOutfitsListCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.outfitsCollection">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ClotheScrollTableCell.singleTapped(UITapGestureRecognizer) -&gt; ():ClotheScrollTableCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "sender.view!.tag">
-            </PersistentString>
-            <PersistentString
-               value = "sender.view!">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "HomeOutfitsListCell.(createClotheView in _93EE669A28786630E981580C71297921)(Clothe, cell : OufitCell) -&gt; ():HomeOutfitsListCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "cell.containerView.frame.height - height">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "ClotheTableViewCell.awakeFromNib() -&gt; ():ClotheTableViewCell.swift">
          <PersistentStrings>
             <PersistentString
@@ -1297,10 +1227,352 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "static DressTime.DressTimeService.getTodayOutfits (DressTime.DressTimeService.Type)(Swift.String, style : Swift.String, todayCompleted : (succeeded : Swift.Bool, msg : Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;) -&gt; ()) -&gt; ():DressTimeService.swift">
+         contextName = "SettingsViewController.onSaveTapped(AnyObject) -&gt; ():SettingsViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "println(jsonObject)">
+               value = "self.confirmationView.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.FilterView.applyConstrainte (DressTime.FilterView)(ObjectiveC.UIView) -&gt; ():FilterView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "parentView.frame.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ClotheSelectionCell.collectionView(UICollectionView, didSelectItemAtIndexPath : NSIndexPath) -&gt; ():ClotheSelectionCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(selected[indexPath.row])">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewLoginService.Login(String, password : String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():NewLoginService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "JSON(data: nsdata)">
+            </PersistentString>
+            <PersistentString
+               value = "NSString(data: nsdate, encoding:NSUTF8StringEncoding)">
+            </PersistentString>
+            <PersistentString
+               value = "JSON(data: str)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeHeaderCell.collectionView(UICollectionView, cellForItemAtIndexPath : NSIndexPath) -&gt; UICollectionViewCell:HomeHeaderCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.timeText.text">
+            </PersistentString>
+            <PersistentString
+               value = "weather.temp!">
+            </PersistentString>
+            <PersistentString
+               value = " NSNumberFormatter().numberFromString(weather.temp!).integerValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfilViewController.viewWillAppear(Bool) -&gt; ():ProfilViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.headerView.frame">
+            </PersistentString>
+            <PersistentString
+               value = "self.backgroundImage.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewRegisterStyleViewContainer.(whichContainerSelected in _679001B8745959EB780324EBC29F2E1E)() -&gt; UIImageView?:NewRegisterStyleViewContainer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tempImage!">
+            </PersistentString>
+            <PersistentString
+               value = "areaRelax.accessibilityIdentifier">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeViewController.viewDidAppear(Bool) -&gt; ():HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.currentWeather">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfilViewController.viewDidAppear(Bool) -&gt; ():ProfilViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.backgroundImage.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "OutfitViewController.(onDressUpTapped(OutfitViewController) -&gt; (AnyObject) -&gt; ()).(closure #1):OutfitViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "UIScreen.mainScreen().bounds.size.height/2.0">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeOutfitsListCell.(loadTodayOutfits(HomeOutfitsListCell) -&gt; () -&gt; ()).(closure #1):HomeOutfitsListCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "object.count">
+            </PersistentString>
+            <PersistentString
+               value = "object[0]">
+            </PersistentString>
+            <PersistentString
+               value = "print(object[0])">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RegisterEmailViewController.viewWillAppear(Bool) -&gt; ():RegisterEmailViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "email">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ClotheScrollTableCell.setupScrollView() -&gt; ():ClotheScrollTableCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.scrollView.bounds.size.width">
+            </PersistentString>
+            <PersistentString
+               value = "self.scrollView.bounds.size.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "TypeSelectionCell.(createBorderButton in _E75CDD17C72D1D1EA0D37963F3DDFC10)(UIButton, isSelected : Bool) -&gt; ():TypeSelectionCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "btn.frame.size.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "WeatherService.GetCurrentWeather(CLLocation, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():WeatherService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "json[&quot;main&quot;][&quot;temp&quot;].float">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfilViewController.scrollViewDidScroll(UIScrollView) -&gt; ():ProfilViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.backgroundImage.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.TypeViewController.collectionView (DressTime.TypeViewController)(ObjectiveC.UICollectionView, layout : ObjectiveC.UICollectionViewLayout, sizeForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; C.CGSize:TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tableView.frame.size.width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.DetailTypeViewController.viewDidLoad (DressTime.DetailTypeViewController)() -&gt; ():DetailTypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "titleNav.title">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewRegisterStyleViewContainer.touchesBegan(Set&lt;UITouch&gt;, withEvent : UIEvent?) -&gt; ():NewRegisterStyleViewContainer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(location)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "NewRegisterStyleViewContainer.touchesEnded(Set&lt;UITouch&gt;, withEvent : UIEvent?) -&gt; ():NewRegisterStyleViewContainer.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "container.accessibilityIdentifier">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.CollectionViewController.collectionView (DressTime.CollectionViewController)(ObjectiveC.UICollectionView, cellForItemAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ObjectiveC.UICollectionViewCell:CollectionViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "cell.frame">
+            </PersistentString>
+            <PersistentString
+               value = "cell.subviews.count ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.TypeViewController.tableView (DressTime.TypeViewController)(ObjectiveC.UITableView, willDisplayCell : ObjectiveC.UITableViewCell, forRowAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ():TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "OutfitsViewController.((loadOutfitsByStyle in _41EA043F4A7C0CFFB95A291D9AD51DD8)(OutfitsViewController) -&gt; () -&gt; ()).(closure #1):OutfitsViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "styleOutfits">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.TypeViewController.collectionView (DressTime.TypeViewController)(ObjectiveC.UICollectionView, numberOfItemsInSection : Swift.Int) -&gt; Swift.Int:TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "section">
+            </PersistentString>
+            <PersistentString
+               value = "self.labelsSubTop.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.ClothesDAL.updateClotheId (DressTime.ClothesDAL)() -&gt; ():ClothesDAL.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "clothe.clothe_id">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static DressTime.DressTimeService.getTodayOutfits (DressTime.DressTimeService.Type)(Swift.String, style : Swift.String, todayCompleted : (succeeded : Swift.Bool, msg : Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;&gt;) -&gt; ()) -&gt; ():DressTimeService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "profil.gender">
+            </PersistentString>
+            <PersistentString
+               value = "dressingSeriazible[0][&quot;clothe_colors&quot;]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AKPickerView.collectionView(UICollectionView, layout : UICollectionViewLayout, sizeForItemAtIndexPath : NSIndexPath) -&gt; CGSize:AKPickerView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "view.frame.size.width">
+            </PersistentString>
+            <PersistentString
+               value = "self.sizeForString(patternView.patternLabel.text!).width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LoginViewController.viewWillAppear(Bool) -&gt; ():LoginViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "defaults.boolForKey(&quot;alreadyLaunch&quot;)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeViewController.addBlurEffect() -&gt; ():HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(bounds)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.TypeViewController.sectionHeaderTapped (DressTime.TypeViewController)(ObjectiveC.UITapGestureRecognizer) -&gt; ():TypeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "indexPath.section">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeOutfitsListCell.awakeFromNib() -&gt; ():HomeOutfitsListCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.contentView.frame">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ClotheScrollTableCell.setupScrollView(CGFloat, height : CGFloat) -&gt; ():ClotheScrollTableCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentOutfit?.clothe_id">
+            </PersistentString>
+            <PersistentString
+               value = "UIScreen.mainScreen().bounds.size.height">
+            </PersistentString>
+            <PersistentString
+               value = "self.selectedPage">
+            </PersistentString>
+            <PersistentString
+               value = "width">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RegisterStyleViewController.(initStyleSelected in _886C7AE956072BECE6D1576B06A28A46)(String, containerName : String) -&gt; ():RegisterStyleViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "container!.center">
+            </PersistentString>
+            <PersistentString
+               value = "container!.superview!.convertPoint(container!.frame.origin, toView: nil)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.TypeTableViewCell.calculateCollectionViewHeight (DressTime.TypeTableViewCell)() -&gt; CoreGraphics.CGFloat:TypeTableViewCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.data">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.ClothesDAL.fetch (DressTime.ClothesDAL)(Swift.String) -&gt; Swift.Array&lt;DressTime.Clothe&gt;:ClothesDAL.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = " SharedData.sharedInstance.currentUser.userid">
+            </PersistentString>
+            <PersistentString
+               value = "clothes.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.NewHomeViewController.weatherFinishing (DressTime.NewHomeViewController)() -&gt; ():NewHomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "SharedData.sharedInstance.weatherCode">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTime.AppDelegate.(application (DressTime.AppDelegate) -&gt; (ObjectiveC.UIApplication, didFinishLaunchingWithOptions : Swift.Optional&lt;Swift.Dictionary&lt;ObjectiveC.NSObject, Swift.AnyObject&gt;&gt;) -&gt; Swift.Bool).(closure #1):AppDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "msg[&quot;refresh_token&quot;] as! String">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1319,38 +1591,59 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "HomeViewController.(createArrowImageView in _F0FEB500489D9228EB52A9BCCA599548)() -&gt; ():HomeViewController.swift">
+         contextName = "DressTime.DetailTypeViewController.tableView (DressTime.DetailTypeViewController)(ObjectiveC.UITableView, numberOfRowsInSection : Swift.Int) -&gt; Swift.Int:DetailTypeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = " bubbleImageView.frame.origin.y">
-            </PersistentString>
-            <PersistentString
-               value = " p.y">
-            </PersistentString>
-            <PersistentString
-               value = "self.arrowImageView!.frame">
+               value = "list.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTime.ProfilViewController.onLogoutClick (DressTime.ProfilViewController)(Swift.AnyObject) -&gt; ():ProfilViewController.swift">
+         contextName = "ProfilViewController.onAddTypedTapped(NSIndexPath) -&gt; ():ProfilViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "AppDelegate.CurrentUser.currentUser.userid">
-            </PersistentString>
-            <PersistentString
-               value = "user.userid">
+               value = "indexPath.row">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTimeService.((getOutfitsByStyle in _3F9FBDEE54AB84ACC9699628EA4A9769)(DressTimeService) -&gt; (String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ()).(closure #1):DressTimeService.swift">
+         contextName = "DressTimeService.((getOutfits in _3F9FBDEE54AB84ACC9699628EA4A9769)(DressTimeService) -&gt; ([String], weather : Weather, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ()).(closure #1):DressTimeService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "print(response.request)">
+               value = "profil.refresh_token">
+            </PersistentString>
+            <PersistentString
+               value = "response.response?.statusCode">
             </PersistentString>
             <PersistentString
                value = "profil.access_token">
+            </PersistentString>
+            <PersistentString
+               value = "dal">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ClotheMatchSelectionCell.collectionView(UICollectionView, numberOfItemsInSection : Int) -&gt; Int:ClotheMatchSelectionCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(clothesMatched)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static DressTime.DressTimeService.getTodayOutfits (DressTime.DressTimeService.Type)(Swift.String, style : Swift.String, todayCompleted : (succeeded : Swift.Bool, msg : Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;) -&gt; ()) -&gt; ():DressTimeService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "println(jsonObject)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressingSynchro.(isDressingEmpty in _5D4E5A99B5AE9DBB58B651F0E284D94A)() -&gt; Bool:DressingSynchro.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.clothesLocal.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1359,139 +1652,6 @@
          <PersistentStrings>
             <PersistentString
                value = "print(hexTranslator.name(colorName))">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "HomeHeaderCell.collectionView(UICollectionView, didSelectItemAtIndexPath : NSIndexPath) -&gt; ():HomeHeaderCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.weatherList[self.selectedWeather]">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.ProfilViewController.prepareForSegue (DressTime.ProfilViewController)(ObjectiveC.UIStoryboardSegue, sender : Swift.ImplicitlyUnwrappedOptional&lt;Swift.AnyObject&gt;) -&gt; ():ProfilViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "segue.destinationViewController ">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.TypeViewController.tableView (DressTime.TypeViewController)(ObjectiveC.UITableView, willDisplayCell : ObjectiveC.UITableViewCell, forRowAtIndexPath : ObjectiveC.NSIndexPath) -&gt; ():TypeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "indexPath.row">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.ClothesDAL.updateClotheId (DressTime.ClothesDAL)() -&gt; ():ClothesDAL.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "clothe.clothe_id">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ProfilViewController.viewWillAppear(Bool) -&gt; ():ProfilViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.headerView.frame">
-            </PersistentString>
-            <PersistentString
-               value = "self.backgroundImage.frame">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static DressTimeService.(getClothesIdDressing(DressTimeService.Type) -&gt; (String, clotheCompleted : (succeeded : Bool, idList : [String]) -&gt; ()) -&gt; ()).(closure #1):DressTimeService.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "item[&quot;id&quot;] as String">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "NewLoginService.((login in _842E7303190A5B28BB95827F907B63C1)(NewLoginService) -&gt; (String, password : String) -&gt; ()).(closure #1):NewLoginService.swift">
-      </ContextState>
-      <ContextState
-         contextName = "HomeOutfitsListCell.(loadTodayOutfits(HomeOutfitsListCell) -&gt; () -&gt; ()).(closure #1):HomeOutfitsListCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "object.count">
-            </PersistentString>
-            <PersistentString
-               value = "object[0]">
-            </PersistentString>
-            <PersistentString
-               value = "print(object[0])">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ShoppingViewController.((loadBrandClothe in _B32BF079880571CE877C037BDB9BB455)(ShoppingViewController) -&gt; () -&gt; ()).(closure #1):ShoppingViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "print(object)">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static DressTime.DressTimeService.(getClothe (DressTime.DressTimeService.Type) -&gt; (Swift.String, clotheId : Swift.String, clotheCompleted : (succeeded : Swift.Bool, clothe : Swift.AnyObject) -&gt; ()) -&gt; ()).(closure #1):DressTimeService.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "msg[&quot;clothe&quot;] as! String">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "HomeHeaderCell.(locationManager(HomeHeaderCell) -&gt; (CLLocationManager, didUpdateLocations : [CLLocation]) -&gt; ()).(closure #1):HomeHeaderCell.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "today[&quot;high&quot;].string">
-            </PersistentString>
-            <PersistentString
-               value = "self.weatherList[0]">
-            </PersistentString>
-            <PersistentString
-               value = "today[&quot;low&quot;].string">
-            </PersistentString>
-            <PersistentString
-               value = "object[&quot;query&quot;][&quot;results&quot;][&quot;channel&quot;][&quot;item&quot;][&quot;condition&quot;][&quot;code&quot;].string">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "static Mock.isMockable() -&gt; Bool:LoginService.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "SharedData.sharedInstance.currentUserId?">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "RegisterStyleViewController.onSaveTapped(AnyObject) -&gt; ():RegisterStyleViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.atWorkSelected">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.ProfilViewController.viewDidLoad (DressTime.ProfilViewController)() -&gt; ():ProfilViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "mailleCollection.count">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.HexColorToName.name (DressTime.HexColorToName)(ObjectiveC.UIColor) -&gt; Swift.Array&lt;Swift.AnyObject&gt;:HexColorToName.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.colorName[0]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

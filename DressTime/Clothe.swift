@@ -12,6 +12,7 @@ import CoreData
 class Clothe: NSManagedObject {
 
     @NSManaged var clothe_colors: String
+    @NSManaged var clothe_litteralColor: String
     @NSManaged var clothe_cut: String
     @NSManaged var clothe_id: String
     @NSManaged var clothe_image: NSData

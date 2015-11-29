@@ -14,6 +14,7 @@ class OufitCell: UICollectionViewCell {
     @IBOutlet weak var styleLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     
+    
     override func awakeFromNib() {
         
     }
@@ -59,57 +60,55 @@ class OufitCell: UICollectionViewCell {
     
     func setLoadNecessaryImage(imageNamed: String, rect: CGRect){
         let view = UIView(frame: rect)
-        view.backgroundColor = UIColor.dressTimeOrange()
+        view.backgroundColor = UIColor.clearColor()
         view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
         view.layer.masksToBounds = true
         let img = UIImage(named: imageNamed)!
         let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
+        imageView.backgroundColor = UIColor.clearColor()
+        imageView.opaque = false
         imageView.image = img
-        imageView.contentMode = UIViewContentMode.Bottom
+        imageView.contentMode = UIViewContentMode.ScaleToFill
         view.addSubview(imageView)
-        applyPlainShadow(view)
         containerView.addSubview(view)
     }
     
     func setBrandClothe(image: String, partnerName: String, rate: Int, rect: CGRect){
-        if let data: NSData = NSData(base64EncodedString: image, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters) {
-            
-            let view = UIView(frame: rect)
-            view.backgroundColor = UIColor.clearColor()
-            view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
-            view.clipsToBounds = true
-            
-            view.layer.masksToBounds = false
-            view.layer.shadowOffset = CGSizeMake(0, 20)
-            view.layer.shadowRadius = 8
-            view.layer.shadowOpacity = 1
-            view.layer.shadowColor = UIColor.blackColor().CGColor
-            view.layer.shadowPath = UIBezierPath(rect: self.bounds).CGPath
-            
-            let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
-            imageView.layer.masksToBounds = false
-            view.layer.shadowOffset = CGSizeMake(0, 20)
-            imageView.layer.shadowRadius = 8
-            imageView.layer.shadowOpacity = 1
-            imageView.layer.shadowColor = UIColor.blackColor().CGColor
-            imageView.layer.shadowPath = UIBezierPath(rect: self.bounds).CGPath
-            var img = UIImage(data: data)!
-            
-            var mode = UIViewContentMode.Top
-            if (rect.size.height != containerView.frame.size.height){
-                img = img.imageResize(CGSizeMake(rect.size.width, 160.0))
-            } else {
-                mode = UIViewContentMode.ScaleToFill
-            }
-            
-            imageView.image = img
-            imageView.contentMode = mode
-            imageView.clipsToBounds = true
-            view.addSubview(imageView)
-            containerView.addSubview(view)
-            
-            self.styleLabel.text = partnerName
+        let view = UIView(frame: rect)
+        view.backgroundColor = UIColor.clearColor()
+        view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
+        view.clipsToBounds = true
+        
+        view.layer.masksToBounds = false
+        view.layer.shadowOffset = CGSizeMake(0, 20)
+        view.layer.shadowRadius = 8
+        view.layer.shadowOpacity = 1
+        view.layer.shadowColor = UIColor.blackColor().CGColor
+        view.layer.shadowPath = UIBezierPath(rect: self.bounds).CGPath
+        
+        let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
+        imageView.layer.masksToBounds = false
+        view.layer.shadowOffset = CGSizeMake(0, 20)
+        imageView.layer.shadowRadius = 8
+        imageView.layer.shadowOpacity = 1
+        imageView.layer.shadowColor = UIColor.blackColor().CGColor
+        imageView.layer.shadowPath = UIBezierPath(rect: self.bounds).CGPath
+        var img = UIImage(named:image.stringByReplacingOccurrencesOfString(".jpg", withString: ""))
+        
+        var mode = UIViewContentMode.Top
+        if (rect.size.height != containerView.frame.size.height){
+            img = img!.imageResize(CGSizeMake(rect.size.width, 160.0))
+        } else {
+            mode = UIViewContentMode.ScaleToFill
         }
+        
+        imageView.image = img
+        imageView.contentMode = mode
+        imageView.clipsToBounds = true
+        view.addSubview(imageView)
+        containerView.addSubview(view)
+        
+        self.styleLabel.text = partnerName
         
     }
     

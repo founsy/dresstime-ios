@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import Alamofire
 
 class DressingService {
@@ -127,6 +128,7 @@ class DressingService {
             if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
                 let dict = NSMutableDictionary(dictionary: clothe.toDictionnary())
                 dict.removeObjectForKey("clothe_image")
+                print(dict)
                 let path = baseUrlDressing + "clothes/"
                 let headers = ["Authorization": "Bearer \(profil.access_token!)"]
                 Alamofire.request(.PUT, path, parameters: dict as? [String : AnyObject], encoding: .JSON, headers: headers).responseJSON { response in

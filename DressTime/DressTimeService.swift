@@ -40,9 +40,9 @@ class DressTimeService {
         if (Mock.isMockable()){
             var nameFile = ""
             if (SharedData.sharedInstance.sexe == "M") {
-                nameFile = "alexandre-OutfitsBrandToday"
+                nameFile = "alexandre-Shopping"
             } else {
-                nameFile = "juliette-OutfitsBrandToday"
+                nameFile = "juliette-Shopping"
             }
             if let nsdata = ReadJsonFile().readFile(nameFile){
                 let json = JSON(data: nsdata)

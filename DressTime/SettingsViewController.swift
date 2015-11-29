@@ -60,7 +60,7 @@ class SettingsViewController: UIViewController {
                     self.confirmationView?.alpha = 0
                     self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
                     }, completion: { (finish) -> Void in
-
+                        self.navigationController?.popViewControllerAnimated(true)
                 })
             }
         }

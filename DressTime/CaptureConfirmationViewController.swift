@@ -44,6 +44,10 @@ class CaptureConfirmationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+        nameClothe.delegate = self
+        
         whiteNavBar()
         self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         createPickerView()
@@ -68,13 +72,10 @@ class CaptureConfirmationViewController: UIViewController {
             let type = clothe.clothe_type
             let subtype = clothe.clothe_subtype
             let split = subtype.characters.split{$0 == "-"}.map(String.init)
-            var cut = ""
             if (split.count > 1){
-                cut = split[1]
-                NSLog(cut)
+                clothe.clothe_subtype = split[0]
+                clothe.clothe_cut = split[1]
             }
-            
-            clothe.clothe_cut = cut
             nameClothe.text = "\(type) - \(subtype)"
             let clotheImage =  UIImage(data: clothe.clothe_image)
             captureResult.image = clotheImage
@@ -96,6 +97,10 @@ class CaptureConfirmationViewController: UIViewController {
             
             if (colors.count > 0) {
                 color1.backgroundColor = UIColor.colorWithHexString(colors[0] as String)
+                let hexTranslator = HexColorToName()
+                let colorName = UIColor.colorWithHexString(colors[0])
+                clothe.clothe_litteralColor = hexTranslator.name(colorName)[1] as! String
+                
             }
             if (colors.count > 1) {
                 color2.backgroundColor = UIColor.colorWithHexString(colors[1] as String)
@@ -120,6 +125,10 @@ class CaptureConfirmationViewController: UIViewController {
         super.viewDidAppear(animated)
     }
     
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
     
     private func setColorStyle(color: UIView){
         color.layer.cornerRadius = 5.0
@@ -155,12 +164,11 @@ class CaptureConfirmationViewController: UIViewController {
         
         self.patternContainerView.addSubview(self.pickerView)
         
-        self.pickerView.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)! //[UIFont fontWithName:@"HelveticaNeue-Light" size:20];
-        self.pickerView.highlightedFont =  UIFont(name: "HelveticaNeue", size:20)!
+        self.pickerView.font =  UIFont.italicSystemFontOfSize(13.0)
+        self.pickerView.highlightedFont =  UIFont.systemFontOfSize(19.0, weight: UIFontWeightMedium)
         self.pickerView.interitemSpacing = 20.0
         self.pickerView.textColor = UIColor.whiteColor()
         self.pickerView.highlightedTextColor = UIColor.whiteColor()
-        //self.pickerView.fisheyeFactor = 0.001
         self.pickerView.pickerViewStyle = AKPickerViewStyle.Wheel
         self.pickerView.maskDisabled = false
         
@@ -213,6 +221,7 @@ class CaptureConfirmationViewController: UIViewController {
         self.currentClothe?.clothe_isUnis = self.isUnis()
         self.currentClothe?.clothe_pattern = self.patternData[self.selectedPattern]
         self.currentClothe?.clothe_name = self.nameClothe.text!
+        
         dal.update(self.currentClothe!)
         DressingService().UpdateClothe(self.currentClothe!.clothe_id) { (isSuccess, object) -> Void in
             ActivityLoader.shared.hideProgressView()
@@ -279,6 +288,13 @@ extension UILabel {
             //self.layoutIfNeeded()
             self.textColor = color
         }
+    }
+}
+
+extension CaptureConfirmationViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
     }
 }
 

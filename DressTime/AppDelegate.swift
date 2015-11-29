@@ -16,18 +16,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var currentUser:Profil?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-         NSLog("didFinishLaunchingWithOptions")
-        let profilDAL = ProfilsDAL()
-        let profil = profilDAL.fetchLastUserConnected()
-        
-        if let user = profil {
-            SharedData.sharedInstance.currentUserId = user.userid
-            SharedData.sharedInstance.sexe = user.gender
-            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        NSLog("didFinishLaunchingWithOptions")
+       
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let alreadyLaunch = defaults.boolForKey("alreadyLaunch")
+        if (!alreadyLaunch) {
+             //defaults.setBool(true, forKey: "alreadyLaunch")
+            //Display Tutorial
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
-            self.window?.rootViewController = initialViewController
-            self.window?.makeKeyAndVisible()
+            let tutorialViewController = storyboard.instantiateViewControllerWithIdentifier("TutorialViewController")
+            
+        } else {
+            let profilDAL = ProfilsDAL()
+            let profil = profilDAL.fetchLastUserConnected()
+            
+            if let user = profil {
+                SharedData.sharedInstance.currentUserId = user.userid
+                SharedData.sharedInstance.sexe = user.gender
+                self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
+                self.window?.rootViewController = initialViewController
+                self.window?.makeKeyAndVisible()
+            }
         }
         return true
     }

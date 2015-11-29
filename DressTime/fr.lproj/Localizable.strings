@@ -1,58 +1,72 @@
-/* 
-  Localizable.strings
-  DressTime
-
-  Created by Fab on 26/10/2015.
-  Copyright © 2015 Fab. All rights reserved.
-*/
+/*
+ Localizable.strings
+ DressTime
+ 
+ Created by Fab on 26/10/2015.
+ Copyright © 2015 Fab. All rights reserved.
+ */
 
 /* LoginViewController */
-"loginErrTitle" = "Failed!";
-"loginErrMessage" = "Error during the login the processs";
+"loginErrTitle" = "Raté!";
+"loginErrMessage" = "Erreur pendant l'identification";
 "loginErrButton" = "Okay.";
 
+/* HomeViewController */
 "Now" = "Maintenant";
 "Afternoon" = "Après-midi";
 "Morning" = "Matin";
-"Tonight" = "Soir";
+"Tonight" = "Soirée";
+
+/* OutfitViewController */
+"HOME" = "HOME";
+"OUTFIT OF THE DAY" = "TENUE DU JOUR";
+"SOMETHING MISSING" = "QUELQUE CHOSE VOUS MANQUE... NON ?";
+
+/* Detail Type View Controller */
+"Edit" =  "Modifier";
+"Delete" = "Supprimer";
+"Profile" = "Profil";
+
+/* ProfilViewController */
+"PROFILE" = "PROFIL";
 
 /* TypeViewController */
-"Maille" = "Maille";
-"Dress" = "Dress";
-"Top" = "Top";
-"Pants" = "Pants";
-"jumper-fin" = "Jumper Thin";
-"jumper-epais" = "Jumper";
-"cardigan" = "Cardigan";
+"Maille" = "Mailles";
+"Dress" = "Robes";
+"Top" = "Tops";
+"Pants" = "Pantalons";
+"jumper-fin" = "Pull fin";
+"jumper-epais" = "Pull";
+"cardigan" = "Gilet";
 "sweater" = "Sweater";
 "tshirt" = "T-shirt";
-"shirt" = "Shirt";
-"shirt-sleeve" = "Shirt Sleeve";
+"shirt" = "Chemise";
+"shirt-sleeve" = "Chemise manches courtes";
 "polo" = "Polo";
-"polo-sleeve" = "Polo Sleeve";
-"jeans" = "Jeans";
-"jeans-slim" = "Jeans Slim";
-"trousers-pleated" = "Pleated";
-"trousers-suit" = "Suit";
-"chinos" = "Chinos";
-"trousers-regular" = "Regular";
-"trousers" = "Normal";
+"polo-sleeve" = "Polo manches longues";
+"jeans" = "Jean";
+"jeans-slim" = "Jean slim";
+"trousers-pleated" = "A pinces";
+"trousers-suit" = "Pantalon costume";
+"chinos" = "Chino";
+"trousers-regular" = "Coupe droite";
+"trousers" = "Pantalon";
 "trousers-slim" = "Slim";
 "bermuda" = "Bermuda";
 "short" = "Short";
-"skirt" = "Skirt";
-"skirt-long" = "Long Skirt";
-"skirt-mini" = "Mini Skirt";
-"dress" = "Dress";
-"dress-party" = "Party Dress";
+"skirt" = "Jupe";
+"skirt-long" = "Jupe longue";
+"skirt-mini" = "Jupe courte";
+"dress" = "Robe";
+"dress-party" = "Robe de soirée";
 
 /*Capture*/
-"plain" = "plain";
-"Hstripe" = "h stripes";
-"Vstripe" = "v stripes";
-"check" = "check";
-"gingham" = "gingham";
-"jacquard" = "jacquard";
-"printed" = "printed";
-"unisTouchImprime" = "printed touch";
-"floral" = "floral";
+"plain" = "Uni";
+"Hstripe" = "Rayures H";
+"Vstripe" = "Rayures V";
+"check" = "Carreaux";
+"gingham" = "Vichy";
+"jacquard" = "Jacquard";
+"printed" = "Imprimé";
+"unisTouchImprime" = "Uni + imprimé";
+"floral" = "Fleural";

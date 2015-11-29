@@ -118,6 +118,9 @@ class ClothesDAL {
         clothe.clothe_cut = cut
         clothe.clothe_image = image
         clothe.clothe_colors = colors
+        let hexTranslator = HexColorToName()
+        let colorName = UIColor.colorWithHexString(clothe.clothe_colors)
+        clothe.clothe_litteralColor = hexTranslator.name(colorName)[1] as! String
         clothe.profilRel = profilDal.fetch(SharedData.sharedInstance.currentUserId!)!
         
         do {

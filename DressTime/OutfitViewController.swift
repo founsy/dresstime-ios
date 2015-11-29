@@ -31,6 +31,7 @@ class OutfitViewController: UIViewController {
                 self.confirmationView?.alpha = 0
                 self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
                 }, completion: { (finish) -> Void in
+                    self.navigationController?.popViewControllerAnimated(true)
                     
             })
     }
@@ -39,6 +40,12 @@ class OutfitViewController: UIViewController {
         super.viewDidLoad()
         tableView.registerNib(UINib(nibName: "ClotheScrollTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
        ActivityLoader.shared.showProgressView(view)
+        
+        dressupButton.layer.cornerRadius = 20.0
+        dressupButton.layer.shadowOffset = CGSizeMake(0, 1);
+        dressupButton.layer.shadowColor = UIColor.blackColor().CGColor
+        dressupButton.layer.shadowRadius = 5;
+        dressupButton.layer.shadowOpacity = 0.5;
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -61,8 +68,6 @@ class OutfitViewController: UIViewController {
         self.confirmationView!.layer.cornerRadius = 50
         
         self.view.addSubview(self.confirmationView!)
-
-        
         ActivityLoader.shared.hideProgressView()
     }
     

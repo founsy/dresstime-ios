@@ -59,8 +59,13 @@ class ClotheScrollTableCell: UITableViewCell {
                     self.selectedPage = i
                 }
             }
-            self.scrollView.setContentOffset(CGPointMake(CGFloat(self.selectedPage)*width, 0), animated: false)
+            UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveEaseOut, animations: { () -> Void in
+                self.scrollView.setContentOffset(CGPointMake(CGFloat(self.selectedPage)*width, 0), animated: false)
+            }, completion: nil)
+            
         }
+        
+     
     }
 
 }

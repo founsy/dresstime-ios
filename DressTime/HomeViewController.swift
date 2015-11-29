@@ -29,6 +29,7 @@ class HomeViewController: UIViewController{
     private var numberOfClothes: Int = 0
     private var arrowImageView: UIImageView?
     
+    private var typeClothe:Int = -1
     private var currentWeather: Weather?
     
     override func viewDidLoad() {
@@ -82,6 +83,12 @@ class HomeViewController: UIViewController{
         if (segue.identifier == "showOutfit"){
             let targetVC = segue.destinationViewController as! OutfitViewController
             targetVC.currentOutfits = self.outfitSelected!["outfit"].arrayObject
+        } else if (segue.identifier == "AddClothe"){
+            if (typeClothe >= 0) {
+                let navController = segue.destinationViewController as! UINavigationController
+                let targetVC = navController.topViewController as! TypeViewController
+                targetVC.openItem(typeClothe)
+            }
         }
     }
     
@@ -106,8 +113,13 @@ class HomeViewController: UIViewController{
     
     private func addProfilButtonToNavBar(){
         let regularButton = UIButton(frame: CGRectMake(0, 0, 40.0, 40.0))
-        let historyButtonImage = UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)")
-        regularButton.setBackgroundImage(historyButtonImage, forState: UIControlState.Normal)
+        if (SharedData.sharedInstance.currentUserId!.lowercaseString == "alexandre"){
+            regularButton.setBackgroundImage(UIImage(named: "profileAlexandre"), forState: UIControlState.Normal)
+        } else if (SharedData.sharedInstance.currentUserId!.lowercaseString == "juliette"){
+            regularButton.setBackgroundImage(UIImage(named: "profileJuliette"), forState: UIControlState.Normal)
+        } else {
+            regularButton.setBackgroundImage(UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)"), forState: UIControlState.Normal)
+        }
         
         regularButton.setTitle("", forState: UIControlState.Normal)
         regularButton.addTarget(self, action: "profilButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
@@ -253,9 +265,14 @@ extension HomeViewController: HomeHeaderCellDelegate {
 }
 
 extension HomeViewController: HomeOutfitsListCellDelegate {
-    func showOutfits(outfit: JSON) {
-        self.outfitSelected = outfit
-        self.performSegueWithIdentifier("showOutfit", sender: self)
+    func showOutfits(homeOutfitsListCell: HomeOutfitsListCell, outfit: JSON?){
+        if let result = outfit {
+            self.outfitSelected = result
+            self.performSegueWithIdentifier("showOutfit", sender: self)
+        } else {
+            //self.typeClothe = homeOutfitsListCell.typeClothe
+            self.performSegueWithIdentifier("AddClothe", sender: self)
+        }
     }
     
     func loadedOutfits(outfitsCount: Int) {
@@ -306,7 +323,7 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if (indexPath.row == 1){
-            return 92.0
+            return 100.0
         } else if (indexPath.row == 2){
             return 370.0
         } else if (indexPath.row == 3){

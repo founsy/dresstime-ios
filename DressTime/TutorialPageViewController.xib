@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <viewController id="pkR-WA-76U" customClass="TutorialPageViewController" customModule="DressTime" customModuleProvider="target">
+            <layoutGuides>
+                <viewControllerLayoutGuide type="top" id="vSA-AB-ncZ"/>
+                <viewControllerLayoutGuide type="bottom" id="6Lj-Eh-nDw"/>
+            </layoutGuides>
+            <view key="view" contentMode="scaleToFill" id="V6y-tp-cjc">
+                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cNy-kw-UeH">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CAPTURE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jws-fS-JZf">
+                        <rect key="frame" x="185.5" y="270" width="229.5" height="60"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="YOUR CLOTHES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qD6-oW-X4P">
+                        <rect key="frame" x="217" y="338" width="166.5" height="30"/>
+                        <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="25"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="Jws-fS-JZf" firstAttribute="top" secondItem="qD6-oW-X4P" secondAttribute="bottom" id="8Cd-a8-lbJ"/>
+                    <constraint firstItem="6Lj-Eh-nDw" firstAttribute="top" secondItem="cNy-kw-UeH" secondAttribute="bottom" id="AAP-5Q-SLC"/>
+                    <constraint firstItem="qD6-oW-X4P" firstAttribute="top" secondItem="Jws-fS-JZf" secondAttribute="bottom" constant="8" id="Vl7-gK-x6Q"/>
+                    <constraint firstItem="cNy-kw-UeH" firstAttribute="leading" secondItem="V6y-tp-cjc" secondAttribute="leading" id="eqp-Ke-prS"/>
+                    <constraint firstItem="qD6-oW-X4P" firstAttribute="centerX" secondItem="V6y-tp-cjc" secondAttribute="centerX" id="gh3-7D-z9g"/>
+                    <constraint firstItem="cNy-kw-UeH" firstAttribute="top" secondItem="V6y-tp-cjc" secondAttribute="top" id="heC-zg-w8h"/>
+                    <constraint firstItem="Jws-fS-JZf" firstAttribute="centerY" secondItem="V6y-tp-cjc" secondAttribute="centerY" id="kF8-Wo-diT"/>
+                    <constraint firstItem="Jws-fS-JZf" firstAttribute="centerX" secondItem="V6y-tp-cjc" secondAttribute="centerX" id="mHW-bz-Ddp"/>
+                    <constraint firstAttribute="trailing" secondItem="cNy-kw-UeH" secondAttribute="trailing" id="x67-Vs-fVL"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="8Cd-a8-lbJ"/>
+                    </mask>
+                </variation>
+            </view>
+            <connections>
+                <outlet property="imageView" destination="cNy-kw-UeH" id="Zwh-pC-CRZ"/>
+                <outlet property="subTitleLabel" destination="qD6-oW-X4P" id="QSb-HU-am1"/>
+                <outlet property="titleLabel" destination="Jws-fS-JZf" id="p20-3k-BqR"/>
+            </connections>
+            <point key="canvasLocation" x="320" y="392"/>
+        </viewController>
+    </objects>
+</document>

@@ -7,6 +7,7 @@
         <attribute name="clothe_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="clothe_image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="clothe_isUnis" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="clothe_litteralColor" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="clothe_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="clothe_partnerid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
         <attribute name="clothe_partnerName" optional="YES" attributeType="String" syncable="YES"/>
@@ -31,7 +32,7 @@
         <attribute name="userid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Clothe" positionX="268" positionY="-153" width="128" height="240"/>
+        <element name="Clothe" positionX="268" positionY="-153" width="128" height="255"/>
         <element name="Profil" positionX="-63" positionY="63" width="128" height="240"/>
     </elements>
 </model>

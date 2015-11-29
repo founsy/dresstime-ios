@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		012150411C084726008ABE44 /* alexandre-Shopping.json in Resources */ = {isa = PBXBuildFile; fileRef = 012150401C084726008ABE44 /* alexandre-Shopping.json */; };
 		012182ED1BC4EA570019631B /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012182E41BC4EA270019631B /* Alamofire.framework */; };
 		012182EE1BC4EA570019631B /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 012182E41BC4EA270019631B /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		012182F41BC4EE090019631B /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012182F31BC4EE090019631B /* LoginService.swift */; };
@@ -24,11 +25,12 @@
 		013CB7661C01F3CD001EAED3 /* UIView+Dresstime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013CB7651C01F3CD001EAED3 /* UIView+Dresstime.swift */; };
 		013DBC2C1BE3C02700343036 /* ConfirmSave.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013DBC2B1BE3C02700343036 /* ConfirmSave.xib */; };
 		013DBC2E1BE3C0A400343036 /* ConfirmSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013DBC2D1BE3C0A400343036 /* ConfirmSave.swift */; };
+		014128331C0A09C000BDE2AE /* RegisterStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014128321C0A09C000BDE2AE /* RegisterStyleViewController.swift */; };
 		0143732D1BCCE21C00443F66 /* alexandre-OutfitsBrandToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 0143732C1BCCE21C00443F66 /* alexandre-OutfitsBrandToday.json */; };
 		0143732F1BCE2A6000443F66 /* DressTimeBL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0143732E1BCE2A6000443F66 /* DressTimeBL.swift */; };
 		014BF92D1BB171C400319701 /* RegisterEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF92C1BB171C400319701 /* RegisterEmailViewController.swift */; };
 		014BF92F1BB171EE00319701 /* RegisterSexeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF92E1BB171EE00319701 /* RegisterSexeViewController.swift */; };
-		014BF9311BB171FD00319701 /* RegisterStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014BF9301BB171FD00319701 /* RegisterStyleViewController.swift */; };
+		015D52701C0476BE00DCA7BD /* RegisterPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 015D526F1C0476BE00DCA7BD /* RegisterPasswordViewController.swift */; };
 		0162FFB81BFA58E100B19D61 /* UIColor+Dresstime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0162FFB71BFA58E100B19D61 /* UIColor+Dresstime.swift */; };
 		0164461A1BDCC00B00E2434B /* TitleNavBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 016446191BDCC00B00E2434B /* TitleNavBar.xib */; };
 		016446201BDCC0BA00E2434B /* TitleNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0164461F1BDCC0BA00E2434B /* TitleNavBar.swift */; };
@@ -104,6 +106,7 @@
 		01A6BDEA1B9B41A100D357A3 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A6BDE91B9B41A100D357A3 /* CameraViewController.swift */; };
 		01AE7C011BD616BC00728EA4 /* AuthorizationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AE7C001BD616BC00728EA4 /* AuthorizationManager.swift */; };
 		01B06B781BDF69BF004C17B2 /* juliette-OutfitsBrandToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 01B06B771BDF69BF004C17B2 /* juliette-OutfitsBrandToday.json */; };
+		01B851CC1C04D76E0008054E /* TextSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B851CB1C04D76D0008054E /* TextSelectionCell.swift */; };
 		01C2AE5A1BC5591200F7D4C2 /* outfitsByStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE591BC5591200F7D4C2 /* outfitsByStyle.json */; };
 		01C2AE5C1BC6407600F7D4C2 /* alexandre-OutfitsToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE5B1BC6407600F7D4C2 /* alexandre-OutfitsToday.json */; };
 		01C2AE5E1BC7931F00F7D4C2 /* WeatherCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C2AE5D1BC7931F00F7D4C2 /* WeatherCell.xib */; };
@@ -144,6 +147,9 @@
 		01C683DC1BBBBC1700765C7F /* TypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683DB1BBBBC1700765C7F /* TypeCell.swift */; };
 		01C683DE1BBBBC9600765C7F /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683DD1BBBBC9600765C7F /* ProfilViewController.swift */; };
 		01C683E01BBD72BB00765C7F /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C683DF1BBD72BB00765C7F /* SettingsViewController.swift */; };
+		01C6F2061C044BE200F3A95C /* TutorialPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C6F2051C044BE200F3A95C /* TutorialPageViewController.xib */; };
+		01C6F2081C044C0F00F3A95C /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C6F2071C044C0F00F3A95C /* TutorialPageViewController.swift */; };
+		01C6F20A1C044D3A00F3A95C /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C6F2091C044D3A00F3A95C /* TutorialViewController.swift */; };
 		01D1B8701B72374100920C64 /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B86F1B72374100920C64 /* AKPickerView.swift */; };
 		01D1B8721B726B7D00920C64 /* TypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D1B8711B726B7D00920C64 /* TypeViewController.swift */; };
 		01D1B8761B72949B00920C64 /* SubTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D1B8751B72949B00920C64 /* SubTypeCell.xib */; };
@@ -247,6 +253,7 @@
 
 /* Begin PBXFileReference section */
 		010DEB621BE61E800079ACCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		012150401C084726008ABE44 /* alexandre-Shopping.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "alexandre-Shopping.json"; sourceTree = "<group>"; };
 		012182DB1BC4EA270019631B /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
 		012182F31BC4EE090019631B /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		012182F71BC4F3AE0019631B /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
@@ -263,11 +270,12 @@
 		013CB7651C01F3CD001EAED3 /* UIView+Dresstime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Dresstime.swift"; sourceTree = "<group>"; };
 		013DBC2B1BE3C02700343036 /* ConfirmSave.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ConfirmSave.xib; sourceTree = "<group>"; };
 		013DBC2D1BE3C0A400343036 /* ConfirmSave.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfirmSave.swift; sourceTree = "<group>"; };
+		014128321C0A09C000BDE2AE /* RegisterStyleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterStyleViewController.swift; sourceTree = "<group>"; };
 		0143732C1BCCE21C00443F66 /* alexandre-OutfitsBrandToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "alexandre-OutfitsBrandToday.json"; sourceTree = "<group>"; };
 		0143732E1BCE2A6000443F66 /* DressTimeBL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressTimeBL.swift; sourceTree = "<group>"; };
 		014BF92C1BB171C400319701 /* RegisterEmailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterEmailViewController.swift; sourceTree = "<group>"; };
 		014BF92E1BB171EE00319701 /* RegisterSexeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSexeViewController.swift; sourceTree = "<group>"; };
-		014BF9301BB171FD00319701 /* RegisterStyleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterStyleViewController.swift; sourceTree = "<group>"; };
+		015D526F1C0476BE00DCA7BD /* RegisterPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterPasswordViewController.swift; sourceTree = "<group>"; };
 		0162FFB71BFA58E100B19D61 /* UIColor+Dresstime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+Dresstime.swift"; sourceTree = "<group>"; };
 		016446191BDCC00B00E2434B /* TitleNavBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TitleNavBar.xib; sourceTree = "<group>"; };
 		0164461F1BDCC0BA00E2434B /* TitleNavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleNavBar.swift; sourceTree = "<group>"; };
@@ -331,7 +339,6 @@
 		019A78521BA002E3001958FE /* OutfitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitViewController.swift; sourceTree = "<group>"; };
 		019F76441BDE0CF3007E6A3E /* juliette-OutfitsToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "juliette-OutfitsToday.json"; sourceTree = "<group>"; };
 		019F764A1BDE0FC6007E6A3E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		019F764B1BDE0FC6007E6A3E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		019F764F1BDE1013007E6A3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		019F76501BDE1018007E6A3E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		01A4FABC1BE355B6009DEAA8 /* PriceSelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PriceSelectionCell.swift; sourceTree = "<group>"; };
@@ -348,6 +355,8 @@
 		01A6BDE91B9B41A100D357A3 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		01AE7C001BD616BC00728EA4 /* AuthorizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		01B06B771BDF69BF004C17B2 /* juliette-OutfitsBrandToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "juliette-OutfitsBrandToday.json"; sourceTree = "<group>"; };
+		01B851CB1C04D76D0008054E /* TextSelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSelectionCell.swift; sourceTree = "<group>"; };
+		01B851D41C04D87B0008054E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		01C2AE591BC5591200F7D4C2 /* outfitsByStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = outfitsByStyle.json; sourceTree = "<group>"; };
 		01C2AE5B1BC6407600F7D4C2 /* alexandre-OutfitsToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "alexandre-OutfitsToday.json"; sourceTree = "<group>"; };
 		01C2AE5D1BC7931F00F7D4C2 /* WeatherCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherCell.xib; sourceTree = "<group>"; };
@@ -392,6 +401,9 @@
 		01C683DB1BBBBC1700765C7F /* TypeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeCell.swift; sourceTree = "<group>"; };
 		01C683DD1BBBBC9600765C7F /* ProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilViewController.swift; sourceTree = "<group>"; };
 		01C683DF1BBD72BB00765C7F /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		01C6F2051C044BE200F3A95C /* TutorialPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TutorialPageViewController.xib; sourceTree = "<group>"; };
+		01C6F2071C044C0F00F3A95C /* TutorialPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
+		01C6F2091C044D3A00F3A95C /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		01D1B86E1B7215F000920C64 /* DressTime-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DressTime-Bridging-Header.h"; sourceTree = "<group>"; };
 		01D1B86F1B72374100920C64 /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AKPickerView.swift; path = AKPickerView/AKPickerView.swift; sourceTree = "<group>"; };
 		01D1B8711B726B7D00920C64 /* TypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeViewController.swift; sourceTree = "<group>"; };
@@ -399,11 +411,11 @@
 		01D1B8771B7327B000920C64 /* CustomSubTypeViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSubTypeViewCell.swift; sourceTree = "<group>"; };
 		01D626AD1BE0DE8E009FF6B6 /* ActivityLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityLoader.swift; sourceTree = "<group>"; };
 		01DC16E51BEE543E0016D294 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
-		01DC16ED1BEE66810016D294 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		01E167EC1BC3E700008D3A0C /* SettingsStyleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsStyleCell.swift; sourceTree = "<group>"; };
 		01E167F01BC3EA3D008D3A0C /* SettingsSexCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSexCell.swift; sourceTree = "<group>"; };
 		01E167F21BC3EA4B008D3A0C /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
 		01E7CDC11BF10B7F00B45F03 /* juliette-login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "juliette-login.json"; sourceTree = "<group>"; };
+		01F13D4C1C023B0E00E3E9B0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		01FFCEDD1B6E714600F59D1B /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -493,8 +505,9 @@
 			isa = PBXGroup;
 			children = (
 				014BF92C1BB171C400319701 /* RegisterEmailViewController.swift */,
+				015D526F1C0476BE00DCA7BD /* RegisterPasswordViewController.swift */,
 				014BF92E1BB171EE00319701 /* RegisterSexeViewController.swift */,
-				014BF9301BB171FD00319701 /* RegisterStyleViewController.swift */,
+				014128321C0A09C000BDE2AE /* RegisterStyleViewController.swift */,
 			);
 			name = Register;
 			sourceTree = "<group>";
@@ -601,6 +614,7 @@
 				01A4FAC61BE36A94009DEAA8 /* ClotheCell.xib */,
 				01A4FAC81BE36AC8009DEAA8 /* ClotheCell.swift */,
 				01A4FACA1BE36DDD009DEAA8 /* TypeSelectionCell.swift */,
+				01B851CB1C04D76D0008054E /* TextSelectionCell.swift */,
 			);
 			name = Shopping;
 			sourceTree = "<group>";
@@ -608,6 +622,7 @@
 		01A6BDDC1B99D3C500D357A3 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				01C6F1FE1C044BCF00F3A95C /* Tutorial */,
 				0178DFAC1BF3552400B50811 /* Capture */,
 				0187FA1F1BE2048B0060FFA8 /* Shopping */,
 				01C683DA1BBBBC0500765C7F /* Profil */,
@@ -642,6 +657,7 @@
 				0180A3B61BDCB38800EDF565 /* alexandre.json */,
 				0143732C1BCCE21C00443F66 /* alexandre-OutfitsBrandToday.json */,
 				01C2AE5B1BC6407600F7D4C2 /* alexandre-OutfitsToday.json */,
+				012150401C084726008ABE44 /* alexandre-Shopping.json */,
 			);
 			name = Jacky;
 			sourceTree = "<group>";
@@ -740,6 +756,7 @@
 				014BF92B1BB171AE00319701 /* Register */,
 				01C454FB1B593A18003D5E41 /* LoginViewController.swift */,
 				013B07841BA824D10063CCF9 /* HomeViewController.swift */,
+				01C6F2091C044D3A00F3A95C /* TutorialViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -855,6 +872,15 @@
 				01E167F21BC3EA4B008D3A0C /* SettingsHeaderCell.swift */,
 			);
 			name = Profil;
+			sourceTree = "<group>";
+		};
+		01C6F1FE1C044BCF00F3A95C /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				01C6F2051C044BE200F3A95C /* TutorialPageViewController.xib */,
+				01C6F2071C044C0F00F3A95C /* TutorialPageViewController.swift */,
+			);
+			name = Tutorial;
 			sourceTree = "<group>";
 		};
 		01EAFA3D1B71E13C00835BB4 /* AKPickerView */ = {
@@ -1045,6 +1071,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01C6F2061C044BE200F3A95C /* TutorialPageViewController.xib in Resources */,
 				01C683D91BBBBB7100765C7F /* TypeCell.xib in Resources */,
 				01E7CDC21BF10B7F00B45F03 /* juliette-login.json in Resources */,
 				013B64641BD23D9700176098 /* ClotheScrollTableCell.xib in Resources */,
@@ -1072,6 +1099,7 @@
 				01A6BDDE1B99D3E600D357A3 /* ClotheTableCell.xib in Resources */,
 				01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */,
 				01C2AE621BC7DA3300F7D4C2 /* weather.json in Resources */,
+				012150411C084726008ABE44 /* alexandre-Shopping.json in Resources */,
 				0178DFB21BF3553700B50811 /* PatternView.xib in Resources */,
 				01C2AE5E1BC7931F00F7D4C2 /* WeatherCell.xib in Resources */,
 				019F764C1BDE0FE5007E6A3E /* Localizable.strings in Resources */,
@@ -1132,10 +1160,11 @@
 				01D1B8701B72374100920C64 /* AKPickerView.swift in Sources */,
 				01E167ED1BC3E700008D3A0C /* SettingsStyleCell.swift in Sources */,
 				0187FA231BE2065E0060FFA8 /* BrandClotheCell.swift in Sources */,
+				01C6F2081C044C0F00F3A95C /* TutorialPageViewController.swift in Sources */,
 				0162FFB81BFA58E100B19D61 /* UIColor+Dresstime.swift in Sources */,
 				014BF92F1BB171EE00319701 /* RegisterSexeViewController.swift in Sources */,
-				014BF9311BB171FD00319701 /* RegisterStyleViewController.swift in Sources */,
 				016446581BDCE5FD00E2434B /* SpringTextView.swift in Sources */,
+				015D52701C0476BE00DCA7BD /* RegisterPasswordViewController.swift in Sources */,
 				01C683D61BB971C900765C7F /* UIImage+Dresstime.swift in Sources */,
 				01A4FAC51BE369B3009DEAA8 /* ClotheMatchSelectionCell.swift in Sources */,
 				0177B4E61B78FB1300AC3FD1 /* CaptureConfirmationViewController.swift in Sources */,
@@ -1144,11 +1173,13 @@
 				01C455111B597626003D5E41 /* Clothe.swift in Sources */,
 				0180A3B41BDA0B0800EDF565 /* OutfitCell.swift in Sources */,
 				016446431BDCE5FD00E2434B /* BlurView.swift in Sources */,
+				01C6F20A1C044D3A00F3A95C /* TutorialViewController.swift in Sources */,
 				019405C31BC114A8005D6F92 /* Profil+CoreDataProperties.swift in Sources */,
 				0164464D1BDCE5FD00E2434B /* KeyboardLayoutConstraint.swift in Sources */,
 				013996421B5CED57004B2DE0 /* DressingSynchro.swift in Sources */,
 				016446501BDCE5FD00E2434B /* Misc.swift in Sources */,
 				01DC16E61BEE543E0016D294 /* UserService.swift in Sources */,
+				01B851CC1C04D76E0008054E /* TextSelectionCell.swift in Sources */,
 				013CB7661C01F3CD001EAED3 /* UIView+Dresstime.swift in Sources */,
 				01D1B8781B7327B000920C64 /* CustomSubTypeViewCell.swift in Sources */,
 				0164465A1BDCE5FD00E2434B /* TransitionManager.swift in Sources */,
@@ -1179,6 +1210,7 @@
 				0183F30A1BD8E71800691238 /* RBBBlockBasedArray.swift in Sources */,
 				016446461BDCE5FD00E2434B /* DesignableLabel.swift in Sources */,
 				013B646A1BD23EC300176098 /* ClotheScrollTableCell.swift in Sources */,
+				014128331C0A09C000BDE2AE /* RegisterStyleViewController.swift in Sources */,
 				013B077F1BA820790063CCF9 /* HomeHeaderCell.swift in Sources */,
 				014BF92D1BB171C400319701 /* RegisterEmailViewController.swift in Sources */,
 				012A219D1B5AB89700CD01D3 /* ProfilsDAL.swift in Sources */,
@@ -1271,8 +1303,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				01C455001B5942F4003D5E41 /* Base */,
-				019F764B1BDE0FC6007E6A3E /* fr */,
-				01DC16ED1BEE66810016D294 /* en */,
+				01F13D4C1C023B0E00E3E9B0 /* fr */,
+				01B851D41C04D87B0008054E /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

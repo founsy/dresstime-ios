@@ -32,8 +32,9 @@ class ClotheTableViewCell: UITableViewCell{
         if let clo = self.clothe {
             let dal = ClothesDAL()
             clo.clothe_favorite = favoriteButton.selected
-
-            dal.update(clo)
+            DressingService().UpdateClothe(clo.clothe_id) { (isSuccess, object) -> Void in
+                dal.update(clo)
+            }
         }
     }
     

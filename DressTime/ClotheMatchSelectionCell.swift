@@ -35,10 +35,19 @@ extension ClotheMatchSelectionCell: UICollectionViewDataSource, UICollectionView
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! ClotheCell
         if let clothesMatched = self.clothes {
-            let clothe_id = clothesMatched["clothes"][indexPath.row]["clothe"]["clothe_id"].stringValue
-            let dal = ClothesDAL()
-            if let clothe = dal.fetch(clothe_id) {
-                cell.imageView.image = UIImage(data: clothe.clothe_image)
+            if let clothe_id = clothesMatched["clothes"][indexPath.row].string {
+                let dal = ClothesDAL()
+                if let clothe = dal.fetch(clothe_id) {
+                    cell.imageView.image = UIImage(data: clothe.clothe_image)
+                }
+
+            } else {
+                let clothe_id = clothesMatched["clothes"][indexPath.row]["clothe"]["clothe_id"].stringValue
+                let dal = ClothesDAL()
+                if let clothe = dal.fetch(clothe_id) {
+                    cell.imageView.image = UIImage(data: clothe.clothe_image)
+                }
+
             }
         }
         

@@ -17,29 +17,34 @@ class ShoppingViewController: UIViewController {
     
     private let cellIdentifier = "BrandClotheCell"
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        ActivityLoader.shared.showProgressView(view)
-        loadBrandClothe()
+
     }
     
      override func viewDidLayoutSubviews() {
         //slider.frame = CGRectMake(0, 0, rangeSlider.frame.width, 18)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        ActivityLoader.shared.showProgressView(view)
+        loadBrandClothe()
+    }
+    
     private func loadBrandClothe(){
         let service = DressTimeService()
         service.GetBrandClothes() { (isSuccess, object) -> Void in
             if (isSuccess){
-                self.brandClotheCell?.brandClothe = object
-                self.brandClotheCell?.collectionView.reloadData()
+                self.brandClotheCell!.brandClothe = object
+                self.brandClotheCell!.pickerView.reloadData()
             }
             ActivityLoader.shared.hideProgressView()
         }
     }
+    
 }
 
 extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
@@ -85,10 +90,11 @@ extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
             return self.tableView.dequeueReusableCellWithIdentifier("priceSelection")! as! PriceSelectionCell
         } else if (indexPath.row == 3){
             self.brandClotheCell = self.tableView.dequeueReusableCellWithIdentifier("clotheSelection")! as? ClotheSelectionCell
+            
             self.brandClotheCell?.delegate = self
             return self.brandClotheCell!
         } else if (indexPath.row == 4){
-            return self.tableView.dequeueReusableCellWithIdentifier("textCell")! as UITableViewCell
+            return self.tableView.dequeueReusableCellWithIdentifier("textCell")! as! TextSelectionCell
         } else if (indexPath.row == 5){
             self.matchClotheCell = self.tableView.dequeueReusableCellWithIdentifier("clotheMatchSelection")! as? ClotheMatchSelectionCell
             return self.matchClotheCell!
@@ -103,8 +109,8 @@ extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension ShoppingViewController: TypeSelectionCellDelegate {
     func onSelectedType(typeSelected: String) {
-        self.brandClotheCell?.selectedType = typeSelected
-        self.brandClotheCell?.collectionView.reloadData()
+        self.brandClotheCell!.selectedType = typeSelected
+        self.brandClotheCell!.pickerView.reloadData()
     }
 }
 

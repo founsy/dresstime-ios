@@ -28,8 +28,14 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var temperatureField: UISegmentedControl!
     @IBOutlet weak var currentPasswordField: UITextField!
     @IBOutlet weak var newPasswordField: UITextField!
+    @IBOutlet weak var switchTutorial: UISwitch!
     
     var menSelected = true
+    
+    @IBAction func tutorialChanged(sender: UISwitch) {
+        let defaults = NSUserDefaults.standardUserDefaults()
+        defaults.setValue(sender.on, forKey: "alreadyLaunch")
+    }
     
     @IBAction func onGenderSelected(sender: AnyObject) {
         self.menSelected = !self.menSelected
@@ -69,6 +75,8 @@ class SettingsTableViewController: UITableViewController {
         currentPasswordField.delegate = self
         newPasswordField.delegate = self
         profilImage.image = UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)")
+        let defaults = NSUserDefaults.standardUserDefaults()
+        switchTutorial.on = defaults.boolForKey( "alreadyLaunch")
     }
     
     override func viewWillAppear(animated: Bool) {

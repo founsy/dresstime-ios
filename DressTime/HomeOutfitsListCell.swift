@@ -11,7 +11,7 @@ import UIKit
 
 protocol HomeOutfitsListCellDelegate {
     func loadedOutfits(outfitsCount: Int)
-    func showOutfits(outfit: JSON)
+    func showOutfits(homeOutfitsListCell: HomeOutfitsListCell, outfit: JSON?)
 }
 
 class HomeOutfitsListCell: UITableViewCell {
@@ -19,6 +19,7 @@ class HomeOutfitsListCell: UITableViewCell {
     @IBOutlet weak var blurView: UIVisualEffectView!
     @IBOutlet weak var curveArrow: CurveArrowView!
     @IBOutlet weak var mainView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
 
     private let cellIdentifier = "OutfitCell"
     private var outfitsCollection: JSON?
@@ -30,6 +31,7 @@ class HomeOutfitsListCell: UITableViewCell {
     private var styleByMoment: [String]?
     
     private var isEnoughOutfits = true
+    var typeClothe = 1
     
     private let loading = ActivityLoader()
     
@@ -52,6 +54,9 @@ class HomeOutfitsListCell: UITableViewCell {
                 if (self.outfitsCollection?.count == 0){
                     self.isEnoughOutfits = false
                     self.notEnoughOutfit()
+                    self.titleLabel.text = NSLocalizedString("SOMETHING MISSING", comment: "")
+                } else {
+                    self.titleLabel.text = NSLocalizedString("OUTFIT OF THE DAY", comment: "")
                 }
                 
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -128,12 +133,14 @@ class HomeOutfitsListCell: UITableViewCell {
         let y:CGFloat = 0
         let rect = CGRectMake(x, y, width, height)
         if (clothe.clothe_type == "top"){
-            cell.setLoadNecessaryImage("underwearIconM", rect: CGRectMake(x, cell.containerView.frame.height - height, width, height))
+            cell.setLoadNecessaryImage("underwear", rect: CGRectMake(x, cell.containerView.frame.height - height, width, height))
             cell.createClotheView(clothe, style:"", rect: rect)
+            self.typeClothe = 2
         }
         if (clothe.clothe_type == "pants"){
-            cell.setLoadNecessaryImage("underwearIconM", rect: rect)
+            cell.setLoadNecessaryImage("undershirt", rect: rect)
             cell.createClotheView(clothe, style:"", rect: CGRectMake(x, cell.containerView.frame.height - height, width, height))
+            self.typeClothe = 1
         }
     }
 }
@@ -165,11 +172,14 @@ extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        if isEnoughOutfits {
             if let del = self.delegate {
-                let outfitElem = self.outfitsCollection![indexPath.row]
-                del.showOutfits(outfitElem)
+                if isEnoughOutfits {
+                    let outfitElem = self.outfitsCollection![indexPath.row]
+                    del.showOutfits(self, outfit: outfitElem)
+                } else {
+                    del.showOutfits(self, outfit: nil)
+                }
             }
-        }
+        
     }
 }

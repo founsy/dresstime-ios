@@ -24,6 +24,11 @@ class DetailTypeViewController: UIViewController {
     @IBOutlet weak var emptyViewLabel: UILabel!
     @IBOutlet weak var emptyViewButton: UIButton!
     @IBOutlet weak var emptyViewImage: UIImageView!
+    @IBOutlet weak var buttonCapture: UIButton!
+    
+    @IBAction func onCaptureTapped(sender: AnyObject) {
+        self.performSegueWithIdentifier("showCapture", sender: self)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +45,12 @@ class DetailTypeViewController: UIViewController {
         emptyViewButton.layer.borderColor = UIColor.whiteColor().CGColor
         emptyViewButton.layer.borderWidth = 1.0
         emptyViewImage.image = UIImage(named: "underwearIcon\(SharedData.sharedInstance.sexe!.uppercaseString)")
+        
+        self.buttonCapture.layer.cornerRadius = 20.0
+        self.buttonCapture.layer.shadowOffset = CGSizeMake(0, 1);
+        self.buttonCapture.layer.shadowColor = UIColor.blackColor().CGColor
+        self.buttonCapture.layer.shadowRadius = 5;
+        self.buttonCapture.layer.shadowOpacity = 0.5;
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -49,9 +60,12 @@ class DetailTypeViewController: UIViewController {
         if (clothesList?.count > 0){
             self.emptyView.hidden = true
             self.tableView.hidden = false
+            self.buttonCapture.hidden = false
         } else {
             self.emptyView.hidden = false
             self.tableView.hidden = true
+            self.buttonCapture.hidden = true
+
         }
 
         //Remove Title of Back button
@@ -88,7 +102,8 @@ class DetailTypeViewController: UIViewController {
         } else {
             self.emptyView.hidden = false
             self.tableView.hidden = true
-        }    }
+        }
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "detailClothe") {
@@ -96,7 +111,25 @@ class DetailTypeViewController: UIViewController {
             if let detailController = navigationController.viewControllers[0] as? DetailClotheViewController {
                 detailController.currentClothe =  self.clothesList![self.currentSection]
             }
-
+        } else if (segue.identifier == "showCapture"){
+            let navController = segue.destinationViewController as! UINavigationController
+            let targetVC = navController.topViewController as! TypeViewController
+            targetVC.openItem(getTypeClothe(typeClothe!))
+        }
+    }
+    
+    private func getTypeClothe(typeClothe: String) -> Int {
+        switch(typeClothe.lowercaseString){
+            case "maille":
+                return 0
+            case "top":
+                return 1
+            case "pants":
+                return 2
+            case "dress":
+                return 3
+            default:
+                return -1
         }
     }
 }

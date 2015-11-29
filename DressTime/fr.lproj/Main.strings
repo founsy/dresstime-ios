@@ -1,60 +1,60 @@
 
 /* Class = "UINavigationItem"; title = "Your clothes!"; ObjectID = "0hT-Z0-i9G"; */
-"0hT-Z0-i9G.title" = "Your clothes!";
+"0hT-Z0-i9G.title" = "Vos vêtements!";
 
-/* Class = "UILabel"; text = "#OOTD"; ObjectID = "1fl-Xh-GfK"; */
-"1fl-Xh-GfK.text" = "Outfits Of The Day";
+/* Class = "UILabel"; text = "Outfits Of The Day"; ObjectID = "1fl-Xh-GfK"; */
+"1fl-Xh-GfK.text" = "Tenues du jour";
 
 /* Class = "UILabel"; text = "on party"; ObjectID = "2Bc-6E-S9v"; */
-"2Bc-6E-S9v.text" = "on party";
+"2Bc-6E-S9v.text" = "en soirée";
+
+/* Class = "UILabel"; text = "You seem to be naked :) Add some clothings !"; ObjectID = "2Ey-Zk-HQB"; */
+"2Ey-Zk-HQB.text" = "Tu as oublié de t'habiller :) Ajoutes tes vêtements !";
 
 /* Class = "UILabel"; text = "relax"; ObjectID = "2b0-wl-GQF"; */
 "2b0-wl-GQF.text" = "relax";
 
 /* Class = "UIButton"; normalTitle = "I'M A MEN"; ObjectID = "5k2-ZJ-yab"; */
-"5k2-ZJ-yab.normalTitle" = "I'M A MEN";
+"5k2-ZJ-yab.normalTitle" = "JE SUIS UN HOMME";
 
 /* Class = "UIViewController"; title = "Settings Container"; ObjectID = "5mE-yp-Xvl"; */
-"5mE-yp-Xvl.title" = "Settings Container";
+"5mE-yp-Xvl.title" = "Réglages";
 
 /* Class = "UINavigationItem"; title = "MY WARDROBE"; ObjectID = "69m-MK-rBG"; */
-"69m-MK-rBG.title" = "MY WARDROBE";
+"69m-MK-rBG.title" = "Mon dressing";
 
 /* Class = "UIImageView"; accessibilityIdentifier = "atWork"; ObjectID = "6p2-e6-t9Q"; */
 "6p2-e6-t9Q.accessibilityIdentifier" = "atWork";
 
 /* Class = "UILabel"; text = "current password"; ObjectID = "6s3-Sr-rdB"; */
-"6s3-Sr-rdB.text" = "current password";
+"6s3-Sr-rdB.text" = "mot de passe actuel";
 
 /* Class = "UILabel"; text = "the awesome color of your clothe"; ObjectID = "7SK-1h-Oni"; */
-"7SK-1h-Oni.text" = "the awesome color of your clothe";
+"7SK-1h-Oni.text" = "la couleur géniale de ton vêtement";
 
 /* Class = "UITableViewController"; title = "Settings"; ObjectID = "AJZ-9a-PlQ"; */
-"AJZ-9a-PlQ.title" = "Settings";
-
-/* Class = "UIViewController"; title = "Profile"; ObjectID = "AfX-Y5-jdM"; */
-"AfX-Y5-jdM.title" = "Profile";
+"AJZ-9a-PlQ.title" = "Réglages";
 
 /* Class = "UIViewController"; title = "Login"; ObjectID = "BYZ-38-t0r"; */
-"BYZ-38-t0r.title" = "Login";
+"BYZ-38-t0r.title" = "Identifiant";
 
 /* Class = "UINavigationItem"; title = "What kind of clothe?"; ObjectID = "Cul-Ts-qHz"; */
-"Cul-Ts-qHz.title" = "What kind of clothe?";
+"Cul-Ts-qHz.title" = "Quel type de vêtement?";
 
 /* Class = "UIButton"; normalTitle = "Login"; ObjectID = "De5-dZ-mNx"; */
-"De5-dZ-mNx.normalTitle" = "Login";
+"De5-dZ-mNx.normalTitle" = "Identifiant";
 
 /* Class = "UIButton"; normalTitle = "I'M A WOMEN"; ObjectID = "DqD-0S-5Xl"; */
-"DqD-0S-5Xl.normalTitle" = "I'M A WOMEN";
+"DqD-0S-5Xl.normalTitle" = "JE SUIS UNE FEMME";
 
 /* Class = "UILabel"; text = "I AM A GREAT MEN"; ObjectID = "E40-PC-vdA"; */
-"E40-PC-vdA.text" = "I AM A GREAT MEN";
+"E40-PC-vdA.text" = "JE SUIS UN SUPER MEC";
 
 /* Class = "UIButton"; normalTitle = "Register"; ObjectID = "EFf-3U-mkH"; */
-"EFf-3U-mkH.normalTitle" = "Register";
+"EFf-3U-mkH.normalTitle" = "S'inscrire";
 
-/* Class = "UILabel"; text = "100 pts"; ObjectID = "G6m-vY-CNC"; */
-"G6m-vY-CNC.text" = "100 pts";
+/* Class = "UIButton"; normalTitle = "CREATE AN ACCOUNT"; ObjectID = "FN6-Wx-nkD"; */
+"FN6-Wx-nkD.normalTitle" = "CREER UN COMPTE";
 
 /* Class = "UINavigationItem"; title = "INFORMATIONS"; ObjectID = "G9H-XA-rAo"; */
 "G9H-XA-rAo.title" = "INFORMATIONS";
@@ -63,31 +63,64 @@
 "GC6-Cv-Z3b.accessibilityIdentifier" = "onParty";
 
 /* Class = "UIViewController"; title = "Register Style"; ObjectID = "H7e-uW-xSz"; */
-"H7e-uW-xSz.title" = "Register Style";
+"H7e-uW-xSz.title" = "Enregistrer mes styles";
 
 /* Class = "UILabel"; text = "YOUR EMAIL"; ObjectID = "HeQ-jq-YUY"; */
-"HeQ-jq-YUY.text" = "YOUR EMAIL";
+"HeQ-jq-YUY.text" = "TON EMAIL";
+
+/* Class = "UILabel"; text = "match with +3 outfits"; ObjectID = "Htq-Mu-5vs"; */
+"Htq-Mu-5vs.text" = "tenues dans votre dressing";
 
 /* Class = "UIButton"; normalTitle = "LET'S SEE MY NEW DRESSING"; ObjectID = "I6j-Mn-s2L"; */
-"I6j-Mn-s2L.normalTitle" = "LET'S SEE MY NEW DRESSING";
+"I6j-Mn-s2L.normalTitle" = "VOIR MON NOUVEAU DRESSING";
+
+/* Class = "UILabel"; text = "POINTS"; ObjectID = "Idy-mG-fUJ"; */
+"Idy-mG-fUJ.text" = "POINTS";
+
+/* Class = "UIButton"; accessibilityIdentifier = "maille"; ObjectID = "J8N-Xq-45Y"; */
+"J8N-Xq-45Y.accessibilityIdentifier" = "maille";
+
+/* Class = "UIButton"; normalTitle = "MAILLE"; ObjectID = "J8N-Xq-45Y"; */
+"J8N-Xq-45Y.normalTitle" = "MAILLE";
+
+/* Class = "UIButton"; selectedTitle = "MAILLE"; ObjectID = "J8N-Xq-45Y"; */
+"J8N-Xq-45Y.selectedTitle" = "MAILLE";
+
+/* Class = "UILabel"; text = "63"; ObjectID = "Jqs-XB-Rnk"; */
+"Jqs-XB-Rnk.text" = "63";
 
 /* Class = "UIButton"; normalTitle = "Add Clothe"; ObjectID = "KDM-Ty-OLl"; */
-"KDM-Ty-OLl.normalTitle" = "Add Clothe";
+"KDM-Ty-OLl.normalTitle" = "AJOUTER UN VETEMENT";
 
 /* Class = "UIViewController"; title = "Register Sexe"; ObjectID = "M0N-ts-wT2"; */
-"M0N-ts-wT2.title" = "Register Sexe";
+"M0N-ts-wT2.title" = "Enregistrer sexe";
 
 /* Class = "UIViewController"; title = "Capture Validation"; ObjectID = "MSz-xx-K8e"; */
-"MSz-xx-K8e.title" = "Capture Validation";
+"MSz-xx-K8e.title" = "Capture Validée";
+
+/* Class = "UIButton"; accessibilityIdentifier = "top"; ObjectID = "MfJ-1S-fcY"; */
+"MfJ-1S-fcY.accessibilityIdentifier" = "top";
+
+/* Class = "UIButton"; normalTitle = "TOP"; ObjectID = "MfJ-1S-fcY"; */
+"MfJ-1S-fcY.normalTitle" = "TOP";
+
+/* Class = "UIButton"; selectedTitle = "TOP"; ObjectID = "MfJ-1S-fcY"; */
+"MfJ-1S-fcY.selectedTitle" = "TOP";
 
 /* Class = "UILabel"; text = "Try to shoot the main body of your shirt"; ObjectID = "O8P-N7-Pqs"; */
-"O8P-N7-Pqs.text" = "Try to shoot the main body of your shirt";
+"O8P-N7-Pqs.text" = "Capture ta chemise";
+
+/* Class = "UILabel"; text = "casual chic padawn - 2 month ago"; ObjectID = "OfM-Jb-H6N"; */
+"OfM-Jb-H6N.text" = "padawan casual chic - il y a 2 mois";
 
 /* Class = "UIImageView"; accessibilityIdentifier = "business"; ObjectID = "Olq-ep-WNw"; */
 "Olq-ep-WNw.accessibilityIdentifier" = "business";
 
 /* Class = "UIButton"; normalTitle = " CREATE AN OUTFIT  "; ObjectID = "OvB-Hf-GNK"; */
-"OvB-Hf-GNK.normalTitle" = " CREATE AN OUTFIT  ";
+"OvB-Hf-GNK.normalTitle" = " CREER UNE TENUE  ";
+
+/* Class = "UILabel"; text = "2505"; ObjectID = "Puc-tf-dAC"; */
+"Puc-tf-dAC.text" = "2505";
 
 /* Class = "UILabel"; text = "DressTime"; ObjectID = "QKF-yT-pTx"; */
 "QKF-yT-pTx.text" = "DressTime";
@@ -96,10 +129,13 @@
 "QKr-WL-ybT.placeholder" = "barak.obama@usa.com";
 
 /* Class = "UILabel"; text = "new password"; ObjectID = "Qea-1B-4iT"; */
-"Qea-1B-4iT.text" = "new password";
+"Qea-1B-4iT.text" = "nouveau mot de passe";
 
 /* Class = "UILabel"; text = "Sportwear"; ObjectID = "Shk-ly-v9e"; */
-"Shk-ly-v9e.text" = "Sportwear";
+"Shk-ly-v9e.text" = "Sportswear";
+
+/* Class = "UILabel"; text = "You are late! What can I wear today?"; ObjectID = "T6A-mV-TvK"; */
+"T6A-mV-TvK.text" = "Tu es en retard, qu'est ce que tu peux porter aujourd'hui?";
 
 /* Class = "UITextField"; placeholder = "TOP - TSHIRT"; ObjectID = "Tlf-HK-Ciu"; */
 "Tlf-HK-Ciu.placeholder" = "TOP - TSHIRT";
@@ -108,13 +144,13 @@
 "To3-dj-Baa.accessibilityIdentifier" = "relax";
 
 /* Class = "UIViewController"; title = "Register Email"; ObjectID = "UHe-E1-Wkk"; */
-"UHe-E1-Wkk.title" = "Register Email";
+"UHe-E1-Wkk.title" = "Enregistrer email";
 
 /* Class = "UIViewController"; title = "Dressing"; ObjectID = "Uhw-Ud-lZ0"; */
 "Uhw-Ud-lZ0.title" = "Dressing";
 
-/* Class = "UITextField"; placeholder = "barack.obama@usa.gouv"; ObjectID = "V6o-8M-UmW"; */
-"V6o-8M-UmW.placeholder" = "barack.obama@usa.gouv";
+/* Class = "UITextField"; text = "barack.obama@usa.gov"; ObjectID = "V6o-8M-UmW"; */
+"V6o-8M-UmW.text" = "barack.obama@usa.gov";
 
 /* Class = "UIImageView"; accessibilityIdentifier = "fashion"; ObjectID = "Vim-mk-HT2"; */
 "Vim-mk-HT2.accessibilityIdentifier" = "fashion";
@@ -128,11 +164,17 @@
 /* Class = "UINavigationController"; title = "DressTime"; ObjectID = "Y11-0F-X5P"; */
 "Y11-0F-X5P.title" = "DressTime";
 
-/* Class = "UILabel"; text = "Nice shoot! Can you confirme us everything is alright ?"; ObjectID = "YH8-gs-zqw"; */
-"YH8-gs-zqw.text" = "Nice shoot! Everything is alright ?";
+/* Class = "UILabel"; text = "Nice shoot! Everything is alright ?"; ObjectID = "YH8-gs-zqw"; */
+"YH8-gs-zqw.text" = "Bonne capture! Tout est ok?";
+
+/* Class = "UILabel"; text = "Let's see what is missing in your wardrobe"; ObjectID = "YXH-mi-2z0"; */
+"YXH-mi-2z0.text" = "Voyons ce qu'il manque dans ton dressing";
 
 /* Class = "UINavigationController"; title = "Detail Clothe Navigation"; ObjectID = "YjD-kx-zf5"; */
 "YjD-kx-zf5.title" = "Detail Clothe Navigation";
+
+/* Class = "UILabel"; text = "CLOTHES"; ObjectID = "aEM-GN-532"; */
+"aEM-GN-532.text" = "VÊTEMENTS";
 
 /* Class = "UISegmentedControl"; c9j-Lg-GFm.segmentTitles[0] = "°C"; ObjectID = "c9j-Lg-GFm"; */
 "c9j-Lg-GFm.segmentTitles[0]" = "°C";
@@ -144,7 +186,7 @@
 "caQ-AQ-ZS4.text" = "Fashion";
 
 /* Class = "UITextField"; placeholder = "Password"; ObjectID = "cb8-9d-edX"; */
-"cb8-9d-edX.placeholder" = "Password";
+"cb8-9d-edX.placeholder" = "Mot de passe";
 
 /* Class = "UILabel"; text = "Casual"; ObjectID = "ded-Pd-yCG"; */
 "ded-Pd-yCG.text" = "Casual";
@@ -152,11 +194,14 @@
 /* Class = "UILabel"; text = "MY TOP SUMMER SHIRT"; ObjectID = "djE-3C-m19"; */
 "djE-3C-m19.text" = "MY TOP SUMMER SHIRT";
 
+/* Class = "UILabel"; text = "min"; ObjectID = "f1g-8D-aDb"; */
+"f1g-8D-aDb.text" = "min";
+
 /* Class = "UIButton"; normalTitle = "VALIDATE MY MODIFICATION"; ObjectID = "f2a-9D-ySV"; */
-"f2a-9D-ySV.normalTitle" = "VALIDATE MY MODIFICATION";
+"f2a-9D-ySV.normalTitle" = "VALIDER LES MODIFICATIONS";
 
 /* Class = "UIBarButtonItem"; title = "ADD"; ObjectID = "f8Z-HZ-xYx"; */
-"f8Z-HZ-xYx.title" = "ADD";
+"f8Z-HZ-xYx.title" = "AJOUTER";
 
 /* Class = "UINavigationItem"; title = "Informations"; ObjectID = "fFh-p7-Oma"; */
 "fFh-p7-Oma.title" = "Informations";
@@ -164,23 +209,29 @@
 /* Class = "UIViewController"; title = "Capture"; ObjectID = "fJc-xh-U6k"; */
 "fJc-xh-U6k.title" = "Capture";
 
+/* Class = "UITableViewController"; title = "Profil"; ObjectID = "g49-UM-Cnb"; */
+"g49-UM-Cnb.title" = "Profil";
+
+/* Class = "UIViewController"; title = "Shopping"; ObjectID = "g4f-mX-ITe"; */
+"g4f-mX-ITe.title" = "Shopping";
+
 /* Class = "UINavigationController"; title = "Register Navigation"; ObjectID = "g6I-Sv-Hfi"; */
 "g6I-Sv-Hfi.title" = "Register Navigation";
 
+/* Class = "UILabel"; text = "max"; ObjectID = "iAa-KS-7It"; */
+"iAa-KS-7It.text" = "max";
+
 /* Class = "UIViewController"; title = "Outfit"; ObjectID = "iIL-pB-KNb"; */
-"iIL-pB-KNb.title" = "Outfit";
+"iIL-pB-KNb.title" = "Tenue";
 
 /* Class = "UITextField"; text = "Name"; ObjectID = "jEL-m6-OQa"; */
-"jEL-m6-OQa.text" = "Name";
+"jEL-m6-OQa.text" = "Nom";
 
 /* Class = "UILabel"; text = "Paul Harper"; ObjectID = "kR7-pQ-1lZ"; */
-"kR7-pQ-1lZ.text" = "Paul Harper";
+"kR7-pQ-1lZ.text" = "Hugo Harper";
 
 /* Class = "UILabel"; text = "DRAG STYLES"; ObjectID = "lET-x2-jJ8"; */
-"lET-x2-jJ8.text" = "DRAG STYLES";
-
-/* Class = "UILabel"; text = "10 clothes"; ObjectID = "nnM-Fo-v3Z"; */
-"nnM-Fo-v3Z.text" = "10 clothes";
+"lET-x2-jJ8.text" = "GLISSER LES STYLES";
 
 /* Class = "UIImageView"; accessibilityIdentifier = "casual"; ObjectID = "nts-UC-gik"; */
 "nts-UC-gik.accessibilityIdentifier" = "casual";
@@ -191,41 +242,44 @@
 /* Class = "UIButton"; normalTitle = "Button"; ObjectID = "onn-C3-X3O"; */
 "onn-C3-X3O.normalTitle" = "Button";
 
-/* Class = "UILabel"; text = "CONFIRM"; ObjectID = "oyN-Rt-CIM"; */
-"oyN-Rt-CIM.text" = "CONFIRM";
-
 /* Class = "UILabel"; text = "Do you know the brand?"; ObjectID = "rTA-al-3LQ"; */
-"rTA-al-3LQ.text" = "Do you know the brand?";
+"rTA-al-3LQ.text" = "Quelle est la marque?";
 
 /* Class = "UILabel"; text = "PICK YOUR OWN STYLE OR THE ONE  YOU WANT TO BE WHEN YOU ARE..."; ObjectID = "rub-mc-uUY"; */
-"rub-mc-uUY.text" = "PICK YOUR OWN STYLE OR THE ONE  YOU WANT TO BE WHEN YOU ARE...";
+"rub-mc-uUY.text" = "CHOISIS TON STYLE";
 
-/* Class = "UILabel"; text = "They feel alone, help them to meet friends!"; ObjectID = "sD3-uj-3zq"; */
-"sD3-uj-3zq.text" = "They feel alone, help them to meet friends!";
+/* Class = "UILabel"; text = "Smart Shopping List"; ObjectID = "tsU-eQ-nYp"; */
+"tsU-eQ-nYp.text" = "Shopping list personnalisée";
 
-/* Class = "UIButton"; normalTitle = "+"; ObjectID = "sGa-oU-GNj"; */
-"sGa-oU-GNj.normalTitle" = "+";
+/* Class = "UIButton"; accessibilityIdentifier = "pants"; ObjectID = "uZd-pV-Oix"; */
+"uZd-pV-Oix.accessibilityIdentifier" = "pants";
 
-/* Class = "UILabel"; text = "Suggestion"; ObjectID = "tsU-eQ-nYp"; */
-"tsU-eQ-nYp.text" = "Suggestion";
+/* Class = "UIButton"; normalTitle = "BOTTOM"; ObjectID = "uZd-pV-Oix"; */
+"uZd-pV-Oix.normalTitle" = "BAS";
+
+/* Class = "UIButton"; selectedTitle = "BOTTOM"; ObjectID = "uZd-pV-Oix"; */
+"uZd-pV-Oix.selectedTitle" = "BAS";
 
 /* Class = "UIViewController"; title = "Capture Clothe Type"; ObjectID = "uqY-Z2-jag"; */
-"uqY-Z2-jag.title" = "Capture Clothe Type";
+"uqY-Z2-jag.title" = "Capture le type de vêtement";
+
+/* Class = "UIButton"; normalTitle = "CONFIRM"; ObjectID = "v9M-M4-SFS"; */
+"v9M-M4-SFS.normalTitle" = "CONFIRME";
 
 /* Class = "UIViewController"; title = "Home"; ObjectID = "wRP-wE-6jT"; */
 "wRP-wE-6jT.title" = "Home";
 
-/* Class = "UILabel"; text = "Select the main pattern by swipping, it will be helpful !"; ObjectID = "weu-eW-K1s"; */
-"weu-eW-K1s.text" = "THE  PATTERN";
+/* Class = "UILabel"; text = "THE  PATTERN"; ObjectID = "weu-eW-K1s"; */
+"weu-eW-K1s.text" = "LE MOTIF";
 
 /* Class = "UILabel"; text = "Business"; ObjectID = "x4F-FV-acr"; */
 "x4F-FV-acr.text" = "Business";
 
 /* Class = "UIBarButtonItem"; title = "Add"; ObjectID = "z2e-XR-Hiq"; */
-"z2e-XR-Hiq.title" = "Add";
+"z2e-XR-Hiq.title" = "Ajouter";
 
 /* Class = "UILabel"; text = "I AM A NICE WOMEN"; ObjectID = "zM4-1S-CS1"; */
-"zM4-1S-CS1.text" = "I AM A NICE WOMEN";
+"zM4-1S-CS1.text" = "JE SUIS UNE JOLIE FILLE";
 
 /* Class = "UILabel"; text = "at work"; ObjectID = "zyK-5i-nrp"; */
-"zyK-5i-nrp.text" = "at work";
+"zyK-5i-nrp.text" = "au travail";

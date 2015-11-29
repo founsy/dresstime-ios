@@ -1,16 +1,17 @@
-/* 
-  Localizable.strings
-  DressTime
-
-  Created by Fab on 26/10/2015.
-  Copyright © 2015 Fab. All rights reserved.
-*/
+/*
+ Localizable.strings
+ DressTime
+ 
+ Created by Fab on 26/10/2015.
+ Copyright © 2015 Fab. All rights reserved.
+ */
 
 /* LoginViewController */
 "loginErrTitle" = "Failed!";
 "loginErrMessage" = "Error during the login the processs";
 "loginErrButton" = "Okay.";
 
+/* HomeViewController */
 "Now" = "Now";
 "Afternoon" = "Afternoon";
 "Morning" = "Morning";
@@ -19,6 +20,7 @@
 /* OutfitViewController */
 "HOME" = "HOME";
 "OUTFIT OF THE DAY" = "OUTFIT OF THE DAY";
+"SOMETHING MISSING" = "SOMETHING IS MISSING .. NO ?";
 
 /* Detail Type View Controller */
 "Edit" =  "Edit";

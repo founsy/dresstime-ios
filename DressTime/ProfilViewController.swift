@@ -19,12 +19,12 @@ class ProfilViewController: UITableViewController {
     private var headerView: UIView!
     
     @IBOutlet weak var backgroundImage: UIImageView!
-    @IBOutlet weak var numberClothes: UILabel!
-    @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var buttonAddClothe: UIButton!
+    @IBOutlet weak var buttonStyle: UIButton!
     @IBOutlet weak var profilButton: UIButton!
+    @IBOutlet weak var styleLabel: UILabel!
     
-    private var kTableHeaderHeight:CGFloat = 390.0
+    private var kTableHeaderHeight:CGFloat = 300.0
     
     @IBAction func onStyleTapped(sender: AnyObject) {
         self.performSegueWithIdentifier("showStyle", sender: self)
@@ -49,25 +49,40 @@ class ProfilViewController: UITableViewController {
         headerView = self.tableView.tableHeaderView
         self.tableView.tableHeaderView = nil
         self.tableView.addSubview(headerView)
-        self.tableView.contentInset = UIEdgeInsets(top: kTableHeaderHeight, left: 0, bottom: 0, right: 0)
-        self.tableView.contentOffset = CGPoint(x: 0, y: -kTableHeaderHeight)
+        self.tableView.contentInset = UIEdgeInsets(top: (kTableHeaderHeight - 46), left: 0, bottom: 0, right: 0)
+        self.tableView.contentOffset = CGPoint(x: 0, y: (-kTableHeaderHeight + 46))
         updateHeaderView()
         
         buttonAddClothe.layer.cornerRadius = 20.0
+        buttonStyle.layer.cornerRadius = 20.0
+        if (SharedData.sharedInstance.sexe! == "M") {
+            buttonStyle.backgroundColor = UIColor.dressTimeGreen()
+            styleLabel.textColor = UIColor.dressTimeGreen()
+        } else {
+            buttonStyle.backgroundColor = UIColor.dressTimePink()
+            styleLabel.textColor = UIColor.dressTimePink()
+
+        }
         
         profilButton.layer.shadowColor = UIColor.blackColor().CGColor
         profilButton.layer.shadowOffset = CGSizeMake(0, 1)
         profilButton.layer.shadowOpacity = 0.50
         profilButton.layer.shadowRadius = 4
+        self.view.bringSubviewToFront(self.profilButton)
     }
     
     override func viewWillAppear(animated: Bool){
         super.viewWillAppear(animated)
         self.type = SharedData.sharedInstance.getType(SharedData.sharedInstance.sexe!)
         initData()
-        setValueProfil()
+        if (SharedData.sharedInstance.currentUserId!.lowercaseString == "alexandre"){
+            profilButton.setImage(UIImage(named: "profileAlexandre"), forState: .Normal)
+        } else if (SharedData.sharedInstance.currentUserId!.lowercaseString == "juliette"){
+            profilButton.setImage(UIImage(named: "profileJuliette"), forState: .Normal)
+        } else {
+            profilButton.setImage(UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)"), forState: .Normal)
+        }
         
-        profilButton.setImage(UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)"), forState: .Normal)
         backgroundImage.image = UIImage(named: "BackgroundHeader\(SharedData.sharedInstance.sexe!.uppercaseString)")
         
         
@@ -75,6 +90,10 @@ class ProfilViewController: UITableViewController {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("PROFILE", comment: ""), style: .Plain, target: nil, action: nil)
         UIApplication.sharedApplication().statusBarHidden = false // for status bar hide
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     private func updateHeaderView(){
@@ -133,16 +152,8 @@ class ProfilViewController: UITableViewController {
             totalClothe = totalClothe + count
             countType?.append("\(count)")
         }
-        self.numberClothes.text = "\(totalClothe)"
+        //self.numberClothes.text = "\(totalClothe)"
         self.tableView.reloadData()
-    }
-    
-    private func setValueProfil(){
-        let profilDal = ProfilsDAL()
-    
-        if let user = profilDal.fetch(SharedData.sharedInstance.currentUserId!) {
-            self.nameLabel.text = user.name
-        }
     }
 }
 

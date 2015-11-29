@@ -67,7 +67,7 @@ extension HomeHeaderCell: UICollectionViewDataSource {
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: collectionView.bounds.size.width/3, height: 75);
+        return CGSize(width: collectionView.bounds.size.width/3, height: 100);
     }
     
 }

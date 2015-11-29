@@ -13,6 +13,7 @@ class DetailClotheViewController: UIViewController {
     
     var currentClothe: Clothe!
     
+    @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var color1View: UIView!
@@ -27,10 +28,32 @@ class DetailClotheViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func onRemoveTapped(sender: AnyObject) {
+        DressingService().DeleteClothe(currentClothe.clothe_id, completion: { (isSuccess, object) -> Void in
+            print("Clothe deleted")
+            ClothesDAL().delete(self.currentClothe)
+            self.dismissViewControllerAnimated(true, completion: nil)
+        })
+    }
+    
     @IBAction func onCreateOutfitTapped(sender: AnyObject) {
     }
     
     @IBAction func onFavoriteTapped(sender: AnyObject) {
+        if (favoriteButton.selected){
+            favoriteButton.selected = false
+            favoriteButton.setImage(UIImage(named: "loveIconOFF"), forState: UIControlState.Normal)
+        } else {
+            favoriteButton.selected = true
+            favoriteButton.setImage(UIImage(named: "loveIconON"), forState: UIControlState.Selected)
+        }
+        if let clo = self.currentClothe {
+            let dal = ClothesDAL()
+            clo.clothe_favorite = favoriteButton.selected
+            
+            dal.update(clo)
+        }
+
     }
     
     @IBAction func onEditTapped(sender: AnyObject) {

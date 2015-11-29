@@ -7,66 +7,45 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+            <rect key="frame" x="0.0" y="0.0" width="481" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-bg" translatesAutoresizingMaskIntoConstraints="NO" id="hyn-RH-amN">
-                    <rect key="frame" x="0.0" y="0.0" width="480" height="480"/>
+                    <rect key="frame" x="0.0" y="0.0" width="481" height="568"/>
+                </imageView>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dresstimeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="j2S-iW-4eY">
+                    <rect key="frame" x="41" y="241" width="399" height="86"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="86" id="GIL-JG-hlT"/>
+                    </constraints>
                 </imageView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  Copyright (c) 2015 DressTime. All rights reserved." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="8ie-xW-0ye">
-                    <rect key="frame" x="20" y="440.5" width="441" height="19.5"/>
+                    <rect key="frame" x="20" y="528.5" width="441" height="19.5"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-UltraLight" family="Helvetica Neue" pointSize="17"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w5R-qj-dzP">
-                    <rect key="frame" x="20" y="255" width="441" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="DpG-aU-lFz"/>
-                    </constraints>
-                    <attributedString key="attributedText">
-                        <fragment content="the new way to get dressed">
-                            <attributes>
-                                <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <font key="NSFont" size="17" name="HelveticaNeue-ThinItalic"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
-                            </attributes>
-                        </fragment>
-                    </attributedString>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DRESSTIME" textAlignment="center" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="kId-c2-rCX">
-                    <rect key="frame" x="20" y="218" width="441" height="43"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="43" id="c4l-SF-aqf"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="36"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
+                <constraint firstItem="j2S-iW-4eY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="41" id="1sL-mc-BlK"/>
                 <constraint firstItem="hyn-RH-amN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8jZ-zM-g50"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="trailing" secondItem="8ie-xW-0ye" secondAttribute="trailing" id="Wbi-SK-x96"/>
+                <constraint firstItem="j2S-iW-4eY" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="RhN-gK-BBK"/>
+                <constraint firstAttribute="trailing" secondItem="j2S-iW-4eY" secondAttribute="trailing" constant="41" id="Uhe-Le-fo9"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="218" id="aG8-ZX-zyy"/>
                 <constraint firstItem="hyn-RH-amN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="azU-O1-pcM"/>
-                <constraint firstItem="w5R-qj-dzP" firstAttribute="trailing" secondItem="kId-c2-rCX" secondAttribute="trailing" id="sAu-yl-vC5"/>
-                <constraint firstItem="w5R-qj-dzP" firstAttribute="leading" secondItem="kId-c2-rCX" secondAttribute="leading" id="tVy-fm-y6q"/>
-                <constraint firstAttribute="bottom" secondItem="w5R-qj-dzP" secondAttribute="bottom" constant="185" id="w84-5d-fhP"/>
+                <constraint firstAttribute="trailing" secondItem="hyn-RH-amN" secondAttribute="trailing" id="naG-6i-hxu"/>
                 <constraint firstAttribute="bottom" secondItem="hyn-RH-amN" secondAttribute="bottom" id="wZ3-on-C0P"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="leading" secondItem="8ie-xW-0ye" secondAttribute="leading" id="x3E-jK-OAE"/>
-                <constraint firstItem="kId-c2-rCX" firstAttribute="centerX" secondItem="hyn-RH-amN" secondAttribute="centerX" id="yqX-lV-3pr"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="548" y="455"/>
+            <point key="canvasLocation" x="548.5" y="499"/>
         </view>
     </objects>
     <resources>
+        <image name="dresstimeLogo" width="293" height="88"/>
         <image name="login-bg" width="768" height="1024"/>
     </resources>
 </document>
