@@ -32,7 +32,7 @@ class SharedData {
             case "Maille":
                 return ["jumper-fin","jumper-epais","cardigan","sweater"]
             case "Top":
-                return ["tshirt", "shirt", "shirt-sleeve", "polo","polo-sleeve"]
+                return ["shirt", "shirt-sleeve", "polo-sleeve", "polo", "tshirt"]
             case "Pants":
                 return ["jeans", "jeans-slim", "trousers-pleated", "trousers-suit", "chinos", "trousers-regular", "trousers", "trousers-slim", "bermuda", "short"]
             case "Dress":

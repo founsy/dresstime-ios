@@ -50,6 +50,14 @@ class RegisterStyleViewController : UIViewController {
     
     @IBAction func onSaveTapped(sender: AnyObject) {
         //Edit Mode
+        if (!isValidData()){
+            ActivityLoader.shared.hideProgressView()
+            let alert = UIAlertController(title: NSLocalizedString("styleErrTitle", comment: ""), message: NSLocalizedString("styleErrMessage", comment: ""), preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("styleErrButton", comment: ""), style: .Default) { _ in })
+            self.presentViewController(alert, animated: true){}
+            return
+        }
+        
         if let userId = currentUserId {
             let dal = ProfilsDAL()
             if let profil = dal.fetch(userId) {
@@ -72,15 +80,17 @@ class RegisterStyleViewController : UIViewController {
                 
             }
         } else {
-            //Create Model
             let dal = ProfilsDAL()
             let profil = dal.save(email!, email: email!, access_token: "", refresh_token: "", expire_in: 3600, name: "", gender: sexe!, temp_unit: "C")
             profil.atWorkStyle = self.atWorkSelected
             profil.onPartyStyle = self.onPartySelected
             profil.relaxStyle = self.relaxSelected
             dal.update(profil)
+            
             UserService().CreateUser(profil, password: password!, completion: { (isSuccess, object) -> Void in
                 if (isSuccess){
+                    //Create Model
+                    self.loginSuccess(profil, password: self.password!)
                     UIView.animateAndChainWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: {
                         self.confirmationView?.alpha = 1
                         self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
@@ -88,7 +98,7 @@ class RegisterStyleViewController : UIViewController {
                             self.confirmationView?.alpha = 0
                             self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
                             }, completion: { (finish) -> Void in
-                                self.dismissViewControllerAnimated(true, completion: nil)
+                                
                         })
                 }
             })
@@ -100,11 +110,11 @@ class RegisterStyleViewController : UIViewController {
         super.viewDidLoad()
         
         if (currentUserId != nil){
-            onValidateButton.setTitle("VALIDATE MY MODIFICATION", forState: UIControlState.Normal)
-            labelText.text = "PICK YOUR OWN STYLE"
+            onValidateButton.setTitle(NSLocalizedString("VALIDATE MY MODIFICATION", comment: ""), forState: UIControlState.Normal)
+            labelText.text = NSLocalizedString("PICK YOUR OWN STYLE", comment: "")
         } else {
-            onValidateButton.titleLabel?.text = "LET'S SEE MY NEW DRESSING"
-            onValidateButton.setTitle("LET'S SEE MY NEW DRESSING", forState: UIControlState.Normal)
+            onValidateButton.titleLabel?.text = NSLocalizedString("LET'S SEE MY NEW DRESSING", comment: "")
+            onValidateButton.setTitle(NSLocalizedString("LET'S SEE MY NEW DRESSING", comment: ""), forState: UIControlState.Normal)
         }
         
         self.confirmationView = NSBundle.mainBundle().loadNibNamed("ConfirmSave", owner: self, options: nil)[0] as? ConfirmSave
@@ -177,6 +187,12 @@ class RegisterStyleViewController : UIViewController {
         }
     }
     
+    private func isValidData() -> Bool {
+        return !((relaxSelected == nil || relaxSelected!.isEmpty) ||
+            (onPartySelected == nil || onPartySelected!.isEmpty) ||
+            (atWorkSelected == nil || atWorkSelected!.isEmpty))
+    }
+    
     private func initData(){
         let profilDal = ProfilsDAL()
         
@@ -221,9 +237,10 @@ class RegisterStyleViewController : UIViewController {
         } else if (selectedStyle == "casual"){
             self.tempImage = createCloneImage(self.casualIcon, location: nil, isInit: true)
         }
-
-        self.tempImage!.center = container!.center
-        self.view.addSubview(self.tempImage!)
+        if let _ = self.tempImage {
+            self.tempImage!.center = container!.center
+            self.view.addSubview(self.tempImage!)
+        }
     }
     
     private func goBackArea(){
@@ -372,6 +389,39 @@ class RegisterStyleViewController : UIViewController {
             name = "IconCasualStyleSelected"
         }
         return name
+    }
+    
+    
+    private func loginSuccess(profil: Profil, password: String){
+        LoginService().Login(profil.email!, password: password) { (isSuccess, object) -> Void in
+            if (isSuccess){
+                let dal = ProfilsDAL()
+                
+                if let profil = dal.fetch(object["user"]["username"].string!.lowercaseString){
+                    profil.access_token = object["access_token"].string
+                    profil.refresh_token = object["refresh_token"].string
+                    profil.expire_in = object["expires_in"].float
+                    if let newProfil = dal.update(profil) {
+                        SharedData.sharedInstance.currentUserId = newProfil.userid
+                        SharedData.sharedInstance.sexe = newProfil.gender
+                    }
+                    dispatch_async(dispatch_get_main_queue(),  { () -> Void in
+                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
+                        appDelegate.window?.rootViewController = initialViewController
+                        appDelegate.window?.makeKeyAndVisible()
+                    })
+                }
+            } else {
+                ActivityLoader.shared.hideProgressView()
+                let alert = UIAlertController(title: NSLocalizedString("loginErrTitle", comment: ""), message: NSLocalizedString("loginErrMessage", comment: ""), preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("loginErrButton", comment: ""), style: .Default) { _ in })
+                self.presentViewController(alert, animated: true){}
+            }
+            
+        }
+        
     }
     
     private func animationEnd(destination: CGPoint){

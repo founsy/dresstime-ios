@@ -12,10 +12,10 @@ import Alamofire
 class LoginService {
     let base_url = "http://api.drez.io/oauth/"
     let isDebug = true
-    let clientId = "android"
-    let grantTypePassword = "password"
-    let grantTypeRefresh = "refresh_token"
-    let clientSecret = "SomeRandomCharsAndNumbers"
+    static let clientId = "android"
+    static let grantTypePassword = "password"
+    static let grantTypeRefresh = "refresh_token"
+    static let clientSecret = "SomeRandomCharsAndNumbers"
     
     
     func Login(login: String, password: String, completion: (isSuccess: Bool, object: JSON) -> Void){
@@ -69,9 +69,9 @@ class LoginService {
     //POST
     private func login(login: String, password: String, completion: (isSuccess: Bool, object: JSON) -> Void){
         let parameters = [
-            "grant_type" : self.grantTypePassword,
-            "client_id" : self.clientId,
-            "client_secret" : self.clientSecret,
+            "grant_type" : LoginService.grantTypePassword,
+            "client_id" : LoginService.clientId,
+            "client_secret" : LoginService.clientSecret,
             "username" : login,
             "password" : password
         ]
@@ -113,9 +113,9 @@ class LoginService {
     
     private func refreshToken(refreshToken: String, completion:(isSuccess: Bool, object: JSON) -> Void) {
         let parameters = [
-            "grant_type" : self.grantTypeRefresh,
-            "client_id" : self.clientId,
-            "client_secret" : self.clientSecret,
+            "grant_type" : LoginService.grantTypeRefresh,
+            "client_id" : LoginService.clientId,
+            "client_secret" : LoginService.clientSecret,
             "refresh_token" : refreshToken
         ]
         let path = base_url + "token"

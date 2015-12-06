@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import CoreLocation
 
 
 class HomeViewController: UIViewController{
@@ -67,6 +67,10 @@ class HomeViewController: UIViewController{
         super.viewDidAppear(animated)
         if (self.numberOfClothes == 0){
             createArrowImageView()
+        } else {
+            if let imageView = self.arrowImageView {
+                imageView.removeFromSuperview()
+            }
         }
         
         if let weather = self.currentWeather {
@@ -181,8 +185,7 @@ class HomeViewController: UIViewController{
 }
 
 extension HomeViewController: HomeHeaderCellDelegate {
-    func weatherFinishing(weather: Weather) {
-        //Call HomeOutfitsListCell
+    func homeHeaderCell(homeHeaderCell: HomeHeaderCell, weatherFinishing weather: Weather) {
         self.currentWeather = weather
         let condition = weatherConditionByCode(Int(weather.code!))
         var image: UIImage?
@@ -230,6 +233,19 @@ extension HomeViewController: HomeHeaderCellDelegate {
         }
     }
     
+    func homeHeaderCell(homeHeaderCell: HomeHeaderCell, noLocationAccess error: CLAuthorizationStatus) {
+        switch(error) {
+        case .NotDetermined, .Restricted, .Denied:
+            let alert = UIAlertController(title: NSLocalizedString("homeLocErrTitle", comment: ""), message: NSLocalizedString("homeLocErrMessage", comment: ""), preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("homeLocErrButton", comment: ""), style: .Default) { _ in })
+            self.presentViewController(alert, animated: true){}
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
+            print("Access")
+        default:
+            print("...")
+        }
+    }
+    
     func weatherConditionByCode(code: Int) -> String{
         //2xx Thunderstorm
         //3xx Drizzle
@@ -265,18 +281,26 @@ extension HomeViewController: HomeHeaderCellDelegate {
 }
 
 extension HomeViewController: HomeOutfitsListCellDelegate {
-    func showOutfits(homeOutfitsListCell: HomeOutfitsListCell, outfit: JSON?){
-        if let result = outfit {
-            self.outfitSelected = result
-            self.performSegueWithIdentifier("showOutfit", sender: self)
-        } else {
-            //self.typeClothe = homeOutfitsListCell.typeClothe
-            self.performSegueWithIdentifier("AddClothe", sender: self)
+    func homeOutfitsListCell(homeOutfitsListCell: HomeOutfitsListCell, loadedOutfits outfitsCount: Int){
+        self.numberOfOutfits = outfitsCount
+        if (self.numberOfOutfits > 0){
+            shoppingBarButton.enabled = true
+            shoppingBarButton.tintColor = nil
         }
     }
     
-    func loadedOutfits(outfitsCount: Int) {
-        self.numberOfOutfits = outfitsCount
+    
+    func homeOutfitsListCell(homeOutfitsListCell: HomeOutfitsListCell, showOutfit outfit: JSON) {
+        self.outfitSelected = outfit
+        self.performSegueWithIdentifier("showOutfit", sender: self)
+    }
+    
+    
+    func homeOutfitsListCell(homeOutfitsListCell: HomeOutfitsListCell, openCaptureType type: String) {
+        if let intType = Int(type) {
+            self.typeClothe = intType
+        }
+        self.performSegueWithIdentifier("AddClothe", sender: self)
     }
 }
 
@@ -287,7 +311,7 @@ extension HomeViewController: HomeBrandOutfitsListCellDelegate {
     }
     
     func loadedBrandOutfits(outfitsCount: Int) {
-        self.numberOfOutfits = outfitsCount
+        //self.numberOfOutfits = outfitsCount
     }
 }
 

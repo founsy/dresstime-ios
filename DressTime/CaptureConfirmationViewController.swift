@@ -14,9 +14,8 @@ class CaptureConfirmationViewController: UIViewController {
 
     @IBOutlet weak var captureResult: UIImageView!
     @IBOutlet weak var nameClothe: UITextField!
-    @IBOutlet weak var color1: UIView!
-    @IBOutlet weak var color2: UIView!
-    @IBOutlet weak var color3: UIView!
+    @IBOutlet var colorBtnCollection: [UIButton]!
+    
     @IBOutlet weak var patternContainerView: UIView!
     @IBOutlet weak var brandButton: UIButton!
     @IBOutlet weak var saveButton: UIBarButtonItem!
@@ -38,9 +37,22 @@ class CaptureConfirmationViewController: UIViewController {
             isModify = true
         }
     }
-    
-    //TODO - Cut subtype-cut 
-    
+
+    @IBAction func onTouchUpColor(sender: UIButton) {
+        for (var i = 0; i < colorBtnCollection.count; i++){
+            if (colorBtnCollection[i] == sender){
+                colorBtnCollection[i].selected = !colorBtnCollection[i].selected
+                colorBtnCollection[i].layer.borderWidth = 2.0
+                colorBtnCollection[i].layer.borderColor = UIColor.dressTimeOrange().CGColor
+            } else {
+                colorBtnCollection[i].selected = false
+                colorBtnCollection[i].layer.borderWidth = 1.0
+                colorBtnCollection[i].layer.borderColor = UIColor.whiteColor().CGColor
+            }
+        }
+
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,75 +62,76 @@ class CaptureConfirmationViewController: UIViewController {
         
         whiteNavBar()
         self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        
         createPickerView()
         brandButton.layer.cornerRadius = 30.0
-        setColorStyle(color1)
-        setColorStyle(color2)
-        setColorStyle(color3)
         applyStyleTextView(nameClothe)
         
         if let clothe = self.clotheObject {
-            let type = clothe["clothe_type"] as! String
-            let subtype = clothe["clothe_subtype"] as! String
-            nameClothe.text = "\(type) - \(subtype)"
-            captureResult.image = UIImage(data: clothe["clothe_image"] as! NSData)
-            let colors = self.splitHexColor(clothe["clothe_colors"] as! String)
-            color1.backgroundColor = UIColor.colorWithHexString(colors[0] as String)
-            color2.backgroundColor = UIColor.colorWithHexString(colors[1] as String)
-            color3.backgroundColor = UIColor.colorWithHexString(colors[2] as String)
+            self.setNewClotheData(clothe)
+            self.saveButton.title = NSLocalizedString("ADD", comment: "")
         }
         
         if let clothe = self.currentClothe {
-            let type = clothe.clothe_type
-            let subtype = clothe.clothe_subtype
-            let split = subtype.characters.split{$0 == "-"}.map(String.init)
-            if (split.count > 1){
-                clothe.clothe_subtype = split[0]
-                clothe.clothe_cut = split[1]
+            self.setModifyClotheData(clothe)
+            self.saveButton.title = NSLocalizedString("MODIFY", comment: "")
+        }
+    }
+    
+    private func setColors(colors: String){
+        let colors = self.splitHexColor(colors)
+        for (var i = 0; i < colorBtnCollection.count && i < colors.count; i++){
+            setColorStyle(colorBtnCollection[i])
+            colorBtnCollection[i].backgroundColor = UIColor.colorWithHexString(colors[i] as String)
+            if (i == 0){
+                colorBtnCollection[i].selected = true
+                colorBtnCollection[i].layer.borderWidth = 2.0
+                colorBtnCollection[i].layer.borderColor = UIColor.dressTimeOrange().CGColor
             }
-            nameClothe.text = "\(type) - \(subtype)"
-            let clotheImage =  UIImage(data: clothe.clothe_image)
-            captureResult.image = clotheImage
-            
-            //Fall back if image don't have 3 main colors
-            var colors = self.splitHexColor(clothe.clothe_colors)
-            if (colors.count < 2){
-                var tempColor = ""
-                let arrayColors = clotheImage!.dominantColors()
-                for var i = 0; i < arrayColors.count && i < 3; i++ {
-                    if (tempColor != ""){
-                        tempColor += ","
-                    }
-                    tempColor += arrayColors[i].hexStringFromColor()
+        }
+    }
+    
+    private func setNewClotheData(clothe : [String: AnyObject]){
+        let type = clothe["clothe_type"] as! String
+        let subtype = clothe["clothe_subtype"] as! String
+        nameClothe.text = "\(type) - \(subtype)"
+        captureResult.image = UIImage(data: clothe["clothe_image"] as! NSData)
+        self.setColors(clothe["clothe_colors"] as! String)
+    }
+    
+    private func setModifyClotheData(clothe: Clothe){
+        let type = clothe.clothe_type
+        let subtype = clothe.clothe_subtype
+        let split = subtype.characters.split{$0 == "-"}.map(String.init)
+        if (split.count > 1){
+            clothe.clothe_subtype = split[0]
+            clothe.clothe_cut = split[1]
+        }
+        nameClothe.text = clothe.clothe_name
+        let clotheImage =  clothe.getImage()
+        captureResult.image = clotheImage
+        
+        //Fall back if image don't have 3 main colors
+        let colors = self.splitHexColor(clothe.clothe_colors)
+        if (colors.count < 2){
+            var tempColor = ""
+            let arrayColors = clotheImage.dominantColors()
+            for var i = 0; i < arrayColors.count && i < 3; i++ {
+                if (tempColor != ""){
+                    tempColor += ","
                 }
-                clothe.clothe_colors = tempColor
-                colors = self.splitHexColor(tempColor)
+                tempColor += arrayColors[i].hexStringFromColor()
             }
-            
-            if (colors.count > 0) {
-                color1.backgroundColor = UIColor.colorWithHexString(colors[0] as String)
-                let hexTranslator = HexColorToName()
-                let colorName = UIColor.colorWithHexString(colors[0])
-                clothe.clothe_litteralColor = hexTranslator.name(colorName)[1] as! String
-                
-            }
-            if (colors.count > 1) {
-                color2.backgroundColor = UIColor.colorWithHexString(colors[1] as String)
-            }
-            if (colors.count > 2) {
-                color3.backgroundColor = UIColor.colorWithHexString(colors[2] as String)
-            }
-            if let index = self.patternData.indexOf(clothe.clothe_pattern) {
-                self.pickerView.selectItem(index)
-                self.selectedPattern = index
-            }
+            clothe.clothe_colors = tempColor
         }
         
-        if (self.isModify){
-            self.saveButton.title = "MODIFY"
-        } else {
-            self.saveButton.title = "ADD"
+        self.setColors(clothe.clothe_colors)
+        
+        if let index = self.patternData.indexOf(clothe.clothe_pattern) {
+            self.pickerView.selectItem(index)
+            self.selectedPattern = index
         }
+
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -192,7 +205,11 @@ class CaptureConfirmationViewController: UIViewController {
         
         resultCapture["clothe_isUnis"] = self.isUnis()
         resultCapture["clothe_pattern"] = self.patternData[self.selectedPattern]
-        resultCapture["colors"] = color1.backgroundColor!.hexStringFromColor()
+        
+        //Set name of selected Color
+        resultCapture["colors"] = getMainColor()
+        resultCapture["clothe_litteralColor"] = getSelectedColor()
+        
         resultCapture["clothe_name"] = self.nameClothe.text
         let subtype = resultCapture["clothe_subtype"] as! String
         
@@ -201,7 +218,6 @@ class CaptureConfirmationViewController: UIViewController {
         if (split.count > 1){
             resultCapture["clothe_subtype"] = split[0]
             resultCapture["clothe_cut"] = split[1]
-            print(resultCapture)
         }
         
         let dal = ClothesDAL()
@@ -221,6 +237,8 @@ class CaptureConfirmationViewController: UIViewController {
         self.currentClothe?.clothe_isUnis = self.isUnis()
         self.currentClothe?.clothe_pattern = self.patternData[self.selectedPattern]
         self.currentClothe?.clothe_name = self.nameClothe.text!
+        self.currentClothe?.clothe_colors = getMainColor()
+        self.currentClothe?.clothe_litteralColor = getSelectedColor()
         
         dal.update(self.currentClothe!)
         DressingService().UpdateClothe(self.currentClothe!.clothe_id) { (isSuccess, object) -> Void in
@@ -228,6 +246,37 @@ class CaptureConfirmationViewController: UIViewController {
             self.dismissViewControllerAnimated(true, completion: nil)
         }
         
+    }
+    
+    private func getSelectedColor() -> String {
+        let hexTranslator = HexColorToName()
+        for(var i=0; i < colorBtnCollection.count; i++){
+            if (colorBtnCollection[i].selected){
+                let colorName = UIColor.colorWithHexString(colorBtnCollection[i].backgroundColor!.hexStringFromColor())
+                return hexTranslator.name(colorName)[1] as! String
+            }
+        }
+        return ""
+    }
+    
+    private func getMainColor() -> String {
+        var mainColor = ""
+        for (var i=0; i < colorBtnCollection.count; i++){
+            if (colorBtnCollection[i].selected){
+                if (mainColor.isEmpty){
+                    mainColor = colorBtnCollection[i].backgroundColor!.hexStringFromColor()
+                } else {
+                    mainColor = colorBtnCollection[i].backgroundColor!.hexStringFromColor() + "," + mainColor
+                }
+            } else {
+                if (!mainColor.isEmpty) {
+                    mainColor += ","
+                }
+                mainColor += colorBtnCollection[i].backgroundColor!.hexStringFromColor()
+            }
+            
+        }
+        return mainColor
     }
     
     @IBAction func onBack(sender: AnyObject) {

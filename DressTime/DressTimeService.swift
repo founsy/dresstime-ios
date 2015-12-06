@@ -105,9 +105,7 @@ class DressTimeService {
             ]
             
             let parameters = [
-                "sex" : profil.gender!,
                 "styles" : styles,
-                "dressing" : dressingSeriazible,
                 "weather" : weatherObject
             ]
             

@@ -93,16 +93,21 @@ extension ClotheSelectionCell : AKPickerViewDataSource {
     func pickerView(pickerView: AKPickerView, viewForItem item: Int) -> UIView {
         let view = NSBundle.mainBundle().loadNibNamed("BrandClotheCell", owner: self, options: nil)[0] as! BrandClotheCell
         view.frame = CGRectMake(0, 0, 207, 240)
-        if let selected = self.selectedClothe {
-            let clothe = selected[item]
-            view.imageView.image = UIImage(named:clothe["brandClothe"]["clothe_image"].stringValue.stringByReplacingOccurrencesOfString(".jpg", withString: ""))
+        if (item < self.selectedClothe!.count){
+            if let selected = self.selectedClothe {
+                
+                let clothe = selected[item]
+                view.priceLabel.text = clothe["brandClothe"]["clothe_price"].stringValue
+                view.imageView.image = UIImage(named:clothe["brandClothe"]["clothe_image"].stringValue.stringByReplacingOccurrencesOfString(".jpg", withString: ""))
+                let named = clothe["brandClothe"]["clothe_partnerName"].stringValue.stringByReplacingOccurrencesOfString(" ", withString: "")
+                view.brandIcon.image = UIImage(named:"brand\(named)")
+            }
+            
+            view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
+            view.priceView.layer.cornerRadius = 20
+            view.priceView.layer.borderWidth = 1.0
+            view.priceView.layer.borderColor = UIColor.blackColor().CGColor
         }
-        
-        view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
-        view.priceView.layer.cornerRadius = 20
-        view.priceView.layer.borderWidth = 1.0
-        view.priceView.layer.borderColor = UIColor.blackColor().CGColor
-
         return view
     }
     

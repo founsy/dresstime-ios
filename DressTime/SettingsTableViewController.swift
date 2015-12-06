@@ -75,6 +75,14 @@ class SettingsTableViewController: UITableViewController {
         currentPasswordField.delegate = self
         newPasswordField.delegate = self
         profilImage.image = UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)")
+        if (SharedData.sharedInstance.currentUserId!.lowercaseString == "alexandre"){
+            profilImage.image = UIImage(named: "profileAlexandre")
+        } else if (SharedData.sharedInstance.currentUserId!.lowercaseString == "juliette"){
+            profilImage.image = UIImage(named: "profileJuliette")
+        } else {
+            profilImage.image = UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)")
+        }
+
         let defaults = NSUserDefaults.standardUserDefaults()
         switchTutorial.on = defaults.boolForKey( "alreadyLaunch")
     }

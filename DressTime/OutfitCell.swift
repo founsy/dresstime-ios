@@ -9,14 +9,19 @@
 import Foundation
 import UIKit
 
+protocol OutfitCellDelegate {
+    func outfitCell(outfitCell : UICollectionViewCell, typeSelected type: String)
+}
+
 class OufitCell: UICollectionViewCell {
     
     @IBOutlet weak var styleLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
     
+    var delegate: OutfitCellDelegate?
     
     override func awakeFromNib() {
-        
+        super.awakeFromNib()
     }
     
     private func applyPlainShadow(view: UIView) {
@@ -40,7 +45,7 @@ class OufitCell: UICollectionViewCell {
         view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
         view.layer.masksToBounds = true
         
-        var img = UIImage(data: clothe.clothe_image)!
+        var img = clothe.getImage()
         
         var mode = UIViewContentMode.Top
         if (rect.size.height != containerView.frame.size.height){
@@ -58,11 +63,15 @@ class OufitCell: UICollectionViewCell {
         containerView.addSubview(view)
     }
     
-    func setLoadNecessaryImage(imageNamed: String, rect: CGRect){
+    func setLoadNecessaryImage(imageNamed: String, type: String, rect: CGRect){
         let view = UIView(frame: rect)
         view.backgroundColor = UIColor.clearColor()
         view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
         view.layer.masksToBounds = true
+        view.accessibilityIdentifier = type
+        let gesture = UITapGestureRecognizer(target: self, action: "someAction:")
+        view.addGestureRecognizer(gesture)
+        
         let img = UIImage(named: imageNamed)!
         let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
         imageView.backgroundColor = UIColor.clearColor()
@@ -115,6 +124,14 @@ class OufitCell: UICollectionViewCell {
     func removeOldImages(){
         for item in containerView.subviews {
             item.removeFromSuperview()
+        }
+    }
+    
+    func someAction(sender:UITapGestureRecognizer){
+        // do other task
+        print(sender.view?.accessibilityIdentifier)
+        if let del = self.delegate {
+            del.outfitCell(self, typeSelected: sender.view!.accessibilityIdentifier!)
         }
     }
 }

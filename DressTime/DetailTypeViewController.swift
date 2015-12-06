@@ -32,14 +32,13 @@ class DetailTypeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableView.registerNib(UINib(nibName: "ClotheTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
         
         tableView!.delegate = self
         tableView!.dataSource = self
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         //TODO Manage Localization
-        titleNav.title = "My \(typeClothe!.uppercaseString)!"
+        titleNav.title = "\(NSLocalizedString("My", comment: "")) \(NSLocalizedString(typeClothe!.uppercaseString, comment:""))!"
         
         emptyViewButton.layer.cornerRadius = 10.0
         emptyViewButton.layer.borderColor = UIColor.whiteColor().CGColor
@@ -55,6 +54,8 @@ class DetailTypeViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.alpha = 1.0
+        
         initData()
         tableView.reloadData()
         if (clothesList?.count > 0){
@@ -172,9 +173,7 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! ClotheTableViewCell
     
         let clothe = self.clothesList![indexPath.row]
-        if let image = UIImage(data: clothe.clothe_image) {
-            cell.clotheImageView.image = image.imageWithImage(480.0)
-        }
+        cell.clotheImageView.image = clothe.getImage().imageWithImage(480.0)
         cell.initFavoriteButton(clothe.clothe_favorite)
         cell.clothe = clothe
         cell.layer.shadowOffset = CGSizeMake(3, 6);

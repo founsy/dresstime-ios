@@ -89,7 +89,10 @@
 		0187FA231BE2065E0060FFA8 /* BrandClotheCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0187FA221BE2065E0060FFA8 /* BrandClotheCell.swift */; };
 		019405C31BC114A8005D6F92 /* Profil+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019405C11BC114A8005D6F92 /* Profil+CoreDataProperties.swift */; };
 		019405C41BC114A8005D6F92 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019405C21BC114A8005D6F92 /* Profil.swift */; };
+		019781C31C145DD6001ED685 /* UIActivityLoader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 019781C21C145DD6001ED685 /* UIActivityLoader.xib */; };
+		019781CB1C145E8A001ED685 /* UIActivityLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019781CA1C145E8A001ED685 /* UIActivityLoader.swift */; };
 		019A78531BA002E3001958FE /* OutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019A78521BA002E3001958FE /* OutfitViewController.swift */; };
+		019E58C61C0C8C8B00FF1820 /* juliette-Shopping.json in Resources */ = {isa = PBXBuildFile; fileRef = 019E58C51C0C8C8B00FF1820 /* juliette-Shopping.json */; };
 		019F76451BDE0CF3007E6A3E /* juliette-OutfitsToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 019F76441BDE0CF3007E6A3E /* juliette-OutfitsToday.json */; };
 		019F764C1BDE0FE5007E6A3E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 019F764E1BDE0FE5007E6A3E /* Localizable.strings */; };
 		01A4FABD1BE355B6009DEAA8 /* PriceSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A4FABC1BE355B6009DEAA8 /* PriceSelectionCell.swift */; };
@@ -252,6 +255,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0105906F1C0E1DD40037FC61 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		010590711C0E1DDC0037FC61 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		010DEB621BE61E800079ACCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		012150401C084726008ABE44 /* alexandre-Shopping.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "alexandre-Shopping.json"; sourceTree = "<group>"; };
 		012182DB1BC4EA270019631B /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Alamofire/Alamofire.xcodeproj; sourceTree = SOURCE_ROOT; };
@@ -336,7 +341,10 @@
 		0187FA221BE2065E0060FFA8 /* BrandClotheCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrandClotheCell.swift; sourceTree = "<group>"; };
 		019405C11BC114A8005D6F92 /* Profil+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profil+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		019405C21BC114A8005D6F92 /* Profil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
+		019781C21C145DD6001ED685 /* UIActivityLoader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIActivityLoader.xib; sourceTree = "<group>"; };
+		019781CA1C145E8A001ED685 /* UIActivityLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIActivityLoader.swift; sourceTree = "<group>"; };
 		019A78521BA002E3001958FE /* OutfitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutfitViewController.swift; sourceTree = "<group>"; };
+		019E58C51C0C8C8B00FF1820 /* juliette-Shopping.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "juliette-Shopping.json"; sourceTree = "<group>"; };
 		019F76441BDE0CF3007E6A3E /* juliette-OutfitsToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "juliette-OutfitsToday.json"; sourceTree = "<group>"; };
 		019F764A1BDE0FC6007E6A3E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		019F764F1BDE1013007E6A3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -356,7 +364,6 @@
 		01AE7C001BD616BC00728EA4 /* AuthorizationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorizationManager.swift; sourceTree = "<group>"; };
 		01B06B771BDF69BF004C17B2 /* juliette-OutfitsBrandToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "juliette-OutfitsBrandToday.json"; sourceTree = "<group>"; };
 		01B851CB1C04D76D0008054E /* TextSelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextSelectionCell.swift; sourceTree = "<group>"; };
-		01B851D41C04D87B0008054E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		01C2AE591BC5591200F7D4C2 /* outfitsByStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = outfitsByStyle.json; sourceTree = "<group>"; };
 		01C2AE5B1BC6407600F7D4C2 /* alexandre-OutfitsToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "alexandre-OutfitsToday.json"; sourceTree = "<group>"; };
 		01C2AE5D1BC7931F00F7D4C2 /* WeatherCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WeatherCell.xib; sourceTree = "<group>"; };
@@ -415,7 +422,6 @@
 		01E167F01BC3EA3D008D3A0C /* SettingsSexCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsSexCell.swift; sourceTree = "<group>"; };
 		01E167F21BC3EA4B008D3A0C /* SettingsHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsHeaderCell.swift; sourceTree = "<group>"; };
 		01E7CDC11BF10B7F00B45F03 /* juliette-login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "juliette-login.json"; sourceTree = "<group>"; };
-		01F13D4C1C023B0E00E3E9B0 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		01FFCEDD1B6E714600F59D1B /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -642,6 +648,7 @@
 		01B06B751BDF6974004C17B2 /* Cathy */ = {
 			isa = PBXGroup;
 			children = (
+				019E58C51C0C8C8B00FF1820 /* juliette-Shopping.json */,
 				01E7CDC11BF10B7F00B45F03 /* juliette-login.json */,
 				0180A3B51BDCB38800EDF565 /* juliette.json */,
 				019F76441BDE0CF3007E6A3E /* juliette-OutfitsToday.json */,
@@ -821,6 +828,8 @@
 				0180A3B31BDA0B0800EDF565 /* OutfitCell.swift */,
 				01D626AD1BE0DE8E009FF6B6 /* ActivityLoader.swift */,
 				013DBC2D1BE3C0A400343036 /* ConfirmSave.swift */,
+				019781C21C145DD6001ED685 /* UIActivityLoader.xib */,
+				019781CA1C145E8A001ED685 /* UIActivityLoader.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -1098,10 +1107,12 @@
 				0164464C1BDCE5FD00E2434B /* Info.plist in Resources */,
 				01A6BDDE1B99D3E600D357A3 /* ClotheTableCell.xib in Resources */,
 				01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */,
+				019781C31C145DD6001ED685 /* UIActivityLoader.xib in Resources */,
 				01C2AE621BC7DA3300F7D4C2 /* weather.json in Resources */,
 				012150411C084726008ABE44 /* alexandre-Shopping.json in Resources */,
 				0178DFB21BF3553700B50811 /* PatternView.xib in Resources */,
 				01C2AE5E1BC7931F00F7D4C2 /* WeatherCell.xib in Resources */,
+				019E58C61C0C8C8B00FF1820 /* juliette-Shopping.json in Resources */,
 				019F764C1BDE0FE5007E6A3E /* Localizable.strings in Resources */,
 				01A6BDE61B9B352E00D357A3 /* TypeTableCell.xib in Resources */,
 				019F76451BDE0CF3007E6A3E /* juliette-OutfitsToday.json in Resources */,
@@ -1217,6 +1228,7 @@
 				016446521BDCE5FD00E2434B /* Spring.swift in Sources */,
 				01D1B8721B726B7D00920C64 /* TypeViewController.swift in Sources */,
 				0183F30B1BD8E71800691238 /* RBBLinearInterpolation.swift in Sources */,
+				019781CB1C145E8A001ED685 /* UIActivityLoader.swift in Sources */,
 				016446541BDCE5FD00E2434B /* SpringButton.swift in Sources */,
 				013DBC2E1BE3C0A400343036 /* ConfirmSave.swift in Sources */,
 				01D626AE1BE0DE8E009FF6B6 /* ActivityLoader.swift in Sources */,
@@ -1303,8 +1315,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				01C455001B5942F4003D5E41 /* Base */,
-				01F13D4C1C023B0E00E3E9B0 /* fr */,
-				01B851D41C04D87B0008054E /* en */,
+				0105906F1C0E1DD40037FC61 /* en */,
+				010590711C0E1DDC0037FC61 /* fr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

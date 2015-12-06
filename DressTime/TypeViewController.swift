@@ -32,7 +32,9 @@ class TypeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.lightGrayColor()
+        self.view.backgroundColor = UIColor.whiteColor()
+        navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
         tableView.registerNib(UINib(nibName: "TypeTableCell", bundle:nil), forCellReuseIdentifier: self.cellTypeIdentifier)
         if (arrayForBool.count == 0){
             initSubType()
@@ -129,13 +131,13 @@ extension TypeViewController: UITableViewDataSource {
     }
    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        //let height = self.tableView.bounds.height - self.navigationController!.navigationBar.frame.height
+        let height = self.tableView.bounds.height
         
         if (arrayForBool.objectAtIndex(indexPath.row).boolValue as Bool){
             let height = calculateCollectionViewHeight()
             return height > 230.0 ? height : 230.0
         } else {
-            return 230.0//round(height*0.33333)
+            return round(height*0.33333) //230.0
         }
 
     }

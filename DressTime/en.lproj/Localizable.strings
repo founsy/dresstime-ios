@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  DressTime
-
-  Created by Fab on 26/10/2015.
-  Copyright © 2015 Fab. All rights reserved.
-*/
+/*
+ Localizable.strings
+ DressTime
+ 
+ Created by Fab on 26/10/2015.
+ Copyright © 2015 Fab. All rights reserved.
+ */
 
 /* LoginViewController */
 "loginErrTitle" = "Failed!";
@@ -16,19 +16,31 @@
 "Afternoon" = "Afternoon";
 "Morning" = "Morning";
 "Tonight" = "Tonight";
+"homeLocErrTitle" = "Failed!";
+"homeLocErrMessage" = "Please activate le localisation service via Settings > Localisation > DressTime : Enable While Using";
+"homeLocErrButton" = "Okay.";
 
 /* OutfitViewController */
 "HOME" = "HOME";
 "OUTFIT OF THE DAY" = "OUTFIT OF THE DAY";
 "SOMETHING MISSING" = "SOMETHING IS MISSING .. NO ?";
+"relax" = "Relax";
+"atWork" = "at Work";
+"onParty" = "on Party";
 
 /* Detail Type View Controller */
 "Edit" =  "Edit";
 "Delete" = "Delete";
 "Profile" = "Profile";
+"My" = "My";
+"MAILLE" = "MAILLE";
+"TOPS" = "TOPS";
+"PANTS" = "PANTS";
+"DRESS" = "DRESS";
 
 /* ProfilViewController */
 "PROFILE" = "PROFILE";
+"Add" = "Add";
 
 /* TypeViewController */
 "Maille" = "Mailles";
@@ -72,7 +84,6 @@
 "floral" = "floral";
 
 /* Tutorial */
-
 "CAPTURE" = "CAPTURE";
 "CHECK" = "CHECK";
 "GET" = "GET";
@@ -80,3 +91,22 @@
 "THAT IT MATCHES" = "THAT IT MATCHES";
 "SMART OUTFITS" = "SMART OUTFITS";
 "SMART SHOPPING LIST" = "SMART SHOPPING LIST";
+
+/* Select Style View */
+"styleErrTitle" = "Error";
+"styleErrMessage" = "Please select a style for each moment of the day";
+"styleErrButton" = "Okay";
+
+/* Settings View */
+"settingsErrTitle" = "Error";
+"settingsErrMessage" = "Please fill all fields";
+"settingsErrButton" = "Okay";
+
+/*Register Style View */
+"VALIDATE MY MODIFICATION" = "VALIDATE MY MODIFICATION";
+"PICK YOUR OWN STYLE" = "PICK YOUR OWN STYLE";
+"LET'S SEE MY NEW DRESSING" = "LET'S SEE MY NEW DRESSING";
+
+/*Capture Confirmation */
+"MODIFY" = "MODIFY";
+"ADD" = "ADD";

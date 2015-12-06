@@ -24,6 +24,14 @@ class SettingsViewController: UIViewController {
         
         if let userSaving = self.user {
             if let vc = tableViewController {
+                if (!isValidData()){
+                    ActivityLoader.shared.hideProgressView()
+                    let alert = UIAlertController(title: NSLocalizedString("settingsErrTitle", comment: ""), message: NSLocalizedString("settingsErrMessage", comment: ""), preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("settingsErrButton", comment: ""), style: .Default) { _ in })
+                    self.presentViewController(alert, animated: true){}
+                    return
+                }
+                
                 if (vc.menSelected){
                     userSaving.gender = "M"
                 } else {
@@ -100,15 +108,16 @@ class SettingsViewController: UIViewController {
             self.user = user
             changeBackground(self.user!.gender!)
         }
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Profile", style: .Plain, target: nil, action: nil)
-       
-        
-
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -131,6 +140,11 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
     private func changeBackground(sex: String){
         dispatch_async(dispatch_get_main_queue(),  { () -> Void in
             if (sex == "M"){
@@ -139,6 +153,11 @@ class SettingsViewController: UIViewController {
                 self.backgroundView.image = UIImage(named: "ProfilsSettingBgdWomen")
             }
         })
+    }
+    
+    private func isValidData() -> Bool {
+        return !((tableViewController!.emailField.text == nil || tableViewController!.emailField.text!.isEmpty) ||
+                (tableViewController!.nameField.text == nil || tableViewController!.nameField.text!.isEmpty))
     }
 }
 

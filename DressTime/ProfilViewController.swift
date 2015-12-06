@@ -49,9 +49,6 @@ class ProfilViewController: UITableViewController {
         headerView = self.tableView.tableHeaderView
         self.tableView.tableHeaderView = nil
         self.tableView.addSubview(headerView)
-        self.tableView.contentInset = UIEdgeInsets(top: (kTableHeaderHeight - 46), left: 0, bottom: 0, right: 0)
-        self.tableView.contentOffset = CGPoint(x: 0, y: (-kTableHeaderHeight + 46))
-        updateHeaderView()
         
         buttonAddClothe.layer.cornerRadius = 20.0
         buttonStyle.layer.cornerRadius = 20.0
@@ -73,6 +70,11 @@ class ProfilViewController: UITableViewController {
     
     override func viewWillAppear(animated: Bool){
         super.viewWillAppear(animated)
+        
+        self.tableView.contentInset = UIEdgeInsets(top: (kTableHeaderHeight - 46), left: 0, bottom: 0, right: 0)
+        self.tableView.contentOffset = CGPoint(x: 0, y: (-kTableHeaderHeight + 46))
+        updateHeaderView()
+        
         self.type = SharedData.sharedInstance.getType(SharedData.sharedInstance.sexe!)
         initData()
         if (SharedData.sharedInstance.currentUserId!.lowercaseString == "alexandre"){
@@ -96,6 +98,11 @@ class ProfilViewController: UITableViewController {
         super.viewDidAppear(animated)
     }
     
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.navigationController?.navigationBar.alpha = 1.0
+        
+    }
     private func updateHeaderView(){
         var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: tableView.bounds.width, height: kTableHeaderHeight)
         if  tableView.contentOffset.y < -kTableHeaderHeight {
@@ -107,6 +114,12 @@ class ProfilViewController: UITableViewController {
     
     override func scrollViewDidScroll(scrollView: UIScrollView) {
         updateHeaderView()
+        if (tableView.contentOffset.y > -260){
+            print( (CGFloat(abs(tableView.contentOffset.y))/260.0-0.5))
+            navigationController?.navigationBar.alpha = (CGFloat(abs(tableView.contentOffset.y))/260.0-0.5) > 0.3 ? (CGFloat(abs(tableView.contentOffset.y))/250.0-0.5) : 0
+        } else {
+            navigationController?.navigationBar.alpha = 1.0
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -179,7 +192,7 @@ extension ProfilViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! TypeCell
         let typeCell = self.type[indexPath.row]
         cell.backgroundImage.image = UIImage(named: "Background\(typeCell)\(SharedData.sharedInstance.sexe!.uppercaseString)")
-        cell.longPressLabel.text = "Add \(NSLocalizedString(typeCell, comment: ""))"
+        cell.longPressLabel.text = "\(NSLocalizedString("Add", comment: "")) \(NSLocalizedString(typeCell, comment: ""))"
         cell.viewLongPress.hidden = true
         cell.delegate = self
         cell.indexPath = indexPath

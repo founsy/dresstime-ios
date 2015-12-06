@@ -38,14 +38,14 @@ extension ClotheMatchSelectionCell: UICollectionViewDataSource, UICollectionView
             if let clothe_id = clothesMatched["clothes"][indexPath.row].string {
                 let dal = ClothesDAL()
                 if let clothe = dal.fetch(clothe_id) {
-                    cell.imageView.image = UIImage(data: clothe.clothe_image)
+                    cell.imageView.image = clothe.getImage()
                 }
 
             } else {
                 let clothe_id = clothesMatched["clothes"][indexPath.row]["clothe"]["clothe_id"].stringValue
                 let dal = ClothesDAL()
                 if let clothe = dal.fetch(clothe_id) {
-                    cell.imageView.image = UIImage(data: clothe.clothe_image)
+                    cell.imageView.image = clothe.getImage()
                 }
 
             }

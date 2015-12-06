@@ -101,7 +101,7 @@ class ClothesDAL {
     }
     
     
-    func save(clotheId: String, partnerId: NSNumber, partnerName: String, type: String, subType: String, name: String, isUnis: Bool, pattern: String, cut: String, image: NSData, colors: String){
+    func save(clotheId: String, partnerId: NSNumber, partnerName: String, type: String, subType: String, name: String, isUnis: Bool, pattern: String, cut: String, image: NSData?, colors: String){
         let entityDescription = NSEntityDescription.entityForName("Clothe", inManagedObjectContext: managedObjectContext);
         let clothe = Clothe(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext);
         
@@ -136,6 +136,30 @@ class ClothesDAL {
             try clothe.managedObjectContext?.save()
         } catch let error as NSError {
           NSLog(error.localizedFailureReason!);
+        }
+    }
+    
+    func updateClotheImage(clotheId: String, imageBase64: String){
+        let fetchRequest = NSFetchRequest(entityName: "Clothe")
+        let predicate = NSPredicate(format: "clothe_id = %@", clotheId)
+   
+        let data: NSData = NSData(base64EncodedString: imageBase64, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
+        
+        // Set the predicate on the fetch request
+        fetchRequest.predicate = predicate
+        do {
+            if let fetchResult = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Clothe] {
+                if (fetchResult.count > 0){
+                    fetchResult[0].clothe_image = data
+                }
+            }
+        } catch let error as NSError {
+            print(error)
+        }
+        do {
+            try managedObjectContext.save()
+        } catch let error as NSError {
+            NSLog(error.localizedFailureReason!);
         }
     }
     

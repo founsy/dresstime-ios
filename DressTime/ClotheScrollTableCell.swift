@@ -49,7 +49,7 @@ class ClotheScrollTableCell: UITableViewCell {
             for (var i = 0; i < collection.count; i++){
                 let view = NSBundle.mainBundle().loadNibNamed("ClotheTableCell", owner: self, options: nil)[0] as! ClotheTableViewCell
                 view.frame = CGRectMake(CGFloat(i)*width, 0, width, height+1)
-                let image = UIImage(data: collection[i].clothe_image)!
+                let image = collection[i].getImage()
                 view.initFavoriteButton(collection[i].clothe_favorite)
                 view.clotheImageView.image = image.imageWithImage(width)
                 view.clotheImageView.backgroundColor = UIColor.clearColor()

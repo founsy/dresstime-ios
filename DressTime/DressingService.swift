@@ -21,6 +21,14 @@ class DressingService {
         }
     }
     
+    func GetImageClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        if (Mock.isMockable()){
+            completion(isSuccess: true, object:nil)
+        } else {
+            self.getImageClothe(clotheId, completion: completion)
+        }
+    }
+    
     func SaveClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
         if (Mock.isMockable()){
             if let nsdata = ReadJsonFile().readFile("outfitsToday"){
@@ -190,6 +198,24 @@ class DressingService {
     private func getClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
             let path = baseUrlDressing + "clothes/" + clotheId
+            
+            let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).responseJSON { response in
+                if response.result.isSuccess {
+                    print(response.result.value)
+                    let jsonDic = JSON(response.result.value!)
+                    completion(isSuccess: true, object: jsonDic)
+                } else {
+                    completion(isSuccess: false, object: "")
+                }
+            }
+        }
+        completion(isSuccess: false, object: "")
+    }
+    
+    private func getImageClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
+            let path = baseUrlDressing + "clothes/image/" + clotheId
             
             let headers = ["Authorization": "Bearer \(profil.access_token!)"]
             Alamofire.request(.GET, path, encoding: .JSON, headers: headers).responseJSON { response in

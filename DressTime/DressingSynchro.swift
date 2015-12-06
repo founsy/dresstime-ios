@@ -9,7 +9,8 @@
 import Foundation
 
 protocol DressingSynchroDelegate {
-    func syncDidFinish()
+    func dressingSynchro(dressingSynchro: DressingSynchro, syncDidFinish isFinish: Bool)
+    func dressingSynchro(dressingSynchro: DressingSynchro, synchingProgressing currentValue: Int, totalNumber: Int)
 }
 
 class DressingSynchro {
@@ -30,7 +31,10 @@ class DressingSynchro {
             if (Mock.isMockable()){
                 updateMockableLocalstorage()
             } else {
-                updateLocalStorage()
+                
+                self.updateLocalStorage({ (isFinish) -> Void in
+                    self.downloadImage()
+                })
             }
             completion(isNeeded: true)
         } else {
@@ -66,7 +70,7 @@ class DressingSynchro {
     
     //Update Local DataBase
     //TODO - Need To update - 1 Call by Clothe too much
-    private func updateLocalStorage(){
+  /*  private func updateLocalStorage(){
         let dressingSvc = DressingService()
          var numberSync = 0
          dressingSvc.GetClothesIdDressing { (isSuccess, object) -> Void in
@@ -102,6 +106,50 @@ class DressingSynchro {
                 }
             }*/
         }
+    } */
+    
+    private func updateLocalStorage(completion: (isNeeded: Bool) -> Void){
+        let dressingSvc = DressingService()
+        dressingSvc.GetDressing { (isSuccess, object) -> Void in
+            if (isSuccess){
+                let clotheDAL = ClothesDAL()
+                for (var i = 0; i < object.arrayValue.count; i++) {
+                    let clothe = object.arrayValue[i]
+                    let isUnis = clothe["clothe_isUnis"].boolValue
+                
+                    clotheDAL.save(clothe["clothe_id"].stringValue, partnerId: clothe["clothe_partnerid"].floatValue, partnerName: clothe["clothe_partnerName"].stringValue, type: clothe["clothe_type"] .stringValue, subType: clothe["clothe_subtype"].stringValue, name: clothe["clothe_name"].stringValue , isUnis: isUnis, pattern: clothe["clothe_pattern"].stringValue, cut: clothe["clothe_cut"].stringValue, image: nil, colors: clothe["clothe_colors"].stringValue)
+                }
+                completion(isNeeded: true)
+            }
+        }
+    }
+    
+    private func downloadImage(){
+        let clotheDAL = ClothesDAL()
+        let dressingSvc = DressingService()
+        let clothes = clotheDAL.fetch()
+        var numberSync = 0
+        for (var i = 0; i < clothes.count; i++){
+            dressingSvc.GetImageClothe(clothes[i].clothe_id, completion: { (isSuccess, object) -> Void in
+                if (isSuccess){
+                    clotheDAL.updateClotheImage(object["clothe_id"].stringValue, imageBase64: object["clothe_image"].stringValue)
+                    numberSync++
+                    if let del = self.delagate{
+                        del.dressingSynchro(self, synchingProgressing: numberSync, totalNumber: clothes.count)
+                    }
+                }
+                if (numberSync >= clothes.count){
+                    if let del = self.delagate{
+                        del.dressingSynchro(self, syncDidFinish: true)
+                    }
+                }
+            })
+        }
+        if (clothes.count == 0){
+            if let del = self.delagate{
+                del.dressingSynchro(self, syncDidFinish: true)
+            }
+        }
     }
     
     private func updateMockableLocalstorage(){
@@ -118,7 +166,7 @@ class DressingSynchro {
             }
             
             if let del = self.delagate{
-                del.syncDidFinish()
+               del.dressingSynchro(self, syncDidFinish: true)
             }
         }
     }

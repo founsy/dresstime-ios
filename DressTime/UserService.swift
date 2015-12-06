@@ -44,6 +44,7 @@ class UserService {
         ]
         
         Alamofire.request(.POST, baseUrlRegistration, parameters: ["user" : parameters], encoding: .JSON).responseJSON { response in
+            print(response.result.value)
             if response.result.isSuccess {
                 print(response.result.value)
                 let jsonDic = JSON(response.result.value!)

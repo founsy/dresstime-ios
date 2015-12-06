@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 
 protocol HomeOutfitsListCellDelegate {
-    func loadedOutfits(outfitsCount: Int)
-    func showOutfits(homeOutfitsListCell: HomeOutfitsListCell, outfit: JSON?)
+    func homeOutfitsListCell(homeOutfitsListCell: HomeOutfitsListCell, loadedOutfits outfitsCount: Int)
+    func homeOutfitsListCell(homeOutfitsListCell: HomeOutfitsListCell, showOutfit outfit: JSON)
+    func homeOutfitsListCell(homeOutfitsListCell: HomeOutfitsListCell, openCaptureType type: String)
 }
 
 class HomeOutfitsListCell: UITableViewCell {
@@ -56,6 +57,7 @@ class HomeOutfitsListCell: UITableViewCell {
                     self.notEnoughOutfit()
                     self.titleLabel.text = NSLocalizedString("SOMETHING MISSING", comment: "")
                 } else {
+                    self.isEnoughOutfits = true
                     self.titleLabel.text = NSLocalizedString("OUTFIT OF THE DAY", comment: "")
                 }
                 
@@ -65,7 +67,7 @@ class HomeOutfitsListCell: UITableViewCell {
                         }, completion: nil)
                 })
                 if let del = self.delegate {
-                    del.loadedOutfits(self.outfitsCollection!.count)
+                    del.homeOutfitsListCell(self, loadedOutfits: self.outfitsCollection!.count)
                 }
             }
             self.loading.hideProgressView()
@@ -77,14 +79,19 @@ class HomeOutfitsListCell: UITableViewCell {
         let clotheDAL = ClothesDAL()
         let tops = clotheDAL.fetch(type: "top")
         let pants = clotheDAL.fetch(type: "pants")
+        let maille = clotheDAL.fetch(type: "maille")
         self.clothesCollection = [Clothe]()
-         //Pick 1 top if available -> Create a outfit with 2 elem
+         //Pick 1 top if available -> Create a outfit with 3 elem
         if (tops.count > 0){
             self.clothesCollection!.append(tops[0])
         }
-         //Pick 1 bottom if available -> Create a outfit with 2 elem
+         //Pick 1 bottom if available -> Create a outfit with 3 elem
         if (pants.count > 0){
             self.clothesCollection!.append(pants[0])
+        }
+        //Pick 1 maille if available -> Create a outfit with 3 elem
+        if (maille.count > 0){
+            self.clothesCollection!.append(maille[0])
         }
     }
     
@@ -95,7 +102,7 @@ class HomeOutfitsListCell: UITableViewCell {
         for (var i = outfit.count-1; i >= 0 ; i--){
             let clothe_id = outfit[i]["clothe_id"].string
             if let clothe = dal.fetch(clothe_id!) {
-                let style = BL.getMomentByStyle(self.dayMoment!, style: outfitElem["style"].stringValue)
+                let style = NSLocalizedString(BL.getMomentByStyle(self.dayMoment!, style: outfitElem["style"].stringValue), comment: "")
                 
                 let width:CGFloat = cell.containerView.frame.width
                 var height:CGFloat = CGFloat(cell.containerView.frame.height/CGFloat(outfit.count))
@@ -128,19 +135,28 @@ class HomeOutfitsListCell: UITableViewCell {
     
     private func createClotheView(clothe: Clothe, cell: OufitCell){
         let width:CGFloat = cell.containerView.frame.width
-        let height:CGFloat = 186.6
+        let height:CGFloat = 143.3
+        let heightCard: CGFloat = (cell.containerView.frame.height-height)/2.0
         let x:CGFloat = 0
         let y:CGFloat = 0
         let rect = CGRectMake(x, y, width, height)
         if (clothe.clothe_type == "top"){
-            cell.setLoadNecessaryImage("underwear", rect: CGRectMake(x, cell.containerView.frame.height - height, width, height))
-            cell.createClotheView(clothe, style:"", rect: rect)
+            cell.setLoadNecessaryImage("mailleCard", type: "0", rect: CGRectMake(x, 0, width, heightCard))
+            cell.createClotheView(clothe, style:"", rect: CGRectMake(x, heightCard, width, height))
+            cell.setLoadNecessaryImage("pantCard", type: "2", rect: CGRectMake(x, cell.containerView.frame.height - heightCard, width, heightCard))
             self.typeClothe = 2
         }
         if (clothe.clothe_type == "pants"){
-            cell.setLoadNecessaryImage("undershirt", rect: rect)
+            cell.setLoadNecessaryImage("mailleCard", type: "0", rect: CGRectMake(x, 0, width, heightCard))
+            cell.setLoadNecessaryImage("topCard",  type: "1", rect: CGRectMake(x, heightCard, width, heightCard))
             cell.createClotheView(clothe, style:"", rect: CGRectMake(x, cell.containerView.frame.height - height, width, height))
             self.typeClothe = 1
+        }
+        if (clothe.clothe_type == "maille"){
+            cell.createClotheView(clothe, style:"", rect: CGRectMake(x, 0, width, height))
+            cell.setLoadNecessaryImage("topCard", type: "1", rect: CGRectMake(x, height, width, heightCard))
+            cell.setLoadNecessaryImage("pantCard", type: "2",rect: CGRectMake(x, cell.containerView.frame.height - heightCard, width, heightCard))
+            self.typeClothe = 2
         }
     }
 }
@@ -167,6 +183,7 @@ extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDeleg
         } else {
             let clothe = self.clothesCollection![indexPath.row]
             createClotheView(clothe, cell: cell)
+            cell.delegate = self
         }
         return cell
     }
@@ -175,11 +192,17 @@ extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDeleg
             if let del = self.delegate {
                 if isEnoughOutfits {
                     let outfitElem = self.outfitsCollection![indexPath.row]
-                    del.showOutfits(self, outfit: outfitElem)
-                } else {
-                    del.showOutfits(self, outfit: nil)
+                    del.homeOutfitsListCell(self, showOutfit: outfitElem)
                 }
             }
         
+    }
+}
+
+extension HomeOutfitsListCell: OutfitCellDelegate {
+    func outfitCell(outfitCell : UICollectionViewCell, typeSelected type: String) {
+        if let del = self.delegate {
+            del.homeOutfitsListCell(self, openCaptureType: type)
+        }
     }
 }

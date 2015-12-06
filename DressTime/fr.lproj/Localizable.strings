@@ -16,38 +16,50 @@
 "Afternoon" = "Après-midi";
 "Morning" = "Matin";
 "Tonight" = "Soirée";
+"homeLocErrTitle" = "Failed!";
+"homeLocErrMessage" = "Please activate le localisation service via Settings > Localisation > DressTime : Enable While Using";
+"homeLocErrButton" = "Okay.";
 
 /* OutfitViewController */
 "HOME" = "HOME";
 "OUTFIT OF THE DAY" = "TENUE DU JOUR";
-"SOMETHING MISSING" = "QUELQUE CHOSE VOUS MANQUE... NON ?";
+"SOMETHING MISSING" = "REMPLIS TON DRESSING";
+"relax" = "Relax";
+"atWork" = "Au travail";
+"onParty" = "En soirée";
 
 /* Detail Type View Controller */
 "Edit" =  "Modifier";
 "Delete" = "Supprimer";
 "Profile" = "Profil";
+"My" = "Mes";
+"MAILLE" = "MAILLES";
+"TOPS" = "HAUTS";
+"PANTS" = "BAS";
+"DRESS" = "ROBES";
 
 /* ProfilViewController */
 "PROFILE" = "PROFIL";
+"Add" = "AJOUTER";
 
 /* TypeViewController */
 "Maille" = "Mailles";
 "Dress" = "Robes";
-"Top" = "Tops";
-"Pants" = "Pantalons";
+"Top" = "Hauts";
+"Pants" = "Bas";
 "jumper-fin" = "Pull fin";
 "jumper-epais" = "Pull";
 "cardigan" = "Gilet";
 "sweater" = "Sweater";
 "tshirt" = "T-shirt";
 "shirt" = "Chemise";
-"shirt-sleeve" = "Chemise manches courtes";
-"polo" = "Polo";
-"polo-sleeve" = "Polo manches longues";
+"shirt-sleeve" = "Manches courtes";
+"polo" = "Manches longues";
+"polo-sleeve" = "Polo";
 "jeans" = "Jean";
 "jeans-slim" = "Jean slim";
-"trousers-pleated" = "A pinces";
-"trousers-suit" = "Pantalon costume";
+"trousers-pleated" = "Pinces";
+"trousers-suit" = "Costume";
 "chinos" = "Chino";
 "trousers-regular" = "Coupe droite";
 "trousers" = "Pantalon";
@@ -55,10 +67,10 @@
 "bermuda" = "Bermuda";
 "short" = "Short";
 "skirt" = "Jupe";
-"skirt-long" = "Jupe longue";
-"skirt-mini" = "Jupe courte";
+"skirt-long" = "Longue";
+"skirt-mini" = "Courte";
 "dress" = "Robe";
-"dress-party" = "Robe de soirée";
+"dress-party" = "Soirée";
 
 /*Capture*/
 "plain" = "Uni";
@@ -70,3 +82,31 @@
 "printed" = "Imprimé";
 "unisTouchImprime" = "Uni + imprimé";
 "floral" = "Fleural";
+
+/* Tutorial */
+"CAPTURE" = "CAPTURE";
+"CHECK" = "VERIFIE";
+"GET" = "RETROUVE";
+"YOUR CLOTHES" = "TES VÊTEMENTS";
+"THAT IT MATCHES" = "QUE CA VA ENSEMBLE";
+"SMART OUTFITS" = "TES TENUES";
+"SMART SHOPPING LIST" = "TA SHOPPING LIST";
+
+/* Select Style View */
+"styleErrTitle" = "Erreur";
+"styleErrMessage" = "Selectionnez votre style pour chaque moment de la journée!";
+"styleErrButton" = "Okay";
+
+/* Settings View */
+"settingsErrTitle" = "Erreur";
+"settingsErrMessage" = "Remplissez chaque champs!";
+"settingsErrButton" = "Okay";
+
+/*Register Style View */
+"VALIDATE MY MODIFICATION" = "VALIDER";
+"PICK YOUR OWN STYLE" = "SELECTIONNE TES STYLES";
+"LET'S SEE MY NEW DRESSING" = "VOIR MON NOUVEAU DRESSING";
+
+/*Capture Confirmation */
+"MODIFY" = "MODIFIER";
+"ADD" = "AJOUTER";

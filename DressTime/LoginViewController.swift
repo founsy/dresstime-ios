@@ -117,9 +117,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 }
 
 extension LoginViewController: DressingSynchroDelegate {
-    func syncDidFinish() {
+    func dressingSynchro(dressingSynchro: DressingSynchro, syncDidFinish isFinish: Bool) {
         dispatch_async(dispatch_get_main_queue(),  { () -> Void in
             self.goToHome()
         })
+
+    }
+    
+    func dressingSynchro(dressingSynchro: DressingSynchro, synchingProgressing currentValue: Int, totalNumber: Int) {
+        ActivityLoader.shared.setLabel("Synching \(currentValue)/\(totalNumber) clothes")
     }
 }

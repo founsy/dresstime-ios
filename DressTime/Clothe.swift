@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 class Clothe: NSManagedObject {
 
@@ -15,7 +16,7 @@ class Clothe: NSManagedObject {
     @NSManaged var clothe_litteralColor: String
     @NSManaged var clothe_cut: String
     @NSManaged var clothe_id: String
-    @NSManaged var clothe_image: NSData
+    @NSManaged var clothe_image: NSData?
     @NSManaged var clothe_isUnis: NSNumber
     @NSManaged var clothe_name: String
     @NSManaged var clothe_partnerid: NSNumber
@@ -30,5 +31,29 @@ class Clothe: NSManagedObject {
         let attributes = Array(self.entity.attributesByName.keys)
         let dict = self.dictionaryWithValuesForKeys(attributes)
         return dict ;
+    }
+    
+    func getImage() -> UIImage {
+        if let img = self.clothe_image {
+            if let uiimage = UIImage(data: img) {
+                return uiimage
+            }
+        }
+        
+        var named = ""
+        switch(self.clothe_type){
+        case "maille":
+            named = "TypeMailleIcon"
+        case "top":
+            named = "TypeTopIcon"
+        case "pants":
+            named = "TypePantsIcon"
+        case "dress":
+            named = "TypeDressIcon"
+        default:
+            named = "TypeTopIcon"
+        }
+        return UIImage(named: named)!
+
     }
 }

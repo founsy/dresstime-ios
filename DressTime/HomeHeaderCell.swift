@@ -11,7 +11,8 @@ import UIKit
 import CoreLocation
 
 protocol HomeHeaderCellDelegate {
-    func weatherFinishing(weather: Weather)
+    func homeHeaderCell(homeHeaderCell: HomeHeaderCell, weatherFinishing weather: Weather)
+    func homeHeaderCell(homeHeaderCell: HomeHeaderCell, noLocationAccess error:CLAuthorizationStatus)
 }
 
 class HomeHeaderCell: UITableViewCell {
@@ -85,7 +86,7 @@ extension HomeHeaderCell: UICollectionViewDelegate {
             self.selectedWeather = indexPath.row
             if let del = self.delegate {
                 //Return current weather
-                del.weatherFinishing( self.weatherList[self.selectedWeather])
+                del.homeHeaderCell(self, weatherFinishing: self.weatherList[self.selectedWeather])
             }
         }
         
@@ -136,7 +137,7 @@ extension HomeHeaderCell: CLLocationManagerDelegate {
                     self.updateWeather(self.weatherList[0].code!, high: String(self.weatherList[0].tempMax!), low: String(self.weatherList[0].tempMin!), city: self.weatherList[0].city!)
                     if let del = self.delegate {
                         //Return current weather
-                        del.weatherFinishing(self.weatherList[0])
+                        del.homeHeaderCell(self, weatherFinishing: self.weatherList[0])
                     }
                 }
             })
@@ -151,6 +152,12 @@ extension HomeHeaderCell: CLLocationManagerDelegate {
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print(error)
+        if(CLLocationManager.locationServicesEnabled()){
+            if let del = self.delegate {
+                del.homeHeaderCell(self, noLocationAccess: CLLocationManager.authorizationStatus())
+            }
+        } else {
+            print("Location services are not enabled")
+        }
     }
 }
