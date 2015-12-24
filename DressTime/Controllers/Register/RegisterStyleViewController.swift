@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RegisterStyleViewController : UIViewController {
+class RegisterStyleViewController : UIDTViewController {
 
     @IBOutlet weak var areaAtWork: UIImageView!
     @IBOutlet weak var areaOnParty: UIImageView!
@@ -110,6 +110,7 @@ class RegisterStyleViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.classNameAnalytics = "RegisterStyle"
         
         if (currentUserId != nil){
             onValidateButton.setTitle(NSLocalizedString("VALIDATE MY MODIFICATION", comment: ""), forState: UIControlState.Normal)

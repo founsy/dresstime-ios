@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TutorialViewController : UIViewController {
+class TutorialViewController : UIDTViewController {
     var pageController: UIPageViewController?
     private var currentPage = 0
     private var nexIndex = 0
@@ -23,6 +23,7 @@ class TutorialViewController : UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.classNameAnalytics = "Tutorial"
         
         pageController = UIPageViewController(
             transitionStyle: .Scroll,

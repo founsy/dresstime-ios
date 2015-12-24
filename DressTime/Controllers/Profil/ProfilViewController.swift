@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Parse
 
 class ProfilViewController: UITableViewController {
     let cellIdentifier = "profilTypeCell"
@@ -96,6 +97,11 @@ class ProfilViewController: UITableViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        let dimensions = [
+            "page" : "Profil",
+        ]
+        PFAnalytics.trackEvent("page", dimensions: dimensions)
+        
     }
     
     override func viewDidDisappear(animated: Bool) {

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DetailClotheViewController: UIViewController {
+class DetailClotheViewController: UIDTViewController {
     
     var currentClothe: Clothe!
     
@@ -75,6 +75,8 @@ class DetailClotheViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.classNameAnalytics = "DetailClothe"
+        
         self.navigationController?.navigationBar.alpha = 1.0
         self.navigationController?.navigationBarHidden = true
         self.view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.5)

@@ -10,8 +10,9 @@ import Foundation
 import UIKit
 import AVFoundation
 import DominantColor
+import Parse
 
-class CameraViewController : UIViewController {
+class CameraViewController : UIDTViewController {
     
     private var captureManager: CameraSessionManager?
     private var currentImage: UIImage?
@@ -69,6 +70,8 @@ class CameraViewController : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.classNameAnalytics = "Capture_Camera"
+ 
         whiteNavBar()
         drawClearRectArea()
         

@@ -25,7 +25,7 @@ class DressTimeService {
             if let nsdata = ReadJsonFile().readFile("\(SharedData.sharedInstance.currentUserId!)-OutfitsToday"){
                 var json = JSON(data: nsdata)
                 var newJSON = [JSON]()
-                var moment = WeatherWrapper().getNameByTime(json["weather"][0]["hour"].intValue).lowercaseString
+                let moment = WeatherWrapper().getNameByTime(json["weather"][0]["hour"].intValue).lowercaseString
                 
                 for (_, subjson) in json["outfits"][moment] {
                     if (subjson["style"].stringValue == "fashion" || subjson["style"].stringValue == "casual"){
@@ -89,14 +89,16 @@ class DressTimeService {
     private func getOutfits(location: CLLocation, completion: (isSuccess: Bool, object: JSON) -> Void){
         let dal = ProfilsDAL()
         if let profil = dal.fetch(SharedData.sharedInstance.currentUserId!) {
-            let path = baseUrlOutfits + "v2.1/?lat=\(location.coordinate.latitude)&long=\(location.coordinate.longitude)"
+           
+
+            let path = baseUrlOutfits + "v2.1/?lat=\(location.coordinate.latitude)&long=\(location.coordinate.longitude)&timezone=\(NSTimeZone.systemTimeZone().secondsFromGMT)"
             
             let headers = ["Authorization": "Bearer \(profil.access_token!)"]
             
             Alamofire.request(.GET, path, parameters: nil, encoding: .JSON, headers: headers).validate().responseJSON { response in
                 switch response.result {
                     case .Success(let json):
-                        print("Success with JSON: \(json)")
+                        print("Success getOutfits")
                         completion(isSuccess: true, object: JSON(json))
                     case .Failure(let error):
                         if let error = error as NSError? {
@@ -104,16 +106,6 @@ class DressTimeService {
                             completion(isSuccess: false, object: JSON(error.localizedDescription))
                         }
                 }
-                
-                
-                
-              /*  if response.result.isSuccess {
-                    print(response.result.value)
-                    let jsonDic = JSON(response.result.value!)
-                    completion(isSuccess: true, object: jsonDic)
-                } else {
-                    completion(isSuccess: false, object: "")
-                } */
             }
         } else {
             completion(isSuccess: false, object: "")

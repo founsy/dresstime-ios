@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import Parse
 
-class ShoppingViewController: UIViewController {
+class ShoppingViewController: UIDTViewController {
     @IBOutlet weak var tableView: UITableView!
 
     private var brandClotheCell: ClotheSelectionCell?
@@ -19,9 +20,10 @@ class ShoppingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.classNameAnalytics = "Shopping"
         self.tableView.delegate = self
         self.tableView.dataSource = self
-
+        
     }
     
      override func viewDidLayoutSubviews() {

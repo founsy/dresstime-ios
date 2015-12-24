@@ -8,8 +8,9 @@
 
 import Foundation
 import UIKit
+import Parse
 
-class TypeViewController: UIViewController {
+class TypeViewController: UIDTViewController {
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -32,6 +33,8 @@ class TypeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.classNameAnalytics = "Capture_Type"
+
         self.view.backgroundColor = UIColor.whiteColor()
         navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
         navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
@@ -85,6 +88,12 @@ class TypeViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "showCapture"){
+            let dimensions = [
+                "page" : "Capture_Show",    // What type of news is this?
+                "data" : "Type \(self.types[self.currentSection].lowercaseString) - Subtype \(self.subTypes[self.currentSection][self.subTypeSelected])"
+            ]
+            PFAnalytics.trackEvent("page", dimensions: dimensions)
+            
             let captureController = segue.destinationViewController as! CameraViewController
             captureController.typeClothe = self.types[self.currentSection].lowercaseString
             captureController.subTypeClothe = self.subTypes[self.currentSection][self.subTypeSelected]

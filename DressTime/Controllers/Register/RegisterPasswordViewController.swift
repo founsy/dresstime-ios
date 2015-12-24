@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RegisterPasswordViewController: UIViewController {
+class RegisterPasswordViewController: UIDTViewController {
     
     @IBOutlet weak var hidePasswordButton: UIButton!
     @IBOutlet weak var textLabel: UILabel!
@@ -46,6 +46,7 @@ class RegisterPasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.classNameAnalytics = "RegisterPassword"
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         passwordText.attributedPlaceholder = NSAttributedString(string:"MySecurePassword",

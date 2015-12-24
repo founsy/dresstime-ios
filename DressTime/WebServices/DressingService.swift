@@ -11,7 +11,7 @@ import UIKit
 import Alamofire
 
 class DressingService {
-    let baseUrlDressing = "\(PListReader.getStringProperty("serverURL"))dressing/"//"http://api.drez.io/dressing/"
+    let baseUrlDressing = "\(DressTimeService.baseURL)dressing/"//"http://api.drez.io/dressing/"
     
     func UpdateClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
         if (Mock.isMockable()){

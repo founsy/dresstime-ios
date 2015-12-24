@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 import DominantColor
+import Parse
 
-class CaptureConfirmationViewController: UIViewController {
+class CaptureConfirmationViewController: UIDTViewController {
 
     @IBOutlet weak var captureResult: UIImageView!
     @IBOutlet weak var nameClothe: UITextField!
@@ -56,6 +57,8 @@ class CaptureConfirmationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.classNameAnalytics = "Capture_Confirmation"
+        
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         nameClothe.delegate = self

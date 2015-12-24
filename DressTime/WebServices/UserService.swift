@@ -10,8 +10,8 @@ import Foundation
 import Alamofire
 
 class UserService {
-    let baseUrlUser = "http://127.0.0.1:3000/users/" //"http://api.drez.io/users/"
-    let baseUrlRegistration = "http://127.0.0.1:3000/auth/registration"//"http://api.drez.io/auth/registration"
+    let baseUrlUser = "\(DressTimeService.baseURL)users/" //"http://api.drez.io/users/"
+    let baseUrlRegistration = "\(DressTimeService.baseURL)auth/registration"//"http://api.drez.io/auth/registration"
     
     func UpdateUser(user: Profil, completion: (isSuccess: Bool, object: JSON) -> Void){
         /*if (Mock.isMockable()){

@@ -8,5 +8,5 @@
 
 #ifndef DressTime_DressTime_Bridging_Header_h
 #define DressTime_DressTime_Bridging_Header_h
-
+#import "MixPanel.h"
 #endif

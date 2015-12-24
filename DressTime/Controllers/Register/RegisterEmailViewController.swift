@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RegisterEmailViewController: UIViewController {
+class RegisterEmailViewController: UIDTViewController {
 
     @IBOutlet weak var hidePasswordButton: UIButton!
     @IBOutlet weak var textLabel: UILabel!
@@ -42,6 +42,7 @@ class RegisterEmailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.classNameAnalytics = "RegisterEmail"
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         configNavBar()

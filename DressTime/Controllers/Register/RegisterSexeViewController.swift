@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RegisterSexeViewController: UIViewController {
+class RegisterSexeViewController: UIDTViewController {
     var email: String?
     var password: String?
     private var sexe: String?
@@ -22,6 +22,7 @@ class RegisterSexeViewController: UIViewController {
     
     override func viewDidLoad(){
         super.viewDidLoad()
+        self.classNameAnalytics = "RegisterSexe"
         self.tableView.dataSource = self
         self.tableView.delegate = self
     }

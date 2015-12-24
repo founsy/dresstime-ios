@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class OutfitViewController: UIViewController {
+class OutfitViewController: UIDTViewController {
     private let cellIdentifier : String = "ClotheTableCell"
     private let dal = ClothesDAL()
     private var currentClothe: Clothe?
@@ -17,7 +17,7 @@ class OutfitViewController: UIViewController {
     private var confirmationView: ConfirmSave?
     
     var outfitObject: Outfit?
-    var currentOutfits: NSArray!
+    var currentOutfits = [ClotheModel]()
     private var number = 0
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dressupButton: UIButton!
@@ -52,6 +52,7 @@ class OutfitViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.classNameAnalytics = "Outfit View"
         tableView.registerNib(UINib(nibName: "ClotheScrollTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
         ActivityLoader.shared.showProgressView(view)
         
@@ -73,7 +74,7 @@ class OutfitViewController: UIViewController {
         tableView!.delegate = self
         tableView!.dataSource = self
 
-        self.number = self.currentOutfits!.count
+        self.number = self.currentOutfits.count
         self.tableView.reloadData()
         
         self.confirmationView = NSBundle.mainBundle().loadNibNamed("ConfirmSave", owner: self, options: nil)[0] as? ConfirmSave
@@ -103,10 +104,8 @@ extension OutfitViewController: ClotheScrollTableCellDelegate {
     
     func clotheScrollTableCell(clotheScrollTableCell : ClotheScrollTableCell, didSelectedClothe clothe: Clothe) {
         for (var i = 0; i < self.currentOutfits.count; i++){
-            if (self.currentOutfits[i]["clothe_type"] == clothe.clothe_type){
-                let mutableOutfits = self.currentOutfits.mutableCopy()
-                mutableOutfits.replaceObjectAtIndex(i, withObject: clothe.toDictionnary())
-                self.currentOutfits = mutableOutfits as! NSArray
+            if (self.currentOutfits[i].clothe_type == clothe.clothe_type){
+                self.currentOutfits[i] = ClotheModel(clothe: clothe)
             }
         }
     }
@@ -125,9 +124,8 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! ClotheScrollTableCell
-        if let outfit = self.currentOutfits[indexPath.row] as? NSDictionary {
-            let type = outfit["clothe_type"] as! String
-            let clothe_id = outfit["clothe_id"] as! String
+        let type =  self.currentOutfits[indexPath.row].clothe_type
+            let clothe_id =  self.currentOutfits[indexPath.row].clothe_id
             
             let collection = dal.fetch(type: type)
             cell.clotheCollection = collection
@@ -140,8 +138,6 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.shadowColor = UIColor.blackColor().CGColor
             cell.layer.shadowRadius = 8;
             cell.layer.shadowOpacity = 0.75;
-        }
-
         return cell
     }
 }

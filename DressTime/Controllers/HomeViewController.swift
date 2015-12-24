@@ -11,7 +11,8 @@ import UIKit
 import CoreLocation
 
 
-class HomeViewController: UIViewController{
+class HomeViewController: UIDTViewController {
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bgView: UIImageView!
     @IBOutlet weak var emptyView: UIVisualEffectView!
@@ -33,20 +34,24 @@ class HomeViewController: UIViewController{
     private var currentWeather: Weather?
     
     
-    private var locationManager: CLLocationManager = CLLocationManager()
+    private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation!
+    private var locationFixAchieved : Bool = false
     private var weatherList = [Weather]()
     private var outfitList = [Outfit]()
     private var brandClothesList = [ClotheModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.classNameAnalytics = "Home"
+        
         configNavBar()
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
         // Do any additional setup after loading the view, typically from a nib.
+        self.locationManager = CLLocationManager()
         self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
         self.locationManager.delegate = self
         self.locationManager.requestWhenInUseAuthorization()
@@ -106,7 +111,7 @@ class HomeViewController: UIViewController{
         if (segue.identifier == "showOutfit"){
             let targetVC = segue.destinationViewController as! OutfitViewController
             targetVC.outfitObject = self.outfitSelected
-            targetVC.currentOutfits = self.outfitSelected?.outfit
+            targetVC.currentOutfits = self.outfitSelected!.outfit
         } else if (segue.identifier == "AddClothe"){
             if (typeClothe >= 0) {
                 let navController = segue.destinationViewController as! UINavigationController
@@ -208,36 +213,40 @@ class HomeViewController: UIViewController{
 extension HomeViewController: CLLocationManagerDelegate {
     /***/
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.currentLocation = locations[locations.count-1]
-        locationManager.stopUpdatingLocation()
-        ActivityLoader.shared.showProgressView(self.view)
-        DressTimeService().GetOutfitsToday(self.currentLocation) { (isSuccess, object) -> Void in
-            if (isSuccess){
-                self.weatherList = WeatherWrapper().arrayOfWeather(object["weather"])
-                if (self.weatherList.count > 0){
-                    self.currentWeather = self.weatherList[0]
-  
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        self.homeHeaderCell!.collectionView.reloadData()
-                        self.setTitleNavBar(self.currentWeather!.city!)
-                        UIView.animateWithDuration(0.2, animations: { () -> Void in
-                            self.bgView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(self.currentWeather!.code!))
+        if (locationFixAchieved == false){
+            locationFixAchieved = true
+            
+            self.currentLocation = locations[locations.count-1]
+            locationManager.stopUpdatingLocation()
+            ActivityLoader.shared.showProgressView(self.view)
+            DressTimeService().GetOutfitsToday(self.currentLocation) { (isSuccess, object) -> Void in
+                if (isSuccess){
+                    self.weatherList = WeatherWrapper().arrayOfWeather(object["weather"])
+                    if (self.weatherList.count > 0){
+                        self.currentWeather = self.weatherList[0]
+                        
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            self.homeHeaderCell!.collectionView.reloadData()
+                            self.setTitleNavBar(self.currentWeather!.city!)
+                            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                                self.bgView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(self.currentWeather!.code!))
+                            })
                         })
-                    })
-                    self.outfitList = [Outfit]()
-                    //Load the collection of Outfits
-                    if let outfitsCell = self.outfitsCell {
-                        for (var i = 0; i < object["outfits"].arrayValue.count; i++){
-                            self.outfitList.append(Outfit(json: object["outfits"][i]))
+                        self.outfitList = [Outfit]()
+                        //Load the collection of Outfits
+                        if let outfitsCell = self.outfitsCell {
+                            for (var i = 0; i < object["outfits"].arrayValue.count; i++){
+                                self.outfitList.append(Outfit(json: object["outfits"][i]))
+                            }
+                            self.outfitsCell!.dataSource = self
+                            outfitsCell.outfitCollectionView.reloadData()
                         }
-                        self.outfitsCell!.dataSource = self
-                        outfitsCell.outfitCollectionView.reloadData()
                     }
+                } else {
+                    print("Error \(object.stringValue)")
                 }
-            } else {
-                print("Error \(object.stringValue)")
+                ActivityLoader.shared.hideProgressView()
             }
-            ActivityLoader.shared.hideProgressView()
         }
     }
     

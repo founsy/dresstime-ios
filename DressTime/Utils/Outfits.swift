@@ -38,6 +38,22 @@ public class ClotheModel: NSObject {
         self.clothe_type = json["clothe_type"].stringValue
         self.clothe_favorite = json["clothe_favorite"].boolValue
     }
+    
+    init(clothe: Clothe) {
+        self.clothe_colors = clothe.clothe_colors
+        self.clothe_litteralColor = clothe.clothe_litteralColor
+        self.clothe_cut = clothe.clothe_cut
+        self.clothe_id = clothe.clothe_id
+        self.clothe_image =  ""
+        self.clothe_isUnis = clothe.clothe_isUnis as! Bool
+        self.clothe_name = clothe.clothe_name
+        self.clothe_partnerid = clothe.clothe_partnerid
+        self.clothe_partnerName = clothe.clothe_partnerName
+        self.clothe_pattern = clothe.clothe_pattern
+        self.clothe_subtype = clothe.clothe_subtype
+        self.clothe_type = clothe.clothe_type
+        self.clothe_favorite = clothe.clothe_favorite
+    }
 
 }
 

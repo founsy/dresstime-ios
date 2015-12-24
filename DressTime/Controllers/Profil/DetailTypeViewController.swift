@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DetailTypeViewController: UIViewController {
+class DetailTypeViewController: UIDTViewController {
     private let cellIdentifier : String = "ClotheTableCell"
     private var clothesList: [Clothe]?
     private var currentSection = -1
@@ -32,6 +32,7 @@ class DetailTypeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.classNameAnalytics = "DetailType"
         tableView.registerNib(UINib(nibName: "ClotheTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
         
         tableView!.delegate = self
