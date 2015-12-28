@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class TutorialViewController : UIDTViewController {
+class TutorialViewController : DTViewController {
     var pageController: UIPageViewController?
     private var currentPage = 0
     private var nexIndex = 0

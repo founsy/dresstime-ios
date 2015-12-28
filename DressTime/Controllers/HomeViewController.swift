@@ -11,14 +11,11 @@ import UIKit
 import CoreLocation
 
 
-class HomeViewController: UIDTViewController {
+class HomeViewController: DTViewController {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var bgView: UIImageView!
-    @IBOutlet weak var emptyView: UIVisualEffectView!
-    @IBOutlet weak var animationImageView: UIImageView!
     @IBOutlet weak var bubbleImageView: UIImageView!
-    @IBOutlet weak var shoppingBarButton: UIBarButtonItem!
     
     var outfitsCell: HomeOutfitsListCell?
     var homeHeaderCell: HomeHeaderCell?
@@ -77,21 +74,10 @@ class HomeViewController: UIDTViewController {
         
         self.numberOfClothes = ClothesDAL().numberOfClothes()
         if (self.numberOfClothes > 0){
-            self.emptyView.hidden = true
-            shoppingBarButton.enabled = true
-            shoppingBarButton.tintColor = nil
             self.tableView.reloadData()
         } else {
             self.tableView.reloadData()
-            self.emptyView.hidden = false
-            
-            self.animationImageView.animationImages = self.loadAnimateImage()
-            self.animationImageView.animationDuration = 3.5
-            self.animationImageView.startAnimating()
-            
-            shoppingBarButton.enabled = false
-            shoppingBarButton.tintColor = UIColor.clearColor()
-            
+            self.bgView.image = UIImage(named: "backgroundEmpty")
             ActivityLoader.shared.hideProgressView()
         }
     }   
@@ -130,14 +116,14 @@ class HomeViewController: UIDTViewController {
     }
     
     private func createArrowImageView(){
-        if let imageView = self.arrowImageView {
+       /* if let imageView = self.arrowImageView {
             imageView.removeFromSuperview()
         }
         self.arrowImageView = UIImageView(image: UIImage(named: "arrowIcon"))
         let p = self.bubbleImageView.convertPoint(self.bubbleImageView.frame.origin, toView: self.view)
         self.arrowImageView!.frame = CGRectMake(bubbleImageView.frame.width + bubbleImageView.frame.origin.x, 64, 64.0, p.y - 64.0)
         self.arrowImageView!.hidden = (self.numberOfClothes > 0)
-        self.view.addSubview(self.arrowImageView!)
+        self.view.addSubview(self.arrowImageView!)*/
     }
     
     private func addProfilButtonToNavBar(){
@@ -168,18 +154,7 @@ class HomeViewController: UIDTViewController {
     }
     
     private func configNavBar(){
-        let bar:UINavigationBar! =  self.navigationController?.navigationBar
-        
-        bar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        bar.shadowImage = UIImage()
-        bar.tintColor = UIColor.whiteColor()
-        self.navigationController?.view.backgroundColor = UIColor.clearColor()
-        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-
-        //Remove Title of Back button
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
-
-        addProfilButtonToNavBar()
+       // addProfilButtonToNavBar()
         addAddButtonToNavBar()
        
     }
@@ -189,23 +164,6 @@ class HomeViewController: UIDTViewController {
         myView.frame = CGRectMake(0, 0, 300, 30)
         myView.cityLabel.text = city
         self.navigationItem.titleView = myView;
-    }
-    
-    private func loadAnimateImage() -> [UIImage] {
-        let imagesListArray :NSMutableArray = []
-        for position in 0...296{
-            var i = String(position)
-            if (i.characters.count == 1){
-                i = "00" + i
-            } else if (i.characters.count == 2){
-                i =  "0" + i
-            }
-            
-            let strImageName : String = "men_00\(i).png"
-            let image  = UIImage(named:strImageName)
-            imagesListArray.addObject(image!)
-        }
-        return imagesListArray as AnyObject as! [UIImage]
     }
 }
 
@@ -226,10 +184,14 @@ extension HomeViewController: CLLocationManagerDelegate {
                         self.currentWeather = self.weatherList[0]
                         
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            self.homeHeaderCell!.collectionView.reloadData()
+                            if let headerCell = self.homeHeaderCell {
+                                headerCell.collectionView.reloadData()
+                            }
                             self.setTitleNavBar(self.currentWeather!.city!)
                             UIView.animateWithDuration(0.2, animations: { () -> Void in
-                                self.bgView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(self.currentWeather!.code!))
+                                if (self.numberOfClothes > 0) {
+                                    self.bgView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(self.currentWeather!.code!))
+                                }
                             })
                         })
                         self.outfitList = [Outfit]()
@@ -293,8 +255,7 @@ extension HomeViewController: HomeOutfitsListCellDelegate, HomeOutfitsListCellDa
     func homeOutfitsListCell(homeOutfitsListCell: HomeOutfitsListCell, loadedOutfits outfitsCount: Int){
         self.numberOfOutfits = outfitsCount
         if (self.numberOfOutfits > 0){
-            shoppingBarButton.enabled = true
-            shoppingBarButton.tintColor = nil
+           
         }
     }
     
@@ -338,15 +299,26 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         NSLog("Load home tableview \(indexPath.row)")
-        if (indexPath.row == 1) {
-            self.homeHeaderCell = self.tableView.dequeueReusableCellWithIdentifier("headerCell") as? HomeHeaderCell
-            self.homeHeaderCell!.delegate = self
-            return self.homeHeaderCell!
-        } else if (indexPath.row == 2){
-            self.outfitsCell = self.tableView.dequeueReusableCellWithIdentifier("myOutfitsCell") as? HomeOutfitsListCell
-            self.outfitsCell!.delegate = self
-            return self.outfitsCell!
-        }  else if (indexPath.row == 3){
+        if (indexPath.row == 0) {
+            if (self.numberOfClothes == 0){
+                var cell = self.tableView.dequeueReusableCellWithIdentifier("emptyStepCell") as? HomeEmptyStepCell
+                return cell!
+            } else {
+                self.homeHeaderCell = self.tableView.dequeueReusableCellWithIdentifier("headerCell") as? HomeHeaderCell
+                self.homeHeaderCell!.delegate = self
+                return self.homeHeaderCell!
+            }
+        } else if (indexPath.row == 1){
+            if (self.numberOfClothes == 0){
+                var cell = self.tableView.dequeueReusableCellWithIdentifier("emptyAnimationCell") as? HomeEmptyAnimationCell
+                return cell!
+
+            } else {
+                self.outfitsCell = self.tableView.dequeueReusableCellWithIdentifier("myOutfitsCell") as? HomeOutfitsListCell
+                self.outfitsCell!.delegate = self
+                return self.outfitsCell!
+            }
+        }  else if (indexPath.row == 2){
             self.brandOutfitsCell = self.tableView.dequeueReusableCellWithIdentifier("brandOutfitsCell") as? HomeBrandOutfitsListCell
             self.brandOutfitsCell!.delegate = self
             self.brandOutfitsCell!.dataSource = self
@@ -357,11 +329,15 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if (indexPath.row == 1){
-            return 100.0
-        } else if (indexPath.row == 2){
+        if (indexPath.row == 0){
+            if (self.numberOfClothes == 0){
+                return 186.0
+            } else {
+                return 100.0
+            }
+        } else if (indexPath.row == 1){
             return 370.0
-        } else if (indexPath.row == 3){
+        } else if (indexPath.row == 2){
             return 300.0
         } else {
             return 0.0

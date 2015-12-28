@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0105594A1C2ACBB60098E976 /* UIDTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010559491C2ACBB60098E976 /* UIDTViewController.swift */; };
+		0105594A1C2ACBB60098E976 /* DTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010559491C2ACBB60098E976 /* DTViewController.swift */; };
 		010559CE1C2ACF320098E976 /* _MPTweakBindObserver.m in Sources */ = {isa = PBXBuildFile; fileRef = 010559541C2ACF320098E976 /* _MPTweakBindObserver.m */; };
 		010559CF1C2ACF320098E976 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 010559551C2ACF320098E976 /* Media.xcassets */; };
 		010559D01C2ACF320098E976 /* Mixpanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 010559571C2ACF320098E976 /* Mixpanel.m */; };
@@ -150,14 +150,25 @@
 		01218C4D1C29DC2200E4D80F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 01218C4C1C29DC2200E4D80F /* libsqlite3.tbd */; };
 		01218C4F1C29DC2800E4D80F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01218C4E1C29DC2800E4D80F /* Accounts.framework */; };
 		01218C511C29DC2C00E4D80F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01218C501C29DC2C00E4D80F /* Social.framework */; };
+		0155C62C1C2ECFA000B5ACD2 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0155C62B1C2ECFA000B5ACD2 /* FBSDKCoreKit.framework */; };
+		0155C62E1C301AA600B5ACD2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155C62D1C301AA600B5ACD2 /* User.swift */; };
+		0155C6341C30378100B5ACD2 /* LoginBL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155C6331C30378100B5ACD2 /* LoginBL.swift */; };
 		018647BD1C287C7100976E32 /* DressTime.plist in Resources */ = {isa = PBXBuildFile; fileRef = 018647BC1C287C7100976E32 /* DressTime.plist */; };
 		019F764C1BDE0FE5007E6A3E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 019F764E1BDE0FE5007E6A3E /* Localizable.strings */; };
+		01A19B8C1C30A2B3002642EE /* DTNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19B8B1C30A2B3002642EE /* DTNavigationController.swift */; };
+		01A19B951C30A5F1002642EE /* DTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19B941C30A5F1002642EE /* DTTabBarController.swift */; };
+		01A19B971C30A6AC002642EE /* DTTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19B961C30A6AC002642EE /* DTTableViewController.swift */; };
+		01A19B9A1C30B099002642EE /* EmptyTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A19B991C30B099002642EE /* EmptyTypeView.xib */; };
+		01A19B9C1C30B1C4002642EE /* EmptyTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19B9B1C30B1C4002642EE /* EmptyTypeView.swift */; };
+		01A19BA11C30BE01002642EE /* HomeEmptyStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19BA01C30BE01002642EE /* HomeEmptyStepCell.swift */; };
+		01A19BA31C30CCD3002642EE /* HomeEmptyAnimationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19BA21C30CCD3002642EE /* HomeEmptyAnimationCell.swift */; };
 		01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D21B5935B3003D5E41 /* AppDelegate.swift */; };
 		01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */; };
 		01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DC1B5935B3003D5E41 /* Images.xcassets */; };
 		01C454E01B5935B3003D5E41 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DE1B5935B3003D5E41 /* LaunchScreen.xib */; };
 		01C454EC1B5935B3003D5E41 /* DressTimeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454EB1B5935B3003D5E41 /* DressTimeTests.swift */; };
 		01C455011B5942F4003D5E41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C454FF1B5942F4003D5E41 /* Main.storyboard */; };
+		01CEF2571C2DC812002FF9A9 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01CEF2541C2DC812002FF9A9 /* FBSDKLoginKit.framework */; };
 		01D3BADD1C29C9FF005B2A59 /* alexandre-login.json in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BACF1C29C9FF005B2A59 /* alexandre-login.json */; };
 		01D3BADE1C29CA00005B2A59 /* alexandre-OutfitsBrandToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BAD01C29C9FF005B2A59 /* alexandre-OutfitsBrandToday.json */; };
 		01D3BADF1C29CA00005B2A59 /* alexandre-OutfitsToday.json in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BAD11C29C9FF005B2A59 /* alexandre-OutfitsToday.json */; };
@@ -340,7 +351,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		010559491C2ACBB60098E976 /* UIDTViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIDTViewController.swift; sourceTree = "<group>"; };
+		010559491C2ACBB60098E976 /* DTViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTViewController.swift; sourceTree = "<group>"; };
 		010559531C2ACF320098E976 /* _MPTweakBindObserver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _MPTweakBindObserver.h; sourceTree = "<group>"; };
 		010559541C2ACF320098E976 /* _MPTweakBindObserver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _MPTweakBindObserver.m; sourceTree = "<group>"; };
 		010559551C2ACF320098E976 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
@@ -539,10 +550,21 @@
 		01218C4C1C29DC2200E4D80F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		01218C4E1C29DC2800E4D80F /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		01218C501C29DC2C00E4D80F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		0155C62B1C2ECFA000B5ACD2 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = "../../../../../../Downloads/FacebookSDKs-iOS-20151111/FBSDKCoreKit.framework"; sourceTree = "<group>"; };
+		0155C62D1C301AA600B5ACD2 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		0155C62F1C302D1B00B5ACD2 /* DressTime v2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DressTime v2.xcdatamodel"; sourceTree = "<group>"; };
+		0155C6331C30378100B5ACD2 /* LoginBL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginBL.swift; path = BusinessLogic/LoginBL.swift; sourceTree = "<group>"; };
 		018647BC1C287C7100976E32 /* DressTime.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DressTime.plist; sourceTree = "<group>"; };
 		019F764A1BDE0FC6007E6A3E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		019F764F1BDE1013007E6A3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		019F76501BDE1018007E6A3E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		01A19B8B1C30A2B3002642EE /* DTNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTNavigationController.swift; sourceTree = "<group>"; };
+		01A19B941C30A5F1002642EE /* DTTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTTabBarController.swift; sourceTree = "<group>"; };
+		01A19B961C30A6AC002642EE /* DTTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTTableViewController.swift; sourceTree = "<group>"; };
+		01A19B991C30B099002642EE /* EmptyTypeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmptyTypeView.xib; sourceTree = "<group>"; };
+		01A19B9B1C30B1C4002642EE /* EmptyTypeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyTypeView.swift; sourceTree = "<group>"; };
+		01A19BA01C30BE01002642EE /* HomeEmptyStepCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeEmptyStepCell.swift; sourceTree = "<group>"; };
+		01A19BA21C30CCD3002642EE /* HomeEmptyAnimationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeEmptyAnimationCell.swift; sourceTree = "<group>"; };
 		01C454CD1B5935B3003D5E41 /* DressTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DressTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C454D11B5935B3003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01C454D21B5935B3003D5E41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -554,6 +576,7 @@
 		01C454EB1B5935B3003D5E41 /* DressTimeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressTimeTests.swift; sourceTree = "<group>"; };
 		01C455001B5942F4003D5E41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		01C455361B597F25003D5E41 /* DominantColor.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DominantColor.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		01CEF2541C2DC812002FF9A9 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		01D1B86E1B7215F000920C64 /* DressTime-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DressTime-Bridging-Header.h"; sourceTree = "<group>"; };
 		01D3BACF1C29C9FF005B2A59 /* alexandre-login.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "alexandre-login.json"; sourceTree = "<group>"; };
 		01D3BAD01C29C9FF005B2A59 /* alexandre-OutfitsBrandToday.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "alexandre-OutfitsBrandToday.json"; sourceTree = "<group>"; };
@@ -664,6 +687,7 @@
 				01055A1A1C2AD01E0098E976 /* CoreTelephony.framework in Frameworks */,
 				01055A181C2AD0180098E976 /* Accelerate.framework in Frameworks */,
 				01055A161C2AD0020098E976 /* Foundation.framework in Frameworks */,
+				01CEF2571C2DC812002FF9A9 /* FBSDKLoginKit.framework in Frameworks */,
 				01055A141C2ACFF50098E976 /* UIKit.framework in Frameworks */,
 				01218C511C29DC2C00E4D80F /* Social.framework in Frameworks */,
 				01218C4F1C29DC2800E4D80F /* Accounts.framework in Frameworks */,
@@ -679,6 +703,7 @@
 				01218C3B1C29DBE300E4D80F /* AudioToolbox.framework in Frameworks */,
 				01218C381C29DBB900E4D80F /* Bolts.framework in Frameworks */,
 				01218BFE1C29CD7100E4D80F /* DominantColor.framework in Frameworks */,
+				0155C62C1C2ECFA000B5ACD2 /* FBSDKCoreKit.framework in Frameworks */,
 				01218C391C29DBB900E4D80F /* Parse.framework in Frameworks */,
 				01218C181C29CDA400E4D80F /* Alamofire.framework in Frameworks */,
 			);
@@ -835,6 +860,8 @@
 		01218B941C29CD5A00E4D80F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0155C62B1C2ECFA000B5ACD2 /* FBSDKCoreKit.framework */,
+				01CEF2541C2DC812002FF9A9 /* FBSDKLoginKit.framework */,
 				01055A1B1C2AD0E80098E976 /* libicucore.tbd */,
 				01055A191C2AD01E0098E976 /* CoreTelephony.framework */,
 				01055A171C2AD0180098E976 /* Accelerate.framework */,
@@ -974,6 +1001,37 @@
 			path = DominantColor;
 			sourceTree = "<group>";
 		};
+		0155C6321C30376500B5ACD2 /* BusinessLogic */ = {
+			isa = PBXGroup;
+			children = (
+				0155C6331C30378100B5ACD2 /* LoginBL.swift */,
+			);
+			name = BusinessLogic;
+			sourceTree = "<group>";
+		};
+		01A19B981C30A797002642EE /* DTComponents */ = {
+			isa = PBXGroup;
+			children = (
+				010559491C2ACBB60098E976 /* DTViewController.swift */,
+				01A19B8B1C30A2B3002642EE /* DTNavigationController.swift */,
+				01A19B941C30A5F1002642EE /* DTTabBarController.swift */,
+				01A19B961C30A6AC002642EE /* DTTableViewController.swift */,
+			);
+			name = DTComponents;
+			sourceTree = "<group>";
+		};
+		01A19B9D1C30BC55002642EE /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				01D3BAFE1C29CA31005B2A59 /* HomeBrandOutfitsListCell.swift */,
+				01D3BAFF1C29CA31005B2A59 /* HomeHeaderCell.swift */,
+				01D3BB001C29CA31005B2A59 /* HomeOutfitsListCell.swift */,
+				01A19BA01C30BE01002642EE /* HomeEmptyStepCell.swift */,
+				01A19BA21C30CCD3002642EE /* HomeEmptyAnimationCell.swift */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
 		01C454C41B5935B3003D5E41 = {
 			isa = PBXGroup;
 			children = (
@@ -996,6 +1054,7 @@
 		01C454CF1B5935B3003D5E41 /* DressTime */ = {
 			isa = PBXGroup;
 			children = (
+				0155C6321C30376500B5ACD2 /* BusinessLogic */,
 				01218B941C29CD5A00E4D80F /* Frameworks */,
 				01D3BACE1C29C9FF005B2A59 /* Data */,
 				01D3BAED1C29CA31005B2A59 /* UI */,
@@ -1075,6 +1134,7 @@
 		01D3BAED1C29CA31005B2A59 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				01A19B9D1C30BC55002642EE /* Home */,
 				01D3BAEE1C29CA31005B2A59 /* ActivityLoader.swift */,
 				01D3BAEF1C29CA31005B2A59 /* BrandClotheCell.swift */,
 				01D3BAF01C29CA31005B2A59 /* BrandClotheCell.xib */,
@@ -1091,9 +1151,6 @@
 				01D3BAFB1C29CA31005B2A59 /* ConfirmSave.xib */,
 				01D3BAFC1C29CA31005B2A59 /* CurveArrowView.swift */,
 				01D3BAFD1C29CA31005B2A59 /* CustomSubTypeViewCell.swift */,
-				01D3BAFE1C29CA31005B2A59 /* HomeBrandOutfitsListCell.swift */,
-				01D3BAFF1C29CA31005B2A59 /* HomeHeaderCell.swift */,
-				01D3BB001C29CA31005B2A59 /* HomeOutfitsListCell.swift */,
 				01D3BB011C29CA31005B2A59 /* OutfitCell.swift */,
 				01D3BB021C29CA31005B2A59 /* OutfitCell.xib */,
 				01D3BB031C29CA31005B2A59 /* PatternView.swift */,
@@ -1117,6 +1174,8 @@
 				01D3BB151C29CA31005B2A59 /* UIActivityLoader.xib */,
 				01D3BB161C29CA31005B2A59 /* WeatherCell.swift */,
 				01D3BB171C29CA31005B2A59 /* WeatherCell.xib */,
+				01A19B991C30B099002642EE /* EmptyTypeView.xib */,
+				01A19B9B1C30B1C4002642EE /* EmptyTypeView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1124,6 +1183,7 @@
 		01D3BB421C29CA45005B2A59 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				01A19B981C30A797002642EE /* DTComponents */,
 				01D3BB431C29CA45005B2A59 /* DressingSynchro.swift */,
 				01D3BB441C29CA45005B2A59 /* DressTimeBL.swift */,
 				01D3BB451C29CA45005B2A59 /* HexColorToName.swift */,
@@ -1133,7 +1193,7 @@
 				01D3BB491C29CA45005B2A59 /* UIImage+Dresstime.swift */,
 				01D3BB4A1C29CA45005B2A59 /* UIView+Dresstime.swift */,
 				01D3BB4B1C29CA45005B2A59 /* WeatherWrapper.swift */,
-				010559491C2ACBB60098E976 /* UIDTViewController.swift */,
+				0155C62D1C301AA600B5ACD2 /* User.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1456,6 +1516,7 @@
 				01D3BB3A1C29CA31005B2A59 /* TypeCell.xib in Resources */,
 				01D3BB3C1C29CA31005B2A59 /* TypeTableCell.xib in Resources */,
 				019F764C1BDE0FE5007E6A3E /* Localizable.strings in Resources */,
+				01A19B9A1C30B099002642EE /* EmptyTypeView.xib in Resources */,
 				01D3BAE11C29CA00005B2A59 /* alexandre.json in Resources */,
 				01D3BAE91C29CA00005B2A59 /* refreshToken.json in Resources */,
 				01D3BB2C1C29CA31005B2A59 /* OutfitCell.xib in Resources */,
@@ -1507,6 +1568,7 @@
 				01D3BB1B1C29CA31005B2A59 /* ClotheCell.swift in Sources */,
 				010559E51C2ACF320098E976 /* MPCGSizeToNSDictionaryValueTransformer.m in Sources */,
 				01055A0F1C2ACF320098E976 /* UIColor+MPColor.m in Sources */,
+				0155C6341C30378100B5ACD2 /* LoginBL.swift in Sources */,
 				01D3BB7C1C29CA6C005B2A59 /* HomeViewController.swift in Sources */,
 				01D3BB861C29CA6C005B2A59 /* Clothe.swift in Sources */,
 				010559F41C2ACF320098E976 /* MPObjectSerializerConfig.m in Sources */,
@@ -1540,10 +1602,14 @@
 				01D3BB221C29CA31005B2A59 /* ClotheTableViewCell.swift in Sources */,
 				01218BE41C29CD5A00E4D80F /* BlurView.swift in Sources */,
 				01D3BB4F1C29CA45005B2A59 /* Outfits.swift in Sources */,
+				01A19BA31C30CCD3002642EE /* HomeEmptyAnimationCell.swift in Sources */,
 				01218BF11C29CD5A00E4D80F /* Misc.swift in Sources */,
 				01D3BB341C29CA31005B2A59 /* TextSelectionCell.swift in Sources */,
+				01A19B971C30A6AC002642EE /* DTTableViewController.swift in Sources */,
 				01055A111C2ACF320098E976 /* UIImage+MPImageEffects.m in Sources */,
 				01055A061C2ACF320098E976 /* MPUIFontToNSDictionaryValueTransformer.m in Sources */,
+				01A19B951C30A5F1002642EE /* DTTabBarController.swift in Sources */,
+				0155C62E1C301AA600B5ACD2 /* User.swift in Sources */,
 				010559F51C2ACF320098E976 /* MPObjectSerializerContext.m in Sources */,
 				01055A101C2ACF320098E976 /* UIImage+MPAverageColor.m in Sources */,
 				01218BE31C29CD5A00E4D80F /* AutoTextView.swift in Sources */,
@@ -1584,6 +1650,7 @@
 				010559FF1C2ACF320098E976 /* MPTweak.m in Sources */,
 				01D3BB4E1C29CA45005B2A59 /* HexColorToName.swift in Sources */,
 				01D3BB791C29CA6C005B2A59 /* CameraViewController.swift in Sources */,
+				01A19BA11C30BE01002642EE /* HomeEmptyStepCell.swift in Sources */,
 				01218BEB1C29CD5A00E4D80F /* DesignableView.swift in Sources */,
 				01055A001C2ACF320098E976 /* MPTweakInline.m in Sources */,
 				010559CE1C2ACF320098E976 /* _MPTweakBindObserver.m in Sources */,
@@ -1593,12 +1660,13 @@
 				010559EA1C2ACF320098E976 /* MPEnumDescription.m in Sources */,
 				010559F81C2ACF320098E976 /* MPSequenceGenerator.m in Sources */,
 				01D3BB8B1C29CA6C005B2A59 /* SharedData.swift in Sources */,
-				0105594A1C2ACBB60098E976 /* UIDTViewController.swift in Sources */,
+				0105594A1C2ACBB60098E976 /* DTViewController.swift in Sources */,
 				01D3BB891C29CA6C005B2A59 /* Profil.swift in Sources */,
 				01218BD91C29CD5A00E4D80F /* EAAnimationDelayed.swift in Sources */,
 				01D3BB271C29CA31005B2A59 /* CustomSubTypeViewCell.swift in Sources */,
 				01D3BB281C29CA31005B2A59 /* HomeBrandOutfitsListCell.swift in Sources */,
 				01055A091C2ACF320098E976 /* MPVariant.m in Sources */,
+				01A19B8C1C30A2B3002642EE /* DTNavigationController.swift in Sources */,
 				01D3BB881C29CA6C005B2A59 /* Profil+CoreDataProperties.swift in Sources */,
 				010559DA1C2ACF320098E976 /* MPABTestDesignerSnapshotRequestMessage.m in Sources */,
 				01218BE01C29CD5A00E4D80F /* RangeSlider.swift in Sources */,
@@ -1609,6 +1677,7 @@
 				01218BEC1C29CD5A00E4D80F /* ImageLoader.swift in Sources */,
 				010559D41C2ACF320098E976 /* MPABTestDesignerClearRequestMessage.m in Sources */,
 				01D3BB911C29CA6C005B2A59 /* SwiftyJSON.swift in Sources */,
+				01A19B9C1C30B1C4002642EE /* EmptyTypeView.swift in Sources */,
 				01D3BB191C29CA31005B2A59 /* BrandClotheCell.swift in Sources */,
 				01218BF51C29CD5A00E4D80F /* SpringButton.swift in Sources */,
 				010559E11C2ACF320098E976 /* MPCGAffineTransformToNSDictionaryValueTransformer.m in Sources */,
@@ -1992,9 +2061,10 @@
 		01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				0155C62F1C302D1B00B5ACD2 /* DressTime v2.xcdatamodel */,
 				01C454D51B5935B3003D5E41 /* DressTime.xcdatamodel */,
 			);
-			currentVersion = 01C454D51B5935B3003D5E41 /* DressTime.xcdatamodel */;
+			currentVersion = 0155C62F1C302D1B00B5ACD2 /* DressTime v2.xcdatamodel */;
 			path = DressTime.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

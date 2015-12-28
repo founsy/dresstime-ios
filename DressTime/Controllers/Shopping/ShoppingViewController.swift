@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Parse
 
-class ShoppingViewController: UIDTViewController {
+class ShoppingViewController: DTViewController {
     @IBOutlet weak var tableView: UITableView!
 
     private var brandClotheCell: ClotheSelectionCell?

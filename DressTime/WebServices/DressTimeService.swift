@@ -90,10 +90,20 @@ class DressTimeService {
         let dal = ProfilsDAL()
         if let profil = dal.fetch(SharedData.sharedInstance.currentUserId!) {
            
-
-            let path = baseUrlOutfits + "v2.1/?lat=\(location.coordinate.latitude)&long=\(location.coordinate.longitude)&timezone=\(NSTimeZone.systemTimeZone().secondsFromGMT)"
+            var path = baseUrlOutfits + "v2.1/?lat=\(location.coordinate.latitude)&long=\(location.coordinate.longitude)&timezone=\(NSTimeZone.systemTimeZone().secondsFromGMT)"
             
-            let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            var headers :[String : String]?
+            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
+                path = path + "&access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            } else {
+                if let token = profil.access_token {
+                    headers = ["Authorization": "Bearer \(token)"]
+                } else {
+                    completion(isSuccess: false, object: "")
+                }
+               
+            }
+            
             
             Alamofire.request(.GET, path, parameters: nil, encoding: .JSON, headers: headers).validate().responseJSON { response in
                 switch response.result {
@@ -114,8 +124,15 @@ class DressTimeService {
     private func getBrandClothes(completion: (isSuccess: Bool, object: JSON) -> Void){
         let dal = ProfilsDAL()
         if let profil = dal.fetch(SharedData.sharedInstance.currentUserId!) {
-            let headers = ["Authorization": "Bearer \(profil.access_token!)"]
-            Alamofire.request(.GET, self.baseUrlBrand, parameters: nil, encoding: .JSON, headers: headers).responseJSON { response in
+            var path = self.baseUrlBrand
+            var headers :[String : String]?
+            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            } else {
+                headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            }
+            
+            Alamofire.request(.GET, path, parameters: nil, encoding: .JSON, headers: headers).responseJSON { response in
                 if response.result.isSuccess {
                     let jsonDic = JSON(response.result.value!)
                     completion(isSuccess: true, object: jsonDic)

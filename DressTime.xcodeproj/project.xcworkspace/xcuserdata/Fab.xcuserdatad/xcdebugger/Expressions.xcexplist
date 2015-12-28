@@ -179,6 +179,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "RegisterEmailViewController.(returnUserData(RegisterEmailViewController) -&gt; () -&gt; ()).(closure #1):RegisterEmailViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DressTime.TypeViewController.tableView (DressTime.TypeViewController)(ObjectiveC.UITableView, viewForHeaderInSection : Swift.Int) -&gt; Swift.Optional&lt;ObjectiveC.UIView&gt;:TypeViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -323,6 +331,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "LoginBL.LoginWithSuccess(JSON) -&gt; ():LoginBL.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "SharedData.sharedInstance.sexe">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "HomeViewController.(locationManager(HomeViewController) -&gt; (CLLocationManager, didUpdateLocations : [CLLocation]) -&gt; ()).(closure #1):HomeViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -433,6 +449,17 @@
          <PersistentStrings>
             <PersistentString
                value = "user.onPartySelected">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "RegisterEmailViewController.loginButton(FBSDKLoginButton!, didCompleteWithResult : FBSDKLoginManagerLoginResult!, error : NSError!) -&gt; ():RegisterEmailViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(result.grantedPermissions[&quot;email&quot;])">
+            </PersistentString>
+            <PersistentString
+               value = "print(FBSDKAccessToken.currentAccessToken().tokenString)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -590,6 +617,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "LoginViewController.(loginButton(LoginViewController) -&gt; (FBSDKLoginButton!, didCompleteWithResult : FBSDKLoginManagerLoginResult!, error : NSError!) -&gt; ()).(closure #1):LoginViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(object)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "HomeHeaderCell.(locationManager(HomeHeaderCell) -&gt; (CLLocationManager, didUpdateLocations : [CLLocation]) -&gt; ()).(closure #1).(closure #1):HomeHeaderCell.swift">
          <PersistentStrings>
             <PersistentString
@@ -661,6 +696,12 @@
       <ContextState
          contextName = "LoginViewController.(onClickLoginBtn(LoginViewController) -&gt; (AnyObject) -&gt; ()).(closure #1):LoginViewController.swift">
          <PersistentStrings>
+            <PersistentString
+               value = " object[&quot;error_description&quot;].string">
+            </PersistentString>
+            <PersistentString
+               value = "err_desc == &quot;001&quot;">
+            </PersistentString>
             <PersistentString
                value = "pro.gender">
             </PersistentString>
@@ -781,7 +822,18 @@
          contextName = "RegisterStyleViewController.onSaveTapped(AnyObject) -&gt; ():RegisterStyleViewController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "self.user">
+            </PersistentString>
+            <PersistentString
                value = "self.atWorkSelected">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTimeService.(getOutfits in _3F9FBDEE54AB84ACC9699628EA4A9769)(CLLocation, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():DressTimeService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "profil.access_token">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -830,15 +882,18 @@
          contextName = "HomeViewController.(createArrowImageView in _F0FEB500489D9228EB52A9BCCA599548)() -&gt; ():HomeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = " bubbleImageView.frame.origin.y">
+               value = " p.y">
             </PersistentString>
             <PersistentString
-               value = " p.y">
+               value = " bubbleImageView.frame.origin.y">
             </PersistentString>
             <PersistentString
                value = "self.arrowImageView!.frame">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AppDelegate.application(UIApplication, openURL : NSURL, options : [String : AnyObject]) -&gt; Bool:AppDelegate.swift">
       </ContextState>
       <ContextState
          contextName = "DressingSynchro.(downloadImage in _5D4E5A99B5AE9DBB58B651F0E284D94A)() -&gt; ():DressingSynchro.swift">
@@ -963,6 +1018,9 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "User.init(json : JSON) -&gt; User:User.swift">
+      </ContextState>
+      <ContextState
          contextName = "HomeOutfitsListCell.collectionView(UICollectionView, didSelectItemAtIndexPath : NSIndexPath) -&gt; ():HomeOutfitsListCell.swift">
          <PersistentStrings>
             <PersistentString
@@ -990,10 +1048,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "DressTimeBL.getStyleByMoment([String]) -&gt; [String]:DressTimeBL.swift">
+         contextName = "HomeViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:HomeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "profil.atWorkStyle">
+               value = "print((indexPath.row)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1002,6 +1060,14 @@
          <PersistentStrings>
             <PersistentString
                value = "self.outfitSelected!.outfit">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressTimeBL.getStyleByMoment([String]) -&gt; [String]:DressTimeBL.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "profil.atWorkStyle">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1065,6 +1131,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "LoginBL.loginFacebookWithSuccess(JSON) -&gt; User:LoginBL.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(object[&quot;_json&quot;][&quot;picture&quot;][&quot;data&quot;][&quot;url&quot;].stringValue)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "CaptureConfirmationViewController.viewDidLoad() -&gt; ():CaptureConfirmationViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -1117,10 +1191,16 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "UserService.(updateUser in _FB3E589A3D30C8483E90F674004580CD)(Profil, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():UserService.swift">
+      </ContextState>
+      <ContextState
          contextName = "LoginService.((login in _4E5A9D5E97EAEC2B1BBDB3C89D55161D)(LoginService) -&gt; (String, password : String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ()).(closure #1):LoginService.swift">
          <PersistentStrings>
             <PersistentString
                value = "response.response?.statusCode">
+            </PersistentString>
+            <PersistentString
+               value = "print(response.result.value)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1169,10 +1249,10 @@
                value = "isSuccess">
             </PersistentString>
             <PersistentString
-               value = "object">
+               value = " object.arrayValue.count">
             </PersistentString>
             <PersistentString
-               value = " object.arrayValue.count">
+               value = "object">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1368,10 +1448,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "Outfit.init(json : JSON) -&gt; Outfit:Outfits.swift">
+         contextName = "DressingService.(getDressing in _7740898A30638FEEC3F9DBDA933F485E)((isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():DressingService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.style">
+               value = "SharedData.sharedInstance.currentUserId">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1380,6 +1460,14 @@
          <PersistentStrings>
             <PersistentString
                value = "self.currentWeather">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "Outfit.init(json : JSON) -&gt; Outfit:Outfits.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.style">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1779,6 +1867,14 @@
          <PersistentStrings>
             <PersistentString
                value = "self.clothesLocal.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LoginViewController.loginButton(FBSDKLoginButton!, didCompleteWithResult : FBSDKLoginManagerLoginResult!, error : NSError!) -&gt; ():LoginViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(result)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

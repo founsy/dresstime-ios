@@ -12,7 +12,7 @@ import AVFoundation
 import DominantColor
 import Parse
 
-class CameraViewController : UIDTViewController {
+class CameraViewController : DTViewController {
     
     private var captureManager: CameraSessionManager?
     private var currentImage: UIImage?

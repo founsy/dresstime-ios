@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DetailClotheViewController: UIDTViewController {
+class DetailClotheViewController: DTViewController {
     
     var currentClothe: Clothe!
     

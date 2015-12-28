@@ -77,24 +77,17 @@ class SettingsViewController: UIViewController {
     @IBAction func onLogout(sender: AnyObject) {
         let profilDal = ProfilsDAL()
         if let user = profilDal.fetch(SharedData.sharedInstance.currentUserId!) {
-            
-            LoginService().Logout(user.access_token!, completion: { (isSuccess, object) -> Void in
-                let dal = ProfilsDAL()
-                let profilOld = dal.fetch(user.userid!)
-                if let profil = profilOld {
-                    profil.access_token = ""
-                    profil.refresh_token = ""
-                    profil.expire_in = 0
-                    dal.update(profil)
-                }
-                dispatch_async(dispatch_get_main_queue(),  { () -> Void in
-                    let rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController")
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                    appDelegate.window!.makeKeyAndVisible()
-                    appDelegate.window!.rootViewController = rootController
-                    self.navigationController?.popToRootViewControllerAnimated(false)
+            let loginBL = LoginBL()
+            if let token = user.access_token {
+                LoginService().Logout(user.access_token!, completion: { (isSuccess, object) -> Void in
+                    loginBL.logoutWithSuccess(user)
+                    self.goToLogin()
                 })
-            })
+            } else {
+                loginBL.logoutWithSuccess(user)
+                self.goToLogin()
+            }
+            
         }
     }
 
@@ -158,6 +151,16 @@ class SettingsViewController: UIViewController {
     private func isValidData() -> Bool {
         return !((tableViewController!.emailField.text == nil || tableViewController!.emailField.text!.isEmpty) ||
                 (tableViewController!.nameField.text == nil || tableViewController!.nameField.text!.isEmpty))
+    }
+    
+    private func goToLogin(){
+        dispatch_async(dispatch_get_main_queue(),  { () -> Void in
+            let rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController")
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.window!.makeKeyAndVisible()
+            appDelegate.window!.rootViewController = rootController
+            self.navigationController?.popToRootViewControllerAnimated(false)
+        })
     }
 }
 

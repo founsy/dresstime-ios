@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class OutfitViewController: UIDTViewController {
+class OutfitViewController: DTViewController {
     private let cellIdentifier : String = "ClotheTableCell"
     private let dal = ClothesDAL()
     private var currentClothe: Clothe?

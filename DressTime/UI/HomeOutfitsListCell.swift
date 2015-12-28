@@ -42,6 +42,7 @@ class HomeOutfitsListCell: UITableViewCell {
     var dataSource : HomeOutfitsListCellDataSource?
 
     override func awakeFromNib() {
+        super.awakeFromNib()
         self.outfitCollectionView.registerNib(UINib(nibName: "OutfitCell", bundle:nil), forCellWithReuseIdentifier: self.cellIdentifier)
         self.outfitCollectionView.dataSource = self
         self.outfitCollectionView.delegate = self

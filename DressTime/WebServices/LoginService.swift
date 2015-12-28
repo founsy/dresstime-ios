@@ -12,6 +12,8 @@ import Alamofire
 class LoginService {
     
     let base_url = "\(DressTimeService.baseURL)oauth/"//"http://api.drez.io/oauth/"
+    let base_url_email = "\(DressTimeService.baseURL)email/"//"http://api.drez.io/oauth/"
+    
     
     let isDebug = true
     static let clientId = "android"
@@ -46,6 +48,14 @@ class LoginService {
             }
         } else {
             self.logout(access_token, completion: completion)
+        }
+    }
+    
+    func SendVerificationEmail(email: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        if (Mock.isMockable()){
+            completion(isSuccess: true, object: "")
+        } else {
+            self.sendVerificationEmail(email, completion: completion)
         }
     }
     
@@ -91,7 +101,8 @@ class LoginService {
                 let jsonDic = JSON(response.result.value!)
                 completion(isSuccess: true, object: jsonDic)
             } else {
-                completion(isSuccess: false, object: JSON("Error \(statusCode)"))
+                let jsonDic = JSON(response.result.value!)
+                completion(isSuccess: false, object: jsonDic)
             }
         }
     }
@@ -103,6 +114,19 @@ class LoginService {
         ];
         let path = base_url + "logout"
         Alamofire.request(.GET, path, parameters: parameters, encoding: .JSON).responseJSON { (response) -> Void in
+            if response.result.isSuccess {
+                print(response.result.value)
+                let jsonDic = JSON(response.result.value!)
+                completion(isSuccess: true, object: jsonDic)
+            } else {
+                completion(isSuccess: false, object: "")
+            }
+        }
+    }
+    
+    private func sendVerificationEmail(email: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+        let path =  "\(base_url_email)send?email=\(email)"
+        Alamofire.request(.GET, path, parameters: nil, encoding: .JSON).responseJSON { (response) -> Void in
             if response.result.isSuccess {
                 print(response.result.value)
                 let jsonDic = JSON(response.result.value!)

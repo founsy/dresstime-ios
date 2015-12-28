@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Parse
 
-class ProfilViewController: UITableViewController {
+class ProfilViewController: DTTableViewController {
     let cellIdentifier = "profilTypeCell"
     private var type = [String]()
     var countType:Array<String>?

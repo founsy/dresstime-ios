@@ -11,7 +11,7 @@ import UIKit
 import DominantColor
 import Parse
 
-class CaptureConfirmationViewController: UIDTViewController {
+class CaptureConfirmationViewController: DTViewController {
 
     @IBOutlet weak var captureResult: UIImageView!
     @IBOutlet weak var nameClothe: UITextField!
@@ -228,6 +228,7 @@ class CaptureConfirmationViewController: UIDTViewController {
         
         DressingService().SaveClothe(clotheId) { (isSuccess, object) -> Void in
             print("Save Clothe")
+            NSNotificationCenter.defaultCenter().postNotificationName("NewClotheAddedNotification", object: self, userInfo: ["type": resultCapture["clothe_type"] as! String])
             ActivityLoader.shared.hideProgressView()
             self.dismissViewControllerAnimated(true, completion: nil)
         }

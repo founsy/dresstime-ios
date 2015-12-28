@@ -29,8 +29,16 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var currentPasswordField: UITextField!
     @IBOutlet weak var newPasswordField: UITextField!
     @IBOutlet weak var switchTutorial: UISwitch!
+    @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
     
     var menSelected = true
+    
+    @IBAction func unlinkTapped(sender: AnyObject) {
+        let loginBL = LoginBL()
+        loginBL.unmergeProfilWithFacebook(self.user!) { (isSuccess) -> Void in
+            FBSDKLoginManager().logOut()
+        }
+    }
     
     @IBAction func tutorialChanged(sender: UISwitch) {
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -85,6 +93,8 @@ class SettingsTableViewController: UITableViewController {
 
         let defaults = NSUserDefaults.standardUserDefaults()
         switchTutorial.on = defaults.boolForKey( "alreadyLaunch")
+        
+        fbLoginButton.delegate = self
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -141,4 +151,33 @@ extension SettingsTableViewController: UITextFieldDelegate {
         textField.resignFirstResponder()
         return true
     }
+}
+
+extension SettingsTableViewController : FBSDKLoginButtonDelegate {
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        print("User Logged In")
+        if ((error) != nil){
+            // Process error
+            print(error)
+        }
+        else if result.isCancelled {
+            // Handle cancellations
+            print("Cancelled")
+        }
+        else {
+            // If you ask for multiple permissions at once, you
+            // should check if specific permissions missing
+            if result.grantedPermissions.contains("email") {
+                let loginBL = LoginBL()
+                loginBL.mergeProfilWithFacebook(self.user!)
+            }
+        }
+        
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        /*let loginBL = LoginBL()
+        loginBL.unmergeProfilWithFacebook(self.user!) */
+    }
+    
 }

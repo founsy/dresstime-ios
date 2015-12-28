@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DetailTypeViewController: UIDTViewController {
+class DetailTypeViewController: DTViewController {
     private let cellIdentifier : String = "ClotheTableCell"
     private var clothesList: [Clothe]?
     private var currentSection = -1

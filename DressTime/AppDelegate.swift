@@ -28,6 +28,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
         
         
+        //Facebook SDK
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
         let defaults = NSUserDefaults.standardUserDefaults()
         let alreadyLaunch = defaults.boolForKey("alreadyLaunch")
         if (!alreadyLaunch) {
@@ -40,14 +43,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let profilDAL = ProfilsDAL()
             let profil = profilDAL.fetchLastUserConnected()
             
-            if let user = profil {
-                SharedData.sharedInstance.currentUserId = user.userid
-                SharedData.sharedInstance.sexe = user.gender
-                self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
-                self.window?.rootViewController = initialViewController
-                self.window?.makeKeyAndVisible()
+            let defaults = NSUserDefaults.standardUserDefaults()
+            if let name = defaults.stringForKey("userId") {
+                if let profil = profilDAL.fetch(name) {
+                    SharedData.sharedInstance.currentUserId = profil.userid
+                    SharedData.sharedInstance.sexe = profil.gender
+                    self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
+                    self.window?.rootViewController = initialViewController
+                    self.window?.makeKeyAndVisible()
+                }
             }
         }
         
@@ -98,6 +104,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         NSLog("applicationDidBecomeActive")
+        FBSDKAppEvents.activateApp()
     }
 
     func applicationWillTerminate(application: UIApplication) {
@@ -106,6 +113,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.saveContext()
     }
     
+    func application(application: UIApplication,
+        openURL url: NSURL,
+        sourceApplication: String?,
+        annotation: AnyObject?) -> Bool {
+            return FBSDKApplicationDelegate.sharedInstance().application(
+                application,
+                openURL: url,
+                sourceApplication: sourceApplication,
+                annotation: annotation)
+    }
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
         let installation = PFInstallation.currentInstallation()
         installation.setDeviceTokenFromData(deviceToken)
@@ -169,7 +186,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("DressTime.sqlite")
         var failureReason = "There was an error creating or loading the application's saved data."
         do {
-            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
+            let mOptions = [NSMigratePersistentStoresAutomaticallyOption: true,
+                NSInferMappingModelAutomaticallyOption: true]
+            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: mOptions)
         } catch {
             // Report any error we got.
             var dict = [String: AnyObject]()

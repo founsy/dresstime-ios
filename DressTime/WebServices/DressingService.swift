@@ -126,8 +126,15 @@ class DressingService {
                     "dressing" : dressingSeriazible
                 ]
                 
-                let path = baseUrlDressing + "clothes/"
-                let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+                var path = baseUrlDressing + "clothes/"
+
+                var headers :[String : String]?
+                if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
+                    path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+                } else {
+                    headers = ["Authorization": "Bearer \(profil.access_token!)"]
+                }
+                
                 Alamofire.request(.POST, path, parameters: parameters, encoding: .JSON, headers: headers).responseJSON { response in
                     if response.result.isSuccess {
                         print(response.result.value)
@@ -148,8 +155,13 @@ class DressingService {
                 let dict = NSMutableDictionary(dictionary: clothe.toDictionnary())
                 dict.removeObjectForKey("clothe_image")
 
-                let path = baseUrlDressing + "clothes/"
-                let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+                var path = baseUrlDressing + "clothes/"
+                var headers :[String : String]?
+                if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
+                    path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+                } else {
+                    headers = ["Authorization": "Bearer \(profil.access_token!)"]
+                }
                 Alamofire.request(.PUT, path, parameters: dict as? [String : AnyObject], encoding: .JSON, headers: headers).responseJSON { response in
                     if response.result.isSuccess {
                         print(response.result.value)
@@ -170,8 +182,13 @@ class DressingService {
                 "style" : style,
                 "clothes" : outfit
             ];
-            let path = baseUrlDressing + "clothes/OOTD"
-            let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            var path = baseUrlDressing + "clothes/OOTD"
+            var headers :[String : String]?
+            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            } else {
+                headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            }
             Alamofire.request(.POST, path, parameters: parameters as? [String : AnyObject], encoding: .JSON, headers: headers).responseJSON { response in
                 if response.result.isSuccess {
                     completion(isSuccess: true)
@@ -184,8 +201,13 @@ class DressingService {
     
     private func getDressing(completion: (isSuccess: Bool, object: JSON) -> Void){
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
-            let path = baseUrlDressing + "clothes/"
-            let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            var path = baseUrlDressing + "clothes/"
+            var headers :[String : String]?
+            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            } else {
+                headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            }
             Alamofire.request(.GET, path, encoding: .JSON, headers: headers).responseJSON { response in
                 if response.result.isSuccess {
                     print(response.result.value)
@@ -201,8 +223,13 @@ class DressingService {
     
     private func getClothesIdDressing(completion: (isSuccess: Bool, object: JSON) -> Void){
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
-            let path = baseUrlDressing + "clothesIds/"
-            let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            var path = baseUrlDressing + "clothesIds/"
+            var headers :[String : String]?
+            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            } else {
+                headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            }
             Alamofire.request(.GET, path, encoding: .JSON, headers: headers).responseJSON { response in
                 if response.result.isSuccess {
                     print(response.result.value)
@@ -227,9 +254,14 @@ class DressingService {
     
     private func getClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
-            let path = baseUrlDressing + "clothes/" + clotheId
+            var path = baseUrlDressing + "clothes/" + clotheId
             
-            let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            var headers :[String : String]?
+            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            } else {
+                headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            }
             Alamofire.request(.GET, path, encoding: .JSON, headers: headers).responseJSON { response in
                 if response.result.isSuccess {
                     print(response.result.value)
@@ -245,9 +277,14 @@ class DressingService {
     
     private func getImageClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
-            let path = baseUrlDressing + "clothes/image/" + clotheId
+            var path = baseUrlDressing + "clothes/image/" + clotheId
             
-            let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            var headers :[String : String]?
+            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            } else {
+                headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            }
             Alamofire.request(.GET, path, encoding: .JSON, headers: headers).responseJSON { response in
                 if response.result.isSuccess {
                     print(response.result.value)
@@ -263,9 +300,14 @@ class DressingService {
     
     private func deleteClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
-            let path = baseUrlDressing + "clothes/" + clotheId
+            var path = baseUrlDressing + "clothes/" + clotheId
             
-            let headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            var headers :[String : String]?
+            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            } else {
+                headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            }
             Alamofire.request(.DELETE, path, encoding: .JSON, headers: headers).responseJSON { response in
                 if response.result.isSuccess {
                     print(response.result.value)

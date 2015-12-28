@@ -107,6 +107,36 @@ class ProfilsDAL {
         return profil
     }
     
+    func save(user: User) -> Profil {
+        let entityDescription = NSEntityDescription.entityForName("Profil", inManagedObjectContext: managedObjectContext);
+        let profil = Profil(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext);
+        
+        profil.userid = user.email
+        profil.access_token = user.access_token
+        profil.refresh_token = user.refresh_token
+        profil.expire_in = user.expire_in
+        profil.name = user.displayName
+        profil.gender = user.gender
+        profil.temp_unit = user.tempUnit
+        profil.email = user.email
+        profil.atWorkStyle = user.atWorkStyle
+        profil.relaxStyle = user.relaxStyle
+        profil.onPartyStyle = user.onPartyStyle
+        profil.fb_id = user.fb_id
+        profil.fb_token = user.fb_token
+        profil.picture_url = user.picture
+        
+        do {
+            try managedObjectContext.save()
+            NSLog("Contact Saved");
+        } catch let error as NSError {
+            NSLog(error.localizedFailureReason!);
+        }
+        
+        return profil
+        
+    }
+    
     func update(profil: Profil) -> Profil? {
         if let oldProfil = self.fetch(profil.userid!) {
             

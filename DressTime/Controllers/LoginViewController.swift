@@ -8,10 +8,13 @@
 
 import UIKit
 
-class LoginViewController: UIDTViewController, UITextFieldDelegate {
+class LoginViewController: DTViewController, UITextFieldDelegate {
     
     @IBOutlet weak var loginText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
+    @IBOutlet weak var loginWithFacebook: FBSDKLoginButton!
+    
+    private var userByFB: User?
     
     @IBAction func onClickLoginBtn(sender: AnyObject) {
         if let login = loginText.text {
@@ -20,27 +23,8 @@ class LoginViewController: UIDTViewController, UITextFieldDelegate {
                 ActivityLoader.shared.showProgressView(self.view)
                 LoginService().Login(login, password: password) { (isSuccess, object) -> Void in
                     if (isSuccess){
-                        let dal = ProfilsDAL()
-                        
-                        if let profil = dal.fetch(object["user"]["username"].string!.lowercaseString){
-                            profil.access_token = object["access_token"].string
-                            profil.refresh_token = object["refresh_token"].string
-                            profil.expire_in = object["expires_in"].float
-                            if let newProfil = dal.update(profil) {
-                                SharedData.sharedInstance.currentUserId = newProfil.userid
-                                SharedData.sharedInstance.sexe = newProfil.gender
-                            }
-                        } else {
-                            let pro = dal.save(object["user"]["username"].string!, email: object["user"]["email"].string!, access_token:  object["access_token"].string!, refresh_token: object["refresh_token"].string!, expire_in: object["expires_in"].int!, name: object["user"]["displayName"].string!, gender: object["user"]["gender"].string!, temp_unit: object["user"]["tempUnit"].string!);
-                            
-                            pro.atWorkStyle = object["user"]["atWorkStyle"].string
-                            pro.onPartyStyle = object["user"]["onPartyStyle"].string
-                            pro.relaxStyle = object["user"]["relaxStyle"].string
-                            dal.update(pro)
-                            
-                            SharedData.sharedInstance.currentUserId = pro.userid
-                            SharedData.sharedInstance.sexe = pro.gender
-                        }
+                        let loginBL = LoginBL()
+                        loginBL.loginWithSuccess(object)
                         
                         //Check after login, if a synchro is necessary
                         //Today, only if Local database is empty
@@ -52,13 +36,30 @@ class LoginViewController: UIDTViewController, UITextFieldDelegate {
                                 self.goToHome()
                             }
                         })
-                        
-                        
                     } else {
                         ActivityLoader.shared.hideProgressView()
-                        let alert = UIAlertController(title: NSLocalizedString("loginErrTitle", comment: ""), message: NSLocalizedString("loginErrMessage", comment: ""), preferredStyle: .Alert)
-                        alert.addAction(UIAlertAction(title: NSLocalizedString("loginErrButton", comment: ""), style: .Default) { _ in })
-                        self.presentViewController(alert, animated: true){}
+                        if let err_desc = object["error_description"].string {
+                            if (err_desc == "001"){
+                                print("Please validate your account");
+                                let alert = UIAlertController(title: "Account not validate", message: "Please validate your account! Do you want to send again the email?", preferredStyle: .Alert)
+                                
+                                alert.addAction(UIAlertAction(title: "Resend", style: .Default, handler: { (action) -> Void in
+                                    //Resend Validation Email
+                                    LoginService().SendVerificationEmail(self.loginText.text!, completion: { (isSuccess, object) -> Void in
+                                        print("Email Send");
+                                    });
+                                }));
+                                alert.addAction(UIAlertAction(title: "No", style: .Default, handler: { (action) -> Void in
+                                    self.dismissViewControllerAnimated(true, completion: nil)
+                                }))
+                                self.presentViewController(alert, animated: true){}
+                            } else {
+                                let alert = UIAlertController(title: NSLocalizedString("loginErrTitle", comment: ""), message: NSLocalizedString("loginErrMessage", comment: ""), preferredStyle: .Alert)
+                                alert.addAction(UIAlertAction(title: NSLocalizedString("loginErrButton", comment: ""), style: .Default) { _ in })
+                                self.presentViewController(alert, animated: true){}
+                            }
+                        }
+                       
                     }
                     
                 }
@@ -91,6 +92,8 @@ class LoginViewController: UIDTViewController, UITextFieldDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
+        self.loginWithFacebook.delegate = self
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -107,6 +110,15 @@ class LoginViewController: UIDTViewController, UITextFieldDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "showStyle"){
+            let vc = segue.destinationViewController as! UINavigationController
+            if let styleVC = vc.topViewController as? RegisterStyleViewController {
+                styleVC.user = self.userByFB
+            }
+        }
     }
     
     func dismissKeyboard() {
@@ -137,4 +149,47 @@ extension LoginViewController: DressingSynchroDelegate {
     func dressingSynchro(dressingSynchro: DressingSynchro, synchingProgressing currentValue: Int, totalNumber: Int) {
         ActivityLoader.shared.setLabel("Synching \(currentValue)/\(totalNumber) clothes")
     }
+}
+
+extension LoginViewController : FBSDKLoginButtonDelegate {
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        print("User Logged In")
+        if ((error) != nil){
+            // Process error
+            print(error)
+        }
+        else if result.isCancelled {
+            // Handle cancellations
+            print("Cancelled")
+        }
+        else {
+            // If you ask for multiple permissions at once, you
+            // should check if specific permissions missing
+            if result.grantedPermissions.contains("email") {
+                UserService().GetUser({ (isSuccess, object) -> Void in
+                    let loginBL = LoginBL()
+                    if (isSuccess){
+                        //If into object provider is Facebook, meaning no account still exists on our system
+                        if let _ = object["provider"].string {
+                            self.userByFB = loginBL.loginFacebookWithSuccess(object)
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let vc = storyboard.instantiateViewControllerWithIdentifier("RegisterStyleViewController") as! RegisterStyleViewController
+                            vc.user = self.userByFB
+                            self.presentViewController(vc, animated: true, completion: nil)
+                        } else {
+                            //Otherwise find an account go to Home
+                            loginBL.loginWithSuccess(object)
+                            self.goToHome();
+                        }
+                    }
+                })
+            }
+        }
+        
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        
+    }
+    
 }

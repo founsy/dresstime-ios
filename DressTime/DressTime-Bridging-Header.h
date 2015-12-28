@@ -9,4 +9,8 @@
 #ifndef DressTime_DressTime_Bridging_Header_h
 #define DressTime_DressTime_Bridging_Header_h
 #import "MixPanel.h"
+
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import <FBSDKLoginKit/FBSDKLoginKit.h>
+
 #endif

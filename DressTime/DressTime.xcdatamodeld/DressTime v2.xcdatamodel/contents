@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Automatic">
+    <entity name="Clothe" representedClassName="DressTime.Clothe" syncable="YES">
+        <attribute name="clothe_colors" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clothe_cut" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clothe_favorite" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="clothe_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clothe_image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="clothe_isUnis" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="clothe_litteralColor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clothe_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clothe_partnerid" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="clothe_partnerName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clothe_pattern" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clothe_subtype" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clothe_type" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="profilRel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Profil" syncable="YES"/>
+    </entity>
+    <entity name="Profil" representedClassName="DressTime.Profil" syncable="YES">
+        <attribute name="access_token" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="atWorkStyle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="expire_in" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="fb_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="fb_token" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numberPts" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="onPartyStyle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="picture" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="picture_url" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="refresh_token" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="relaxStyle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="temp_unit" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userid" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Clothe" positionX="268" positionY="-153" width="128" height="255"/>
+        <element name="Profil" positionX="-63" positionY="63" width="128" height="285"/>
+    </elements>
+</model>

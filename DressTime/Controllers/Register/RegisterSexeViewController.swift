@@ -9,10 +9,12 @@
 import Foundation
 import UIKit
 
-class RegisterSexeViewController: UIDTViewController {
+class RegisterSexeViewController: DTViewController {
     var email: String?
     var password: String?
     private var sexe: String?
+    
+    var user: User?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -61,9 +63,11 @@ extension RegisterSexeViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if (indexPath.row == 0){
+            self.user?.gender = "F"
             sexe = "F"
         } else if (indexPath.row == 1){
             sexe = "M"
+            self.user?.gender = "M"
         }
         self.performSegueWithIdentifier("selectStyle", sender: self)
     }

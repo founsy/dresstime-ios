@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RegisterPasswordViewController: UIDTViewController {
+class RegisterPasswordViewController: DTViewController {
     
     @IBOutlet weak var hidePasswordButton: UIButton!
     @IBOutlet weak var textLabel: UILabel!
@@ -19,6 +19,8 @@ class RegisterPasswordViewController: UIDTViewController {
     
     var email:String = ""
     private var password: String = ""
+    
+    var user: User?
     
     private var isEmailStep = true
     
@@ -39,6 +41,9 @@ class RegisterPasswordViewController: UIDTViewController {
     @IBAction func onCreateButtonTapped(sender: AnyObject) {
         //Validate Email et go to step 2 choose password if email password
         if let passwordTemp = passwordText.text {
+            if let _ = self.user {
+                self.user!.password = passwordTemp
+            }
             password = passwordTemp
             self.performSegueWithIdentifier("selectSexe", sender: self)
         }
@@ -64,6 +69,7 @@ class RegisterPasswordViewController: UIDTViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "selectSexe") {
             if let viewController = segue.destinationViewController as? RegisterSexeViewController {
+                viewController.user = self.user
                 viewController.email = email
                 viewController.password = password
             }

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RegisterStyleViewController : UIDTViewController {
+class RegisterStyleViewController : DTViewController {
 
     @IBOutlet weak var areaAtWork: UIImageView!
     @IBOutlet weak var areaOnParty: UIImageView!
@@ -42,6 +42,7 @@ class RegisterStyleViewController : UIDTViewController {
     var email: String?
     var password: String?
     var sexe: String?
+    var user: User?
     
     @IBAction func onCancelTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -58,12 +59,14 @@ class RegisterStyleViewController : UIDTViewController {
             return
         }
         
+        //Update Current User
         if let userId = currentUserId {
             let dal = ProfilsDAL()
             if let profil = dal.fetch(userId) {
                 profil.atWorkStyle = self.atWorkSelected
                 profil.onPartyStyle = self.onPartySelected
                 profil.relaxStyle = self.relaxSelected
+                
                 let newProfil = dal.update(profil)
                 UserService().UpdateUser(newProfil!, completion: { (isSuccess, object) -> Void in
                     self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
@@ -81,18 +84,25 @@ class RegisterStyleViewController : UIDTViewController {
                 
                 
             }
-        } else {
+        } else { //Create new User
             let dal = ProfilsDAL()
-            let profil = dal.save(email!, email: email!, access_token: "", refresh_token: "", expire_in: 3600, name: "", gender: sexe!, temp_unit: "C")
-            profil.atWorkStyle = self.atWorkSelected
-            profil.onPartyStyle = self.onPartySelected
-            profil.relaxStyle = self.relaxSelected
-            dal.update(profil)
+            self.user?.atWorkStyle = self.atWorkSelected
+            self.user?.onPartyStyle = self.onPartySelected;
+            self.user?.relaxStyle = self.relaxSelected
+            let profil = dal.save(self.user!)
             
-            UserService().CreateUser(profil, password: password!, completion: { (isSuccess, object) -> Void in
+            UserService().CreateUser(profil, password: self.user!.password, completion: { (isSuccess, object) -> Void in
                 if (isSuccess){
                     //Create Model
-                    self.loginSuccess(profil, password: self.password!)
+                    if (FBSDKAccessToken.currentAccessToken() == nil){
+                        self.loginSuccess(profil, password: self.user!.password!)   
+                    } else {
+                        let defaults = NSUserDefaults.standardUserDefaults()
+                        defaults.setObject(profil.userid, forKey: "userId")
+                        defaults.synchronize()
+                    }
+                    SharedData.sharedInstance.currentUserId = profil.userid
+                    SharedData.sharedInstance.sexe = profil.gender
                     UIView.animateAndChainWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: {
                         self.confirmationView?.alpha = 1
                         self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
@@ -100,6 +110,13 @@ class RegisterStyleViewController : UIDTViewController {
                             self.confirmationView?.alpha = 0
                             self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
                             }, completion: { (finish) -> Void in
+                                dispatch_async(dispatch_get_main_queue(),  { () -> Void in
+                                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                    let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
+                                    appDelegate.window?.rootViewController = initialViewController
+                                    appDelegate.window?.makeKeyAndVisible()
+                                })
                                 
                         })
                 }
@@ -398,24 +415,15 @@ class RegisterStyleViewController : UIDTViewController {
     private func loginSuccess(profil: Profil, password: String){
         LoginService().Login(profil.email!, password: password) { (isSuccess, object) -> Void in
             if (isSuccess){
-                let dal = ProfilsDAL()
-                
-                if let profil = dal.fetch(object["user"]["username"].string!.lowercaseString){
-                    profil.access_token = object["access_token"].string
-                    profil.refresh_token = object["refresh_token"].string
-                    profil.expire_in = object["expires_in"].float
-                    if let newProfil = dal.update(profil) {
-                        SharedData.sharedInstance.currentUserId = newProfil.userid
-                        SharedData.sharedInstance.sexe = newProfil.gender
-                    }
-                    dispatch_async(dispatch_get_main_queue(),  { () -> Void in
-                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
-                        appDelegate.window?.rootViewController = initialViewController
-                        appDelegate.window?.makeKeyAndVisible()
-                    })
-                }
+                let loginBL = LoginBL();
+                loginBL.loginWithSuccess(object)
+                dispatch_async(dispatch_get_main_queue(),  { () -> Void in
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
+                    appDelegate.window?.rootViewController = initialViewController
+                    appDelegate.window?.makeKeyAndVisible()
+                })
             } else {
                 ActivityLoader.shared.hideProgressView()
                 let alert = UIAlertController(title: NSLocalizedString("loginErrTitle", comment: ""), message: NSLocalizedString("loginErrMessage", comment: ""), preferredStyle: .Alert)
