@@ -31,6 +31,8 @@ public class User: NSObject {
     var refresh_token: String?
     var expire_in: Int?
     
+    var picture_data: NSData?
+    
     public init(var json: JSON) {
         access_token = json["access_token"].string
         refresh_token = json["refresh_token"].string

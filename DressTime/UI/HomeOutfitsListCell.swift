@@ -23,7 +23,6 @@ import UIKit
 class HomeOutfitsListCell: UITableViewCell {
     @IBOutlet weak var outfitCollectionView: UICollectionView!
     @IBOutlet weak var blurView: UIVisualEffectView!
-    @IBOutlet weak var curveArrow: CurveArrowView!
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
 

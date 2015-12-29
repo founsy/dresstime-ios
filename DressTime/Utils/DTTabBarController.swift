@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 
+
 public class DTTabBarController: UITabBarController {
-    
+
     override public func viewDidLoad() {
         self.tabBar.tintColor = UIColor.dressTimeOrange()
         self.selectedViewController = self.viewControllers![1]

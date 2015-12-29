@@ -50,6 +50,9 @@ class ProfilViewController: DTTableViewController {
         headerView = self.tableView.tableHeaderView
         self.tableView.tableHeaderView = nil
         self.tableView.addSubview(headerView)
+        self.tableView.contentInset = UIEdgeInsets(top: (kTableHeaderHeight - 46), left: 0, bottom: 0, right: 0)
+        self.tableView.contentOffset = CGPoint(x: 0, y: (-kTableHeaderHeight + 46))
+        
         
         buttonAddClothe.layer.cornerRadius = 20.0
         buttonStyle.layer.cornerRadius = 20.0
@@ -66,14 +69,19 @@ class ProfilViewController: DTTableViewController {
         profilButton.layer.shadowOffset = CGSizeMake(0, 1)
         profilButton.layer.shadowOpacity = 0.50
         profilButton.layer.shadowRadius = 4
+        profilButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
+        profilButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
+        profilButton.imageView?.contentMode = .ScaleToFill
+        profilButton.layer.cornerRadius = 47.5
+        profilButton.clipsToBounds = true
         self.view.bringSubviewToFront(self.profilButton)
     }
     
     override func viewWillAppear(animated: Bool){
         super.viewWillAppear(animated)
         
-        self.tableView.contentInset = UIEdgeInsets(top: (kTableHeaderHeight - 46), left: 0, bottom: 0, right: 0)
-        self.tableView.contentOffset = CGPoint(x: 0, y: (-kTableHeaderHeight + 46))
+        //self.tableView.contentInset = UIEdgeInsets(top: (kTableHeaderHeight - 46), left: 0, bottom: 0, right: 0)
+        //self.tableView.contentOffset = CGPoint(x: 0, y: (-kTableHeaderHeight + 46))
         updateHeaderView()
         
         self.type = SharedData.sharedInstance.getType(SharedData.sharedInstance.sexe!)
@@ -83,7 +91,11 @@ class ProfilViewController: DTTableViewController {
         } else if (SharedData.sharedInstance.currentUserId!.lowercaseString == "juliette"){
             profilButton.setImage(UIImage(named: "profileJuliette"), forState: .Normal)
         } else {
-            profilButton.setImage(UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)"), forState: .Normal)
+            if let profil_image = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!)?.picture{
+                profilButton.setImage(UIImage(data: profil_image), forState: .Normal)
+            } else {
+                profilButton.setImage(UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)"), forState: .Normal)
+            }
         }
         
         backgroundImage.image = UIImage(named: "BackgroundHeader\(SharedData.sharedInstance.sexe!.uppercaseString)")
@@ -195,26 +207,16 @@ extension ProfilViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! TypeCell
+        cell.removeAllSubviews()
         let typeCell = self.type[indexPath.row]
-        cell.backgroundImage.image = UIImage(named: "Background\(typeCell)\(SharedData.sharedInstance.sexe!.uppercaseString)")
-        cell.longPressLabel.text = "\(NSLocalizedString("Add", comment: "")) \(NSLocalizedString(typeCell, comment: ""))"
-        cell.viewLongPress.hidden = true
         cell.delegate = self
-        cell.indexPath = indexPath
+        cell.currentType = typeCell
+        cell.number = Int(self.countType![indexPath.row])!
         if (indexPath.row % 2 == 0){
-            cell.leftLabel.hidden = true
-            cell.leftLabelName.hidden = true
-            cell.rightLabel.hidden = false
-            cell.rightLabelName.hidden = false
-            cell.rightLabel.text = self.countType![indexPath.row]
-            cell.rightLabelName.text = NSLocalizedString(typeCell, comment: "").uppercaseString
+           cell.addViews(false)
+           // cell.rightLabelName.text = NSLocalizedString(typeCell, comment: "").uppercaseString
         } else {
-            cell.leftLabel.hidden = false
-            cell.leftLabelName.hidden = false
-            cell.rightLabel.hidden = true
-            cell.rightLabelName.hidden = true
-            cell.leftLabel.text = self.countType![indexPath.row]
-            cell.leftLabelName.text = NSLocalizedString(typeCell, comment: "").uppercaseString
+            cell.addViews(true)
         }
         
         //Remove edge insets to have full width separtor line
@@ -227,7 +229,7 @@ extension ProfilViewController {
 }
 
 extension ProfilViewController: TypeCellDelegate {
-    func onAddTypedTapped(indexPath: NSIndexPath) {
+    func typeCell(typeCell: TypeCell, didSelectType indexPath: NSIndexPath) {
         self.currentClotheOpenSelected = indexPath.row
         self.performSegueWithIdentifier("AddClothe", sender: self)
     }

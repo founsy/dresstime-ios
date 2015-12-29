@@ -25,7 +25,6 @@ class LoginService {
     func Login(login: String, password: String, completion: (isSuccess: Bool, object: JSON) -> Void){
         if (login.lowercaseString == "alexandre" || login.lowercaseString == "juliette"){
             if let nsdata = ReadJsonFile().readFile("\(login.lowercaseString)-login"){
-                _ = NSString(data: nsdata, encoding:NSUTF8StringEncoding)
                 let json = JSON(data: nsdata)
                 completion(isSuccess: true, object:json)
             } else {
@@ -39,8 +38,6 @@ class LoginService {
     func Logout(access_token: String, completion: (isSuccess: Bool, object: JSON) -> Void){
         if (Mock.isMockable()){
             if let nsdata = ReadJsonFile().readFile("logout"){
-                let str = NSString(data: nsdata, encoding:NSUTF8StringEncoding)
-                print(str)
                 let json = JSON(data: nsdata)
                 completion(isSuccess: true, object:json)
             } else {
@@ -101,8 +98,12 @@ class LoginService {
                 let jsonDic = JSON(response.result.value!)
                 completion(isSuccess: true, object: jsonDic)
             } else {
-                let jsonDic = JSON(response.result.value!)
-                completion(isSuccess: false, object: jsonDic)
+                if let value = response.result.value {
+                    let jsonDic = JSON(response.result.value!)
+                    completion(isSuccess: false, object: jsonDic)
+                } else {
+                    completion(isSuccess: false, object: "")
+                }
             }
         }
     }

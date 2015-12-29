@@ -5,6 +5,6 @@
 	<key>serverURL</key>
 	<string>http://api.drez.io/</string>
 	<key>serverURLDebug</key>
-	<string>http://127.0.0.1:3000/</string>
+	<string>http://localhost:3000/</string>
 </dict>
 </plist>

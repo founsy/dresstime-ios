@@ -13,8 +13,11 @@ class HomeEmptyAnimationCell: UITableViewCell {
     
     @IBOutlet weak var imageViewAnimation: UIImageView!
     @IBOutlet weak var messageLabel: UILabel!
+    @IBOutlet weak var bubbleImageView: UIImageView!
     
-
+    private var arrowImageView: UIImageView?
+    var controller: HomeViewController?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -40,5 +43,20 @@ class HomeEmptyAnimationCell: UITableViewCell {
         return imagesListArray as AnyObject as! [UIImage]
     }
 
-
+    func createArrowImageView(){
+        if let imageView = self.arrowImageView {
+            imageView.removeFromSuperview()
+        }
+    
+        self.arrowImageView = UIImageView(image: UIImage(named: "arrowIcon"))
+        let p = self.bubbleImageView.convertPoint(self.bubbleImageView.frame.origin, toView: self.controller!.view)
+        
+        let t = self.bubbleImageView.superview!.convertPoint(self.bubbleImageView.frame.origin, toView: nil)
+        
+        let y = t.y > 300 ? t.y - (self.bubbleImageView.frame.height/2): 186.0 + p.y - 10
+        let x = bubbleImageView.frame.width + bubbleImageView.frame.origin.x
+        
+        self.arrowImageView!.frame = CGRectMake(x, 64.0, 64.0, y)
+        self.controller!.view.addSubview(self.arrowImageView!)
+    }
 }

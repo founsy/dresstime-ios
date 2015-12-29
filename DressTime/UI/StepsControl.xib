@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="StepsControl" customModule="DressTime" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Amm-ZS-dxQ">
+                    <rect key="frame" x="280" y="313.5" width="40" height="5"/>
+                    <color key="backgroundColor" red="0.98431372549999996" green="0.72941176470000002" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="K9g-eG-4Hy"/>
+                        <constraint firstAttribute="height" constant="5" id="nE2-WS-UbI"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n6C-35-Mmu">
+                    <rect key="frame" x="230" y="313.5" width="40" height="5"/>
+                    <color key="backgroundColor" red="0.98431372549999996" green="0.72941176470000002" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="5" id="2w9-21-YTK"/>
+                        <constraint firstAttribute="width" constant="40" id="6PX-Va-tqm"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fu4-Ma-iBL">
+                    <rect key="frame" x="330" y="313.5" width="40" height="5"/>
+                    <color key="backgroundColor" red="0.98431372549999996" green="0.72941176470000002" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="BKb-TS-TKf"/>
+                        <constraint firstAttribute="height" constant="5" id="C5G-iz-vAN"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hc0-vH-9JN">
+                    <rect key="frame" x="277" y="277" width="46" height="23"/>
+                    <fontDescription key="fontDescription" type="italicSystem" pointSize="19"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="fu4-Ma-iBL" firstAttribute="centerY" secondItem="Amm-ZS-dxQ" secondAttribute="centerY" id="3xq-XD-mu8"/>
+                <constraint firstItem="Amm-ZS-dxQ" firstAttribute="top" secondItem="hc0-vH-9JN" secondAttribute="bottom" constant="13" id="B6M-fP-3Oa"/>
+                <constraint firstItem="n6C-35-Mmu" firstAttribute="centerY" secondItem="Amm-ZS-dxQ" secondAttribute="centerY" id="G9R-1c-6mI"/>
+                <constraint firstItem="hc0-vH-9JN" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="a1M-pA-ghF"/>
+                <constraint firstItem="hc0-vH-9JN" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="centerY" id="aTL-33-evI"/>
+                <constraint firstItem="Amm-ZS-dxQ" firstAttribute="centerX" secondItem="hc0-vH-9JN" secondAttribute="centerX" id="bFD-ey-MUm"/>
+                <constraint firstItem="Amm-ZS-dxQ" firstAttribute="leading" secondItem="n6C-35-Mmu" secondAttribute="trailing" constant="10" id="iha-WI-11h"/>
+                <constraint firstItem="fu4-Ma-iBL" firstAttribute="leading" secondItem="Amm-ZS-dxQ" secondAttribute="trailing" constant="10" id="whg-is-hAT"/>
+            </constraints>
+            <connections>
+                <outlet property="titleLabel" destination="hc0-vH-9JN" id="i33-4A-Ism"/>
+                <outletCollection property="stepsViewCollections" destination="n6C-35-Mmu" collectionClass="NSMutableArray" id="n02-G5-jZ5"/>
+                <outletCollection property="stepsViewCollections" destination="Amm-ZS-dxQ" collectionClass="NSMutableArray" id="irw-Te-gyC"/>
+                <outletCollection property="stepsViewCollections" destination="fu4-Ma-iBL" collectionClass="NSMutableArray" id="AAo-xx-WaU"/>
+            </connections>
+        </view>
+    </objects>
+</document>

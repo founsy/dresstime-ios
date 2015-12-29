@@ -20,6 +20,9 @@ public class LoginBL {
             profil.access_token = user.access_token
             profil.refresh_token = user.refresh_token
             profil.expire_in = user.expire_in
+            if let id = profil.fb_id {
+                profil.picture = NSData(contentsOfURL: NSURL(string: "https://graph.facebook.com/\(id)/picture?width=100&height=100")!)
+            }
             dal.update(profil)
         } else {
             dal.save(user)

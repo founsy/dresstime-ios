@@ -35,6 +35,7 @@ class RegisterSexeViewController: DTViewController {
                 viewController.email = self.email
                 viewController.password = self.password
                 viewController.sexe = self.sexe
+                viewController.user = self.user
             }
         }
     }

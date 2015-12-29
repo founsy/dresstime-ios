@@ -51,6 +51,7 @@ class OutfitViewController: DTViewController {
     }
 
     override func viewDidLoad() {
+        self.hideTabBar = true
         super.viewDidLoad()
         self.classNameAnalytics = "Outfit View"
         tableView.registerNib(UINib(nibName: "ClotheScrollTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)

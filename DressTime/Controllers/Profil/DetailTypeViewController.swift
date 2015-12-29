@@ -31,6 +31,8 @@ class DetailTypeViewController: DTViewController {
     }
     
     override func viewDidLoad() {
+        self.hideTabBar = true
+        
         super.viewDidLoad()
         self.classNameAnalytics = "DetailType"
         tableView.registerNib(UINib(nibName: "ClotheTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
@@ -94,6 +96,7 @@ class DetailTypeViewController: DTViewController {
             DressingService().DeleteClothe(currentClothe.clothe_id, completion: { (isSuccess, object) -> Void in
                 print("Clothe deleted")
                 ClothesDAL().delete(currentClothe)
+                NSNotificationCenter.defaultCenter().postNotificationName("ClotheDeletedNotification", object: self, userInfo: ["type": currentClothe.clothe_type])
             })
         }
         self.clothesList!.removeAtIndex(indexPath.row)

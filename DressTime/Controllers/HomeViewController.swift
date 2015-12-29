@@ -20,12 +20,14 @@ class HomeViewController: DTViewController {
     var outfitsCell: HomeOutfitsListCell?
     var homeHeaderCell: HomeHeaderCell?
     var brandOutfitsCell: HomeBrandOutfitsListCell?
+    var emptyAnimationCell: HomeEmptyAnimationCell?
     
     private var currentStyleSelected: String?
     private var outfitSelected: Outfit?
     private var numberOfOutfits: Int = 0
     private var numberOfClothes: Int = 0
     private var arrowImageView: UIImageView?
+    private var isEnoughClothes = true
     
     private var typeClothe:Int = -1
     private var currentWeather: Weather?
@@ -37,6 +39,7 @@ class HomeViewController: DTViewController {
     private var weatherList = [Weather]()
     private var outfitList = [Outfit]()
     private var brandClothesList = [ClotheModel]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,12 +74,38 @@ class HomeViewController: DTViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().statusBarHidden = false // for status bar hide
-        
         self.numberOfClothes = ClothesDAL().numberOfClothes()
-        if (self.numberOfClothes > 0){
-            self.tableView.reloadData()
+        let lastStatus = self.isEnoughClothes
+        self.isEnoughClothes = self.isEnoughClothe()
+        
+        if (self.isEnoughClothes){
+            //Meaning not enough clothes to Enough
+            if (lastStatus != self.isEnoughClothes){
+                //Need to add Shopping controller
+                if (self.tabBarController!.viewControllers?.count == 2) {
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let vc = storyboard.instantiateViewControllerWithIdentifier("ShoppingViewController") as! ShoppingViewController
+                    self.tabBarController!.viewControllers?.append(vc)
+                    //shoppingController.tabBarItem = UITabBarItem(title: "Shopping", image: UIImage(named: "shoppingIcon"), tag: 3)
+                }
+                //Remove Arrow image view
+                for item in self.view.subviews {
+                    if let imageview = item as? UIImageView {
+                        if (imageview != self.bgView){
+                            imageview.removeFromSuperview()
+                        }
+                    }
+                }
+                //Reload TableView with good cell
+                self.tableView.reloadData()
+                //Call web service to get Outfits of the Day
+                self.loadOutfits()
+            }
         } else {
             self.tableView.reloadData()
+            if (self.tabBarController!.viewControllers?.count > 2) {
+                self.tabBarController!.viewControllers?.removeAtIndex(2)
+            }
             self.bgView.image = UIImage(named: "backgroundEmpty")
             ActivityLoader.shared.hideProgressView()
         }
@@ -84,8 +113,11 @@ class HomeViewController: DTViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        if (self.numberOfClothes == 0){
-            createArrowImageView()
+        if (!self.isEnoughClothes){
+            if let cell = emptyAnimationCell {
+                cell.createArrowImageView()
+                cell.imageViewAnimation.startAnimating()
+            }
         } else {
             if let imageView = self.arrowImageView {
                 imageView.removeFromSuperview()
@@ -115,33 +147,6 @@ class HomeViewController: DTViewController {
         self.performSegueWithIdentifier("showProfil", sender: self)
     }
     
-    private func createArrowImageView(){
-       /* if let imageView = self.arrowImageView {
-            imageView.removeFromSuperview()
-        }
-        self.arrowImageView = UIImageView(image: UIImage(named: "arrowIcon"))
-        let p = self.bubbleImageView.convertPoint(self.bubbleImageView.frame.origin, toView: self.view)
-        self.arrowImageView!.frame = CGRectMake(bubbleImageView.frame.width + bubbleImageView.frame.origin.x, 64, 64.0, p.y - 64.0)
-        self.arrowImageView!.hidden = (self.numberOfClothes > 0)
-        self.view.addSubview(self.arrowImageView!)*/
-    }
-    
-    private func addProfilButtonToNavBar(){
-        let regularButton = UIButton(frame: CGRectMake(0, 0, 40.0, 40.0))
-        if (SharedData.sharedInstance.currentUserId!.lowercaseString == "alexandre"){
-            regularButton.setBackgroundImage(UIImage(named: "profileAlexandre"), forState: UIControlState.Normal)
-        } else if (SharedData.sharedInstance.currentUserId!.lowercaseString == "juliette"){
-            regularButton.setBackgroundImage(UIImage(named: "profileJuliette"), forState: UIControlState.Normal)
-        } else {
-            regularButton.setBackgroundImage(UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)"), forState: UIControlState.Normal)
-        }
-        
-        regularButton.setTitle("", forState: UIControlState.Normal)
-        regularButton.addTarget(self, action: "profilButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
-        let navBarButtonItem = UIBarButtonItem(customView: regularButton)
-        self.navigationItem.leftBarButtonItem = navBarButtonItem
-    }
-    
     private func addAddButtonToNavBar(){
         let regularButton = UIButton(frame: CGRectMake(0, 0, 35.0, 35.0))
         let historyButtonImage = UIImage(named: "AddIcon")
@@ -154,7 +159,6 @@ class HomeViewController: DTViewController {
     }
     
     private func configNavBar(){
-       // addProfilButtonToNavBar()
         addAddButtonToNavBar()
        
     }
@@ -164,6 +168,56 @@ class HomeViewController: DTViewController {
         myView.frame = CGRectMake(0, 0, 300, 30)
         myView.cityLabel.text = city
         self.navigationItem.titleView = myView;
+    }
+    
+    private func isEnoughClothe() -> Bool {
+        let type = SharedData.sharedInstance.getType(SharedData.sharedInstance.sexe!)
+        let clotheDAL = ClothesDAL()
+        if (ClothesDAL().numberOfClothes() > 10){
+            return true;
+        }
+        
+        var result = true
+        for (var i = 0; i < type.count; i++){
+            result = result && (clotheDAL.fetch(type: type[i].lowercaseString).count >= 3)
+        }
+        return result
+    }
+    
+    private func loadOutfits(){
+        ActivityLoader.shared.showProgressView(self.view)
+        DressTimeService().GetOutfitsToday(self.currentLocation) { (isSuccess, object) -> Void in
+            if (isSuccess){
+                self.weatherList = WeatherWrapper().arrayOfWeather(object["weather"])
+                if (self.weatherList.count > 0){
+                    self.currentWeather = self.weatherList[0]
+                    
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        if let headerCell = self.homeHeaderCell {
+                            headerCell.collectionView.reloadData()
+                        }
+                        self.setTitleNavBar(self.currentWeather!.city!)
+                        UIView.animateWithDuration(0.2, animations: { () -> Void in
+                            if (self.isEnoughClothe()) {
+                                self.bgView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(self.currentWeather!.code!))
+                            }
+                        })
+                    })
+                    self.outfitList = [Outfit]()
+                    //Load the collection of Outfits
+                    if let outfitsCell = self.outfitsCell {
+                        for (var i = 0; i < object["outfits"].arrayValue.count; i++){
+                            self.outfitList.append(Outfit(json: object["outfits"][i]))
+                        }
+                        self.outfitsCell!.dataSource = self
+                        outfitsCell.outfitCollectionView.reloadData()
+                    }
+                }
+            } else {
+                print("Error \(object.stringValue)")
+            }
+            ActivityLoader.shared.hideProgressView()
+        }
     }
 }
 
@@ -176,39 +230,7 @@ extension HomeViewController: CLLocationManagerDelegate {
             
             self.currentLocation = locations[locations.count-1]
             locationManager.stopUpdatingLocation()
-            ActivityLoader.shared.showProgressView(self.view)
-            DressTimeService().GetOutfitsToday(self.currentLocation) { (isSuccess, object) -> Void in
-                if (isSuccess){
-                    self.weatherList = WeatherWrapper().arrayOfWeather(object["weather"])
-                    if (self.weatherList.count > 0){
-                        self.currentWeather = self.weatherList[0]
-                        
-                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                            if let headerCell = self.homeHeaderCell {
-                                headerCell.collectionView.reloadData()
-                            }
-                            self.setTitleNavBar(self.currentWeather!.city!)
-                            UIView.animateWithDuration(0.2, animations: { () -> Void in
-                                if (self.numberOfClothes > 0) {
-                                    self.bgView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(self.currentWeather!.code!))
-                                }
-                            })
-                        })
-                        self.outfitList = [Outfit]()
-                        //Load the collection of Outfits
-                        if let outfitsCell = self.outfitsCell {
-                            for (var i = 0; i < object["outfits"].arrayValue.count; i++){
-                                self.outfitList.append(Outfit(json: object["outfits"][i]))
-                            }
-                            self.outfitsCell!.dataSource = self
-                            outfitsCell.outfitCollectionView.reloadData()
-                        }
-                    }
-                } else {
-                    print("Error \(object.stringValue)")
-                }
-                ActivityLoader.shared.hideProgressView()
-            }
+            loadOutfits()
         }
     }
     
@@ -284,13 +306,37 @@ extension HomeViewController: HomeBrandOutfitsListCellDelegate, HomeBrandOutfits
     }
     
     func homeBrandOutfitsListCell(homeBrandOutfitsListCell: HomeBrandOutfitsListCell, didSelectItem item: Int) {
-        self.performSegueWithIdentifier("showShoppingList", sender: self)
+        //self.performSegueWithIdentifier("showShoppingList", sender: self)
+        self.tabBarController!.selectedIndex = 2
+    }
+}
+
+extension HomeViewController: HomeEmptyStepCellDelegate {
+    func homeEmptyStepCell(homeEmptyStepCell: HomeEmptyStepCell, didSelectItem item: String) {
+        switch(item.lowercaseString){
+            case "maille":
+                self.typeClothe = 0
+                break;
+            case "top":
+                self.typeClothe = 1
+                break;
+            case "pants":
+                self.typeClothe = 2
+                break;
+            case "dress":
+                self.typeClothe = 3
+                break;
+        default:
+            self.typeClothe = 0
+            break;
+        }
+        self.performSegueWithIdentifier("AddClothe", sender: self)
     }
 }
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (self.numberOfClothes > 0){
+        if (self.isEnoughClothes){
             return 4
         } else {
             return 2
@@ -300,8 +346,9 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         NSLog("Load home tableview \(indexPath.row)")
         if (indexPath.row == 0) {
-            if (self.numberOfClothes == 0){
-                var cell = self.tableView.dequeueReusableCellWithIdentifier("emptyStepCell") as? HomeEmptyStepCell
+            if (!self.isEnoughClothes){
+                let cell = self.tableView.dequeueReusableCellWithIdentifier("emptyStepCell") as? HomeEmptyStepCell
+                cell?.delegate = self
                 return cell!
             } else {
                 self.homeHeaderCell = self.tableView.dequeueReusableCellWithIdentifier("headerCell") as? HomeHeaderCell
@@ -309,9 +356,10 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                 return self.homeHeaderCell!
             }
         } else if (indexPath.row == 1){
-            if (self.numberOfClothes == 0){
-                var cell = self.tableView.dequeueReusableCellWithIdentifier("emptyAnimationCell") as? HomeEmptyAnimationCell
-                return cell!
+            if (!self.isEnoughClothes){
+                self.emptyAnimationCell = self.tableView.dequeueReusableCellWithIdentifier("emptyAnimationCell") as? HomeEmptyAnimationCell
+                self.emptyAnimationCell!.controller = self
+                return self.emptyAnimationCell!
 
             } else {
                 self.outfitsCell = self.tableView.dequeueReusableCellWithIdentifier("myOutfitsCell") as? HomeOutfitsListCell
@@ -330,7 +378,7 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if (indexPath.row == 0){
-            if (self.numberOfClothes == 0){
+            if (!self.isEnoughClothes){
                 return 186.0
             } else {
                 return 100.0

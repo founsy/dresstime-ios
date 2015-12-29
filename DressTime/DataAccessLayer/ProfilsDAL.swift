@@ -125,6 +125,7 @@ class ProfilsDAL {
         profil.fb_id = user.fb_id
         profil.fb_token = user.fb_token
         profil.picture_url = user.picture
+        profil.picture = user.picture_data
         
         do {
             try managedObjectContext.save()

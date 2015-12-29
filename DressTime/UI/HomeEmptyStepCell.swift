@@ -9,8 +9,14 @@
 import Foundation
 import UIKit
 
+protocol HomeEmptyStepCellDelegate {
+    func homeEmptyStepCell(homeEmptyStepCell: HomeEmptyStepCell, didSelectItem item: String)
+}
+
 class HomeEmptyStepCell: UITableViewCell {
     @IBOutlet weak var stackView: UIStackView!
+    
+    var delegate: HomeEmptyStepCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -19,13 +25,12 @@ class HomeEmptyStepCell: UITableViewCell {
         let clotheDAL = ClothesDAL()
         
         for (var i = 0; i < type.count; i++) {
-            let number = clotheDAL.fetch(type: type[i]).count
+            let number = clotheDAL.fetch(type: type[i].lowercaseString).count
             let view = NSBundle.mainBundle().loadNibNamed("EmptyTypeView", owner: self, options: nil)[0] as! EmptyTypeView
             view.iconImage.image = UIImage(named: getImageName(type[i]))
-            view.titleLabel.text = "\(number) \(type[i])"
-            view.currentType = type[i]
-            
+            view.currentType = type[i].lowercaseString
             view.updateStepViews(number)
+            view.delegate = self
             stackView.addArrangedSubview(view)
         }
        // stackView.translatesAutoresizingMaskIntoConstraints = false;
@@ -45,5 +50,12 @@ class HomeEmptyStepCell: UITableViewCell {
                 return ""
         }
     }
+}
 
+extension HomeEmptyStepCell : EmptyTypeViewDelegate {
+    func emptyTypeView(emptyTypeView: EmptyTypeView, didSelectItem item: String) {
+        if let del = self.delegate {
+            del.homeEmptyStepCell(self, didSelectItem: item)
+        }
+    }
 }

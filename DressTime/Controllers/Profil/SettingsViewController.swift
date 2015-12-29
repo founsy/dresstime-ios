@@ -12,7 +12,7 @@ import UIKit
 
 
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: DTViewController {
     private var user: Profil?
     private var tableViewController: SettingsTableViewController?
     private var confirmationView: ConfirmSave?
@@ -93,6 +93,8 @@ class SettingsViewController: UIViewController {
 
     
     override func viewDidLoad() {
+        self.hideTabBar = true
+        
         super.viewDidLoad()
         
         let profilDal = ProfilsDAL()
@@ -111,6 +113,7 @@ class SettingsViewController: UIViewController {
         super.viewWillAppear(animated)
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "Profile", style: .Plain, target: nil, action: nil)
+        //self.tabBarController?.tabBar.hidden = true
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -124,6 +127,11 @@ class SettingsViewController: UIViewController {
         self.confirmationView!.layer.cornerRadius = 50
         
         self.view.addSubview(self.confirmationView!)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        //self.tabBarController?.tabBar.hidden = false
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

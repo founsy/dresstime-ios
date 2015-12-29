@@ -83,12 +83,24 @@ class SettingsTableViewController: UITableViewController {
         currentPasswordField.delegate = self
         newPasswordField.delegate = self
         profilImage.image = UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)")
+        profilImage.layer.shadowColor = UIColor.blackColor().CGColor
+        profilImage.layer.shadowOffset = CGSizeMake(0, 1)
+        profilImage.layer.shadowOpacity = 0.50
+        profilImage.layer.shadowRadius = 4
+        profilImage.contentMode = .ScaleToFill
+        profilImage.layer.cornerRadius = 36.0
+        profilImage.clipsToBounds = true
+        
         if (SharedData.sharedInstance.currentUserId!.lowercaseString == "alexandre"){
             profilImage.image = UIImage(named: "profileAlexandre")
         } else if (SharedData.sharedInstance.currentUserId!.lowercaseString == "juliette"){
             profilImage.image = UIImage(named: "profileJuliette")
         } else {
-            profilImage.image = UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)")
+            if let profil_image = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!)?.picture{
+                profilImage.image = UIImage(data: profil_image)
+            } else {
+                profilImage.image = UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)")
+            }
         }
 
         let defaults = NSUserDefaults.standardUserDefaults()

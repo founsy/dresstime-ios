@@ -93,7 +93,6 @@ class TypeViewController: DTViewController {
                 "data" : "Type \(self.types[self.currentSection].lowercaseString) - Subtype \(self.subTypes[self.currentSection][self.subTypeSelected])"
             ]
             PFAnalytics.trackEvent("page", dimensions: dimensions)
-            NSNotificationCenter.defaultCenter().postNotificationName("NewClotheAddedNotification", object: self, userInfo: ["type": self.types[self.currentSection].lowercaseString])
             
             let captureController = segue.destinationViewController as! CameraViewController
             captureController.typeClothe = self.types[self.currentSection].lowercaseString

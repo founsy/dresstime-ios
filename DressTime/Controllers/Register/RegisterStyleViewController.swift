@@ -126,6 +126,8 @@ class RegisterStyleViewController : DTViewController {
     }
     
     override func viewDidLoad() {
+        self.hideTabBar = true
+        
         super.viewDidLoad()
         self.classNameAnalytics = "RegisterStyle"
         
@@ -154,6 +156,7 @@ class RegisterStyleViewController : DTViewController {
             initData()
         }
     }
+    
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         if (!self.isMoving){

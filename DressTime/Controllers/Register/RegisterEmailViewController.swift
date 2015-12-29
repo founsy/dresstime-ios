@@ -85,6 +85,11 @@ class RegisterEmailViewController: DTViewController {
                 //viewController.email = email
                 viewController.user = self.user
             }
+        } else if (segue.identifier == "selectPassword"){
+            if let viewController = segue.destinationViewController as? RegisterPasswordViewController {
+                //viewController.email = email
+                viewController.user = self.user
+            }
         }
     }
     

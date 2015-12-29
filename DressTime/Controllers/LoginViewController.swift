@@ -19,6 +19,12 @@ class LoginViewController: DTViewController, UITextFieldDelegate {
     @IBAction func onClickLoginBtn(sender: AnyObject) {
         if let login = loginText.text {
             if let password = passwordText.text {
+                if (login.isEmpty || password.isEmpty){
+                    self.showError("loginErrTitle", messageKey:  "loginErrMessage", buttonKey:  "loginErrButton", handler: nil)
+                    return
+                }
+                
+                
                 view.endEditing(true)
                 ActivityLoader.shared.showProgressView(self.view)
                 LoginService().Login(login, password: password) { (isSuccess, object) -> Void in
@@ -42,7 +48,6 @@ class LoginViewController: DTViewController, UITextFieldDelegate {
                             if (err_desc == "001"){
                                 print("Please validate your account");
                                 let alert = UIAlertController(title: "Account not validate", message: "Please validate your account! Do you want to send again the email?", preferredStyle: .Alert)
-                                
                                 alert.addAction(UIAlertAction(title: "Resend", style: .Default, handler: { (action) -> Void in
                                     //Resend Validation Email
                                     LoginService().SendVerificationEmail(self.loginText.text!, completion: { (isSuccess, object) -> Void in
@@ -53,11 +58,9 @@ class LoginViewController: DTViewController, UITextFieldDelegate {
                                     self.dismissViewControllerAnimated(true, completion: nil)
                                 }))
                                 self.presentViewController(alert, animated: true){}
-                            } else {
-                                let alert = UIAlertController(title: NSLocalizedString("loginErrTitle", comment: ""), message: NSLocalizedString("loginErrMessage", comment: ""), preferredStyle: .Alert)
-                                alert.addAction(UIAlertAction(title: NSLocalizedString("loginErrButton", comment: ""), style: .Default) { _ in })
-                                self.presentViewController(alert, animated: true){}
                             }
+                        } else {
+                            self.showError("loginErrTitle", messageKey:  "loginErrMessage", buttonKey:  "loginErrButton", handler: nil)
                         }
                        
                     }
@@ -67,7 +70,15 @@ class LoginViewController: DTViewController, UITextFieldDelegate {
         }
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {        
+    func showError(titleKey: String, messageKey: String, buttonKey: String, handler: ((UIAlertAction) -> Void)?){
+        dispatch_async(dispatch_get_main_queue(),  { () -> Void in
+            let alert = UIAlertController(title: NSLocalizedString(titleKey, comment: ""), message: NSLocalizedString(messageKey, comment: ""), preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString(buttonKey, comment: ""), style: .Default, handler: handler))
+            self.presentViewController(alert, animated: true){}
+        })
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
         if(textField.returnKeyType == UIReturnKeyType.Next) {
             let nextTag: Int = textField.tag + 1
             let nextField: UITextField = textField.superview?.viewWithTag(nextTag) as! UITextField
@@ -92,6 +103,7 @@ class LoginViewController: DTViewController, UITextFieldDelegate {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
         view.addGestureRecognizer(tap)
         
+        self.loginWithFacebook.readPermissions = ["public_profile", "email", "user_friends"];
         self.loginWithFacebook.delegate = self
         
     }
@@ -172,6 +184,9 @@ extension LoginViewController : FBSDKLoginButtonDelegate {
                         //If into object provider is Facebook, meaning no account still exists on our system
                         if let _ = object["provider"].string {
                             self.userByFB = loginBL.loginFacebookWithSuccess(object)
+                            if let url = self.userByFB?.picture {
+                                self.userByFB?.picture_data = NSData(contentsOfURL: NSURL(string: url)!)
+                            }
                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
                             let vc = storyboard.instantiateViewControllerWithIdentifier("RegisterStyleViewController") as! RegisterStyleViewController
                             vc.user = self.userByFB

@@ -269,6 +269,9 @@
          contextName = "HomeViewController.viewWillAppear(Bool) -&gt; ():HomeViewController.swift">
          <PersistentStrings>
             <PersistentString
+               value = "self.tabBarController!.viewControllers?.count">
+            </PersistentString>
+            <PersistentString
                value = " self.numberOfClothes">
             </PersistentString>
          </PersistentStrings>
@@ -335,6 +338,14 @@
          <PersistentStrings>
             <PersistentString
                value = "SharedData.sharedInstance.sexe">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeEmptyAnimationCell.(createArrowImageView in _6186DD0F19D5DF15AF8D7AE1FED64824)() -&gt; ():HomeEmptyAnimationCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.superview">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -700,10 +711,10 @@
                value = " object[&quot;error_description&quot;].string">
             </PersistentString>
             <PersistentString
-               value = "err_desc == &quot;001&quot;">
+               value = "pro.gender">
             </PersistentString>
             <PersistentString
-               value = "pro.gender">
+               value = "err_desc == &quot;001&quot;">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -882,10 +893,10 @@
          contextName = "HomeViewController.(createArrowImageView in _F0FEB500489D9228EB52A9BCCA599548)() -&gt; ():HomeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = " p.y">
+               value = " bubbleImageView.frame.origin.y">
             </PersistentString>
             <PersistentString
-               value = " bubbleImageView.frame.origin.y">
+               value = " p.y">
             </PersistentString>
             <PersistentString
                value = "self.arrowImageView!.frame">
@@ -1021,10 +1032,29 @@
          contextName = "User.init(json : JSON) -&gt; User:User.swift">
       </ContextState>
       <ContextState
+         contextName = "HomeEmptyAnimationCell.createArrowImageView() -&gt; ():HomeEmptyAnimationCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "bubbleImageView.frame">
+            </PersistentString>
+            <PersistentString
+               value = "bubbleImageView.frame.width + bubbleImageView.frame.origin.x">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "HomeOutfitsListCell.collectionView(UICollectionView, didSelectItemAtIndexPath : NSIndexPath) -&gt; ():HomeOutfitsListCell.swift">
          <PersistentStrings>
             <PersistentString
                value = "self.typeClothe">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "HomeViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print((indexPath.row)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1044,14 +1074,6 @@
          <PersistentStrings>
             <PersistentString
                value = "activityIndicator">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "HomeViewController.tableView(UITableView, cellForRowAtIndexPath : NSIndexPath) -&gt; UITableViewCell:HomeViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "print((indexPath.row)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1232,6 +1254,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "HomeViewController.tabBarController(UITabBarController, shouldSelectViewController : UIViewController) -&gt; Bool:HomeViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "tabBarController.selectedIndex ">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DressTimeService.(getBrandClothes in _3F9FBDEE54AB84ACC9699628EA4A9769)((isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():DressTimeService.swift">
          <PersistentStrings>
             <PersistentString
@@ -1243,16 +1273,24 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "HomeHeaderCell.(locationManager(HomeHeaderCell) -&gt; (CLLocationManager, didUpdateLocations : [CLLocation]) -&gt; ()).(closure #1):HomeHeaderCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "object.stringValue">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "DressingSynchro.((updateLocalStorage in _5D4E5A99B5AE9DBB58B651F0E284D94A)(DressingSynchro) -&gt; () -&gt; ()).(closure #1):DressingSynchro.swift">
          <PersistentStrings>
             <PersistentString
                value = "isSuccess">
             </PersistentString>
             <PersistentString
-               value = " object.arrayValue.count">
+               value = "object">
             </PersistentString>
             <PersistentString
-               value = "object">
+               value = " object.arrayValue.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1261,17 +1299,6 @@
          <PersistentStrings>
             <PersistentString
                value = "cell.view.frame">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "DressTime.CameraViewController.prepareForSegue (DressTime.CameraViewController)(ObjectiveC.UIStoryboardSegue, sender : Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ():CameraViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.typeClothe">
-            </PersistentString>
-            <PersistentString
-               value = "self.subTypeClothe">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1287,10 +1314,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "HomeHeaderCell.(locationManager(HomeHeaderCell) -&gt; (CLLocationManager, didUpdateLocations : [CLLocation]) -&gt; ()).(closure #1):HomeHeaderCell.swift">
+         contextName = "DressTime.CameraViewController.prepareForSegue (DressTime.CameraViewController)(ObjectiveC.UIStoryboardSegue, sender : Swift.Optional&lt;Swift.AnyObject&gt;) -&gt; ():CameraViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "object.stringValue">
+               value = "self.typeClothe">
+            </PersistentString>
+            <PersistentString
+               value = "self.subTypeClothe">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

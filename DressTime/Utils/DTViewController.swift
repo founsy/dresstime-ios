@@ -13,6 +13,14 @@ import Parse
 public class DTViewController: UIViewController {
     
     var classNameAnalytics = "UIDTViewController"
+    var hideTabBar = false
+    
+    override public func viewDidLoad() {
+        super.viewDidLoad()
+        if (hideTabBar){
+            self.tabBarController?.tabBar.hidden = true
+        }
+    }
     
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -27,6 +35,14 @@ public class DTViewController: UIViewController {
         )
         
         self.tabBarController?.tabBar.tintColor = UIColor.dressTimeOrange()
+        
+    }
+    
+    override public func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        if (hideTabBar){
+            self.tabBarController?.tabBar.hidden = false
+        }
     }
 
 }
