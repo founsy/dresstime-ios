@@ -157,7 +157,7 @@ class DressingSynchro {
             let json = JSON(data: nsdata)
             let clotheDAL = ClothesDAL()
             
-            for (_, clothe) in json {
+            for (_, clothe) in json {   
                 let image: String = clothe["clothe_image"].stringValue
                 let data: NSData = NSData(base64EncodedString: image, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
                 let isUnis = clothe["clothe_isUnis"].boolValue

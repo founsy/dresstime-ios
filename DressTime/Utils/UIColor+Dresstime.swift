@@ -31,6 +31,22 @@ extension UIColor {
     class func dressTimePink() -> UIColor {
         return UIColor(red: 238.0 / 255.0, green: 119.0 / 255.0, blue: 105.0 / 255.0, alpha: 1.0)
     }
+    
+    class func drsPaleSalmonColor() -> UIColor {
+        return UIColor(red: 255.0 / 255.0, green: 205.0 / 255.0, blue: 144.0 / 255.0, alpha: 1.0)
+    }
+    
+    class func drsSalmonColor() -> UIColor {
+        return UIColor(red: 254.0 / 255.0, green: 116.0 / 255.0, blue: 116.0 / 255.0, alpha: 1.0)
+    }
+    
+    class func drsPaleBlueColor() -> UIColor {
+        return UIColor(red: 136.0 / 255.0, green: 164.0 / 255.0, blue: 172.0 / 255.0, alpha: 1.0)
+    }
+    
+    class func drsBlueColor() -> UIColor {
+        return UIColor(red: 31.0 / 255.0, green: 51.0 / 255.0, blue: 72.0 / 255.0, alpha: 1.0)
+    }
 }
 
 extension UIColor {

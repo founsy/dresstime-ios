@@ -8,66 +8,81 @@
 
 import Foundation
 
-public class ClotheModel: NSObject {
-    var clothe_colors: String
-    var clothe_litteralColor: String
-    var clothe_cut: String
-    var clothe_id: String
-    var clothe_image: String
-    var clothe_isUnis: Bool
-    var clothe_name: String
-    var clothe_partnerid: NSNumber
-    var clothe_partnerName: String
-    var clothe_pattern: String
-    var clothe_subtype: String
-    var clothe_type: String
-    var clothe_favorite: Bool
-    
-    public init(json: JSON) {
-        self.clothe_colors = json["clothe_colors"].stringValue
-        self.clothe_litteralColor = json["clothe_litteralColor"].stringValue
-        self.clothe_cut = json["clothe_cut"].stringValue
-        self.clothe_id = json["clothe_id"].stringValue
-        self.clothe_image =  json["clothe_image"].stringValue
-        self.clothe_isUnis = json["clothe_isUnis"].boolValue
-        self.clothe_name = json["clothe_name"].stringValue
-        self.clothe_partnerid = json["clothe_partnerid"].numberValue
-        self.clothe_partnerName = json["clothe_partnerName"].stringValue
-        self.clothe_pattern = json["clothe_pattern"].stringValue
-        self.clothe_subtype = json["clothe_subtype"].stringValue
-        self.clothe_type = json["clothe_type"].stringValue
-        self.clothe_favorite = json["clothe_favorite"].boolValue
-    }
-    
-    init(clothe: Clothe) {
-        self.clothe_colors = clothe.clothe_colors
-        self.clothe_litteralColor = clothe.clothe_litteralColor
-        self.clothe_cut = clothe.clothe_cut
-        self.clothe_id = clothe.clothe_id
-        self.clothe_image =  ""
-        self.clothe_isUnis = clothe.clothe_isUnis as! Bool
-        self.clothe_name = clothe.clothe_name
-        self.clothe_partnerid = clothe.clothe_partnerid
-        self.clothe_partnerName = clothe.clothe_partnerName
-        self.clothe_pattern = clothe.clothe_pattern
-        self.clothe_subtype = clothe.clothe_subtype
-        self.clothe_type = clothe.clothe_type
-        self.clothe_favorite = clothe.clothe_favorite
-    }
-
-}
-
 public class Outfit: NSObject{
     var matchingRate: NSNumber
-    var outfit: [ClotheModel]
+    var clothes: [ClotheModel]
     var style: String
+    var isSuggestion: Bool
+    var isPutOn: Bool
+    var updatedDate : NSDate?
+    var moment: String?
+    var _id: String
     
     public init(json: JSON){
+        self._id = json["_id"].stringValue
         self.matchingRate = json["matchingRate"].numberValue
         self.style = json["style"].stringValue
-        self.outfit = [ClotheModel]()
-        for (var i = 0; i < json["outfit"].arrayValue.count; i++){
-            self.outfit.append(ClotheModel(json: json["outfit"][i]))
+        self.isSuggestion = json["isSuggestion"].bool != nil ? json["isSuggestion"].boolValue : true
+        self.isPutOn = json["isPutOn"].bool != nil ? json["isPutOn"].boolValue : false
+        self.moment = json["moment"].stringValue
+        if let update = json["updated"].string {
+            self.updatedDate = NSDate(dateString: update)
+        }
+        
+        self.clothes = [ClotheModel]()
+        if (json["outfit"].arrayValue.count > 0) {
+            for (var i = 0; i < json["outfit"].arrayValue.count; i++){
+                self.clothes.append(ClotheModel(json: json["outfit"][i]))
+            }
+        } else if (json["clothes"].arrayValue.count > 0) {
+            for (var i = 0; i < json["clothes"].arrayValue.count; i++){
+                self.clothes.append(ClotheModel(json: json["clothes"][i]))
+            }
+        }
+    }
+    
+    public init(clothes: [ClotheModel], updatedDate: NSDate, isSuggestion: Bool, isPutOn: Bool){
+        self._id = ""
+        self.matchingRate = 0
+        self.style = ""
+        self.isSuggestion = isSuggestion
+        self.isPutOn = isPutOn
+        self.moment = ""
+        self.clothes = clothes
+    }
+    
+    func toDictionnary() -> NSDictionary {
+        var dict = [NSDictionary]()
+        for item in self.clothes {
+            dict.append(item.toDictionnary())
+        }
+        
+        let dictionnary = NSMutableDictionary()
+        dictionnary["matchingRate"] = self.matchingRate
+        dictionnary["style"] = self.style
+        dictionnary["isSuggestion"] = self.isSuggestion
+        dictionnary["isPutOn"] = self.isPutOn
+        dictionnary["_id"] = self._id
+        dictionnary["clothes"] = dict
+        if let date = self.updatedDate {
+            dictionnary["updated"] = date.toS("yyyy-MM-dd'T'HH:mm:ss.SSSZ")!
+            
+        }
+        
+        return dictionnary
+    }
+}
+
+extension NSDate
+{
+    convenience
+    init(dateString:String) {
+        let dateStringFormatter = NSDateFormatter()
+        dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        if let d = dateStringFormatter.dateFromString(dateString) {
+            self.init(timeInterval:0, sinceDate:d)
+        } else {
+            self.init(timeIntervalSince1970: 0)
         }
     }
 }

@@ -100,8 +100,36 @@ class ClothesDAL {
         }
     }
     
+    func save(clotheToSave: NSDictionary) -> Clothe{
+        let entityDescription = NSEntityDescription.entityForName("Clothe", inManagedObjectContext: managedObjectContext);
+        let clothe = Clothe(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext);
+        
+        let profilDal = ProfilsDAL()
+        
+        clothe.clothe_id = NSUUID().UUIDString
+        clothe.clothe_partnerid = clotheToSave["clothe_partnerid"] as! NSNumber
+        clothe.clothe_partnerName = clotheToSave["clothe_partnerName"] as! String
+        clothe.clothe_type = clotheToSave["clothe_type"] as! String
+        clothe.clothe_subtype = clotheToSave["clothe_subtype"] as! String
+        clothe.clothe_name = clotheToSave["clothe_name"] as! String
+        clothe.clothe_isUnis = clotheToSave["clothe_isUnis"] as! Bool
+        clothe.clothe_pattern = clotheToSave["clothe_pattern"] as! String
+        clothe.clothe_cut = clotheToSave["clothe_cut"] as! String
+        clothe.clothe_image = clotheToSave["clothe_image"] as? NSData
+        clothe.clothe_colors = clotheToSave["clothe_colors"] as! String
+        clothe.clothe_litteralColor = clotheToSave["clothe_litteralColor"] as! String
+        clothe.profilRel = profilDal.fetch(SharedData.sharedInstance.currentUserId!)!
+        
+        do {
+            try managedObjectContext.save()
+            NSLog("Contact Saved");
+        } catch let error as NSError {
+            NSLog(error.localizedFailureReason!);
+        }
+        return clothe
+    }
     
-    func save(clotheId: String, partnerId: NSNumber, partnerName: String, type: String, subType: String, name: String, isUnis: Bool, pattern: String, cut: String, image: NSData?, colors: String){
+    func save(clotheId: String, partnerId: NSNumber, partnerName: String, type: String, subType: String, name: String, isUnis: Bool, pattern: String, cut: String, image: NSData?, colors: String) -> Clothe {
         let entityDescription = NSEntityDescription.entityForName("Clothe", inManagedObjectContext: managedObjectContext);
         let clothe = Clothe(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext);
         
@@ -129,6 +157,7 @@ class ClothesDAL {
         } catch let error as NSError {
             NSLog(error.localizedFailureReason!);
         }
+        return clothe
     }
     
     func update(clothe: Clothe){

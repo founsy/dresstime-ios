@@ -16,6 +16,6 @@ class NumberClotheControl: UIView {
     
     func updateControl(number: Int, type: String){
         self.numberLabel.text = "\(number)"
-        self.typeLabel.text = type.uppercaseString
+        self.typeLabel.text = NSLocalizedString(type, comment: "Translate type").uppercaseString
     }
 }

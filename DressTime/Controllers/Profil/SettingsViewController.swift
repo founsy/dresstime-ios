@@ -9,9 +9,6 @@
 import Foundation
 import UIKit
 
-
-
-
 class SettingsViewController: DTViewController {
     private var user: Profil?
     private var tableViewController: SettingsTableViewController?
@@ -61,14 +58,16 @@ class SettingsViewController: DTViewController {
                 
                 self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
                 
-                UIView.animateAndChainWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: {
+                UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: { () -> Void in
                     self.confirmationView?.alpha = 1
                     self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
-                }, completion:  nil).animateWithDuration(0.2, animations: { () -> Void in
-                    self.confirmationView?.alpha = 0
-                    self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
-                    }, completion: { (finish) -> Void in
-                        self.navigationController?.popViewControllerAnimated(true)
+                    }, completion: { (isFinish) -> Void in
+                        UIView.animateWithDuration(0.2, animations: { () -> Void in
+                            self.confirmationView?.alpha = 0
+                            self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
+                            }, completion: { (finish) -> Void in
+                                self.navigationController?.popViewControllerAnimated(true)
+                        })
                 })
             }
         }
@@ -79,7 +78,7 @@ class SettingsViewController: DTViewController {
         if let user = profilDal.fetch(SharedData.sharedInstance.currentUserId!) {
             let loginBL = LoginBL()
             if let token = user.access_token {
-                LoginService().Logout(user.access_token!, completion: { (isSuccess, object) -> Void in
+                LoginService().Logout(token, completion: { (isSuccess, object) -> Void in
                     loginBL.logoutWithSuccess(user)
                     self.goToLogin()
                 })
@@ -119,21 +118,13 @@ class SettingsViewController: DTViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         self.confirmationView = NSBundle.mainBundle().loadNibNamed("ConfirmSave", owner: self, options: nil)[0] as? ConfirmSave
-        print(self.confirmationView!.frame)
-        print(UIScreen.mainScreen().bounds)
         self.confirmationView!.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 50, UIScreen.mainScreen().bounds.size.height/2.0 - 50 - 65, 100, 100)
-        print(self.confirmationView!.frame)
         self.confirmationView!.alpha = 0
         self.confirmationView!.layer.cornerRadius = 50
         
         self.view.addSubview(self.confirmationView!)
     }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        //self.tabBarController?.tabBar.hidden = false
-    }
-    
+
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "settingTableView"){
             tableViewController = segue.destinationViewController as? SettingsTableViewController
@@ -163,7 +154,7 @@ class SettingsViewController: DTViewController {
     
     private func goToLogin(){
         dispatch_async(dispatch_get_main_queue(),  { () -> Void in
-            let rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController")
+            let rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginNavigationController")
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             appDelegate.window!.makeKeyAndVisible()
             appDelegate.window!.rootViewController = rootController

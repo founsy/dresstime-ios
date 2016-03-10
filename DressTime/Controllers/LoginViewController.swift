@@ -13,6 +13,10 @@ class LoginViewController: DTViewController, UITextFieldDelegate {
     @IBOutlet weak var loginText: UITextField!
     @IBOutlet weak var passwordText: UITextField!
     @IBOutlet weak var loginWithFacebook: FBSDKLoginButton!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var registerButton: UIButton!
+    
+    
     
     private var userByFB: User?
     
@@ -106,6 +110,11 @@ class LoginViewController: DTViewController, UITextFieldDelegate {
         self.loginWithFacebook.readPermissions = ["public_profile", "email", "user_friends"];
         self.loginWithFacebook.delegate = self
         
+        /* Set Translation */
+        loginButton.setTitle(NSLocalizedString("loginLoginButton", comment: ""), forState: .Normal)
+        registerButton.setTitle(NSLocalizedString("loginRegisterButton", comment: ""), forState: .Normal)
+        loginText.placeholder = NSLocalizedString("loginPlaceholderEmail", comment: "")
+        passwordText.placeholder = NSLocalizedString("loginPlaceHolderPassword", comment: "")
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -196,6 +205,8 @@ extension LoginViewController : FBSDKLoginButtonDelegate {
                             loginBL.loginWithSuccess(object)
                             self.goToHome();
                         }
+                    } else {
+                        self.showError("loginErrTitle", messageKey:  "loginErrMessage", buttonKey:  "loginErrButton", handler: nil)
                     }
                 })
             }

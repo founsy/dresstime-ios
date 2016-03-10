@@ -45,4 +45,5 @@ extension UIImage {
         UIGraphicsEndImageContext()
         return scaledImage
     }
+    
 }

@@ -36,7 +36,7 @@ class SharedData {
             case "Pants":
                 return ["jeans", "jeans-slim", "trousers-pleated", "trousers-suit", "chinos", "trousers-regular", "trousers", "trousers-slim", "bermuda", "short"]
             case "Dress":
-                return ["skirt", "skirt-long", "skirt-mini", "dress", "dress-party"]
+                return ["skirts-midlenght", "skirts-long", "skirts-short", "dress-casual", "dress-evening", "dress-straight"]
             default:
                 return []
         }
@@ -82,15 +82,17 @@ class SharedData {
                 return "bermuda"
             case "short":
                 return "shortJean"
-            case "skirt":
+            case "skirts-midlenght":
                 return "skirt2"
-            case "skirt-long":
+            case "skirts-long":
                 return "skirt1"
-            case "skirt-mini":
+            case "skirts-short":
                 return "skirt3"
-            case "dress":
+            case "dress-casual":
                 return "dress2"
-            case "dress-party":
+            case "dress-evening":
+                return "dress"
+            case "dress-straight":
                 return "dress"
         default:
                 return ""

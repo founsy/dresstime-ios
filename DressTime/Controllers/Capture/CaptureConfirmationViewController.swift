@@ -16,6 +16,9 @@ class CaptureConfirmationViewController: DTViewController {
     @IBOutlet weak var captureResult: UIImageView!
     @IBOutlet weak var nameClothe: UITextField!
     @IBOutlet var colorBtnCollection: [UIButton]!
+    @IBOutlet weak var headerMsgLabel: UILabel!
+    @IBOutlet weak var patternTitleLabel: UILabel!
+    @IBOutlet weak var brandTitleLabel: UILabel!
     
     @IBOutlet weak var patternContainerView: UIView!
     @IBOutlet weak var brandButton: UIButton!
@@ -42,7 +45,7 @@ class CaptureConfirmationViewController: DTViewController {
     @IBAction func onTouchUpColor(sender: UIButton) {
         for (var i = 0; i < colorBtnCollection.count; i++){
             if (colorBtnCollection[i] == sender){
-                colorBtnCollection[i].selected = !colorBtnCollection[i].selected
+                colorBtnCollection[i].selected = true
                 colorBtnCollection[i].layer.borderWidth = 2.0
                 colorBtnCollection[i].layer.borderColor = UIColor.dressTimeOrange().CGColor
             } else {
@@ -72,13 +75,18 @@ class CaptureConfirmationViewController: DTViewController {
         
         if let clothe = self.clotheObject {
             self.setNewClotheData(clothe)
-            self.saveButton.title = NSLocalizedString("ADD", comment: "")
+            self.saveButton.title = NSLocalizedString("captureStep3AddBtn", comment: "").uppercaseString
         }
         
         if let clothe = self.currentClothe {
             self.setModifyClotheData(clothe)
-            self.saveButton.title = NSLocalizedString("MODIFY", comment: "")
+            self.saveButton.title = NSLocalizedString("captureStep3ModifyBtn", comment: "").uppercaseString
         }
+        
+        //Set Translation
+        headerMsgLabel.text = NSLocalizedString("captureStep3HeaderMsg", comment: "")
+        patternTitleLabel.text = NSLocalizedString("captureStep3PatternTitle", comment: "").uppercaseString
+        brandTitleLabel.text = NSLocalizedString("captureStep3BrandTitle", comment: "")
     }
     
     private func setColors(colors: String){
@@ -223,10 +231,11 @@ class CaptureConfirmationViewController: DTViewController {
         }
         
         let dal = ClothesDAL()
-        let clotheId = NSUUID().UUIDString
-        dal.save(clotheId, partnerId: resultCapture["clothe_partnerid"] as! NSNumber, partnerName: resultCapture["clothe_partnerName"] as! String, type: resultCapture["clothe_type"] as! String, subType: resultCapture["clothe_subtype"] as! String, name: resultCapture["clothe_name"] as! String, isUnis: resultCapture["clothe_isUnis"] as! Bool, pattern: resultCapture["clothe_pattern"] as! String, cut: resultCapture["clothe_cut"] as! String, image: resultCapture["clothe_image"] as? NSData, colors: resultCapture["clothe_colors"] as! String)
+        //let clotheId = NSUUID().UUIDString
+        //let clothe = dal.save(clotheId, partnerId: resultCapture["clothe_partnerid"] as! NSNumber, partnerName: resultCapture["clothe_partnerName"] as! String, type: resultCapture["clothe_type"] as! String, subType: resultCapture["clothe_subtype"] as! String, name: resultCapture["clothe_name"] as! String, isUnis: resultCapture["clothe_isUnis"] as! Bool, pattern: resultCapture["clothe_pattern"] as! String, cut: resultCapture["clothe_cut"] as! String, image: resultCapture["clothe_image"] as? NSData, colors: resultCapture["clothe_colors"] as! String)
+        let clothe = dal.save(resultCapture)
         
-        DressingService().SaveClothe(clotheId) { (isSuccess, object) -> Void in
+        DressingService().SaveClothe(clothe) { (isSuccess, object) -> Void in
             print("Save Clothe")
             NSNotificationCenter.defaultCenter().postNotificationName("NewClotheAddedNotification", object: self, userInfo: ["type": resultCapture["clothe_type"] as! String])
             ActivityLoader.shared.hideProgressView()
@@ -244,7 +253,7 @@ class CaptureConfirmationViewController: DTViewController {
         self.currentClothe?.clothe_litteralColor = getSelectedColor()
         
         dal.update(self.currentClothe!)
-        DressingService().UpdateClothe(self.currentClothe!.clothe_id) { (isSuccess, object) -> Void in
+        DressingService().UpdateClothe(self.currentClothe!) { (isSuccess, object) -> Void in
             ActivityLoader.shared.hideProgressView()
             self.dismissViewControllerAnimated(true, completion: nil)
         }
@@ -256,7 +265,8 @@ class CaptureConfirmationViewController: DTViewController {
         for(var i=0; i < colorBtnCollection.count; i++){
             if (colorBtnCollection[i].selected){
                 let colorName = UIColor.colorWithHexString(colorBtnCollection[i].backgroundColor!.hexStringFromColor())
-                return hexTranslator.name(colorName)[1] as! String
+                let name = hexTranslator.name(colorName)
+                return name[1] as! String
             }
         }
         return ""

@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         NSLog("didFinishLaunchingWithOptions")
        
-        let mixpanel = Mixpanel.sharedInstanceWithToken("fbe8acba2c1532169cd509ab5838e1ed")
+        _ = Mixpanel.sharedInstanceWithToken("fbe8acba2c1532169cd509ab5838e1ed")
         
         Parse.setApplicationId("5EqfHwj47AbvbF5c0LpPjQwJRSseWRo8fMokcbhE",
             clientKey: "QPFiMdpk8RmblN8QYG2cXzZtii4yuHOHk5ayeFiF")
@@ -37,11 +37,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
              //defaults.setBool(true, forKey: "alreadyLaunch")
             //Display Tutorial
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let tutorialViewController = storyboard.instantiateViewControllerWithIdentifier("TutorialViewController")
+            _ = storyboard.instantiateViewControllerWithIdentifier("TutorialViewController")
             
         } else {
             let profilDAL = ProfilsDAL()
-            let profil = profilDAL.fetchLastUserConnected()
+            _ = profilDAL.fetchLastUserConnected()
             
             let defaults = NSUserDefaults.standardUserDefaults()
             if let name = defaults.stringForKey("userId") {
@@ -116,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication,
         openURL url: NSURL,
         sourceApplication: String?,
-        annotation: AnyObject?) -> Bool {
+        annotation: AnyObject) -> Bool {
             return FBSDKApplicationDelegate.sharedInstance().application(
                 application,
                 openURL: url,

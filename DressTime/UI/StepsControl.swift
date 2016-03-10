@@ -74,9 +74,9 @@ class StepsControl: UIView {
     
     private func getLabel(number: Int) -> String {
         if (number >= 0 && number <= 2){
-            return "more"
+            return NSLocalizedString("profilStepMore", comment: "")
         } else if (number == 3) {
-            return "well done !"
+            return NSLocalizedString("profilStepWellDone", comment: "")
         } else {
             return ""
         }

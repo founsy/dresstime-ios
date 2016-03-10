@@ -49,6 +49,7 @@ Private. Used to deliver the style of the picker.
 */
 private protocol AKCollectionViewLayoutDelegate {
     func pickerViewStyleForCollectionViewLayout(layout: AKCollectionViewLayout) -> AKPickerViewStyle
+    func pickerViewDirectionForCollectionViewLayout(layout: AKCollectionViewLayout) -> UICollectionViewScrollDirection
 }
 
 // MARK: AKCollectionViewCell
@@ -147,6 +148,8 @@ private class AKCollectionViewLayout: UICollectionViewFlowLayout {
         self.midX = CGRectGetMidX(visibleRect);
         self.width = CGRectGetWidth(visibleRect) / 2;
         self.maxAngle = CGFloat(M_PI_2);
+        self.scrollDirection = self.delegate.pickerViewDirectionForCollectionViewLayout(self)
+        
     }
     
     private override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
@@ -260,8 +263,11 @@ public class AKPickerView: UIView, UICollectionViewDataSource, UICollectionViewD
     /// Readwrite. A float value which indicates the spacing between cells.
     @IBInspectable public var interitemSpacing: CGFloat = 0.0
     
+    @IBInspectable public lazy var pickerViewScrollDirection: UICollectionViewScrollDirection = .Horizontal
+    
     /// Readwrite. The style of the picker view. See AKPickerViewStyle.
     public var pickerViewStyle = AKPickerViewStyle.Wheel
+    
     
     /// Readwrite. A float value which determines the perspective representation which used when using AKPickerViewStyle.Wheel style.
     @IBInspectable public var viewDepth: CGFloat = 1000.0 {
@@ -552,7 +558,12 @@ public class AKPickerView: UIView, UICollectionViewDataSource, UICollectionViewD
     
     // MARK: UICollectionViewDelegateFlowLayout
     public func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        var size = CGSizeMake(self.interitemSpacing, collectionView.bounds.size.height)
+        var height = collectionView.bounds.size.height
+        if (self.pickerViewScrollDirection == .Vertical){
+            height = 45.0
+        }
+        
+        var size = CGSizeMake(self.interitemSpacing, height)
         if let title = self.dataSource?.pickerView?(self, titleForItem: indexPath.item) {
             size.width += self.sizeForString(title).width
             if let margin = self.delegate?.pickerView?(self, marginForItem: indexPath.item) {
@@ -621,4 +632,7 @@ public class AKPickerView: UIView, UICollectionViewDataSource, UICollectionViewD
         return self.pickerViewStyle
     }
     
+    private func pickerViewDirectionForCollectionViewLayout(layout: AKCollectionViewLayout) -> UICollectionViewScrollDirection {
+        return self.pickerViewScrollDirection
+    }
 }

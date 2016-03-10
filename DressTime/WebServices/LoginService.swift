@@ -11,8 +11,9 @@ import Alamofire
 
 class LoginService {
     
-    let base_url = "\(DressTimeService.baseURL)oauth/"//"http://api.drez.io/oauth/"
-    let base_url_email = "\(DressTimeService.baseURL)email/"//"http://api.drez.io/oauth/"
+    let base_url = "\(DressTimeService.baseURL)oauth/"
+    let base_url_auth = "\(DressTimeService.baseURL)auth/"
+    let base_url_email = "\(DressTimeService.baseURL)email/"
     
     
     let isDebug = true
@@ -23,16 +24,7 @@ class LoginService {
     
     
     func Login(login: String, password: String, completion: (isSuccess: Bool, object: JSON) -> Void){
-        if (login.lowercaseString == "alexandre" || login.lowercaseString == "juliette"){
-            if let nsdata = ReadJsonFile().readFile("\(login.lowercaseString)-login"){
-                let json = JSON(data: nsdata)
-                completion(isSuccess: true, object:json)
-            } else {
-                completion(isSuccess: false, object: "")
-            }
-        } else {
-            self.login(login, password: password, completion: completion)
-        }
+        self.login(login, password: password, completion: completion)
     }
     
     func Logout(access_token: String, completion: (isSuccess: Bool, object: JSON) -> Void){
@@ -99,7 +91,7 @@ class LoginService {
                 completion(isSuccess: true, object: jsonDic)
             } else {
                 if let value = response.result.value {
-                    let jsonDic = JSON(response.result.value!)
+                    let jsonDic = JSON(value)
                     completion(isSuccess: false, object: jsonDic)
                 } else {
                     completion(isSuccess: false, object: "")
@@ -110,17 +102,25 @@ class LoginService {
     
     //GET
     private func logout(accessToken: String, completion: (isSuccess: Bool, object: JSON) -> Void){
-        let parameters = [
-            "access_token" : accessToken
-        ];
-        let path = base_url + "logout"
-        Alamofire.request(.GET, path, parameters: parameters, encoding: .JSON).responseJSON { (response) -> Void in
-            if response.result.isSuccess {
-                print(response.result.value)
-                let jsonDic = JSON(response.result.value!)
-                completion(isSuccess: true, object: jsonDic)
+        let dal = ProfilsDAL()
+        if let profil = dal.fetch(SharedData.sharedInstance.currentUserId!) {
+            var path = base_url_auth + "logout"
+
+            var headers :[String : String]?
+            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
             } else {
-                completion(isSuccess: false, object: "")
+                headers = ["Authorization": "Bearer \(profil.access_token!)"]
+            }
+            
+            Alamofire.request(.GET, path, parameters: nil, encoding: .JSON, headers: headers).responseJSON { (response) -> Void in
+                if response.result.isSuccess {
+                    print(response.result.value)
+                    let jsonDic = JSON(response.result.value!)
+                    completion(isSuccess: true, object: jsonDic)
+                } else {
+                    completion(isSuccess: false, object: "")
+                }
             }
         }
     }

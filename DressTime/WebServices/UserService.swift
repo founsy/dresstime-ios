@@ -10,20 +10,11 @@ import Foundation
 import Alamofire
 
 class UserService {
-    let baseUrlUser = "\(DressTimeService.baseURL)users/" //"http://api.drez.io/users/"
-    let baseUrlRegistration = "\(DressTimeService.baseURL)auth/registration"//"http://api.drez.io/auth/registration"
+    let baseUrlUser = "\(DressTimeService.baseURL)users/"
+    let baseUrlRegistration = "\(DressTimeService.baseURL)auth/registration"
     
     func UpdateUser(user: Profil, completion: (isSuccess: Bool, object: JSON) -> Void){
-        /*if (Mock.isMockable()){
-        if let nsdata = ReadJsonFile().readFile("\(SharedData.sharedInstance.currentUserId!)-OutfitsBrandToday"){
-            let json = JSON(data: nsdata)
-            completion(isSuccess: true, object:json)
-        } else {
-            completion(isSuccess: false, object: "")
-        }
-          } else { */
         self.updateUser(user, completion: completion)
-        /*} */
     }
     
     func CreateUser(user: Profil, password: String?, completion: (isSuccess: Bool, object: JSON) -> Void){

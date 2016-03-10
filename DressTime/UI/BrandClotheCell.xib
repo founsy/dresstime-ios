@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="3Ai-JY-fPU" customClass="BrandClotheCell" customModule="DressTime" customModuleProvider="target">
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="brandClotheCell" id="3Ai-JY-fPU" customClass="BrandClotheCell" customModule="DressTime" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="195" height="225"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -15,11 +15,9 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="maille2" translatesAutoresizingMaskIntoConstraints="NO" id="Gov-0m-fhH">
                         <rect key="frame" x="0.0" y="0.0" width="195" height="225"/>
-                        <animations/>
                     </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uBT-Er-KBO">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uBT-Er-KBO">
                         <rect key="frame" x="5" y="5" width="41" height="40"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="41" id="tah-l9-FSf"/>
                             <constraint firstAttribute="height" constant="40" id="zt8-aY-C4y"/>
@@ -30,13 +28,11 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="49,90€" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kfi-TR-eTy">
                                 <rect key="frame" x="1.5" y="13.5" width="38" height="13.5"/>
-                                <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="kfi-TR-eTy" firstAttribute="centerX" secondItem="EgR-2T-fFB" secondAttribute="centerX" id="0hg-qH-kBA"/>
@@ -54,40 +50,44 @@
                             </mask>
                         </variation>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="addBtn" translatesAutoresizingMaskIntoConstraints="NO" id="XD8-Nm-45K">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehx-UH-VMg">
                         <rect key="frame" x="155" y="185" width="30" height="30"/>
-                        <animations/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="sng-B5-m0K"/>
-                            <constraint firstAttribute="height" constant="30" id="x4T-zl-Sic"/>
+                            <constraint firstAttribute="height" constant="30" id="Ay6-Sd-m0S"/>
+                            <constraint firstAttribute="width" constant="30" id="iV9-YH-SnP"/>
                         </constraints>
-                    </imageView>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sadBtn" translatesAutoresizingMaskIntoConstraints="NO" id="FdS-DW-rU4">
+                        <state key="normal" image="addBtn"/>
+                        <connections>
+                            <action selector="shopTapped:" destination="3Ai-JY-fPU" eventType="touchUpInside" id="vDs-0m-h35"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygw-UN-Tus">
                         <rect key="frame" x="10" y="185" width="30" height="30"/>
-                        <animations/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="2DJ-Do-R4v"/>
-                            <constraint firstAttribute="width" constant="30" id="Xz9-fZ-h1B"/>
+                            <constraint firstAttribute="height" constant="30" id="GNX-4z-mYe"/>
+                            <constraint firstAttribute="width" constant="30" id="Mgg-vh-sx6"/>
                         </constraints>
-                    </imageView>
+                        <state key="normal" image="sadBtn"/>
+                        <connections>
+                            <action selector="dislikeTapped:" destination="3Ai-JY-fPU" eventType="touchUpInside" id="JzL-5v-v4Z"/>
+                        </connections>
+                    </button>
                 </subviews>
-                <animations/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
-            <animations/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="XD8-Nm-45K" secondAttribute="bottom" constant="10" id="2F3-km-4iw"/>
+                <constraint firstItem="ygw-UN-Tus" firstAttribute="leading" secondItem="3Ai-JY-fPU" secondAttribute="leading" constant="10" id="56H-F9-9br"/>
                 <constraint firstItem="Gov-0m-fhH" firstAttribute="leading" secondItem="3Ai-JY-fPU" secondAttribute="leading" id="9Pi-ik-DZv"/>
                 <constraint firstItem="uBT-Er-KBO" firstAttribute="top" secondItem="3Ai-JY-fPU" secondAttribute="top" constant="5" id="9Z3-U6-Ej6"/>
-                <constraint firstAttribute="trailing" secondItem="XD8-Nm-45K" secondAttribute="trailing" constant="10" id="IP2-bG-edp"/>
+                <constraint firstAttribute="bottom" secondItem="ygw-UN-Tus" secondAttribute="bottom" constant="10" id="Nb4-DB-LnY"/>
                 <constraint firstItem="Gov-0m-fhH" firstAttribute="top" secondItem="3Ai-JY-fPU" secondAttribute="top" id="ZK2-TX-iGM"/>
+                <constraint firstAttribute="bottom" secondItem="ehx-UH-VMg" secondAttribute="bottom" constant="10" id="arM-3L-yEh"/>
                 <constraint firstItem="uBT-Er-KBO" firstAttribute="leading" secondItem="3Ai-JY-fPU" secondAttribute="leading" constant="5" id="bZR-5F-oLH"/>
                 <constraint firstAttribute="trailing" secondItem="Gov-0m-fhH" secondAttribute="trailing" id="gzG-G7-cCd"/>
                 <constraint firstAttribute="trailing" secondItem="EgR-2T-fFB" secondAttribute="trailing" constant="5" id="myz-uM-ypH"/>
-                <constraint firstItem="FdS-DW-rU4" firstAttribute="leading" secondItem="3Ai-JY-fPU" secondAttribute="leading" constant="10" id="oTV-hn-GNn"/>
                 <constraint firstItem="EgR-2T-fFB" firstAttribute="top" secondItem="3Ai-JY-fPU" secondAttribute="top" constant="5" id="qNA-9S-ZcG"/>
                 <constraint firstAttribute="bottom" secondItem="Gov-0m-fhH" secondAttribute="bottom" id="soY-ze-Tia"/>
-                <constraint firstAttribute="bottom" secondItem="FdS-DW-rU4" secondAttribute="bottom" constant="10" id="t24-I4-yAS"/>
+                <constraint firstAttribute="trailing" secondItem="ehx-UH-VMg" secondAttribute="trailing" constant="10" id="uj9-eO-gdJ"/>
             </constraints>
             <connections>
                 <outlet property="brandIcon" destination="uBT-Er-KBO" id="WIc-py-Z0o"/>

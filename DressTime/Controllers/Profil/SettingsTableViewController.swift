@@ -28,7 +28,6 @@ class SettingsTableViewController: UITableViewController {
     @IBOutlet weak var temperatureField: UISegmentedControl!
     @IBOutlet weak var currentPasswordField: UITextField!
     @IBOutlet weak var newPasswordField: UITextField!
-    @IBOutlet weak var switchTutorial: UISwitch!
     @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
     
     var menSelected = true
@@ -103,9 +102,6 @@ class SettingsTableViewController: UITableViewController {
             }
         }
 
-        let defaults = NSUserDefaults.standardUserDefaults()
-        switchTutorial.on = defaults.boolForKey( "alreadyLaunch")
-        
         fbLoginButton.delegate = self
     }
     

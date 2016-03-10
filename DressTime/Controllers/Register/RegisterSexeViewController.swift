@@ -25,16 +25,19 @@ class RegisterSexeViewController: DTViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
         self.classNameAnalytics = "RegisterSexe"
+        self.navigationController?.navigationBarHidden = false
         self.tableView.dataSource = self
         self.tableView.delegate = self
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBarHidden = false
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "selectStyle"){
             if let viewController = segue.destinationViewController as? RegisterStyleViewController {
-                viewController.email = self.email
-                viewController.password = self.password
-                viewController.sexe = self.sexe
                 viewController.user = self.user
             }
         }
@@ -49,9 +52,15 @@ extension RegisterSexeViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         NSLog("\(indexPath.row)")
         if (indexPath.row == 0){
-            return self.tableView.dequeueReusableCellWithIdentifier("womenCell")!
+            let cell = self.tableView.dequeueReusableCellWithIdentifier("sexeCell") as! RegisterSexeTableViewCell
+            cell.titleLabel.text = NSLocalizedString("registerSexeWomen", comment: "").uppercaseString
+            cell.imageViewBackground.image = UIImage(named: "RegisterBgWomen")
+            return cell
         } else if (indexPath.row == 1){
-            return self.tableView.dequeueReusableCellWithIdentifier("menCell")!
+            let cell = self.tableView.dequeueReusableCellWithIdentifier("sexeCell") as! RegisterSexeTableViewCell
+            cell.titleLabel.text = NSLocalizedString("registerSexeMen", comment: "").uppercaseString
+            cell.imageViewBackground.image = UIImage(named: "RegisterBgMen")
+            return cell
         }
         return UITableViewCell()
     }

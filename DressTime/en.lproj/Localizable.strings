@@ -7,40 +7,80 @@
  */
 
 /* LoginViewController */
+"loginName" = "Name";
+"loginEmail" = "Email";
+"loginPassword" = "Password";
+"loginOr" = "OR";
+"loginTitle" = "Hello :)";
+"loginLoginButton" = "Login";
+"loginSignUpButton" = "Join us";
+"loginSignUpHeaderButton" = "Sign up";
+"loginLoginHeaderButton" = "Login";
 "loginErrTitle" = "Failed!";
 "loginErrMessage" = "Error during the login the processs";
 "loginErrButton" = "Okay.";
 
+/* Register Pages */
+"registerEmailYourEmail" = "Your Email";
+"registerEmailOr" = "Or";
+"registerEmailPlaceholder" = "barack.obama@usa.gov";
+"registerPasswordYourPassword" = "Your Password";
+"registerPasswordPlaceholder" = "MySecurePassword";
+"registerPasswordCreateAnAccount" = "Create an Account";
+"registerSexeWomen" = "I am a nice women";
+"registerSexeMen" = "I am a great men";
+"registerStyleSelectStyle" = "1 - Select a style";
+"registerStyleFashionStyle" = "fashion";
+"registerStyleBusinessStyle" = "business";
+"registerStyleSportwearStyle" = "sportwear";
+"registerStyleCasualStyle" = "casual chic";
+"registerStyleSelectPeriod" = "2 - Select a period";
+"registerStyleWorkPeriod" = "for work";
+"registerStylePartyPeriod" = "for party";
+"registerStyleChillPeriod" = "for chill";
+"registerErrorCreateAccountTitle" = "Error!";
+"registerErrorCreateAccountMessge" = "Error during the creating account process. Please try again later!";
+"registerErrorCreateAccountButton" = "Okay.";
+"registerStyleValidateModificationBtn" = "Validate my modification";
+"registerStyleSeeMyNewDressingBtn" = "Let's see my new dressing";
+"registerStyleErrTitle" = "Error";
+"registerStyleErrMessage" = "Please select a style for each moment of the day";
+"registerStyleErrButton" = "Okay";
+
+
+/* General translation */
+"maille" = "mailles";
+"dress" = "dresses";
+"top" = "tops";
+"pants" = "pants";
+
+
 /* HomeViewController */
-"Now" = "Now";
-"Afternoon" = "Afternoon";
-"Morning" = "Morning";
-"Tonight" = "Tonight";
 "homeLocErrTitle" = "Failed!";
 "homeLocErrMessage" = "Please activate le localisation service via Settings > Localisation > DressTime : Enable While Using";
 "homeLocErrButton" = "Okay.";
+"Moment_Relax" = "Relax";
+"Moment_Work" = "Work";
+"Moment_Party" = "Party";
+"homeEmptyMessage" = "Keep going ! Few more clothes :)";
+"homeEmptyAnimationMessage" = "You are late! What can I wear today?";
 
-/* OutfitViewController */
-"HOME" = "HOME";
-"OUTFIT OF THE DAY" = "OUTFIT OF THE DAY";
-"SOMETHING MISSING" = "SOMETHING IS MISSING .. NO ?";
 "relax" = "Relax";
 "atWork" = "at Work";
 "onParty" = "on Party";
 
 /* Detail Type View Controller */
-"Edit" =  "Edit";
-"Delete" = "Delete";
-"Profile" = "Profile";
-"My" = "My";
-"MAILLE" = "MAILLE";
-"TOPS" = "TOPS";
-"PANTS" = "PANTS";
-"DRESS" = "DRESS";
+"detailTypeBackBtn" = "Profile";
+"detailTypeEditBtn" = "Edit";
+"detailTypeDeleteBtn" = "Delete";
+"detailTypeMyMsg" = "My";
+"detailTypeEmptyMsg" = "You seem to be naked :) Add some clothings !";
 
 /* ProfilViewController */
 "PROFILE" = "PROFILE";
 "Add" = "Add";
+"profilStepMore" = "more";
+"profilStepWellDone" = "Well done!";
 
 /* TypeViewController */
 "Maille" = "Mailles";
@@ -84,29 +124,34 @@
 "floral" = "floral";
 
 /* Tutorial */
-"CAPTURE" = "CAPTURE";
-"CHECK" = "CHECK";
-"GET" = "GET";
-"YOUR CLOTHES" = "YOUR CLOTHES";
-"THAT IT MATCHES" = "THAT IT MATCHES";
-"SMART OUTFITS" = "SMART OUTFITS";
-"SMART SHOPPING LIST" = "SMART SHOPPING LIST";
+"TutorialPage1Title" = "CAPTURE";
+"TutorialPage1Msg" = "YOUR CLOTHES";
+"TutorialPage2Title" = "CHECK";
+"TutorialPage2Msg" = "THAT IT MATCHES";
+"TutorialPage3Title" = "GET";
+"TutorialPage3Msg" = "SMART OUTFITS";
+"TutorialPage4Title" = "GET";
+"TutorialPage4Msg" = "SMART SHOPPING LIST";
 
-/* Select Style View */
-"styleErrTitle" = "Error";
-"styleErrMessage" = "Please select a style for each moment of the day";
-"styleErrButton" = "Okay";
 
 /* Settings View */
 "settingsErrTitle" = "Error";
 "settingsErrMessage" = "Please fill all fields";
 "settingsErrButton" = "Okay";
 
-/*Register Style View */
-"VALIDATE MY MODIFICATION" = "VALIDATE MY MODIFICATION";
-"PICK YOUR OWN STYLE" = "PICK YOUR OWN STYLE";
-"LET'S SEE MY NEW DRESSING" = "LET'S SEE MY NEW DRESSING";
 
-/*Capture Confirmation */
-"MODIFY" = "MODIFY";
-"ADD" = "ADD";
+/* Capture Confirmation */
+"captureStep2HeaderMsg" = "Try to shoot the main body of your shirt";
+"captureStep2ColorMsg" = "the awesome color of your clothe";
+"captureStep3ModifyBtn" = "Modify";
+"captureStep3AddBtn" = "Add";
+"captureStep3HeaderMsg" = "Nice shoot! Everything is alright ?";
+"captureStep3PatternTitle" = "THE  PATTERN";
+"captureStep3BrandTitle" = "Do you know the brand?";
+
+/* Calendar */
+"calendarDoYouRemember" = "Do you remember what was your outfit ?";
+
+/* Shopping */
+"shoppingNumberOfMatching" = "outfits in your wardrobe";
+"shoppingHeaderMsg" = "Let's see what is missing in your wardrobe";

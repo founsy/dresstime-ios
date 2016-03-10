@@ -35,9 +35,7 @@ class TypeViewController: DTViewController {
         super.viewDidLoad()
         self.classNameAnalytics = "Capture_Type"
 
-        self.view.backgroundColor = UIColor.whiteColor()
-        navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
-        navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
+        
         tableView.registerNib(UINib(nibName: "TypeTableCell", bundle:nil), forCellReuseIdentifier: self.cellTypeIdentifier)
         if (arrayForBool.count == 0){
             initSubType()
@@ -60,6 +58,10 @@ class TypeViewController: DTViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(true);
         UIApplication.sharedApplication().statusBarHidden=true; // for status bar hide
+        self.view.backgroundColor = UIColor.whiteColor()
+        navigationController?.navigationBar.barTintColor = UIColor.whiteColor()
+        navigationController?.navigationBar.backgroundColor = UIColor.whiteColor()
+        
     }
     
     private func initSubType(){

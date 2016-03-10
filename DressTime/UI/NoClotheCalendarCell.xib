@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="227" id="ENn-A7-vgA" customClass="NoClotheCalendarCell" customModule="DressTime" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="533" height="227"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ENn-A7-vgA" id="ezE-El-cUv">
+                <rect key="frame" x="0.0" y="0.0" width="533" height="226.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="missingIcon" translatesAutoresizingMaskIntoConstraints="NO" id="6bf-M2-MNb">
+                        <rect key="frame" x="228" y="8" width="77" height="116"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="116" id="9sk-bN-y9W"/>
+                            <constraint firstAttribute="width" constant="77" id="f7Z-Q5-v72"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="swy-ir-rRj">
+                        <rect key="frame" x="191" y="166" width="150" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="VnR-dd-i07"/>
+                            <constraint firstAttribute="width" constant="150" id="aZw-y5-r8O"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                        <state key="normal" title="add a outfit">
+                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="createOutfit:" destination="ENn-A7-vgA" eventType="touchUpInside" id="PVt-3y-pQA"/>
+                        </connections>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you remember what was your outfit ?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGC-ON-CyO">
+                        <rect key="frame" x="0.0" y="129" width="533" height="17"/>
+                        <fontDescription key="fontDescription" type="italicSystem" pointSize="14"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="swy-ir-rRj" firstAttribute="top" secondItem="sGC-ON-CyO" secondAttribute="bottom" constant="20" id="3Zf-4i-ocB"/>
+                    <constraint firstItem="6bf-M2-MNb" firstAttribute="centerX" secondItem="ezE-El-cUv" secondAttribute="centerX" id="4KL-iV-iAK"/>
+                    <constraint firstAttribute="trailing" secondItem="sGC-ON-CyO" secondAttribute="trailing" id="5xF-fI-wAd"/>
+                    <constraint firstItem="swy-ir-rRj" firstAttribute="centerX" secondItem="ezE-El-cUv" secondAttribute="centerX" id="65b-Ou-nc5"/>
+                    <constraint firstItem="6bf-M2-MNb" firstAttribute="top" secondItem="ezE-El-cUv" secondAttribute="top" constant="8" id="UK5-u4-5ua"/>
+                    <constraint firstItem="sGC-ON-CyO" firstAttribute="top" secondItem="6bf-M2-MNb" secondAttribute="bottom" constant="5" id="a1q-PA-jm0"/>
+                    <constraint firstItem="sGC-ON-CyO" firstAttribute="leading" secondItem="ezE-El-cUv" secondAttribute="leading" id="bDY-YM-5Tx"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <connections>
+                <outlet property="addOutfit" destination="swy-ir-rRj" id="REg-A2-CKJ"/>
+                <outlet property="commentsCalendar" destination="sGC-ON-CyO" id="crg-qu-MZV"/>
+            </connections>
+            <point key="canvasLocation" x="552.5" y="273.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="missingIcon" width="78" height="117"/>
+    </resources>
+</document>

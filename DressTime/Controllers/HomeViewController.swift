@@ -17,10 +17,15 @@ class HomeViewController: DTViewController {
     @IBOutlet weak var bgView: UIImageView!
     @IBOutlet weak var bubbleImageView: UIImageView!
     
+    @IBOutlet weak var weatherContainer: UIView!
+    @IBOutlet weak var temperatureLabel: UILabel!
+    @IBOutlet weak var iconLabel: UILabel!
+    @IBOutlet weak var commentWeather: UILabel!
+    
     var outfitsCell: HomeOutfitsListCell?
-    var homeHeaderCell: HomeHeaderCell?
-    var brandOutfitsCell: HomeBrandOutfitsListCell?
     var emptyAnimationCell: HomeEmptyAnimationCell?
+    private var headerView: UIView!
+    private var kTableHeaderHeight:CGFloat = 184.0
     
     private var currentStyleSelected: String?
     private var outfitSelected: Outfit?
@@ -31,21 +36,23 @@ class HomeViewController: DTViewController {
     
     private var typeClothe:Int = -1
     private var currentWeather: Weather?
-    
+    private var needToReload = false
     
     private var locationManager: CLLocationManager!
     private var currentLocation: CLLocation!
     private var locationFixAchieved : Bool = false
-    private var weatherList = [Weather]()
     private var outfitList = [Outfit]()
     private var brandClothesList = [ClotheModel]()
     
+    
+    private var isLoaded = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.classNameAnalytics = "Home"
         
         configNavBar()
+        weatherContainer.roundCorners(.AllCorners, radius: 22.5)
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -57,23 +64,23 @@ class HomeViewController: DTViewController {
         self.locationManager.requestWhenInUseAuthorization()
         self.locationManager.startUpdatingLocation()
         
-        DressTimeService().GetBrandOutfitsToday { (isSuccess, object) -> Void in
-            if (isSuccess){
-                self.brandClothesList = [ClotheModel]()
-                for (var i = 0; i < object.arrayValue.count; i++){
-                    self.brandClothesList.append(ClotheModel(json: object[i]))
-                }
-                if let cell = self.brandOutfitsCell {
-                    
-                    cell.collectionView.reloadData()
-                }
-            }
+        headerView = self.tableView.tableHeaderView
+        self.tableView.tableHeaderView = nil
+        if (self.isEnoughClothe()){
+            self.tableView.addSubview(headerView)
+            self.tableView.contentInset = UIEdgeInsets(top: (kTableHeaderHeight), left: 0, bottom: 0, right: 0)
+            self.tableView.contentOffset = CGPoint(x: 0, y: (-kTableHeaderHeight))
+        } else {
+            self.tableView.contentInset = UIEdgeInsets(top: (64), left: 0, bottom: 0, right: 0)
+            self.tableView.contentOffset = CGPoint(x: 0, y: (-64))
+
         }
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().statusBarHidden = false // for status bar hide
+        
         self.numberOfClothes = ClothesDAL().numberOfClothes()
         let lastStatus = self.isEnoughClothes
         self.isEnoughClothes = self.isEnoughClothe()
@@ -84,9 +91,13 @@ class HomeViewController: DTViewController {
                 //Need to add Shopping controller
                 if (self.tabBarController!.viewControllers?.count == 2) {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let vc = storyboard.instantiateViewControllerWithIdentifier("ShoppingViewController") as! ShoppingViewController
-                    self.tabBarController!.viewControllers?.append(vc)
-                    //shoppingController.tabBarItem = UITabBarItem(title: "Shopping", image: UIImage(named: "shoppingIcon"), tag: 3)
+                    
+                    let vcCalendar = storyboard.instantiateViewControllerWithIdentifier("CalendarNavigationViewController") as! DTNavigationController
+                    self.tabBarController!.viewControllers?.insert(vcCalendar, atIndex: 1)
+                    
+                    let vcShopping = storyboard.instantiateViewControllerWithIdentifier("ShoppingNavigationViewController") as! DTNavigationController
+                    self.tabBarController!.viewControllers?.insert(vcShopping, atIndex: 3)
+                    
                 }
                 //Remove Arrow image view
                 for item in self.view.subviews {
@@ -96,23 +107,53 @@ class HomeViewController: DTViewController {
                         }
                     }
                 }
+                self.headerView.hidden = false
+                self.tableView.addSubview(headerView)
+                self.tableView.contentInset = UIEdgeInsets(top: (kTableHeaderHeight), left: 0, bottom: 0, right: 0)
+                self.tableView.contentOffset = CGPoint(x: 0, y: (-kTableHeaderHeight))
+                
                 //Reload TableView with good cell
                 self.tableView.reloadData()
+                
+            }
+            if (!isLoaded && self.currentLocation != nil){
                 //Call web service to get Outfits of the Day
                 self.loadOutfits()
+                //Reload TableView with good cell
+                self.tableView.reloadData()
             }
+            
         } else {
             self.tableView.reloadData()
-            if (self.tabBarController!.viewControllers?.count > 2) {
-                self.tabBarController!.viewControllers?.removeAtIndex(2)
+            if (self.tabBarController!.viewControllers?.count > 3) {
+                self.tabBarController!.viewControllers?.removeAtIndex(3)
+                self.tabBarController!.viewControllers?.removeAtIndex(1)
             }
             self.bgView.image = UIImage(named: "backgroundEmpty")
+            self.headerView.hidden = true
+            self.tableView.contentInset = UIEdgeInsets(top: (64), left: 0, bottom: 0, right: 0)
+            self.tableView.contentOffset = CGPoint(x: 0, y: (-64))
             ActivityLoader.shared.hideProgressView()
         }
+       
     }   
+    
+    private func updateHeaderView(){
+    
+        var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: UIScreen.mainScreen().bounds.width, height: kTableHeaderHeight)
+        if  tableView.contentOffset.y < -kTableHeaderHeight {
+            headerRect.origin.y = tableView.contentOffset.y
+            headerRect.size.height = -tableView.contentOffset.y
+        }
+        headerView.frame = headerRect
+    }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        if (self.needToReload){
+            self.loadOutfits()
+            self.needToReload = false
+        }
         if (!self.isEnoughClothes){
             if let cell = emptyAnimationCell {
                 cell.createArrowImageView()
@@ -129,7 +170,8 @@ class HomeViewController: DTViewController {
         if (segue.identifier == "showOutfit"){
             let targetVC = segue.destinationViewController as! OutfitViewController
             targetVC.outfitObject = self.outfitSelected
-            targetVC.currentOutfits = self.outfitSelected!.outfit
+            targetVC.currentOutfits = self.outfitSelected!.clothes
+            targetVC.delegate = self
         } else if (segue.identifier == "AddClothe"){
             if (typeClothe >= 0) {
                 let navController = segue.destinationViewController as! UINavigationController
@@ -188,32 +230,38 @@ class HomeViewController: DTViewController {
         ActivityLoader.shared.showProgressView(self.view)
         DressTimeService().GetOutfitsToday(self.currentLocation) { (isSuccess, object) -> Void in
             if (isSuccess){
-                self.weatherList = WeatherWrapper().arrayOfWeather(object["weather"])
-                if (self.weatherList.count > 0){
-                    self.currentWeather = self.weatherList[0]
+                self.isLoaded = true
+                
+                self.currentWeather = Weather(json: object["weather"]["current"])
+                let sentence = object["weather"]["comment"].stringValue
                     
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        if let headerCell = self.homeHeaderCell {
-                            headerCell.collectionView.reloadData()
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    self.commentWeather.text = sentence
+                    self.iconLabel.text = self.currentWeather!.icon!
+                    let temperature:Int = self.currentWeather!.temp!
+                    self.temperatureLabel.text = "\(temperature)°"
+                    self.setTitleNavBar(self.currentWeather!.city!)
+                    UIView.animateWithDuration(0.2, animations: { () -> Void in
+                        if (self.isEnoughClothe()) {
+                            self.bgView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(self.currentWeather!.code!))
                         }
-                        self.setTitleNavBar(self.currentWeather!.city!)
-                        UIView.animateWithDuration(0.2, animations: { () -> Void in
-                            if (self.isEnoughClothe()) {
-                                self.bgView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(self.currentWeather!.code!))
-                            }
-                        })
                     })
+                })
+
+                if let outfits = object["outfits"].array {
                     self.outfitList = [Outfit]()
                     //Load the collection of Outfits
                     if let outfitsCell = self.outfitsCell {
-                        for (var i = 0; i < object["outfits"].arrayValue.count; i++){
-                            self.outfitList.append(Outfit(json: object["outfits"][i]))
+                        for (var i = 0; i < outfits.count; i++){
+                            self.outfitList.append(Outfit(json: outfits[i]))
                         }
                         self.outfitsCell!.dataSource = self
                         outfitsCell.outfitCollectionView.reloadData()
                     }
                 }
             } else {
+                //TO DO - ADD Error Messages
+                self.isLoaded = false
                 print("Error \(object.stringValue)")
             }
             ActivityLoader.shared.hideProgressView()
@@ -221,6 +269,11 @@ class HomeViewController: DTViewController {
     }
 }
 
+extension HomeViewController: OutfitViewControllerDelegate {
+    func outfitViewControllerDelegate(outfitViewController: OutfitViewController, didModifyOutfit outfit: Outfit) {
+        self.needToReload = true
+    }
+}
 
 extension HomeViewController: CLLocationManagerDelegate {
     /***/
@@ -245,20 +298,6 @@ extension HomeViewController: CLLocationManagerDelegate {
         case .AuthorizedAlways, .AuthorizedWhenInUse:
             print("Access")
         }
-    }
-}
-
-extension HomeViewController: HomeHeaderCellDelegate {
-    func numberOfItemsInHomeHeaderCell(homeHeaderCell: HomeHeaderCell) -> Int {
-        return self.weatherList.count
-    }
-    
-    func homeHeaderCell(homeHeaderCell: HomeHeaderCell, weatherForItem item: Int) -> Weather {
-        return self.weatherList[item]
-    }
-    
-    func homeHeaderCell(homeHeaderCell: HomeHeaderCell, didSelectItem item: Int) {
-        self.currentWeather = self.weatherList[item];
     }
 }
 
@@ -296,21 +335,6 @@ extension HomeViewController: HomeOutfitsListCellDelegate, HomeOutfitsListCellDa
     }
 }
 
-extension HomeViewController: HomeBrandOutfitsListCellDelegate, HomeBrandOutfitsListCellDataSource {
-    func numberOfItemsInHomeBrandOutfitsListCell(homeBrandOutfitsListCell: HomeBrandOutfitsListCell) -> Int {
-        return self.brandClothesList.count
-    }
-    
-    func homeBrandOutfitsListCell(homeBrandOutfitsListCell: HomeBrandOutfitsListCell, clotheForItem item: Int) -> ClotheModel {
-        return self.brandClothesList[item]
-    }
-    
-    func homeBrandOutfitsListCell(homeBrandOutfitsListCell: HomeBrandOutfitsListCell, didSelectItem item: Int) {
-        //self.performSegueWithIdentifier("showShoppingList", sender: self)
-        self.tabBarController!.selectedIndex = 2
-    }
-}
-
 extension HomeViewController: HomeEmptyStepCellDelegate {
     func homeEmptyStepCell(homeEmptyStepCell: HomeEmptyStepCell, didSelectItem item: String) {
         switch(item.lowercaseString){
@@ -336,42 +360,31 @@ extension HomeViewController: HomeEmptyStepCellDelegate {
 
 extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if (self.isEnoughClothes){
-            return 4
-        } else {
+        if (!self.isEnoughClothes){
             return 2
+        } else {
+            return 1
         }
+        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
-        NSLog("Load home tableview \(indexPath.row)")
         if (indexPath.row == 0) {
             if (!self.isEnoughClothes){
                 let cell = self.tableView.dequeueReusableCellWithIdentifier("emptyStepCell") as? HomeEmptyStepCell
                 cell?.delegate = self
                 return cell!
             } else {
-                self.homeHeaderCell = self.tableView.dequeueReusableCellWithIdentifier("headerCell") as? HomeHeaderCell
-                self.homeHeaderCell!.delegate = self
-                return self.homeHeaderCell!
+                self.outfitsCell = self.tableView.dequeueReusableCellWithIdentifier("myOutfitsCell") as? HomeOutfitsListCell
+                self.outfitsCell!.delegate = self
+                return self.outfitsCell!
             }
         } else if (indexPath.row == 1){
             if (!self.isEnoughClothes){
                 self.emptyAnimationCell = self.tableView.dequeueReusableCellWithIdentifier("emptyAnimationCell") as? HomeEmptyAnimationCell
                 self.emptyAnimationCell!.controller = self
                 return self.emptyAnimationCell!
-
-            } else {
-                self.outfitsCell = self.tableView.dequeueReusableCellWithIdentifier("myOutfitsCell") as? HomeOutfitsListCell
-                self.outfitsCell!.delegate = self
-                return self.outfitsCell!
             }
-        }  else if (indexPath.row == 2){
-            self.brandOutfitsCell = self.tableView.dequeueReusableCellWithIdentifier("brandOutfitsCell") as? HomeBrandOutfitsListCell
-            self.brandOutfitsCell!.delegate = self
-            self.brandOutfitsCell!.dataSource = self
-            return self.brandOutfitsCell!
-
         }
         return UITableViewCell()
     }
@@ -381,14 +394,25 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
             if (!self.isEnoughClothes){
                 return 186.0
             } else {
-                return 100.0
+                return 400.0
             }
         } else if (indexPath.row == 1){
-            return 370.0
+            return 400.0
         } else if (indexPath.row == 2){
             return 300.0
         } else {
             return 0.0
+        }
+    }
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        if (self.isEnoughClothes){
+            updateHeaderView()
+            if (tableView.contentOffset.y > -140){
+                navigationController?.navigationBar.alpha = (CGFloat(abs(tableView.contentOffset.y))/140.0-0.5) > 0.3 ? (CGFloat(abs(tableView.contentOffset.y))/140.0-0.5) : 0
+            } else {
+                navigationController?.navigationBar.alpha = 1.0
+            }
         }
     }
 

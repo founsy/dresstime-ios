@@ -80,8 +80,6 @@ class ProfilViewController: DTTableViewController {
     override func viewWillAppear(animated: Bool){
         super.viewWillAppear(animated)
         
-        //self.tableView.contentInset = UIEdgeInsets(top: (kTableHeaderHeight - 46), left: 0, bottom: 0, right: 0)
-        //self.tableView.contentOffset = CGPoint(x: 0, y: (-kTableHeaderHeight + 46))
         updateHeaderView()
         
         self.type = SharedData.sharedInstance.getType(SharedData.sharedInstance.sexe!)
@@ -162,7 +160,6 @@ class ProfilViewController: DTTableViewController {
         if (indexPath == nil) {
             NSLog("long press on table view but not on a row");
         } else if (gestureRecognizer.state == UIGestureRecognizerState.Began) {
-           print(indexPath!.row)
             if let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as? TypeCell {
                 cell.viewLongPress.hidden = false
             }
@@ -182,7 +179,6 @@ class ProfilViewController: DTTableViewController {
             totalClothe = totalClothe + count
             countType?.append("\(count)")
         }
-        //self.numberClothes.text = "\(totalClothe)"
         self.tableView.reloadData()
     }
 }
@@ -214,7 +210,6 @@ extension ProfilViewController {
         cell.number = Int(self.countType![indexPath.row])!
         if (indexPath.row % 2 == 0){
            cell.addViews(false)
-           // cell.rightLabelName.text = NSLocalizedString(typeCell, comment: "").uppercaseString
         } else {
             cell.addViews(true)
         }

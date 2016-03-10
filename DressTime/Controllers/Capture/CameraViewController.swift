@@ -35,6 +35,9 @@ class CameraViewController : DTViewController {
     @IBOutlet weak var color2View: UIView!
     @IBOutlet weak var opacityView: UIView!
     
+    @IBOutlet weak var messageHeaderLabel: UILabel!
+    @IBOutlet weak var messageColorLabel: UILabel!
+    
     @IBAction func onBackButton(sender: AnyObject) {
         self.captureManager!.session.stopRunning()
         self.navigationController?.popViewControllerAnimated(true)
@@ -103,7 +106,10 @@ class CameraViewController : DTViewController {
         self.arrayUIView.append(self.color1View)
         self.arrayUIView.append(self.color2View)
         self.arrayUIView.append(self.color3View)
-  
+        
+        //Set Translation
+        messageHeaderLabel.text = NSLocalizedString("captureStep2HeaderMsg", comment: "Try to shoot the main body of your shirt")
+        messageColorLabel.text = NSLocalizedString("captureStep2ColorMsg", comment: "the awesome color of your clothe")
     }
     
     private func whiteNavBar(){

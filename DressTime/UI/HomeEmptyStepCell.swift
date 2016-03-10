@@ -15,6 +15,7 @@ protocol HomeEmptyStepCellDelegate {
 
 class HomeEmptyStepCell: UITableViewCell {
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var messageHomeEmpty: UILabel!
     
     var delegate: HomeEmptyStepCellDelegate?
     
@@ -33,6 +34,7 @@ class HomeEmptyStepCell: UITableViewCell {
             view.delegate = self
             stackView.addArrangedSubview(view)
         }
+        messageHomeEmpty.text = NSLocalizedString("homeEmptyMessage", comment: "")
        // stackView.translatesAutoresizingMaskIntoConstraints = false;
     }
     
@@ -45,7 +47,7 @@ class HomeEmptyStepCell: UITableViewCell {
             case "pants":
                 return "jeansIcon"
             case "dress":
-                return ""
+                return "TypeDressIcon"
             default:
                 return ""
         }

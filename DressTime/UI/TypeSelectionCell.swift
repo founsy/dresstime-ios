@@ -20,6 +20,16 @@ class TypeSelectionCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        if (SharedData.sharedInstance.sexe == "M"){
+            for var i = 0; i < buttonType.count; i++ {
+                if (buttonType[i].accessibilityIdentifier == "dress"){
+                    buttonType[i].hidden = true
+                }
+            }
+        }
+        for (var i = 0; i < buttonType.count; i++){
+            buttonType[i].setTitle(NSLocalizedString(buttonType[i].accessibilityIdentifier!, comment: "").uppercaseString, forState: .Normal)
+        }
     }
     
     func drawBorderButton(){

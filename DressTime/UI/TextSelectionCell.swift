@@ -13,9 +13,12 @@ class TextSelectionCell: UITableViewCell {
     
     @IBOutlet weak var viewContainer: UIView!
     @IBOutlet weak var numberOutfit: UILabel!
+    @IBOutlet weak var messageLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         viewContainer.layer.cornerRadius = 15.0
+        messageLabel.text = NSLocalizedString("shoppingNumberOfMatching", comment: "")
+        
     }
 }

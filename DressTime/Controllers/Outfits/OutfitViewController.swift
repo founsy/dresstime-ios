@@ -9,6 +9,12 @@
 import Foundation
 import UIKit
 
+protocol OutfitViewControllerDelegate {
+
+    func outfitViewControllerDelegate(outfitViewController: OutfitViewController, didModifyOutfit outfit: Outfit)
+}
+
+
 class OutfitViewController: DTViewController {
     private let cellIdentifier : String = "ClotheTableCell"
     private let dal = ClothesDAL()
@@ -19,35 +25,53 @@ class OutfitViewController: DTViewController {
     var outfitObject: Outfit?
     var currentOutfits = [ClotheModel]()
     private var number = 0
+    var delegate: OutfitViewControllerDelegate?
+    var creationDate : NSDate?
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dressupButton: UIButton!
     
     @IBAction func onDressUpTapped(sender: AnyObject) {
-        var idArray = [String]()
-        for(var i = 0; i < self.currentOutfits.count; i++){
-            if let outfit = self.currentOutfits[i] as? NSDictionary {
-                let id = outfit["clothe_id"] as! String
-                idArray.append(id)
-            }
+        self.outfitObject?.isPutOn = true
+        
+        if (outfitObject == nil) {
+            outfitObject = Outfit(clothes: self.currentOutfits, updatedDate: self.creationDate!, isSuggestion: false, isPutOn: true)
         }
-        print(idArray)
-        let dressSvc = DressingService()
-        dressSvc.SaveOutfit(idArray, style: self.outfitObject!.style) { (isSuccess) -> Void in
-             print(isSuccess)
+        
+        
+        var isModify = false
+        for (var i = 0; i < currentOutfits.count; i++){
+            isModify = isModify || (currentOutfits[i].clothe_id != outfitObject?.clothes[i].clothe_id)
+        }
+        
+        if (isModify){
+            self.outfitObject?.clothes = currentOutfits
+            self.outfitObject?.isSuggestion = !isModify
+        }
+        
+        if let date = self.creationDate {
+            self.outfitObject?.updatedDate = date
+        }
+        
+        let dressSvc = DressTimeService()
+        dressSvc.SaveOutfit(self.outfitObject!) { (isSuccess) -> Void in
+            print(isSuccess)
+            self.delegate?.outfitViewControllerDelegate(self, didModifyOutfit: self.outfitObject!)
         }
         
         self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
         
-        UIView.animateAndChainWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: {
+        UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: { () -> Void in
             self.confirmationView?.alpha = 1
             self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
-            }, completion:  nil).animateWithDuration(0.2, animations: { () -> Void in
-                self.confirmationView?.alpha = 0
-                self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
-                }, completion: { (finish) -> Void in
-                    self.navigationController?.popViewControllerAnimated(true)
-                    
-            })
+            }, completion: { (isFinish) -> Void in
+                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                    self.confirmationView?.alpha = 0
+                    self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
+                    }, completion: { (finish) -> Void in
+                         self.navigationController?.popViewControllerAnimated(true)
+                })
+        })
     }
 
     override func viewDidLoad() {
@@ -76,6 +100,29 @@ class OutfitViewController: DTViewController {
         tableView!.dataSource = self
 
         self.number = self.currentOutfits.count
+        if (self.number == 0){
+            self.number = 3
+
+            let mailles = dal.fetch(type: "maille")
+            if (mailles.count > 0){
+                self.currentOutfits.append(ClotheModel(clothe: mailles[0]))
+            } else {
+                self.number--
+            }
+            let tops = dal.fetch(type: "top")
+            if (tops.count > 0){
+                self.currentOutfits.append(ClotheModel(clothe: tops[0]))
+            } else {
+                self.number--
+            }
+            let pants = dal.fetch(type: "pants")
+            if (pants.count > 0){
+                self.currentOutfits.append(ClotheModel(clothe: pants[0]))
+            } else {
+                self.number--
+            }
+        }
+        
         self.tableView.reloadData()
         
         self.confirmationView = NSBundle.mainBundle().loadNibNamed("ConfirmSave", owner: self, options: nil)[0] as? ConfirmSave
@@ -125,7 +172,8 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! ClotheScrollTableCell
-        let type =  self.currentOutfits[indexPath.row].clothe_type
+        if (indexPath.row <= self.currentOutfits.count && self.currentOutfits.count > 0){
+            let type =  self.currentOutfits[indexPath.row].clothe_type
             let clothe_id =  self.currentOutfits[indexPath.row].clothe_id
             
             let collection = dal.fetch(type: type)
@@ -139,6 +187,7 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
             cell.layer.shadowColor = UIColor.blackColor().CGColor
             cell.layer.shadowRadius = 8;
             cell.layer.shadowOpacity = 0.75;
+        }
         return cell
     }
 }

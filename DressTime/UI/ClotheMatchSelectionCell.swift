@@ -13,7 +13,7 @@ class ClotheMatchSelectionCell: UITableViewCell {
     private let cellIdentifier = "ClotheCell"
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var clothes: JSON?
+    var clothes: [ClotheModel]?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,7 +27,7 @@ class ClotheMatchSelectionCell: UITableViewCell {
 extension ClotheMatchSelectionCell: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let clothesMatched = self.clothes {
-            return clothesMatched["clothes"].arrayValue.count
+            return clothesMatched.count
         }
         return 0
     }
@@ -35,19 +35,10 @@ extension ClotheMatchSelectionCell: UICollectionViewDataSource, UICollectionView
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! ClotheCell
         if let clothesMatched = self.clothes {
-            if let clothe_id = clothesMatched["clothes"][indexPath.row].string {
-                let dal = ClothesDAL()
-                if let clothe = dal.fetch(clothe_id) {
-                    cell.imageView.image = clothe.getImage()
-                }
-
-            } else {
-                let clothe_id = clothesMatched["clothes"][indexPath.row]["clothe"]["clothe_id"].stringValue
-                let dal = ClothesDAL()
-                if let clothe = dal.fetch(clothe_id) {
-                    cell.imageView.image = clothe.getImage()
-                }
-
+            let clothe_id = clothesMatched[indexPath.row].clothe_id
+            let dal = ClothesDAL()
+            if let clothe = dal.fetch(clothe_id) {
+                cell.imageView.image = clothe.getImage()
             }
         }
         

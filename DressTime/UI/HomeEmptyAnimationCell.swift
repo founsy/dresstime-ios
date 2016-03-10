@@ -24,6 +24,8 @@ class HomeEmptyAnimationCell: UITableViewCell {
         self.imageViewAnimation.animationImages = self.loadAnimateImage()
         self.imageViewAnimation.animationDuration = 3.5
         self.imageViewAnimation.startAnimating()
+        
+        messageLabel.text = NSLocalizedString("homeEmptyAnimationMessage", comment: "")
     }
     
     private func loadAnimateImage() -> [UIImage] {

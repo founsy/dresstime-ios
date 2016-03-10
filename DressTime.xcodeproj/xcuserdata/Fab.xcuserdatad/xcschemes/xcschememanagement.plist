@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>DressTimeUITests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>8</integer>
+		</dict>
 		<key>dominantColor.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -17,6 +22,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>013FD7621C889E6F0017B146</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>01C454CC1B5935B3003D5E41</key>
 		<dict>
 			<key>primary</key>

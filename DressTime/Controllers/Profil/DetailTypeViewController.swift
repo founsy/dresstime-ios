@@ -41,7 +41,9 @@ class DetailTypeViewController: DTViewController {
         tableView!.dataSource = self
         self.tableView.tableFooterView = UIView(frame: CGRectZero)
         //TODO Manage Localization
-        titleNav.title = "\(NSLocalizedString("My", comment: "")) \(NSLocalizedString(typeClothe!.uppercaseString, comment:""))!"
+        titleNav.title = "\(NSLocalizedString("detailTypeMyMsg", comment: "")) \(NSLocalizedString(typeClothe!, comment:"").uppercaseString)!"
+        emptyViewLabel.text = NSLocalizedString("detailTypeEmptyMsg", comment: "")
+        
         
         emptyViewButton.layer.cornerRadius = 10.0
         emptyViewButton.layer.borderColor = UIColor.whiteColor().CGColor
@@ -73,7 +75,7 @@ class DetailTypeViewController: DTViewController {
         }
 
         //Remove Title of Back button
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Profile", comment: ""), style: .Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("detailTypeBackBtn", comment: ""), style: .Plain, target: nil, action: nil)
     }
     
     func initData(){
@@ -146,12 +148,12 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
-        let editAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: NSLocalizedString("Edit", comment: "")) { (action, indexPath) -> Void in
+        let editAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: NSLocalizedString("detailTypeEditBtn", comment: "")) { (action, indexPath) -> Void in
                 self.openEditClotheView(indexPath)
         }
         editAction.backgroundColor = UIColor.blueColor()
         
-        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: NSLocalizedString("Delete", comment: "")) { (action, indexPath) -> Void in
+        let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: NSLocalizedString("detailTypeDeleteBtn", comment: "")) { (action, indexPath) -> Void in
             self.deleteClothe(indexPath)
         }
         return [deleteAction, editAction]

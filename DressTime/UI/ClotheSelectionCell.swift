@@ -8,23 +8,25 @@
 
 import Foundation
 import UIKit
+import MapleBacon
 
 protocol ClotheSelectionCellDelegate {
-    func onSelectedBrandClothe(myClothes: JSON)
+    func onSelectedBrandClothe(myClothes: [ClotheModel])
+    func clotheSelectionCell(cell: ClotheSelectionCell, shopSelected clothe: BrandClothe)
 }
 
 class ClotheSelectionCell: UITableViewCell {
     private let cellIdentifier = "BrandClotheCell"
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var brandClothe: JSON?
+    var brandClothes: [BrandClothe]?
     var selectedType:String = "maille"
+    var minValue : NSNumber?
+    var maxValue : NSNumber?
     var delegate : ClotheSelectionCellDelegate?
-    private var selectedClothe: [JSON]?
+    private var selectedClothe: [BrandClothe]?
     var pickerView: AKPickerView!
-    
-    private let images = ["HM_m_sweat1", "HM_m_sweat2", "HM_m_sweat3", "HM_m_sweat4"]
-    
+   
     override func awakeFromNib() {
         super.awakeFromNib()
         self.collectionView.registerNib(UINib(nibName: "BrandClotheCell", bundle:nil), forCellWithReuseIdentifier: self.cellIdentifier)
@@ -50,28 +52,12 @@ class ClotheSelectionCell: UITableViewCell {
         
     }
     
-    private func applySelect(item: Int){
-        for (var j=0; j < self.images.count; j++){
-            if let cell = pickerView.collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: j, inSection: 0)) as? AKCollectionViewCell{
-                for (var i = 0; i < cell.view.subviews.count; i++){
-                    if let view = cell.view.subviews[i] as? BrandClotheCell {
-                        if (item == j) {
-                            
-                            let scale = 240/view.frame.size.height
-                            
-                            UIView.animateWithDuration(0.2, animations: { () -> Void in
-                                 view.transform = CGAffineTransformScale(view.transform, scale, scale);
-                            })
-                        } else {
-                            let scale = 205/view.frame.size.height
-                            UIView.animateWithDuration(0.2, animations: { () -> Void in
-                                view.transform = CGAffineTransformScale(view.transform, scale, scale);
-                            })
-                        }
-                        //view.needsUpdateConstraints()
-                    }
-                }
-            }
+}
+
+extension ClotheSelectionCell: BrandClotheCellDelegate {
+    func brandClotheCell(cell: BrandClotheCell, selectedItem clothe: BrandClothe) {
+        if let del = self.delegate {
+            del.clotheSelectionCell(self, shopSelected: clothe)
         }
     }
 }
@@ -79,10 +65,10 @@ class ClotheSelectionCell: UITableViewCell {
 extension ClotheSelectionCell : AKPickerViewDataSource {
     
     func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
-        if let clothes = self.brandClothe {
-            self.selectedClothe = clothes.array?.filter { (clothe : JSON) -> Bool in
-                return clothe["brandClothe"]["clothe_type"].stringValue == selectedType
-            }
+        if let clothes = self.brandClothes {
+            self.selectedClothe = clothes.filter({(clothe) -> Bool in
+                return clothe.clothe_type == selectedType && (minValue != nil && clothe.clothe_price >= minValue!) && (maxValue != nil && clothe.clothe_price <= maxValue!)
+            })
             return self.selectedClothe!.count
         } else {
             return 0
@@ -93,20 +79,11 @@ extension ClotheSelectionCell : AKPickerViewDataSource {
     func pickerView(pickerView: AKPickerView, viewForItem item: Int) -> UIView {
         let view = NSBundle.mainBundle().loadNibNamed("BrandClotheCell", owner: self, options: nil)[0] as! BrandClotheCell
         view.frame = CGRectMake(0, 0, 207, 240)
+        view.delegate = self
         if (item < self.selectedClothe!.count){
             if let selected = self.selectedClothe {
-                
-                let clothe = selected[item]
-                view.priceLabel.text = clothe["brandClothe"]["clothe_price"].stringValue
-                view.imageView.image = UIImage(named:clothe["brandClothe"]["clothe_image"].stringValue.stringByReplacingOccurrencesOfString(".jpg", withString: ""))
-                let named = clothe["brandClothe"]["clothe_partnerName"].stringValue.stringByReplacingOccurrencesOfString(" ", withString: "")
-                view.brandIcon.image = UIImage(named:"brand\(named)")
+                view.brandClotheModel = selected[item]
             }
-            
-            view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
-            view.priceView.layer.cornerRadius = 20
-            view.priceView.layer.borderWidth = 1.0
-            view.priceView.layer.borderColor = UIColor.blackColor().CGColor
         }
         return view
     }
@@ -115,15 +92,12 @@ extension ClotheSelectionCell : AKPickerViewDataSource {
 
 extension ClotheSelectionCell : AKPickerViewDelegate {
     func pickerView(pickerView: AKPickerView, didSelectItem item: Int){
-        NSLog("\(item)")
-        /* NSLog(self.patternData[item]);
-        self.selectedPattern = item*/
-        applySelect(item)
-        
         if let selected = self.selectedClothe {
-            if let del = self.delegate {
-                let clothe = selected[item]
-                del.onSelectedBrandClothe(clothe)
+            if (selected.count > 0){
+                if let del = self.delegate {
+                    let brandClothe = selected[item]
+                    del.onSelectedBrandClothe(brandClothe.clothes)
+                }
             }
         }
     }

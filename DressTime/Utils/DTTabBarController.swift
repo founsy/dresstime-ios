@@ -13,7 +13,12 @@ import UIKit
 public class DTTabBarController: UITabBarController {
 
     override public func viewDidLoad() {
-        self.tabBar.tintColor = UIColor.dressTimeOrange()
-        self.selectedViewController = self.viewControllers![1]
+        self.tabBar.tintColor = UIColor.whiteColor()
+        self.tabBar.backgroundColor = UIColor.dressTimeOrange()
+        
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: .Normal)
+        UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: .Selected)
+        
+        self.selectedViewController = self.viewControllers![2]
     }
 }

@@ -58,8 +58,9 @@ class EmptyTypeView : UIView {
     }
     
     func updateStepViews(number: Int){
-        var calculNumber = viewSteps.count - number <= 0 ? 0 : viewSteps.count - number
-        self.titleLabel.text = "\(calculNumber) \(self.currentType!.uppercaseString)"
+        let calculNumber = viewSteps.count - number <= 0 ? 0 : viewSteps.count - number
+        
+        self.titleLabel.text = "\(calculNumber) \(NSLocalizedString(self.currentType!, comment: "").uppercaseString)"
         for (var j = 0; j < self.viewSteps.count; j++){
             if (j < number){
                 self.viewSteps[j].backgroundColor = UIColor.dressTimeOrange()

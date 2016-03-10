@@ -1,35 +1,46 @@
 //
-//  NewRegisterStyleViewContainer.swift
+//  RegisterStyleViewControllerNew.swift
 //  DressTime
 //
-//  Created by Fab on 28/11/2015.
-//  Copyright © 2015 Fab. All rights reserved.
+//  Created by Fab on 17/02/2016.
+//  Copyright © 2016 Fab. All rights reserved.
 //
 
 import Foundation
-import UIKit
 
-class RegisterStyleViewController : DTViewController {
-
-    @IBOutlet weak var areaAtWork: UIImageView!
-    @IBOutlet weak var areaOnParty: UIImageView!
-    @IBOutlet weak var areaRelax: UIImageView!
+class RegisterStyleViewController: DTViewController {
     
-    @IBOutlet weak var sportwearIcon: UIImageView!
-    @IBOutlet weak var fashionIcon: UIImageView!
-    @IBOutlet weak var businessIcon: UIImageView!
-    @IBOutlet weak var casualIcon: UIImageView!
+    @IBOutlet weak var panel: UIVisualEffectView!
     
-    @IBOutlet weak var onValidateButton: UIButton!
-    @IBOutlet weak var labelText: UILabel!
+    @IBOutlet weak var heightPanelCst: NSLayoutConstraint!
+    @IBOutlet var imageHeight: [NSLayoutConstraint]!
+    @IBOutlet var imageWidth: [NSLayoutConstraint]!
+    @IBOutlet weak var bottomMargin: NSLayoutConstraint!
     
-    private var isMoving = false
-    private var currentStyleSelected = ""
-    private var tempImage: UIImageView?
+    @IBOutlet weak var workArea: UIImageView!
+    @IBOutlet weak var partyArea: UIImageView!
+    @IBOutlet weak var relaxArea: UIImageView!
+    @IBOutlet var buttonsStyle: [UIButton]!
     
-    private var relaxImage: UIImageView?
-    private var atWorkImage: UIImageView?
-    private var onPartyImage: UIImageView?
+    @IBOutlet weak var validationButton: UIButton!
+    
+    @IBOutlet weak var selectStyleLabel: UILabel!
+    @IBOutlet weak var fashionStyleLabel: UILabel!
+    @IBOutlet weak var businessStyleLabel: UILabel!
+    @IBOutlet weak var sportwearStyleLabel: UILabel!
+    @IBOutlet weak var casualStyleLabel: UILabel!
+    @IBOutlet weak var selectPeriodLabel: UILabel!
+    @IBOutlet weak var workPeriodLabel: UILabel!
+    @IBOutlet weak var partyPeriodLabel: UILabel!
+    @IBOutlet weak var chillPeriodLabel: UILabel!
+    
+    
+    private var isOpen = false
+    private var isStyleSelected = false
+    private var currentStyleSelected: String?
+    private let workRec = UITapGestureRecognizer()
+    private let partyRec = UITapGestureRecognizer()
+    private let relaxRec = UITapGestureRecognizer()
     
     private var relaxSelected: String?
     private var atWorkSelected: String?
@@ -44,17 +55,31 @@ class RegisterStyleViewController : DTViewController {
     var sexe: String?
     var user: User?
     
-    @IBAction func onCancelTapped(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
     
+    @IBAction func buttonsStyle(sender: AnyObject) {
+        for (var i = 0; i < buttonsStyle.count; i++){
+            if (buttonsStyle[i] == sender as! UIButton){
+                buttonsStyle[i].selected = !buttonsStyle[i].selected
+                isStyleSelected = buttonsStyle[i].selected
+                if (isStyleSelected){
+                    currentStyleSelected = buttonsStyle[i].accessibilityIdentifier
+                    openPanel()
+                } else {
+                    currentStyleSelected = nil
+                    closePanel()
+                }
+            } else {
+                buttonsStyle[i].selected = false
+            }
+        }
+    }
     
     @IBAction func onSaveTapped(sender: AnyObject) {
         //Edit Mode
         if (!isValidData()){
             ActivityLoader.shared.hideProgressView()
-            let alert = UIAlertController(title: NSLocalizedString("styleErrTitle", comment: ""), message: NSLocalizedString("styleErrMessage", comment: ""), preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("styleErrButton", comment: ""), style: .Default) { _ in })
+            let alert = UIAlertController(title: NSLocalizedString("registerStyleErrTitle", comment: ""), message: NSLocalizedString("registerStyleErrMessage", comment: ""), preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("registerStyleErrButton", comment: ""), style: .Default) { _ in })
             self.presentViewController(alert, animated: true){}
             return
         }
@@ -71,15 +96,18 @@ class RegisterStyleViewController : DTViewController {
                 UserService().UpdateUser(newProfil!, completion: { (isSuccess, object) -> Void in
                     self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
                     self.view.bringSubviewToFront(self.confirmationView!)
-                    UIView.animateAndChainWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: {
+                    
+                    UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: { () -> Void in
                         self.confirmationView?.alpha = 1
                         self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
-                        }, completion:  nil).animateWithDuration(0.2, animations: { () -> Void in
-                            self.confirmationView?.alpha = 0
-                            self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
-                            }, completion: { (finish) -> Void in
-                                self.navigationController?.popViewControllerAnimated(true)
-                        })
+                        }, completion: { (isFinish) -> Void in
+                            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                                self.confirmationView?.alpha = 0
+                                self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
+                                }, completion: { (finish) -> Void in
+                                     self.navigationController?.popViewControllerAnimated(true)
+                            })
+                    })
                 })
                 
                 
@@ -95,7 +123,7 @@ class RegisterStyleViewController : DTViewController {
                 if (isSuccess){
                     //Create Model
                     if (FBSDKAccessToken.currentAccessToken() == nil){
-                        self.loginSuccess(profil, password: self.user!.password!)   
+                        self.loginSuccess(profil, password: self.user!.password!)
                     } else {
                         let defaults = NSUserDefaults.standardUserDefaults()
                         defaults.setObject(profil.userid, forKey: "userId")
@@ -103,22 +131,29 @@ class RegisterStyleViewController : DTViewController {
                     }
                     SharedData.sharedInstance.currentUserId = profil.userid
                     SharedData.sharedInstance.sexe = profil.gender
-                    UIView.animateAndChainWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: {
+                    
+                    UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: { () -> Void in
                         self.confirmationView?.alpha = 1
                         self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
-                        }, completion:  nil).animateWithDuration(0.2, animations: { () -> Void in
-                            self.confirmationView?.alpha = 0
-                            self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
-                            }, completion: { (finish) -> Void in
-                                dispatch_async(dispatch_get_main_queue(),  { () -> Void in
-                                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                    let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
-                                    appDelegate.window?.rootViewController = initialViewController
-                                    appDelegate.window?.makeKeyAndVisible()
-                                })
-                                
-                        })
+                        }, completion: { (isFinish) -> Void in
+                            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                                self.confirmationView?.alpha = 0
+                                self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
+                                }, completion: { (finish) -> Void in
+                                    dispatch_async(dispatch_get_main_queue(),  { () -> Void in
+                                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                        let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
+                                        appDelegate.window?.rootViewController = initialViewController
+                                        appDelegate.window?.makeKeyAndVisible()
+                                    })
+                            })
+                    })
+                } else {
+                    let alert = UIAlertController(title: NSLocalizedString("registerErrorCreateAccountTitle", comment: ""), message: NSLocalizedString("registerErrorCreateAccountMessge", comment: ""), preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: NSLocalizedString("registerErrorCreateAccountButton", comment: ""), style: .Default, handler: nil))
+                    self.presentViewController(alert, animated: true){}
+                
                 }
             })
             
@@ -127,85 +162,197 @@ class RegisterStyleViewController : DTViewController {
     
     override func viewDidLoad() {
         self.hideTabBar = true
-        
         super.viewDidLoad()
         self.classNameAnalytics = "RegisterStyle"
         
-        if (currentUserId != nil){
-            onValidateButton.setTitle(NSLocalizedString("VALIDATE MY MODIFICATION", comment: ""), forState: UIControlState.Normal)
-            labelText.text = NSLocalizedString("PICK YOUR OWN STYLE", comment: "")
-        } else {
-            onValidateButton.titleLabel?.text = NSLocalizedString("LET'S SEE MY NEW DRESSING", comment: "")
-            onValidateButton.setTitle(NSLocalizedString("LET'S SEE MY NEW DRESSING", comment: ""), forState: UIControlState.Normal)
-        }
+        workRec.addTarget(self, action: "tappedMoment:")
+        workArea.userInteractionEnabled = true
+        workArea.addGestureRecognizer(workRec)
         
-        self.confirmationView = NSBundle.mainBundle().loadNibNamed("ConfirmSave", owner: self, options: nil)[0] as? ConfirmSave
-        self.confirmationView!.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 50, UIScreen.mainScreen().bounds.size.height/2.0 - 50, 100, 100)
-        self.confirmationView!.alpha = 0
-        self.confirmationView!.layer.cornerRadius = 50
+        partyRec.addTarget(self, action: "tappedMoment:")
+        partyArea.userInteractionEnabled = true
+        partyArea.addGestureRecognizer(partyRec)
         
-        self.view.addSubview(self.confirmationView!)
+        relaxRec.addTarget(self, action: "tappedMoment:")
+        relaxArea.userInteractionEnabled = true
+        relaxArea.addGestureRecognizer(relaxRec)
         
+        
+        let upSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        
+        upSwipe.direction = .Up
+        downSwipe.direction = .Down
+        
+        panel.addGestureRecognizer(upSwipe)
+        panel.addGestureRecognizer(downSwipe)
+        
+        self.changeLabel() //Change Button Label
+        self.createConfirmationView()
+        
+        /* Set Translation */
+        selectStyleLabel.text = NSLocalizedString("registerStyleSelectStyle", comment: "").uppercaseString
+        fashionStyleLabel.text = NSLocalizedString("registerStyleFashionStyle", comment: "")
+        businessStyleLabel.text = NSLocalizedString("registerStyleBusinessStyle", comment: "")
+        sportwearStyleLabel.text = NSLocalizedString("registerStyleSportwearStyle", comment: "")
+        casualStyleLabel.text = NSLocalizedString("registerStyleCasualStyle", comment: "")
+        selectPeriodLabel.text = NSLocalizedString("registerStyleSelectPeriod", comment: "").uppercaseString
+        workPeriodLabel.text = NSLocalizedString("registerStyleWorkPeriod", comment: "")
+        partyPeriodLabel.text = NSLocalizedString("registerStylePartyPeriod", comment: "")
+        chillPeriodLabel.text = NSLocalizedString("registerStyleChillPeriod", comment: "")
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if let _ = currentUserId {
-            self.view.setNeedsLayout()
-            self.view.layoutIfNeeded()
             initData()
         }
     }
     
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if (!self.isMoving){
-            let touch = touches.first
-            let location = touch!.locationInView(self.view)
-            
-            if let selectedStyle = whichStyleSelected(location) {
-                NSLog("Start to move")
-                self.tempImage = createCloneImage(selectedStyle, location: location)
-                self.tempImage!.frame.origin = location
-                self.view.addSubview(self.tempImage!)
-                 isMoving = true
-            } else if let tempImage = self.whichMomentSelected(location) {
-                let viewPoint = tempImage.convertPoint(location, fromView: self.view) //Inside a container?
-                if tempImage.pointInside(viewPoint, withEvent: nil) {
-                    self.tempImage = tempImage
-                    isMoving = true
-                    NSLog("Start to move temp")
-                }
-            }
+    func setSmallImage(){
+        workArea.image = UIImage(named : "areaSmallW")
+        partyArea.image = UIImage(named : "areaSmallP")
+        relaxArea.image = UIImage(named : "areaSmallC")
+    }
+    
+    func setBigImage(){
+        workArea.image = UIImage(named : "areaBigW")
+        partyArea.image = UIImage(named : "areaBigP")
+        relaxArea.image = UIImage(named : "areaBigC")
+    }
+    
+    
+    func openPanel(){
+        self.heightPanelCst.constant = 315
+        self.bottomMargin.constant = 45
+        for (var i = 0; i < self.imageHeight.count; i++){
+            self.imageHeight[i].constant = 90
+            self.imageWidth[i].constant = 90
+        }
+       
+        UIView.animateWithDuration(0.4, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+            self.setBigImage()
+            }) { (isFinish) -> Void in
+                self.isOpen = true
         }
     }
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if (isMoving){
-            let touch = touches.first
-            let location = touch!.locationInView(self.view)
-            if let img = self.tempImage {
-                img.center = CGPointMake(location.x, location.y)
+    func closePanel(){
+        self.heightPanelCst.constant = 120
+        self.bottomMargin.constant = 22
+        for (var i = 0; i < self.imageHeight.count; i++){
+            self.imageHeight[i].constant = 40
+            self.imageWidth[i].constant = 40
+        }
+        
+        UIView.animateWithDuration(0.4, animations: { () -> Void in
+            self.view.layoutIfNeeded()
+            self.setSmallImage()
+            }) { (isFinish) -> Void in
+                self.isOpen = false
+        }
+    }
+    
+    func handleSwipes(sender:UISwipeGestureRecognizer) {
+        if (sender.direction == .Up) {
+            if (!self.isOpen){
+                openPanel()
             }
-           
+        } else if (sender.direction == .Down) {
+            if (self.isOpen){
+                closePanel()
+            }
         }
         
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        if (isMoving){
-            if let _ = self.tempImage {
-                if let container = self.whichContainerSelected() {
-                    NSLog("Animation go to Area")
-                    if (isAreaEmpty(container)){
-                        setStyleForArea(container, style: self.tempImage!.accessibilityIdentifier!)
-                        animationEnd(container.center)
-                    } else {
-                        goBackArea()
-                    }
-                } else {
-                    goBackArea()
+    func tappedMoment(sender: UIGestureRecognizer){
+        if let style = currentStyleSelected {
+            let view = UIImageView(image: UIImage(named: getImageNamed(style)))
+            view.frame = CGRectMake(0, 0, 70, 70)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            
+            if (sender.view as! UIImageView == workArea){
+                if (workArea.subviews.count > 0){
+                    removeSubviews(workArea)
                 }
+                workArea.addSubview(view)
+                createConstraint(view, targetArea: workArea)
+                atWorkSelected = style
+            } else if (sender.view as! UIImageView == partyArea){
+                if (partyArea.subviews.count > 0){
+                    removeSubviews(partyArea)
+                }
+                partyArea.addSubview(view)
+                createConstraint(view, targetArea: partyArea)
+                onPartySelected = style
+            } else if (sender.view as! UIImageView == relaxArea){
+                if (relaxArea.subviews.count > 0){
+                    removeSubviews(relaxArea)
+                }
+                relaxArea.addSubview(view)
+                createConstraint(view, targetArea: relaxArea)
+                relaxSelected = style
+            }
+            unSelectedStyle()
+            closePanel()
+        }
+    }
+    
+    private func unSelectedStyle(){
+        for (var i = 0; i < buttonsStyle.count; i++){
+            if (buttonsStyle[i].accessibilityIdentifier == currentStyleSelected){
+                buttonsStyle[i].selected = false
+            }
+        }
+    }
+    
+    private func removeSubviews(containerView: UIView){
+        for view in containerView.subviews{
+            view.removeFromSuperview()
+        }
+    }
+    
+    private func initData(){
+        let profilDal = ProfilsDAL()
+        if let user = profilDal.fetch(self.currentUserId!) {
+            if let style = user.onPartyStyle {
+                //Add view to partyArea
+                let view = UIImageView(image: UIImage(named: getImageNamed(style)))
+                view.frame = CGRectMake(0, 0, 70, 70)
+                view.translatesAutoresizingMaskIntoConstraints = false
+               /* let button = UIButton(frame: CGRectMake(0, 0, 10, 10))
+                button.setTitle("X", forState: .Normal)
+                button.translatesAutoresizingMaskIntoConstraints = false
+                view.addSubview(button) */
+                partyArea.addSubview(view)
+                onPartySelected = style
+                createConstraint(view, targetArea: partyArea)
+                //createConstraintButton(view, button: button)
+            }
+            if let style = user.relaxStyle {
+                //Add view to partyArea
+                let view = UIImageView(image: UIImage(named: getImageNamed(style)))
+                view.frame = CGRectMake(0, 0, 70, 70)
+                view.translatesAutoresizingMaskIntoConstraints = false
+                relaxArea.addSubview(view)
+                relaxSelected = style
+                createConstraint(view, targetArea: relaxArea)
+            }
+            if let style = user.atWorkStyle{
+                //Add view to partyArea
+                let view = UIImageView(image: UIImage(named: getImageNamed(style)))
+                view.frame = CGRectMake(0, 0, 70, 70)
+                view.translatesAutoresizingMaskIntoConstraints = false
+                workArea.addSubview(view)
+                atWorkSelected = style
+                createConstraint(view, targetArea: workArea)
             }
         }
     }
@@ -216,217 +363,59 @@ class RegisterStyleViewController : DTViewController {
             (atWorkSelected == nil || atWorkSelected!.isEmpty))
     }
     
-    private func initData(){
-        let profilDal = ProfilsDAL()
-        
-        if let user = profilDal.fetch(self.currentUserId!) {
-            if let style = user.onPartyStyle {
-                initStyleSelected(style, containerName: "onParty")
-                self.onPartyImage = self.tempImage
-                self.onPartySelected = self.tempImage?.accessibilityIdentifier
-            }
-            if let style = user.relaxStyle {
-                initStyleSelected(style, containerName: "relax")
-                self.relaxImage = self.tempImage
-                self.relaxSelected = self.tempImage?.accessibilityIdentifier
-            }
-            
-            if let style = user.atWorkStyle{
-                initStyleSelected(style, containerName: "atWork")
-                self.atWorkImage = self.tempImage
-                self.atWorkSelected = self.tempImage?.accessibilityIdentifier
-            }
-        }
-        
-    }
-    
-    private func initStyleSelected(selectedStyle: String, containerName: String) {
-        var container: UIImageView?
-
-        if (containerName == "relax") {
-            container = self.areaRelax
-        } else if (containerName == "onParty") {
-            container = self.areaOnParty
-        } else if (containerName == "atWork") {
-            container = self.areaAtWork
-        }
-        
-        if (selectedStyle == "sportwear"){
-            self.tempImage = createCloneImage(self.sportwearIcon, location: nil, isInit: true)
-        } else if (selectedStyle == "business"){
-            self.tempImage = createCloneImage(self.businessIcon, location: nil, isInit: true)
-        } else if (selectedStyle == "fashion"){
-            self.tempImage = createCloneImage(self.fashionIcon, location: nil, isInit: true)
-        } else if (selectedStyle == "casual"){
-            self.tempImage = createCloneImage(self.casualIcon, location: nil, isInit: true)
-        }
-        if let _ = self.tempImage {
-            self.tempImage!.center = container!.center
-            self.view.addSubview(self.tempImage!)
-        }
-    }
-    
-    private func goBackArea(){
-        let viewPoint = whichStyle(self.tempImage!)
-        if let point = viewPoint {
-            NSLog("Animation go back to park area")
-            animationPark(CGPointMake(point.x, point.y))
+    private func changeLabel(){
+        if (currentUserId != nil){
+            validationButton.setTitle(NSLocalizedString("registerStyleValidateModificationBtn", comment: ""), forState: UIControlState.Normal)
         } else {
-            NSLog("Remove uiImageView")
-            self.tempImage!.removeFromSuperview()
+            validationButton.setTitle(NSLocalizedString("registerStyleSeeMyNewDressingBtn", comment: ""), forState: UIControlState.Normal)
         }
     }
     
-    private func isAreaEmpty(container: UIImageView) -> Bool{
-        if (container.accessibilityIdentifier == "atWork" && self.atWorkSelected != nil && !(self.atWorkSelected!.isEmpty)){
-            return false
-        } else if (container.accessibilityIdentifier == "relax" && self.relaxSelected != nil && !(self.relaxSelected!.isEmpty)){
-            return false
-        } else if (container.accessibilityIdentifier == "onParty" && self.onPartySelected != nil && !(self.onPartySelected!.isEmpty)){
-            return false
-        }
-        return true
+    private func createConfirmationView(){
+        self.confirmationView = NSBundle.mainBundle().loadNibNamed("ConfirmSave", owner: self, options: nil)[0] as? ConfirmSave
+        self.confirmationView!.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 50, UIScreen.mainScreen().bounds.size.height/2.0 - 50, 100, 100)
+        self.confirmationView!.alpha = 0
+        self.confirmationView!.layer.cornerRadius = 50
+    
+        self.view.addSubview(self.confirmationView!)
     }
     
-    private func setStyleForArea(container: UIImageView, style: String){
-        if (container.accessibilityIdentifier == "atWork"){
-           self.atWorkSelected = style
-        } else if (container.accessibilityIdentifier == "onParty"){
-            self.onPartySelected = style
-        } else if (container.accessibilityIdentifier == "relax"){
-             self.relaxSelected = style
-        }
+    private func createConstraint(imageView: UIImageView, targetArea: UIImageView){
+        let leadingConstraint = imageView.leadingAnchor.constraintEqualToAnchor(targetArea.leadingAnchor, constant: 5)
+        let trailingConstraint = imageView.trailingAnchor.constraintEqualToAnchor(targetArea.trailingAnchor, constant: -5)
+        let topConstraint = imageView.topAnchor.constraintEqualToAnchor(targetArea.topAnchor, constant: 5)
+        let bottomConstraint = imageView.bottomAnchor.constraintEqualToAnchor(targetArea.bottomAnchor, constant: -5)
+        NSLayoutConstraint.activateConstraints([leadingConstraint, trailingConstraint, topConstraint,bottomConstraint])
     }
     
-    private func createCloneImage(imageToClone: UIImageView, location: CGPoint?, isInit : Bool = false) -> UIImageView {
-        let newImage = UIImageView(frame: imageToClone.frame)
-        if (isInit){
-            newImage.image = UIImage(named: getImageNameSelected(imageToClone.accessibilityIdentifier!))
-        } else {
-            newImage.image = imageToClone.image
-        }
-        newImage.accessibilityIdentifier = imageToClone.accessibilityIdentifier
-        
-        if let loc = location {
-            newImage.center = CGPointMake(loc.x, loc.y)
-        }
-        return newImage
+    private func createConstraintButton(imageView: UIImageView, button: UIButton){
+        let topConstraint = button.topAnchor.constraintEqualToAnchor(imageView.topAnchor, constant: -5)
+        let trailingConstraint = button.trailingAnchor.constraintEqualToAnchor(imageView.trailingAnchor, constant: -5)
+        let widthConstraint = button.widthAnchor.constraintEqualToConstant(10.0)
+        let heightConstraint = button.heightAnchor.constraintEqualToConstant(10.0)
+        NSLayoutConstraint.activateConstraints([trailingConstraint, topConstraint, widthConstraint, heightConstraint])
     }
     
-    private func whichStyleSelected(location: CGPoint) -> UIImageView? {
-        var viewPoint = sportwearIcon.convertPoint(location, fromView: self.view)
-        if sportwearIcon.pointInside(viewPoint, withEvent: nil) {
-            self.currentStyleSelected = "sportwear"
-            return sportwearIcon
+    private func getImageNamed(style: String) -> String {
+        switch(style) {
+        case "fashion":
+            return "cocktailIcon_select"
+        case "business":
+            return "briefcaseIcon_select"
+        case "sportwear":
+            return "dumbbellIcon_select"
+        case "casual":
+            return "glassesIcon_select"
+        default:
+            return ""
         }
-        viewPoint = fashionIcon.convertPoint(location, fromView: self.view)
-        if fashionIcon.pointInside(viewPoint, withEvent: nil) {
-            self.currentStyleSelected = "fashion"
-            return fashionIcon
-        }
-        viewPoint = businessIcon.convertPoint(location, fromView: self.view)
-        if businessIcon.pointInside(viewPoint, withEvent: nil) {
-            self.currentStyleSelected = "business"
-            return businessIcon
-        }
-        viewPoint = casualIcon.convertPoint(location, fromView: self.view)
-        if casualIcon.pointInside(viewPoint, withEvent: nil) {
-            self.currentStyleSelected = "casual"
-            return casualIcon
-        }
-        return nil
     }
-    
-    private func whichContainerSelected() -> UIImageView? {
-        if (CGRectIntersectsRect(areaRelax.frame, self.tempImage!.frame)) {
-            self.relaxImage = self.tempImage
-            print("areaRelax")
-            return areaRelax
-        }
-        if (CGRectIntersectsRect(areaAtWork.frame, self.tempImage!.frame)) {
-            self.atWorkImage = self.tempImage
-            print("areaAtWork")
-            return areaAtWork
-        }
-        if (CGRectIntersectsRect(areaOnParty.frame, self.tempImage!.frame)) {
-            self.onPartyImage = self.tempImage
-            print("areaOnParty")
-            return areaOnParty
-        }
-        return nil
-    }
-    
-    private func whichStyle(image: UIImageView) -> CGPoint? {
-        if (image.accessibilityIdentifier == "sportwear"){
-            return sportwearIcon.center
-        } else if (image.accessibilityIdentifier == "fashion"){
-            return fashionIcon.center
-        } else if (image.accessibilityIdentifier == "business"){
-            return businessIcon.center
-        } else if (image.accessibilityIdentifier == "casual"){
-            return casualIcon.center
-        }
-        return nil
-    }
-    
-    private func whichMomentSelected(location: CGPoint) -> UIImageView?{
-        if let image = relaxImage {
-            let viewPoint = image.convertPoint(location, fromView: self.view)
-            if image.pointInside(viewPoint, withEvent: nil){
-                setStyleForArea(areaRelax, style: "")
-                relaxImage = nil
-                print("remove areaRelax")
-                return image
-            }
-        }
-        if let image = atWorkImage {
-            let viewPoint = image.convertPoint(location, fromView: self.view)
-            if image.pointInside(viewPoint, withEvent: nil){
-                setStyleForArea(areaAtWork, style: "")
-                atWorkImage = nil
-                print("remove atWorkImage")
-                return image
-            }
-        }
-        if let image = onPartyImage {
-            let viewPoint = image.convertPoint(location, fromView: self.view)
-            if image.pointInside(viewPoint, withEvent: nil){
-                setStyleForArea(areaOnParty, style: "")
-                onPartyImage = nil
-                print("remove onPartyImage")
-                return image
-            }
-        }
-        return nil
-    }
-    
-    private func getImageNameSelected(style: String) -> String{
-        var name = ""
-        if (style == "sportwear"){
-            name = "IconSportwearStyleSelected"
-        } else if (style == "fashion"){
-            name = "IconFashionStyleSelected"
-        } else if (style == "business"){
-            name = "IconBusinessStyleSelected"
-        } else if (style == "casual"){
-            name = "IconCasualStyleSelected"
-        }
-        return name
-    }
-    
     
     private func loginSuccess(profil: Profil, password: String){
         LoginService().Login(profil.email!, password: password) { (isSuccess, object) -> Void in
             if (isSuccess){
                 let loginBL = LoginBL();
                 loginBL.loginWithSuccess(object)
-                dispatch_async(dispatch_get_main_queue(),  { () -> Void in
-                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
-                    appDelegate.window?.rootViewController = initialViewController
-                    appDelegate.window?.makeKeyAndVisible()
-                })
             } else {
                 ActivityLoader.shared.hideProgressView()
                 let alert = UIAlertController(title: NSLocalizedString("loginErrTitle", comment: ""), message: NSLocalizedString("loginErrMessage", comment: ""), preferredStyle: .Alert)
@@ -437,31 +426,5 @@ class RegisterStyleViewController : DTViewController {
         }
         
     }
-    
-    private func animationEnd(destination: CGPoint){
-        UIView.animateWithDuration(0.5, animations: {
-            self.tempImage!.center = destination
-            }, completion: { animationFinished in
-                // when complete, remove the square from the parent view
-                if let _ = self.tempImage {
-                    self.tempImage!.center = destination
-                    self.tempImage!.image = UIImage(named: self.getImageNameSelected(self.tempImage!.accessibilityIdentifier!))
-                }
-                self.isMoving = false
-        })
-    }
-    
-    private func animationPark(destination: CGPoint){
-        UIView.animateWithDuration(0.5, animations: {
-            self.tempImage!.center = destination
-            }, completion: { animationFinished in
-                // when complete, remove the square from the parent view
-                if let _ = self.tempImage {
-                    self.tempImage!.removeFromSuperview()
-                    self.tempImage = nil
-                }
-                self.isMoving = false
-        })
-        
-    }
+
 }

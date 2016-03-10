@@ -36,6 +36,35 @@ public class LoginBL {
         defaults.synchronize()
     }
     
+    
+    func returnUserData(){
+        let graphRequest : FBSDKGraphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email, gender"])
+        graphRequest.startWithCompletionHandler({ (connection, result, error) -> Void in
+            
+            if ((error) != nil) {
+                // Process error
+                print("Error: \(error)")
+            }
+            else {
+                print(result)
+/*                self.email = result.valueForKey("email") as! String
+                self.emailText.text = self.email
+                self.user = User(email: self.email, username: self.email, displayName: result.valueForKey("name") as? String)
+                self.user!.fb_id = result.valueForKey("id") as? String
+                self.user!.fb_token = FBSDKAccessToken.currentAccessToken().tokenString
+                
+                if let gender = result.valueForKey("gender") as? String {
+                    self.user!.gender = gender == "male" ? "M" : "F"
+                }
+                if let picture = result.valueForKey("picture") as? NSDictionary {
+                    if let valueDict : NSDictionary = picture.valueForKey("data") as? NSDictionary {
+                        self.user!.picture = valueDict.valueForKey("url") as? String
+                    }
+                } */
+            }
+        })
+    }
+    
     public func loginFacebookWithSuccess(object: JSON) -> User{
         let email = object["emails"].arrayValue[0]["value"].stringValue
         let displayName = object["displayName"].stringValue
