@@ -14,7 +14,7 @@
         <!--Login-->
         <scene sceneID="FlA-RK-sl0">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" title="Login" id="4RF-P2-7ss" customClass="LoginViewControllerNew" customModule="DressTime" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" title="Login" id="4RF-P2-7ss" customClass="LoginViewController" customModule="DressTime" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="M5k-Rk-I6x"/>
                         <viewControllerLayoutGuide type="bottom" id="UwB-lf-yzx"/>
