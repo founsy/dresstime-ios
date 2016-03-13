@@ -149,7 +149,7 @@ class CalendarViewController: DTViewController {
                 self.collectionView(self.collectionView, didDeselectItemAtIndexPath: NSIndexPath(forItem: self.cellSelected, inSection: 0))
                 self.collectionView(self.collectionView, didSelectItemAtIndexPath: NSIndexPath(forItem: indexPath.section, inSection: 0))
             }
-        } else if (scrollView == collectionView){
+        } /*else if (scrollView == collectionView){
             if let indexPath = self.collectionView.indexPathForItemAtPoint(center) {
                 self.collectionView.deselectItemAtIndexPath(NSIndexPath(forItem: self.cellSelected, inSection: 0), animated: true)
                 self.collectionView(self.collectionView, didDeselectItemAtIndexPath: NSIndexPath(forItem: self.cellSelected, inSection: 0))
@@ -157,7 +157,7 @@ class CalendarViewController: DTViewController {
                 self.tableView.selectRowAtIndexPath(NSIndexPath(forItem: 0, inSection: indexPath.row), animated: true, scrollPosition: .None)
                 self.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: 0, inSection: indexPath.row), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
             }
-        }
+        } */
     }
 }
 

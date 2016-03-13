@@ -41,6 +41,8 @@
 "registerErrorCreateAccountTitle" = "Error!";
 "registerErrorCreateAccountMessge" = "Error during the creating account process. Please try again later!";
 "registerErrorCreateAccountButton" = "Okay.";
+"registerStyleTutorialLabel" = "FOR BEING PRECISE, LET’S SELECT YOUR OWN STYLES";
+"registerStyleTutorialButton" = "LET’S GO !";
 "registerStyleValidateModificationBtn" = "Validate my modification";
 "registerStyleSeeMyNewDressingBtn" = "Let's see my new dressing";
 "registerStyleErrTitle" = "Error";

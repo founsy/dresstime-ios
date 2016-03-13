@@ -224,6 +224,8 @@ extension LoginViewController {
                                     self.dismissViewControllerAnimated(true, completion: nil)
                                 }))
                                 self.presentViewController(alert, animated: true){}
+                            } else {
+                                self.showError("loginErrTitle", messageKey:  "loginErrMessage", buttonKey:  "loginErrButton", handler: nil)
                             }
                         } else {
                             self.showError("loginErrTitle", messageKey:  "loginErrMessage", buttonKey:  "loginErrButton", handler: nil)

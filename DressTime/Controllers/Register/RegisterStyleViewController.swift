@@ -35,6 +35,15 @@ class RegisterStyleViewController: DTViewController {
     @IBOutlet weak var chillPeriodLabel: UILabel!
     
     
+    @IBOutlet weak var tutorialView: UIVisualEffectView!
+    @IBOutlet weak var tutorialLabel: UILabel!
+    @IBOutlet weak var tutorialButton: UIButton!
+    @IBOutlet weak var tutorialImage: UIImageView!
+    
+    @IBOutlet weak var topTitleConstrainte: NSLayoutConstraint!
+    @IBOutlet weak var topButtonLabel: NSLayoutConstraint!
+    @IBOutlet weak var topButtonButtonConstraintes: NSLayoutConstraint!
+    
     private var isOpen = false
     private var isStyleSelected = false
     private var currentStyleSelected: String?
@@ -55,6 +64,13 @@ class RegisterStyleViewController: DTViewController {
     var sexe: String?
     var user: User?
     
+    @IBAction func onButtonTapped(sender: AnyObject) {
+        UIView.animateWithDuration(0.3, animations: { () -> Void in
+            self.tutorialView.alpha = 0
+            }) { (finished) -> Void in
+                self.tutorialView.hidden = finished
+        }
+    }
     
     @IBAction func buttonsStyle(sender: AnyObject) {
         for (var i = 0; i < buttonsStyle.count; i++){
@@ -190,6 +206,10 @@ class RegisterStyleViewController: DTViewController {
         self.changeLabel() //Change Button Label
         self.createConfirmationView()
         
+        tutorialButton.layer.borderColor = UIColor.whiteColor().CGColor
+        tutorialButton.layer.cornerRadius = 2.0
+        tutorialButton.layer.borderWidth = 1.0
+        
         /* Set Translation */
         selectStyleLabel.text = NSLocalizedString("registerStyleSelectStyle", comment: "").uppercaseString
         fashionStyleLabel.text = NSLocalizedString("registerStyleFashionStyle", comment: "")
@@ -200,12 +220,31 @@ class RegisterStyleViewController: DTViewController {
         workPeriodLabel.text = NSLocalizedString("registerStyleWorkPeriod", comment: "")
         partyPeriodLabel.text = NSLocalizedString("registerStylePartyPeriod", comment: "")
         chillPeriodLabel.text = NSLocalizedString("registerStyleChillPeriod", comment: "")
+        tutorialLabel.text = NSLocalizedString("registerStyleTutorialLabel", comment: "").uppercaseString
+        tutorialButton.setTitle(NSLocalizedString("registerStyleTutorialButton", comment: "").uppercaseString, forState: .Normal)
+        
+        if (UIScreen.mainScreen().bounds.height == 480.0){
+            topTitleConstrainte.constant = 10
+            topButtonLabel.constant = 10
+            topButtonButtonConstraintes.constant = 35
+        }
+    
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if let _ = currentUserId {
             initData()
+            tutorialView.hidden = true
+        } else {
+             tutorialView.hidden = false
+            if let user = self.user {
+                if (user.gender == "M"){
+                    tutorialImage.image = UIImage(named: "woolyhatIcon")
+                } else if (user.gender == "F"){
+                    tutorialImage.image = UIImage(named: "hatsIcon")
+                }
+            }
         }
     }
     
@@ -327,14 +366,9 @@ class RegisterStyleViewController: DTViewController {
                 let view = UIImageView(image: UIImage(named: getImageNamed(style)))
                 view.frame = CGRectMake(0, 0, 70, 70)
                 view.translatesAutoresizingMaskIntoConstraints = false
-               /* let button = UIButton(frame: CGRectMake(0, 0, 10, 10))
-                button.setTitle("X", forState: .Normal)
-                button.translatesAutoresizingMaskIntoConstraints = false
-                view.addSubview(button) */
                 partyArea.addSubview(view)
                 onPartySelected = style
                 createConstraint(view, targetArea: partyArea)
-                //createConstraintButton(view, button: button)
             }
             if let style = user.relaxStyle {
                 //Add view to partyArea
