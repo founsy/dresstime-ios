@@ -29,6 +29,7 @@
 "registerPasswordCreateAnAccount" = "Créer un compte";
 "registerSexeWomen" = "Je suis une jolie fille";
 "registerSexeMen" = "Je suis un joli garçon";
+
 "registerStyleSelectStyle" = "1 - Selectionne un style";
 "registerStyleFashionStyle" = "fashion";
 "registerStyleBusinessStyle" = "business";
@@ -36,11 +37,9 @@
 "registerStyleCasualStyle" = "casual chic";
 "registerStyleSelectPeriod" = "2 - Selectionne une periode";
 "registerStyleWorkPeriod" = "pour travailler";
-"registerStylePartyPeriod" = "pour soirée";
+"registerStylePartyPeriod" = "en soirée";
 "registerStyleChillPeriod" = "for chill";
-"registerErrorCreateAccountTitle" = "Error!";
-"registerErrorCreateAccountMessge" = "Error during the creating account process. Please try again later!";
-"registerErrorCreateAccountButton" = "Okay.";
+"registerStyleTitle" = "MES STYLES";
 "registerStyleTutorialLabel" = "Pour être précis, sélectionnez vos propre styles.";
 "registerStyleTutorialButton" = "C'est partie!";
 "registerStyleValidateModificationBtn" = "Valider";
@@ -49,6 +48,9 @@
 "registerStyleErrMessage" = "Selectionnez votre style pour chaque moment de la journée!";
 "registerStyleErrButton" = "Okay";
 
+"registerErrorCreateAccountTitle" = "Error!";
+"registerErrorCreateAccountMessge" = "Error during the creating account process. Please try again later!";
+"registerErrorCreateAccountButton" = "Okay.";
 
 /* General translation */
 "maille" = "mailles";
@@ -56,15 +58,21 @@
 "top" = "hauts";
 "pants" = "pantalons";
 
+/* Tab Bar Item */
+"tabBarItemWardrobe" = "Dressing";
+"tabBarItemCalendar" = "Calendrier";
+"tabBarItemDaily" = "Aujourd'hui";
+"tabBarItemShopping" = "Shopping";
+
 /* HomeViewController */
 "homeLocErrTitle" = "Failed!";
 "homeLocErrMessage" = "Please activate le localisation service via Settings > Localisation > DressTime : Enable While Using";
 "homeLocErrButton" = "Okay.";
 "Moment_Relax" = "Relax";
-"Moment_Work" = "Work";
-"Moment_Party" = "Party";
+"Moment_Work" = "travail";
+"Moment_Party" = "soirée";
 "homeEmptyMessage" = "Continue ! Ajoute plus de vêtements :)";
-"homeEmptyAnimationMessage" = "Tu es en retard! Comment tu vas t'habiller aujourd'hui?";
+"homeEmptyAnimationMessage" = "Tu es en retard! Comment vas tu t'habiller aujourd'hui?";
 
 "relax" = "Relax";
 "atWork" = "Au travail";
@@ -75,7 +83,7 @@
 "detailTypeEditBtn" = "Modifier";
 "detailTypeDeleteBtn" = "Supprimer";
 "detailTypeMyMsg" = "Mes";
-"detailTypeEmptyMsg" = "You seem to be naked :) Add some clothings !";
+"detailTypeEmptyMsg" = "Tu sembles être nu :) Ajoute des vêtements !";
 
 /* ProfilViewController */
 "PROFILE" = "PROFIL";
@@ -139,12 +147,17 @@
 "settingsErrMessage" = "Remplissez chaque champs!";
 "settingsErrButton" = "Okay";
 
-/*Capture Confirmation */
-"MODIFY" = "MODIFIER";
-"ADD" = "AJOUTER";
+/* Capture Confirmation */
+"captureStep2HeaderMsg" = "Capture la partie principal de ton vêtement!";
+"captureStep2ColorMsg" = "Les magnigique couleurs de ton vêtement :";
+"captureStep3ModifyBtn" = "Modifier";
+"captureStep3AddBtn" = "Ajouter";
+"captureStep3HeaderMsg" = "Super shoot! Tout est parfait ?";
+"captureStep3PatternTitle" = "Les motifs";
+"captureStep3BrandTitle" = "Connais-tu la marque ?";
 
 /* Calendar */
-"calendarDoYouRemember" = "Te rappels-tu quelle était ta tenue ?";
+"calendarDoYouRemember" = "Te rappel tu quelle était ta tenue ?";
 
 /* Shopping */
 "shoppingNumberOfMatching" = "tenus dans ton dressing";

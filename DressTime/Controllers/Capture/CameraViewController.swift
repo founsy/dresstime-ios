@@ -49,22 +49,27 @@ class CameraViewController : DTViewController {
     }
     
     @IBAction func onCapture(sender: AnyObject) {
-        if (!self.isCapturing){
-            self.isCapturing = true
-            self.captureManager!.captureImage { (image, error) -> Void in
-                self.isCapturing = false
-                if let _ = image {
-                    self.currentImage = self.cropImage(image!)
-                    self.arrayColors = self.currentImage!.dominantColors()
-                    self.timeToScan = false
-                    self.captureManager!.session.stopRunning()
-                    self.performSegueWithIdentifier("showConfirmation", sender: self)
-                } else {
-                    NSLog("Error")
+        #if (arch(i386) || arch(x86_64)) && os(iOS)
+            self.currentImage = UIImage(named: "login-bg")
+            self.arrayColors = self.currentImage!.dominantColors()
+            self.performSegueWithIdentifier("showConfirmation", sender: self)
+        #else
+            if (!self.isCapturing){
+                self.isCapturing = true
+                self.captureManager!.captureImage { (image, error) -> Void in
+                    self.isCapturing = false
+                    if let _ = image {
+                        self.currentImage = self.cropImage(image!)
+                        self.arrayColors = self.currentImage!.dominantColors()
+                        self.timeToScan = false
+                        self.captureManager!.session.stopRunning()
+                        self.performSegueWithIdentifier("showConfirmation", sender: self)
+                    } else {
+                        NSLog("Error")
+                    }
                 }
             }
-        }
-
+        #endif
     }
     
     @IBAction func onLight(sender: AnyObject) {
@@ -136,7 +141,11 @@ class CameraViewController : DTViewController {
         if (segue.identifier == "showConfirmation"){
             let controller = segue.destinationViewController as! CaptureConfirmationViewController
             if let image = self.currentImage {
-                let img = UIImage(CGImage: image.CGImage!, scale: 1.0, orientation: UIImageOrientation.Right)
+                #if (arch(i386) || arch(x86_64)) && os(iOS)
+                     let img = image
+                #else
+                    let img = UIImage(CGImage: image.CGImage!, scale: 1.0, orientation: UIImageOrientation.Right)
+                #endif
                 let result = self.wrapResultObject(UIImageJPEGRepresentation(img, 1.0)!, labels: getListOfSubType(self.typeClothe))
                 controller.clotheObject = result
                 controller.previousController = self

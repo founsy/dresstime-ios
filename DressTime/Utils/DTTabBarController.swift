@@ -16,6 +16,18 @@ public class DTTabBarController: UITabBarController {
         self.tabBar.tintColor = UIColor.whiteColor()
         self.tabBar.backgroundColor = UIColor.dressTimeOrange()
         
+        for item in self.tabBar.items! {
+            if item.tag == 1 {
+                item.title =  NSLocalizedString("tabBarItemWardrobe", comment: "")
+            } else if item.tag == 2 {
+                item.title =  NSLocalizedString("tabBarItemCalendar", comment: "")
+            } else if item.tag == 3 {
+                item.title =  NSLocalizedString("tabBarItemDaily", comment: "")
+            } else if item.tag == 4 {
+                item.title =  NSLocalizedString("tabBarItemShopping", comment: "")
+            }
+        }
+        
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: .Normal)
         UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: .Selected)
         

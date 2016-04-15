@@ -29,6 +29,7 @@
 "registerPasswordCreateAnAccount" = "Create an Account";
 "registerSexeWomen" = "I am a nice women";
 "registerSexeMen" = "I am a great men";
+
 "registerStyleSelectStyle" = "1 - Select a style";
 "registerStyleFashionStyle" = "fashion";
 "registerStyleBusinessStyle" = "business";
@@ -38,10 +39,8 @@
 "registerStyleWorkPeriod" = "for work";
 "registerStylePartyPeriod" = "for party";
 "registerStyleChillPeriod" = "for chill";
-"registerErrorCreateAccountTitle" = "Error!";
-"registerErrorCreateAccountMessge" = "Error during the creating account process. Please try again later!";
-"registerErrorCreateAccountButton" = "Okay.";
-"registerStyleTutorialLabel" = "FOR BEING PRECISE, LET’S SELECT YOUR OWN STYLE";
+"registerStyleTitle" = "MY STYLES";
+"registerStyleTutorialLabel" = "FOR BEING PRECISE, LET’S SELECT YOUR OWN STYLES";
 "registerStyleTutorialButton" = "LET’S GO !";
 "registerStyleValidateModificationBtn" = "Validate my modification";
 "registerStyleSeeMyNewDressingBtn" = "Let's see my new dressing";
@@ -49,6 +48,9 @@
 "registerStyleErrMessage" = "Please select a style for each moment of the day";
 "registerStyleErrButton" = "Okay";
 
+"registerErrorCreateAccountTitle" = "Error!";
+"registerErrorCreateAccountMessge" = "Error during the creating account process. Please try again later!";
+"registerErrorCreateAccountButton" = "Okay.";
 
 /* General translation */
 "maille" = "mailles";
@@ -56,6 +58,11 @@
 "top" = "tops";
 "pants" = "pants";
 
+/* Tab Bar Item */
+"tabBarItemWardrobe" = "Wardrobe";
+"tabBarItemCalendar" = "Calendar";
+"tabBarItemDaily" = "Daily";
+"tabBarItemShopping" = "Shopping";
 
 /* HomeViewController */
 "homeLocErrTitle" = "Failed!";
@@ -135,12 +142,10 @@
 "TutorialPage4Title" = "GET";
 "TutorialPage4Msg" = "SMART SHOPPING LIST";
 
-
 /* Settings View */
 "settingsErrTitle" = "Error";
 "settingsErrMessage" = "Please fill all fields";
 "settingsErrButton" = "Okay";
-
 
 /* Capture Confirmation */
 "captureStep2HeaderMsg" = "Try to shoot the main body of your shirt";

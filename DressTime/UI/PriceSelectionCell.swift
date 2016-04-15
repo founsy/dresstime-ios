@@ -49,8 +49,8 @@ class PriceSelectionCell: UITableViewCell {
         super.awakeFromNib()
         slider.trackHighlightTintColor = UIColor(red: 235/255, green: 175/255, blue: 73/255, alpha: 1)
         rangeView.addSubview(slider)
-        slider.addTarget(self, action: "rangeSliderValueChanged:", forControlEvents: .ValueChanged)
-        slider.addTarget(self, action: "touchUp:", forControlEvents: .TouchUpInside)
+        slider.addTarget(self, action: #selector(PriceSelectionCell.rangeSliderValueChanged(_:)), forControlEvents: .ValueChanged)
+        slider.addTarget(self, action: #selector(PriceSelectionCell.touchUp(_:)), forControlEvents: .TouchUpInside)
     }
     
     override func drawRect(rect: CGRect) {

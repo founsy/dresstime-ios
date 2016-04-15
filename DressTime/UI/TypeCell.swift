@@ -35,7 +35,7 @@ class TypeCell: UITableViewCell {
     }
     
     override func awakeFromNib() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: "tapHandle:")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TypeCell.tapHandle(_:)))
         self.viewLongPress.addGestureRecognizer(tapGesture)
         self.viewLongPress.hidden = true
     }

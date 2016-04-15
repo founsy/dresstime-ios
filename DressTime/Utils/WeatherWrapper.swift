@@ -97,7 +97,7 @@ class WeatherWrapper {
     
     func arrayOfWeather(list: JSON)  -> [Weather]{
         var result = [Weather]()
-        for(var i = 0; i < list.arrayValue.count; i++){
+        for(var i = 0; i < list.arrayValue.count; i += 1){
             result.append(Weather(json: list[i]))
         }
         return result
@@ -124,7 +124,7 @@ class WeatherWrapper {
                         weather.city = city
                     }
                     list.append(weather)
-                    i++
+                    i += 1
                     if (i>1) {
                         break;
                     }
@@ -191,7 +191,7 @@ class WeatherWrapper {
     }
     
     func codeToFont(code:Int) -> String{
-        for (var i=0; i < transcodeValue.count; i++){
+        for (var i=0; i < transcodeValue.count; i += 1){
             if (transcodeValue[i][0] == code){
                 return transcodeValue[i][2] as! String
             }

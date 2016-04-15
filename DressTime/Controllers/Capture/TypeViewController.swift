@@ -42,7 +42,7 @@ class TypeViewController: DTViewController {
         }
         
         if (isOpenSectionRequired){
-            for (var i = 0; i < arrayForBool.count; i++) {
+            for i in 0...arrayForBool.count-1 {
                 let collapsed = arrayForBool[i].boolValue!
                 if (collapsed){
                     let path:NSIndexPath = NSIndexPath(forItem: i, inSection: 0)
@@ -66,7 +66,7 @@ class TypeViewController: DTViewController {
     
     private func initSubType(){
         self.subTypes = Array<Array<String>>()
-        for (var i = 0; i < self.types.count; i++){
+        for i in 0...self.types.count-1 {
             self.subTypes.append(SharedData.sharedInstance.getSubType(self.types[i]))
             self.arrayForBool.addObject("0")
         }
@@ -111,7 +111,7 @@ extension TypeViewController: UITableViewDelegate{
         self.currentSection = indexPath.row
         
         //Collapse row already opened
-        for (var i = 0; i < arrayForBool.count; i++) {
+        for i in 0...arrayForBool.count-1 {
             let collapsed = arrayForBool.objectAtIndex(i).boolValue as Bool
             if (collapsed && i != indexPath.row) {
                 arrayForBool.replaceObjectAtIndex(i, withObject: !collapsed)

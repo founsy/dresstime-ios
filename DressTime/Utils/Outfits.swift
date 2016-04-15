@@ -31,11 +31,11 @@ public class Outfit: NSObject{
         
         self.clothes = [ClotheModel]()
         if (json["outfit"].arrayValue.count > 0) {
-            for (var i = 0; i < json["outfit"].arrayValue.count; i++){
+            for (var i = 0; i < json["outfit"].arrayValue.count; i += 1){
                 self.clothes.append(ClotheModel(json: json["outfit"][i]))
             }
         } else if (json["clothes"].arrayValue.count > 0) {
-            for (var i = 0; i < json["clothes"].arrayValue.count; i++){
+            for (var i = 0; i < json["clothes"].arrayValue.count; i += 1){
                 self.clothes.append(ClotheModel(json: json["clothes"][i]))
             }
         }

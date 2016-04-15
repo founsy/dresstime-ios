@@ -55,8 +55,8 @@ class CalendarViewController: DTViewController {
         super.viewDidAppear(animated)
         
         DressTimeService().GetOutfitsPutOn { (isSuccess, object) -> Void in
-            for (var i = 0; i < object.arrayValue.count; i++){
-                self.tableData.append(Outfit(json: object.arrayValue[i]))
+            for item in object.arrayValue {
+                self.tableData.append(Outfit(json: item))
             }
             self.getIndex()
             self.tableView.reloadData()
@@ -88,7 +88,8 @@ class CalendarViewController: DTViewController {
         var j = 1
         //let outfit = outfitElem["outfit"]
         let dal = ClothesDAL()
-        for (var i = outfit.clothes.count-1; i >= 0 ; i--){
+ 
+        for i in outfit.clothes.count-1...0 {
             let clothe_id = outfit.clothes[i].clothe_id
             if let clothe = dal.fetch(clothe_id) {
                 let width:CGFloat = cell.containerView.frame.width
@@ -113,7 +114,7 @@ class CalendarViewController: DTViewController {
                 }
                 
                 let rect = CGRectMake(x, y, width, height)
-                j++
+                j += 1
                 
                 cell.createClotheView(clothe, rect: rect)
             }
@@ -121,13 +122,12 @@ class CalendarViewController: DTViewController {
     }
     
     private func getOutfit(date: String) -> Outfit? {
-        for (var i = 0; i < self.tableData.count; i++){
-            let outfitdate = self.tableData[i].updatedDate!.toS("MM-dd-YY")
+        for item in self.tableData {
+            let outfitdate = item.updatedDate!.toS("MM-dd-YY")
             if (outfitdate == date){
-                return self.tableData[i]
+                return item
             }
         }
-        
         return nil
     }
     

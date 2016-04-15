@@ -42,7 +42,7 @@ class ProfilViewController: DTTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let longPressedGesture = UILongPressGestureRecognizer(target: self, action: "longPressedHandle:")
+        let longPressedGesture = UILongPressGestureRecognizer(target: self, action: #selector(ProfilViewController.longPressedHandle(_:)))
         longPressedGesture.minimumPressDuration = 1.0
         
         self.tableView.addGestureRecognizer(longPressedGesture)
@@ -173,7 +173,7 @@ class ProfilViewController: DTTableViewController {
         var totalClothe = 0
         let dal = ClothesDAL()
         countType = Array<String>()
-        for (var i = 0; i < self.type.count; i++){
+        for i in 0...self.type.count-1 {
             let typeCell = self.type[i].lowercaseString
             let count = dal.fetch(type: typeCell).count
             totalClothe = totalClothe + count

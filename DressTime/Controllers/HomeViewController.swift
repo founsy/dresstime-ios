@@ -75,6 +75,8 @@ class HomeViewController: DTViewController {
             self.tableView.contentOffset = CGPoint(x: 0, y: (-64))
 
         }
+        
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -195,7 +197,7 @@ class HomeViewController: DTViewController {
         regularButton.setBackgroundImage(historyButtonImage, forState: UIControlState.Normal)
         
         regularButton.setTitle("", forState: UIControlState.Normal)
-        regularButton.addTarget(self, action: "addButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        regularButton.addTarget(self, action: #selector(HomeViewController.addButtonPressed), forControlEvents: UIControlEvents.TouchUpInside)
         let navBarButtonItem = UIBarButtonItem(customView: regularButton)
         self.navigationItem.rightBarButtonItem = navBarButtonItem
     }
@@ -220,7 +222,7 @@ class HomeViewController: DTViewController {
         }
         
         var result = true
-        for (var i = 0; i < type.count; i++){
+        for (var i = 0; i < type.count; i += 1){
             result = result && (clotheDAL.fetch(type: type[i].lowercaseString).count >= 3)
         }
         return result
@@ -237,8 +239,8 @@ class HomeViewController: DTViewController {
                     
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     self.commentWeather.text = sentence
-                    self.iconLabel.text = self.currentWeather!.icon!
-                    let temperature:Int = self.currentWeather!.temp!
+                    self.iconLabel.text = self.currentWeather!.icon != nil ? self.currentWeather!.icon! : ""
+                    let temperature:Int = self.currentWeather!.temp != nil ? self.currentWeather!.temp! : 0
                     self.temperatureLabel.text = "\(temperature)°"
                     self.setTitleNavBar(self.currentWeather!.city!)
                     UIView.animateWithDuration(0.2, animations: { () -> Void in
@@ -252,8 +254,8 @@ class HomeViewController: DTViewController {
                     self.outfitList = [Outfit]()
                     //Load the collection of Outfits
                     if let outfitsCell = self.outfitsCell {
-                        for (var i = 0; i < outfits.count; i++){
-                            self.outfitList.append(Outfit(json: outfits[i]))
+                        for outfit in outfits {
+                            self.outfitList.append(Outfit(json: outfit))
                         }
                         self.outfitsCell!.dataSource = self
                         outfitsCell.outfitCollectionView.reloadData()

@@ -15,6 +15,14 @@ public class DTViewController: UIViewController {
     var classNameAnalytics = "UIDTViewController"
     var hideTabBar = false
     
+    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         if (hideTabBar){

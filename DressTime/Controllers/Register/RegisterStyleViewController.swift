@@ -73,7 +73,7 @@ class RegisterStyleViewController: DTViewController {
     }
     
     @IBAction func buttonsStyle(sender: AnyObject) {
-        for (var i = 0; i < buttonsStyle.count; i++){
+        for i in 0...buttonsStyle.count-1 {
             if (buttonsStyle[i] == sender as! UIButton){
                 buttonsStyle[i].selected = !buttonsStyle[i].selected
                 isStyleSelected = buttonsStyle[i].selected
@@ -181,21 +181,21 @@ class RegisterStyleViewController: DTViewController {
         super.viewDidLoad()
         self.classNameAnalytics = "RegisterStyle"
         
-        workRec.addTarget(self, action: "tappedMoment:")
+        workRec.addTarget(self, action: #selector(RegisterStyleViewController.tappedMoment(_:)))
         workArea.userInteractionEnabled = true
         workArea.addGestureRecognizer(workRec)
         
-        partyRec.addTarget(self, action: "tappedMoment:")
+        partyRec.addTarget(self, action: #selector(RegisterStyleViewController.tappedMoment(_:)))
         partyArea.userInteractionEnabled = true
         partyArea.addGestureRecognizer(partyRec)
         
-        relaxRec.addTarget(self, action: "tappedMoment:")
+        relaxRec.addTarget(self, action: #selector(RegisterStyleViewController.tappedMoment(_:)))
         relaxArea.userInteractionEnabled = true
         relaxArea.addGestureRecognizer(relaxRec)
         
         
-        let upSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
-        let downSwipe = UISwipeGestureRecognizer(target: self, action: Selector("handleSwipes:"))
+        let upSwipe = UISwipeGestureRecognizer(target: self, action: #selector(RegisterStyleViewController.handleSwipes(_:)))
+        let downSwipe = UISwipeGestureRecognizer(target: self, action: #selector(RegisterStyleViewController.handleSwipes(_:)))
         
         upSwipe.direction = .Up
         downSwipe.direction = .Down
@@ -222,6 +222,7 @@ class RegisterStyleViewController: DTViewController {
         chillPeriodLabel.text = NSLocalizedString("registerStyleChillPeriod", comment: "")
         tutorialLabel.text = NSLocalizedString("registerStyleTutorialLabel", comment: "").uppercaseString
         tutorialButton.setTitle(NSLocalizedString("registerStyleTutorialButton", comment: "").uppercaseString, forState: .Normal)
+        self.title = NSLocalizedString("registerStyleTitle", comment: "").uppercaseString
         
         if (UIScreen.mainScreen().bounds.height == 480.0){
             topTitleConstrainte.constant = 10
@@ -269,7 +270,7 @@ class RegisterStyleViewController: DTViewController {
     func openPanel(){
         self.heightPanelCst.constant = 315
         self.bottomMargin.constant = 45
-        for (var i = 0; i < self.imageHeight.count; i++){
+        for i in 0...self.imageHeight.count-1 {
             self.imageHeight[i].constant = 90
             self.imageWidth[i].constant = 90
         }
@@ -285,7 +286,8 @@ class RegisterStyleViewController: DTViewController {
     func closePanel(){
         self.heightPanelCst.constant = 120
         self.bottomMargin.constant = 22
-        for (var i = 0; i < self.imageHeight.count; i++){
+        
+        for i in 0...self.imageHeight.count-1 {
             self.imageHeight[i].constant = 40
             self.imageWidth[i].constant = 40
         }
@@ -345,7 +347,7 @@ class RegisterStyleViewController: DTViewController {
     }
     
     private func unSelectedStyle(){
-        for (var i = 0; i < buttonsStyle.count; i++){
+        for i in 0...buttonsStyle.count-1 {
             if (buttonsStyle[i].accessibilityIdentifier == currentStyleSelected){
                 buttonsStyle[i].selected = false
             }

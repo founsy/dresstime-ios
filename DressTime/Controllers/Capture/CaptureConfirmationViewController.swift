@@ -18,10 +18,8 @@ class CaptureConfirmationViewController: DTViewController {
     @IBOutlet var colorBtnCollection: [UIButton]!
     @IBOutlet weak var headerMsgLabel: UILabel!
     @IBOutlet weak var patternTitleLabel: UILabel!
-    @IBOutlet weak var brandTitleLabel: UILabel!
     
     @IBOutlet weak var patternContainerView: UIView!
-    @IBOutlet weak var brandButton: UIButton!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
     private let patternData = ["plain", "Hstripe", "Vstripe", "check", "gingham", "jacquard", "printed", "unisTouchImprime"]
@@ -62,7 +60,7 @@ class CaptureConfirmationViewController: DTViewController {
         super.viewDidLoad()
         self.classNameAnalytics = "Capture_Confirmation"
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CaptureConfirmationViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         nameClothe.delegate = self
         
@@ -70,7 +68,6 @@ class CaptureConfirmationViewController: DTViewController {
         self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
         
         createPickerView()
-        brandButton.layer.cornerRadius = 30.0
         applyStyleTextView(nameClothe)
         
         if let clothe = self.clotheObject {
@@ -86,12 +83,11 @@ class CaptureConfirmationViewController: DTViewController {
         //Set Translation
         headerMsgLabel.text = NSLocalizedString("captureStep3HeaderMsg", comment: "")
         patternTitleLabel.text = NSLocalizedString("captureStep3PatternTitle", comment: "").uppercaseString
-        brandTitleLabel.text = NSLocalizedString("captureStep3BrandTitle", comment: "")
     }
     
     private func setColors(colors: String){
         let colors = self.splitHexColor(colors)
-        for (var i = 0; i < colorBtnCollection.count && i < colors.count; i++){
+        for (var i = 0; i < colorBtnCollection.count && i < colors.count; i += 1){
             setColorStyle(colorBtnCollection[i])
             colorBtnCollection[i].backgroundColor = UIColor.colorWithHexString(colors[i] as String)
             if (i == 0){
@@ -262,9 +258,9 @@ class CaptureConfirmationViewController: DTViewController {
     
     private func getSelectedColor() -> String {
         let hexTranslator = HexColorToName()
-        for(var i=0; i < colorBtnCollection.count; i++){
-            if (colorBtnCollection[i].selected){
-                let colorName = UIColor.colorWithHexString(colorBtnCollection[i].backgroundColor!.hexStringFromColor())
+        for item in colorBtnCollection {
+            if (item.selected){
+                let colorName = UIColor.colorWithHexString(item.backgroundColor!.hexStringFromColor())
                 let name = hexTranslator.name(colorName)
                 return name[1] as! String
             }
@@ -274,18 +270,18 @@ class CaptureConfirmationViewController: DTViewController {
     
     private func getMainColor() -> String {
         var mainColor = ""
-        for (var i=0; i < colorBtnCollection.count; i++){
-            if (colorBtnCollection[i].selected){
+        for item in colorBtnCollection {
+            if (item.selected){
                 if (mainColor.isEmpty){
-                    mainColor = colorBtnCollection[i].backgroundColor!.hexStringFromColor()
+                    mainColor = item.backgroundColor!.hexStringFromColor()
                 } else {
-                    mainColor = colorBtnCollection[i].backgroundColor!.hexStringFromColor() + "," + mainColor
+                    mainColor = item.backgroundColor!.hexStringFromColor() + "," + mainColor
                 }
             } else {
                 if (!mainColor.isEmpty) {
                     mainColor += ","
                 }
-                mainColor += colorBtnCollection[i].backgroundColor!.hexStringFromColor()
+                mainColor += item.backgroundColor!.hexStringFromColor()
             }
             
         }
@@ -318,8 +314,8 @@ class CaptureConfirmationViewController: DTViewController {
     private func applySelect(item: Int){
         for (var j=0; j < self.patternData.count; j++){
             if let cell = pickerView.collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: j, inSection: 0)) as? AKCollectionViewCell{
-                for (var i = 0; i < cell.view.subviews.count; i++){
-                    if let view = cell.view.subviews[i] as? PatternView{
+                for subview in cell.view.subviews {
+                    if let view = subview as? PatternView{
                         let image = j == item ? UIImage(named: "\(self.patternData[j])IconSelect") : UIImage(named: "\(self.patternData[j])Icon");
                         
                         UIView.transitionWithView(view.patternImage, duration: 0.32, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in

@@ -73,13 +73,13 @@ extension TutorialViewController : UIPageViewControllerDataSource, UIPageViewCon
         if (index == 0) {
             return nil
         }
-        index--
+        index -= 1
         return self.viewControllerAtIndex(index)
     
     }
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         var index = (viewController as! TutorialPageViewController).index
-        index++
+        index += 1
         
         if (index == 4) {
             return nil

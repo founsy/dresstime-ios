@@ -103,7 +103,7 @@ class SettingsViewController: DTViewController {
             changeBackground(self.user!.gender!)
         }
         
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SettingsViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
     }

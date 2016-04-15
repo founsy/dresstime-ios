@@ -14,7 +14,7 @@ class DressTimeBL {
     func orderOutfit(outfit: Outfit){
         var clothe = [ClotheModel]()
         
-        for (var i = 0; i < outfit.clothes.count; i++){
+        for (var i = 0; i < outfit.clothes.count; i += 1){
         
         }
     }

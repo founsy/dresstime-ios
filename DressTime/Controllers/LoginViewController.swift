@@ -60,7 +60,7 @@ class LoginViewController: DTViewController {
         super.viewDidLoad()
         
         self.navigationController?.navigationBarHidden = true
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
         self.facebookButton.readPermissions = ["public_profile", "email", "user_friends"];
@@ -115,16 +115,16 @@ class LoginViewController: DTViewController {
 
     
     private func drawBorderButton(){
-        for (var i = 0; i < buttonCollection.count; i++){
+        for i in 0...buttonCollection.count-1 {
             createBorder(buttonCollection[i], isSelect: buttonCollection[i].selected)
-            buttonCollection[i].addTarget(self, action: "createBorderButton:", forControlEvents: UIControlEvents.TouchUpInside)
+            buttonCollection[i].addTarget(self, action: #selector(LoginViewController.createBorderButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         }
     }
     
     func createBorderButton(btn: UIButton){
         removeBorder()
         btn.selected = true
-        for (var i = 0; i < buttonCollection.count; i++){
+        for i in 0...buttonCollection.count-1 {
             createBorder(buttonCollection[i], isSelect: buttonCollection[i].selected)
             if (btn == loginButton){
                 isRegister = false
@@ -160,7 +160,7 @@ class LoginViewController: DTViewController {
     }
     
     private func removeBorder(){
-        for (var i = 0; i < buttonCollection.count; i++){
+        for i in 0...buttonCollection.count-1 {
             buttonCollection[i].selected = false
             for subView in buttonCollection[i].subviews {
                 if (!subView.isKindOfClass(UILabel)){

@@ -66,7 +66,7 @@ class DressTimeService {
     
     private func jsonToBrandClothe(json: JSON) -> [BrandClothe] {
         var brandClothes = [BrandClothe]()
-        for (var i = 0; i < json.arrayValue.count; i++){
+        for i in 0...json.arrayValue.count-1{
             brandClothes.append(BrandClothe(json: json.arrayValue[i]))
         }
         return brandClothes

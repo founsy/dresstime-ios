@@ -119,7 +119,7 @@ extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
             typeCell.delegate = self
             return typeCell
         } else if (indexPath.row == 2) {
-            priceSelectionCell = self.tableView.dequeueReusableCellWithIdentifier("priceSelection")! as! PriceSelectionCell
+            priceSelectionCell = self.tableView.dequeueReusableCellWithIdentifier("priceSelection")! as? PriceSelectionCell
             priceSelectionCell?.delegate = self
             return priceSelectionCell!
         } else if (indexPath.row == 3){
@@ -143,7 +143,7 @@ extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         var minPrice : NSNumber?
-        for (var i = 0; i < typeFiltered.count; i++){
+        for i in 0...typeFiltered.count-1 {
             if (minPrice == nil){
                 minPrice = typeFiltered[i].clothe_price
             }
@@ -161,7 +161,7 @@ extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         var maxPrice : NSNumber?
-        for (var i = 0; i < typeFiltered.count; i++){
+        for i in 0...typeFiltered.count-1 {
             if (maxPrice == nil){
                 maxPrice = typeFiltered[i].clothe_price
             }
