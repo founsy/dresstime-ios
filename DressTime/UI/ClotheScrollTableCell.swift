@@ -29,7 +29,7 @@ class ClotheScrollTableCell: UITableViewCell {
         self.scrollView.pagingEnabled = true
         self.scrollView.delegate = self
         
-        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: "singleTapped:")
+        let singleTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ClotheScrollTableCell.singleTapped(_:)))
         singleTapGestureRecognizer.numberOfTapsRequired = 1
         singleTapGestureRecognizer.enabled = true
         //singleTapGestureRecognizer.cancelsTouchesInView = false
@@ -47,7 +47,7 @@ class ClotheScrollTableCell: UITableViewCell {
     func setupScrollView(width: CGFloat, height: CGFloat){
         if let collection = self.clotheCollection {
             self.scrollView.contentSize = CGSizeMake(width * CGFloat(collection.count), height)
-            for (var i = 0; i < collection.count; i++){
+            for i in 0 ..< collection.count{
                 let view = NSBundle.mainBundle().loadNibNamed("ClotheTableCell", owner: self, options: nil)[0] as! ClotheTableViewCell
                 view.frame = CGRectMake(CGFloat(i)*width, 0, width, height+1)
                 let image = collection[i].getImage()

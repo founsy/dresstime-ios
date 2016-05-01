@@ -113,7 +113,7 @@ class DressingSynchro {
         dressingSvc.GetDressing { (isSuccess, object) -> Void in
             if (isSuccess){
                 let clotheDAL = ClothesDAL()
-                for (var i = 0; i < object.arrayValue.count; i++) {
+                for i in 0 ..< object.arrayValue.count {
                     let clothe = object.arrayValue[i]
                     let isUnis = clothe["clothe_isUnis"].boolValue
                 
@@ -129,11 +129,11 @@ class DressingSynchro {
         let dressingSvc = DressingService()
         let clothes = clotheDAL.fetch()
         var numberSync = 0
-        for (var i = 0; i < clothes.count; i++){
+        for i in 0 ..< clothes.count {
             dressingSvc.GetImageClothe(clothes[i].clothe_id, completion: { (isSuccess, object) -> Void in
                 if (isSuccess){
                     clotheDAL.updateClotheImage(object["clothe_id"].stringValue, imageBase64: object["clothe_image"].stringValue)
-                    numberSync++
+                    numberSync += 1
                     if let del = self.delagate{
                         del.dressingSynchro(self, synchingProgressing: numberSync, totalNumber: clothes.count)
                     }

@@ -40,12 +40,13 @@ class OutfitViewController: DTViewController {
         
         
         var isModify = false
-        for (var i = 0; i < currentOutfits.count; i++){
+        for i in 0..<currentOutfits.count {
             isModify = isModify || (currentOutfits[i].clothe_id != outfitObject?.clothes[i].clothe_id)
         }
         
         if (isModify){
             self.outfitObject?.clothes = currentOutfits
+            self.outfitObject?.orderOutfit()
             self.outfitObject?.isSuggestion = !isModify
         }
         
@@ -107,19 +108,19 @@ class OutfitViewController: DTViewController {
             if (mailles.count > 0){
                 self.currentOutfits.append(ClotheModel(clothe: mailles[0]))
             } else {
-                self.number--
+                self.number -= 1
             }
             let tops = dal.fetch(type: "top")
             if (tops.count > 0){
                 self.currentOutfits.append(ClotheModel(clothe: tops[0]))
             } else {
-                self.number--
+                self.number -= 1
             }
             let pants = dal.fetch(type: "pants")
             if (pants.count > 0){
                 self.currentOutfits.append(ClotheModel(clothe: pants[0]))
             } else {
-                self.number--
+                self.number -= 1
             }
         }
         
@@ -151,7 +152,7 @@ extension OutfitViewController: ClotheScrollTableCellDelegate {
     }
     
     func clotheScrollTableCell(clotheScrollTableCell : ClotheScrollTableCell, didSelectedClothe clothe: Clothe) {
-        for (var i = 0; i < self.currentOutfits.count; i++){
+        for i in 0 ..< self.currentOutfits.count{
             if (self.currentOutfits[i].clothe_type == clothe.clothe_type){
                 self.currentOutfits[i] = ClotheModel(clothe: clothe)
             }

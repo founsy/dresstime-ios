@@ -119,6 +119,9 @@ class ProfilViewController: DTTableViewController {
         self.navigationController?.navigationBar.alpha = 1.0
         
     }
+    
+    
+    
     private func updateHeaderView(){
         var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: tableView.bounds.width, height: kTableHeaderHeight)
         if  tableView.contentOffset.y < -kTableHeaderHeight {

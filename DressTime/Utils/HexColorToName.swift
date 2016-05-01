@@ -14,8 +14,7 @@ class HexColorToName {
    
     init(){
         var color: String, rgb:[Int], hsl: [Int], uiColor: UIColor;
-        for(var i = 0; i < self.colorName.count; i++)
-        {
+        for i in 0 ..< self.colorName.count {
             self.colorName[i][0] = (self.colorName[i][0] as! String).uppercaseString
             color = "#" + (self.colorName[i][0] as! String);
             uiColor = UIColor.colorWithHexString(color)
@@ -42,7 +41,7 @@ class HexColorToName {
         var cl = -1
         var df = -1;
     
-        for(var i = 0; i < self.colorName.count; i++){
+        for i  in 0 ..< self.colorName.count {
             let colorName = "#" + (self.colorName[i][0] as! String)
             if(color == colorName) {
                 return [colorName , self.colorName[i][1], true];

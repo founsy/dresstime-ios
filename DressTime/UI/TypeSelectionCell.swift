@@ -21,23 +21,23 @@ class TypeSelectionCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         if (SharedData.sharedInstance.sexe == "M"){
-            for var i = 0; i < buttonType.count; i++ {
+            for i in 0 ..< buttonType.count {
                 if (buttonType[i].accessibilityIdentifier == "dress"){
                     buttonType[i].hidden = true
                 }
             }
         }
-        for (var i = 0; i < buttonType.count; i++){
+        for i in 0 ..< buttonType.count{
             buttonType[i].setTitle(NSLocalizedString(buttonType[i].accessibilityIdentifier!, comment: "").uppercaseString, forState: .Normal)
         }
     }
     
     func drawBorderButton(){
-        for (var i = 0; i < buttonType.count; i++){
+        for i in 0 ..< buttonType.count {
             if (buttonType[i].selected){
                  createBorder(buttonType[i])
             }
-            buttonType[i].addTarget(self, action: "createBorderButton:", forControlEvents: UIControlEvents.TouchUpInside)
+            buttonType[i].addTarget(self, action: #selector(TypeSelectionCell.createBorderButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         }
     }
     
@@ -59,7 +59,7 @@ class TypeSelectionCell: UITableViewCell {
     }
 
     private func removeBorder(){
-        for (var i = 0; i < buttonType.count; i++){
+        for i in 0 ..< buttonType.count{
             buttonType[i].selected = false
             for subView in buttonType[i].subviews {
                 if (!subView.isKindOfClass(UILabel)){

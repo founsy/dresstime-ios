@@ -19,20 +19,20 @@ class StepsControl: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        for (var i = 0; i < stepsViewCollections.count; i++){
+        for i in 0 ..< stepsViewCollections.count {
             stepsViewCollections[i].layer.borderColor = UIColor.whiteColor().CGColor
             stepsViewCollections[i].layer.borderWidth = 1
             stepsViewCollections[i].backgroundColor = UIColor.clearColor()
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"updateValue:", name: "NewClotheAddedNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(StepsControl.updateValue(_:)), name: "NewClotheAddedNotification", object: nil)
     }
     
     func updateValue(notification: NSNotification) {
         let userInfo = notification.userInfo as! [String: AnyObject]
         let type = userInfo["type"] as! String
         if (type.lowercaseString == currentType!.lowercaseString){
-            number++
+            number += 1
             updateStepViews(number)
             
         }
@@ -43,7 +43,7 @@ class StepsControl: UIView {
     func updateStepViews(number: Int){
         if (number > self.stepsViewCollections.count) {
             self.titleLabel.hidden = true
-            for (var j = 0; j < self.stepsViewCollections.count; j++){
+            for j in 0 ..< self.stepsViewCollections.count{
                 self.stepsViewCollections[j].hidden = true
             }
             return
@@ -62,7 +62,7 @@ class StepsControl: UIView {
         }
         self.titleLabel.attributedText = mutableString
         
-        for (var j = 0; j < self.stepsViewCollections.count; j++){
+        for j in 0 ..< self.stepsViewCollections.count {
             self.stepsViewCollections[j].hidden = false
             if (j < number){
                 self.stepsViewCollections[j].backgroundColor = UIColor.dressTimeOrange()

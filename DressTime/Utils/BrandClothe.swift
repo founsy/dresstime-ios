@@ -27,8 +27,8 @@ public class BrandClothe: ClotheModel{
         
         self.clothes = [ClotheModel]()
         
-        for (var i = 0; i < json["clothes"].arrayValue.count; i++){
-            self.clothes.append(ClotheModel(json: json["clothes"].arrayValue[i]["clothe"]))
+        for item in json["clothes"].arrayValue {
+            self.clothes.append(ClotheModel(json: item["clothe"]))
         }
         
         super.init(json: json["brandClothe"])

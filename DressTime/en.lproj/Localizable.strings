@@ -148,7 +148,6 @@
 "settingsErrButton" = "Okay";
 
 /* Capture Confirmation */
-"captureStep2HeaderMsg" = "Try to shoot the main body of your shirt";
 "captureStep2ColorMsg" = "the awesome color of your clothe";
 "captureStep3ModifyBtn" = "Modify";
 "captureStep3AddBtn" = "Add";

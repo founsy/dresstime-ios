@@ -207,7 +207,7 @@ class HomeViewController: DTViewController {
        
     }
     
-    private func setTitleNavBar(city: String){
+    private func setTitleNavBar(city: String?){
         let myView = NSBundle.mainBundle().loadNibNamed("TitleNavBar", owner: self, options: nil)[0] as! TitleNavBar
         myView.frame = CGRectMake(0, 0, 300, 30)
         myView.cityLabel.text = city
@@ -222,7 +222,7 @@ class HomeViewController: DTViewController {
         }
         
         var result = true
-        for (var i = 0; i < type.count; i += 1){
+        for i in 0 ..< type.count {
             result = result && (clotheDAL.fetch(type: type[i].lowercaseString).count >= 3)
         }
         return result
@@ -242,10 +242,12 @@ class HomeViewController: DTViewController {
                     self.iconLabel.text = self.currentWeather!.icon != nil ? self.currentWeather!.icon! : ""
                     let temperature:Int = self.currentWeather!.temp != nil ? self.currentWeather!.temp! : 0
                     self.temperatureLabel.text = "\(temperature)°"
-                    self.setTitleNavBar(self.currentWeather!.city!)
+                    self.setTitleNavBar(self.currentWeather?.city)
                     UIView.animateWithDuration(0.2, animations: { () -> Void in
                         if (self.isEnoughClothe()) {
-                            self.bgView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(self.currentWeather!.code!))
+                            if let code = self.currentWeather?.code {
+                                self.bgView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(code))
+                            }
                         }
                     })
                 })

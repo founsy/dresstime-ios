@@ -25,7 +25,7 @@ class HomeEmptyStepCell: UITableViewCell {
         let type = SharedData.sharedInstance.getType(SharedData.sharedInstance.sexe!)
         let clotheDAL = ClothesDAL()
         
-        for (var i = 0; i < type.count; i++) {
+        for i in 0 ..< type.count {
             let number = clotheDAL.fetch(type: type[i].lowercaseString).count
             let view = NSBundle.mainBundle().loadNibNamed("EmptyTypeView", owner: self, options: nil)[0] as! EmptyTypeView
             view.iconImage.image = UIImage(named: getImageName(type[i]))

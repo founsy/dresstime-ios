@@ -86,37 +86,40 @@ class CalendarViewController: DTViewController {
     
     private func createOutfitView(outfit: Outfit, cell: ClotheCalendarCell){
         var j = 1
-        //let outfit = outfitElem["outfit"]
-        let dal = ClothesDAL()
- 
-        for i in outfit.clothes.count-1...0 {
-            let clothe_id = outfit.clothes[i].clothe_id
-            if let clothe = dal.fetch(clothe_id) {
-                let width:CGFloat = cell.containerView.frame.width
-                var height:CGFloat = CGFloat(cell.containerView.frame.height/CGFloat(outfit.clothes.count))
-                let x:CGFloat = 0
-                var y:CGFloat = 0
-                
-                if (outfit.clothes.count == 1){
-                    height = cell.containerView.frame.height
-                } else if (outfit.clothes.count == 2){
-                    height = 186.6
-                } else {
-                    height = 143.3
+        if (outfit.clothes.count > 0){
+            //Be sure the order of clothes are ok
+            outfit.orderOutfit()
+            let dal = ClothesDAL()
+     
+            for i in (outfit.clothes.count-1).stride(to: 0, by: -1) {
+                let clothe_id = outfit.clothes[i].clothe_id
+                if let clothe = dal.fetch(clothe_id) {
+                    let width:CGFloat = cell.containerView.frame.width
+                    var height:CGFloat = CGFloat(cell.containerView.frame.height/CGFloat(outfit.clothes.count))
+                    let x:CGFloat = 0
+                    var y:CGFloat = 0
+                    
+                    if (outfit.clothes.count == 1){
+                        height = cell.containerView.frame.height
+                    } else if (outfit.clothes.count == 2){
+                        height = 186.6
+                    } else {
+                        height = 143.3
+                    }
+                    
+                    if (i == 0){
+                        y = 0
+                    } else if (outfit.clothes.count-1 == i) {
+                        y = cell.containerView.frame.height - height
+                    } else {
+                        y = cell.containerView.frame.height - (height * CGFloat(j)) + (height/2.0)
+                    }
+                    
+                    let rect = CGRectMake(x, y, width, height)
+                    j += 1
+                    
+                    cell.createClotheView(clothe, rect: rect)
                 }
-                
-                if (i == 0){
-                    y = 0
-                } else if (outfit.clothes.count-1 == i) {
-                    y = cell.containerView.frame.height - height
-                } else {
-                    y = cell.containerView.frame.height - (height * CGFloat(j)) + (height/2.0)
-                }
-                
-                let rect = CGRectMake(x, y, width, height)
-                j += 1
-                
-                cell.createClotheView(clothe, rect: rect)
             }
         }
     }
@@ -132,8 +135,6 @@ class CalendarViewController: DTViewController {
     }
     
     private func didEndScrolling(scrollView: UIScrollView){
-        //let center = self.view.convertPoint(scrollView.center, toView: scrollView)
-        
         var center = scrollView.frame.origin;
         center.x += scrollView.frame.size.width / 2;
         center.y += scrollView.frame.size.height / 2;
@@ -149,15 +150,7 @@ class CalendarViewController: DTViewController {
                 self.collectionView(self.collectionView, didDeselectItemAtIndexPath: NSIndexPath(forItem: self.cellSelected, inSection: 0))
                 self.collectionView(self.collectionView, didSelectItemAtIndexPath: NSIndexPath(forItem: indexPath.section, inSection: 0))
             }
-        } /*else if (scrollView == collectionView){
-            if let indexPath = self.collectionView.indexPathForItemAtPoint(center) {
-                self.collectionView.deselectItemAtIndexPath(NSIndexPath(forItem: self.cellSelected, inSection: 0), animated: true)
-                self.collectionView(self.collectionView, didDeselectItemAtIndexPath: NSIndexPath(forItem: self.cellSelected, inSection: 0))
-                self.collectionView(self.collectionView, didSelectItemAtIndexPath: NSIndexPath(forItem: indexPath.row, inSection: 0))
-                self.tableView.selectRowAtIndexPath(NSIndexPath(forItem: 0, inSection: indexPath.row), animated: true, scrollPosition: .None)
-                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: 0, inSection: indexPath.row), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
-            }
-        } */
+        }
     }
 }
 
@@ -202,6 +195,8 @@ extension CalendarViewController : UITableViewDataSource , UITableViewDelegate {
             self.didEndScrolling(scrollView)
         }
     }
+    
+    
 
 }
 
@@ -264,14 +259,6 @@ extension CalendarViewController : UICollectionViewDelegate {
         cell?.roundView.layer.masksToBounds = true
         cellSelected = -1
         
-    }
-}
-
-extension Int {
-    var days: NSTimeInterval {
-        let DAY_IN_SECONDS = 60 * 60 * 24
-        let days:Double = Double(DAY_IN_SECONDS) * Double(self)
-        return days
     }
 }
 
@@ -346,6 +333,12 @@ extension Int {
     
     var day: TimeInterval {
         return TimeInterval(interval: self, unit: TimeIntervalUnit.Days);
+    }
+    
+    var days: NSTimeInterval {
+        let DAY_IN_SECONDS = 60 * 60 * 24
+        let days:Double = Double(DAY_IN_SECONDS) * Double(self)
+        return days
     }
 }
 

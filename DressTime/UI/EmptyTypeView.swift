@@ -28,15 +28,15 @@ class EmptyTypeView : UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        for (var i = 0; i < viewSteps.count; i++){
+        for i in 0 ..< viewSteps.count {
             viewSteps[i].layer.borderColor = UIColor.whiteColor().CGColor
             viewSteps[i].layer.borderWidth = 1
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"updateValue:", name: "NewClotheAddedNotification", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"updateValue:", name: "ClotheDeletedNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(EmptyTypeView.updateValue(_:)), name: "NewClotheAddedNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(EmptyTypeView.updateValue(_:)), name: "ClotheDeletedNotification", object: nil)
         
-        let tap = UITapGestureRecognizer(target: self, action: Selector("handleTap:"))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(EmptyTypeView.handleTap(_:)))
         self.addGestureRecognizer(tap)
     }
     
@@ -61,7 +61,7 @@ class EmptyTypeView : UIView {
         let calculNumber = viewSteps.count - number <= 0 ? 0 : viewSteps.count - number
         
         self.titleLabel.text = "\(calculNumber) \(NSLocalizedString(self.currentType!, comment: "").uppercaseString)"
-        for (var j = 0; j < self.viewSteps.count; j++){
+        for j in 0 ..< self.viewSteps.count {
             if (j < number){
                 self.viewSteps[j].backgroundColor = UIColor.dressTimeOrange()
             } else {

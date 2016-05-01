@@ -41,7 +41,7 @@ class CaptureConfirmationViewController: DTViewController {
     }
 
     @IBAction func onTouchUpColor(sender: UIButton) {
-        for (var i = 0; i < colorBtnCollection.count; i++){
+        for i in 0 ..< colorBtnCollection.count{
             if (colorBtnCollection[i] == sender){
                 colorBtnCollection[i].selected = true
                 colorBtnCollection[i].layer.borderWidth = 2.0
@@ -312,7 +312,7 @@ class CaptureConfirmationViewController: DTViewController {
     }
     
     private func applySelect(item: Int){
-        for (var j=0; j < self.patternData.count; j++){
+        for j in 0 ..< self.patternData.count {
             if let cell = pickerView.collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: j, inSection: 0)) as? AKCollectionViewCell{
                 for subview in cell.view.subviews {
                     if let view = subview as? PatternView{

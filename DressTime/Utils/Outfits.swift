@@ -31,12 +31,12 @@ public class Outfit: NSObject{
         
         self.clothes = [ClotheModel]()
         if (json["outfit"].arrayValue.count > 0) {
-            for (var i = 0; i < json["outfit"].arrayValue.count; i += 1){
-                self.clothes.append(ClotheModel(json: json["outfit"][i]))
+            for clothe in json["outfit"].arrayValue {
+                self.clothes.append(ClotheModel(json: clothe))
             }
         } else if (json["clothes"].arrayValue.count > 0) {
-            for (var i = 0; i < json["clothes"].arrayValue.count; i += 1){
-                self.clothes.append(ClotheModel(json: json["clothes"][i]))
+            for clothe in json["clothes"].arrayValue {
+                self.clothes.append(ClotheModel(json: clothe))
             }
         }
     }
@@ -70,6 +70,43 @@ public class Outfit: NSObject{
         }
         
         return dictionnary
+    }
+    
+    
+    enum ClotheType : String {
+        case maille = "maille"
+        case top = "top"
+        case dress = "dress"
+        case pants = "pants"
+    }
+    
+    enum ClotheOrder : Int {
+        case maille = 0
+        case top = 1
+        case dress = 2
+        case pants = 3
+    }
+    
+    func orderOutfit() {
+        var clothes = [ClotheModel]()
+        
+        for item in self.clothes {
+            switch ClotheType(rawValue: item.clothe_type)! {
+            case ClotheType.maille :
+                clothes.insert(item, atIndex: ClotheOrder.maille.rawValue)
+                break
+            case ClotheType.top :
+                clothes.insert(item, atIndex: ClotheOrder.top.rawValue)
+                break
+            case ClotheType.dress :
+                clothes.insert(item, atIndex: ClotheOrder.dress.rawValue - 1)
+                break
+            case ClotheType.pants :
+                clothes.insert(item, atIndex: ClotheOrder.pants.rawValue - 1)
+                break
+            }
+        }
+        self.clothes = clothes
     }
 }
 

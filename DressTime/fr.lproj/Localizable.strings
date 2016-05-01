@@ -148,8 +148,7 @@
 "settingsErrButton" = "Okay";
 
 /* Capture Confirmation */
-"captureStep2HeaderMsg" = "Capture la partie principal de ton vêtement!";
-"captureStep2ColorMsg" = "Les magnigique couleurs de ton vêtement :";
+"captureStep2ColorMsg" = "Couleurs principales";
 "captureStep3ModifyBtn" = "Modifier";
 "captureStep3AddBtn" = "Ajouter";
 "captureStep3HeaderMsg" = "Super shoot! Tout est parfait ?";

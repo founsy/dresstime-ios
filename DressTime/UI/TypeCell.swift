@@ -28,10 +28,11 @@ class TypeCell: UITableViewCell {
     
     
     @IBAction func onAddTypedTapped(sender: AnyObject) {
-        if let del = self.delegate {
+        //TODO - Fix the issue on tap long
+        /*if let del = self.delegate {
             self.viewLongPress.hidden = true
             del.typeCell(self, didSelectType: self.indexPath!)
-        }
+        }*/
     }
     
     override func awakeFromNib() {

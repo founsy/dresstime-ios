@@ -33,7 +33,7 @@ class OufitCell: UICollectionViewCell {
     func createOutfitView(outfit: Outfit, cell: OufitCell){
         var j = 1
         let dal = ClothesDAL()
-        for (var i = outfit.clothes.count-1; i >= 0 ; i--){
+        for i in (outfit.clothes.count-1).stride(to: 0, by: -1) {
             let clothe_id = outfit.clothes[i].clothe_id
             if let clothe = dal.fetch(clothe_id) {
                 let width:CGFloat = cell.containerView.frame.width
@@ -58,7 +58,7 @@ class OufitCell: UICollectionViewCell {
                 }
                 
                 let rect = CGRectMake(x, y, width, height)
-                j++
+                j += 1
                 
                 self.createClotheView(clothe, rect: rect)
             }

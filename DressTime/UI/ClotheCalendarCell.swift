@@ -62,7 +62,7 @@ class ClotheCalendarCell : UITableViewCell {
         view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
         view.layer.masksToBounds = true
         view.accessibilityIdentifier = type
-        let gesture = UITapGestureRecognizer(target: self, action: "someAction:")
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(ClotheCalendarCell.someAction(_:)))
         view.addGestureRecognizer(gesture)
         
         let img = UIImage(named: imageNamed)!

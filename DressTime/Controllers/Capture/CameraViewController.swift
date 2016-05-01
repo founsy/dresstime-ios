@@ -34,8 +34,6 @@ class CameraViewController : DTViewController {
     @IBOutlet weak var color3View: UIView!
     @IBOutlet weak var color2View: UIView!
     @IBOutlet weak var opacityView: UIView!
-    
-    @IBOutlet weak var messageHeaderLabel: UILabel!
     @IBOutlet weak var messageColorLabel: UILabel!
     
     @IBAction func onBackButton(sender: AnyObject) {
@@ -113,7 +111,6 @@ class CameraViewController : DTViewController {
         self.arrayUIView.append(self.color3View)
         
         //Set Translation
-        messageHeaderLabel.text = NSLocalizedString("captureStep2HeaderMsg", comment: "Try to shoot the main body of your shirt")
         messageColorLabel.text = NSLocalizedString("captureStep2ColorMsg", comment: "the awesome color of your clothe")
     }
     
@@ -224,8 +221,7 @@ class CameraViewController : DTViewController {
     
     private func wrapResultObject(image: NSData, labels: [String]) -> [String: AnyObject]{
         var colors = ""
-        
-        for var i = 0; i < self.arrayColors.count && i < 3; i++ {
+        for i in 0 ..< min(self.arrayColors.count, 3) {
             if (colors != ""){
                 colors+=","
             }

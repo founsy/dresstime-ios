@@ -738,14 +738,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MLJ-jb-6JY" userLabel="OpacitiyView">
                                 <rect key="frame" x="0.0" y="-1" width="320" height="569"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try to shoot the main body of your shirt" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O8P-N7-Pqs">
-                                        <rect key="frame" x="8" y="60" width="304" height="20.5"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="248" verticalCompressionResistancePriority="749" image="ScanArea" translatesAutoresizingMaskIntoConstraints="NO" id="vev-dv-jet">
-                                        <rect key="frame" x="22" y="95" width="276" height="303"/>
+                                        <rect key="frame" x="22" y="65" width="276" height="333"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="the awesome color of your clothe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7SK-1h-Oni">
                                         <rect key="frame" x="8" y="413" width="304" height="20.5"/>
@@ -805,10 +799,9 @@
                                     <constraint firstAttribute="trailing" secondItem="7SK-1h-Oni" secondAttribute="trailing" constant="8" id="15s-52-HIS"/>
                                     <constraint firstAttribute="centerX" secondItem="EB7-cq-c2y" secondAttribute="centerX" id="2mH-27-anv"/>
                                     <constraint firstItem="EB7-cq-c2y" firstAttribute="top" secondItem="7SK-1h-Oni" secondAttribute="bottom" constant="10" id="6Li-WX-GAE"/>
-                                    <constraint firstItem="O8P-N7-Pqs" firstAttribute="leading" secondItem="MLJ-jb-6JY" secondAttribute="leading" constant="8" id="6kd-AL-Ynj"/>
                                     <constraint firstItem="tHU-u9-v0L" firstAttribute="top" secondItem="7SK-1h-Oni" secondAttribute="bottom" constant="10" id="InR-Xd-Bnl"/>
                                     <constraint firstItem="EB7-cq-c2y" firstAttribute="leading" secondItem="XWr-vd-GJh" secondAttribute="trailing" constant="30" id="L3F-Y8-wW0"/>
-                                    <constraint firstItem="O8P-N7-Pqs" firstAttribute="top" secondItem="MLJ-jb-6JY" secondAttribute="top" constant="60" id="QMa-gp-16y"/>
+                                    <constraint firstItem="vev-dv-jet" firstAttribute="top" secondItem="MLJ-jb-6JY" secondAttribute="top" constant="65" id="MAz-eP-ix3"/>
                                     <constraint firstItem="7SK-1h-Oni" firstAttribute="top" secondItem="vev-dv-jet" secondAttribute="bottom" constant="15" id="UVl-ce-SF8"/>
                                     <constraint firstAttribute="centerX" secondItem="rdx-6e-hbZ" secondAttribute="centerX" id="WTW-Me-FCb"/>
                                     <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="vev-dv-jet" secondAttribute="trailing" constant="35" id="ZuQ-L7-SSL"/>
@@ -817,9 +810,7 @@
                                     <constraint firstItem="vev-dv-jet" firstAttribute="leading" relation="lessThanOrEqual" secondItem="MLJ-jb-6JY" secondAttribute="leading" constant="35" id="fct-nI-vT4"/>
                                     <constraint firstAttribute="trailing" secondItem="7e7-Wd-PAM" secondAttribute="trailing" constant="20" id="gMt-H7-QO5"/>
                                     <constraint firstItem="rdx-6e-hbZ" firstAttribute="top" secondItem="EB7-cq-c2y" secondAttribute="bottom" constant="15" id="mex-q6-Qz4"/>
-                                    <constraint firstItem="vev-dv-jet" firstAttribute="top" secondItem="O8P-N7-Pqs" secondAttribute="bottom" constant="15" id="mwy-FY-ZnQ"/>
                                     <constraint firstAttribute="bottom" secondItem="rdx-6e-hbZ" secondAttribute="bottom" constant="10" id="nWN-8F-hmc"/>
-                                    <constraint firstAttribute="trailing" secondItem="O8P-N7-Pqs" secondAttribute="trailing" constant="8" id="qWU-bl-RfA"/>
                                     <constraint firstAttribute="bottom" secondItem="7e7-Wd-PAM" secondAttribute="bottom" constant="10" id="qyD-la-aQu"/>
                                     <constraint firstAttribute="centerX" secondItem="vev-dv-jet" secondAttribute="centerX" id="rNU-Cz-bsr"/>
                                     <constraint firstItem="7SK-1h-Oni" firstAttribute="leading" secondItem="MLJ-jb-6JY" secondAttribute="leading" constant="8" id="ufH-ey-neA"/>
@@ -831,14 +822,8 @@
                             <constraint firstItem="MLJ-jb-6JY" firstAttribute="leading" secondItem="eaS-af-Jp0" secondAttribute="leading" id="BEJ-gB-uNw"/>
                             <constraint firstAttribute="trailing" secondItem="MLJ-jb-6JY" secondAttribute="trailing" id="EZZ-Ct-M25"/>
                             <constraint firstItem="MLJ-jb-6JY" firstAttribute="top" secondItem="eaS-af-Jp0" secondAttribute="topMargin" constant="-1" id="Eks-4y-HMt"/>
-                            <constraint firstItem="O8P-N7-Pqs" firstAttribute="top" secondItem="HNg-qZ-aVc" secondAttribute="bottom" id="G1z-E9-UKU"/>
                             <constraint firstItem="MLJ-jb-6JY" firstAttribute="bottom" secondItem="eaS-af-Jp0" secondAttribute="bottomMargin" id="KF6-In-k3t"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="G1z-E9-UKU"/>
-                            </mask>
-                        </variation>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="wkC-zn-6y1">
@@ -861,7 +846,6 @@
                         <outlet property="color2View" destination="EB7-cq-c2y" id="nDc-U2-Ogz"/>
                         <outlet property="color3View" destination="tHU-u9-v0L" id="18B-lZ-hpm"/>
                         <outlet property="messageColorLabel" destination="7SK-1h-Oni" id="XdB-lS-wF6"/>
-                        <outlet property="messageHeaderLabel" destination="O8P-N7-Pqs" id="X1r-wY-bRj"/>
                         <outlet property="opacityView" destination="MLJ-jb-6JY" id="smr-8c-kP3"/>
                         <outlet property="scanArea" destination="vev-dv-jet" id="mVJ-xS-zAE"/>
                         <segue destination="MSz-xx-K8e" kind="show" identifier="showConfirmation" id="k6Y-Tt-a1n"/>
@@ -1871,7 +1855,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9XB-o1-vFQ">
+                            <collectionView clipsSubviews="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9XB-o1-vFQ">
                                 <rect key="frame" x="270" y="104" width="50" height="375"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -3142,11 +3126,11 @@ LET’S SELECT YOUR OWN STYLE</string>
         <image name="underwearIconF" width="84" height="153"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vVh-u2-n8x"/>
-        <segue reference="ltp-qt-tPn"/>
+        <segue reference="RQo-jk-TTL"/>
         <segue reference="PqT-cY-1Tt"/>
+        <segue reference="k6Y-Tt-a1n"/>
         <segue reference="LUV-K9-I0Y"/>
         <segue reference="H2a-vj-les"/>
-        <segue reference="Mz3-Xd-4Oh"/>
+        <segue reference="vVh-u2-n8x"/>
     </inferredMetricsTieBreakers>
 </document>
