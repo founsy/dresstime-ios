@@ -56,7 +56,11 @@ extension HomeOutfitsListCell: UICollectionViewDataSource, UICollectionViewDeleg
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! OufitCell
         cell.removeOldImages()
         let outfitElem = self.dataSource!.homeOutfitsListCell(self, outfitForItem: indexPath.row)
-        cell.createOutfitView(outfitElem, cell: cell)
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            cell.createOutfitView(outfitElem, cell: cell)
+        })
+        cell.layer.shouldRasterize = true
+        cell.layer.rasterizationScale = UIScreen.mainScreen().scale
         return cell
     }
     

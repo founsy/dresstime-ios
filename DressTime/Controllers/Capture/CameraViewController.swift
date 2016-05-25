@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 import AVFoundation
 import DominantColor
-import Parse
 
 class CameraViewController : DTViewController {
     

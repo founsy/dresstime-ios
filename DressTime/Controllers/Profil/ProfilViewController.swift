@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import Parse
 
 class ProfilViewController: DTTableViewController {
     let cellIdentifier = "profilTypeCell"
@@ -107,11 +106,8 @@ class ProfilViewController: DTTableViewController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        let dimensions = [
-            "page" : "Profil",
-        ]
-        PFAnalytics.trackEvent("page", dimensions: dimensions)
-        
+       
+        OneSignal.defaultClient().sendTag("page", value: "Profil")
     }
     
     override func viewDidDisappear(animated: Bool) {

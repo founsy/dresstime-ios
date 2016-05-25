@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import Parse
 
 class ShoppingViewController: DTViewController {
     @IBOutlet weak var tableView: UITableView!

@@ -16,7 +16,6 @@ protocol OutfitCellDelegate {
 class OufitCell: UICollectionViewCell {
     
     @IBOutlet weak var containerView: UIView!
-    @IBOutlet weak var checkImageView: UIImageView!
     @IBOutlet weak var containerMomentImage: UIView!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var momentLabel: UILabel!
@@ -26,14 +25,13 @@ class OufitCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        checkImageView.hidden = true
         containerMomentImage.roundCorners(.AllCorners, radius: 27.5)
     }
     
     func createOutfitView(outfit: Outfit, cell: OufitCell){
         var j = 1
         let dal = ClothesDAL()
-        for i in (outfit.clothes.count-1).stride(to: 0, by: -1) {
+        for i in (outfit.clothes.count-1).stride(through: 0, by: -1) {
             let clothe_id = outfit.clothes[i].clothe_id
             if let clothe = dal.fetch(clothe_id) {
                 let width:CGFloat = cell.containerView.frame.width
@@ -63,8 +61,7 @@ class OufitCell: UICollectionViewCell {
                 self.createClotheView(clothe, rect: rect)
             }
         }
-        self.setMomentIcon(outfit.moment!)
-        self.putOnStyle(outfit.isPutOn)
+        self.putOnStyle(outfit.isPutOn, moment: outfit.moment!)
     }
     
     
@@ -84,27 +81,28 @@ class OufitCell: UICollectionViewCell {
 
     
     private func createClotheView(clothe: Clothe, rect: CGRect){
-        let view = UIView(frame: rect)
-        view.backgroundColor = UIColor.clearColor()
-        view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
-        view.layer.masksToBounds = true
+         let view = UIView(frame: rect)
+            view.backgroundColor = UIColor.clearColor()
+            view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
+            view.layer.masksToBounds = true
         
-        var img = clothe.getImage()
+            var img = clothe.getImage()
         
-        var mode = UIViewContentMode.Top
-        if (rect.size.height != containerView.frame.size.height){
-            img = img.imageResize(CGSizeMake(rect.size.width, rect.size.height))
-        } else {
-            mode = UIViewContentMode.ScaleToFill
-        }
+            var mode = UIViewContentMode.Top
+            if (rect.size.height != self.containerView.frame.size.height){
+                img = img.imageResize(CGSizeMake(rect.size.width, rect.size.height))
+            } else {
+                mode = UIViewContentMode.ScaleToFill
+            }
+            
+            let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
         
-        let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
-        imageView.image = img
-        imageView.contentMode = mode
-
-        applyPlainShadow(view)
-        view.addSubview(imageView)
-        containerView.addSubview(view)
+                imageView.image = img
+                imageView.contentMode = mode
+        
+            self.applyPlainShadow(view)
+            view.addSubview(imageView)
+            self.containerView.addSubview(view)
     }
     
     private func setMomentIcon(moment: String){
@@ -123,17 +121,23 @@ class OufitCell: UICollectionViewCell {
     
     }
         
-    private func putOnStyle(isPutOn: Bool){
+    private func putOnStyle(isPutOn: Bool, moment: String){
         if (isPutOn){
-            self.containerView.layer.borderWidth = 5.0
-            self.containerView.layer.cornerRadius = 3.0
-            self.containerView.layer.borderColor = UIColor.dressTimeOrange().CGColor
-            checkImageView.hidden = false
+            self.containerView.layer.borderWidth = 3.0
+            self.containerView.layer.cornerRadius = 2.0
+            self.containerView.layer.borderColor = UIColor.whiteColor().CGColor
+            self.containerMomentImage.backgroundColor = UIColor.whiteColor()
+            self.imageView.image = UIImage(named: "crossIcon")
+            self.imageView.tintColor = UIColor.dressTimeRedBrand()
+            self.momentLabel.textColor = UIColor.dressTimeRedBrand()
         } else {
             self.containerView.layer.borderWidth = 0.0
             self.containerView.layer.cornerRadius = 0.0
             self.containerView.layer.borderColor = UIColor.clearColor().CGColor
-            checkImageView.hidden = true
+            self.containerMomentImage.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
+            setMomentIcon(moment)
+            self.imageView.tintColor = UIColor.whiteColor()
+            self.momentLabel.textColor = UIColor.whiteColor()
         }
     
     }

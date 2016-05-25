@@ -53,11 +53,11 @@ class StepsControl: UIView {
         if (number >= 0 && number <= 2) {
             mutableString = NSMutableAttributedString(string: "\(stepsViewCollections.count - number) \(getLabel(number))"
             ,attributes: [NSFontAttributeName:UIFont.systemFontOfSize(19.0)])
-            mutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.dressTimeOrange(), range: NSRange(location:0, length:  1))
+            mutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.dressTimeRedBrand(), range: NSRange(location:0, length:  1))
         } else {
             mutableString = NSMutableAttributedString(string: "\(getLabel(number))"
                 ,attributes: [NSFontAttributeName:UIFont.systemFontOfSize(19.0)])
-            mutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.dressTimeOrange(), range: NSRange(location:0, length:  mutableString.length))
+            mutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.dressTimeRedBrand(), range: NSRange(location:0, length:  mutableString.length))
 
         }
         self.titleLabel.attributedText = mutableString

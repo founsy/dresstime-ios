@@ -91,7 +91,7 @@ class CalendarViewController: DTViewController {
             outfit.orderOutfit()
             let dal = ClothesDAL()
      
-            for i in (outfit.clothes.count-1).stride(to: 0, by: -1) {
+            for i in (outfit.clothes.count-1).stride(through: 0, by: -1) {
                 let clothe_id = outfit.clothes[i].clothe_id
                 if let clothe = dal.fetch(clothe_id) {
                     let width:CGFloat = cell.containerView.frame.width

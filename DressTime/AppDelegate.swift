@@ -8,81 +8,55 @@
 
 import UIKit
 import CoreData
-import Parse
+import CoreLocation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var currentUser:Profil?
+    
+    private var locationManager: CLLocationManager!
+    private var currentLocation: CLLocation!
+    private var locationFixAchieved : Bool = false
+    
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         NSLog("didFinishLaunchingWithOptions")
        
         _ = Mixpanel.sharedInstanceWithToken("fbe8acba2c1532169cd509ab5838e1ed")
         
-        Parse.setApplicationId("5EqfHwj47AbvbF5c0LpPjQwJRSseWRo8fMokcbhE",
-            clientKey: "QPFiMdpk8RmblN8QYG2cXzZtii4yuHOHk5ayeFiF")
-        
-        //Analytics
-        PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
-        
-        
         //Facebook SDK
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let alreadyLaunch = defaults.boolForKey("alreadyLaunch")
-        if (!alreadyLaunch) {
-             //defaults.setBool(true, forKey: "alreadyLaunch")
-            //Display Tutorial
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            _ = storyboard.instantiateViewControllerWithIdentifier("TutorialViewController")
+        //OneSignal Push Notification
+        _ = OneSignal(launchOptions: launchOptions, appId: "b0963a36-5d81-44c5-89bb-06f55c3fec1e") { (message, additionalData, isActive) in
+            NSLog("OneSignal Notification opened:\nMessage: %@", message)
             
-        } else {
-            let profilDAL = ProfilsDAL()
-            _ = profilDAL.fetchLastUserConnected()
-            
-            let defaults = NSUserDefaults.standardUserDefaults()
-            if let name = defaults.stringForKey("userId") {
-                if let profil = profilDAL.fetch(name) {
-                    SharedData.sharedInstance.currentUserId = profil.userid
-                    SharedData.sharedInstance.sexe = profil.gender
-                    self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
-                    self.window?.rootViewController = initialViewController
-                    self.window?.makeKeyAndVisible()
+            if additionalData != nil {
+                NSLog("additionalData: %@", additionalData)
+                // Check for and read any custom values you added to the notification
+                // This done with the "Additonal Data" section the dashbaord.
+                // OR setting the 'data' field on our REST API.
+                if let customKey = additionalData["customKey"] as! String? {
+                    NSLog("customKey: %@", customKey)
                 }
             }
         }
+        loadSharedData()
+        openLaunchingScreen()
         
-        // Register for Push Notitications
-        if application.applicationState != UIApplicationState.Background {
-            // Track an app open here if we launch with a push, unless
-            // "content_available" was used to trigger a background push (introduced in iOS 7).
-            // In that case, we skip tracking here to avoid double counting the app-open.
-            
-            let preBackgroundPush = !application.respondsToSelector(Selector("backgroundRefreshStatus"))
-            let oldPushHandlerOnly = !self.respondsToSelector(#selector(UIApplicationDelegate.application(_:didReceiveRemoteNotification:fetchCompletionHandler:)))
-            var pushPayload = false
-            if let options = launchOptions {
-                pushPayload = options[UIApplicationLaunchOptionsRemoteNotificationKey] != nil
-            }
-            if (preBackgroundPush || oldPushHandlerOnly || pushPayload) {
-                PFAnalytics.trackAppOpenedWithLaunchOptions(launchOptions)
-            }
-        }
-        if application.respondsToSelector(#selector(UIApplication.registerUserNotificationSettings(_:))) {
-            let settings = UIUserNotificationSettings(forTypes: [.Badge, .Alert, .Sound], categories: nil)
-            application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
-        } else { 
-            application.registerForRemoteNotificationTypes([.Badge, .Alert, .Sound])
-        }
+        OneSignal.defaultClient().enableInAppAlertNotification(true)
         
         //Remove all badges
         application.applicationIconBadgeNumber = 0
+        
+        self.locationManager = CLLocationManager()
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.delegate = self
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
+        
         return true
     }
 
@@ -113,20 +87,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.saveContext()
     }
     
-    func application(application: UIApplication,
-        openURL url: NSURL,
-        sourceApplication: String?,
-        annotation: AnyObject) -> Bool {
-            return FBSDKApplicationDelegate.sharedInstance().application(
-                application,
-                openURL: url,
-                sourceApplication: sourceApplication,
-                annotation: annotation)
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+            return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        let installation = PFInstallation.currentInstallation()
-        installation.setDeviceTokenFromData(deviceToken)
-        installation.saveInBackground()
+           NSLog("didRegisterForRemoteNotificationsWithDeviceToken")
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
@@ -138,11 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-        PFPush.handlePush(userInfo)
-        if application.applicationState == UIApplicationState.Inactive {
-            print("Open App from Notification")
-            PFAnalytics.trackAppOpenedWithRemoteNotificationPayload(userInfo)
-        }
+        NSLog("didReceiveRemoteNotification")
     }
     
     private func getNewToken(user: Profil){
@@ -163,6 +124,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
+    }
+    
+    private func loadSharedData(){
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let alreadyLaunch = defaults.boolForKey("alreadyLaunch")
+        if (!alreadyLaunch) {
+            //defaults.setBool(true, forKey: "alreadyLaunch")
+            //Display Tutorial
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            _ = storyboard.instantiateViewControllerWithIdentifier("TutorialViewController")
+            
+        } else {
+            let profilDAL = ProfilsDAL()
+            _ = profilDAL.fetchLastUserConnected()
+            
+            let defaults = NSUserDefaults.standardUserDefaults()
+            if let name = defaults.stringForKey("userId") {
+                if let profil = profilDAL.fetch(name) {
+                    SharedData.sharedInstance.currentUserId = profil.userid
+                    SharedData.sharedInstance.sexe = profil.gender
+                }
+            }
+        }
+    }
+    
+    private func openLaunchingScreen(){
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = storyboard.instantiateViewControllerWithIdentifier("SplashViewController")
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
+    }
+    
+    private func openMainNavScreen(){
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController") as? DTTabBarController
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
     }
 
     // MARK: - Core Data stack
@@ -195,7 +194,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
             dict[NSLocalizedFailureReasonErrorKey] = failureReason
             
-            dict[NSUnderlyingErrorKey] = error as NSError
+            dict[NSUnderlyingErrorKey] = error as! NSError
             let wrappedError = NSError(domain: "YOUR_ERROR_DOMAIN", code: 9999, userInfo: dict)
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -230,6 +229,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    
+    private func loadOutfits(){
+        DressTimeService().GetOutfitsToday(self.currentLocation) { (isSuccess, object) -> Void in
+            if (isSuccess){
+                let weather = Weather(json: object["weather"]["current"])
+                let sentence = object["weather"]["comment"].stringValue
+                var listOutfit = [Outfit]()
+                if let outfits = object["outfits"].array {
+                    for outfit in outfits {
+                        let outfitObj = Outfit(json: outfit)
+                        outfitObj.orderOutfit()
+                        listOutfit.append(outfitObj)
+                    }
+                }
+                let userInfo:[String:AnyObject] = ["weather":weather, "sentence": sentence, "outfitList": listOutfit]
+                SharedData.sharedInstance.currentWeater = weather
+                SharedData.sharedInstance.outfitList = listOutfit
+                SharedData.sharedInstance.weatherSentence = sentence
+                
+                NSNotificationCenter.defaultCenter().postNotificationName("OutfitLoaded", object: self, userInfo: userInfo)
+                self.openMainNavScreen()
+            } else {
+                //TO DO - ADD Error Messages
+                NSNotificationCenter.defaultCenter().postNotificationName("OutfitError", object: object.stringValue)
+            }
+            
+        }
+    }
+}
 
+extension AppDelegate: CLLocationManagerDelegate {
+    /***/
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if (locationFixAchieved == false){
+            locationFixAchieved = true
+            locationManager.stopUpdatingLocation()
+            self.currentLocation = locations[locations.count-1]
+            SharedData.sharedInstance.currentLocation = self.currentLocation
+            NSNotificationCenter.defaultCenter().postNotificationName("LocationUpdated", object: self.currentLocation)
+            loadOutfits()
+        }
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        ActivityLoader.shared.hideProgressView()
+        
+        switch(CLLocationManager.authorizationStatus()) {
+        case .NotDetermined, .Restricted, .Denied:
+            NSNotificationCenter.defaultCenter().postNotificationName("LocationError", object: nil)
+        case .AuthorizedAlways, .AuthorizedWhenInUse:
+            print("Access")
+        }
+    }
 }
 

@@ -7,12 +7,17 @@
 //
 
 import Foundation
+import CoreLocation
 
 class SharedData {
     static let sharedInstance = SharedData()
     
     var currentUserId: String?
     var sexe: String? = "M"
+    var currentWeater: Weather?
+    var outfitList: [Outfit]?
+    var weatherSentence: String?
+    var currentLocation: CLLocation?
     
     var weatherCode: String?
     var lowTemp: String?

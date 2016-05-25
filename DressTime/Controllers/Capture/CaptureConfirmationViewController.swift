@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 import DominantColor
-import Parse
 
 class CaptureConfirmationViewController: DTViewController {
 
@@ -87,7 +86,7 @@ class CaptureConfirmationViewController: DTViewController {
     
     private func setColors(colors: String){
         let colors = self.splitHexColor(colors)
-        for (var i = 0; i < colorBtnCollection.count && i < colors.count; i += 1){
+        for i in 0 ..< min(colorBtnCollection.count, colors.count){
             setColorStyle(colorBtnCollection[i])
             colorBtnCollection[i].backgroundColor = UIColor.colorWithHexString(colors[i] as String)
             if (i == 0){
@@ -122,7 +121,7 @@ class CaptureConfirmationViewController: DTViewController {
         if (colors.count < 2){
             var tempColor = ""
             let arrayColors = clotheImage.dominantColors()
-            for var i = 0; i < arrayColors.count && i < 3; i++ {
+            for i in 0 ..< min(arrayColors.count, 3) {
                 if (tempColor != ""){
                     tempColor += ","
                 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -10,10 +10,7 @@
             <rect key="frame" x="0.0" y="0.0" width="481" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login-bg" translatesAutoresizingMaskIntoConstraints="NO" id="hyn-RH-amN">
-                    <rect key="frame" x="0.0" y="0.0" width="481" height="568"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dresstimeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="j2S-iW-4eY">
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Icon" translatesAutoresizingMaskIntoConstraints="NO" id="j2S-iW-4eY">
                     <rect key="frame" x="41" y="241" width="399" height="86"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="86" id="GIL-JG-hlT"/>
@@ -26,18 +23,14 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.94117647059999998" green="0.31764705879999999" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="j2S-iW-4eY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="41" id="1sL-mc-BlK"/>
-                <constraint firstItem="hyn-RH-amN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8jZ-zM-g50"/>
                 <constraint firstAttribute="bottom" secondItem="8ie-xW-0ye" secondAttribute="bottom" constant="20" id="Kzo-t9-V3l"/>
                 <constraint firstItem="8ie-xW-0ye" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" symbolic="YES" id="MfP-vx-nX0"/>
                 <constraint firstItem="j2S-iW-4eY" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="RhN-gK-BBK"/>
                 <constraint firstAttribute="trailing" secondItem="j2S-iW-4eY" secondAttribute="trailing" constant="41" id="Uhe-Le-fo9"/>
                 <constraint firstAttribute="centerX" secondItem="8ie-xW-0ye" secondAttribute="centerX" id="ZEH-qu-HZ9"/>
-                <constraint firstItem="hyn-RH-amN" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="azU-O1-pcM"/>
-                <constraint firstAttribute="trailing" secondItem="hyn-RH-amN" secondAttribute="trailing" id="naG-6i-hxu"/>
-                <constraint firstAttribute="bottom" secondItem="hyn-RH-amN" secondAttribute="bottom" id="wZ3-on-C0P"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -45,7 +38,6 @@
         </view>
     </objects>
     <resources>
-        <image name="dresstimeLogo" width="293" height="88"/>
-        <image name="login-bg" width="768" height="1024"/>
+        <image name="Icon" width="60" height="60"/>
     </resources>
 </document>

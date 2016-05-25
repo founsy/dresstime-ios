@@ -35,15 +35,12 @@ class HomeViewController: DTViewController {
     private var isEnoughClothes = true
     
     private var typeClothe:Int = -1
-    private var currentWeather: Weather?
     private var needToReload = false
     
-    private var locationManager: CLLocationManager!
-    private var currentLocation: CLLocation!
-    private var locationFixAchieved : Bool = false
-    private var outfitList = [Outfit]()
-    private var brandClothesList = [ClotheModel]()
-    
+    var currentLocation: CLLocation!
+    var outfitList = [Outfit]()
+    var sentence: String?
+    var currentWeather: Weather?
     
     private var isLoaded = false
     
@@ -57,13 +54,6 @@ class HomeViewController: DTViewController {
         self.tableView.dataSource = self
         self.tableView.delegate = self
         
-        // Do any additional setup after loading the view, typically from a nib.
-        self.locationManager = CLLocationManager()
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.delegate = self
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
-        
         headerView = self.tableView.tableHeaderView
         self.tableView.tableHeaderView = nil
         if (self.isEnoughClothe()){
@@ -75,8 +65,6 @@ class HomeViewController: DTViewController {
             self.tableView.contentOffset = CGPoint(x: 0, y: (-64))
 
         }
-        
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -97,8 +85,8 @@ class HomeViewController: DTViewController {
                     let vcCalendar = storyboard.instantiateViewControllerWithIdentifier("CalendarNavigationViewController") as! DTNavigationController
                     self.tabBarController!.viewControllers?.insert(vcCalendar, atIndex: 1)
                     
-                    let vcShopping = storyboard.instantiateViewControllerWithIdentifier("ShoppingNavigationViewController") as! DTNavigationController
-                    self.tabBarController!.viewControllers?.insert(vcShopping, atIndex: 3)
+                   // let vcShopping = storyboard.instantiateViewControllerWithIdentifier("ShoppingNavigationViewController") as! DTNavigationController
+                   // self.tabBarController!.viewControllers?.insert(vcShopping, atIndex: 3)
                     
                 }
                 //Remove Arrow image view
@@ -113,18 +101,10 @@ class HomeViewController: DTViewController {
                 self.tableView.addSubview(headerView)
                 self.tableView.contentInset = UIEdgeInsets(top: (kTableHeaderHeight), left: 0, bottom: 0, right: 0)
                 self.tableView.contentOffset = CGPoint(x: 0, y: (-kTableHeaderHeight))
-                
                 //Reload TableView with good cell
                 self.tableView.reloadData()
-                
+                self.needToReload = true
             }
-            if (!isLoaded && self.currentLocation != nil){
-                //Call web service to get Outfits of the Day
-                self.loadOutfits()
-                //Reload TableView with good cell
-                self.tableView.reloadData()
-            }
-            
         } else {
             self.tableView.reloadData()
             if (self.tabBarController!.viewControllers?.count > 3) {
@@ -135,19 +115,8 @@ class HomeViewController: DTViewController {
             self.headerView.hidden = true
             self.tableView.contentInset = UIEdgeInsets(top: (64), left: 0, bottom: 0, right: 0)
             self.tableView.contentOffset = CGPoint(x: 0, y: (-64))
-            ActivityLoader.shared.hideProgressView()
         }
        
-    }   
-    
-    private func updateHeaderView(){
-    
-        var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: UIScreen.mainScreen().bounds.width, height: kTableHeaderHeight)
-        if  tableView.contentOffset.y < -kTableHeaderHeight {
-            headerRect.origin.y = tableView.contentOffset.y
-            headerRect.size.height = -tableView.contentOffset.y
-        }
-        headerView.frame = headerRect
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -155,7 +124,10 @@ class HomeViewController: DTViewController {
         if (self.needToReload){
             self.loadOutfits()
             self.needToReload = false
+        } else {
+            self.outfitLoaded()
         }
+        
         if (!self.isEnoughClothes){
             if let cell = emptyAnimationCell {
                 cell.createArrowImageView()
@@ -166,6 +138,49 @@ class HomeViewController: DTViewController {
                 imageView.removeFromSuperview()
             }
         }
+    }
+
+    deinit{
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func outfitLoaded(){
+        self.currentWeather = SharedData.sharedInstance.currentWeater
+        let sentence = SharedData.sharedInstance.weatherSentence
+        
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            self.commentWeather.text = sentence
+            self.iconLabel.text = self.currentWeather!.icon != nil ? self.currentWeather!.icon! : ""
+            let temperature:Int = self.currentWeather!.temp != nil ? self.currentWeather!.temp! : 0
+            self.temperatureLabel.text = "\(temperature)°"
+            self.setTitleNavBar(self.currentWeather?.city)
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                if (self.isEnoughClothe()) {
+                    if let code = self.currentWeather?.code {
+                        self.bgView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(code))
+                    }
+                }
+            })
+        })
+        
+        if let list = SharedData.sharedInstance.outfitList {
+            self.outfitList = list
+            self.outfitList.sortInPlace({ $0.isPutOn || $1.isPutOn })
+            //Load the collection of Outfits
+            if let outfitsCell = self.outfitsCell {
+                self.outfitsCell!.dataSource = self
+                outfitsCell.outfitCollectionView.reloadData()
+            }
+        }
+    }
+    
+    private func updateHeaderView(){
+        var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: UIScreen.mainScreen().bounds.width, height: kTableHeaderHeight)
+        if  tableView.contentOffset.y < -kTableHeaderHeight {
+            headerRect.origin.y = tableView.contentOffset.y
+            headerRect.size.height = -tableView.contentOffset.y
+        }
+        headerView.frame = headerRect
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -229,46 +244,30 @@ class HomeViewController: DTViewController {
     }
     
     private func loadOutfits(){
-        ActivityLoader.shared.showProgressView(self.view)
-        DressTimeService().GetOutfitsToday(self.currentLocation) { (isSuccess, object) -> Void in
+        DressTimeService().GetOutfitsToday(SharedData.sharedInstance.currentLocation!) { (isSuccess, object) -> Void in
             if (isSuccess){
-                self.isLoaded = true
-                
-                self.currentWeather = Weather(json: object["weather"]["current"])
+                let weather = Weather(json: object["weather"]["current"])
                 let sentence = object["weather"]["comment"].stringValue
-                    
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    self.commentWeather.text = sentence
-                    self.iconLabel.text = self.currentWeather!.icon != nil ? self.currentWeather!.icon! : ""
-                    let temperature:Int = self.currentWeather!.temp != nil ? self.currentWeather!.temp! : 0
-                    self.temperatureLabel.text = "\(temperature)°"
-                    self.setTitleNavBar(self.currentWeather?.city)
-                    UIView.animateWithDuration(0.2, animations: { () -> Void in
-                        if (self.isEnoughClothe()) {
-                            if let code = self.currentWeather?.code {
-                                self.bgView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(code))
-                            }
-                        }
-                    })
-                })
-
+                var listOutfit = [Outfit]()
                 if let outfits = object["outfits"].array {
-                    self.outfitList = [Outfit]()
-                    //Load the collection of Outfits
-                    if let outfitsCell = self.outfitsCell {
-                        for outfit in outfits {
-                            self.outfitList.append(Outfit(json: outfit))
-                        }
-                        self.outfitsCell!.dataSource = self
-                        outfitsCell.outfitCollectionView.reloadData()
+                    for outfit in outfits {
+                        let outfitObj = Outfit(json: outfit)
+                        outfitObj.orderOutfit()
+                        listOutfit.append(outfitObj)
                     }
                 }
+                let userInfo:[String:AnyObject] = ["weather":weather, "sentence": sentence, "outfitList": listOutfit]
+                SharedData.sharedInstance.currentWeater = weather
+                SharedData.sharedInstance.outfitList = listOutfit
+                SharedData.sharedInstance.weatherSentence = sentence
+                
+                NSNotificationCenter.defaultCenter().postNotificationName("OutfitLoaded", object: self, userInfo: userInfo)
+                self.outfitLoaded()
             } else {
                 //TO DO - ADD Error Messages
-                self.isLoaded = false
-                print("Error \(object.stringValue)")
+                NSNotificationCenter.defaultCenter().postNotificationName("OutfitError", object: object.stringValue)
             }
-            ActivityLoader.shared.hideProgressView()
+            
         }
     }
 }
@@ -276,32 +275,6 @@ class HomeViewController: DTViewController {
 extension HomeViewController: OutfitViewControllerDelegate {
     func outfitViewControllerDelegate(outfitViewController: OutfitViewController, didModifyOutfit outfit: Outfit) {
         self.needToReload = true
-    }
-}
-
-extension HomeViewController: CLLocationManagerDelegate {
-    /***/
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if (locationFixAchieved == false){
-            locationFixAchieved = true
-            
-            self.currentLocation = locations[locations.count-1]
-            locationManager.stopUpdatingLocation()
-            loadOutfits()
-        }
-    }
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        ActivityLoader.shared.hideProgressView()
-
-        switch(CLLocationManager.authorizationStatus()) {
-        case .NotDetermined, .Restricted, .Denied:
-            let alert = UIAlertController(title: NSLocalizedString("homeLocErrTitle", comment: ""), message: NSLocalizedString("homeLocErrMessage", comment: ""), preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("homeLocErrButton", comment: ""), style: .Default) { _ in })
-            self.presentViewController(alert, animated: true){}
-        case .AuthorizedAlways, .AuthorizedWhenInUse:
-            print("Access")
-        }
     }
 }
 
@@ -369,7 +342,6 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
         } else {
             return 1
         }
-        
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{

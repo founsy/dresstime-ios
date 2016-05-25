@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import Parse
 
 class TypeViewController: DTViewController {
 
@@ -94,8 +93,8 @@ class TypeViewController: DTViewController {
                 "page" : "Capture_Show",    // What type of news is this?
                 "data" : "Type \(self.types[self.currentSection].lowercaseString) - Subtype \(self.subTypes[self.currentSection][self.subTypeSelected])"
             ]
-            PFAnalytics.trackEvent("page", dimensions: dimensions)
-            
+
+            OneSignal.defaultClient().sendTags(dimensions)
             let captureController = segue.destinationViewController as! CameraViewController
             captureController.typeClothe = self.types[self.currentSection].lowercaseString
             captureController.subTypeClothe = self.subTypes[self.currentSection][self.subTypeSelected]

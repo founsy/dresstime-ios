@@ -63,7 +63,7 @@ class EmptyTypeView : UIView {
         self.titleLabel.text = "\(calculNumber) \(NSLocalizedString(self.currentType!, comment: "").uppercaseString)"
         for j in 0 ..< self.viewSteps.count {
             if (j < number){
-                self.viewSteps[j].backgroundColor = UIColor.dressTimeOrange()
+                self.viewSteps[j].backgroundColor = UIColor.dressTimeRedBrand()
             } else {
                 self.viewSteps[j].backgroundColor = UIColor.clearColor()
             }

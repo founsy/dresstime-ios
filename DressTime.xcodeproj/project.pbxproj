@@ -132,7 +132,6 @@
 		01218C341C29D4DF00E4D80F /* Memoization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218C281C29D4DF00E4D80F /* Memoization.swift */; };
 		01218C351C29D4DF00E4D80F /* PlatformExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218C291C29D4DF00E4D80F /* PlatformExtensions.swift */; };
 		01218C381C29DBB900E4D80F /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01218C361C29DBB900E4D80F /* Bolts.framework */; };
-		01218C391C29DBB900E4D80F /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01218C371C29DBB900E4D80F /* Parse.framework */; };
 		01218C3B1C29DBE300E4D80F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01218C3A1C29DBE300E4D80F /* AudioToolbox.framework */; };
 		01218C3D1C29DBEC00E4D80F /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01218C3C1C29DBEC00E4D80F /* CFNetwork.framework */; };
 		01218C3F1C29DBF200E4D80F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01218C3E1C29DBF200E4D80F /* CoreGraphics.framework */; };
@@ -145,6 +144,7 @@
 		01218C4D1C29DC2200E4D80F /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 01218C4C1C29DC2200E4D80F /* libsqlite3.tbd */; };
 		01218C4F1C29DC2800E4D80F /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01218C4E1C29DC2800E4D80F /* Accounts.framework */; };
 		01218C511C29DC2C00E4D80F /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01218C501C29DC2C00E4D80F /* Social.framework */; };
+		012F30D11CF1AB2300909616 /* OneSignal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012F30D01CF1AB2300909616 /* OneSignal.framework */; };
 		01328B091C6F383E0068B8C9 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01328B081C6F383E0068B8C9 /* CalendarViewController.swift */; };
 		01328B0C1C6F3D940068B8C9 /* ClotheCalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01328B0B1C6F3D940068B8C9 /* ClotheCalendarCell.xib */; };
 		01328B0E1C6F3DC60068B8C9 /* ClotheCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01328B0D1C6F3DC60068B8C9 /* ClotheCalendarCell.swift */; };
@@ -557,7 +557,6 @@
 		01218C281C29D4DF00E4D80F /* Memoization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Memoization.swift; sourceTree = "<group>"; };
 		01218C291C29D4DF00E4D80F /* PlatformExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlatformExtensions.swift; sourceTree = "<group>"; };
 		01218C361C29DBB900E4D80F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
-		01218C371C29DBB900E4D80F /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
 		01218C3A1C29DBE300E4D80F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		01218C3C1C29DBEC00E4D80F /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		01218C3E1C29DBF200E4D80F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -570,6 +569,7 @@
 		01218C4C1C29DC2200E4D80F /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		01218C4E1C29DC2800E4D80F /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		01218C501C29DC2C00E4D80F /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		012F30D01CF1AB2300909616 /* OneSignal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = OneSignal.framework; sourceTree = "<group>"; };
 		01328B081C6F383E0068B8C9 /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		01328B0B1C6F3D940068B8C9 /* ClotheCalendarCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClotheCalendarCell.xib; sourceTree = "<group>"; };
 		01328B0D1C6F3DC60068B8C9 /* ClotheCalendarCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClotheCalendarCell.swift; sourceTree = "<group>"; };
@@ -729,7 +729,7 @@
 				01218C381C29DBB900E4D80F /* Bolts.framework in Frameworks */,
 				01218BFE1C29CD7100E4D80F /* DominantColor.framework in Frameworks */,
 				0155C62C1C2ECFA000B5ACD2 /* FBSDKCoreKit.framework in Frameworks */,
-				01218C391C29DBB900E4D80F /* Parse.framework in Frameworks */,
+				012F30D11CF1AB2300909616 /* OneSignal.framework in Frameworks */,
 				01218C181C29CDA400E4D80F /* Alamofire.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -895,6 +895,7 @@
 		01218B941C29CD5A00E4D80F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				012F30D01CF1AB2300909616 /* OneSignal.framework */,
 				0106CB971C79EC9600CAF09E /* MapleBacon.xcodeproj */,
 				0155C62B1C2ECFA000B5ACD2 /* FBSDKCoreKit.framework */,
 				01CEF2541C2DC812002FF9A9 /* FBSDKLoginKit.framework */,
@@ -917,7 +918,6 @@
 				01218C3C1C29DBEC00E4D80F /* CFNetwork.framework */,
 				01218C3A1C29DBE300E4D80F /* AudioToolbox.framework */,
 				01218C361C29DBB900E4D80F /* Bolts.framework */,
-				01218C371C29DBB900E4D80F /* Parse.framework */,
 				01218C1D1C29D4DF00E4D80F /* DominantColor */,
 				01218C001C29CD8000E4D80F /* Alamofire.xcodeproj */,
 				01218B951C29CD5A00E4D80F /* AKPickerView */,
@@ -2175,7 +2175,7 @@
 		01C455511B597F25003D5E41 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;

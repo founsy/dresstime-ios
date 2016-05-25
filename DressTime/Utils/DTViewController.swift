@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import Parse
 
 public class DTViewController: UIViewController {
     
@@ -33,16 +32,13 @@ public class DTViewController: UIViewController {
     override public func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let dimensions = [
-            "page" : self.classNameAnalytics,    // What type of news is this?
-        ]
-        PFAnalytics.trackEvent("page", dimensions: dimensions)
-
+        OneSignal.defaultClient().sendTag("page", value: self.classNameAnalytics)
+        
         Mixpanel.sharedInstance().track(
              self.classNameAnalytics
         )
         
-        self.tabBarController?.tabBar.tintColor = UIColor.dressTimeOrange()
+        //self.tabBarController?.tabBar.tintColor = UIColor.dressTimeOrange()
         
     }
     

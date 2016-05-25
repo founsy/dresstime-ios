@@ -88,21 +88,21 @@ public class Outfit: NSObject{
     }
     
     func orderOutfit() {
-        var clothes = [ClotheModel]()
+        var clothes = self.clothes
         
         for item in self.clothes {
             switch ClotheType(rawValue: item.clothe_type)! {
             case ClotheType.maille :
-                clothes.insert(item, atIndex: ClotheOrder.maille.rawValue)
+                clothes[ClotheOrder.maille.rawValue] = item
                 break
             case ClotheType.top :
-                clothes.insert(item, atIndex: ClotheOrder.top.rawValue)
+                clothes[ClotheOrder.top.rawValue] = item
                 break
             case ClotheType.dress :
-                clothes.insert(item, atIndex: ClotheOrder.dress.rawValue - 1)
+                clothes[ClotheOrder.dress.rawValue - 1] = item
                 break
             case ClotheType.pants :
-                clothes.insert(item, atIndex: ClotheOrder.pants.rawValue - 1)
+                clothes[ClotheOrder.pants.rawValue - 1] = item
                 break
             }
         }
