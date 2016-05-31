@@ -78,7 +78,8 @@ class DressTimeService {
     
     private func getOutfits(location: CLLocation, completion: (isSuccess: Bool, object: JSON) -> Void){
         let dal = ProfilsDAL()
-        if let profil = dal.fetch(SharedData.sharedInstance.currentUserId!) {
+        if let userId = SharedData.sharedInstance.currentUserId,
+            let profil = dal.fetch(userId) {
            
             var path = baseUrlOutfits + "v2.1/?lat=\(location.coordinate.latitude)&long=\(location.coordinate.longitude)&timezone=\(NSTimeZone.systemTimeZone().secondsFromGMT)"
             

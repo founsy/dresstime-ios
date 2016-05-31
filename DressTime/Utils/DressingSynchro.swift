@@ -68,45 +68,6 @@ class DressingSynchro {
         //Back-end is master
     }
     
-    //Update Local DataBase
-    //TODO - Need To update - 1 Call by Clothe too much
-  /*  private func updateLocalStorage(){
-        let dressingSvc = DressingService()
-         var numberSync = 0
-         dressingSvc.GetClothesIdDressing { (isSuccess, object) -> Void in
-            if (isSuccess){
-                let clotheDAL = ClothesDAL()
-                for (var i = 0; i < object.arrayValue.count; i++) {
-                    let id = object.arrayValue[i]["id"].stringValue
-                    dressingSvc.GetClothe(id, completion: { (succeeded, clothe) -> () in
-                        if (succeeded) {
-                            let image: String = clothe["clothe_image"].stringValue
-                            let data: NSData = NSData(base64EncodedString: image, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
-                            let isUnis = clothe["clothe_isUnis"].boolValue
-                            
-                            clotheDAL.save(clothe["clothe_id"].stringValue, partnerId: clothe["clothe_partnerid"].floatValue, partnerName: clothe["clothe_partnerName"].stringValue, type: clothe["clothe_type"] .stringValue, subType: clothe["clothe_subtype"].stringValue, name: clothe["clothe_name"].stringValue , isUnis: isUnis, pattern: clothe["clothe_pattern"].stringValue, cut: clothe["clothe_cut"].stringValue, image: data, colors: clothe["clothe_colors"].stringValue)
-                            numberSync++
-                        }
-                        if (numberSync >= object.arrayValue.count){
-                            if let del = self.delagate{
-                                del.syncDidFinish()
-                            }
-                        }
-                    })
-                }
-                if (object.arrayValue.count == 0){
-                    if let del = self.delagate{
-                        del.syncDidFinish()
-                    }
-
-                }
-            } /*else {
-                if let del = self.delagate{
-                    del.syncDidFinish()
-                }
-            }*/
-        }
-    } */
     
     private func updateLocalStorage(completion: (isNeeded: Bool) -> Void){
         let dressingSvc = DressingService()
@@ -132,7 +93,8 @@ class DressingSynchro {
         for i in 0 ..< clothes.count {
             dressingSvc.GetImageClothe(clothes[i].clothe_id, completion: { (isSuccess, object) -> Void in
                 if (isSuccess){
-                    clotheDAL.updateClotheImage(object["clothe_id"].stringValue, imageBase64: object["clothe_image"].stringValue)
+                    FileManager.saveImage("\(object["clothe_id"].stringValue).png", imageBase64: object["clothe_image"].stringValue)
+                    //clotheDAL.updateClotheImage(object["clothe_id"].stringValue, imageBase64: object["clothe_image"].stringValue)
                     numberSync += 1
                     if let del = self.delagate{
                         del.dressingSynchro(self, synchingProgressing: numberSync, totalNumber: clothes.count)
@@ -148,6 +110,19 @@ class DressingSynchro {
         if (clothes.count == 0){
             if let del = self.delagate{
                 del.dressingSynchro(self, syncDidFinish: true)
+            }
+        }
+    }
+    
+    func migrateImageCoreDataToFile(){
+        let clotheDAL = ClothesDAL()
+        let clothes = clotheDAL.fetch()
+        
+        for item in clothes {
+            if let data = item.clothe_image {
+                FileManager.saveImage(item.clothe_id, data: data)
+                item.clothe_image = nil
+                clotheDAL.update(item)
             }
         }
     }

@@ -48,8 +48,8 @@
 "registerStyleErrMessage" = "Selectionnez votre style pour chaque moment de la journée!";
 "registerStyleErrButton" = "Okay";
 
-"registerErrorCreateAccountTitle" = "Error!";
-"registerErrorCreateAccountMessge" = "Error during the creating account process. Please try again later!";
+"registerErrorCreateAccountTitle" = "Erreur!";
+"registerErrorCreateAccountMessge" = "Erreur durant la création du compte. Svp réessayez plus-tard!";
 "registerErrorCreateAccountButton" = "Okay.";
 
 /* General translation */
@@ -66,13 +66,14 @@
 
 /* HomeViewController */
 "homeLocErrTitle" = "Failed!";
-"homeLocErrMessage" = "Please activate le localisation service via Settings > Localisation > DressTime : Enable While Using";
+"homeLocErrMessage" = "Svp activatez la localisation via Settings > Localisation > DressTime : Activité";
 "homeLocErrButton" = "Okay.";
 "Moment_Relax" = "Relax";
 "Moment_Work" = "travail";
 "Moment_Party" = "soirée";
 "homeEmptyMessage" = "Continue ! Ajoute plus de vêtements :)";
 "homeEmptyAnimationMessage" = "Tu es en retard! Comment vas tu t'habiller aujourd'hui?";
+"homeErrorNoAccessInternet" = "Erreur pendant le téléchargement de vos tenus";
 
 "relax" = "Relax";
 "atWork" = "Au travail";

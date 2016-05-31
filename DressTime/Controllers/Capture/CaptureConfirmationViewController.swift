@@ -226,13 +226,15 @@ class CaptureConfirmationViewController: DTViewController {
         }
         
         let dal = ClothesDAL()
-        //let clotheId = NSUUID().UUIDString
-        //let clothe = dal.save(clotheId, partnerId: resultCapture["clothe_partnerid"] as! NSNumber, partnerName: resultCapture["clothe_partnerName"] as! String, type: resultCapture["clothe_type"] as! String, subType: resultCapture["clothe_subtype"] as! String, name: resultCapture["clothe_name"] as! String, isUnis: resultCapture["clothe_isUnis"] as! Bool, pattern: resultCapture["clothe_pattern"] as! String, cut: resultCapture["clothe_cut"] as! String, image: resultCapture["clothe_image"] as? NSData, colors: resultCapture["clothe_colors"] as! String)
         let clothe = dal.save(resultCapture)
+        DressingService().UploadImage(clothe.clothe_id, data: resultCapture["clothe_image"] as! NSData, completion: { (isSuccess, object) in
+            print("OK")
+        })
         
         DressingService().SaveClothe(clothe) { (isSuccess, object) -> Void in
             print("Save Clothe")
             NSNotificationCenter.defaultCenter().postNotificationName("NewClotheAddedNotification", object: self, userInfo: ["type": resultCapture["clothe_type"] as! String])
+           
             ActivityLoader.shared.hideProgressView()
             self.dismissViewControllerAnimated(true, completion: nil)
         }

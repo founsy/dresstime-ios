@@ -115,10 +115,14 @@ class ClothesDAL {
         clothe.clothe_isUnis = clotheToSave["clothe_isUnis"] as! Bool
         clothe.clothe_pattern = clotheToSave["clothe_pattern"] as! String
         clothe.clothe_cut = clotheToSave["clothe_cut"] as! String
-        clothe.clothe_image = clotheToSave["clothe_image"] as? NSData
+        clothe.clothe_image = nil
         clothe.clothe_colors = clotheToSave["clothe_colors"] as! String
         clothe.clothe_litteralColor = clotheToSave["clothe_litteralColor"] as! String
         clothe.profilRel = profilDal.fetch(SharedData.sharedInstance.currentUserId!)!
+        
+        if let data = clotheToSave["clothe_image"] as? NSData {
+            FileManager.saveImage("\(clothe.clothe_id).png", data: data)
+        }
         
         do {
             try managedObjectContext.save()
@@ -144,12 +148,18 @@ class ClothesDAL {
         clothe.clothe_isUnis = isUnis
         clothe.clothe_pattern = pattern
         clothe.clothe_cut = cut
-        clothe.clothe_image = image
+        clothe.clothe_image = nil
         clothe.clothe_colors = colors
         let hexTranslator = HexColorToName()
         let colorName = UIColor.colorWithHexString(clothe.clothe_colors)
         clothe.clothe_litteralColor = hexTranslator.name(colorName)[1] as! String
         clothe.profilRel = profilDal.fetch(SharedData.sharedInstance.currentUserId!)!
+        
+        
+        if let data = image {
+            FileManager.saveImage("\(clothe.clothe_id).png", data: data)
+        }
+
         
         do {
             try managedObjectContext.save()
@@ -171,15 +181,14 @@ class ClothesDAL {
     func updateClotheImage(clotheId: String, imageBase64: String){
         let fetchRequest = NSFetchRequest(entityName: "Clothe")
         let predicate = NSPredicate(format: "clothe_id = %@", clotheId)
-   
-        let data: NSData = NSData(base64EncodedString: imageBase64, options: NSDataBase64DecodingOptions.IgnoreUnknownCharacters)!
         
         // Set the predicate on the fetch request
         fetchRequest.predicate = predicate
         do {
             if let fetchResult = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Clothe] {
+                FileManager.saveImage("\(clotheId).png", imageBase64: imageBase64)
                 if (fetchResult.count > 0){
-                    fetchResult[0].clothe_image = data
+                    fetchResult[0].clothe_image = nil
                 }
             }
         } catch let error as NSError {

@@ -301,6 +301,9 @@
             <PersistentString
                value = "subjson[&quot;style&quot;].stringValue">
             </PersistentString>
+            <PersistentString
+               value = "baseURL">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
@@ -319,6 +322,14 @@
             </PersistentString>
             <PersistentString
                value = "&amp;self.datePickerView">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static FileManager.getDocumentsDirectory() -&gt; NSString:FileManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(documentsDirectory)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -406,6 +417,20 @@
          <PersistentStrings>
             <PersistentString
                value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ClotheCalendarCell.createClotheView(Clothe, rect : CGRect) -&gt; ():ClotheCalendarCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "rect.size.height">
+            </PersistentString>
+            <PersistentString
+               value = "self.containerView.frame.size.height">
+            </PersistentString>
+            <PersistentString
+               value = "img.size">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -686,6 +711,9 @@
             <PersistentString
                value = "self.backgroundImage.frame">
             </PersistentString>
+            <PersistentString
+               value = "ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!)?.picture">
+            </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
@@ -886,6 +914,9 @@
          <PersistentStrings>
             <PersistentString
                value = "resultCapture[&quot;clothe_litteralColor&quot;]">
+            </PersistentString>
+            <PersistentString
+               value = "resultCapture[&quot;clothe_image&quot;]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1096,18 +1127,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "CaptureConfirmationViewController.(getSelectedColor in _3252D31F8E4653D5950B80A77EB70229)() -&gt; String:CaptureConfirmationViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "colorBtnCollection[i].backgroundColor!.hexStringFromColor()">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
          contextName = "HomeViewController.outfitLoaded(NSNotification) -&gt; ():HomeViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "print(notification.object![&quot;weather&quot;])">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CaptureConfirmationViewController.(getSelectedColor in _3252D31F8E4653D5950B80A77EB70229)() -&gt; String:CaptureConfirmationViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "colorBtnCollection[i].backgroundColor!.hexStringFromColor()">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1320,10 +1351,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "CalendariewController.(getIndex in _51E155A1B0B30F496C8E2F043ECF9AAB)() -&gt; ():CalendarViewController.swift">
+         contextName = "DressingService.(saveClothe in _7740898A30638FEEC3F9DBDA933F485E)(Clothe, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():DressingService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "lastMonth.toS(&quot;MM/dd/yy&quot;)">
+               value = "print(d)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1332,6 +1363,14 @@
          <PersistentStrings>
             <PersistentString
                value = "CameraSessionManager">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CalendariewController.(getIndex in _51E155A1B0B30F496C8E2F043ECF9AAB)() -&gt; ():CalendarViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "lastMonth.toS(&quot;MM/dd/yy&quot;)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1879,13 +1918,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "static DressTime.DressTimeService.getTodayOutfits (DressTime.DressTimeService.Type)(Swift.String, style : Swift.String, todayCompleted : (succeeded : Swift.Bool, msg : Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;&gt;) -&gt; ()) -&gt; ():DressTimeService.swift">
+         contextName = "HomeViewController.(addLoadingView in _F0FEB500489D9228EB52A9BCCA599548)() -&gt; ():HomeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "profil.gender">
+               value = "window.frame.width/113">
             </PersistentString>
             <PersistentString
-               value = "dressingSeriazible[0][&quot;clothe_colors&quot;]">
+               value = " window.frame.height/125">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1905,6 +1944,17 @@
             </PersistentString>
             <PersistentString
                value = "self.labelsSubTop.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static DressTime.DressTimeService.getTodayOutfits (DressTime.DressTimeService.Type)(Swift.String, style : Swift.String, todayCompleted : (succeeded : Swift.Bool, msg : Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;&gt;) -&gt; ()) -&gt; ():DressTimeService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "profil.gender">
+            </PersistentString>
+            <PersistentString
+               value = "dressingSeriazible[0][&quot;clothe_colors&quot;]">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -2186,7 +2236,12 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "User.init(json : JSON) -&gt; User:User.swift">
+         contextName = "Clothe.getImage() -&gt; UIImage:Clothe.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(FileManager.getDocumentsDirectory())">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "HomeViewController.(updateHeaderView in _F0FEB500489D9228EB52A9BCCA599548)() -&gt; ():HomeViewController.swift">
@@ -2195,6 +2250,9 @@
                value = "UIScreen.main()">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "User.init(json : JSON) -&gt; User:User.swift">
       </ContextState>
       <ContextState
          contextName = "LoginBL.LoginWithSuccess(JSON) -&gt; ():LoginBL.swift">
@@ -2345,6 +2403,28 @@
          <PersistentStrings>
             <PersistentString
                value = "list.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DressingService.((saveClothe in _7740898A30638FEEC3F9DBDA933F485E)(Clothe, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ()).(closure #1):DressingService.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(response)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "LaunchingView.awakeFromNib() -&gt; ():LaunchingView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.center">
+            </PersistentString>
+            <PersistentString
+               value = "print(self.layoutIfNeeded())">
+            </PersistentString>
+            <PersistentString
+               value = "UIApplication.sharedApplication().keyWindow?.center">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

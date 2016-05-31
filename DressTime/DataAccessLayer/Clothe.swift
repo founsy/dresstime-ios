@@ -34,11 +34,14 @@ class Clothe: NSManagedObject {
     }
     
     func getImage() -> UIImage {
-        if let img = self.clothe_image {
+        if let image = UIImage(contentsOfFile: FileManager.getDocumentsDirectory().stringByAppendingPathComponent("\(self.clothe_id).png")){
+            return image
+        }
+        /*if let img = self.clothe_image {
             if let uiimage = UIImage(data: img) {
                 return uiimage
             }
-        }
+        } */
         
         var named = ""
         switch(self.clothe_type){

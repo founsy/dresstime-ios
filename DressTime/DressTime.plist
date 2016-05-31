@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>serverURL</key>
-	<string>http://api.drez.io/</string>
+	<string>https://api.drez.io/</string>
 	<key>serverURLDebug</key>
 	<string>http://localhost:3000/</string>
 </dict>

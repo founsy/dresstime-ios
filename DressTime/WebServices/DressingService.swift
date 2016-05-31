@@ -29,6 +29,31 @@ class DressingService {
         }
     }
     
+    
+    func UploadImage(clotheId: String, data: NSData,  completion: (isSuccess: Bool, object: JSON) -> Void){
+        
+        if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
+            var path = baseUrlDressing + "clothes/image/\(clotheId)"
+            let request = NSMutableURLRequest(URL:  NSURL(string: path)!)
+            request.HTTPMethod = "POST"
+            
+            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            } else {
+                request.addValue("Bearer \(profil.access_token!)", forHTTPHeaderField: "Authorization")
+            }
+            
+            Photo.upload(data, filename: "\(clotheId).jpg", request: request)
+                .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
+                    print(totalBytesWritten)
+                }
+                .responseJSON { (response) in
+                    print(response)
+            }
+        }
+    }
+    
+    
     func SaveClothe(clothe: Clothe, completion: (isSuccess: Bool, object: JSON) -> Void){
         if (Mock.isMockable()){
             if let nsdata = ReadJsonFile().readFile("outfitsToday"){
@@ -105,8 +130,7 @@ class DressingService {
             var dressingSeriazible = [[String:AnyObject]]()
             
             let dict = NSMutableDictionary(dictionary: clothe.toDictionnary())
-            let image:String = (dict["clothe_image"] as! NSData).base64EncodedStringWithOptions(NSDataBase64EncodingOptions.Encoding64CharacterLineLength)
-            dict["clothe_image"] = image
+            dict["clothe_image"] = ""
             let d:[String:AnyObject] = dict as NSDictionary as! [String : AnyObject]
             dressingSeriazible.append(d)
             
@@ -279,5 +303,26 @@ class DressingService {
             }
         }
         completion(isSuccess: false, object: "")
+    }
+}
+
+
+class Photo {
+    class func upload(image: NSData, filename: String, request: NSMutableURLRequest) -> Request {
+        let boundary = "NET-POST-boundary-\(arc4random())-\(arc4random())"
+        request.setValue("multipart/form-data;boundary="+boundary,
+                         forHTTPHeaderField: "Content-Type")
+        
+        let parameters = NSMutableData()
+        for s in ["\r\n--\(boundary)\r\n",
+                  "Content-Disposition: form-data; name=\"clothe_image\";" +
+                    " filename=\"\(filename)\"\r\n",
+                  "Content-Type: image/png\r\n\r\n"] {
+                    parameters.appendData(s.dataUsingEncoding(NSUTF8StringEncoding)!)
+        }
+        parameters.appendData(image)
+        parameters.appendData("\r\n--\(boundary)--\r\n"
+            .dataUsingEncoding(NSUTF8StringEncoding)!)
+        return Alamofire.upload(request, data: parameters)
     }
 }

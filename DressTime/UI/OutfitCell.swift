@@ -86,19 +86,19 @@ class OufitCell: UICollectionViewCell {
             view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
             view.layer.masksToBounds = true
         
-            var img = clothe.getImage()
+            let img = clothe.getImage()
         
-            var mode = UIViewContentMode.Top
-            if (rect.size.height != self.containerView.frame.size.height){
+            //var mode = UIViewContentMode.Top
+            /*if (rect.size.height != self.containerView.frame.size.height){
                 img = img.imageResize(CGSizeMake(rect.size.width, rect.size.height))
             } else {
                 mode = UIViewContentMode.ScaleToFill
-            }
+            } */
             
             let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
         
                 imageView.image = img
-                imageView.contentMode = mode
+                imageView.contentMode = UIViewContentMode.ScaleToFill
         
             self.applyPlainShadow(view)
             view.addSubview(imageView)
@@ -107,14 +107,14 @@ class OufitCell: UICollectionViewCell {
     
     private func setMomentIcon(moment: String){
         if (moment == "onParty"){
-            momentLabel.text = NSLocalizedString("Moment_Party", comment: "PARTY").uppercaseString
+            momentLabel.text = NSLocalizedString("Moment_Party", comment: "PARTY").lowercaseString
             imageView.image = UIImage(named: "baloonIcon")
         } else if (moment == "atWork"){
-            momentLabel.text = NSLocalizedString("Moment_Work", comment: "WORK").uppercaseString
+            momentLabel.text = NSLocalizedString("Moment_Work", comment: "WORK").lowercaseString
              imageView.image = UIImage(named: "lampOutfitIcon")
             
         } else if (moment == "relax"){
-            momentLabel.text = NSLocalizedString("Moment_Relax", comment: "RELAX").uppercaseString
+            momentLabel.text = NSLocalizedString("Moment_Relax", comment: "RELAX").lowercaseString
             imageView.image = UIImage(named: "reclinerIcon")
             
         }
@@ -123,11 +123,12 @@ class OufitCell: UICollectionViewCell {
         
     private func putOnStyle(isPutOn: Bool, moment: String){
         if (isPutOn){
+            let whiteColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
             self.containerView.layer.borderWidth = 3.0
             self.containerView.layer.cornerRadius = 2.0
-            self.containerView.layer.borderColor = UIColor.whiteColor().CGColor
-            self.containerMomentImage.backgroundColor = UIColor.whiteColor()
-            self.imageView.image = UIImage(named: "crossIcon")
+            self.containerView.layer.borderColor = whiteColor.CGColor
+            self.containerMomentImage.backgroundColor = whiteColor
+            self.imageView.image = UIImage(named: "checkSelected")
             self.imageView.tintColor = UIColor.dressTimeRedBrand()
             self.momentLabel.textColor = UIColor.dressTimeRedBrand()
         } else {

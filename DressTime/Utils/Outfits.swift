@@ -102,7 +102,9 @@ public class Outfit: NSObject{
                 clothes[ClotheOrder.dress.rawValue - 1] = item
                 break
             case ClotheType.pants :
-                clothes[ClotheOrder.pants.rawValue - 1] = item
+                if (ClotheOrder.pants.rawValue - 1) < clothes.count {
+                    clothes[ClotheOrder.pants.rawValue - 1] = item
+                }
                 break
             }
         }

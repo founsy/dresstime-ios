@@ -73,6 +73,7 @@
 "Moment_Party" = "Party";
 "homeEmptyMessage" = "Keep going ! Few more clothes :)";
 "homeEmptyAnimationMessage" = "You are late! What can I wear today?";
+"homeErrorNoAccessInternet" = "Error during retrieving your outfits";
 
 "relax" = "Relax";
 "atWork" = "at Work";

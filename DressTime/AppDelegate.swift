@@ -1,4 +1,4 @@
-//
+    //
 //  AppDelegate.swift
 //  DressTime
 //
@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import CoreLocation
+import Mixpanel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -43,19 +44,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-        loadSharedData()
-        openLaunchingScreen()
         
-        OneSignal.defaultClient().enableInAppAlertNotification(true)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        let alreadyLaunch = defaults.boolForKey("alreadyLaunch")
+        if (!alreadyLaunch) {
+            //defaults.setBool(true, forKey: "alreadyLaunch")
+            //Display Tutorial
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            _ = storyboard.instantiateViewControllerWithIdentifier("TutorialViewController")
+            
+        } else {
+            let profilDAL = ProfilsDAL()
+            _ = profilDAL.fetchLastUserConnected()
+            
+            let defaults = NSUserDefaults.standardUserDefaults()
+            if let name = defaults.stringForKey("userId") {
+                if let profil = profilDAL.fetch(name) {
+                    SharedData.sharedInstance.currentUserId = profil.userid
+                    SharedData.sharedInstance.sexe = profil.gender
+                    DressingSynchro(userId: profil.userid!).migrateImageCoreDataToFile()
+                    self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
+                    self.window?.rootViewController = initialViewController
+                    self.window?.makeKeyAndVisible()
+                }
+            }
+        }
         
         //Remove all badges
         application.applicationIconBadgeNumber = 0
-        
-        self.locationManager = CLLocationManager()
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.delegate = self
-        self.locationManager.requestWhenInUseAuthorization()
-        self.locationManager.startUpdatingLocation()
         
         return true
     }
@@ -106,55 +124,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSLog("didReceiveRemoteNotification")
     }
     
-    private func getNewToken(user: Profil){
-        let profilDAL = ProfilsDAL()
-        if let user = profilDAL.fetch(SharedData.sharedInstance.currentUserId!) {
-            LoginService().RefreshToken(user.refresh_token!) { (isSuccess, object) -> Void in
-                if (isSuccess){
-                    user.refresh_token = object["refresh_token"].string
-                    user.access_token = object["access_token"].string
-                    profilDAL.update(user)
-                } else {
-                    user.refresh_token = ""
-                    user.access_token = ""
-                    profilDAL.update(user)
-                    let rootController:UIViewController = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginViewController")
-                    self.window?.makeKeyAndVisible()
-                    self.window?.rootViewController!.presentViewController(rootController, animated: true, completion: nil)
-                }
-            }
-        }
-    }
-    
-    private func loadSharedData(){
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let alreadyLaunch = defaults.boolForKey("alreadyLaunch")
-        if (!alreadyLaunch) {
-            //defaults.setBool(true, forKey: "alreadyLaunch")
-            //Display Tutorial
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            _ = storyboard.instantiateViewControllerWithIdentifier("TutorialViewController")
-            
-        } else {
-            let profilDAL = ProfilsDAL()
-            _ = profilDAL.fetchLastUserConnected()
-            
-            let defaults = NSUserDefaults.standardUserDefaults()
-            if let name = defaults.stringForKey("userId") {
-                if let profil = profilDAL.fetch(name) {
-                    SharedData.sharedInstance.currentUserId = profil.userid
-                    SharedData.sharedInstance.sexe = profil.gender
-                }
-            }
-        }
-    }
-    
     private func openLaunchingScreen(){
-        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialViewController = storyboard.instantiateViewControllerWithIdentifier("SplashViewController")
-        self.window?.rootViewController = initialViewController
-        self.window?.makeKeyAndVisible()
+        //Id
+        
+        if let _ = SharedData.sharedInstance.currentUserId {
+            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("SplashViewController")
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+        }
+        
     }
     
     private func openMainNavScreen(){
@@ -254,6 +234,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             } else {
                 //TO DO - ADD Error Messages
                 NSNotificationCenter.defaultCenter().postNotificationName("OutfitError", object: object.stringValue)
+                self.openMainNavScreen()
             }
             
         }

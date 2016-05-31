@@ -83,16 +83,10 @@ class ProfilViewController: DTTableViewController {
         
         self.type = SharedData.sharedInstance.getType(SharedData.sharedInstance.sexe!)
         initData()
-        if (SharedData.sharedInstance.currentUserId!.lowercaseString == "alexandre"){
-            profilButton.setImage(UIImage(named: "profileAlexandre"), forState: .Normal)
-        } else if (SharedData.sharedInstance.currentUserId!.lowercaseString == "juliette"){
-            profilButton.setImage(UIImage(named: "profileJuliette"), forState: .Normal)
+        if let profil_image = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!)?.picture{
+            profilButton.setImage(UIImage(data: profil_image), forState: .Normal)
         } else {
-            if let profil_image = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!)?.picture{
-                profilButton.setImage(UIImage(data: profil_image), forState: .Normal)
-            } else {
-                profilButton.setImage(UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)"), forState: .Normal)
-            }
+            profilButton.setImage(UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)"), forState: .Normal)
         }
         
         backgroundImage.image = UIImage(named: "BackgroundHeader\(SharedData.sharedInstance.sexe!.uppercaseString)")

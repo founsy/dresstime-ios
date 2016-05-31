@@ -43,6 +43,7 @@ class ClotheCalendarCell : UITableViewCell {
         var mode = UIViewContentMode.Top
         if (rect.size.height != self.containerView.frame.size.height){
             img = img.imageResize(CGSizeMake(rect.size.width, rect.size.height))
+            //img = img.resize(CGSizeMake(rect.size.width, rect.size.height))!
         } else {
             mode = UIViewContentMode.ScaleToFill
         }
