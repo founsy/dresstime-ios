@@ -8,6 +8,8 @@
 
 import Foundation
 import Alamofire
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class LoginService {
     

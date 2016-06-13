@@ -228,15 +228,23 @@ class CaptureConfirmationViewController: DTViewController {
         let dal = ClothesDAL()
         let clothe = dal.save(resultCapture)
         DressingService().UploadImage(clothe.clothe_id, data: resultCapture["clothe_image"] as! NSData, completion: { (isSuccess, object) in
+            if (!isSuccess) {
+                //TODO - Add Error Message
+            }
             print("OK")
         })
         
         DressingService().SaveClothe(clothe) { (isSuccess, object) -> Void in
-            print("Save Clothe")
-            NSNotificationCenter.defaultCenter().postNotificationName("NewClotheAddedNotification", object: self, userInfo: ["type": resultCapture["clothe_type"] as! String])
+            if (isSuccess){
+                print("Save Clothe")
+                NSNotificationCenter.defaultCenter().postNotificationName("NewClotheAddedNotification", object: self, userInfo: ["type": resultCapture["clothe_type"] as! String])
            
-            ActivityLoader.shared.hideProgressView()
-            self.dismissViewControllerAnimated(true, completion: nil)
+                ActivityLoader.shared.hideProgressView()
+                self.dismissViewControllerAnimated(true, completion: nil)
+            } else {
+                //TODO - Add Error Message
+            }
+            
         }
     }
     
@@ -317,13 +325,16 @@ class CaptureConfirmationViewController: DTViewController {
             if let cell = pickerView.collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: j, inSection: 0)) as? AKCollectionViewCell{
                 for subview in cell.view.subviews {
                     if let view = subview as? PatternView{
-                        let image = j == item ? UIImage(named: "\(self.patternData[j])IconSelect") : UIImage(named: "\(self.patternData[j])Icon");
-                        
                         UIView.transitionWithView(view.patternImage, duration: 0.32, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-                            view.patternImage.image = image
+                            if (j == item){
+                                view.patternImage.tintColor = UIColor.dressTimeRedBrand()
+                            } else {
+                                view.patternImage.tintColor = UIColor.whiteColor()
+                            }
+                            //view.patternImage.image = image
                             }, completion: nil)
                         let font = j == item ? UIFont.boldSystemFontOfSize(17) : UIFont.italicSystemFontOfSize(13)
-                        let color = j == item ? UIColor(red: 245/255, green: 166/255, blue: 35/255, alpha: 1.0) : UIColor.whiteColor()
+                        let color = j == item ? UIColor.dressTimeRedBrand() : UIColor.whiteColor()
                         view.patternLabel.animateToFont(font, color: color, withDuration: 0.32)
                     }
                 }

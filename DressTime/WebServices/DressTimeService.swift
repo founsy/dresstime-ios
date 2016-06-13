@@ -8,6 +8,8 @@
 import UIKit
 import Alamofire
 import CoreLocation
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class DressTimeService {
     #if (arch(i386) || arch(x86_64)) && os(iOS)

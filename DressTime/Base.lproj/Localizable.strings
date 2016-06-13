@@ -27,7 +27,7 @@
 "registerPasswordYourPassword" = "Your Password";
 "registerPasswordPlaceholder" = "MySecurePassword";
 "registerPasswordCreateAnAccount" = "Create an Account";
-"registerSexeWomen" = "I am a nice women";
+"registerSexeWomen" = "I am an amazing women";
 "registerSexeMen" = "I am a great men";
 
 "registerStyleSelectStyle" = "1 - Select a style";
@@ -72,7 +72,7 @@
 "Moment_Work" = "Work";
 "Moment_Party" = "Party";
 "homeEmptyMessage" = "Keep going ! Few more clothes :)";
-"homeEmptyAnimationMessage" = "You are late! What can I wear today?";
+"homeEmptyAnimationMessage" = "You are late! How are you going to get dressed today? »;
 "homeErrorNoAccessInternet" = "Error during retrieving your outfits";
 
 "relax" = "Relax";
@@ -84,7 +84,7 @@
 "detailTypeEditBtn" = "Edit";
 "detailTypeDeleteBtn" = "Delete";
 "detailTypeMyMsg" = "My";
-"detailTypeEmptyMsg" = "You seem to be naked :) Add some clothings !";
+"detailTypeEmptyMsg" = "You seem to be naked :) Add some clothes!";
 
 /* ProfilViewController */
 "PROFILE" = "PROFILE";
@@ -148,7 +148,7 @@
 "settingsErrMessage" = "Please fill all fields";
 "settingsErrButton" = "Okay";
 
-/* Capture Confirmation */  
+/* Capture Confirmation */
 "captureStep2ColorMsg" = "the awesome color of your clothe";
 "captureStep3ModifyBtn" = "Modify";
 "captureStep3AddBtn" = "Add";
@@ -157,7 +157,8 @@
 "captureStep3BrandTitle" = "Do you know the brand?";
 
 /* Calendar */
-"calendarDoYouRemember" = "Do you remember what was your outfit ?";
+"calendarDoYouRemember" = "Do you remember what was your outfit?";
+"calendarErrNoInternet" = "Error while retrieve your outfits";
 
 /* Shopping */
 "shoppingNumberOfMatching" = "outfits in your wardrobe";

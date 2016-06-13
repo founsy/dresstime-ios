@@ -7,6 +7,9 @@
 //
 
 import Foundation
+import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class RegisterStyleViewController: DTViewController {
     

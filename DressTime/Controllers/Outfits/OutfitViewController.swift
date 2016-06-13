@@ -57,7 +57,11 @@ class OutfitViewController: DTViewController {
         let dressSvc = DressTimeService()
         dressSvc.SaveOutfit(self.outfitObject!) { (isSuccess) -> Void in
             print(isSuccess)
-            self.delegate?.outfitViewControllerDelegate(self, didModifyOutfit: self.outfitObject!)
+            if (isSuccess){
+                self.delegate?.outfitViewControllerDelegate(self, didModifyOutfit: self.outfitObject!)
+            } else {
+                //TODO - Add Error Message
+            }
         }
         
         self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)

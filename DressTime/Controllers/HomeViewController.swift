@@ -287,15 +287,20 @@ class HomeViewController: DTViewController {
                         
                         self.outfitsCell!.dataSource = self
                         outfitsCell.outfitCollectionView.reloadData()
+                        self.loadingView!.animateMask()
                     }
                 }
             } else {
                 //TO DO - ADD Error Messages
                 self.isLoaded = false
-                print("Error \(object.stringValue)")
+                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.GetOutfit, object: nil)
+                /*let alert = UIAlertController(title: NSLocalizedString("homeLocErrTitle", comment: ""), message: NSLocalizedString("homeErrorNoAccessInternet", comment: ""), preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("homeLocErrButton", comment: ""), style: .Default) { _ in })*/
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.loadingView!.animateMask()
+                    //self.presentViewController(alert, animated: true, completion: nil)
+                })
             }
-            
-            self.loadingView!.animateMask()
         }
     }
 }
@@ -319,13 +324,15 @@ extension HomeViewController: CLLocationManagerDelegate {
     }
     
     func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        ActivityLoader.shared.hideProgressView()
-        
         switch(CLLocationManager.authorizationStatus()) {
         case .NotDetermined, .Restricted, .Denied:
+            
             let alert = UIAlertController(title: NSLocalizedString("homeLocErrTitle", comment: ""), message: NSLocalizedString("homeLocErrMessage", comment: ""), preferredStyle: .Alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("homeLocErrButton", comment: ""), style: .Default) { _ in })
-            self.presentViewController(alert, animated: true){}
+            dispatch_async(dispatch_get_main_queue(), {
+                self.loadingView!.animateMask()
+                self.presentViewController(alert, animated: true, completion: nil)
+            })
         case .AuthorizedAlways, .AuthorizedWhenInUse:
             print("Access")
         }

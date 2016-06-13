@@ -9,8 +9,6 @@
 #ifndef DressTime_DressTime_Bridging_Header_h
 #define DressTime_DressTime_Bridging_Header_h
 
-#import <FBSDKCoreKit/FBSDKCoreKit.h>
-#import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <OneSignal/OneSignal.h>
 
 #endif

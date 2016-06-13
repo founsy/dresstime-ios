@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import Alamofire
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 class DressingService {
     let baseUrlDressing = "\(DressTimeService.baseURL)dressing/"//"http://api.drez.io/dressing/"

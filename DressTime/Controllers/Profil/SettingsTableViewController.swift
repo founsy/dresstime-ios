@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
 protocol SettingsTableViewControllerDelegate {
     func onSexeChange(sexe: String)

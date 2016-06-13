@@ -160,10 +160,18 @@
                value = " self.dayMoment">
             </PersistentString>
             <PersistentString
-               value = "weather.hour!">
+               value = "self.contentView.frame">
             </PersistentString>
             <PersistentString
-               value = "self.contentView.frame">
+               value = "weather.hour!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ErrorsManager.displayErrorServer(NSNotification) -&gt; ():ErrorsManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(error.name)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -596,10 +604,10 @@
          contextName = "ClotheScrollTableCell.singleTapped(UITapGestureRecognizer) -&gt; ():ClotheScrollTableCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "sender.view!">
+               value = "sender.view!.tag">
             </PersistentString>
             <PersistentString
-               value = "sender.view!.tag">
+               value = "sender.view!">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -755,10 +763,10 @@
                value = "container!.superview!.convertRect(container!.frame, fromView: self.contentView)">
             </PersistentString>
             <PersistentString
-               value = "container!.frame">
+               value = "container!.convertRect(container!.frame, toView: self.containerView)">
             </PersistentString>
             <PersistentString
-               value = "container!.convertRect(container!.frame, toView: self.containerView)">
+               value = "container!.frame">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -946,10 +954,10 @@
                value = "cell.timeText.text">
             </PersistentString>
             <PersistentString
-               value = " NSNumberFormatter().numberFromString(weather.temp!).integerValue">
+               value = "weather.temp!">
             </PersistentString>
             <PersistentString
-               value = "weather.temp!">
+               value = " NSNumberFormatter().numberFromString(weather.temp!).integerValue">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1064,13 +1072,13 @@
          contextName = "HomeViewController.(createArrowImageView in _F0FEB500489D9228EB52A9BCCA599548)() -&gt; ():HomeViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.arrowImageView!.frame">
-            </PersistentString>
-            <PersistentString
                value = " bubbleImageView.frame.origin.y">
             </PersistentString>
             <PersistentString
                value = " p.y">
+            </PersistentString>
+            <PersistentString
+               value = "self.arrowImageView!.frame">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1116,13 +1124,13 @@
          contextName = "HomeOutfitsListCell.(loadTodayOutfits(HomeOutfitsListCell) -&gt; () -&gt; ()).(closure #1):HomeOutfitsListCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "print(object[0])">
+               value = "object.count">
             </PersistentString>
             <PersistentString
                value = "object[0]">
             </PersistentString>
             <PersistentString
-               value = "object.count">
+               value = "print(object[0])">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1213,13 +1221,13 @@
          contextName = "LoginViewController.(onClickLoginBtn(LoginViewController) -&gt; (AnyObject) -&gt; ()).(closure #1):LoginViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "err_desc == &quot;001&quot;">
+               value = " object[&quot;error_description&quot;].string">
             </PersistentString>
             <PersistentString
                value = "pro.gender">
             </PersistentString>
             <PersistentString
-               value = " object[&quot;error_description&quot;].string">
+               value = "err_desc == &quot;001&quot;">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1389,10 +1397,10 @@
                value = "round(Double(labelsSubTop.count)/2.0)">
             </PersistentString>
             <PersistentString
-               value = "height">
+               value = "labelsSubTop.count">
             </PersistentString>
             <PersistentString
-               value = "labelsSubTop.count">
+               value = "height">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1495,10 +1503,10 @@
          contextName = "HomeOutfitsListCell.(createOutfitView in _93EE669A28786630E981580C71297921)(Outfit, cell : OufitCell) -&gt; ():HomeOutfitsListCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "outfit.clothes[i].clothe_id">
+               value = "print(outfit)">
             </PersistentString>
             <PersistentString
-               value = "print(outfit)">
+               value = "outfit.clothes[i].clothe_id">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1587,10 +1595,10 @@
          contextName = "ClotheScrollTableCell.setupScrollView() -&gt; ():ClotheScrollTableCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.scrollView.bounds.size.height">
+               value = "self.scrollView.bounds.size.width">
             </PersistentString>
             <PersistentString
-               value = "self.scrollView.bounds.size.width">
+               value = "self.scrollView.bounds.size.height">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1691,13 +1699,13 @@
          contextName = "DressingSynchro.((updateLocalStorage in _5D4E5A99B5AE9DBB58B651F0E284D94A)(DressingSynchro) -&gt; () -&gt; ()).(closure #1):DressingSynchro.swift">
          <PersistentStrings>
             <PersistentString
-               value = " object.arrayValue.count">
+               value = "isSuccess">
             </PersistentString>
             <PersistentString
                value = "object">
             </PersistentString>
             <PersistentString
-               value = "isSuccess">
+               value = " object.arrayValue.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1798,13 +1806,13 @@
          contextName = "LoginViewControllerNew.(register in _8DEA9BD0C134F553D5B74D1AFB4C0501)() -&gt; ():LoginViewControllerNew.swift">
          <PersistentStrings>
             <PersistentString
-               value = "isRegister">
+               value = "(name == nil || name == &quot;&quot;)">
             </PersistentString>
             <PersistentString
                value = "(isRegister &amp;&amp; (name == nil || name == &quot;&quot;))">
             </PersistentString>
             <PersistentString
-               value = "(name == nil || name == &quot;&quot;)">
+               value = "isRegister">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1823,10 +1831,10 @@
          contextName = "DressTimeService.(getOutfitsByStyle in _3F9FBDEE54AB84ACC9699628EA4A9769)(String, completion : (isSuccess : Bool, object : JSON) -&gt; ()) -&gt; ():DressTimeService.swift">
          <PersistentStrings>
             <PersistentString
-               value = "print(&quot;Bearer \(profil.access_token!)&quot;)">
+               value = "profil.access_token">
             </PersistentString>
             <PersistentString
-               value = "profil.access_token">
+               value = "print(&quot;Bearer \(profil.access_token!)&quot;)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -1869,6 +1877,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "AppDelegate.application(UIApplication, didFinishLaunchingWithOptions : [NSObject : AnyObject]?) -&gt; Bool:AppDelegate.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(mixpanel.distinctId)">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ClotheTableViewCell.awakeFromNib() -&gt; ():ClotheTableViewCell.swift">
          <PersistentStrings>
             <PersistentString
@@ -1894,10 +1910,10 @@
                value = "preferredLanguage.substringToIndex(2)">
             </PersistentString>
             <PersistentString
-               value = "preferredLanguage">
+               value = "profil.access_token">
             </PersistentString>
             <PersistentString
-               value = "profil.access_token">
+               value = "preferredLanguage">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -2062,10 +2078,10 @@
                value = "container.accessibilityIdentifier">
             </PersistentString>
             <PersistentString
-               value = "self.relaxSelected!.isEmpty">
+               value = "self.atWorkSelected">
             </PersistentString>
             <PersistentString
-               value = "self.atWorkSelected">
+               value = "self.relaxSelected!.isEmpty">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -2181,6 +2197,14 @@
             </PersistentString>
             <PersistentString
                value = "UIScreen.mainScreen().bounds.height">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ErrorsManager.displayErrorServer(AnyObject) -&gt; ():ErrorsManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "print(error)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -2364,10 +2388,10 @@
          contextName = "SettingsStyleCell.(whichContainerSelected in _CBC7436A3C00BE231BF4F51C764CF409)(CGPoint) -&gt; UIImageView?:SettingsStyleCell.swift">
          <PersistentStrings>
             <PersistentString
-               value = "self.contentView.convertPoint(location, fromView: self)">
+               value = "atWorkContainer.frame">
             </PersistentString>
             <PersistentString
-               value = "atWorkContainer.frame">
+               value = "self.contentView.convertPoint(location, fromView: self)">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -2391,10 +2415,10 @@
          contextName = "DressTime.LoginViewController.(onClickLoginBtn (DressTime.LoginViewController) -&gt; (Swift.AnyObject) -&gt; ()).(closure #1):LoginViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "newProfil.access_token">
+               value = "profil.access_token">
             </PersistentString>
             <PersistentString
-               value = "profil.access_token">
+               value = "newProfil.access_token">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -2421,10 +2445,10 @@
                value = "self.center">
             </PersistentString>
             <PersistentString
-               value = "print(self.layoutIfNeeded())">
+               value = "UIApplication.sharedApplication().keyWindow?.center">
             </PersistentString>
             <PersistentString
-               value = "UIApplication.sharedApplication().keyWindow?.center">
+               value = "print(self.layoutIfNeeded())">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

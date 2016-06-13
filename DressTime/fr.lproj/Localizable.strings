@@ -30,26 +30,26 @@
 "registerSexeWomen" = "Je suis une jolie fille";
 "registerSexeMen" = "Je suis un joli garçon";
 
-"registerStyleSelectStyle" = "1 - Selectionne un style";
+"registerStyleSelectStyle" = "1 - Sélectionne un style";
 "registerStyleFashionStyle" = "fashion";
 "registerStyleBusinessStyle" = "business";
 "registerStyleSportwearStyle" = "sportwear";
 "registerStyleCasualStyle" = "casual chic";
-"registerStyleSelectPeriod" = "2 - Selectionne une periode";
+"registerStyleSelectPeriod" = "2 - Sélectionne une periode";
 "registerStyleWorkPeriod" = "pour travailler";
 "registerStylePartyPeriod" = "en soirée";
 "registerStyleChillPeriod" = "for chill";
 "registerStyleTitle" = "MES STYLES";
-"registerStyleTutorialLabel" = "Pour être précis, sélectionnez vos propre styles.";
-"registerStyleTutorialButton" = "C'est partie!";
+"registerStyleTutorialLabel" = "Pour être précis, sélectionne tes propres styles.";
+"registerStyleTutorialButton" = "C'est parti!";
 "registerStyleValidateModificationBtn" = "Valider";
 "registerStyleSeeMyNewDressingBtn" = "Voir mon nouveau dressing";
 "registerStyleErrTitle" = "Erreur";
-"registerStyleErrMessage" = "Selectionnez votre style pour chaque moment de la journée!";
+"registerStyleErrMessage" = "Sélectionnes ton style pour chaque moment de la journée!";
 "registerStyleErrButton" = "Okay";
 
 "registerErrorCreateAccountTitle" = "Erreur!";
-"registerErrorCreateAccountMessge" = "Erreur durant la création du compte. Svp réessayez plus-tard!";
+"registerErrorCreateAccountMessge" = "Erreur durant la création du compte. Merci de réessayer plus-tard!";
 "registerErrorCreateAccountButton" = "Okay.";
 
 /* General translation */
@@ -65,10 +65,10 @@
 "tabBarItemShopping" = "Shopping";
 
 /* HomeViewController */
-"homeLocErrTitle" = "Failed!";
-"homeLocErrMessage" = "Svp activatez la localisation via Settings > Localisation > DressTime : Activité";
+"homeLocErrTitle" = "Raté";
+"homeLocErrMessage" = "Il faut que tu actives la localisation via Settings > Localisation > DressTime : Activité";
 "homeLocErrButton" = "Okay.";
-"Moment_Relax" = "Relax";
+"Moment_Relax" = "relax";
 "Moment_Work" = "travail";
 "Moment_Party" = "soirée";
 "homeEmptyMessage" = "Continue ! Ajoute plus de vêtements :)";
@@ -152,12 +152,13 @@
 "captureStep2ColorMsg" = "Couleurs principales";
 "captureStep3ModifyBtn" = "Modifier";
 "captureStep3AddBtn" = "Ajouter";
-"captureStep3HeaderMsg" = "Super shoot! Tout est parfait ?";
+"captureStep3HeaderMsg" = "Super shoot! Tout est parfait?";
 "captureStep3PatternTitle" = "Les motifs";
-"captureStep3BrandTitle" = "Connais-tu la marque ?";
+"captureStep3BrandTitle" = "Connais-tu la marque?";
 
 /* Calendar */
 "calendarDoYouRemember" = "Te rappel tu quelle était ta tenue ?";
+"calendarErrNoInternet" =  "Erreur pendant la recherche de vos tenues";
 
 /* Shopping */
 "shoppingNumberOfMatching" = "tenus dans ton dressing";

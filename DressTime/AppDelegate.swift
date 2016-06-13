@@ -10,22 +10,30 @@ import UIKit
 import CoreData
 import CoreLocation
 import Mixpanel
+import FBSDKCoreKit
+import FBSDKLoginKit
+import Fabric
+import Crashlytics
+import Appsee
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var currentUser:Profil?
-    
-    private var locationManager: CLLocationManager!
-    private var currentLocation: CLLocation!
-    private var locationFixAchieved : Bool = false
-    
+    var errorManager = ErrorsManager()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         NSLog("didFinishLaunchingWithOptions")
        
+        Fabric.with([Crashlytics.self])
+        Fabric.with([Appsee.self])
+        
         _ = Mixpanel.sharedInstanceWithToken("fbe8acba2c1532169cd509ab5838e1ed")
+        let mixpanel = Mixpanel.sharedInstance()
+        UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes:  [.Alert, .Badge, .Sound], categories: nil))
+        UIApplication.sharedApplication().registerForRemoteNotifications()
+        mixpanel.identify(mixpanel.distinctId)
         
         //Facebook SDK
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
@@ -62,6 +70,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let profil = profilDAL.fetch(name) {
                     SharedData.sharedInstance.currentUserId = profil.userid
                     SharedData.sharedInstance.sexe = profil.gender
+                    mixpanel.people.set(["sexe" : profil.gender!, "$name" : profil.name!, "$email" : profil.email!])
+                    Appsee.setUserID(profil.userid)
+
                     DressingSynchro(userId: profil.userid!).migrateImageCoreDataToFile()
                     self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -110,6 +121,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
            NSLog("didRegisterForRemoteNotificationsWithDeviceToken")
+        let mixPanel = Mixpanel.sharedInstance()
+        mixPanel.people.addPushDeviceToken(deviceToken)
     }
     
     func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError) {
@@ -207,61 +220,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
                 abort()
             }
-        }
-    }
-    
-    
-    private func loadOutfits(){
-        DressTimeService().GetOutfitsToday(self.currentLocation) { (isSuccess, object) -> Void in
-            if (isSuccess){
-                let weather = Weather(json: object["weather"]["current"])
-                let sentence = object["weather"]["comment"].stringValue
-                var listOutfit = [Outfit]()
-                if let outfits = object["outfits"].array {
-                    for outfit in outfits {
-                        let outfitObj = Outfit(json: outfit)
-                        outfitObj.orderOutfit()
-                        listOutfit.append(outfitObj)
-                    }
-                }
-                let userInfo:[String:AnyObject] = ["weather":weather, "sentence": sentence, "outfitList": listOutfit]
-                SharedData.sharedInstance.currentWeater = weather
-                SharedData.sharedInstance.outfitList = listOutfit
-                SharedData.sharedInstance.weatherSentence = sentence
-                
-                NSNotificationCenter.defaultCenter().postNotificationName("OutfitLoaded", object: self, userInfo: userInfo)
-                self.openMainNavScreen()
-            } else {
-                //TO DO - ADD Error Messages
-                NSNotificationCenter.defaultCenter().postNotificationName("OutfitError", object: object.stringValue)
-                self.openMainNavScreen()
-            }
-            
-        }
-    }
-}
-
-extension AppDelegate: CLLocationManagerDelegate {
-    /***/
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        if (locationFixAchieved == false){
-            locationFixAchieved = true
-            locationManager.stopUpdatingLocation()
-            self.currentLocation = locations[locations.count-1]
-            SharedData.sharedInstance.currentLocation = self.currentLocation
-            NSNotificationCenter.defaultCenter().postNotificationName("LocationUpdated", object: self.currentLocation)
-            loadOutfits()
-        }
-    }
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        ActivityLoader.shared.hideProgressView()
-        
-        switch(CLLocationManager.authorizationStatus()) {
-        case .NotDetermined, .Restricted, .Denied:
-            NSNotificationCenter.defaultCenter().postNotificationName("LocationError", object: nil)
-        case .AuthorizedAlways, .AuthorizedWhenInUse:
-            print("Access")
         }
     }
 }

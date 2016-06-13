@@ -1,0 +1,11 @@
+EMBEDDED_CONTENT_CONTAINS_SWIFT = YES
+FRAMEWORK_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/Alamofire-iOS8.1" "$PODS_CONFIGURATION_BUILD_DIR/Bolts-iOS8.1" "$PODS_CONFIGURATION_BUILD_DIR/FBSDKCoreKit-iOS8.1" "$PODS_CONFIGURATION_BUILD_DIR/FBSDKLoginKit-iOS8.1" "$PODS_CONFIGURATION_BUILD_DIR/MapleBacon-iOS8.1" "$PODS_CONFIGURATION_BUILD_DIR/Mixpanel-iOS8.1" "${PODS_ROOT}/Appsee/Appsee" "${PODS_ROOT}/Crashlytics/iOS" "${PODS_ROOT}/Fabric/iOS"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Appsee" "${PODS_ROOT}/Headers/Public/Crashlytics" "${PODS_ROOT}/Headers/Public/Fabric"
+LD_RUNPATH_SEARCH_PATHS = $(inherited) '@executable_path/Frameworks' '@loader_path/Frameworks'
+OTHER_CFLAGS = $(inherited) -iquote "$PODS_CONFIGURATION_BUILD_DIR/Alamofire-iOS8.1/Alamofire.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/Bolts-iOS8.1/Bolts.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/FBSDKCoreKit-iOS8.1/FBSDKCoreKit.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/FBSDKLoginKit-iOS8.1/FBSDKLoginKit.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/MapleBacon-iOS8.1/MapleBacon.framework/Headers" -iquote "$PODS_CONFIGURATION_BUILD_DIR/Mixpanel-iOS8.1/Mixpanel.framework/Headers" -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/Appsee" -isystem "${PODS_ROOT}/Headers/Public/Crashlytics" -isystem "${PODS_ROOT}/Headers/Public/Fabric"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"c++" -l"z" -framework "AVFoundation" -framework "Alamofire" -framework "Appsee" -framework "Bolts" -framework "CoreGraphics" -framework "CoreMedia" -framework "CoreVideo" -framework "Crashlytics" -framework "FBSDKCoreKit" -framework "FBSDKLoginKit" -framework "Fabric" -framework "MapleBacon" -framework "Mixpanel" -framework "QuartzCore" -framework "Security" -framework "SystemConfiguration" -framework "UIKit"
+OTHER_SWIFT_FLAGS = $(inherited) "-D" "COCOAPODS"
+PODS_BUILD_DIR = $BUILD_DIR
+PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
+PODS_ROOT = ${SRCROOT}/Pods
