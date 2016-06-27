@@ -163,3 +163,28 @@
 /* Shopping */
 "shoppingNumberOfMatching" = "tenus dans ton dressing";
 "shoppingHeaderMsg" = "Regardons ce qu'il manque dans ton dressing";
+
+/* Error Management */
+"getDressingErrTitle" = "Erreur";
+"getDressingErrMessage" = "Désolé, nous avons un problème dans la synchronisation de vos vêtements. Merci de réinstaller l'application :(";
+"getDressingErrButton" = "Okay";
+
+"getOutfitErrTitle" = "Erreur";
+"getOutfitErrMessage" = "On ne peut pas trouver vos tenues, merci de réessayer plus tard.";
+"getOutfitErrButton" = "Okay";
+
+"loginErrTitle" = "Erreur";
+"loginErrMessage" = "Désolé, nous avons une erreur avec votre login. Merci de réessayer plus tard.";
+"loginErrButton" = "Okay";
+
+"saveClotheErrTitle" = "Erreur";
+"saveClotheErrMessage" = "Désolé, nous n'avons pas pu sauvegarder ton vêtement. Vérifie que tu es bien connecté.";
+"saveClotheErrButton" = "Okay";
+
+"uploadClotheErrTitle" = "Erreur";
+"uploadClotheErrMessage" =  "Désolé, nous n'avons pas pu sauvegarder ton vêtement. Vérifie que tu es bien connecté.";
+"uploadClotheErrButton" = "Okay";
+
+"saveOutfitErrTitle" = "Erreur";
+"saveOutfitErrMessage" = "Désolé, nous n'avons pas pu sauvegarder ta tenue. Merci de réessayer.";
+"saveOutfitErrButton" = "Okay";

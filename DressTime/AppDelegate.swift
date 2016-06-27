@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var currentUser:Profil?
     var errorManager = ErrorsManager()
+    let mixpanel = Mixpanel.sharedInstance()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         NSLog("didFinishLaunchingWithOptions")
@@ -30,7 +31,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Appsee.self])
         
         _ = Mixpanel.sharedInstanceWithToken("fbe8acba2c1532169cd509ab5838e1ed")
-        let mixpanel = Mixpanel.sharedInstance()
         UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes:  [.Alert, .Badge, .Sound], categories: nil))
         UIApplication.sharedApplication().registerForRemoteNotifications()
         mixpanel.identify(mixpanel.distinctId)

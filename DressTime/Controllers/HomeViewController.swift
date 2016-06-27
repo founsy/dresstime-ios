@@ -294,11 +294,8 @@ class HomeViewController: DTViewController {
                 //TO DO - ADD Error Messages
                 self.isLoaded = false
                 NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.GetOutfit, object: nil)
-                /*let alert = UIAlertController(title: NSLocalizedString("homeLocErrTitle", comment: ""), message: NSLocalizedString("homeErrorNoAccessInternet", comment: ""), preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("homeLocErrButton", comment: ""), style: .Default) { _ in })*/
                 dispatch_async(dispatch_get_main_queue(), {
                     self.loadingView!.animateMask()
-                    //self.presentViewController(alert, animated: true, completion: nil)
                 })
             }
         }

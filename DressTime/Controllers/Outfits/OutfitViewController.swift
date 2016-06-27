@@ -60,7 +60,7 @@ class OutfitViewController: DTViewController {
             if (isSuccess){
                 self.delegate?.outfitViewControllerDelegate(self, didModifyOutfit: self.outfitObject!)
             } else {
-                //TODO - Add Error Message
+                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.SaveOutfit, object: nil)
             }
         }
         

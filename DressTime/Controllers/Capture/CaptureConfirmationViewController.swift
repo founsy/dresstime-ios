@@ -229,7 +229,7 @@ class CaptureConfirmationViewController: DTViewController {
         let clothe = dal.save(resultCapture)
         DressingService().UploadImage(clothe.clothe_id, data: resultCapture["clothe_image"] as! NSData, completion: { (isSuccess, object) in
             if (!isSuccess) {
-                //TODO - Add Error Message
+                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.UploadClothe, object: nil)
             }
             print("OK")
         })
@@ -242,7 +242,7 @@ class CaptureConfirmationViewController: DTViewController {
                 ActivityLoader.shared.hideProgressView()
                 self.dismissViewControllerAnimated(true, completion: nil)
             } else {
-                //TODO - Add Error Message
+                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.SaveClothe, object: nil)
             }
             
         }

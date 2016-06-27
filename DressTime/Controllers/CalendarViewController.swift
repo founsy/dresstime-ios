@@ -65,13 +65,7 @@ class CalendarViewController: DTViewController {
                 self.collectionView(self.collectionView, didSelectItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
                 self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.Top, animated: true)
             } else {
-                //TO DO - ADD Error Messages
-                NSNotificationCenter.defaultCenter().postNotificationName("errorServer", object: nil, userInfo: ["message" : "ErrorMessage"])
-                let alert = UIAlertController(title: NSLocalizedString("homeLocErrTitle", comment: ""), message: NSLocalizedString("calendarErrNoInternet", comment: ""), preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("homeLocErrButton", comment: ""), style: .Default) { _ in })
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.presentViewController(alert, animated: true, completion: nil)
-                })
+                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.SaveOutfit, object: nil)
             }
         }
 

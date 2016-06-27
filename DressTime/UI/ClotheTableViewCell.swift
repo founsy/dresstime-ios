@@ -34,6 +34,9 @@ class ClotheTableViewCell: UITableViewCell{
             clo.clothe_favorite = favoriteButton.selected
             dal.update(clo)
             DressingService().UpdateClothe(clo) { (isSuccess, object) -> Void in
+                if (!isSuccess) {
+                    NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.UpdateClothe, object: nil)
+                }
                 print("Clothe Sync")
             }
         }

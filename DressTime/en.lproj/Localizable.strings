@@ -72,7 +72,7 @@
 "Moment_Work" = "Work";
 "Moment_Party" = "Party";
 "homeEmptyMessage" = "Keep going ! Few more clothes :)";
-"homeEmptyAnimationMessage" = "You are late! How are you going to get dressed today? »;
+"homeEmptyAnimationMessage" = "You are late! How are you going to get dressed today?";
 "homeErrorNoAccessInternet" = "Error during retrieving your outfits";
 
 "relax" = "Relax";
@@ -163,3 +163,28 @@
 /* Shopping */
 "shoppingNumberOfMatching" = "outfits in your wardrobe";
 "shoppingHeaderMsg" = "Let's see what is missing in your wardrobe";
+
+/* Error Management */
+"getDressingErrTitle" = "Error";
+"getDressingErrMessage" = "Sorry, we have an issue when we are trying to retrieve your clothes. Please reinstall the app. :(";
+"getDressingErrButton" = "Okay";
+
+"getOutfitErrTitle" = "Error";
+"getOutfitErrMessage" = "We can't find your outfits, please try again later.";
+"getOutfitErrButton" = "Okay";
+
+"loginErrTitle" = "Error";
+"loginErrMessage" = "Sorry, we have an error with your login, please try again!";
+"loginErrButton" = "Okay";
+
+"saveClotheErrTitle" = "Error";
+"saveClotheErrMessage" = "Sorry, we can't save your clothe. Be sure you are connected.";
+"saveClotheErrButton" = "Okay";
+
+"uploadClotheErrTitle" = "Error";
+"uploadClotheErrMessage" = "Sorry, we can't save your clothe. Be sure you are connected.";
+"uploadClotheErrButton" = "Okay";
+
+"saveOutfitErrTitle" = "Error";
+"saveOutfitErrMessage" = "Sorry, we can't save your outfit. Please try again!";
+"saveOutfitErrButton" = "Okay";
