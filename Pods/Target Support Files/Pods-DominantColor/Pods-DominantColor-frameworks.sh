@@ -84,18 +84,18 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/Alamofire-iOS8.1/Alamofire.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Bolts-iOS8.1/Bolts.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit-iOS8.1/FBSDKCoreKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FBSDKLoginKit-iOS8.1/FBSDKLoginKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/MapleBacon-iOS8.1/MapleBacon.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Mixpanel-iOS8.1/Mixpanel.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit/FBSDKCoreKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSDKLoginKit/FBSDKLoginKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MapleBacon/MapleBacon.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Mixpanel/Mixpanel.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/Alamofire-iOS8.1/Alamofire.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Bolts-iOS8.1/Bolts.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit-iOS8.1/FBSDKCoreKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/FBSDKLoginKit-iOS8.1/FBSDKLoginKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/MapleBacon-iOS8.1/MapleBacon.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Mixpanel-iOS8.1/Mixpanel.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Alamofire/Alamofire.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit/FBSDKCoreKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/FBSDKLoginKit/FBSDKLoginKit.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/MapleBacon/MapleBacon.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/Mixpanel/Mixpanel.framework"
 fi

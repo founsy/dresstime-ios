@@ -37,6 +37,7 @@ class RegisterStyleViewController: DTViewController {
     @IBOutlet weak var partyPeriodLabel: UILabel!
     @IBOutlet weak var chillPeriodLabel: UILabel!
     
+    @IBOutlet weak var arrowImage: UIImageView!
     
     @IBOutlet weak var tutorialView: UIVisualEffectView!
     @IBOutlet weak var tutorialLabel: UILabel!
@@ -83,12 +84,14 @@ class RegisterStyleViewController: DTViewController {
                 if (isStyleSelected){
                     currentStyleSelected = buttonsStyle[i].accessibilityIdentifier
                     openPanel()
+                    buttonsStyle[i].alpha = 1
                 } else {
                     currentStyleSelected = nil
                     closePanel()
                 }
             } else {
                 buttonsStyle[i].selected = false
+                buttonsStyle[i].alpha = 0.4
             }
         }
     }
@@ -277,9 +280,10 @@ class RegisterStyleViewController: DTViewController {
             self.imageHeight[i].constant = 90
             self.imageWidth[i].constant = 90
         }
-       
+        
         UIView.animateWithDuration(0.4, animations: { () -> Void in
             self.view.layoutIfNeeded()
+            self.arrowImage.image = UIImage(named: "arrowDownIcon")
             self.setBigImage()
             }) { (isFinish) -> Void in
                 self.isOpen = true
@@ -298,6 +302,7 @@ class RegisterStyleViewController: DTViewController {
         UIView.animateWithDuration(0.4, animations: { () -> Void in
             self.view.layoutIfNeeded()
             self.setSmallImage()
+            self.arrowImage.image = UIImage(named: "arrowUpIcon")
             }) { (isFinish) -> Void in
                 self.isOpen = false
         }

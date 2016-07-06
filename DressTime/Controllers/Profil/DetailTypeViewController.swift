@@ -58,6 +58,10 @@ class DetailTypeViewController: DTViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        if !((self.tabBarController?.tabBar.hidden)!) {
+            self.tabBarController?.tabBar.hidden = true
+            UIApplication.sharedApplication().statusBarHidden = false
+        }
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.alpha = 1.0
         
@@ -117,6 +121,7 @@ class DetailTypeViewController: DTViewController {
             let navigationController = segue.destinationViewController as! UINavigationController
             if let detailController = navigationController.viewControllers[0] as? DetailClotheViewController {
                 detailController.currentClothe =  self.clothesList![self.currentSection]
+                detailController.delegate = self
             }
         } else if (segue.identifier == "showCapture"){
             let navController = segue.destinationViewController as! UINavigationController
@@ -138,6 +143,12 @@ class DetailTypeViewController: DTViewController {
             default:
                 return -1
         }
+    }
+}
+
+extension DetailTypeViewController: DetailClotheViewControllerDelegate {
+    func detailClotheView(detailClotheview : DetailClotheViewController, itemDeleted item: String) {
+        self.deleteClothe(NSIndexPath(forRow: self.currentSection, inSection: 0))
     }
 }
 

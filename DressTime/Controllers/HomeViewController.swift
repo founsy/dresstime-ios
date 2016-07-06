@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreLocation
+import Mixpanel
 
 
 class HomeViewController: DTViewController {
@@ -81,11 +82,14 @@ class HomeViewController: DTViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         UIApplication.sharedApplication().statusBarHidden = false // for status bar hide
+        let mixpanel = Mixpanel.sharedInstance()
+        mixpanel.identify(mixpanel.distinctId)
         
         self.numberOfClothes = ClothesDAL().numberOfClothes()
         let lastStatus = self.isEnoughClothes
         self.isEnoughClothes = self.isEnoughClothe()
-        
+        mixpanel.people.set(["Clothes Number" : self.numberOfClothes])
+            
         if (self.isEnoughClothes){
             //Meaning not enough clothes to Enough
             if (lastStatus != self.isEnoughClothes){
@@ -287,8 +291,9 @@ class HomeViewController: DTViewController {
                         
                         self.outfitsCell!.dataSource = self
                         outfitsCell.outfitCollectionView.reloadData()
-                        self.loadingView!.animateMask()
+                        
                     }
+                    self.loadingView!.animateMask()
                 }
             } else {
                 //TO DO - ADD Error Messages
@@ -305,6 +310,9 @@ class HomeViewController: DTViewController {
 extension HomeViewController: OutfitViewControllerDelegate {
     func outfitViewControllerDelegate(outfitViewController: OutfitViewController, didModifyOutfit outfit: Outfit) {
         self.needToReload = true
+        if let cell = self.outfitsCell {
+            cell.outfitCollectionView.reloadData()
+        }
     }
 }
 

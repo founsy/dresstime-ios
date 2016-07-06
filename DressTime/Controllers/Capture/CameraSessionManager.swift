@@ -111,8 +111,12 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
                 let videoDeviceInput = try AVCaptureDeviceInput(device: videoDevice) as AVCaptureDeviceInput
                 
                 try videoDevice.lockForConfiguration()
-                videoDevice.focusMode = .AutoFocus
-                videoDevice.flashMode = AVCaptureFlashMode.Auto
+                if (videoDevice.isFocusModeSupported(.AutoFocus)){
+                    videoDevice.focusMode = .AutoFocus
+                }
+                if (videoDevice.isFlashModeSupported(AVCaptureFlashMode.Auto)){
+                    videoDevice.flashMode = AVCaptureFlashMode.Auto
+                }
                 
                 if session.canAddInput(videoDeviceInput) {
                     session.addInput(videoDeviceInput)

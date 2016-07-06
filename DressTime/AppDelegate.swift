@@ -22,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var currentUser:Profil?
     var errorManager = ErrorsManager()
-    let mixpanel = Mixpanel.sharedInstance()
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         NSLog("didFinishLaunchingWithOptions")
@@ -33,6 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ = Mixpanel.sharedInstanceWithToken("fbe8acba2c1532169cd509ab5838e1ed")
         UIApplication.sharedApplication().registerUserNotificationSettings(UIUserNotificationSettings(forTypes:  [.Alert, .Badge, .Sound], categories: nil))
         UIApplication.sharedApplication().registerForRemoteNotifications()
+        let mixpanel = Mixpanel.sharedInstance()
         mixpanel.identify(mixpanel.distinctId)
         
         //Facebook SDK
@@ -70,7 +70,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 if let profil = profilDAL.fetch(name) {
                     SharedData.sharedInstance.currentUserId = profil.userid
                     SharedData.sharedInstance.sexe = profil.gender
-                    mixpanel.people.set(["sexe" : profil.gender!, "$name" : profil.name!, "$email" : profil.email!])
+                    mixpanel.people.set(["sexe" : profil.gender!, "$name" : profil.name!, "$email" : profil.email!, "Style Relax" : profil.relaxStyle!, "Style Work" : profil.atWorkStyle!, "Style Party": profil.onPartyStyle!])
+                    
                     Appsee.setUserID(profil.userid)
 
                     DressingSynchro(userId: profil.userid!).migrateImageCoreDataToFile()

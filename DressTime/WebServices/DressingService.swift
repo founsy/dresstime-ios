@@ -36,14 +36,18 @@ class DressingService {
         
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
             var path = baseUrlDressing + "clothes/image/\(clotheId)"
-            let request = NSMutableURLRequest(URL:  NSURL(string: path)!)
+            
+            var request = NSMutableURLRequest(URL:  NSURL(string: path)!)
             request.HTTPMethod = "POST"
             
             if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
                 path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+                request = NSMutableURLRequest(URL:  NSURL(string: path)!)
+                request.HTTPMethod = "POST"
             } else {
                 request.addValue("Bearer \(profil.access_token!)", forHTTPHeaderField: "Authorization")
             }
+           
             
             Photo.upload(data, filename: "\(clotheId).jpg", request: request)
                 .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in

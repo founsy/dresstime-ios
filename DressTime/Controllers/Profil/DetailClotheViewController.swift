@@ -9,6 +9,10 @@
 import Foundation
 import UIKit
 
+protocol DetailClotheViewControllerDelegate {
+    func detailClotheView(detailClotheview : DetailClotheViewController, itemDeleted item: String)
+}
+
 class DetailClotheViewController: DTViewController {
     
     var currentClothe: Clothe!
@@ -24,16 +28,17 @@ class DetailClotheViewController: DTViewController {
     @IBOutlet weak var createOutfitButton: UIButton!
     @IBOutlet weak var onTap: UIButton!
     
+    var delegate: DetailClotheViewControllerDelegate?
+    
     @IBAction func onTapped(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func onRemoveTapped(sender: AnyObject) {
-        DressingService().DeleteClothe(currentClothe.clothe_id, completion: { (isSuccess, object) -> Void in
-            print("Clothe deleted")
-            ClothesDAL().delete(self.currentClothe)
-            self.dismissViewControllerAnimated(true, completion: nil)
-        })
+        if let del = self.delegate {
+            del.detailClotheView(self, itemDeleted: self.currentClothe.clothe_id)
+        }
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     @IBAction func onCreateOutfitTapped(sender: AnyObject) {

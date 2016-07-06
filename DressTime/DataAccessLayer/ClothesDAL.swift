@@ -88,15 +88,17 @@ class ClothesDAL {
         return 0
     }
     
-    func delete(clothe: Clothe) {
+    func delete(clothe: Clothe) -> Bool {
         // Delete it from the managedObjectContext
         self.managedObjectContext.deleteObject(clothe)
     
         do {
             try managedObjectContext.save()
+            return true
              NSLog("Clothe Deleted");
         } catch let error as NSError {
             print(error)
+            return false
         }
     }
     

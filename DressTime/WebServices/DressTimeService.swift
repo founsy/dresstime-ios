@@ -128,7 +128,7 @@ class DressTimeService {
             var path = baseUrlOutfits + "outfitsPutOn";
             var headers :[String : String]?
             if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
-                path = path + "&access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
             } else {
                 if let token = profil.access_token {
                     headers = ["Authorization": "Bearer \(token)"]

@@ -1,6 +1,0 @@
-framework module Mixpanel {
-  umbrella header "Mixpanel-iOS9.2-umbrella.h"
-
-  export *
-  module * { export * }
-}

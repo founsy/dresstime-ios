@@ -170,9 +170,9 @@
 		01D3BB9C1C29CB09005B2A59 /* artill_clean_icons-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BB9B1C29CB09005B2A59 /* artill_clean_icons-webfont.ttf */; };
 		01FC61FF1C31FC1F004C5CF6 /* StepsControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01FC61FE1C31FC1F004C5CF6 /* StepsControl.xib */; };
 		01FC62031C31FDB9004C5CF6 /* StepsControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC62021C31FDB9004C5CF6 /* StepsControl.swift */; };
-		2DC615E66FAC8F2CB02514B4 /* Pods_DominantColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07143E9C3331E8CD88658F73 /* Pods_DominantColor.framework */; };
 		2EF5C15FFECA033420558B1E /* Pods_DressTimeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24BD8CA10A3FD8C88DFFCEC /* Pods_DressTimeUITests.framework */; };
 		63AF482E2A54FB3AAA5E9958 /* Pods_DressTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD32D206D97E66597C7E58F7 /* Pods_DressTime.framework */; };
+		9C5FD012FBBAD31D1FF6E14E /* Pods_DominantColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07143E9C3331E8CD88658F73 /* Pods_DominantColor.framework */; };
 		B42CEDB7F2A0AFE5F880F9D8 /* Pods_DressTimeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC6A0DD9CCF8D1439470730D /* Pods_DressTimeTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -441,7 +441,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DC615E66FAC8F2CB02514B4 /* Pods_DominantColor.framework in Frameworks */,
+				9C5FD012FBBAD31D1FF6E14E /* Pods_DominantColor.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1744,13 +1744,14 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/DressTime/Frameworks/DominantColor/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.dresstime.DominantColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1772,9 +1773,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/DressTime/Frameworks/DominantColor/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = io.dresstime.DominantColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";

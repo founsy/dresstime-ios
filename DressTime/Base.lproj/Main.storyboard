@@ -2837,7 +2837,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RegisterBgStyle" translatesAutoresizingMaskIntoConstraints="NO" id="hZR-gL-0h1">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RegisterBgStyle" translatesAutoresizingMaskIntoConstraints="NO" id="hZR-gL-0h1">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="519"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IRV-iF-diP">
@@ -2867,7 +2867,7 @@
                                     <constraint firstAttribute="width" constant="70" id="q03-it-vE0"/>
                                 </constraints>
                                 <state key="normal" image="cocktailIcon_unselect"/>
-                                <state key="selected" image="cocktailIcon_select"/>
+                                <state key="selected" image="cocktailIcon_unselect"/>
                                 <connections>
                                     <action selector="buttonsStyle:" destination="7Vm-fc-bZf" eventType="touchUpInside" id="VlO-8E-www"/>
                                 </connections>
@@ -2881,7 +2881,7 @@
                                     <constraint firstAttribute="width" constant="70" id="pKc-pp-fBl"/>
                                 </constraints>
                                 <state key="normal" image="briefcaseIcon_unselect"/>
-                                <state key="selected" image="briefcaseIcon_select"/>
+                                <state key="selected" image="briefcaseIcon_unselect"/>
                                 <connections>
                                     <action selector="buttonsStyle:" destination="7Vm-fc-bZf" eventType="touchUpInside" id="SDa-B5-Aq3"/>
                                 </connections>
@@ -2894,7 +2894,7 @@
                                     <constraint firstAttribute="width" constant="70" id="Tbh-cd-c0z"/>
                                 </constraints>
                                 <state key="normal" image="dumbbellIcon_unselect"/>
-                                <state key="selected" image="dumbbellIcon_select"/>
+                                <state key="selected" image="dumbbellIcon_unselect"/>
                                 <connections>
                                     <action selector="buttonsStyle:" destination="7Vm-fc-bZf" eventType="touchUpInside" id="9Mb-lU-yvh"/>
                                 </connections>
@@ -2907,7 +2907,7 @@
                                     <constraint firstAttribute="height" constant="70" id="Ohl-ei-X1w"/>
                                 </constraints>
                                 <state key="normal" image="glassesIcon_unselect"/>
-                                <state key="selected" image="glassesIcon_select"/>
+                                <state key="selected" image="glassesIcon_unselect"/>
                                 <connections>
                                     <action selector="buttonsStyle:" destination="7Vm-fc-bZf" eventType="touchUpInside" id="xPh-KK-woV"/>
                                 </connections>
@@ -2942,6 +2942,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="120"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowUpIcon" translatesAutoresizingMaskIntoConstraints="NO" id="rN2-6P-FxT">
+                                            <rect key="frame" x="154" y="5" width="12" height="7"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="7" id="adB-yJ-PBs"/>
+                                                <constraint firstAttribute="width" constant="12" id="iJJ-QS-6rT"/>
+                                            </constraints>
+                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2 - SELECT A PERIOD" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVW-Ub-XP6">
                                             <rect key="frame" x="94" y="27" width="132" height="16"/>
                                             <fontDescription key="fontDescription" type="italicSystem" pointSize="13"/>
@@ -2995,8 +3002,10 @@
                                         <constraint firstItem="nSG-kr-o6S" firstAttribute="top" secondItem="6tq-CS-t9H" secondAttribute="bottom" constant="1" id="QLI-op-f2c"/>
                                         <constraint firstAttribute="bottom" secondItem="IZz-Ge-agz" secondAttribute="bottom" constant="22.5" id="RCh-tL-naK"/>
                                         <constraint firstItem="IZz-Ge-agz" firstAttribute="centerX" secondItem="JjC-ss-3pz" secondAttribute="centerX" id="YE4-wR-fMg"/>
+                                        <constraint firstItem="rN2-6P-FxT" firstAttribute="top" secondItem="JjC-ss-3pz" secondAttribute="top" constant="5" id="ZM0-Mq-qK7"/>
                                         <constraint firstItem="nSG-kr-o6S" firstAttribute="centerX" secondItem="6tq-CS-t9H" secondAttribute="centerX" id="gce-aM-0Hh"/>
                                         <constraint firstItem="7J6-30-4qS" firstAttribute="centerX" secondItem="Yyq-6z-6Yx" secondAttribute="centerX" id="o86-pV-tEo"/>
+                                        <constraint firstItem="rN2-6P-FxT" firstAttribute="centerX" secondItem="JjC-ss-3pz" secondAttribute="centerX" id="qD7-sN-teA"/>
                                         <constraint firstItem="Yyq-6z-6Yx" firstAttribute="top" secondItem="mVW-Ub-XP6" secondAttribute="bottom" constant="15.5" id="qN7-dZ-hYp"/>
                                         <constraint firstItem="7J6-30-4qS" firstAttribute="top" secondItem="Yyq-6z-6Yx" secondAttribute="bottom" constant="1" id="qst-9R-eNA"/>
                                         <constraint firstItem="mVW-Ub-XP6" firstAttribute="centerX" secondItem="JjC-ss-3pz" secondAttribute="centerX" id="rIe-3y-DD1"/>
@@ -3054,7 +3063,7 @@ LET’S SELECT YOUR OWN STYLE</string>
                                 <blurEffect style="light"/>
                             </visualEffectView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.94117647058823528" green="0.31764705882352939" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="02N-Qo-6cW" firstAttribute="centerX" secondItem="fSP-pJ-8kt" secondAttribute="centerX" id="0kP-RM-Qgi"/>
                             <constraint firstItem="iNQ-2w-16S" firstAttribute="top" secondItem="SCW-TK-1iv" secondAttribute="bottom" constant="45" id="2Jw-Ag-QR9"/>
@@ -3092,6 +3101,7 @@ LET’S SELECT YOUR OWN STYLE</string>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="arrowImage" destination="rN2-6P-FxT" id="MJF-g5-DGz"/>
                         <outlet property="bottomMargin" destination="RCh-tL-naK" id="uia-wj-Y21"/>
                         <outlet property="businessStyleLabel" destination="Rhd-ue-jVY" id="YQJ-WI-uCH"/>
                         <outlet property="casualStyleLabel" destination="02N-Qo-6cW" id="zeY-l1-x6k"/>
@@ -3157,20 +3167,17 @@ LET’S SELECT YOUR OWN STYLE</string>
         <image name="areaSmallC" width="42" height="42"/>
         <image name="areaSmallP" width="42" height="42"/>
         <image name="areaSmallW" width="42" height="42"/>
+        <image name="arrowUpIcon" width="12" height="8"/>
         <image name="backgroundShopping" width="375" height="667"/>
-        <image name="briefcaseIcon_select" width="78" height="78"/>
         <image name="briefcaseIcon_unselect" width="78" height="78"/>
         <image name="bubbleIcon" width="237" height="99"/>
         <image name="calendarIcon" width="23" height="22"/>
         <image name="cameraIcon" width="25" height="20"/>
         <image name="captureIcon" width="25" height="20"/>
-        <image name="cocktailIcon_select" width="78" height="78"/>
         <image name="cocktailIcon_unselect" width="78" height="78"/>
-        <image name="dumbbellIcon_select" width="78" height="78"/>
         <image name="dumbbellIcon_unselect" width="78" height="78"/>
         <image name="eyesclosdIcon" width="23" height="15"/>
         <image name="eyesopen" width="25" height="14"/>
-        <image name="glassesIcon_select" width="78" height="78"/>
         <image name="glassesIcon_unselect" width="78" height="78"/>
         <image name="hangerIcon" width="23" height="20"/>
         <image name="hatsIcon" width="132" height="101"/>
