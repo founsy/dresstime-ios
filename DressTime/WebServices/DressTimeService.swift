@@ -7,6 +7,7 @@
 //
 import UIKit
 import Alamofire
+import SwiftyJSON
 import CoreLocation
 import FBSDKCoreKit
 import FBSDKLoginKit

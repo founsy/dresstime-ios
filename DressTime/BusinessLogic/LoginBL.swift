@@ -9,6 +9,7 @@
 import Foundation
 import FBSDKCoreKit
 import FBSDKLoginKit
+import SwiftyJSON
 
 public class LoginBL {
     

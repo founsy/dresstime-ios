@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 import UIKit
 
 class ShoppingViewController: DTViewController {
@@ -73,7 +74,7 @@ class ShoppingViewController: DTViewController {
     
     private func sortArrayByPrice(list : [BrandClothe]) -> [BrandClothe]{
         return list.sort { (clothe1, clothe2) -> Bool in
-            clothe1.clothe_price < clothe2.clothe_price
+            clothe1.clothe_price.doubleValue < clothe2.clothe_price.doubleValue
         }
     }
 }
@@ -146,7 +147,7 @@ extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
             if (minPrice == nil){
                 minPrice = typeFiltered[i].clothe_price
             }
-            if (typeFiltered[i].clothe_price < minPrice){
+            if (typeFiltered[i].clothe_price.doubleValue < minPrice?.doubleValue){
                 minPrice = typeFiltered[i].clothe_price
             }
         }
@@ -164,7 +165,7 @@ extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
             if (maxPrice == nil){
                 maxPrice = typeFiltered[i].clothe_price
             }
-            if (typeFiltered[i].clothe_price > maxPrice){
+            if (typeFiltered[i].clothe_price.doubleValue > maxPrice?.doubleValue){
                 maxPrice = typeFiltered[i].clothe_price
             }
         }
@@ -196,7 +197,7 @@ extension ShoppingViewController: TypeSelectionCellDelegate {
         self.brandClotheCell!.minValue = minValue
         self.brandClotheCell!.maxValue = maxValue
         
-        if (minValue > self.priceSelectionCell!.maxValue){
+        if (minValue.doubleValue > self.priceSelectionCell!.maxValue?.doubleValue){
             self.priceSelectionCell!.maxValue = maxValue
             self.priceSelectionCell!.minValue = minValue
         } else {

@@ -164,7 +164,6 @@
 		01D3BB8E1C29CA6C005B2A59 /* DressTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB731C29CA6C005B2A59 /* DressTimeService.swift */; };
 		01D3BB8F1C29CA6C005B2A59 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB741C29CA6C005B2A59 /* LoginService.swift */; };
 		01D3BB901C29CA6C005B2A59 /* ReadJsonFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB751C29CA6C005B2A59 /* ReadJsonFile.swift */; };
-		01D3BB911C29CA6C005B2A59 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB761C29CA6C005B2A59 /* SwiftyJSON.swift */; };
 		01D3BB921C29CA6C005B2A59 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB771C29CA6C005B2A59 /* UserService.swift */; };
 		01D3BB991C29CAC7005B2A59 /* RegisterSexeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB951C29CAC7005B2A59 /* RegisterSexeViewController.swift */; };
 		01D3BB9C1C29CB09005B2A59 /* artill_clean_icons-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BB9B1C29CB09005B2A59 /* artill_clean_icons-webfont.ttf */; };
@@ -386,7 +385,6 @@
 		01D3BB731C29CA6C005B2A59 /* DressTimeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressTimeService.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		01D3BB741C29CA6C005B2A59 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		01D3BB751C29CA6C005B2A59 /* ReadJsonFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReadJsonFile.swift; path = ../WebServices/ReadJsonFile.swift; sourceTree = "<group>"; };
-		01D3BB761C29CA6C005B2A59 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		01D3BB771C29CA6C005B2A59 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		01D3BB951C29CAC7005B2A59 /* RegisterSexeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSexeViewController.swift; sourceTree = "<group>"; };
 		01D3BB9B1C29CB09005B2A59 /* artill_clean_icons-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "artill_clean_icons-webfont.ttf"; sourceTree = "<group>"; };
@@ -812,7 +810,6 @@
 				01D3BB721C29CA6C005B2A59 /* DressingService.swift */,
 				01D3BB731C29CA6C005B2A59 /* DressTimeService.swift */,
 				01D3BB741C29CA6C005B2A59 /* LoginService.swift */,
-				01D3BB761C29CA6C005B2A59 /* SwiftyJSON.swift */,
 				01D3BB771C29CA6C005B2A59 /* UserService.swift */,
 			);
 			path = WebServices;
@@ -1420,7 +1417,6 @@
 				01218BFB1C29CD5A00E4D80F /* TransitionManager.swift in Sources */,
 				010EE6771C83159E007A5828 /* StoreViewController.swift in Sources */,
 				01218BEC1C29CD5A00E4D80F /* ImageLoader.swift in Sources */,
-				01D3BB911C29CA6C005B2A59 /* SwiftyJSON.swift in Sources */,
 				01A19B9C1C30B1C4002642EE /* EmptyTypeView.swift in Sources */,
 				01D3BB191C29CA31005B2A59 /* BrandClotheCell.swift in Sources */,
 				01218BF51C29CD5A00E4D80F /* SpringButton.swift in Sources */,

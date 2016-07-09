@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DressTime/WebServices/DressTimeService.swift"
-            timestampString = "486045061.530749"
+            timestampString = "489765773.780945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "GetOutfitsToday(_:completion:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DressTime/WebServices/DressTimeService.swift"
-            timestampString = "486045137.096982"
+            timestampString = "489765773.780945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "getOutfits(_:completion:)"
             landmarkType = "5">
             <Locations>
@@ -314,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DressTime/WebServices/DressingService.swift"
-            timestampString = "486249781.83175"
+            timestampString = "489765773.780945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "UploadImage(_:data:completion:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -362,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DressTime/WebServices/UserService.swift"
-            timestampString = "486163512.355499"
+            timestampString = "489765773.780945"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
             landmarkName = "createUser(_:password:completion:)"
             landmarkType = "5">
             <Locations>
@@ -374,31 +374,31 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "DressTime.UserService.(createUser in _FB3E589A3D30C8483E90F674004580CD) (DressTime.Profil, password : Swift.Optional&lt;Swift.String&gt;, completion : (isSuccess : Swift.Bool, object : DressTime.JSON) -&gt; ()) -&gt; ()"
+                  symbolName = "DressTime.UserService.(createUser in _FB3E589A3D30C8483E90F674004580CD) (DressTime.Profil, password : Swift.Optional&lt;Swift.String&gt;, completion : (isSuccess : Swift.Bool, object : SwiftyJSON.JSON) -&gt; ()) -&gt; ()"
                   moduleName = "DressTime"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/fab/Documents/Git/dresstime/dresstime-ios/DressTime/WebServices/UserService.swift"
-                  timestampString = "489484882.495518"
+                  timestampString = "489769099.937231"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "47"
-                  endingLineNumber = "47"
-                  offsetFromSymbolStart = "8000">
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "10125">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "DressTime.UserService.((createUser in _FB3E589A3D30C8483E90F674004580CD) (DressTime.Profil, password : Swift.Optional&lt;Swift.String&gt;, completion : (isSuccess : Swift.Bool, object : DressTime.JSON) -&gt; ()) -&gt; ()).(closure #1)"
+                  symbolName = "DressTime.UserService.((createUser in _FB3E589A3D30C8483E90F674004580CD) (DressTime.Profil, password : Swift.Optional&lt;Swift.String&gt;, completion : (isSuccess : Swift.Bool, object : SwiftyJSON.JSON) -&gt; ()) -&gt; ()).(closure #1)"
                   moduleName = "DressTime"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/fab/Documents/Git/dresstime/dresstime-ios/DressTime/WebServices/UserService.swift"
-                  timestampString = "489484882.495654"
+                  timestampString = "489769099.937438"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "136">
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "157">
                </Location>
             </Locations>
          </BreakpointContent>

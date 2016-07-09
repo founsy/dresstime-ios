@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 public class Outfit: NSObject{
     var matchingRate: NSNumber
@@ -96,10 +97,14 @@ public class Outfit: NSObject{
                 clothes[ClotheOrder.maille.rawValue] = item
                 break
             case ClotheType.top :
-                clothes[ClotheOrder.top.rawValue] = item
+                if (ClotheOrder.top.rawValue < clothes.count) {
+                    clothes[ClotheOrder.top.rawValue] = item
+                }
                 break
             case ClotheType.dress :
-                clothes[ClotheOrder.dress.rawValue - 1] = item
+                if (ClotheOrder.dress.rawValue - 1 < clothes.count) {
+                    clothes[ClotheOrder.dress.rawValue - 1] = item
+                }
                 break
             case ClotheType.pants :
                 if (ClotheOrder.pants.rawValue - 1) < clothes.count {

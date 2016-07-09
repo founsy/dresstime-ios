@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import Alamofire
+import SwiftyJSON
 import FBSDKCoreKit
 import FBSDKLoginKit
 

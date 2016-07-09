@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 public class BrandClothe: ClotheModel{
     var clothe_brand: String?

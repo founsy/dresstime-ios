@@ -36,6 +36,7 @@ class LoginViewController: DTViewController {
     @IBOutlet weak var constraintStackButtonTop: NSLayoutConstraint!
     @IBOutlet weak var hidePasswordButton: UIButton!
     
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     private var userByFB: User?
     private var user: User?
     private var isRegister: Bool = true
@@ -83,6 +84,13 @@ class LoginViewController: DTViewController {
         loginButton.setTitle(NSLocalizedString("loginLoginHeaderButton", comment: "LOGIN").uppercaseString, forState: .Selected)
         
         joinButton.setTitle(NSLocalizedString("loginSignUpButton", comment: "LOGIN").uppercaseString, forState: .Normal)
+        
+        let tapName = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.fieldSelection(_:)))
+        tapName.numberOfTapsRequired = 1
+        nameLabel.userInteractionEnabled = true
+        nameLabel.addGestureRecognizer(tapName)
+        emailLabel.addGestureRecognizer(tapName)
+        passwordLabel.addGestureRecognizer(tapName)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -95,6 +103,9 @@ class LoginViewController: DTViewController {
             //Display Tutorial
             self.performSegueWithIdentifier("showTutorial", sender: self)
         }
+        
+       // NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+       // NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(LoginViewController.keyboardWillHide(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -120,6 +131,30 @@ class LoginViewController: DTViewController {
         for i in 0...buttonCollection.count-1 {
             createBorder(buttonCollection[i], isSelect: buttonCollection[i].selected)
             buttonCollection[i].addTarget(self, action: #selector(LoginViewController.createBorderButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        }
+    }
+    
+    func keyboardWillShow(notification: NSNotification){
+        if let userInfo = notification.userInfo {
+            if let keyboardSize = (userInfo[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+                heightConstraint.constant = keyboardSize.height
+                view.setNeedsLayout()
+            }
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification){
+        heightConstraint.constant = 0.0
+        view.setNeedsLayout()
+    }
+    
+    func fieldSelection(sender:UITapGestureRecognizer) {
+        if (sender == nameLabel){
+            self.nameField.becomeFirstResponder()
+        } else if (sender == emailLabel) {
+            self.emailField.becomeFirstResponder()
+        } else if (sender == passwordLabel){
+            self.passwordField.becomeFirstResponder()
         }
     }
     
@@ -181,6 +216,13 @@ class LoginViewController: DTViewController {
             appDelegate.window?.rootViewController = initialViewController
             appDelegate.window?.makeKeyAndVisible()
         })
+    }
+}
+
+extension LoginViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }
 

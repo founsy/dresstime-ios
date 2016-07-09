@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 import UIKit
 import MapleBacon
 
@@ -67,7 +68,7 @@ extension ClotheSelectionCell : AKPickerViewDataSource {
     func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
         if let clothes = self.brandClothes {
             self.selectedClothe = clothes.filter({(clothe) -> Bool in
-                return clothe.clothe_type == selectedType && (minValue != nil && clothe.clothe_price >= minValue!) && (maxValue != nil && clothe.clothe_price <= maxValue!)
+                return clothe.clothe_type == selectedType && (minValue != nil && clothe.clothe_price.doubleValue >= minValue!.doubleValue) && (maxValue != nil && clothe.clothe_price.doubleValue <= maxValue!.doubleValue)
             })
             return self.selectedClothe!.count
         } else {

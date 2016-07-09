@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SwiftyJSON
 
 protocol DressingSynchroDelegate {
     func dressingSynchro(dressingSynchro: DressingSynchro, syncDidFinish isFinish: Bool)
