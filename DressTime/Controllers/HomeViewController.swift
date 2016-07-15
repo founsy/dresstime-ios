@@ -69,6 +69,7 @@ class HomeViewController: DTViewController {
         
         headerView = self.tableView.tableHeaderView
         self.tableView.tableHeaderView = nil
+    
         if (self.isEnoughClothe()){
             self.tableView.addSubview(headerView)
             self.tableView.contentInset = UIEdgeInsets(top: (kTableHeaderHeight), left: 0, bottom: 0, right: 0)
@@ -77,10 +78,15 @@ class HomeViewController: DTViewController {
             self.tableView.contentInset = UIEdgeInsets(top: (64), left: 0, bottom: 0, right: 0)
             self.tableView.contentOffset = CGPoint(x: 0, y: (-64))
         }
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(HomeViewController.needToReloadOutfit), name: "ClotheDeletedNotification", object: nil)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        updateHeaderView()
         UIApplication.sharedApplication().statusBarHidden = false // for status bar hide
         let mixpanel = Mixpanel.sharedInstance()
         mixpanel.identify(mixpanel.distinctId)
@@ -116,7 +122,6 @@ class HomeViewController: DTViewController {
                 self.tableView.addSubview(headerView)
                 self.tableView.contentInset = UIEdgeInsets(top: (kTableHeaderHeight), left: 0, bottom: 0, right: 0)
                 self.tableView.contentOffset = CGPoint(x: 0, y: (-kTableHeaderHeight))
-                
                 //Reload TableView with good cell
                 self.tableView.reloadData()
                 
@@ -124,6 +129,7 @@ class HomeViewController: DTViewController {
             if (!isLoaded && self.currentLocation != nil){
                 //Call web service to get Outfits of the Day
                 self.loadOutfits()
+                updateHeaderView()
                 //Reload TableView with good cell
                 self.tableView.reloadData()
             }
@@ -143,6 +149,10 @@ class HomeViewController: DTViewController {
         
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     var mask: CAShapeLayer?
     
     private func addLoadingView(){
@@ -152,6 +162,19 @@ class HomeViewController: DTViewController {
         loadingView!.frame = self.view.frame
         loadingView!.tag = 1000
         currentWindow.addSubview(loadingView!)
+    }
+    
+    private func updateHeaderView(){
+        var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: tableView.bounds.width, height: kTableHeaderHeight)
+        if  tableView.contentOffset.y < -kTableHeaderHeight {
+            headerRect.origin.y = tableView.contentOffset.y
+            headerRect.size.height = -tableView.contentOffset.y
+        }
+        headerView.frame = headerRect
+    }
+    
+    func needToReloadOutfit(){
+        self.isLoaded = false
     }
     
     func animateMask() {
@@ -166,16 +189,6 @@ class HomeViewController: DTViewController {
         keyFrameAnimation.keyTimes = [0, 0.3, 1]
         keyFrameAnimation.timingFunctions = [CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut), CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)]
         self.mask!.addAnimation(keyFrameAnimation, forKey: "bounds")
-    }
-    
-    private func updateHeaderView(){
-        
-        var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: UIScreen.mainScreen().bounds.width, height: kTableHeaderHeight)
-        if  tableView.contentOffset.y < -kTableHeaderHeight {
-            headerRect.origin.y = tableView.contentOffset.y
-            headerRect.size.height = -tableView.contentOffset.y
-        }
-        headerView.frame = headerRect
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -201,6 +214,7 @@ class HomeViewController: DTViewController {
             let targetVC = segue.destinationViewController as! OutfitViewController
             targetVC.outfitObject = self.outfitSelected
             targetVC.currentOutfits = self.outfitSelected!.clothes
+            targetVC.imageName = self.bgView.image
             targetVC.delegate = self
         } else if (segue.identifier == "AddClothe"){
             if (typeClothe >= 0) {

@@ -32,6 +32,6 @@ public class DTTabBarController: UITabBarController {
         //UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: .Normal)
         //UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: .Selected)
         
-        self.selectedViewController = self.viewControllers![2]
+        self.selectedViewController = self.viewControllers![0]
     }
 }

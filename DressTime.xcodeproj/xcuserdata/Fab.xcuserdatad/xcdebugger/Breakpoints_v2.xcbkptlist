@@ -217,22 +217,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DressTime/Utils/DTTabBarController.swift"
-            timestampString = "485606622.381672"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "DressTime/WebServices/DressTimeService.swift"
             timestampString = "489765773.780945"
             startingColumnNumber = "9223372036854775807"
@@ -345,22 +329,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DressTime/Controllers/Register/RegisterStyleViewController.swift"
-            timestampString = "489484695.149154"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
-            landmarkName = "onSaveTapped(_:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "DressTime/WebServices/UserService.swift"
             timestampString = "489765773.780945"
             startingColumnNumber = "9223372036854775807"
@@ -369,38 +337,6 @@
             endingLineNumber = "47"
             landmarkName = "createUser(_:password:completion:)"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DressTime.UserService.(createUser in _FB3E589A3D30C8483E90F674004580CD) (DressTime.Profil, password : Swift.Optional&lt;Swift.String&gt;, completion : (isSuccess : Swift.Bool, object : SwiftyJSON.JSON) -&gt; ()) -&gt; ()"
-                  moduleName = "DressTime"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fab/Documents/Git/dresstime/dresstime-ios/DressTime/WebServices/UserService.swift"
-                  timestampString = "489769099.937231"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "48"
-                  endingLineNumber = "48"
-                  offsetFromSymbolStart = "10125">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "DressTime.UserService.((createUser in _FB3E589A3D30C8483E90F674004580CD) (DressTime.Profil, password : Swift.Optional&lt;Swift.String&gt;, completion : (isSuccess : Swift.Bool, object : SwiftyJSON.JSON) -&gt; ()) -&gt; ()).(closure #1)"
-                  moduleName = "DressTime"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fab/Documents/Git/dresstime/dresstime-ios/DressTime/WebServices/UserService.swift"
-                  timestampString = "489769099.937438"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "157">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

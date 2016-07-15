@@ -9,6 +9,20 @@
 import Foundation
 import SwiftyJSON
 
+enum ClotheType : String {
+    case maille = "maille"
+    case top = "top"
+    case dress = "dress"
+    case pants = "pants"
+}
+
+enum ClotheOrder : Int {
+    case maille = 0
+    case top = 1
+    case dress = 2
+    case pants = 3
+}
+
 public class Outfit: NSObject{
     var matchingRate: NSNumber
     var clothes: [ClotheModel]
@@ -73,25 +87,26 @@ public class Outfit: NSObject{
         return dictionnary
     }
     
-    
-    enum ClotheType : String {
-        case maille = "maille"
-        case top = "top"
-        case dress = "dress"
-        case pants = "pants"
-    }
-    
-    enum ClotheOrder : Int {
-        case maille = 0
-        case top = 1
-        case dress = 2
-        case pants = 3
+    func getOrder(type: String) -> Int {
+        switch ClotheType(rawValue: type)! {
+        case ClotheType.maille :
+            return ClotheOrder.maille.rawValue
+        case ClotheType.top :
+               return ClotheOrder.top.rawValue
+        case ClotheType.dress :
+            return ClotheOrder.dress.rawValue
+        case ClotheType.pants :
+            return ClotheOrder.pants.rawValue
+        }
     }
     
     func orderOutfit() {
         var clothes = self.clothes
+        clothes.sortInPlace { (clothe1, clothe2) -> Bool in
+            getOrder(clothe1.clothe_type) < getOrder(clothe2.clothe_type)
+        }
         
-        for item in self.clothes {
+       /* for item in self.clothes {
             switch ClotheType(rawValue: item.clothe_type)! {
             case ClotheType.maille :
                 clothes[ClotheOrder.maille.rawValue] = item
@@ -112,7 +127,7 @@ public class Outfit: NSObject{
                 }
                 break
             }
-        }
+        } */
         self.clothes = clothes
     }
 }

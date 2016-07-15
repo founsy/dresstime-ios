@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HeaderOutfitView" customModule="DressTime" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nGT-l9-sGg">
+                    <rect key="frame" x="279" y="278.5" width="42" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="42" id="3g0-Gu-oOE"/>
+                        <constraint firstAttribute="height" constant="42" id="bx0-Rg-dMF"/>
+                    </constraints>
+                    <state key="normal" image="addIcon">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="onTappedAdd:" destination="iN0-l3-epB" eventType="touchUpInside" id="0C3-KP-HOT"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add element" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F79-g7-YO2">
+                    <rect key="frame" x="259.5" y="326.5" width="81.5" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="F79-g7-YO2" firstAttribute="centerX" secondItem="nGT-l9-sGg" secondAttribute="centerX" id="BvR-fg-Hxd"/>
+                <constraint firstItem="nGT-l9-sGg" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="J3N-yA-M6B"/>
+                <constraint firstItem="F79-g7-YO2" firstAttribute="top" secondItem="nGT-l9-sGg" secondAttribute="bottom" constant="6" id="QKO-29-Qqc"/>
+                <constraint firstItem="nGT-l9-sGg" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="tlW-xD-Z5T"/>
+            </constraints>
+            <connections>
+                <outlet property="addButton" destination="nGT-l9-sGg" id="Vpv-Yz-qXp"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="addIcon" width="40" height="40"/>
+    </resources>
+</document>

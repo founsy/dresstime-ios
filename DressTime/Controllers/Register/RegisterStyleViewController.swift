@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Mixpanel
 
 class RegisterStyleViewController: DTViewController {
     
@@ -139,45 +140,52 @@ class RegisterStyleViewController: DTViewController {
             self.user?.atWorkStyle = self.atWorkSelected
             self.user?.onPartyStyle = self.onPartySelected;
             self.user?.relaxStyle = self.relaxSelected
-            let profil = dal.save(self.user!)
             
-            UserService().CreateUser(profil, password: self.user!.password, completion: { (isSuccess, object) -> Void in
-                if (isSuccess){
-                    //Create Model
-                    if (FBSDKAccessToken.currentAccessToken() == nil){
-                        self.loginSuccess(profil, password: self.user!.password!)
+            
+            if let newUser = self.user {
+                let profil = dal.save(newUser)
+                let mixpanel = Mixpanel.sharedInstance()
+                mixpanel.people.set(["sexe" : newUser.gender!, "$name" : newUser.displayName, "$email" : newUser.email, "Style Relax" : newUser.relaxStyle!, "Style Work" : newUser.atWorkStyle!, "Style Party": newUser.onPartyStyle!])
+            
+           
+                UserService().CreateUser(profil, password: newUser.password, completion: { (isSuccess, object) -> Void in
+                    if (isSuccess){
+                        //Create Model
+                        if (FBSDKAccessToken.currentAccessToken() == nil){
+                            self.loginSuccess(profil, password: newUser.password!)
+                        } else {
+                            let defaults = NSUserDefaults.standardUserDefaults()
+                            defaults.setObject(profil.userid, forKey: "userId")
+                            defaults.synchronize()
+                        }
+                        SharedData.sharedInstance.currentUserId = profil.userid
+                        SharedData.sharedInstance.sexe = profil.gender
+                        
+                        UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: { () -> Void in
+                            self.confirmationView?.alpha = 1
+                            self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
+                            }, completion: { (isFinish) -> Void in
+                                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                                    self.confirmationView?.alpha = 0
+                                    self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
+                                    }, completion: { (finish) -> Void in
+                                        dispatch_async(dispatch_get_main_queue(),  { () -> Void in
+                                            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
+                                            appDelegate.window?.rootViewController = initialViewController
+                                            appDelegate.window?.makeKeyAndVisible()
+                                        })
+                                })
+                        })
                     } else {
-                        let defaults = NSUserDefaults.standardUserDefaults()
-                        defaults.setObject(profil.userid, forKey: "userId")
-                        defaults.synchronize()
+                        let alert = UIAlertController(title: NSLocalizedString("registerErrorCreateAccountTitle", comment: ""), message: NSLocalizedString("registerErrorCreateAccountMessge", comment: ""), preferredStyle: .Alert)
+                        alert.addAction(UIAlertAction(title: NSLocalizedString("registerErrorCreateAccountButton", comment: ""), style: .Default, handler: nil))
+                        self.presentViewController(alert, animated: true){}
+                        
                     }
-                    SharedData.sharedInstance.currentUserId = profil.userid
-                    SharedData.sharedInstance.sexe = profil.gender
-                    
-                    UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: { () -> Void in
-                        self.confirmationView?.alpha = 1
-                        self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
-                        }, completion: { (isFinish) -> Void in
-                            UIView.animateWithDuration(0.2, animations: { () -> Void in
-                                self.confirmationView?.alpha = 0
-                                self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
-                                }, completion: { (finish) -> Void in
-                                    dispatch_async(dispatch_get_main_queue(),  { () -> Void in
-                                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-                                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                        let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
-                                        appDelegate.window?.rootViewController = initialViewController
-                                        appDelegate.window?.makeKeyAndVisible()
-                                    })
-                            })
-                    })
-                } else {
-                    let alert = UIAlertController(title: NSLocalizedString("registerErrorCreateAccountTitle", comment: ""), message: NSLocalizedString("registerErrorCreateAccountMessge", comment: ""), preferredStyle: .Alert)
-                    alert.addAction(UIAlertAction(title: NSLocalizedString("registerErrorCreateAccountButton", comment: ""), style: .Default, handler: nil))
-                    self.presentViewController(alert, animated: true){}
-                
-                }
-            })
+                })
+            }
             
         }
     }

@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "clear4.png",
+      "filename" : "background_sun.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "clear4@2x.png",
+      "filename" : "background_sun@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "clear4@3x.png",
+      "filename" : "background_sun@3x.png",
       "scale" : "3x"
     }
   ],

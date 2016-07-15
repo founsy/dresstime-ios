@@ -133,7 +133,7 @@ class ProfilViewController: DTTableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "DetailsClothes"){
             let targetVC = segue.destinationViewController as! DetailTypeViewController
-            targetVC.typeClothe = self.typeColtheSelected
+            targetVC.typeClothe = [self.typeColtheSelected!]
         } else if (segue.identifier == "AddClothe"){
             let navController = segue.destinationViewController as! UINavigationController
             let targetVC = navController.topViewController as! TypeViewController

@@ -19,17 +19,32 @@ class OutfitViewController: DTViewController {
     private let cellIdentifier : String = "ClotheTableCell"
     private let dal = ClothesDAL()
     private var currentClothe: Clothe?
+    private var typeToOpen: [String]?
+    private var indexPathToAnimate : Int?
+    private var isEditingMode = false
     
     private var confirmationView: ConfirmSave?
     
     var outfitObject: Outfit?
     var currentOutfits = [ClotheModel]()
-    private var number = 0
     var delegate: OutfitViewControllerDelegate?
     var creationDate : NSDate?
+    var imageName : UIImage?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dressupButton: UIButton!
+    @IBOutlet weak var backgroundImageView: UIImageView!
+    
+    @IBOutlet weak var onEditTapped: UIBarButtonItem!
+    @IBAction func onEditTapped(sender: AnyObject) {
+        isEditingMode = !isEditingMode
+        if (isEditingMode){
+            onEditTapped.title = "Cancel" //TODO Translate
+        } else {
+             onEditTapped.title = "Edit" //TODO Translate
+        }
+        tableView.reloadData()
+    }
     
     @IBAction func onDressUpTapped(sender: AnyObject) {
         self.outfitObject?.isPutOn = true
@@ -40,8 +55,12 @@ class OutfitViewController: DTViewController {
         
         
         var isModify = false
-        for i in 0..<currentOutfits.count {
-            isModify = isModify || (currentOutfits[i].clothe_id != outfitObject?.clothes[i].clothe_id)
+        if (currentOutfits.count == outfitObject!.clothes.count) {
+            for i in 0..<currentOutfits.count {
+                isModify = isModify || (currentOutfits[i].clothe_id != outfitObject?.clothes[i].clothe_id)
+            }
+        } else {
+            isModify = true
         }
         
         if (isModify){
@@ -83,7 +102,9 @@ class OutfitViewController: DTViewController {
         self.hideTabBar = true
         super.viewDidLoad()
         self.classNameAnalytics = "Outfit View"
-        tableView.registerNib(UINib(nibName: "ClotheScrollTableCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
+        self.navigationItem.title = "Outfit" //TODO Translate
+        
+        tableView.registerNib(UINib(nibName: "ClotheTableCell", bundle:nil), forCellReuseIdentifier: ClotheTableViewCell.cellIdentifier)
         ActivityLoader.shared.showProgressView(view)
         
         dressupButton.layer.cornerRadius = 20.0
@@ -94,39 +115,20 @@ class OutfitViewController: DTViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        if !((self.tabBarController?.tabBar.hidden)!) {
+            self.tabBarController?.tabBar.hidden = true
+            UIApplication.sharedApplication().statusBarHidden = false
+        }
         super.viewWillAppear(animated)
         //Remove Title of Back button
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("HOME", comment: ""), style: .Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Outfit", comment: ""), style: .Plain, target: nil, action: nil)
+        self.backgroundImageView.image = self.imageName
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        tableView!.delegate = self
-        tableView!.dataSource = self
-
-        self.number = self.currentOutfits.count
-        if (self.number == 0){
-            self.number = 3
-
-            let mailles = dal.fetch(type: "maille")
-            if (mailles.count > 0){
-                self.currentOutfits.append(ClotheModel(clothe: mailles[0]))
-            } else {
-                self.number -= 1
-            }
-            let tops = dal.fetch(type: "top")
-            if (tops.count > 0){
-                self.currentOutfits.append(ClotheModel(clothe: tops[0]))
-            } else {
-                self.number -= 1
-            }
-            let pants = dal.fetch(type: "pants")
-            if (pants.count > 0){
-                self.currentOutfits.append(ClotheModel(clothe: pants[0]))
-            } else {
-                self.number -= 1
-            }
-        }
+        tableView.delegate = self
+        tableView.dataSource = self
         
         self.tableView.reloadData()
         
@@ -145,54 +147,195 @@ class OutfitViewController: DTViewController {
             if let detailController = navigationController.viewControllers[0] as? DetailClotheViewController {
                 detailController.currentClothe =  self.currentClothe
             }
-        }
-    }
-}
-
-extension OutfitViewController: ClotheScrollTableCellDelegate {
-    func clotheScrollTableCell(clotheScrollTableCell : ClotheScrollTableCell, didTouchClothe clothe: Clothe){
-        self.currentClothe = clothe
-        self.performSegueWithIdentifier("detailClothe", sender: self)
-    }
-    
-    func clotheScrollTableCell(clotheScrollTableCell : ClotheScrollTableCell, didSelectedClothe clothe: Clothe) {
-        for i in 0 ..< self.currentOutfits.count{
-            if (self.currentOutfits[i].clothe_type == clothe.clothe_type){
-                self.currentOutfits[i] = ClotheModel(clothe: clothe)
+        } else if (segue.identifier == "dressingList") {
+            if let detailController = segue.destinationViewController as? DetailTypeViewController {
+                detailController.typeClothe =  self.typeToOpen
+                detailController.clotheToChange = self.currentClothe
+                detailController.isNeedAnimatedFirstElem = true
+                detailController.viewMode = ViewMode.SelectClothe
+                detailController.delegate = self
             }
         }
     }
 }
 
+extension OutfitViewController: ClotheTableViewCellDelegate {
+    func removeItem(item: Clothe) -> Void {
+        //Remove clohes
+        var index = 0
+        for i in 0..<self.currentOutfits.count {
+            if currentOutfits[i].clothe_id == item.clothe_id {  // note: === not ==
+                index = i
+                break
+            }
+        }
+        // could removeAtIndex in the loop but keep it here for when indexOfObject works
+        currentOutfits.removeAtIndex(index)
+        
+        // use the UITableView to animate the removal of this row
+        tableView.beginUpdates()
+        let indexPathForRow = NSIndexPath(forRow: index, inSection: 0)
+        tableView.deleteRowsAtIndexPaths([indexPathForRow], withRowAnimation: .Fade)
+        tableView.endUpdates()
+        tableView.reloadData()
+        if (self.currentOutfits.count == 0) {
+            onEditTapped.title = "Edit"
+            isEditingMode = false
+        }
+    }
+    
+    func changeItem(item: Clothe) -> Void {
+        //Open dressing details
+        self.currentClothe = item
+        self.typeToOpen = [item.clothe_type]
+        self.performSegueWithIdentifier("dressingList", sender: self)
+    }
+    
+    func detailItem(item: Clothe) {
+        self.currentClothe = item
+        self.performSegueWithIdentifier("detailClothe", sender: self)
+
+    }
+    
+    func selectItem(item: Clothe) -> Void {
+    
+    }
+}
 
 extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (SharedData.sharedInstance.sexe == "M" && self.currentOutfits.count != 3)
+         || (SharedData.sharedInstance.sexe == "F" && self.currentOutfits.count != 4) {
+            return 100.0
+        }
+        return 0.0
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if let view = UIView.loadFromNibNamed("HeaderOutfitView") as? HeaderOutfitView {
+            view.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+            view.delegate = self
+            view.setNeedsLayout()
+            view.layoutIfNeeded()
+            return view
+        }
+        return nil
+    }
+    
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let height:CGFloat = (tableView.frame.height) / CGFloat(self.currentOutfits.count)
-        return height
+        return 220.0
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return self.number
+        return self.currentOutfits.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! ClotheScrollTableCell
-        if (indexPath.row <= self.currentOutfits.count && self.currentOutfits.count > 0){
-            let type =  self.currentOutfits[indexPath.row].clothe_type
-            let clothe_id =  self.currentOutfits[indexPath.row].clothe_id
-            
-            let collection = dal.fetch(type: type)
-            cell.clotheCollection = collection
-            cell.currentOutfit =  dal.fetch(clothe_id)
-            cell.numberOfClothesAssos = self.currentOutfits.count
-            cell.setupScrollView(cell.contentView.frame.width, height: cell.contentView.frame.height)
+        let cell = tableView.dequeueReusableCellWithIdentifier(ClotheTableViewCell.cellIdentifier, forIndexPath: indexPath) as! ClotheTableViewCell
+        if let clothe = dal.fetch(self.currentOutfits[indexPath.row].clothe_id) {
+            cell.clotheImageView.image = clothe.getImage().imageWithImage(480.0)
+            cell.initFavoriteButton(clothe.clothe_favorite)
+            cell.clothe = clothe
+            cell.clotheImageView.clipsToBounds = true
             cell.delegate = self
+            cell.viewMode = ViewMode.OutfitView
+            cell.delayTime = 0.3 * Double(indexPath.row)
+            cell.isEditingMode = self.isEditingMode
             
-            cell.layer.shadowOffset = CGSizeMake(3, 6);
-            cell.layer.shadowColor = UIColor.blackColor().CGColor
-            cell.layer.shadowRadius = 8;
-            cell.layer.shadowOpacity = 0.75;
+            
+            //Remove edge insets to have full width separtor line
+            cell.preservesSuperviewLayoutMargins = false
+            cell.separatorInset = UIEdgeInsetsZero
+            cell.layoutMargins = UIEdgeInsetsZero
+            
+            if (indexPathToAnimate == indexPath.row) {
+                let centerPoint = CGPointMake((cell.mouvingCard.frame.width + (cell.mouvingCard.frame.width * 3/4)), cell.mouvingCard.center.y)
+                cell.mouvingCard.center = centerPoint
+                UIView.animateWithDuration(0.4, animations: {
+                    cell.mouvingCard.center = cell.contentView.center
+                    }, completion: {
+                        (value: Bool) in
+                        self.indexPathToAnimate = nil
+                })
+            }
         }
         return cell
     }
+}
+
+extension OutfitViewController: HeaderOutfitViewDelegate {
+    func headerOutfitView(didSelectedAdd : Bool) {
+        //Dress + Bottom -> Maille ou Top
+        //Dress -> Maille ou Top
+        //Top + Bottom -> Maille
+        //Top + Dress -> Maille
+        //Maille + Dress -> Top
+        //Maille + Bottom -> Top
+        
+        var isTop = false, isMaille = false, isBottom = false, isDress = false
+        for index in 0..<self.currentOutfits.count {
+            isTop = isTop || self.currentOutfits[index].clothe_type == ClotheType.top.rawValue
+            isMaille = isMaille || self.currentOutfits[index].clothe_type == ClotheType.maille.rawValue
+            isBottom = isBottom || self.currentOutfits[index].clothe_type == ClotheType.pants.rawValue
+            isDress = isDress || self.currentOutfits[index].clothe_type == ClotheType.dress.rawValue
+        }
+       
+        self.typeToOpen = [String]()
+        if (!isMaille) {
+            self.typeToOpen?.append(ClotheType.maille.rawValue)
+        } else if (!isTop){
+            self.typeToOpen?.append(ClotheType.top.rawValue)
+        } else if (!isBottom) {
+            self.typeToOpen?.append(ClotheType.pants.rawValue)
+        } else if (!isDress && SharedData.sharedInstance.sexe! == "F") {
+            self.typeToOpen?.append(ClotheType.dress.rawValue)
+        }
+        if (typeToOpen!.count == 0){
+            typeToOpen = nil
+        }
+        self.performSegueWithIdentifier("dressingList", sender: self)
+    }
+}
+
+extension OutfitViewController: DetailTypeViewControllerDelegate {
+    func detailTypeViewController(selectedItem : Clothe) {
+        print("Add Item")
+        var isAdded = false
+        for index in 0..<self.currentOutfits.count {
+            if (self.currentOutfits[index].clothe_type == selectedItem.clothe_type){
+                self.currentOutfits[index] = ClotheModel(clothe: selectedItem)
+                isAdded = true
+                break
+            }
+        }
+        if (!isAdded){
+            self.currentOutfits.append(ClotheModel(clothe: selectedItem))
+        }
+        let outfit = Outfit(clothes: self.currentOutfits, updatedDate: NSDate(), isSuggestion: false, isPutOn: false)
+        outfit.orderOutfit()
+        self.currentOutfits = outfit.clothes
+        for i in 0..<outfit.clothes.count {
+            if (outfit.clothes[i].clothe_id == selectedItem.clothe_id){
+                indexPathToAnimate = i
+            }
+        }
+        self.tableView.reloadData()
+    }
+}
+
+class SegueFromLeft: UIStoryboardSegue {
+    
+    override func perform() {
+        let src: UIViewController = self.sourceViewController
+        let dst: UIViewController = self.destinationViewController
+        let transition: CATransition = CATransition()
+        let timeFunc : CAMediaTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.duration = 0.3
+        transition.timingFunction = timeFunc
+        transition.type = kCATransitionFromBottom
+        //transition.subtype = kCATransitionFromRight
+        src.navigationController!.view.layer.addAnimation(transition, forKey: kCATransition)
+        src.navigationController!.pushViewController(dst, animated: false)
+    }
+    
 }
