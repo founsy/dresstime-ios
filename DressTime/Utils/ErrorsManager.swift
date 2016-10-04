@@ -14,6 +14,9 @@ class ErrorsManager: NSObject {
     override init() {
         super.init()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.CreateAccount, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.CreateAccount_Email_Duplicate, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.CreateAccount_Style_Required, object: nil)
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.GetDressing, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.GetOutfit, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.Login, object: nil)
@@ -21,6 +24,9 @@ class ErrorsManager: NSObject {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.SaveClothe, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.UploadClothe, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.SaveOutfit, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.showLoginPage(_:)), name: Notifications.Error.NoAuthentication, object: nil)
+
     }
     
     deinit {
@@ -35,6 +41,16 @@ class ErrorsManager: NSObject {
             title = NSLocalizedString("registerErrorCreateAccountTitle", comment: "")
             message = NSLocalizedString("registerErrorCreateAccountMessge", comment: "")
             actionTitle = NSLocalizedString("registerErrorCreateAccountButton", comment: "")
+            break
+        case Notifications.Error.CreateAccount_Email_Duplicate:
+            title = NSLocalizedString("registerErrorCreateAccounEmailDuplicatetTitle", comment: "")
+            message = NSLocalizedString("registerErrorCreateAccountEmailDuplicateMessage", comment: "")
+            actionTitle = NSLocalizedString("registerErrorCreateAccountEmailDuplicateButton", comment: "")
+            break
+        case Notifications.Error.CreateAccount_Style_Required:
+            title = NSLocalizedString("registerErrorCreateAccountStyleReguiredTitle", comment: "")
+            message = NSLocalizedString("registerErrorCreateAccountStyleReguiredMessage", comment: "")
+            actionTitle = NSLocalizedString("registerErrorCreateAccountStyleReguiredButton", comment: "")
             break
         case Notifications.Error.GetDressing:
             title = NSLocalizedString("getDressingErrTitle", comment: "")
@@ -86,6 +102,12 @@ class ErrorsManager: NSObject {
             })
         }
     }
+    
+    func showLoginPage(error: NSNotification){
+        let loginBL = LoginBL()
+        loginBL.logoutWithSuccess(nil)
+        loginBL.showLoginPage(error)
+    }
 }
 
 public struct Notifications {
@@ -99,5 +121,8 @@ public struct Notifications {
         public static let CreateAccount = "createAccount"
         public static let Login = "login"
         public static let UpdateClothe = "updateClothe"
+        public static let CreateAccount_Email_Duplicate = "createAccount_Email_Duplicate"
+        public static let CreateAccount_Style_Required = "createAccount_Style_Required"
+        public static let NoAuthentication = "error_noauthentication"
     }
 }

@@ -53,34 +53,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
         
-        let defaults = NSUserDefaults.standardUserDefaults()
-        let alreadyLaunch = defaults.boolForKey("alreadyLaunch")
-        if (!alreadyLaunch) {
-            //defaults.setBool(true, forKey: "alreadyLaunch")
-            //Display Tutorial
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            _ = storyboard.instantiateViewControllerWithIdentifier("TutorialViewController")
-            
-        } else {
-            let profilDAL = ProfilsDAL()
+        let profilDAL = ProfilsDAL()
             _ = profilDAL.fetchLastUserConnected()
             
-            let defaults = NSUserDefaults.standardUserDefaults()
-            if let name = defaults.stringForKey("userId") {
-                if let profil = profilDAL.fetch(name) {
-                    SharedData.sharedInstance.currentUserId = profil.userid
-                    SharedData.sharedInstance.sexe = profil.gender
-                    mixpanel.people.set(["sexe" : profil.gender!, "$name" : profil.name!, "$email" : profil.email!, "Style Relax" : profil.relaxStyle!, "Style Work" : profil.atWorkStyle!, "Style Party": profil.onPartyStyle!])
-                    
-                    Appsee.setUserID(profil.userid)
+        let defaults = NSUserDefaults.standardUserDefaults()
+        if let name = defaults.stringForKey("userId") {
+            if let profil = profilDAL.fetch(name) {
+                SharedData.sharedInstance.currentUserId = profil.userid
+                SharedData.sharedInstance.sexe = profil.gender
+                LoginBL().updateStyle(profil)
+                
+                mixpanel.people.set(["sexe" : profil.gender!, "$name" : profil.name!, "$email" : profil.email!, "Styles" : profil.styles!])
+                
+                Appsee.setUserID(profil.userid)
 
-                    DressingSynchro(userId: profil.userid!).migrateImageCoreDataToFile()
-                    self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
-                    self.window?.rootViewController = initialViewController
-                    self.window?.makeKeyAndVisible()
-                }
+                DressingSynchro(userId: profil.userid!).migrateImageCoreDataToFile()
+                self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
+                self.window?.rootViewController = initialViewController
+                self.window?.makeKeyAndVisible()
             }
         }
         

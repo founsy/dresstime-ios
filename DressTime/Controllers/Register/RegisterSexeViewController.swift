@@ -37,7 +37,7 @@ class RegisterSexeViewController: DTViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if (segue.identifier == "selectStyle"){
-            if let viewController = segue.destinationViewController as? RegisterStyleViewController {
+            if let viewController = segue.destinationViewController as? SelectStyleViewController {
                 viewController.user = self.user
             }
         }

@@ -3,6 +3,8 @@ platform :ios, '8.0'
 # Uncomment this line if you're using Swift
 use_frameworks!
 
+link_with 'DressTime', 'DressTime Dev'
+
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'Appsee'

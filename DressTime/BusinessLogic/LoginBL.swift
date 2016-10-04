@@ -17,22 +17,22 @@ public class LoginBL {
     public func loginWithSuccess(object: JSON){
         let dal = ProfilsDAL()
         let user = User(json: object)
+        SharedData.sharedInstance.currentUserId = user.email
+        SharedData.sharedInstance.sexe = user.gender
         
         //If profil already exist update
         if let profil = dal.fetch(user.email.lowercaseString) {
-            profil.access_token = user.access_token
-            profil.refresh_token = user.refresh_token
-            profil.expire_in = user.expire_in
-            if let id = profil.fb_id {
-                profil.picture = NSData(contentsOfURL: NSURL(string: "https://graph.facebook.com/\(id)/picture?width=100&height=100")!)
+            if let newProfil = dal.update(user) {
+                if let id = newProfil.fb_id where !id.isEmpty{
+                    newProfil.picture = NSData(contentsOfURL: NSURL(string: "https://graph.facebook.com/\(id)/picture?width=100&height=100")!)
+                    dal.update(newProfil)
+                }
             }
-            dal.update(profil)
         } else {
-            dal.save(user)
+            if let profil = dal.save(user) {
+                LoginBL().updateStyle(profil)
+            }
         }
-        
-        SharedData.sharedInstance.currentUserId = user.email
-        SharedData.sharedInstance.sexe = user.gender
         
         let defaults = NSUserDefaults.standardUserDefaults()
         defaults.setObject(user.email, forKey: "userId")
@@ -83,9 +83,15 @@ public class LoginBL {
         return user
     }
     
-    public func logoutWithSuccess(user: Profil){
+    public func logoutWithSuccess(user: Profil?){
         let dal = ProfilsDAL()
-        let profilOld = dal.fetch(user.userid!)
+        var profilOld: Profil?
+        if let userTmp = user {
+            profilOld = dal.fetch(userTmp.userid!)
+        } else {
+            profilOld = dal.fetch(SharedData.sharedInstance.currentUserId!)
+        }
+        
         if let profil = profilOld {
             if (FBSDKAccessToken.currentAccessToken() != nil){
                 FBSDKLoginManager().logOut()
@@ -142,5 +148,54 @@ public class LoginBL {
             completion(isSuccess: isSuccess)
         })
         
+    }
+    
+    public func showLoginPage(error: NSNotification){
+        /* Display alert and redirect to login page */
+        if let appDelegate = UIApplication.sharedApplication().delegate, let window = appDelegate.window {
+            let alert = UIAlertController(title: "No Login title", message: "No Login message", preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "", style: .Default, handler: { (alertAction) in
+                //Go back to login page
+                dispatch_async(dispatch_get_main_queue(),  { () -> Void in
+                    let rootController:UIViewController = UIStoryboard(name: "Register", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginNavigationController")
+                    let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                    appDelegate.window!.makeKeyAndVisible()
+                    appDelegate.window!.rootViewController = rootController
+                    
+                    //self.navigationController?.popToRootViewControllerAnimated(false)
+                })
+                
+            }))
+            dispatch_async(dispatch_get_main_queue(), {
+                window!.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+            })
+        }
+    }
+    
+    func updateStyle(profil: Profil){
+        var styles = [String]()
+        if profil.styles == nil {
+            if let workStyle = profil.atWorkStyle {
+                styles.append(workStyle)
+                profil.atWorkStyle = nil
+            }
+            
+            if let partyStyle = profil.onPartyStyle where !styles.contains(partyStyle) {
+                styles.append(partyStyle)
+                profil.onPartyStyle = nil
+            }
+            
+            if let relaxStyle = profil.relaxStyle where !styles.contains(relaxStyle) {
+                styles.append(relaxStyle)
+                profil.relaxStyle = nil
+            }
+            
+            profil.styles = styles.joinWithSeparator(",")
+            //TODO Save new styles on back-end
+            UserService().UpdateUser(profil, completion: { (isSuccess, object) -> Void in
+                let profilDal = ProfilsDAL()
+                profilDal.update(profil)
+            })
+        }
     }
 }

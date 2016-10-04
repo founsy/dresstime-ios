@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "briefcaseIconYes.png",
+      "filename" : "briefcaseIconActive.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "briefcaseIconYes@2x.png",
+      "filename" : "briefcaseIconActive@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "briefcaseIconYes@3x.png",
+      "filename" : "briefcaseIconActive@3x.png",
       "scale" : "3x"
     }
   ],

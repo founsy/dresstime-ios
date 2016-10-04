@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0105594A1C2ACBB60098E976 /* DTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010559491C2ACBB60098E976 /* DTViewController.swift */; };
 		010EE6771C83159E007A5828 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EE6761C83159E007A5828 /* StoreViewController.swift */; };
+		011EEE5C1D53849E0067E60E /* NSDate+DressTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011EEE5B1D53849E0067E60E /* NSDate+DressTime.swift */; };
+		011EEE5E1D5384D40067E60E /* Int+DressTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011EEE5D1D5384D40067E60E /* Int+DressTime.swift */; };
 		01218BCF1C29CD5A00E4D80F /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218B961C29CD5A00E4D80F /* AKPickerView.swift */; };
 		01218BE01C29CD5A00E4D80F /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BAF1C29CD5A00E4D80F /* RangeSlider.swift */; };
 		01218BE11C29CD5A00E4D80F /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BB11C29CD5A00E4D80F /* AsyncButton.swift */; };
@@ -63,21 +65,181 @@
 		0136D0441D094550007076A2 /* ErrorsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136D0431D094550007076A2 /* ErrorsManager.swift */; };
 		013941181CF995CD00A78FD9 /* LaunchingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013941171CF995CD00A78FD9 /* LaunchingView.xib */; };
 		013941231CF99A8300A78FD9 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013941221CF99A8300A78FD9 /* FileManager.swift */; };
+		013C7EBB1D6215A100311981 /* SpringAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BC51C29CD5A00E4D80F /* SpringAnimation.swift */; };
+		013C7EBC1D6215A100311981 /* CameraSessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB571C29CA6C005B2A59 /* CameraSessionManager.swift */; };
+		013C7EBD1D6215A100311981 /* SpringImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BC71C29CD5A00E4D80F /* SpringImageView.swift */; };
+		013C7EBE1D6215A100311981 /* TypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB5A1C29CA6C005B2A59 /* TypeViewController.swift */; };
+		013C7EBF1D6215A100311981 /* DesignableTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BBA1C29CD5A00E4D80F /* DesignableTextView.swift */; };
+		013C7EC01D6215A100311981 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186F9871D4501E50061596C /* SignUpViewController.swift */; };
+		013C7EC11D6215A100311981 /* DressTimeBL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB441C29CA45005B2A59 /* DressTimeBL.swift */; };
+		013C7EC21D6215A100311981 /* UIView+Dresstime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB4A1C29CA45005B2A59 /* UIView+Dresstime.swift */; };
+		013C7EC31D6215A100311981 /* ActivityLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BAEE1C29CA31005B2A59 /* ActivityLoader.swift */; };
+		013C7EC41D6215A100311981 /* TypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB0F1C29CA31005B2A59 /* TypeCell.swift */; };
+		013C7EC51D6215A100311981 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013941221CF99A8300A78FD9 /* FileManager.swift */; };
+		013C7EC61D6215A100311981 /* Int+DressTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011EEE5D1D5384D40067E60E /* Int+DressTime.swift */; };
+		013C7EC71D6215A100311981 /* ClotheCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BAF11C29CA31005B2A59 /* ClotheCell.swift */; };
+		013C7EC81D6215A100311981 /* ClotheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01608C761C7E3FE400D42B20 /* ClotheModel.swift */; };
+		013C7EC91D6215A100311981 /* LoginBL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155C6331C30378100B5ACD2 /* LoginBL.swift */; };
+		013C7ECA1D6215A100311981 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB5B1C29CA6C005B2A59 /* HomeViewController.swift */; };
+		013C7ECB1D6215A100311981 /* Clothe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB6A1C29CA6C005B2A59 /* Clothe.swift */; };
+		013C7ECC1D6215A100311981 /* ProfilsDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB6E1C29CA6C005B2A59 /* ProfilsDAL.swift */; };
+		013C7ECD1D6215A100311981 /* DressingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB721C29CA6C005B2A59 /* DressingService.swift */; };
+		013C7ECE1D6215A100311981 /* DesignableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BB61C29CD5A00E4D80F /* DesignableImageView.swift */; };
+		013C7ECF1D6215A100311981 /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB621C29CA6C005B2A59 /* ProfilViewController.swift */; };
+		013C7ED01D6215A100311981 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A7962C1CF612AF00E78683 /* LoadingViewController.swift */; };
+		013C7ED11D6215A100311981 /* DressTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */; };
+		013C7ED21D6215A100311981 /* SelectStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186F9941D451B270061596C /* SelectStyleViewController.swift */; };
+		013C7ED31D6215A100311981 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186F9921D4505B60061596C /* SignInViewController.swift */; };
+		013C7ED41D6215A100311981 /* TransitionZoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BCD1C29CD5A00E4D80F /* TransitionZoom.swift */; };
+		013C7ED51D6215A100311981 /* SpringLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BC81C29CD5A00E4D80F /* SpringLabel.swift */; };
+		013C7ED61D6215A100311981 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB631C29CA6C005B2A59 /* SettingsTableViewController.swift */; };
+		013C7ED71D6215A100311981 /* UnwindSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BCE1C29CD5A00E4D80F /* UnwindSegue.swift */; };
+		013C7ED81D6215A100311981 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB741C29CA6C005B2A59 /* LoginService.swift */; };
+		013C7ED91D6215A100311981 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB061C29CA31005B2A59 /* SettingsHeaderCell.swift */; };
+		013C7EDA1D6215A100311981 /* HomeOutfitsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB001C29CA31005B2A59 /* HomeOutfitsListCell.swift */; };
+		013C7EDB1D6215A100311981 /* WeatherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB4B1C29CA45005B2A59 /* WeatherWrapper.swift */; };
+		013C7EDC1D6215A100311981 /* SpringTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BCA1C29CD5A00E4D80F /* SpringTextView.swift */; };
+		013C7EDD1D6215A100311981 /* RegisterSexeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF9EB41D55E19E009BB827 /* RegisterSexeViewController.swift */; };
+		013C7EDE1D6215A100311981 /* PatternView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB031C29CA31005B2A59 /* PatternView.swift */; };
+		013C7EDF1D6215A100311981 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BC21C29CD5A00E4D80F /* SoundPlayer.swift */; };
+		013C7EE01D6215A100311981 /* DesignableTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BB81C29CD5A00E4D80F /* DesignableTabBarController.swift */; };
+		013C7EE11D6215A100311981 /* ClotheTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BAF81C29CA31005B2A59 /* ClotheTableViewCell.swift */; };
+		013C7EE21D6215A100311981 /* UIImageView+Dresstime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017996621C5D1C8100E52DA0 /* UIImageView+Dresstime.swift */; };
+		013C7EE31D6215A100311981 /* BlurView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BB41C29CD5A00E4D80F /* BlurView.swift */; };
+		013C7EE41D6215A100311981 /* Outfits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB461C29CA45005B2A59 /* Outfits.swift */; };
+		013C7EE51D6215A100311981 /* HomeEmptyAnimationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19BA21C30CCD3002642EE /* HomeEmptyAnimationCell.swift */; };
+		013C7EE61D6215A100311981 /* Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BC11C29CD5A00E4D80F /* Misc.swift */; };
+		013C7EE71D6215A100311981 /* TextSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB0A1C29CA31005B2A59 /* TextSelectionCell.swift */; };
+		013C7EE81D6215A100311981 /* DTTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19B961C30A6AC002642EE /* DTTableViewController.swift */; };
+		013C7EE91D6215A100311981 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01328B081C6F383E0068B8C9 /* CalendarViewController.swift */; };
+		013C7EEA1D6215A100311981 /* DTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19B941C30A5F1002642EE /* DTTabBarController.swift */; };
+		013C7EEB1D6215A100311981 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155C62D1C301AA600B5ACD2 /* User.swift */; };
+		013C7EEC1D6215A100311981 /* AutoTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BB31C29CD5A00E4D80F /* AutoTextView.swift */; };
+		013C7EED1D6215A100311981 /* RegisterSexeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01424EE71C8C3D75001B81EC /* RegisterSexeTableViewCell.swift */; };
+		013C7EEE1D6215A100311981 /* HeaderOutfitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012930871D38F9A7006760B9 /* HeaderOutfitView.swift */; };
+		013C7EEF1D6215A100311981 /* DetailTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB611C29CA6C005B2A59 /* DetailTypeViewController.swift */; };
+		013C7EF01D6215A100311981 /* ClotheMatchSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BAF31C29CA31005B2A59 /* ClotheMatchSelectionCell.swift */; };
+		013C7EF11D6215A100311981 /* OutfitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB5E1C29CA6C005B2A59 /* OutfitViewController.swift */; };
+		013C7EF21D6215A100311981 /* ClotheCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01328B0D1C6F3DC60068B8C9 /* ClotheCalendarCell.swift */; };
+		013C7EF31D6215A100311981 /* ClothesDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB6B1C29CA6C005B2A59 /* ClothesDAL.swift */; };
+		013C7EF41D6215A100311981 /* ReadJsonFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB751C29CA6C005B2A59 /* ReadJsonFile.swift */; };
+		013C7EF51D6215A100311981 /* NSDate+DressTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011EEE5B1D53849E0067E60E /* NSDate+DressTime.swift */; };
+		013C7EF61D6215A100311981 /* SpringTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BC91C29CD5A00E4D80F /* SpringTextField.swift */; };
+		013C7EF81D6215A100311981 /* AsyncButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BB11C29CD5A00E4D80F /* AsyncButton.swift */; };
+		013C7EF91D6215A100311981 /* TutorialPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB0D1C29CA31005B2A59 /* TutorialPageViewController.swift */; };
+		013C7EFA1D6215A100311981 /* PListReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB471C29CA45005B2A59 /* PListReader.swift */; };
+		013C7EFB1D6215A100311981 /* DesignableTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BB91C29CD5A00E4D80F /* DesignableTextField.swift */; };
+		013C7EFC1D6215A100311981 /* NumberClotheControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019436431C32009A001F5D82 /* NumberClotheControl.swift */; };
+		013C7EFD1D6215A100311981 /* DesignableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BB71C29CD5A00E4D80F /* DesignableLabel.swift */; };
+		013C7EFE1D6215A100311981 /* NumberCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C47A9B1C6F4EF2006CDD14 /* NumberCalendarCell.swift */; };
+		013C7EFF1D6215A100311981 /* OutfitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB011C29CA31005B2A59 /* OutfitCell.swift */; };
+		013C7F001D6215A100311981 /* DressTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB731C29CA6C005B2A59 /* DressTimeService.swift */; };
+		013C7F011D6215A100311981 /* KeyboardLayoutConstraint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BBE1C29CD5A00E4D80F /* KeyboardLayoutConstraint.swift */; };
+		013C7F021D6215A100311981 /* UIColor+Dresstime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB481C29CA45005B2A59 /* UIColor+Dresstime.swift */; };
+		013C7F031D6215A100311981 /* ErrorsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136D0431D094550007076A2 /* ErrorsManager.swift */; };
+		013C7F041D6215A100311981 /* HexColorToName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB451C29CA45005B2A59 /* HexColorToName.swift */; };
+		013C7F051D6215A100311981 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB581C29CA6C005B2A59 /* CameraViewController.swift */; };
+		013C7F061D6215A100311981 /* HomeEmptyStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19BA01C30BE01002642EE /* HomeEmptyStepCell.swift */; };
+		013C7F071D6215A100311981 /* DownloadImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0194364E1C3219F3001F5D82 /* DownloadImageManager.swift */; };
+		013C7F081D6215A100311981 /* DesignableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BBB1C29CD5A00E4D80F /* DesignableView.swift */; };
+		013C7F091D6215A100311981 /* CaptureConfirmationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB591C29CA6C005B2A59 /* CaptureConfirmationViewController.swift */; };
+		013C7F0A1D6215A100311981 /* PriceSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB051C29CA31005B2A59 /* PriceSelectionCell.swift */; };
+		013C7F0B1D6215A100311981 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BB51C29CD5A00E4D80F /* DesignableButton.swift */; };
+		013C7F0C1D6215A100311981 /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB6F1C29CA6C005B2A59 /* SharedData.swift */; };
+		013C7F0D1D6215A100311981 /* DTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010559491C2ACBB60098E976 /* DTViewController.swift */; };
+		013C7F0E1D6215A100311981 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB6D1C29CA6C005B2A59 /* Profil.swift */; };
+		013C7F0F1D6215A100311981 /* CustomSubTypeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BAFD1C29CA31005B2A59 /* CustomSubTypeViewCell.swift */; };
+		013C7F101D6215A100311981 /* DTNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19B8B1C30A2B3002642EE /* DTNavigationController.swift */; };
+		013C7F111D6215A100311981 /* Profil+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB6C1C29CA6C005B2A59 /* Profil+CoreDataProperties.swift */; };
+		013C7F121D6215A100311981 /* RangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BAF1C29CD5A00E4D80F /* RangeSlider.swift */; };
+		013C7F131D6215A100311981 /* DTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186F9901D4504E20061596C /* DTTextField.swift */; };
+		013C7F141D6215A100311981 /* ShoppingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB671C29CA6C005B2A59 /* ShoppingViewController.swift */; };
+		013C7F151D6215A100311981 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BCC1C29CD5A00E4D80F /* TransitionManager.swift */; };
+		013C7F161D6215A100311981 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EE6761C83159E007A5828 /* StoreViewController.swift */; };
+		013C7F171D6215A100311981 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BBC1C29CD5A00E4D80F /* ImageLoader.swift */; };
+		013C7F181D6215A100311981 /* EmptyTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19B9B1C30B1C4002642EE /* EmptyTypeView.swift */; };
+		013C7F191D6215A100311981 /* BrandClotheCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BAEF1C29CA31005B2A59 /* BrandClotheCell.swift */; };
+		013C7F1A1D6215A100311981 /* SpringButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BC61C29CD5A00E4D80F /* SpringButton.swift */; };
+		013C7F1B1D6215A100311981 /* DressingSynchro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB431C29CA45005B2A59 /* DressingSynchro.swift */; };
+		013C7F1C1D6215A100311981 /* BrandClothe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01608C6B1C7E3EB100D42B20 /* BrandClothe.swift */; };
+		013C7F1D1D6215A100311981 /* LaunchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018C145E1CF9DF05000F3330 /* LaunchingView.swift */; };
+		013C7F1E1D6215A100311981 /* ClotheScrollTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BAF41C29CA31005B2A59 /* ClotheScrollTableCell.swift */; };
+		013C7F1F1D6215A100311981 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D21B5935B3003D5E41 /* AppDelegate.swift */; };
+		013C7F201D6215A100311981 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB771C29CA6C005B2A59 /* UserService.swift */; };
+		013C7F211D6215A100311981 /* Spring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BC41C29CD5A00E4D80F /* Spring.swift */; };
+		013C7F221D6215A100311981 /* TitleNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB0B1C29CA31005B2A59 /* TitleNavBar.swift */; };
+		013C7F231D6215A100311981 /* SpringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BCB1C29CD5A00E4D80F /* SpringView.swift */; };
+		013C7F241D6215A100311981 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BBF1C29CD5A00E4D80F /* LoadingView.swift */; };
+		013C7F251D6215A100311981 /* SettingsStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB081C29CA31005B2A59 /* SettingsStyleCell.swift */; };
+		013C7F261D6215A100311981 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218BB21C29CD5A00E4D80F /* AsyncImageView.swift */; };
+		013C7F271D6215A100311981 /* DetailClotheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB601C29CA6C005B2A59 /* DetailClotheViewController.swift */; };
+		013C7F281D6215A100311981 /* StepsControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC62021C31FDB9004C5CF6 /* StepsControl.swift */; };
+		013C7F291D6215A100311981 /* ClotheSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BAF61C29CA31005B2A59 /* ClotheSelectionCell.swift */; };
+		013C7F2A1D6215A100311981 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186F9861D4501E50061596C /* LoginViewController.swift */; };
+		013C7F2B1D6215A100311981 /* UIActivityLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB141C29CA31005B2A59 /* UIActivityLoader.swift */; };
+		013C7F2C1D6215A100311981 /* TypeSelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB111C29CA31005B2A59 /* TypeSelectionCell.swift */; };
+		013C7F2D1D6215A100311981 /* TypeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB131C29CA31005B2A59 /* TypeTableViewCell.swift */; };
+		013C7F2E1D6215A100311981 /* SettingsSexCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB071C29CA31005B2A59 /* SettingsSexCell.swift */; };
+		013C7F2F1D6215A100311981 /* UIImage+Dresstime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB491C29CA45005B2A59 /* UIImage+Dresstime.swift */; };
+		013C7F301D6215A100311981 /* HeaderShoppingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193584B1C8C4ED900440643 /* HeaderShoppingCell.swift */; };
+		013C7F311D6215A100311981 /* ConfirmSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BAFA1C29CA31005B2A59 /* ConfirmSave.swift */; };
+		013C7F321D6215A100311981 /* NoClotheCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C47A9F1C71BD18006CDD14 /* NoClotheCalendarCell.swift */; };
+		013C7F331D6215A100311981 /* AKPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01218B961C29CD5A00E4D80F /* AKPickerView.swift */; };
+		013C7F351D6215A100311981 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012F98F91D0EB9800048C5DB /* SystemConfiguration.framework */; };
+		013C7F361D6215A100311981 /* DominantColor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01C455361B597F25003D5E41 /* DominantColor.framework */; };
+		013C7F371D6215A100311981 /* Pods_DressTime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD32D206D97E66597C7E58F7 /* Pods_DressTime.framework */; };
+		013C7F381D6215A100311981 /* OneSignal.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 012F98F71D0EB8E60048C5DB /* OneSignal.framework */; };
+		013C7F3A1D6215A100311981 /* DominantColor.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 01C455361B597F25003D5E41 /* DominantColor.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		013C7F3C1D6215A100311981 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 01C454FF1B5942F4003D5E41 /* Main.storyboard */; };
+		013C7F3D1D6215A100311981 /* DressTime.plist in Resources */ = {isa = PBXBuildFile; fileRef = 018647BC1C287C7100976E32 /* DressTime.plist */; };
+		013C7F3E1D6215A100311981 /* NoClotheCalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C47A9D1C71BBD0006CDD14 /* NoClotheCalendarCell.xib */; };
+		013C7F3F1D6215A100311981 /* SubTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BB091C29CA31005B2A59 /* SubTypeCell.xib */; };
+		013C7F401D6215A100311981 /* ClotheCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BAF21C29CA31005B2A59 /* ClotheCell.xib */; };
+		013C7F411D6215A100311981 /* ClotheTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BAF71C29CA31005B2A59 /* ClotheTableCell.xib */; };
+		013C7F421D6215A100311981 /* NumberClotheControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0194364C1C3200A7001F5D82 /* NumberClotheControl.xib */; };
+		013C7F431D6215A100311981 /* LaunchingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013941171CF995CD00A78FD9 /* LaunchingView.xib */; };
+		013C7F441D6215A100311981 /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01218BC01C29CD5A00E4D80F /* LoadingView.xib */; };
+		013C7F451D6215A100311981 /* UIActivityLoader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BB151C29CA31005B2A59 /* UIActivityLoader.xib */; };
+		013C7F461D6215A100311981 /* artill_clean_icons-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BB9B1C29CB09005B2A59 /* artill_clean_icons-webfont.ttf */; };
+		013C7F471D6215A100311981 /* BrandClotheCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BAF01C29CA31005B2A59 /* BrandClotheCell.xib */; };
+		013C7F481D6215A100311981 /* ClotheCalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01328B0B1C6F3D940068B8C9 /* ClotheCalendarCell.xib */; };
+		013C7F491D6215A100311981 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DE1B5935B3003D5E41 /* LaunchScreen.xib */; };
+		013C7F4A1D6215A100311981 /* ClotheScrollTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BAF51C29CA31005B2A59 /* ClotheScrollTableCell.xib */; };
+		013C7F4B1D6215A100311981 /* TitleNavBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BB0C1C29CA31005B2A59 /* TitleNavBar.xib */; };
+		013C7F4C1D6215A100311981 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DC1B5935B3003D5E41 /* Images.xcassets */; };
+		013C7F4D1D6215A100311981 /* TutorialPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BB0E1C29CA31005B2A59 /* TutorialPageViewController.xib */; };
+		013C7F4E1D6215A100311981 /* ConfirmSave.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BAFB1C29CA31005B2A59 /* ConfirmSave.xib */; };
+		013C7F4F1D6215A100311981 /* PatternView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BB041C29CA31005B2A59 /* PatternView.xib */; };
+		013C7F501D6215A100311981 /* HeaderOutfitView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 012930851D38E28B006760B9 /* HeaderOutfitView.xib */; };
+		013C7F511D6215A100311981 /* NumberCalendarCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01C47A921C6F4EA4006CDD14 /* NumberCalendarCell.xib */; };
+		013C7F521D6215A100311981 /* StepsControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01FC61FE1C31FC1F004C5CF6 /* StepsControl.xib */; };
+		013C7F531D6215A100311981 /* TypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BB101C29CA31005B2A59 /* TypeCell.xib */; };
+		013C7F541D6215A100311981 /* TypeTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BB121C29CA31005B2A59 /* TypeTableCell.xib */; };
+		013C7F551D6215A100311981 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 019F764E1BDE0FE5007E6A3E /* Localizable.strings */; };
+		013C7F561D6215A100311981 /* EmptyTypeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01A19B991C30B099002642EE /* EmptyTypeView.xib */; };
+		013C7F571D6215A100311981 /* OutfitCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BB021C29CA31005B2A59 /* OutfitCell.xib */; };
+		013C7F581D6215A100311981 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01218BBD1C29CD5A00E4D80F /* Info.plist */; };
+		013C7F591D6215A100311981 /* Register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0186F98D1D4501F90061596C /* Register.storyboard */; };
 		013FD7661C889E6F0017B146 /* DressTimeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013FD7651C889E6F0017B146 /* DressTimeUITests.swift */; };
 		01424EE81C8C3D75001B81EC /* RegisterSexeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01424EE71C8C3D75001B81EC /* RegisterSexeTableViewCell.swift */; };
 		0155C62E1C301AA600B5ACD2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155C62D1C301AA600B5ACD2 /* User.swift */; };
 		0155C6341C30378100B5ACD2 /* LoginBL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0155C6331C30378100B5ACD2 /* LoginBL.swift */; };
 		01608C6C1C7E3EB100D42B20 /* BrandClothe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01608C6B1C7E3EB100D42B20 /* BrandClothe.swift */; };
 		01608C771C7E3FE400D42B20 /* ClotheModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01608C761C7E3FE400D42B20 /* ClotheModel.swift */; };
-		0166B5251C74EF1B00CA8B25 /* RegisterStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0166B5241C74EF1B00CA8B25 /* RegisterStyleViewController.swift */; };
-		016D0EA01C9174DE00BE2EB3 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016D0E9F1C9174DE00BE2EB3 /* LoginViewController.swift */; };
 		017996631C5D1C8100E52DA0 /* UIImageView+Dresstime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 017996621C5D1C8100E52DA0 /* UIImageView+Dresstime.swift */; };
 		018647BD1C287C7100976E32 /* DressTime.plist in Resources */ = {isa = PBXBuildFile; fileRef = 018647BC1C287C7100976E32 /* DressTime.plist */; };
+		0186F98B1D4501E50061596C /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186F9861D4501E50061596C /* LoginViewController.swift */; };
+		0186F98C1D4501E50061596C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186F9871D4501E50061596C /* SignUpViewController.swift */; };
+		0186F98F1D4501F90061596C /* Register.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0186F98D1D4501F90061596C /* Register.storyboard */; };
+		0186F9911D4504E20061596C /* DTTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186F9901D4504E20061596C /* DTTextField.swift */; };
+		0186F9931D4505B60061596C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186F9921D4505B60061596C /* SignInViewController.swift */; };
+		0186F9951D451B270061596C /* SelectStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186F9941D451B270061596C /* SelectStyleViewController.swift */; };
 		018C145F1CF9DF05000F3330 /* LaunchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018C145E1CF9DF05000F3330 /* LaunchingView.swift */; };
 		0193584C1C8C4ED900440643 /* HeaderShoppingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0193584B1C8C4ED900440643 /* HeaderShoppingCell.swift */; };
 		019436441C32009A001F5D82 /* NumberClotheControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019436431C32009A001F5D82 /* NumberClotheControl.swift */; };
 		0194364D1C3200A7001F5D82 /* NumberClotheControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0194364C1C3200A7001F5D82 /* NumberClotheControl.xib */; };
 		0194364F1C3219F3001F5D82 /* DownloadImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0194364E1C3219F3001F5D82 /* DownloadImageManager.swift */; };
+		0198BD481D72F775002D0521 /* DressTime_Beta.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0198BD471D72F775002D0521 /* DressTime_Beta.plist */; };
 		019F764C1BDE0FE5007E6A3E /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 019F764E1BDE0FE5007E6A3E /* Localizable.strings */; };
 		01A19B8C1C30A2B3002642EE /* DTNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19B8B1C30A2B3002642EE /* DTNavigationController.swift */; };
 		01A19B951C30A5F1002642EE /* DTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19B941C30A5F1002642EE /* DTTabBarController.swift */; };
@@ -87,6 +249,7 @@
 		01A19BA11C30BE01002642EE /* HomeEmptyStepCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19BA01C30BE01002642EE /* HomeEmptyStepCell.swift */; };
 		01A19BA31C30CCD3002642EE /* HomeEmptyAnimationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A19BA21C30CCD3002642EE /* HomeEmptyAnimationCell.swift */; };
 		01A7962D1CF612AF00E78683 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01A7962C1CF612AF00E78683 /* LoadingViewController.swift */; };
+		01AF9EB51D55E19E009BB827 /* RegisterSexeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AF9EB41D55E19E009BB827 /* RegisterSexeViewController.swift */; };
 		01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D21B5935B3003D5E41 /* AppDelegate.swift */; };
 		01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */; };
 		01C454DD1B5935B3003D5E41 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 01C454DC1B5935B3003D5E41 /* Images.xcassets */; };
@@ -152,9 +315,7 @@
 		01D3BB801C29CA6C005B2A59 /* DetailTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB611C29CA6C005B2A59 /* DetailTypeViewController.swift */; };
 		01D3BB811C29CA6C005B2A59 /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB621C29CA6C005B2A59 /* ProfilViewController.swift */; };
 		01D3BB821C29CA6C005B2A59 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB631C29CA6C005B2A59 /* SettingsTableViewController.swift */; };
-		01D3BB831C29CA6C005B2A59 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB641C29CA6C005B2A59 /* SettingsViewController.swift */; };
 		01D3BB841C29CA6C005B2A59 /* ShoppingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB671C29CA6C005B2A59 /* ShoppingViewController.swift */; };
-		01D3BB851C29CA6C005B2A59 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB681C29CA6C005B2A59 /* TutorialViewController.swift */; };
 		01D3BB861C29CA6C005B2A59 /* Clothe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB6A1C29CA6C005B2A59 /* Clothe.swift */; };
 		01D3BB871C29CA6C005B2A59 /* ClothesDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB6B1C29CA6C005B2A59 /* ClothesDAL.swift */; };
 		01D3BB881C29CA6C005B2A59 /* Profil+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB6C1C29CA6C005B2A59 /* Profil+CoreDataProperties.swift */; };
@@ -166,7 +327,6 @@
 		01D3BB8F1C29CA6C005B2A59 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB741C29CA6C005B2A59 /* LoginService.swift */; };
 		01D3BB901C29CA6C005B2A59 /* ReadJsonFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB751C29CA6C005B2A59 /* ReadJsonFile.swift */; };
 		01D3BB921C29CA6C005B2A59 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB771C29CA6C005B2A59 /* UserService.swift */; };
-		01D3BB991C29CAC7005B2A59 /* RegisterSexeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB951C29CAC7005B2A59 /* RegisterSexeViewController.swift */; };
 		01D3BB9C1C29CB09005B2A59 /* artill_clean_icons-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BB9B1C29CB09005B2A59 /* artill_clean_icons-webfont.ttf */; };
 		01FC61FF1C31FC1F004C5CF6 /* StepsControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01FC61FE1C31FC1F004C5CF6 /* StepsControl.xib */; };
 		01FC62031C31FDB9004C5CF6 /* StepsControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC62021C31FDB9004C5CF6 /* StepsControl.swift */; };
@@ -177,6 +337,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		013C7EB81D6215A100311981 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01C454C51B5935B3003D5E41 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01C455351B597F25003D5E41;
+			remoteInfo = dominantColor;
+		};
 		013FD7681C889E6F0017B146 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 01C454C51B5935B3003D5E41 /* Project object */;
@@ -201,6 +368,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		013C7F391D6215A100311981 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				013C7F3A1D6215A100311981 /* DominantColor.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		01C455521B597F25003D5E41 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -220,6 +398,8 @@
 		010590711C0E1DDC0037FC61 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
 		010DEB621BE61E800079ACCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		010EE6761C83159E007A5828 /* StoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
+		011EEE5B1D53849E0067E60E /* NSDate+DressTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+DressTime.swift"; sourceTree = "<group>"; };
+		011EEE5D1D5384D40067E60E /* Int+DressTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+DressTime.swift"; sourceTree = "<group>"; };
 		01218B961C29CD5A00E4D80F /* AKPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKPickerView.swift; sourceTree = "<group>"; };
 		01218BAF1C29CD5A00E4D80F /* RangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RangeSlider.swift; sourceTree = "<group>"; };
 		01218BB11C29CD5A00E4D80F /* AsyncButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncButton.swift; sourceTree = "<group>"; };
@@ -274,6 +454,7 @@
 		0136D0431D094550007076A2 /* ErrorsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorsManager.swift; sourceTree = "<group>"; };
 		013941171CF995CD00A78FD9 /* LaunchingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchingView.xib; sourceTree = "<group>"; };
 		013941221CF99A8300A78FD9 /* FileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		013C7F601D6215A100311981 /* DressTime Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DressTime Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		013FD7631C889E6F0017B146 /* DressTimeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DressTimeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		013FD7651C889E6F0017B146 /* DressTimeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DressTimeUITests.swift; sourceTree = "<group>"; };
 		013FD7671C889E6F0017B146 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -283,15 +464,21 @@
 		0155C6331C30378100B5ACD2 /* LoginBL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginBL.swift; path = BusinessLogic/LoginBL.swift; sourceTree = "<group>"; };
 		01608C6B1C7E3EB100D42B20 /* BrandClothe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrandClothe.swift; sourceTree = "<group>"; };
 		01608C761C7E3FE400D42B20 /* ClotheModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClotheModel.swift; sourceTree = "<group>"; };
-		0166B5241C74EF1B00CA8B25 /* RegisterStyleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterStyleViewController.swift; sourceTree = "<group>"; };
-		016D0E9F1C9174DE00BE2EB3 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		017996621C5D1C8100E52DA0 /* UIImageView+Dresstime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImageView+Dresstime.swift"; sourceTree = "<group>"; };
 		018647BC1C287C7100976E32 /* DressTime.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DressTime.plist; sourceTree = "<group>"; };
+		0186F9861D4501E50061596C /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		0186F9871D4501E50061596C /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		0186F98E1D4501F90061596C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = DressTime/Base.lproj/Register.storyboard; sourceTree = SOURCE_ROOT; };
+		0186F9901D4504E20061596C /* DTTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTTextField.swift; sourceTree = "<group>"; };
+		0186F9921D4505B60061596C /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		0186F9941D451B270061596C /* SelectStyleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectStyleViewController.swift; sourceTree = "<group>"; };
+		0186F9961D4521CF0061596C /* DressTime v 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "DressTime v 3.xcdatamodel"; sourceTree = "<group>"; };
 		018C145E1CF9DF05000F3330 /* LaunchingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchingView.swift; sourceTree = "<group>"; };
 		0193584B1C8C4ED900440643 /* HeaderShoppingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderShoppingCell.swift; sourceTree = "<group>"; };
 		019436431C32009A001F5D82 /* NumberClotheControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NumberClotheControl.swift; sourceTree = "<group>"; };
 		0194364C1C3200A7001F5D82 /* NumberClotheControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NumberClotheControl.xib; sourceTree = "<group>"; };
 		0194364E1C3219F3001F5D82 /* DownloadImageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadImageManager.swift; sourceTree = "<group>"; };
+		0198BD471D72F775002D0521 /* DressTime_Beta.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DressTime_Beta.plist; sourceTree = "<group>"; };
 		019F764A1BDE0FC6007E6A3E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		019F764F1BDE1013007E6A3E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		019F76501BDE1018007E6A3E /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -303,6 +490,7 @@
 		01A19BA01C30BE01002642EE /* HomeEmptyStepCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeEmptyStepCell.swift; sourceTree = "<group>"; };
 		01A19BA21C30CCD3002642EE /* HomeEmptyAnimationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeEmptyAnimationCell.swift; sourceTree = "<group>"; };
 		01A7962C1CF612AF00E78683 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		01AF9EB41D55E19E009BB827 /* RegisterSexeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSexeViewController.swift; sourceTree = "<group>"; };
 		01C454CD1B5935B3003D5E41 /* DressTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DressTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		01C454D11B5935B3003D5E41 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		01C454D21B5935B3003D5E41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -374,9 +562,7 @@
 		01D3BB611C29CA6C005B2A59 /* DetailTypeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailTypeViewController.swift; sourceTree = "<group>"; };
 		01D3BB621C29CA6C005B2A59 /* ProfilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilViewController.swift; sourceTree = "<group>"; };
 		01D3BB631C29CA6C005B2A59 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
-		01D3BB641C29CA6C005B2A59 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		01D3BB671C29CA6C005B2A59 /* ShoppingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingViewController.swift; sourceTree = "<group>"; };
-		01D3BB681C29CA6C005B2A59 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		01D3BB6A1C29CA6C005B2A59 /* Clothe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Clothe.swift; sourceTree = "<group>"; };
 		01D3BB6B1C29CA6C005B2A59 /* ClothesDAL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClothesDAL.swift; sourceTree = "<group>"; };
 		01D3BB6C1C29CA6C005B2A59 /* Profil+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Profil+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -388,7 +574,6 @@
 		01D3BB741C29CA6C005B2A59 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		01D3BB751C29CA6C005B2A59 /* ReadJsonFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReadJsonFile.swift; path = ../WebServices/ReadJsonFile.swift; sourceTree = "<group>"; };
 		01D3BB771C29CA6C005B2A59 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
-		01D3BB951C29CAC7005B2A59 /* RegisterSexeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterSexeViewController.swift; sourceTree = "<group>"; };
 		01D3BB9B1C29CB09005B2A59 /* artill_clean_icons-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "artill_clean_icons-webfont.ttf"; sourceTree = "<group>"; };
 		01FC61FE1C31FC1F004C5CF6 /* StepsControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepsControl.xib; sourceTree = "<group>"; };
 		01FC62021C31FDB9004C5CF6 /* StepsControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsControl.swift; sourceTree = "<group>"; };
@@ -410,6 +595,17 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		013C7F341D6215A100311981 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				013C7F351D6215A100311981 /* SystemConfiguration.framework in Frameworks */,
+				013C7F361D6215A100311981 /* DominantColor.framework in Frameworks */,
+				013C7F371D6215A100311981 /* Pods_DressTime.framework in Frameworks */,
+				013C7F381D6215A100311981 /* OneSignal.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		013FD7601C889E6F0017B146 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -585,6 +781,7 @@
 		01A19B981C30A797002642EE /* DTComponents */ = {
 			isa = PBXGroup;
 			children = (
+				0186F9901D4504E20061596C /* DTTextField.swift */,
 				010559491C2ACBB60098E976 /* DTViewController.swift */,
 				01A19B8B1C30A2B3002642EE /* DTNavigationController.swift */,
 				01A19B941C30A5F1002642EE /* DTTabBarController.swift */,
@@ -628,6 +825,7 @@
 				01C454E51B5935B3003D5E41 /* DressTimeTests.xctest */,
 				01C455361B597F25003D5E41 /* DominantColor.framework */,
 				013FD7631C889E6F0017B146 /* DressTimeUITests.xctest */,
+				013C7F601D6215A100311981 /* DressTime Dev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -657,6 +855,7 @@
 		01C454D01B5935B3003D5E41 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0198BD471D72F775002D0521 /* DressTime_Beta.plist */,
 				01D3BB9B1C29CB09005B2A59 /* artill_clean_icons-webfont.ttf */,
 				01C454D11B5935B3003D5E41 /* Info.plist */,
 				019F764E1BDE0FE5007E6A3E /* Localizable.strings */,
@@ -723,6 +922,8 @@
 				017996621C5D1C8100E52DA0 /* UIImageView+Dresstime.swift */,
 				013941221CF99A8300A78FD9 /* FileManager.swift */,
 				0136D0431D094550007076A2 /* ErrorsManager.swift */,
+				011EEE5B1D53849E0067E60E /* NSDate+DressTime.swift */,
+				011EEE5D1D5384D40067E60E /* Int+DressTime.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -736,9 +937,7 @@
 				01D3BB651C29CA6C005B2A59 /* Register */,
 				01D3BB661C29CA6C005B2A59 /* Shopping */,
 				01D3BB5B1C29CA6C005B2A59 /* HomeViewController.swift */,
-				01D3BB681C29CA6C005B2A59 /* TutorialViewController.swift */,
 				01328B081C6F383E0068B8C9 /* CalendarViewController.swift */,
-				016D0E9F1C9174DE00BE2EB3 /* LoginViewController.swift */,
 				01A7962C1CF612AF00E78683 /* LoadingViewController.swift */,
 			);
 			path = Controllers;
@@ -770,7 +969,6 @@
 				01D3BB611C29CA6C005B2A59 /* DetailTypeViewController.swift */,
 				01D3BB621C29CA6C005B2A59 /* ProfilViewController.swift */,
 				01D3BB631C29CA6C005B2A59 /* SettingsTableViewController.swift */,
-				01D3BB641C29CA6C005B2A59 /* SettingsViewController.swift */,
 			);
 			path = Profil;
 			sourceTree = "<group>";
@@ -778,8 +976,12 @@
 		01D3BB651C29CA6C005B2A59 /* Register */ = {
 			isa = PBXGroup;
 			children = (
-				01D3BB951C29CAC7005B2A59 /* RegisterSexeViewController.swift */,
-				0166B5241C74EF1B00CA8B25 /* RegisterStyleViewController.swift */,
+				01AF9EB41D55E19E009BB827 /* RegisterSexeViewController.swift */,
+				0186F9921D4505B60061596C /* SignInViewController.swift */,
+				0186F98D1D4501F90061596C /* Register.storyboard */,
+				0186F9861D4501E50061596C /* LoginViewController.swift */,
+				0186F9871D4501E50061596C /* SignUpViewController.swift */,
+				0186F9941D451B270061596C /* SelectStyleViewController.swift */,
 			);
 			path = Register;
 			sourceTree = "<group>";
@@ -952,6 +1154,29 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		013C7EB61D6215A100311981 /* DressTime Dev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 013C7F5D1D6215A100311981 /* Build configuration list for PBXNativeTarget "DressTime Dev" */;
+			buildPhases = (
+				013C7EB91D6215A100311981 /* [CP] Check Pods Manifest.lock */,
+				013C7EBA1D6215A100311981 /* Sources */,
+				013C7F341D6215A100311981 /* Frameworks */,
+				013C7F391D6215A100311981 /* Embed Frameworks */,
+				013C7F3B1D6215A100311981 /* Resources */,
+				013C7F5A1D6215A100311981 /* [CP] Embed Pods Frameworks */,
+				013C7F5B1D6215A100311981 /* [CP] Copy Pods Resources */,
+				013C7F5C1D6215A100311981 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				013C7EB71D6215A100311981 /* PBXTargetDependency */,
+			);
+			name = "DressTime Dev";
+			productName = DressTime;
+			productReference = 013C7F601D6215A100311981 /* DressTime Dev.app */;
+			productType = "com.apple.product-type.application";
+		};
 		013FD7621C889E6F0017B146 /* DressTimeUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 013FD7751C889E6F0017B146 /* Build configuration list for PBXNativeTarget "DressTimeUITests" */;
@@ -1046,6 +1271,9 @@
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = Fab;
 				TargetAttributes = {
+					013C7EB61D6215A100311981 = {
+						DevelopmentTeam = 4K33TFL396;
+					};
 					013FD7621C889E6F0017B146 = {
 						CreatedOnToolsVersion = 7.2.1;
 						TestTargetID = 01C454CC1B5935B3003D5E41;
@@ -1086,6 +1314,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				013C7EB61D6215A100311981 /* DressTime Dev */,
 				01C454CC1B5935B3003D5E41 /* DressTime */,
 				01C454E41B5935B3003D5E41 /* DressTimeTests */,
 				01C455351B597F25003D5E41 /* DominantColor */,
@@ -1095,6 +1324,43 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		013C7F3B1D6215A100311981 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				013C7F3C1D6215A100311981 /* Main.storyboard in Resources */,
+				013C7F3D1D6215A100311981 /* DressTime.plist in Resources */,
+				013C7F3E1D6215A100311981 /* NoClotheCalendarCell.xib in Resources */,
+				013C7F3F1D6215A100311981 /* SubTypeCell.xib in Resources */,
+				013C7F401D6215A100311981 /* ClotheCell.xib in Resources */,
+				013C7F411D6215A100311981 /* ClotheTableCell.xib in Resources */,
+				013C7F421D6215A100311981 /* NumberClotheControl.xib in Resources */,
+				013C7F431D6215A100311981 /* LaunchingView.xib in Resources */,
+				013C7F441D6215A100311981 /* LoadingView.xib in Resources */,
+				013C7F451D6215A100311981 /* UIActivityLoader.xib in Resources */,
+				013C7F461D6215A100311981 /* artill_clean_icons-webfont.ttf in Resources */,
+				013C7F471D6215A100311981 /* BrandClotheCell.xib in Resources */,
+				013C7F481D6215A100311981 /* ClotheCalendarCell.xib in Resources */,
+				013C7F491D6215A100311981 /* LaunchScreen.xib in Resources */,
+				013C7F4A1D6215A100311981 /* ClotheScrollTableCell.xib in Resources */,
+				013C7F4B1D6215A100311981 /* TitleNavBar.xib in Resources */,
+				013C7F4C1D6215A100311981 /* Images.xcassets in Resources */,
+				013C7F4D1D6215A100311981 /* TutorialPageViewController.xib in Resources */,
+				013C7F4E1D6215A100311981 /* ConfirmSave.xib in Resources */,
+				013C7F4F1D6215A100311981 /* PatternView.xib in Resources */,
+				013C7F501D6215A100311981 /* HeaderOutfitView.xib in Resources */,
+				013C7F511D6215A100311981 /* NumberCalendarCell.xib in Resources */,
+				013C7F521D6215A100311981 /* StepsControl.xib in Resources */,
+				013C7F531D6215A100311981 /* TypeCell.xib in Resources */,
+				013C7F541D6215A100311981 /* TypeTableCell.xib in Resources */,
+				013C7F551D6215A100311981 /* Localizable.strings in Resources */,
+				013C7F561D6215A100311981 /* EmptyTypeView.xib in Resources */,
+				013C7F571D6215A100311981 /* OutfitCell.xib in Resources */,
+				013C7F581D6215A100311981 /* Info.plist in Resources */,
+				013C7F591D6215A100311981 /* Register.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		013FD7611C889E6F0017B146 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1128,6 +1394,7 @@
 				01D3BB2E1C29CA31005B2A59 /* PatternView.xib in Resources */,
 				012930861D38E28B006760B9 /* HeaderOutfitView.xib in Resources */,
 				01C47A931C6F4EA4006CDD14 /* NumberCalendarCell.xib in Resources */,
+				0198BD481D72F775002D0521 /* DressTime_Beta.plist in Resources */,
 				01FC61FF1C31FC1F004C5CF6 /* StepsControl.xib in Resources */,
 				01D3BB3A1C29CA31005B2A59 /* TypeCell.xib in Resources */,
 				01D3BB3C1C29CA31005B2A59 /* TypeTableCell.xib in Resources */,
@@ -1135,6 +1402,7 @@
 				01A19B9A1C30B099002642EE /* EmptyTypeView.xib in Resources */,
 				01D3BB2C1C29CA31005B2A59 /* OutfitCell.xib in Resources */,
 				01218BED1C29CD5A00E4D80F /* Info.plist in Resources */,
+				0186F98F1D4501F90061596C /* Register.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1156,6 +1424,64 @@
 
 /* Begin PBXShellScriptBuildPhase section */
 		012F98FB1D0EB9D10048C5DB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 974faef332f080ae713c610c9190aec2c5c572b4 adde0ef913035891ad1814de96d3719694771efd6075d4932a6073cec07fb8a6";
+		};
+		013C7EB91D6215A100311981 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		013C7F5A1D6215A100311981 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DressTime/Pods-DressTime-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		013C7F5B1D6215A100311981 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DressTime/Pods-DressTime-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		013C7F5C1D6215A100311981 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1321,6 +1647,133 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		013C7EBA1D6215A100311981 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				013C7EBB1D6215A100311981 /* SpringAnimation.swift in Sources */,
+				013C7EBC1D6215A100311981 /* CameraSessionManager.swift in Sources */,
+				013C7EBD1D6215A100311981 /* SpringImageView.swift in Sources */,
+				013C7EBE1D6215A100311981 /* TypeViewController.swift in Sources */,
+				013C7EBF1D6215A100311981 /* DesignableTextView.swift in Sources */,
+				013C7EC01D6215A100311981 /* SignUpViewController.swift in Sources */,
+				013C7EC11D6215A100311981 /* DressTimeBL.swift in Sources */,
+				013C7EC21D6215A100311981 /* UIView+Dresstime.swift in Sources */,
+				013C7EC31D6215A100311981 /* ActivityLoader.swift in Sources */,
+				013C7EC41D6215A100311981 /* TypeCell.swift in Sources */,
+				013C7EC51D6215A100311981 /* FileManager.swift in Sources */,
+				013C7EC61D6215A100311981 /* Int+DressTime.swift in Sources */,
+				013C7EC71D6215A100311981 /* ClotheCell.swift in Sources */,
+				013C7EC81D6215A100311981 /* ClotheModel.swift in Sources */,
+				013C7EC91D6215A100311981 /* LoginBL.swift in Sources */,
+				013C7ECA1D6215A100311981 /* HomeViewController.swift in Sources */,
+				013C7ECB1D6215A100311981 /* Clothe.swift in Sources */,
+				013C7ECC1D6215A100311981 /* ProfilsDAL.swift in Sources */,
+				013C7ECD1D6215A100311981 /* DressingService.swift in Sources */,
+				013C7ECE1D6215A100311981 /* DesignableImageView.swift in Sources */,
+				013C7ECF1D6215A100311981 /* ProfilViewController.swift in Sources */,
+				013C7ED01D6215A100311981 /* LoadingViewController.swift in Sources */,
+				013C7ED11D6215A100311981 /* DressTime.xcdatamodeld in Sources */,
+				013C7ED21D6215A100311981 /* SelectStyleViewController.swift in Sources */,
+				013C7ED31D6215A100311981 /* SignInViewController.swift in Sources */,
+				013C7ED41D6215A100311981 /* TransitionZoom.swift in Sources */,
+				013C7ED51D6215A100311981 /* SpringLabel.swift in Sources */,
+				013C7ED61D6215A100311981 /* SettingsTableViewController.swift in Sources */,
+				013C7ED71D6215A100311981 /* UnwindSegue.swift in Sources */,
+				013C7ED81D6215A100311981 /* LoginService.swift in Sources */,
+				013C7ED91D6215A100311981 /* SettingsHeaderCell.swift in Sources */,
+				013C7EDA1D6215A100311981 /* HomeOutfitsListCell.swift in Sources */,
+				013C7EDB1D6215A100311981 /* WeatherWrapper.swift in Sources */,
+				013C7EDC1D6215A100311981 /* SpringTextView.swift in Sources */,
+				013C7EDD1D6215A100311981 /* RegisterSexeViewController.swift in Sources */,
+				013C7EDE1D6215A100311981 /* PatternView.swift in Sources */,
+				013C7EDF1D6215A100311981 /* SoundPlayer.swift in Sources */,
+				013C7EE01D6215A100311981 /* DesignableTabBarController.swift in Sources */,
+				013C7EE11D6215A100311981 /* ClotheTableViewCell.swift in Sources */,
+				013C7EE21D6215A100311981 /* UIImageView+Dresstime.swift in Sources */,
+				013C7EE31D6215A100311981 /* BlurView.swift in Sources */,
+				013C7EE41D6215A100311981 /* Outfits.swift in Sources */,
+				013C7EE51D6215A100311981 /* HomeEmptyAnimationCell.swift in Sources */,
+				013C7EE61D6215A100311981 /* Misc.swift in Sources */,
+				013C7EE71D6215A100311981 /* TextSelectionCell.swift in Sources */,
+				013C7EE81D6215A100311981 /* DTTableViewController.swift in Sources */,
+				013C7EE91D6215A100311981 /* CalendarViewController.swift in Sources */,
+				013C7EEA1D6215A100311981 /* DTTabBarController.swift in Sources */,
+				013C7EEB1D6215A100311981 /* User.swift in Sources */,
+				013C7EEC1D6215A100311981 /* AutoTextView.swift in Sources */,
+				013C7EED1D6215A100311981 /* RegisterSexeTableViewCell.swift in Sources */,
+				013C7EEE1D6215A100311981 /* HeaderOutfitView.swift in Sources */,
+				013C7EEF1D6215A100311981 /* DetailTypeViewController.swift in Sources */,
+				013C7EF01D6215A100311981 /* ClotheMatchSelectionCell.swift in Sources */,
+				013C7EF11D6215A100311981 /* OutfitViewController.swift in Sources */,
+				013C7EF21D6215A100311981 /* ClotheCalendarCell.swift in Sources */,
+				013C7EF31D6215A100311981 /* ClothesDAL.swift in Sources */,
+				013C7EF41D6215A100311981 /* ReadJsonFile.swift in Sources */,
+				013C7EF51D6215A100311981 /* NSDate+DressTime.swift in Sources */,
+				013C7EF61D6215A100311981 /* SpringTextField.swift in Sources */,
+				013C7EF81D6215A100311981 /* AsyncButton.swift in Sources */,
+				013C7EF91D6215A100311981 /* TutorialPageViewController.swift in Sources */,
+				013C7EFA1D6215A100311981 /* PListReader.swift in Sources */,
+				013C7EFB1D6215A100311981 /* DesignableTextField.swift in Sources */,
+				013C7EFC1D6215A100311981 /* NumberClotheControl.swift in Sources */,
+				013C7EFD1D6215A100311981 /* DesignableLabel.swift in Sources */,
+				013C7EFE1D6215A100311981 /* NumberCalendarCell.swift in Sources */,
+				013C7EFF1D6215A100311981 /* OutfitCell.swift in Sources */,
+				013C7F001D6215A100311981 /* DressTimeService.swift in Sources */,
+				013C7F011D6215A100311981 /* KeyboardLayoutConstraint.swift in Sources */,
+				013C7F021D6215A100311981 /* UIColor+Dresstime.swift in Sources */,
+				013C7F031D6215A100311981 /* ErrorsManager.swift in Sources */,
+				013C7F041D6215A100311981 /* HexColorToName.swift in Sources */,
+				013C7F051D6215A100311981 /* CameraViewController.swift in Sources */,
+				013C7F061D6215A100311981 /* HomeEmptyStepCell.swift in Sources */,
+				013C7F071D6215A100311981 /* DownloadImageManager.swift in Sources */,
+				013C7F081D6215A100311981 /* DesignableView.swift in Sources */,
+				013C7F091D6215A100311981 /* CaptureConfirmationViewController.swift in Sources */,
+				013C7F0A1D6215A100311981 /* PriceSelectionCell.swift in Sources */,
+				013C7F0B1D6215A100311981 /* DesignableButton.swift in Sources */,
+				013C7F0C1D6215A100311981 /* SharedData.swift in Sources */,
+				013C7F0D1D6215A100311981 /* DTViewController.swift in Sources */,
+				013C7F0E1D6215A100311981 /* Profil.swift in Sources */,
+				013C7F0F1D6215A100311981 /* CustomSubTypeViewCell.swift in Sources */,
+				013C7F101D6215A100311981 /* DTNavigationController.swift in Sources */,
+				013C7F111D6215A100311981 /* Profil+CoreDataProperties.swift in Sources */,
+				013C7F121D6215A100311981 /* RangeSlider.swift in Sources */,
+				013C7F131D6215A100311981 /* DTTextField.swift in Sources */,
+				013C7F141D6215A100311981 /* ShoppingViewController.swift in Sources */,
+				013C7F151D6215A100311981 /* TransitionManager.swift in Sources */,
+				013C7F161D6215A100311981 /* StoreViewController.swift in Sources */,
+				013C7F171D6215A100311981 /* ImageLoader.swift in Sources */,
+				013C7F181D6215A100311981 /* EmptyTypeView.swift in Sources */,
+				013C7F191D6215A100311981 /* BrandClotheCell.swift in Sources */,
+				013C7F1A1D6215A100311981 /* SpringButton.swift in Sources */,
+				013C7F1B1D6215A100311981 /* DressingSynchro.swift in Sources */,
+				013C7F1C1D6215A100311981 /* BrandClothe.swift in Sources */,
+				013C7F1D1D6215A100311981 /* LaunchingView.swift in Sources */,
+				013C7F1E1D6215A100311981 /* ClotheScrollTableCell.swift in Sources */,
+				013C7F1F1D6215A100311981 /* AppDelegate.swift in Sources */,
+				013C7F201D6215A100311981 /* UserService.swift in Sources */,
+				013C7F211D6215A100311981 /* Spring.swift in Sources */,
+				013C7F221D6215A100311981 /* TitleNavBar.swift in Sources */,
+				013C7F231D6215A100311981 /* SpringView.swift in Sources */,
+				013C7F241D6215A100311981 /* LoadingView.swift in Sources */,
+				013C7F251D6215A100311981 /* SettingsStyleCell.swift in Sources */,
+				013C7F261D6215A100311981 /* AsyncImageView.swift in Sources */,
+				013C7F271D6215A100311981 /* DetailClotheViewController.swift in Sources */,
+				013C7F281D6215A100311981 /* StepsControl.swift in Sources */,
+				013C7F291D6215A100311981 /* ClotheSelectionCell.swift in Sources */,
+				013C7F2A1D6215A100311981 /* LoginViewController.swift in Sources */,
+				013C7F2B1D6215A100311981 /* UIActivityLoader.swift in Sources */,
+				013C7F2C1D6215A100311981 /* TypeSelectionCell.swift in Sources */,
+				013C7F2D1D6215A100311981 /* TypeTableViewCell.swift in Sources */,
+				013C7F2E1D6215A100311981 /* SettingsSexCell.swift in Sources */,
+				013C7F2F1D6215A100311981 /* UIImage+Dresstime.swift in Sources */,
+				013C7F301D6215A100311981 /* HeaderShoppingCell.swift in Sources */,
+				013C7F311D6215A100311981 /* ConfirmSave.swift in Sources */,
+				013C7F321D6215A100311981 /* NoClotheCalendarCell.swift in Sources */,
+				013C7F331D6215A100311981 /* AKPickerView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		013FD75F1C889E6F0017B146 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1338,12 +1791,13 @@
 				01218BF61C29CD5A00E4D80F /* SpringImageView.swift in Sources */,
 				01D3BB7B1C29CA6C005B2A59 /* TypeViewController.swift in Sources */,
 				01218BEA1C29CD5A00E4D80F /* DesignableTextView.swift in Sources */,
-				01D3BB991C29CAC7005B2A59 /* RegisterSexeViewController.swift in Sources */,
+				0186F98C1D4501E50061596C /* SignUpViewController.swift in Sources */,
 				01D3BB4D1C29CA45005B2A59 /* DressTimeBL.swift in Sources */,
 				01D3BB531C29CA45005B2A59 /* UIView+Dresstime.swift in Sources */,
 				01D3BB181C29CA31005B2A59 /* ActivityLoader.swift in Sources */,
 				01D3BB391C29CA31005B2A59 /* TypeCell.swift in Sources */,
 				013941231CF99A8300A78FD9 /* FileManager.swift in Sources */,
+				011EEE5E1D5384D40067E60E /* Int+DressTime.swift in Sources */,
 				01D3BB1B1C29CA31005B2A59 /* ClotheCell.swift in Sources */,
 				01608C771C7E3FE400D42B20 /* ClotheModel.swift in Sources */,
 				0155C6341C30378100B5ACD2 /* LoginBL.swift in Sources */,
@@ -1354,8 +1808,9 @@
 				01218BE61C29CD5A00E4D80F /* DesignableImageView.swift in Sources */,
 				01D3BB811C29CA6C005B2A59 /* ProfilViewController.swift in Sources */,
 				01A7962D1CF612AF00E78683 /* LoadingViewController.swift in Sources */,
-				01D3BB851C29CA6C005B2A59 /* TutorialViewController.swift in Sources */,
 				01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */,
+				0186F9951D451B270061596C /* SelectStyleViewController.swift in Sources */,
+				0186F9931D4505B60061596C /* SignInViewController.swift in Sources */,
 				01218BFC1C29CD5A00E4D80F /* TransitionZoom.swift in Sources */,
 				01218BF71C29CD5A00E4D80F /* SpringLabel.swift in Sources */,
 				01D3BB821C29CA6C005B2A59 /* SettingsTableViewController.swift in Sources */,
@@ -1365,6 +1820,7 @@
 				01D3BB2A1C29CA31005B2A59 /* HomeOutfitsListCell.swift in Sources */,
 				01D3BB541C29CA45005B2A59 /* WeatherWrapper.swift in Sources */,
 				01218BF91C29CD5A00E4D80F /* SpringTextView.swift in Sources */,
+				01AF9EB51D55E19E009BB827 /* RegisterSexeViewController.swift in Sources */,
 				01D3BB2D1C29CA31005B2A59 /* PatternView.swift in Sources */,
 				01218BF21C29CD5A00E4D80F /* SoundPlayer.swift in Sources */,
 				01218BE81C29CD5A00E4D80F /* DesignableTabBarController.swift in Sources */,
@@ -1377,7 +1833,6 @@
 				01D3BB341C29CA31005B2A59 /* TextSelectionCell.swift in Sources */,
 				01A19B971C30A6AC002642EE /* DTTableViewController.swift in Sources */,
 				01328B091C6F383E0068B8C9 /* CalendarViewController.swift in Sources */,
-				0166B5251C74EF1B00CA8B25 /* RegisterStyleViewController.swift in Sources */,
 				01A19B951C30A5F1002642EE /* DTTabBarController.swift in Sources */,
 				0155C62E1C301AA600B5ACD2 /* User.swift in Sources */,
 				01218BE31C29CD5A00E4D80F /* AutoTextView.swift in Sources */,
@@ -1389,6 +1844,7 @@
 				01328B0E1C6F3DC60068B8C9 /* ClotheCalendarCell.swift in Sources */,
 				01D3BB871C29CA6C005B2A59 /* ClothesDAL.swift in Sources */,
 				01D3BB901C29CA6C005B2A59 /* ReadJsonFile.swift in Sources */,
+				011EEE5C1D53849E0067E60E /* NSDate+DressTime.swift in Sources */,
 				01218BF81C29CD5A00E4D80F /* SpringTextField.swift in Sources */,
 				01218BE11C29CD5A00E4D80F /* AsyncButton.swift in Sources */,
 				01D3BB371C29CA31005B2A59 /* TutorialPageViewController.swift in Sources */,
@@ -1417,6 +1873,7 @@
 				01A19B8C1C30A2B3002642EE /* DTNavigationController.swift in Sources */,
 				01D3BB881C29CA6C005B2A59 /* Profil+CoreDataProperties.swift in Sources */,
 				01218BE01C29CD5A00E4D80F /* RangeSlider.swift in Sources */,
+				0186F9911D4504E20061596C /* DTTextField.swift in Sources */,
 				01D3BB841C29CA6C005B2A59 /* ShoppingViewController.swift in Sources */,
 				01218BFB1C29CD5A00E4D80F /* TransitionManager.swift in Sources */,
 				010EE6771C83159E007A5828 /* StoreViewController.swift in Sources */,
@@ -1434,14 +1891,13 @@
 				01D3BB351C29CA31005B2A59 /* TitleNavBar.swift in Sources */,
 				01218BFA1C29CD5A00E4D80F /* SpringView.swift in Sources */,
 				01218BEF1C29CD5A00E4D80F /* LoadingView.swift in Sources */,
-				01D3BB831C29CA6C005B2A59 /* SettingsViewController.swift in Sources */,
 				01D3BB321C29CA31005B2A59 /* SettingsStyleCell.swift in Sources */,
 				01218BE21C29CD5A00E4D80F /* AsyncImageView.swift in Sources */,
 				01D3BB7F1C29CA6C005B2A59 /* DetailClotheViewController.swift in Sources */,
 				01FC62031C31FDB9004C5CF6 /* StepsControl.swift in Sources */,
 				01D3BB201C29CA31005B2A59 /* ClotheSelectionCell.swift in Sources */,
+				0186F98B1D4501E50061596C /* LoginViewController.swift in Sources */,
 				01D3BB3E1C29CA31005B2A59 /* UIActivityLoader.swift in Sources */,
-				016D0EA01C9174DE00BE2EB3 /* LoginViewController.swift in Sources */,
 				01D3BB3B1C29CA31005B2A59 /* TypeSelectionCell.swift in Sources */,
 				01D3BB3D1C29CA31005B2A59 /* TypeTableViewCell.swift in Sources */,
 				01D3BB311C29CA31005B2A59 /* SettingsSexCell.swift in Sources */,
@@ -1479,6 +1935,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		013C7EB71D6215A100311981 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01C455351B597F25003D5E41 /* DominantColor */;
+			targetProxy = 013C7EB81D6215A100311981 /* PBXContainerItemProxy */;
+		};
 		013FD7691C889E6F0017B146 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 01C454CC1B5935B3003D5E41 /* DressTime */;
@@ -1497,6 +1958,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		0186F98D1D4501F90061596C /* Register.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0186F98E1D4501F90061596C /* Base */,
+			);
+			name = Register.storyboard;
+			sourceTree = "<group>";
+		};
 		019F764E1BDE0FE5007E6A3E /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1529,6 +1998,58 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		013C7F5E1D6215A100311981 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9D5EFCFC20358FAF2D31915 /* Pods-DressTime.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DressTime/Frameworks",
+				);
+				INFOPLIST_FILE = DressTime/DressTime_Beta.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.dresstime.DressTime.dev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a005655a-529f-4057-96dc-299316dca7ff";
+				STRINGS_FILE_OUTPUT_ENCODING = binary;
+				SWIFT_OBJC_BRIDGING_HEADER = "DressTime/DressTime-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		013C7F5F1D6215A100311981 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0ADC66CC1DC0561F3FB2138 /* Pods-DressTime.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/DressTime/Frameworks",
+				);
+				INFOPLIST_FILE = DressTime/DressTime_Beta.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = "-ObjC";
+				OTHER_SWIFT_FLAGS = "$(inherited)";
+				PRODUCT_BUNDLE_IDENTIFIER = io.dresstime.DressTime.dev;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "a005655a-529f-4057-96dc-299316dca7ff";
+				STRINGS_FILE_OUTPUT_ENCODING = binary;
+				SWIFT_OBJC_BRIDGING_HEADER = "DressTime/DressTime-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 		013FD76A1C889E6F0017B146 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4016A294599391F19FD211E4 /* Pods-DressTimeUITests.debug.xcconfig */;
@@ -1790,6 +2311,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		013C7F5D1D6215A100311981 /* Build configuration list for PBXNativeTarget "DressTime Dev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				013C7F5E1D6215A100311981 /* Debug */,
+				013C7F5F1D6215A100311981 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		013FD7751C889E6F0017B146 /* Build configuration list for PBXNativeTarget "DressTimeUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1841,10 +2371,11 @@
 		01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				0186F9961D4521CF0061596C /* DressTime v 3.xcdatamodel */,
 				0155C62F1C302D1B00B5ACD2 /* DressTime v2.xcdatamodel */,
 				01C454D51B5935B3003D5E41 /* DressTime.xcdatamodel */,
 			);
-			currentVersion = 0155C62F1C302D1B00B5ACD2 /* DressTime v2.xcdatamodel */;
+			currentVersion = 0186F9961D4521CF0061596C /* DressTime v 3.xcdatamodel */;
 			path = DressTime.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

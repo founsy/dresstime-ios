@@ -29,13 +29,14 @@ class OutfitViewController: DTViewController {
     var currentOutfits = [ClotheModel]()
     var delegate: OutfitViewControllerDelegate?
     var creationDate : NSDate?
-    var imageName : UIImage?
+    var gradient : CAGradientLayer?
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var dressupButton: UIButton!
     @IBOutlet weak var backgroundImageView: UIImageView!
     
     @IBOutlet weak var onEditTapped: UIBarButtonItem!
+    
     @IBAction func onEditTapped(sender: AnyObject) {
         isEditingMode = !isEditingMode
         if (isEditingMode){
@@ -122,7 +123,11 @@ class OutfitViewController: DTViewController {
         super.viewWillAppear(animated)
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Outfit", comment: ""), style: .Plain, target: nil, action: nil)
-        self.backgroundImageView.image = self.imageName
+        
+        if let weather = SharedData.sharedInstance.currentWeater {
+            self.backgroundImageView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(weather.code == nil ? 800 : weather.code!))
+        }
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -157,6 +162,17 @@ class OutfitViewController: DTViewController {
             }
         }
     }
+    
+    func checkOutfitValidation(){
+        if (self.currentOutfits.count < 2
+            || (self.currentOutfits.count == 1 && self.currentOutfits[0].clothe_type == ClotheType.dress.rawValue)) {
+            self.dressupButton.enabled = false
+            self.dressupButton.backgroundColor = UIColor.dressTimeRedDisabled()
+        } else {
+            self.dressupButton.enabled = true
+            self.dressupButton.backgroundColor = UIColor.dressTimeRed()
+        }
+    }
 }
 
 extension OutfitViewController: ClotheTableViewCellDelegate {
@@ -182,6 +198,9 @@ extension OutfitViewController: ClotheTableViewCellDelegate {
             onEditTapped.title = "Edit"
             isEditingMode = false
         }
+        
+        //Verify if the outfit reach the minimum clothe combination
+        self.checkOutfitValidation()
     }
     
     func changeItem(item: Clothe) -> Void {
@@ -194,7 +213,6 @@ extension OutfitViewController: ClotheTableViewCellDelegate {
     func detailItem(item: Clothe) {
         self.currentClothe = item
         self.performSegueWithIdentifier("detailClothe", sender: self)
-
     }
     
     func selectItem(item: Clothe) -> Void {
@@ -241,8 +259,7 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
             cell.viewMode = ViewMode.OutfitView
             cell.delayTime = 0.3 * Double(indexPath.row)
             cell.isEditingMode = self.isEditingMode
-            
-            
+
             //Remove edge insets to have full width separtor line
             cell.preservesSuperviewLayoutMargins = false
             cell.separatorInset = UIEdgeInsetsZero
@@ -319,6 +336,10 @@ extension OutfitViewController: DetailTypeViewControllerDelegate {
                 indexPathToAnimate = i
             }
         }
+        
+        //Verify if the outfit reach the minimum clothe combination
+        self.checkOutfitValidation()
+        
         self.tableView.reloadData()
     }
 }

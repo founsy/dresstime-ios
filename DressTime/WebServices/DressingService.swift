@@ -154,7 +154,7 @@ class DressingService {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
             
-            Alamofire.request(.POST, path, parameters: parameters, encoding: .JSON, headers: headers).responseJSON { response in
+            Alamofire.request(.POST, path, parameters: parameters, encoding: .JSON, headers: headers).validate().responseJSON { response in
                 if response.result.isSuccess {
                     print(response.result.value)
                     let jsonDic = JSON(response.result.value!)
@@ -178,7 +178,7 @@ class DressingService {
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
-            Alamofire.request(.PUT, path, parameters: dict as? [String : AnyObject], encoding: .JSON, headers: headers).responseJSON { response in
+            Alamofire.request(.PUT, path, parameters: dict as? [String : AnyObject], encoding: .JSON, headers: headers).validate().responseJSON { response in
                 if response.result.isSuccess {
                     print(response.result.value)
                     let jsonDic = JSON(response.result.value!)
@@ -199,7 +199,7 @@ class DressingService {
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
-            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).responseJSON { response in
+            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).validate().responseJSON { response in
                 if response.result.isSuccess {
                     print(response.result.value)
                     let jsonDic = JSON(response.result.value!)
@@ -221,7 +221,7 @@ class DressingService {
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
-            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).responseJSON { response in
+            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).validate().responseJSON { response in
                 if response.result.isSuccess {
                     print(response.result.value)
                     let jsonDic = JSON(response.result.value!)
@@ -253,7 +253,7 @@ class DressingService {
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
-            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).responseJSON { response in
+            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).validate().responseJSON { response in
                 if response.result.isSuccess {
                     print(response.result.value)
                     let jsonDic = JSON(response.result.value!)
@@ -276,7 +276,7 @@ class DressingService {
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
-            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).responseJSON { response in
+            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).validate().responseJSON { response in
                 if response.result.isSuccess {
                     print(response.result.value)
                     let jsonDic = JSON(response.result.value!)
@@ -299,7 +299,7 @@ class DressingService {
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
-            Alamofire.request(.DELETE, path, encoding: .JSON, headers: headers).responseJSON { response in
+            Alamofire.request(.DELETE, path, encoding: .JSON, headers: headers).validate().responseJSON { response in
                 if response.result.isSuccess {
                     print(response.result.value)
                     let jsonDic = JSON(response.result.value!)

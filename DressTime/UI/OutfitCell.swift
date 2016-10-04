@@ -61,7 +61,7 @@ class OufitCell: UICollectionViewCell {
                 self.createClotheView(clothe, rect: rect)
             }
         }
-        self.putOnStyle(outfit.isPutOn, moment: outfit.moment!)
+        self.putOnStyle(outfit.isPutOn, style: outfit.style)
     }
     
     
@@ -87,13 +87,6 @@ class OufitCell: UICollectionViewCell {
             view.layer.masksToBounds = true
         
             let img = clothe.getImage()
-        
-            //var mode = UIViewContentMode.Top
-            /*if (rect.size.height != self.containerView.frame.size.height){
-                img = img.imageResize(CGSizeMake(rect.size.width, rect.size.height))
-            } else {
-                mode = UIViewContentMode.ScaleToFill
-            } */
             
             let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
         
@@ -105,42 +98,19 @@ class OufitCell: UICollectionViewCell {
             self.containerView.addSubview(view)
     }
     
-    private func setMomentIcon(moment: String){
-        if (moment == "onParty"){
-            momentLabel.text = NSLocalizedString("Moment_Party", comment: "PARTY").lowercaseString
-            imageView.image = UIImage(named: "baloonIcon")
-        } else if (moment == "atWork"){
-            momentLabel.text = NSLocalizedString("Moment_Work", comment: "WORK").lowercaseString
-             imageView.image = UIImage(named: "lampOutfitIcon")
-            
-        } else if (moment == "relax"){
-            momentLabel.text = NSLocalizedString("Moment_Relax", comment: "RELAX").lowercaseString
-            imageView.image = UIImage(named: "reclinerIcon")
-            
-        }
-    
-    }
-        
-    private func putOnStyle(isPutOn: Bool, moment: String){
+    private func putOnStyle(isPutOn: Bool, style: String){
         if (isPutOn){
-            let whiteColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.8)
-            self.containerView.layer.borderWidth = 3.0
-            self.containerView.layer.cornerRadius = 2.0
-            self.containerView.layer.borderColor = whiteColor.CGColor
-            self.containerMomentImage.backgroundColor = whiteColor
+            self.containerView.layer.borderColor = UIColor.dressTimeRedBrand().CGColor
+            self.containerMomentImage.backgroundColor = UIColor.dressTimeRedBrand()
             self.imageView.image = UIImage(named: "checkSelected")
-            self.imageView.tintColor = UIColor.dressTimeRedBrand()
-            self.momentLabel.textColor = UIColor.dressTimeRedBrand()
+            self.imageView.tintColor = UIColor.whiteColor()
+            self.momentLabel.textColor = UIColor.whiteColor()
         } else {
-            self.containerView.layer.borderWidth = 0.0
-            self.containerView.layer.cornerRadius = 0.0
-            self.containerView.layer.borderColor = UIColor.clearColor().CGColor
             self.containerMomentImage.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
-            setMomentIcon(moment)
             self.imageView.tintColor = UIColor.whiteColor()
             self.momentLabel.textColor = UIColor.whiteColor()
         }
-    
+        self.momentLabel.text = NSLocalizedString(style, comment: "style").lowercaseString
     }
     
     func removeOldImages(){

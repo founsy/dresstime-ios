@@ -6,51 +6,42 @@
  Copyright © 2015 Fab. All rights reserved.
  */
 
-/* LoginViewController */
-"loginName" = "Name";
-"loginEmail" = "Email";
-"loginPassword" = "Password";
-"loginOr" = "OR";
-"loginTitle" = "Hello :)";
-"loginLoginButton" = "Login";
-"loginSignUpButton" = "Join us";
-"loginSignUpHeaderButton" = "Sign up";
-"loginLoginHeaderButton" = "Login";
-"loginErrTitle" = "Failed!";
-"loginErrMessage" = "Error during the login the processs";
-"loginErrButton" = "Okay.";
-
 /* Register Pages */
-"registerEmailYourEmail" = "Your Email";
-"registerEmailOr" = "Or";
-"registerEmailPlaceholder" = "barack.obama@usa.gov";
-"registerPasswordYourPassword" = "Your Password";
-"registerPasswordPlaceholder" = "MySecurePassword";
-"registerPasswordCreateAnAccount" = "Create an Account";
 "registerSexeWomen" = "I am an amazing women";
 "registerSexeMen" = "I am a great men";
-
-"registerStyleSelectStyle" = "1 - Select a style";
-"registerStyleFashionStyle" = "fashion";
-"registerStyleBusinessStyle" = "business";
-"registerStyleSportwearStyle" = "sportwear";
-"registerStyleCasualStyle" = "casual chic";
-"registerStyleSelectPeriod" = "2 - Select a period";
-"registerStyleWorkPeriod" = "for work";
-"registerStylePartyPeriod" = "for party";
-"registerStyleChillPeriod" = "for chill";
-"registerStyleTitle" = "MY STYLES";
-"registerStyleTutorialLabel" = "FOR BEING PRECISE, LET’S SELECT YOUR OWN STYLES";
-"registerStyleTutorialButton" = "LET’S GO !";
-"registerStyleValidateModificationBtn" = "Validate my modification";
-"registerStyleSeeMyNewDressingBtn" = "Let's see my new dressing";
-"registerStyleErrTitle" = "Error";
-"registerStyleErrMessage" = "Please select a style for each moment of the day";
-"registerStyleErrButton" = "Okay";
 
 "registerErrorCreateAccountTitle" = "Error!";
 "registerErrorCreateAccountMessge" = "Error during the creating account process. Please try again later!";
 "registerErrorCreateAccountButton" = "Okay.";
+"registerErrorCreateAccounEmailDuplicatetTitle" = "Email error"; /* Need to translate */
+"registerErrorCreateAccountEmailDuplicateMessage" = "Email already used! Please try to login!"; /* Need to translate */
+"registerErrorCreateAccountEmailDuplicateButton" = "Ok"; /* Need to translate */
+"registerErrorCreateAccountStyleReguiredTitle" = "Style required"; /* Need to translate */
+"registerErrorCreateAccountStyleReguiredMessage" = "Please select at least one style :)"; /* Need to translate */
+"registerErrorCreateAccountStyleReguiredButton" = "Ok"; /* Need to translate */
+"registerSignInButton" = "Sign in"; /* Need to translate */
+"registerCreateAccountButton" = "Create an account"; /* Need to translate */
+
+/* Login Page */
+"loginEmailOr" = "Or"; /* Need to translate */
+"loginLetsGoButton" = "let's go"; /* Need to translate */
+"loginErrTitle" = "Failed!";
+"loginErrMessage" = "Error during the login the processs";
+"loginErrButton" = "Okay.";
+
+/* SignUp page */
+"signupNextButton" = "next"; /* Need to translate */
+"signupCreateNameLabel" = "The future awesome wardrobe belongs to..."; /* Need to translate */
+"signupCreateEmailLabel" = "You will receive you amazing suggestions..."; /* Need to translate */
+"signupCreatePasswordLabel" = "Finally in order to secure your wardrobe..."; /* Need to translate */
+
+/* Style Selection */
+"styleSelectionValidationButton" = "Yes, it’s my style !"; /* Need to translate */
+"styleSelectionStyleLabel" = "SELECT YOUR STYLE(S)"; /* Need to translate */
+"styleSelectionFashionLabel" = "fashion"; /* Need to translate */
+"styleSelectionBusinessLabel" = "business"; /* Need to translate */
+"styleSelectionSportwearLabel" = "sportwear"; /* Need to translate */
+"styleSelectionCasualChicLabel" = "casual chic"; /* Need to translate */
 
 /* General translation */
 "maille" = "mailles";

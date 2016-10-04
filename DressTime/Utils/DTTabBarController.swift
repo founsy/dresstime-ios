@@ -14,8 +14,6 @@ public class DTTabBarController: UITabBarController {
 
     override public func viewDidLoad() {
         self.tabBar.tintColor = UIColor.dressTimeRedBrand()
-        //self.tabBar.backgroundColor = UIColor.dressTimeOrange()
-        
         
         for item in self.tabBar.items! {
             if item.tag == 1 {
@@ -28,10 +26,6 @@ public class DTTabBarController: UITabBarController {
                 item.title =  NSLocalizedString("tabBarItemShopping", comment: "")
             }
         }
-        
-        //UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: .Normal)
-        //UITabBarItem.appearance().setTitleTextAttributes([NSForegroundColorAttributeName : UIColor.whiteColor()], forState: .Selected)
-        
         self.selectedViewController = self.viewControllers![0]
     }
 }

@@ -9,16 +9,23 @@
 import Foundation
 import SwiftyJSON
 
+enum Notification: String {
+    case morning = "morning"
+    case noon = "noon"
+    case evening = "evening"
+}
+
 public class User: NSObject {
 
     var email: String
     var username: String
     var displayName: String
+    var lastName: String?
+    var firstName: String?
     var password: String?
     
-    var atWorkStyle: String?
-    var onPartyStyle: String?
-    var relaxStyle: String?
+    var styles: String?
+    var notification: String = Notification.morning.rawValue
     
     var tempUnit: String = "C"
     var gender: String?
@@ -46,10 +53,25 @@ public class User: NSObject {
         email = json["email"].stringValue
         username = json["username"].stringValue
         displayName = json["displayName"].stringValue
+        firstName = json["firstName"].stringValue
+        lastName = json["lastName"].stringValue
         
-        atWorkStyle = json["atWorkStyle"].stringValue
-        onPartyStyle = json["onPartyStyle"].stringValue
-        relaxStyle = json["relaxStyle"].stringValue
+        
+        var stylesArr = [String]()
+        if let workStyle = json["atWorkStyle"].string {
+            stylesArr.append(workStyle)
+            if let partyStyle = json["onPartyStyle"].string where !stylesArr.contains(partyStyle) {
+                stylesArr.append(partyStyle)
+            }
+            
+            if let relaxStyle = json["relaxStyle"].string where !stylesArr.contains(relaxStyle) {
+                stylesArr.append(relaxStyle)
+            }
+            styles = stylesArr.joinWithSeparator(",")
+        }
+        
+        styles = json["styles"].stringValue
+        notification = json["notification"].stringValue
         
         tempUnit = json["tempUnit"].stringValue
         gender = json["gender"].stringValue

@@ -11,6 +11,7 @@ import UIKit
 
 protocol DetailClotheViewControllerDelegate {
     func detailClotheView(detailClotheview : DetailClotheViewController, itemDeleted item: String)
+    func detailClotheView(detailClotheView : DetailClotheViewController, noAction item: Clothe)
 }
 
 class DetailClotheViewController: DTViewController {
@@ -31,6 +32,7 @@ class DetailClotheViewController: DTViewController {
     var delegate: DetailClotheViewControllerDelegate?
     
     @IBAction func onTapped(sender: AnyObject) {
+        self.delegate?.detailClotheView(self, noAction: self.currentClothe!)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -116,6 +118,15 @@ class DetailClotheViewController: DTViewController {
         self.navigationController?.navigationBarHidden = true
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if (segue.identifier == "showEditView"){
+            let controller = segue.destinationViewController as! CaptureConfirmationViewController
+            controller.currentClothe = self.currentClothe
+            controller.previousController = self
+        }
+    }
+
+    
     func updateColors(colors: String){
         let colors = self.splitHexColor(colors)
         color1View.backgroundColor = UIColor.colorWithHexString(colors[0] as String)
@@ -132,12 +143,5 @@ class DetailClotheViewController: DTViewController {
         return arrayColors
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if (segue.identifier == "showEditView"){
-            let controller = segue.destinationViewController as! CaptureConfirmationViewController
-            controller.currentClothe = self.currentClothe
-            controller.previousController = self
-        }
-    }
     
 }

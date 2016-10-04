@@ -69,11 +69,12 @@ class HomeViewController: DTViewController {
         
         headerView = self.tableView.tableHeaderView
         self.tableView.tableHeaderView = nil
-    
+        
         if (self.isEnoughClothe()){
             self.tableView.addSubview(headerView)
             self.tableView.contentInset = UIEdgeInsets(top: (kTableHeaderHeight), left: 0, bottom: 0, right: 0)
             self.tableView.contentOffset = CGPoint(x: 0, y: (-kTableHeaderHeight))
+            
         } else {
             self.tableView.contentInset = UIEdgeInsets(top: (64), left: 0, bottom: 0, right: 0)
             self.tableView.contentOffset = CGPoint(x: 0, y: (-64))
@@ -86,11 +87,10 @@ class HomeViewController: DTViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        updateHeaderView()
         UIApplication.sharedApplication().statusBarHidden = false // for status bar hide
         let mixpanel = Mixpanel.sharedInstance()
         mixpanel.identify(mixpanel.distinctId)
-        
+    
         self.numberOfClothes = ClothesDAL().numberOfClothes()
         let lastStatus = self.isEnoughClothes
         self.isEnoughClothes = self.isEnoughClothe()
@@ -100,14 +100,14 @@ class HomeViewController: DTViewController {
             //Meaning not enough clothes to Enough
             if (lastStatus != self.isEnoughClothes){
                 //Need to add Shopping controller
-                if (self.tabBarController!.viewControllers?.count == 2) {
+                if (self.tabBarController!.viewControllers?.count == 2  ) {
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     
                     let vcCalendar = storyboard.instantiateViewControllerWithIdentifier("CalendarNavigationViewController") as! DTNavigationController
                     self.tabBarController!.viewControllers?.insert(vcCalendar, atIndex: 1)
-                    
+                  /*
                     let vcShopping = storyboard.instantiateViewControllerWithIdentifier("ShoppingNavigationViewController") as! DTNavigationController
-                    self.tabBarController!.viewControllers?.insert(vcShopping, atIndex: 3)
+                    self.tabBarController!.viewControllers?.insert(vcShopping, atIndex: 3) */
                     
                 }
                 //Remove Arrow image view
@@ -122,22 +122,25 @@ class HomeViewController: DTViewController {
                 self.tableView.addSubview(headerView)
                 self.tableView.contentInset = UIEdgeInsets(top: (kTableHeaderHeight), left: 0, bottom: 0, right: 0)
                 self.tableView.contentOffset = CGPoint(x: 0, y: (-kTableHeaderHeight))
+                
                 //Reload TableView with good cell
                 self.tableView.reloadData()
                 
+                //updateHeaderView()
             }
             if (!isLoaded && self.currentLocation != nil){
                 //Call web service to get Outfits of the Day
                 self.loadOutfits()
-                updateHeaderView()
+                
                 //Reload TableView with good cell
                 self.tableView.reloadData()
+                
             }
+            updateHeaderView()
             
         } else {
             self.tableView.reloadData()
-            if (self.tabBarController!.viewControllers?.count > 3) {
-                self.tabBarController!.viewControllers?.removeAtIndex(3)
+            if (self.tabBarController!.viewControllers?.count == 3) {
                 self.tabBarController!.viewControllers?.removeAtIndex(1)
             }
             self.bgView.image = UIImage(named: "backgroundEmpty")
@@ -214,7 +217,6 @@ class HomeViewController: DTViewController {
             let targetVC = segue.destinationViewController as! OutfitViewController
             targetVC.outfitObject = self.outfitSelected
             targetVC.currentOutfits = self.outfitSelected!.clothes
-            targetVC.imageName = self.bgView.image
             targetVC.delegate = self
         } else if (segue.identifier == "AddClothe"){
             if (typeClothe >= 0) {
@@ -275,6 +277,7 @@ class HomeViewController: DTViewController {
                 self.isLoaded = true
                 
                 self.currentWeather = Weather(json: object["weather"]["current"])
+                SharedData.sharedInstance.currentWeater = self.currentWeather
                 let sentence = object["weather"]["comment"].stringValue
                 
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
@@ -471,6 +474,16 @@ extension HomeViewController: UITableViewDataSource, UITableViewDelegate {
                 navigationController?.navigationBar.alpha = 1.0
             }
         }
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        updateHeaderView()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateHeaderView()
     }
     
 }

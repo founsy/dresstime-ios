@@ -80,25 +80,14 @@ class LoginService {
             "password" : password
         ]
         let path = base_url + "token"
-        Alamofire.request(.POST, path, parameters: parameters, encoding: .JSON).responseJSON { response in
-            var statusCode = 200
-            if let httpError = response.result.error {
-                statusCode = httpError.code
-            } else { //no errors
-                statusCode = (response.response?.statusCode)!
-            }
-            
-            if statusCode == 200 {
-                print(response.result.value)
+        Alamofire.request(.POST, path, parameters: parameters, encoding: .JSON).validate().responseJSON { response in
+            if response.result.isSuccess {
                 let jsonDic = JSON(response.result.value!)
                 completion(isSuccess: true, object: jsonDic)
             } else {
-                if let value = response.result.value {
-                    let jsonDic = JSON(value)
-                    completion(isSuccess: false, object: jsonDic)
-                } else {
-                    completion(isSuccess: false, object: "")
-                }
+                print(response.result.error)
+                let error = JSON(response.result.error!)
+                completion(isSuccess: false, object: error)
             }
         }
     }
@@ -116,7 +105,7 @@ class LoginService {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
             
-            Alamofire.request(.GET, path, parameters: nil, encoding: .JSON, headers: headers).responseJSON { (response) -> Void in
+            Alamofire.request(.GET, path, parameters: nil, encoding: .JSON, headers: headers).validate().responseJSON { (response) -> Void in
                 if response.result.isSuccess {
                     print(response.result.value)
                     let jsonDic = JSON(response.result.value!)
@@ -130,7 +119,7 @@ class LoginService {
     
     private func sendVerificationEmail(email: String, completion: (isSuccess: Bool, object: JSON) -> Void){
         let path =  "\(base_url_email)send?email=\(email)"
-        Alamofire.request(.GET, path, parameters: nil, encoding: .JSON).responseJSON { (response) -> Void in
+        Alamofire.request(.GET, path, parameters: nil, encoding: .JSON).validate().responseJSON { (response) -> Void in
             if response.result.isSuccess {
                 print(response.result.value)
                 let jsonDic = JSON(response.result.value!)
@@ -149,7 +138,7 @@ class LoginService {
             "refresh_token" : refreshToken
         ]
         let path = base_url + "token"
-        Alamofire.request(.POST, path, parameters: parameters, encoding: .JSON).responseJSON { response in
+        Alamofire.request(.POST, path, parameters: parameters, encoding: .JSON).validate().responseJSON { response in
             if response.result.isSuccess {
                 print(response.result.value)
                 let jsonDic = JSON(response.result.value!)

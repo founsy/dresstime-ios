@@ -84,7 +84,7 @@ class DressTimeService {
         if let userId = SharedData.sharedInstance.currentUserId,
             let profil = dal.fetch(userId) {
            
-            var path = baseUrlOutfits + "v2.1/?lat=\(location.coordinate.latitude)&long=\(location.coordinate.longitude)&timezone=\(NSTimeZone.systemTimeZone().secondsFromGMT)"
+            var path = baseUrlOutfits + "v2.2/?lat=\(location.coordinate.latitude)&long=\(location.coordinate.longitude)&timezone=\(NSTimeZone.systemTimeZone().secondsFromGMT)"
             
             var headers :[String : String]?
             
@@ -100,7 +100,6 @@ class DressTimeService {
                 } else {
                     completion(isSuccess: false, object: "")
                 }
-               
             }
             
             
@@ -111,8 +110,12 @@ class DressTimeService {
                         completion(isSuccess: true, object: JSON(json))
                     case .Failure(let error):
                         if let error = error as NSError? {
-                            print(error.localizedDescription)
-                            completion(isSuccess: false, object: JSON(error.localizedDescription))
+                            if error.code == 401 {
+                                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.NoAuthentication, object: nil)
+                            } else {
+                                print(error.localizedDescription)
+                                completion(isSuccess: false, object: JSON(error.localizedDescription))
+                            }
                         }
                 }
             }
@@ -168,7 +171,7 @@ class DressTimeService {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
             
-            Alamofire.request(.GET, path, parameters: nil, encoding: .JSON, headers: headers).responseJSON { response in
+            Alamofire.request(.GET, path, parameters: nil, encoding: .JSON, headers: headers).validate().responseJSON { response in
                 if response.result.isSuccess {
                     let jsonDic = JSON(response.result.value!)
                     completion(isSuccess: true, object: self.jsonToBrandClothe(jsonDic))
@@ -192,7 +195,7 @@ class DressTimeService {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
   
-            Alamofire.request(.POST, path, parameters: outfit.toDictionnary() as? [String : AnyObject], encoding: .JSON, headers: headers).responseJSON { response in
+            Alamofire.request(.POST, path, parameters: outfit.toDictionnary() as? [String : AnyObject], encoding: .JSON, headers: headers).validate().responseJSON { response in
                 if response.result.isSuccess {
                     completion(isSuccess: true)
                 } else {

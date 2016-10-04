@@ -27,7 +27,13 @@ class ProfilViewController: DTTableViewController {
     private var kTableHeaderHeight:CGFloat = 300.0
     
     @IBAction func onStyleTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("showStyle", sender: self)
+        //self.performSegueWithIdentifier("showStyle", sender: self)
+        let storyboard = UIStoryboard(name: "Register", bundle: nil)
+        if let initialViewController = storyboard.instantiateViewControllerWithIdentifier("SelectStyleViewController") as? SelectStyleViewController {
+            initialViewController.currentUserId = SharedData.sharedInstance.currentUserId
+            self.navigationController?.pushViewController(initialViewController, animated: true)
+        }
+        
     }
     
     @IBAction func onProfilPictureTapped(sender: AnyObject) {
@@ -46,6 +52,7 @@ class ProfilViewController: DTTableViewController {
         
         self.tableView.addGestureRecognizer(longPressedGesture)
         self.tableView.registerNib(UINib(nibName: "TypeCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
+        
         headerView = self.tableView.tableHeaderView
         self.tableView.tableHeaderView = nil
         self.tableView.addSubview(headerView)
@@ -93,8 +100,10 @@ class ProfilViewController: DTTableViewController {
         
         
         //Remove Title of Back button
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("PROFILE", comment: ""), style: .Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Wardrobe", comment: ""), style: .Plain, target: nil, action: nil)
         UIApplication.sharedApplication().statusBarHidden = false // for status bar hide
+        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         
     }
     
@@ -134,16 +143,17 @@ class ProfilViewController: DTTableViewController {
         if (segue.identifier == "DetailsClothes"){
             let targetVC = segue.destinationViewController as! DetailTypeViewController
             targetVC.typeClothe = [self.typeColtheSelected!]
+            targetVC.viewMode = ViewMode.Dressing
         } else if (segue.identifier == "AddClothe"){
             let navController = segue.destinationViewController as! UINavigationController
             let targetVC = navController.topViewController as! TypeViewController
             if let typeClothe = self.currentClotheOpenSelected {
                 targetVC.openItem(typeClothe)
             }
-        } else if (segue.identifier == "showStyle"){
+        } /*else if (segue.identifier == "showStyle"){
             let targetVC = segue.destinationViewController as! RegisterStyleViewController
             targetVC.currentUserId = SharedData.sharedInstance.currentUserId
-        }
+        } */
         
     }
     

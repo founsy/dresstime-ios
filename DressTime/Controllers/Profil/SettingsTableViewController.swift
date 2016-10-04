@@ -10,29 +10,44 @@ import Foundation
 import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
+import Mixpanel
 
 protocol SettingsTableViewControllerDelegate {
     func onSexeChange(sexe: String)
+    func settingsTableViewLogout(isLogout: Bool)
 }
 
 class SettingsTableViewController: UITableViewController {
     
     var user: Profil?
     var delegate: SettingsTableViewControllerDelegate?
+    var menSelected = true
     
+    private var confirmationView: ConfirmSave?
     
     @IBOutlet weak var womenButton: UIButton!
     @IBOutlet weak var menButton: UIButton!
     
+    @IBOutlet weak var titleItem: UINavigationItem!
     @IBOutlet weak var profilImage: UIImageView!
-    @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var emailField: UITextField!
+    @IBOutlet weak var firstName: DTTextField!
+    @IBOutlet weak var nameField: DTTextField!
+    @IBOutlet weak var emailField: DTTextField!
     @IBOutlet weak var temperatureField: UISegmentedControl!
     @IBOutlet weak var currentPasswordField: UITextField!
     @IBOutlet weak var newPasswordField: UITextField!
     @IBOutlet weak var fbLoginButton: FBSDKLoginButton!
+    @IBOutlet weak var morningNotification: UIButton!
+    @IBOutlet weak var noonNotification: UIButton!
+    @IBOutlet weak var eveningNotification: UIButton!
+    @IBOutlet weak var notificationStackView: UIStackView!
+    @IBOutlet weak var leftNotificationView: UIView!
+    @IBOutlet weak var rightNotificationView: UIView!
     
-    var menSelected = true
+    
+    @IBAction func onLogoutTapped(sender: AnyObject) {
+        self.logout()
+    }
     
     @IBAction func unlinkTapped(sender: AnyObject) {
         let loginBL = LoginBL()
@@ -41,15 +56,80 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
-    @IBAction func tutorialChanged(sender: UISwitch) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setValue(sender.on, forKey: "alreadyLaunch")
+    @IBAction func onDoneTapped(sender: AnyObject) {
+        
+        if let userSaving = self.user {
+            if (!isValidData()){
+                ActivityLoader.shared.hideProgressView()
+                let alert = UIAlertController(title: NSLocalizedString("settingsErrTitle", comment: ""), message: NSLocalizedString("settingsErrMessage", comment: ""), preferredStyle: .Alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("settingsErrButton", comment: ""), style: .Default) { _ in })
+                self.presentViewController(alert, animated: true){}
+                return
+            }
+            
+            if (self.menSelected){
+                userSaving.gender = "M"
+            } else {
+                userSaving.gender = "F"
+            }
+            //Update SharedData
+            SharedData.sharedInstance.sexe = userSaving.gender
+            
+            if (self.temperatureField.selectedSegmentIndex == 0){
+                userSaving.temp_unit = "C"
+            } else {
+                userSaving.temp_unit = "F"
+            }
+            
+            if let email = self.emailField.text {
+                userSaving.email = email
+            }
+            
+            if let name = self.nameField.text {
+                userSaving.lastName = name
+                userSaving.name = name
+            }
+            
+            if let firstName = self.firstName.text {
+                userSaving.firstName = firstName
+            }
+            
+            if let notification = self.getNotification() {
+                userSaving.notification = notification
+            }
+            
+            UserService().UpdateUser(userSaving, completion: { (isSuccess, object) -> Void in
+                let profilDal = ProfilsDAL()
+                profilDal.update(userSaving)
+                let mixpanel = Mixpanel.sharedInstance()
+                mixpanel.people.set(["$name" : userSaving.lastName!, "firstname": userSaving.firstName!, "$email" : userSaving.email!, "Notification" : userSaving.notification!])
+                
+            })
+            
+            self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
+            
+            UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: { () -> Void in
+                self.confirmationView?.alpha = 1
+                self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
+                }, completion: { (isFinish) -> Void in
+                    UIView.animateWithDuration(0.2, animations: { () -> Void in
+                        self.confirmationView?.alpha = 0
+                        self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
+                        }, completion: { (finish) -> Void in
+                            self.navigationController?.popViewControllerAnimated(true)
+                    })
+            })
+        }
     }
     
     @IBAction func onGenderSelected(sender: AnyObject) {
         self.menSelected = !self.menSelected
-        createBorderButton(menButton, isSelected: self.menSelected)
-        createBorderButton(womenButton, isSelected: !self.menSelected)
+        if (self.menSelected) {
+            menButton.setTitle("I'm a Men".uppercaseString, forState: .Normal)
+        } else {
+            menButton.setTitle("I'm a women".uppercaseString, forState: .Normal)
+        }
+        
         if let del = delegate {
             var sexe = "F"
             if (self.menSelected){
@@ -59,13 +139,23 @@ class SettingsTableViewController: UITableViewController {
         }
     }
     
+    @IBAction func onNotificationTapped(sender: AnyObject) {
+        morningNotification.selected = (sender === morningNotification)
+        noonNotification.selected = (sender === noonNotification)
+        eveningNotification.selected = (sender === eveningNotification)
+        setStyleButton(morningNotification, isSelected: morningNotification.selected)
+        setStyleButton(noonNotification, isSelected: noonNotification.selected)
+        setStyleButton(eveningNotification, isSelected: eveningNotification.selected)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let profilDal = ProfilsDAL()
         
         if let user = profilDal.fetch(SharedData.sharedInstance.currentUserId!) {
             self.user = user
-            nameField.text = user.name
+            firstName.text = user.firstName
+            nameField.text = user.lastName
             emailField.text = user.email
             if (user.temp_unit == "C"){
                 temperatureField.selectedSegmentIndex = 0
@@ -74,10 +164,10 @@ class SettingsTableViewController: UITableViewController {
             }
             self.menSelected = (user.gender == "M")
         }
-        currentPasswordField.secureTextEntry = true
         currentPasswordField.text = "passwordDressTime"
-        currentPasswordField.clearsOnBeginEditing = true
-        newPasswordField.secureTextEntry = true
+        setNotification(user?.notification)
+        
+        //currentPasswordField.clearsOnBeginEditing = true
         
         nameField.delegate = self
         emailField.delegate = self
@@ -92,16 +182,20 @@ class SettingsTableViewController: UITableViewController {
         profilImage.layer.cornerRadius = 36.0
         profilImage.clipsToBounds = true
         
-        if (SharedData.sharedInstance.currentUserId!.lowercaseString == "alexandre"){
-            profilImage.image = UIImage(named: "profileAlexandre")
-        } else if (SharedData.sharedInstance.currentUserId!.lowercaseString == "juliette"){
-            profilImage.image = UIImage(named: "profileJuliette")
+        morningNotification.layer.cornerRadius = 8.0
+        noonNotification.layer.cornerRadius = 8.0
+        eveningNotification.layer.cornerRadius = 8.0
+        createBorderNotification(leftNotificationView, roudingsCorners: [UIRectCorner.TopLeft, UIRectCorner.BottomLeft])
+        createBorderNotification(rightNotificationView, roudingsCorners: [UIRectCorner.TopRight, UIRectCorner.BottomRight])
+
+        setStyleButton(morningNotification, isSelected: morningNotification.selected)
+        setStyleButton(noonNotification, isSelected: noonNotification.selected)
+        setStyleButton(eveningNotification, isSelected: eveningNotification.selected)
+        
+        if let profil_image = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!)?.picture{
+            profilImage.image = UIImage(data: profil_image)
         } else {
-            if let profil_image = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!)?.picture{
-                profilImage.image = UIImage(data: profil_image)
-            } else {
-                profilImage.image = UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)")
-            }
+            profilImage.image = UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)")
         }
 
         fbLoginButton.delegate = self
@@ -110,49 +204,102 @@ class SettingsTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         //Remove Title of Back button
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Profile", style: .Plain, target: nil, action: nil)
-    }
-    
-    override func viewDidLayoutSubviews(){
-        applyStyleTextView(nameField)
-        applyStyleTextView(emailField)
-        applyStyleTextView(currentPasswordField)
-        applyStyleTextView(newPasswordField)
-        createBorderButton(menButton, isSelected: self.menSelected)
-        createBorderButton(womenButton, isSelected: !self.menSelected)
-
-    }
-    
-    private func applyStyleTextView(textField: UITextField){
-        let bottomLine = CALayer()
-        bottomLine.frame = CGRectMake(0.0, textField.frame.height - 1, textField.frame.width, 1.0)
-        bottomLine.backgroundColor = UIColor.whiteColor().CGColor
-        textField.borderStyle = UITextBorderStyle.None
-        textField.layer.addSublayer(bottomLine)
-        textField.layer.masksToBounds = true
-    }
-    
-    private func createBorderButton(btn: UIButton, isSelected: Bool){
-        var height:CGFloat?
-        var color: UIColor?
-        if (isSelected){
-            height = 4.0
-            color = UIColor(red: 235/255, green: 175/255, blue: 73/255, alpha: 1.0)
-        } else {
-            height = 3.0
-            color = UIColor(red: 255, green: 255, blue: 255, alpha: 1.0)
-
-        }
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "Wardrobe", style: .Plain, target: nil, action: nil)
+        self.navigationController?.navigationBar.tintColor = UIColor.dressTimeRed()
+        titleItem.title = NSLocalizedString("Informations", comment: "Informations")
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.dressTimeRed()]
         
-        let lineView = UIView(frame: CGRectMake(0, btn.frame.size.height - height!, btn.frame.size.width, height!))
-        lineView.backgroundColor = color!
-        for subView in btn.subviews {
-            if (!subView.isKindOfClass(UILabel)){
-                subView.removeFromSuperview()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.confirmationView = NSBundle.mainBundle().loadNibNamed("ConfirmSave", owner: self, options: nil)[0] as? ConfirmSave
+        self.confirmationView!.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 50, UIScreen.mainScreen().bounds.size.height/2.0 - 50, 100, 100)
+        self.confirmationView!.alpha = 0
+        self.confirmationView!.layer.cornerRadius = 50
+        
+        self.view.addSubview(self.confirmationView!)
+    }
+    
+    
+    private func createBorderNotification(view: UIView, roudingsCorners: UIRectCorner) {
+        let maskPath = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: roudingsCorners, cornerRadii: CGSize(width: 8.0, height: 8.0))
+        let maskLayer = CAShapeLayer()
+        maskLayer.frame = view.bounds
+        maskLayer.path = maskPath.CGPath
+        view.layer.mask = maskLayer
+    }
+    
+    private func isValidData() -> Bool {
+        return !((self.emailField.text == nil || self.emailField.text!.isEmpty) ||
+            (self.nameField.text == nil || self.nameField.text!.isEmpty) ||
+            (getNotification() == nil))
+        
+    }
+    
+    func logout() {
+        let profilDal = ProfilsDAL()
+        if let user = profilDal.fetch(SharedData.sharedInstance.currentUserId!) {
+            let loginBL = LoginBL()
+            if let token = user.access_token {
+                LoginService().Logout(token, completion: { (isSuccess, object) -> Void in
+                    loginBL.logoutWithSuccess(user)
+                    self.goToLogin()
+                })
+            } else {
+                loginBL.logoutWithSuccess(user)
+                self.goToLogin()
+            }
+            
+        }
+    }
+    
+    private func goToLogin(){
+        dispatch_async(dispatch_get_main_queue(),  { () -> Void in
+            let rootController:UIViewController = UIStoryboard(name: "Register", bundle: NSBundle.mainBundle()).instantiateViewControllerWithIdentifier("LoginNavigationController")
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            appDelegate.window!.makeKeyAndVisible()
+            appDelegate.window!.rootViewController = rootController
+            self.navigationController?.popToRootViewControllerAnimated(false)
+        })
+    }
+    
+    private func setStyleButton(button: UIButton, isSelected: Bool){
+        if (isSelected) {
+            button.backgroundColor = UIColor.dressTimeRed()
+            button.tintColor = UIColor.whiteColor()
+            button.layer.borderColor = UIColor.dressTimeRed().CGColor
+            button.layer.borderWidth = 0
+        } else {
+            button.backgroundColor = UIColor.clearColor()
+            button.tintColor = UIColor.dressTimeRed()
+            button.layer.borderWidth = 1.0
+            button.layer.borderColor = UIColor.dressTimeRed().CGColor
+        }
+    }
+    
+    private func getNotification() -> String? {
+        if (morningNotification.selected){
+            return Notification.morning.rawValue
+        } else if (noonNotification.selected){
+            return Notification.noon.rawValue
+        } else if (eveningNotification.selected){
+            return Notification.evening.rawValue
+        } else {
+            return nil
+        }
+    }
+    
+    private func setNotification(notification: String?) {
+        if let notif = notification {
+            if (Notification.morning.rawValue == notif){
+                morningNotification.selected = true
+            } else if (Notification.noon.rawValue == notif){
+                noonNotification.selected = true
+            } else if (Notification.evening.rawValue == notif){
+                eveningNotification.selected = true
             }
         }
-        
-        btn.addSubview(lineView)
     }
 }
 

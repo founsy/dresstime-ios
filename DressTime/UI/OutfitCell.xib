@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
@@ -14,11 +14,11 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tti-gJ-ufU">
-                        <rect key="frame" x="0.0" y="68" width="185" height="275"/>
+                        <rect key="frame" x="0.0" y="60" width="185" height="283"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LgZ-gp-cgd">
-                        <rect key="frame" x="65" y="8" width="55" height="55"/>
+                        <rect key="frame" x="65" y="0.0" width="55" height="55"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="checkSelected" translatesAutoresizingMaskIntoConstraints="NO" id="iGO-hY-2CP">
                                 <rect key="frame" x="11" y="9" width="32" height="24"/>
@@ -54,7 +54,7 @@
                 <constraint firstAttribute="bottom" secondItem="tti-gJ-ufU" secondAttribute="bottom" constant="2" id="0GU-PG-1DY"/>
                 <constraint firstAttribute="trailing" secondItem="tti-gJ-ufU" secondAttribute="trailing" id="6Qi-85-zdp"/>
                 <constraint firstItem="tti-gJ-ufU" firstAttribute="leading" secondItem="ywa-0s-aG6" secondAttribute="leading" id="QQI-NJ-abH"/>
-                <constraint firstItem="LgZ-gp-cgd" firstAttribute="top" secondItem="ywa-0s-aG6" secondAttribute="top" constant="8" id="ba4-BU-MVB"/>
+                <constraint firstItem="LgZ-gp-cgd" firstAttribute="top" secondItem="ywa-0s-aG6" secondAttribute="top" id="ba4-BU-MVB"/>
                 <constraint firstItem="tti-gJ-ufU" firstAttribute="top" secondItem="LgZ-gp-cgd" secondAttribute="bottom" constant="5" id="jWU-1K-TyR"/>
                 <constraint firstItem="LgZ-gp-cgd" firstAttribute="centerX" secondItem="ywa-0s-aG6" secondAttribute="centerX" id="ltD-AV-NB9"/>
             </constraints>

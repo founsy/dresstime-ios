@@ -43,7 +43,6 @@ class ClotheCalendarCell : UITableViewCell {
         var mode = UIViewContentMode.Top
         if (rect.size.height != self.containerView.frame.size.height){
             img = img.imageResize(CGSizeMake(rect.size.width, rect.size.height))
-            //img = img.resize(CGSizeMake(rect.size.width, rect.size.height))!
         } else {
             mode = UIViewContentMode.ScaleToFill
         }
@@ -63,8 +62,8 @@ class ClotheCalendarCell : UITableViewCell {
         view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
         view.layer.masksToBounds = true
         view.accessibilityIdentifier = type
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(ClotheCalendarCell.someAction(_:)))
-        view.addGestureRecognizer(gesture)
+        //let gesture = UITapGestureRecognizer(target: self, action: #selector(ClotheCalendarCell.someAction(_:)))
+        //view.addGestureRecognizer(gesture)
         
         let img = UIImage(named: imageNamed)!
         let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))

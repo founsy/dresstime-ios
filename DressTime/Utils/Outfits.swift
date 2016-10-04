@@ -88,6 +88,9 @@ public class Outfit: NSObject{
     }
     
     func getOrder(type: String) -> Int {
+        if type.isEmpty {
+            return 0
+        }
         switch ClotheType(rawValue: type)! {
         case ClotheType.maille :
             return ClotheOrder.maille.rawValue

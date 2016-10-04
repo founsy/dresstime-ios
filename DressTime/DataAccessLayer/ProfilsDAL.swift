@@ -26,21 +26,19 @@ class ProfilsDAL {
         
         // Set the predicate on the fetch request
         fetchRequest.predicate = predicate
-        
+
         do {
-            if let list = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Profil] {
-                if (list.count > 0){
-                    return list[0]
-                } else {
-                    return nil
-                }
+            let list = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Profil]
+            
+            if (list != nil && list!.count > 0){
+                return list![0]
+            } else {
+                return nil
             }
-        } catch let error as NSError {
-            // failure
-            print("Fetch failed: \(error.localizedDescription)")
+        } catch let fetchError as NSError {
+            print("getGalleryForItem error: \(fetchError.localizedDescription)")
+            return nil
         }
-        
-        return nil
     }
     
     func fetchLastUserConnected() -> Profil?{
@@ -83,7 +81,7 @@ class ProfilsDAL {
         return nil
     }
     
-    func save(userid: String, email: String, access_token: String, refresh_token: String, expire_in: Int, name: String, gender: String, temp_unit: String) -> Profil{
+    /*func save(userid: String, email: String, firstName: String, lastName: String, access_token: String, refresh_token: String, expire_in: Int, name: String, gender: String, temp_unit: String) -> Profil{
         
         let entityDescription = NSEntityDescription.entityForName("Profil", inManagedObjectContext: managedObjectContext);
         let profil = Profil(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext);
@@ -96,6 +94,8 @@ class ProfilsDAL {
         profil.gender = gender
         profil.temp_unit = temp_unit
         profil.email = email
+        profil.firstName = firstName
+        profil.lastName = lastName
         
         do {
             try managedObjectContext.save()
@@ -105,9 +105,9 @@ class ProfilsDAL {
         }
         
         return profil
-    }
+    } */
     
-    func save(user: User) -> Profil {
+    func save(user: User) -> Profil? {
         let entityDescription = NSEntityDescription.entityForName("Profil", inManagedObjectContext: managedObjectContext);
         let profil = Profil(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext);
         
@@ -119,23 +119,26 @@ class ProfilsDAL {
         profil.gender = user.gender
         profil.temp_unit = user.tempUnit
         profil.email = user.email
-        profil.atWorkStyle = user.atWorkStyle
-        profil.relaxStyle = user.relaxStyle
-        profil.onPartyStyle = user.onPartyStyle
         profil.fb_id = user.fb_id
         profil.fb_token = user.fb_token
         profil.picture_url = user.picture
         profil.picture = user.picture_data
+        profil.firstName = user.firstName
+        profil.lastName = user.lastName
+        profil.styles = user.styles
+        profil.notification = user.notification
         
         do {
             try managedObjectContext.save()
             NSLog("Contact Saved");
+            SharedData.sharedInstance.currentUserId = profil.userid
+            SharedData.sharedInstance.sexe = profil.gender
+            
+            return profil
         } catch let error as NSError {
             NSLog(error.localizedFailureReason!);
+            return nil
         }
-        
-        return profil
-        
     }
     
     func update(profil: Profil) -> Profil? {
@@ -149,9 +152,12 @@ class ProfilsDAL {
             oldProfil.gender = profil.gender
             oldProfil.temp_unit = profil.temp_unit
             oldProfil.email = profil.email
-            oldProfil.atWorkStyle = profil.atWorkStyle
-            oldProfil.relaxStyle = profil.relaxStyle
-            oldProfil.onPartyStyle = profil.onPartyStyle
+            oldProfil.styles = profil.styles
+            oldProfil.firstName = profil.firstName
+            oldProfil.lastName = profil.lastName
+            oldProfil.styles = profil.styles
+            oldProfil.notification = profil.notification
+            oldProfil.picture = profil.picture
             
             do {
                 try managedObjectContext.save()
@@ -164,5 +170,50 @@ class ProfilsDAL {
         } else {
             return nil
         }
+    }
+    
+    func update(user: User) -> Profil? {
+        if let oldProfil = self.fetch(SharedData.sharedInstance.currentUserId!) {
+            
+            oldProfil.access_token = user.access_token
+            oldProfil.refresh_token = user.refresh_token
+            oldProfil.expire_in = user.expire_in
+            oldProfil.name = user.displayName
+            oldProfil.gender = user.gender
+            oldProfil.temp_unit = user.tempUnit
+            oldProfil.email = user.email
+            oldProfil.styles = user.styles
+            oldProfil.firstName = user.firstName
+            oldProfil.lastName = user.lastName
+            oldProfil.styles = user.styles
+            oldProfil.notification = user.notification
+            
+            do {
+                try managedObjectContext.save()
+                return oldProfil
+            } catch let error as NSError {
+                print(error)
+                return nil
+            }
+            
+        } else {
+            return nil
+        }
+    }
+    
+    private func getStyles(profil: Profil) -> String?{
+        var styles = [String]()
+        if let _ = profil.atWorkStyle {
+            styles.append(profil.atWorkStyle!)
+            if (!styles.contains(profil.onPartyStyle!)){
+                styles.append(profil.onPartyStyle!)
+            }
+            if (!styles.contains(profil.relaxStyle!)){
+                styles.append(profil.relaxStyle!)
+            }
+            
+            return styles.joinWithSeparator(",")
+        }
+        return nil
     }
 }

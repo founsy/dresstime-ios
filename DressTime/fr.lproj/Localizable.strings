@@ -6,51 +6,42 @@
  Copyright © 2015 Fab. All rights reserved.
  */
 
-/* LoginViewController */
-"loginName" = "Nom";
-"loginEmail" = "Email";
-"loginPassword" = "Mot de passe";
-"loginOr" = "OU";
-"loginTitle" = "Bonjour :)";
-"loginLoginButton" = "Connexion";
-"loginSignUpButton" = "Rejoignez-nous";
-"loginSignUpHeaderButton" = "S'incrire";
-"loginLoginHeaderButton" = "Connexion";
-"loginErrTitle" = "Raté!";
-"loginErrMessage" = "Erreur pendant l'identification";
-"loginErrButton" = "Okay.";
-
 /* Register Pages */
-"registerEmailYourEmail" = "Ton email";
-"registerEmailOr" = "ou";
-"registerEmailPlaceholder" = "barack.obama@usa.gov";
-"registerPasswordYourPassword" = "Ton mot de passe";
-"registerPasswordPlaceholder" = "MonPasswordSecurisé";
-"registerPasswordCreateAnAccount" = "Créer un compte";
 "registerSexeWomen" = "Je suis une jolie fille";
 "registerSexeMen" = "Je suis un joli garçon";
-
-"registerStyleSelectStyle" = "1 - Sélectionne un style";
-"registerStyleFashionStyle" = "fashion";
-"registerStyleBusinessStyle" = "business";
-"registerStyleSportwearStyle" = "sportwear";
-"registerStyleCasualStyle" = "casual chic";
-"registerStyleSelectPeriod" = "2 - Sélectionne une periode";
-"registerStyleWorkPeriod" = "pour travailler";
-"registerStylePartyPeriod" = "en soirée";
-"registerStyleChillPeriod" = "for chill";
-"registerStyleTitle" = "MES STYLES";
-"registerStyleTutorialLabel" = "Pour être précis, sélectionne tes propres styles.";
-"registerStyleTutorialButton" = "C'est parti!";
-"registerStyleValidateModificationBtn" = "Valider";
-"registerStyleSeeMyNewDressingBtn" = "Voir mon nouveau dressing";
-"registerStyleErrTitle" = "Erreur";
-"registerStyleErrMessage" = "Sélectionnes ton style pour chaque moment de la journée!";
-"registerStyleErrButton" = "Okay";
 
 "registerErrorCreateAccountTitle" = "Erreur!";
 "registerErrorCreateAccountMessge" = "Erreur durant la création du compte. Merci de réessayer plus-tard!";
 "registerErrorCreateAccountButton" = "Okay.";
+"registerErrorCreateAccounEmailDuplicatetTitle" = "Email error"; /* Need to translate */
+"registerErrorCreateAccountEmailDuplicateMessage" = "Email déjà utilisé! Essaye de te logger!"; /* Need to translate */
+"registerErrorCreateAccountEmailDuplicateButton" = "Ok"; /* Need to translate */
+"registerErrorCreateAccountStyleReguiredTitle" = "Sélectionne un style"; /* Need to translate */
+"registerErrorCreateAccountStyleReguiredMessage" = "Sélectionne au moins un style :)"; /* Need to translate */
+"registerErrorCreateAccountStyleReguiredButton" = "Ok"; /* Need to translate */
+"registerSignInButton" = "Se connecter"; /* Need to translate */
+"registerCreateAccountButton" = "Créer un compte"; /* Need to translate */
+
+/* Login Page */
+"loginEmailOr" = "Ou"; /* Need to translate */
+"loginLetsGoButton" = "C'est parti"; /* Need to translate */
+"loginErrTitle" = "Erreur!";
+"loginErrMessage" = "Erreur de connexion";
+"loginErrButton" = "Okay.";
+
+/* SignUp page */
+"signupNextButton" = "suivant"; /* Need to translate */
+"signupCreateNameLabel" = "Le futur dressing appartiendra à..."; /* Need to translate */
+"signupCreateEmailLabel" = "Tu recevras de super suggestions..."; /* Need to translate */
+"signupCreatePasswordLabel" = "Et enfin pour sécuriser ton dressing..."; /* Need to translate */
+
+/* Style Selection */
+"styleSelectionValidationButton" = "Oui, c'est mon style !"; /* Need to translate */
+"styleSelectionStyleLabel" = "Selection tes styles"; /* Need to translate */
+"styleSelectionFashionLabel" = "fashion"; /* Need to translate */
+"styleSelectionBusinessLabel" = "business"; /* Need to translate */
+"styleSelectionSportwearLabel" = "sportwear"; /* Need to translate */
+"styleSelectionCasualChicLabel" = "casual chic"; /* Need to translate */
 
 /* General translation */
 "maille" = "mailles";
@@ -66,7 +57,7 @@
 
 /* HomeViewController */
 "homeLocErrTitle" = "Raté";
-"homeLocErrMessage" = "Il faut que tu actives la localisation via Settings > Localisation > DressTime : Activité";
+"homeLocErrMessage" = "Il faut que tu actives la localisation via Réglages > Localisation > DressTime : Activité";
 "homeLocErrButton" = "Okay.";
 "Moment_Relax" = "relax";
 "Moment_Work" = "travail";

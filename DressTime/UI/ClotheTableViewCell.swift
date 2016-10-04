@@ -36,18 +36,23 @@ class ClotheTableViewCell: UITableViewCell{
     }
     var viewMode: ViewMode? {
         didSet {
-            if let mode = self.viewMode where mode == ViewMode.OutfitView {
+            if let mode = self.viewMode where mode == ViewMode.OutfitView || mode == ViewMode.Dressing {
                 let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ClotheTableViewCell.finishTapped(_:)))
                 self.clotheImageView.addGestureRecognizer(tapGestureRecognizer)
                 
                 let tapActionGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ClotheTableViewCell.finishTapped(_:)))
                 self.actionView.addGestureRecognizer(tapActionGestureRecognizer)
                 
+                let panGestureRecognizer = UIPanGestureRecognizer(target: self , action: #selector(ClotheTableViewCell.beingDragged(_:)))
+                panGestureRecognizer.delegate = self
+                self.mouvingCard.addGestureRecognizer(panGestureRecognizer)
+                
                 selectButton.hidden = true
             } else if let mode = self.viewMode where mode == ViewMode.SelectClothe {
                 selectButton.hidden = false
-            } else {
-                selectButton.hidden = true
+                let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ClotheTableViewCell.detailTapped(_:)))
+                self.clotheImageView.addGestureRecognizer(tapGestureRecognizer)
+                
             }
         }
     }
@@ -145,9 +150,6 @@ class ClotheTableViewCell: UITableViewCell{
         self.setupView()
         
         ACTION_MARGIN = Float(UIScreen.mainScreen().bounds.width) * (1.0/3.0)
-        let panGestureRecognizer = UIPanGestureRecognizer(target: self , action: #selector(ClotheTableViewCell.beingDragged(_:)))
-        panGestureRecognizer.delegate = self
-        self.mouvingCard.addGestureRecognizer(panGestureRecognizer)
         
         backgroundTaskIdentifier = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({
             UIApplication.sharedApplication().endBackgroundTask(self.backgroundTaskIdentifier!)
@@ -177,6 +179,10 @@ class ClotheTableViewCell: UITableViewCell{
         }
     }
     
+    func detailTapped(gestureRecognizer: UITapGestureRecognizer) -> Void {
+        self.delegate?.detailItem!(self.clothe!)
+    }
+    
     func finishTapped(gestureRecognizer: UITapGestureRecognizer) -> Void {
         self.isEditingMode = !self.isEditingMode
     }
@@ -187,7 +193,7 @@ class ClotheTableViewCell: UITableViewCell{
                 timer?.invalidate()
             }
             xFromCenter = Float(gestureRecognizer.translationInView(self.mouvingCard).x)
-            
+                        
             switch gestureRecognizer.state {
             case UIGestureRecognizerState.Began:
                 self.originPoint = self.mouvingCard.center

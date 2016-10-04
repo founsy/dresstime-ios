@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 
 class SharedData {
     static let sharedInstance = SharedData()
@@ -18,6 +19,7 @@ class SharedData {
     var outfitList: [Outfit]?
     var weatherSentence: String?
     var currentLocation: CLLocation?
+    var image: UIImage?
     
     var weatherCode: String?
     var lowTemp: String?
