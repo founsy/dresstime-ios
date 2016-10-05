@@ -1,24 +1,24 @@
 PODS:
-  - Alamofire (3.4.1)
+  - Alamofire (4.0.1)
   - Appsee (2.2)
-  - Bolts (1.7.0):
-    - Bolts/AppLinks (= 1.7.0)
-    - Bolts/Tasks (= 1.7.0)
-  - Bolts/AppLinks (1.7.0):
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
-  - Bolts/Tasks (1.7.0)
-  - Crashlytics (3.7.1):
+  - Bolts/Tasks (1.8.4)
+  - Crashlytics (3.8.2):
     - Fabric (~> 1.6.3)
-  - Fabric (1.6.7)
-  - FBSDKCoreKit (4.12.0):
+  - Fabric (1.6.9)
+  - FBSDKCoreKit (4.16.0):
     - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.12.0):
+  - FBSDKLoginKit (4.16.0):
     - FBSDKCoreKit
-  - MapleBacon (2.0.8)
-  - Mixpanel (2.9.9):
-    - Mixpanel/Mixpanel (= 2.9.9)
-  - Mixpanel/Mixpanel (2.9.9)
-  - SwiftyJSON (2.3.2)
+  - MapleBacon (3.0.0)
+  - Mixpanel (3.0.4):
+    - Mixpanel/Mixpanel (= 3.0.4)
+  - Mixpanel/Mixpanel (3.0.4)
+  - SwiftyJSON (3.1.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -29,29 +29,20 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - MapleBacon
   - Mixpanel
-  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
-
-EXTERNAL SOURCES:
-  SwiftyJSON:
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
-
-CHECKOUT OPTIONS:
-  SwiftyJSON:
-    :commit: 73670b94292b8d8496c398a973f56ac67789ba9f
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+  - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
   Appsee: c95173e65acaab0ffc8a082c70633c9f5f45d5f0
-  Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
-  Crashlytics: 3cdd4c9655be68032a0cf0379e0fb5ef6af22cad
-  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
-  FBSDKCoreKit: 6e56d5a2a64a755ad4efb5dbeee8f82fb1b99775
-  FBSDKLoginKit: 03f68a8d48c2c8bb81d7eb8097973d483543e1f6
-  MapleBacon: 32e3590e1730485b93f450283ff242f9444efc12
-  Mixpanel: 818d1940c2d9402453b349545022a86968097f57
-  SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
+  Fabric: bc5bec42cef4bcf1ee3ce0e218fc518e4b44dfbb
+  FBSDKCoreKit: 7a6baaed4a2b2a244ba253346713bdbc74df135b
+  FBSDKLoginKit: 9a514a55a7d05190f64d4ef09502737588b5b561
+  MapleBacon: afb48c2ab4133e19e3c380a01d3b3cfc3ed2baf2
+  Mixpanel: 4a2330c26556109d2f42b01e36a05eb9e2caf25e
+  SwiftyJSON: 29b9f2a64f118c07e691667c2ba1efe536acfe0b
 
-PODFILE CHECKSUM: 54b44d16bbe51d1fa6381c00b976579e1fd56145
+PODFILE CHECKSUM: 07670be6bbdd01af8641768613db44236862f1e3
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.1.0.rc.2

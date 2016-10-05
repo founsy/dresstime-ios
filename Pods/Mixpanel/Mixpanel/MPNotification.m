@@ -1,7 +1,3 @@
-#if ! __has_feature(objc_arc)
-#error This file must be compiled with ARC. Either turn on ARC for the project or use -fobjc-arc flag on this file.
-#endif
-
 #import "MPLogger.h"
 #import "MPNotification.h"
 
@@ -13,49 +9,49 @@ NSString *const MPNotificationTypeTakeover = @"takeover";
 + (MPNotification *)notificationWithJSONObject:(NSDictionary *)object
 {
     if (object == nil) {
-        MixpanelError(@"notif json object should not be nil");
+        MPLogError(@"notif json object should not be nil");
         return nil;
     }
 
     NSNumber *ID = object[@"id"];
-    if (!([ID isKindOfClass:[NSNumber class]] && [ID integerValue] > 0)) {
-        MixpanelError(@"invalid notif id: %@", ID);
+    if (!([ID isKindOfClass:[NSNumber class]] && ID.integerValue > 0)) {
+        MPLogError(@"invalid notif id: %@", ID);
         return nil;
     }
 
     NSNumber *messageID = object[@"message_id"];
-    if (!([messageID isKindOfClass:[NSNumber class]] && [messageID integerValue] > 0)) {
-        MixpanelError(@"invalid notif message id: %@", messageID);
+    if (!([messageID isKindOfClass:[NSNumber class]] && messageID.integerValue > 0)) {
+        MPLogError(@"invalid notif message id: %@", messageID);
         return nil;
     }
 
     NSString *type = object[@"type"];
     if (![type isKindOfClass:[NSString class]]) {
-        MixpanelError(@"invalid notif type: %@", type);
+        MPLogError(@"invalid notif type: %@", type);
         return nil;
     }
     
     NSString *style = object[@"style"];
     if (![style isKindOfClass:[NSString class]]) {
-        MixpanelError(@"invalid notif style: %@", style);
+        MPLogError(@"invalid notif style: %@", style);
         return nil;
     }
 
     NSString *title = object[@"title"];
     if (![title isKindOfClass:[NSString class]]) {
-        MixpanelError(@"invalid notif title: %@", title);
+        MPLogError(@"invalid notif title: %@", title);
         return nil;
     }
 
     NSString *body = object[@"body"];
     if (![body isKindOfClass:[NSString class]]) {
-        MixpanelError(@"invalid notif body: %@", body);
+        MPLogError(@"invalid notif body: %@", body);
         return nil;
     }
 
     NSString *callToAction = object[@"cta"];
     if (![callToAction isKindOfClass:[NSString class]]) {
-        MixpanelError(@"invalid notif cta: %@", callToAction);
+        MPLogError(@"invalid notif cta: %@", callToAction);
         return nil;
     }
 
@@ -63,13 +59,13 @@ NSString *const MPNotificationTypeTakeover = @"takeover";
     NSObject *URLString = object[@"cta_url"];
     if (URLString != nil && ![URLString isKindOfClass:[NSNull class]]) {
         if (![URLString isKindOfClass:[NSString class]] || [(NSString *)URLString length] == 0) {
-            MixpanelError(@"invalid notif URL: %@", URLString);
+            MPLogError(@"invalid notif URL: %@", URLString);
             return nil;
         }
 
         callToActionURL = [NSURL URLWithString:(NSString *)URLString];
         if (callToActionURL == nil) {
-            MixpanelError(@"invalid notif URL: %@", URLString);
+            MPLogError(@"invalid notif URL: %@", URLString);
             return nil;
         }
     }
@@ -78,14 +74,14 @@ NSString *const MPNotificationTypeTakeover = @"takeover";
     NSString *imageURLString = object[@"image_url"];
     if (imageURLString != nil && ![imageURLString isKindOfClass:[NSNull class]]) {
         if (![imageURLString isKindOfClass:[NSString class]]) {
-            MixpanelError(@"invalid notif image URL: %@", imageURLString);
+            MPLogError(@"invalid notif image URL: %@", imageURLString);
             return nil;
         }
 
-        NSString *escapedUrl = [imageURLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-        imageURL = [NSURL URLWithString:escapedUrl];
+        NSString *escapedURLString = [imageURLString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+        imageURL = [NSURL URLWithString:escapedURLString];
         if (imageURL == nil) {
-            MixpanelError(@"invalid notif image URL: %@", imageURLString);
+            MPLogError(@"invalid notif image URL: %@", escapedURLString);
             return nil;
         }
 
@@ -95,18 +91,21 @@ NSString *const MPNotificationTypeTakeover = @"takeover";
             NSString *extension = [imagePath pathExtension];
             imagePath = [[imageName stringByAppendingString:@"@2x"] stringByAppendingPathExtension:extension];
         }
-
-        imagePath = [imagePath stringByAddingPercentEscapesUsingEncoding:NSStringEncodingConversionExternalRepresentation];
-        imageURL = [[NSURL alloc] initWithScheme:imageURL.scheme host:imageURL.host path:imagePath];
-
-        if (imageURL == nil) {
-            MixpanelError(@"invalid notif image URL: %@", imageURLString);
+        
+        NSURLComponents *imageURLComponents = [[NSURLComponents alloc] init];
+        imageURLComponents.scheme = imageURL.scheme;
+        imageURLComponents.host = imageURL.host;
+        imageURLComponents.path = imagePath;
+        
+        if (imageURLComponents.URL == nil) {
+            MPLogError(@"invalid notif image URL: %@", imageURLString);
             return nil;
         }
+        imageURL = imageURLComponents.URL;
     }
 
-    return [[MPNotification alloc] initWithID:[ID unsignedIntegerValue]
-                                    messageID:[messageID unsignedIntegerValue]
+    return [[MPNotification alloc] initWithID:ID.unsignedIntegerValue
+                                    messageID:messageID.unsignedIntegerValue
                                          type:type
                                         style:style
                                         title:title
@@ -127,18 +126,18 @@ NSString *const MPNotificationTypeTakeover = @"takeover";
                   imageURL:(NSURL *)imageURL
 {
     if (self = [super init]) {
-        if (!(title && title.length > 0)) {
-            MixpanelError(@"Notification title nil or empty: %@", title);
+        if (title.length == 0) {
+            MPLogError(@"Notification title nil or empty: %@", title);
             return nil;
         }
 
-        if (!(body && body.length > 0)) {
-            MixpanelError(@"Notification body nil or empty: %@", body);
+        if (body.length == 0) {
+            MPLogError(@"Notification body nil or empty: %@", body);
             return nil;
         }
 
         if (!([type isEqualToString:MPNotificationTypeTakeover] || [type isEqualToString:MPNotificationTypeMini])) {
-            MixpanelError(@"Invalid notification type: %@, must be %@ or %@", type, MPNotificationTypeMini, MPNotificationTypeTakeover);
+            MPLogError(@"Invalid notification type: %@, must be %@ or %@", type, MPNotificationTypeMini, MPNotificationTypeTakeover);
             return nil;
         }
 
@@ -163,7 +162,7 @@ NSString *const MPNotificationTypeTakeover = @"takeover";
         NSError *error = nil;
         NSData *imageData = [NSData dataWithContentsOfURL:_imageURL options:NSDataReadingMappedIfSafe error:&error];
         if (error || !imageData) {
-            MixpanelError(@"image failed to load from URL: %@", _imageURL);
+            MPLogError(@"image failed to load from URL: %@", _imageURL);
             return nil;
         }
         _image = imageData;
