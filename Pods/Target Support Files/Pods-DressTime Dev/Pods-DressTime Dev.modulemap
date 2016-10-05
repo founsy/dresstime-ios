@@ -1,0 +1,6 @@
+framework module Pods_DressTime_Dev {
+  umbrella header "Pods-DressTime Dev-umbrella.h"
+
+  export *
+  module * { export * }
+}
