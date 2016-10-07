@@ -13,7 +13,6 @@ import UIKit
 class DTTextField: UITextField, UITextFieldDelegate {
     
     // MARK: - Inspectable properties
-    
     @IBInspectable
     var leftImage: UIImage? {
         didSet{
@@ -109,6 +108,8 @@ class DTTextField: UITextField, UITextFieldDelegate {
                                                             attributes:[NSForegroundColorAttributeName: UIColor(red: 240/255, green: 81/255, blue: 85/255, alpha: 0.42)])
         }
         self.returnKeyType = UIReturnKeyType.next
+        self.autocorrectionType = .no
+        self.autocapitalizationType = .none
         self.delegate = self
     }
     

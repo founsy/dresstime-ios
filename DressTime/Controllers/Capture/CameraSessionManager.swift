@@ -66,17 +66,21 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
         
         sessionQueue = DispatchQueue(label: "CameraSessionController Session", attributes: [])
         
-        sessionQueue.async(execute: {
+            sessionQueue.async(execute: {
             self.session.beginConfiguration()
-            _ = self.addVideoInput()
-            self.addVideoOutput()
-            self.addStillImageOutput()
-            self.session.commitConfiguration()
-            self.startCamera()
-            DispatchQueue.main.sync(execute: {
-                self.cameraSessionReady()
+                _ = self.addVideoInput()
+                self.addVideoOutput()
+                self.addStillImageOutput()
+                #if (arch(i386) || arch(x86_64)) && os(iOS)
+                    print("Simulator Mode")
+                #else
+                    self.session.commitConfiguration()
+                #endif
+                self.startCamera()
+                DispatchQueue.main.sync(execute: {
+                    self.cameraSessionReady()
+                })
             })
-        })
     }
     
     deinit {

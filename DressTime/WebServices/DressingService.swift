@@ -14,7 +14,7 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 
 class DressingService {
-    let baseUrlDressing = "\(DressTimeService.baseURL)dressing/"//"http://api.drez.io/dressing/"
+    let baseUrlDressing = "\(DressTimeService.baseURL)dressing/"
     
     func UpdateClothe(_ clothe: Clothe, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if (Mock.isMockable()){
@@ -38,24 +38,20 @@ class DressingService {
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
             var path = baseUrlDressing + "clothes/image/\(clotheId)"
             
-            var request = NSMutableURLRequest(url:  URL(string: path)!)
-            request.httpMethod = "POST"
-            
+            var headers :[String : String]?
             if ((FBSDKAccessToken.current()) != nil && profil.fb_id != nil){
                 path = path + "?access_token=\(FBSDKAccessToken.current().tokenString)"
-                request = NSMutableURLRequest(url:  URL(string: path)!)
-                request.httpMethod = "POST"
             } else {
-                request.addValue("Bearer \(profil.access_token!)", forHTTPHeaderField: "Authorization")
+                headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
-        
-          /*  Photo.upload(data as NSData, filename: "\(clotheId).jpg", request: request)
-                .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
-                    print(totalBytesWritten)
-                }
-                .responseJSON { (response) in
-                    print(response)
-            } */
+            
+            let URL = try! URLRequest(url: path, method: .post, headers: headers)
+            
+            Alamofire.upload(multipartFormData: { (multipartFormData) in
+                multipartFormData.append(data, withName: "clothe_image", fileName: "\(clotheId).jpg", mimeType: "image/jpeg")
+                }, with: URL, encodingCompletion: { (result) in
+                    print(result)
+            })
         }
     }
     
@@ -302,25 +298,3 @@ class DressingService {
         completion(false, "")
     }
 }
-
-/*
-class Photo {
-    class func upload(_ image: NSData, filename: String, request: NSMutableURLRequest) -> Request {
-        let boundary = "NET-POST-boundary-\(arc4random())-\(arc4random())"
-        request.setValue("multipart/form-data;boundary="+boundary,
-                         forHTTPHeaderField: "Content-Type")
-        
-        let parameters = NSMutableData()
-        for s in ["\r\n--\(boundary)\r\n",
-                  "Content-Disposition: form-data; name=\"clothe_image\";" +
-                    " filename=\"\(filename)\"\r\n",
-                  "Content-Type: image/png\r\n\r\n"] {
-                    parameters.append(s.data(using: String.Encoding.utf8)!)
-        }
-        parameters.append(image as Data)
-        parameters.append("\r\n--\(boundary)--\r\n"
-            .data(using: String.Encoding.utf8)!)
-        
-        return Alamofire.upload(parameters, to: request) //Alamofire.upload(request, data: parameters)
-    }
-} */

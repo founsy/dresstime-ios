@@ -99,9 +99,9 @@ class SignUpViewController : UIViewController {
     
     override func viewDidLayoutSubviews(){
         if (!alreadyLayout){
-            self.nameView!.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: self.containerView.frame.height)
-            self.emailView!.frame = CGRect(x: UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: self.containerView.frame.height)
-            self.passwordView!.frame = CGRect(x: UIScreen.main.bounds.width*2, y: 0, width: UIScreen.main.bounds.width, height: self.containerView.frame.height)
+            self.nameView!.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 130.0)
+            self.emailView!.frame = CGRect(x: UIScreen.main.bounds.width, y: 0, width: UIScreen.main.bounds.width, height: 130.0)
+            self.passwordView!.frame = CGRect(x: UIScreen.main.bounds.width*2, y: 0, width: UIScreen.main.bounds.width, height: 130.0)
             alreadyLayout = true
         }
 
@@ -215,6 +215,7 @@ class SignUpViewController : UIViewController {
         
         self.emailField = createField("barackobama@whitehouse.gov", leftImage: UIImage(named: "LoginMailIcon"))
         self.emailField!.AllRadius = 8.0
+        self.emailField!.keyboardType = .emailAddress
         
         let stackView =  createStackView([self.emailField!])
 
