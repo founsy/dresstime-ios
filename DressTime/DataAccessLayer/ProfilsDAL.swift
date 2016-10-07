@@ -14,21 +14,21 @@ class ProfilsDAL {
     var managedObjectContext: NSManagedObjectContext
     
     init(){
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         self.managedObjectContext = appDelegate.managedObjectContext
     }
     
     
     
-    func fetch(userId: String) -> Profil? {
-        let fetchRequest = NSFetchRequest(entityName: "Profil")
+    func fetch(_ userId: String) -> Profil? {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Profil")
         let predicate = NSPredicate(format: "userid = %@", userId)
         
         // Set the predicate on the fetch request
         fetchRequest.predicate = predicate
 
         do {
-            let list = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Profil]
+            let list = try self.managedObjectContext.fetch(fetchRequest) as? [Profil]
             
             if (list != nil && list!.count > 0){
                 return list![0]
@@ -42,13 +42,13 @@ class ProfilsDAL {
     }
     
     func fetchLastUserConnected() -> Profil?{
-        let fetchRequest = NSFetchRequest(entityName: "Profil")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Profil")
         let predicate = NSPredicate(format: "access_token != \"\"")
         // Set the predicate on the fetch request
         fetchRequest.predicate = predicate
         
         do {
-            if let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Profil] {
+            if let fetchResults = try self.managedObjectContext.fetch(fetchRequest) as? [Profil] {
                 if (fetchResults.count > 0){
                     return fetchResults[0]
                 } else {
@@ -65,9 +65,9 @@ class ProfilsDAL {
     }
     
     func fetch() -> [Profil]? {
-        let fetchRequest = NSFetchRequest(entityName: "Profil")
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Profil")
         do {
-            if let fetchResults = try self.managedObjectContext.executeFetchRequest(fetchRequest) as? [Profil] {
+            if let fetchResults = try self.managedObjectContext.fetch(fetchRequest) as? [Profil] {
                 if (fetchResults.count > 0){
                     return fetchResults
                 } else {
@@ -107,14 +107,14 @@ class ProfilsDAL {
         return profil
     } */
     
-    func save(user: User) -> Profil? {
-        let entityDescription = NSEntityDescription.entityForName("Profil", inManagedObjectContext: managedObjectContext);
-        let profil = Profil(entity: entityDescription!, insertIntoManagedObjectContext: managedObjectContext);
+    func save(_ user: User) -> Profil? {
+        let entityDescription = NSEntityDescription.entity(forEntityName: "Profil", in: managedObjectContext);
+        let profil = Profil(entity: entityDescription!, insertInto: managedObjectContext);
         
         profil.userid = user.email
         profil.access_token = user.access_token
         profil.refresh_token = user.refresh_token
-        profil.expire_in = user.expire_in
+        profil.expire_in = user.expire_in as NSNumber?
         profil.name = user.displayName
         profil.gender = user.gender
         profil.temp_unit = user.tempUnit
@@ -141,7 +141,7 @@ class ProfilsDAL {
         }
     }
     
-    func update(profil: Profil) -> Profil? {
+    func update(_ profil: Profil) -> Profil? {
         if let oldProfil = self.fetch(profil.userid!) {
             
             oldProfil.userid = profil.userid
@@ -172,12 +172,12 @@ class ProfilsDAL {
         }
     }
     
-    func update(user: User) -> Profil? {
+    func update(_ user: User) -> Profil? {
         if let oldProfil = self.fetch(SharedData.sharedInstance.currentUserId!) {
             
             oldProfil.access_token = user.access_token
             oldProfil.refresh_token = user.refresh_token
-            oldProfil.expire_in = user.expire_in
+            oldProfil.expire_in = user.expire_in as NSNumber?
             oldProfil.name = user.displayName
             oldProfil.gender = user.gender
             oldProfil.temp_unit = user.tempUnit
@@ -201,7 +201,7 @@ class ProfilsDAL {
         }
     }
     
-    private func getStyles(profil: Profil) -> String?{
+    fileprivate func getStyles(_ profil: Profil) -> String?{
         var styles = [String]()
         if let _ = profil.atWorkStyle {
             styles.append(profil.atWorkStyle!)
@@ -212,7 +212,7 @@ class ProfilsDAL {
                 styles.append(profil.relaxStyle!)
             }
             
-            return styles.joinWithSeparator(",")
+            return styles.joined(separator: ",")
         }
         return nil
     }

@@ -28,16 +28,16 @@ struct Cluster<T : ClusteredType> {
 // http://users.eecs.northwestern.edu/~wkliao/Kmeans/
 
 func kmeans<T : ClusteredType>(
-        _ points: [T],
-        k: Int,
-        seed: UInt32,
-        distance: ((T, T) -> Float),
-        threshold: Float = 0.0001
+    _ points: [T],
+    k: Int,
+    seed: UInt32,
+    distance: ((T, T) -> Float),
+    threshold: Float = 0.0001
     ) -> [Cluster<T>] {
-            
+    
     let n = points.count
     assert(k <= n, "k cannot be larger than the total number of points")
-
+    
     var centroids = points.randomValues(k)
     var memberships = [Int](repeating: -1, count: n)
     var clusterSizes = [Int](repeating: 0, count: k)
@@ -100,7 +100,7 @@ private func randomNumberInRange(_ range: Range<Int>) -> Int {
 
 private extension Array {
     func randomValues(_ num: Int) -> [Element] {
-
+        
         var indices = [Int]()
         indices.reserveCapacity(num)
         let range: Range<Int> = 0..<self.count
@@ -111,7 +111,7 @@ private extension Array {
             } while indices.contains(random)
             indices.append(random)
         }
-
+        
         return indices.map { self[$0] }
     }
 }

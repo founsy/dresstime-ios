@@ -9,13 +9,13 @@
 import Foundation
 import SwiftyJSON
 
-enum Notification: String {
+enum NotificationTime: String {
     case morning = "morning"
     case noon = "noon"
     case evening = "evening"
 }
 
-public class User: NSObject {
+open class User: NSObject {
 
     var email: String
     var username: String
@@ -25,7 +25,7 @@ public class User: NSObject {
     var password: String?
     
     var styles: String?
-    var notification: String = Notification.morning.rawValue
+    var notification: String = NotificationTime.morning.rawValue
     
     var tempUnit: String = "C"
     var gender: String?
@@ -39,7 +39,7 @@ public class User: NSObject {
     var refresh_token: String?
     var expire_in: Int?
     
-    var picture_data: NSData?
+    var picture_data: Data?
     
     public init(json: JSON) {
         var json = json
@@ -60,14 +60,14 @@ public class User: NSObject {
         var stylesArr = [String]()
         if let workStyle = json["atWorkStyle"].string {
             stylesArr.append(workStyle)
-            if let partyStyle = json["onPartyStyle"].string where !stylesArr.contains(partyStyle) {
+            if let partyStyle = json["onPartyStyle"].string , !stylesArr.contains(partyStyle) {
                 stylesArr.append(partyStyle)
             }
             
-            if let relaxStyle = json["relaxStyle"].string where !stylesArr.contains(relaxStyle) {
+            if let relaxStyle = json["relaxStyle"].string , !stylesArr.contains(relaxStyle) {
                 stylesArr.append(relaxStyle)
             }
-            styles = stylesArr.joinWithSeparator(",")
+            styles = stylesArr.joined(separator: ",")
         }
         
         styles = json["styles"].stringValue

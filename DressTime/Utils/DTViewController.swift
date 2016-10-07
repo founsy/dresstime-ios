@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 import Mixpanel
 
-public class DTViewController: UIViewController {
+open class DTViewController: UIViewController {
     
     var classNameAnalytics = "UIDTViewController"
     var hideTabBar = false
     
-    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override public init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -23,14 +23,14 @@ public class DTViewController: UIViewController {
         super.init(coder: aDecoder)
     }
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         super.viewDidLoad()
         if (hideTabBar){
-            self.tabBarController?.tabBar.hidden = true
+            self.tabBarController?.tabBar.isHidden = true
         }
     }
     
-    override public func viewDidAppear(animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         OneSignal.defaultClient().sendTag("page", value: self.classNameAnalytics)
@@ -43,10 +43,10 @@ public class DTViewController: UIViewController {
         
     }
     
-    override public func viewWillDisappear(animated: Bool) {
+    override open func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if (hideTabBar){
-            self.tabBarController?.tabBar.hidden = false
+            self.tabBarController?.tabBar.isHidden = false
         }
     }
 

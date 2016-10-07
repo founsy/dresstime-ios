@@ -9,23 +9,23 @@
 import Foundation
 import UIKit
 
-public class DTNavigationController: UINavigationController {
+open class DTNavigationController: UINavigationController {
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         
         let bar:UINavigationBar! =  self.navigationBar
  
         bar.shadowImage = UIImage()
-        bar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        bar.tintColor = UIColor.whiteColor()
-        self.view.backgroundColor = UIColor.blackColor()
-        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        bar.setBackgroundImage(UIImage(), for: .default)
+        bar.tintColor = UIColor.white
+        self.view.backgroundColor = UIColor.black
+        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         
         //Remove Title of Back button
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    override public func viewDidAppear(animated: Bool) {
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         

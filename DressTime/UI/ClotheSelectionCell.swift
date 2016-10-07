@@ -12,12 +12,12 @@ import UIKit
 import MapleBacon
 
 protocol ClotheSelectionCellDelegate {
-    func onSelectedBrandClothe(myClothes: [ClotheModel])
-    func clotheSelectionCell(cell: ClotheSelectionCell, shopSelected clothe: BrandClothe)
+    func onSelectedBrandClothe(_ myClothes: [ClotheModel])
+    func clotheSelectionCell(_ cell: ClotheSelectionCell, shopSelected clothe: BrandClothe)
 }
 
 class ClotheSelectionCell: UITableViewCell {
-    private let cellIdentifier = "BrandClotheCell"
+    fileprivate let cellIdentifier = "BrandClotheCell"
     @IBOutlet weak var collectionView: UICollectionView!
     
     var brandClothes: [BrandClothe]?
@@ -25,30 +25,30 @@ class ClotheSelectionCell: UITableViewCell {
     var minValue : NSNumber?
     var maxValue : NSNumber?
     var delegate : ClotheSelectionCellDelegate?
-    private var selectedClothe: [BrandClothe]?
+    fileprivate var selectedClothe: [BrandClothe]?
     var pickerView: AKPickerView!
    
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.collectionView.registerNib(UINib(nibName: "BrandClotheCell", bundle:nil), forCellWithReuseIdentifier: self.cellIdentifier)
+        self.collectionView.register(UINib(nibName: "BrandClotheCell", bundle:nil), forCellWithReuseIdentifier: self.cellIdentifier)
         createPickerView()
     }
     
-    private func createPickerView(){
+    fileprivate func createPickerView(){
         self.pickerView = AKPickerView(frame: self.contentView.bounds)
         self.pickerView.delegate = self;
         self.pickerView.dataSource = self;
-        self.pickerView.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight];
+        self.pickerView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight];
         
         self.contentView.addSubview(self.pickerView)
         
         self.pickerView.font = UIFont(name: "HelveticaNeue-Light", size: 20.0)! //[UIFont fontWithName:@"HelveticaNeue-Light" size:20];
         self.pickerView.highlightedFont =  UIFont(name: "HelveticaNeue", size:20)!
         self.pickerView.interitemSpacing = 32.0
-        self.pickerView.textColor = UIColor.whiteColor()
-        self.pickerView.highlightedTextColor = UIColor.whiteColor()
+        self.pickerView.textColor = UIColor.white
+        self.pickerView.highlightedTextColor = UIColor.white
         //self.pickerView.fisheyeFactor = 0.001
-        self.pickerView.pickerViewStyle = AKPickerViewStyle.Wheel
+        self.pickerView.pickerViewStyle = AKPickerViewStyle.wheel
         self.pickerView.maskDisabled = false
         
     }
@@ -56,7 +56,7 @@ class ClotheSelectionCell: UITableViewCell {
 }
 
 extension ClotheSelectionCell: BrandClotheCellDelegate {
-    func brandClotheCell(cell: BrandClotheCell, selectedItem clothe: BrandClothe) {
+    func brandClotheCell(_ cell: BrandClotheCell, selectedItem clothe: BrandClothe) {
         if let del = self.delegate {
             del.clotheSelectionCell(self, shopSelected: clothe)
         }
@@ -65,7 +65,7 @@ extension ClotheSelectionCell: BrandClotheCellDelegate {
 
 extension ClotheSelectionCell : AKPickerViewDataSource {
     
-    func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
+    func numberOfItemsInPickerView(_ pickerView: AKPickerView) -> Int {
         if let clothes = self.brandClothes {
             self.selectedClothe = clothes.filter({(clothe) -> Bool in
                 return clothe.clothe_type == selectedType && (minValue != nil && clothe.clothe_price.doubleValue >= minValue!.doubleValue) && (maxValue != nil && clothe.clothe_price.doubleValue <= maxValue!.doubleValue)
@@ -77,9 +77,9 @@ extension ClotheSelectionCell : AKPickerViewDataSource {
 
     }
     
-    func pickerView(pickerView: AKPickerView, viewForItem item: Int) -> UIView {
-        let view = NSBundle.mainBundle().loadNibNamed("BrandClotheCell", owner: self, options: nil)[0] as! BrandClotheCell
-        view.frame = CGRectMake(0, 0, 207, 240)
+    func pickerView(_ pickerView: AKPickerView, viewForItem item: Int) -> UIView {
+        let view = Bundle.main.loadNibNamed("BrandClotheCell", owner: self, options: nil)?[0] as! BrandClotheCell
+        view.frame = CGRect(x: 0, y: 0, width: 207, height: 240)
         view.delegate = self
         if (item < self.selectedClothe!.count){
             if let selected = self.selectedClothe {
@@ -92,7 +92,7 @@ extension ClotheSelectionCell : AKPickerViewDataSource {
 }
 
 extension ClotheSelectionCell : AKPickerViewDelegate {
-    func pickerView(pickerView: AKPickerView, didSelectItem item: Int){
+    func pickerView(_ pickerView: AKPickerView, didSelectItem item: Int){
         if let selected = self.selectedClothe {
             if (selected.count > 0){
                 if let del = self.delegate {

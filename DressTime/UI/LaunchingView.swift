@@ -11,10 +11,10 @@ import UIKit
 
 
 protocol LaunchingViewDelegate {
-    func launchingView(view: LaunchingView, startAnimationFinish: Bool)
+    func launchingView(_ view: LaunchingView, startAnimationFinish: Bool)
 }
 
-class LaunchingView: UIView {
+class LaunchingView: UIView , CAAnimationDelegate {
 
     @IBOutlet weak var heightCst: NSLayoutConstraint!
     @IBOutlet weak var widthCst: NSLayoutConstraint!
@@ -22,21 +22,21 @@ class LaunchingView: UIView {
     
     var delegate: LaunchingViewDelegate?
     
-    var mask: CAShapeLayer?
+    var maskLayer: CAShapeLayer?
     override func awakeFromNib() {
         super.awakeFromNib()
-        let window = UIApplication.sharedApplication().keyWindow!
+        let window = UIApplication.shared.keyWindow!
         let maskImage = UIImage(named: "Icon")!
-        self.mask = CAShapeLayer()
-        self.mask!.contents = maskImage.CGImage
-        self.mask!.contentsScale = maskImage.scale
-        self.mask!.contentsGravity = kCAGravityResizeAspect
-        self.mask!.fillColor = UIColor.whiteColor().CGColor
-        self.mask!.bounds = CGRect(x: 0, y: 0, width: 115, height: 123)
-        self.mask!.anchorPoint = CGPoint(x: 0.5, y: 0.5)
-        self.mask!.position = CGPoint(x: window.center.x, y: window.center.y)
-        self.mask!.backgroundColor = UIColor.clearColor().CGColor
-        self.layer.addSublayer(self.mask!)
+        self.maskLayer = CAShapeLayer()
+        self.maskLayer!.contents = maskImage.cgImage
+        self.maskLayer!.contentsScale = maskImage.scale
+        self.maskLayer!.contentsGravity = kCAGravityResizeAspect
+        self.maskLayer!.fillColor = UIColor.white.cgColor
+        self.maskLayer!.bounds = CGRect(x: 0, y: 0, width: 115, height: 123)
+        self.maskLayer!.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        self.maskLayer!.position = CGPoint(x: window.center.x, y: window.center.y)
+        self.maskLayer!.backgroundColor = UIColor.clear.cgColor
+        self.layer.addSublayer(self.maskLayer!)
     }
     
     func animateMask() {
@@ -44,28 +44,28 @@ class LaunchingView: UIView {
         keyFrameAnimation.delegate = self
         keyFrameAnimation.duration = 1
         keyFrameAnimation.beginTime = CACurrentMediaTime() + 1 //add delay of 1 second
-        let initalBounds = NSValue(CGRect: mask!.bounds)
-        let secondBounds = NSValue(CGRect: CGRect(x: 0, y: 0, width: 90, height: 90))
-        let finalBounds = NSValue(CGRect: CGRect(x: 0, y: 0, width: 1500, height: 1500))
+        let initalBounds = NSValue(cgRect: maskLayer!.bounds)
+        let secondBounds = NSValue(cgRect: CGRect(x: 0, y: 0, width: 90, height: 90))
+        let finalBounds = NSValue(cgRect: CGRect(x: 0, y: 0, width: 1500, height: 1500))
         keyFrameAnimation.values = [initalBounds, secondBounds, finalBounds]
         keyFrameAnimation.keyTimes = [0, 0.3, 1]
         keyFrameAnimation.timingFunctions = [CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut), CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)]
-        self.mask!.addAnimation(keyFrameAnimation, forKey: "bounds")
+        self.maskLayer!.add(keyFrameAnimation, forKey: "bounds")
     }
     
     func closeAnimatedView(){
         
-        UIView.animateWithDuration(0.2, delay: 0.5, options: UIViewAnimationOptions.CurveEaseIn, animations: {
-            self.icon.hidden = true
-            self.frame = CGRect(origin: CGPoint(x: self.center.x, y: self.center.y) ,size: CGSizeZero)
+        UIView.animate(withDuration: 0.2, delay: 0.5, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            self.icon.isHidden = true
+            self.frame = CGRect(origin: CGPoint(x: self.center.x, y: self.center.y) ,size: CGSize.zero)
             }) { (fisish) in
                 self.removeFromSuperview()
 
         }
     }
     
-    override func animationDidStop(anim: CAAnimation, finished flag: Bool) {
-        self.mask?.removeFromSuperlayer()
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        self.maskLayer?.removeFromSuperlayer()
         self.removeFromSuperview()        
     }
 }

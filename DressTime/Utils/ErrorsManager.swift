@@ -13,27 +13,28 @@ class ErrorsManager: NSObject {
     
     override init() {
         super.init()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.CreateAccount, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.CreateAccount_Email_Duplicate, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.CreateAccount_Style_Required, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(ErrorsManager.displayErrorServer(_:)), name: Notifications.Error.CreateAccount, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ErrorsManager.displayErrorServer(_:)), name: Notifications.Error.CreateAccount_Email_Duplicate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ErrorsManager.displayErrorServer(_:)), name: Notifications.Error.CreateAccount_Style_Required, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.GetDressing, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.GetOutfit, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.Login, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.NoServer, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.SaveClothe, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.UploadClothe, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.displayErrorServer), name: Notifications.Error.SaveOutfit, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ErrorsManager.displayErrorServer(_:)), name: Notifications.Error.GetDressing, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ErrorsManager.displayErrorServer(_:)), name: Notifications.Error.GetOutfit, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ErrorsManager.displayErrorServer(_:)), name: Notifications.Error.Login, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ErrorsManager.displayErrorServer(_:)), name: Notifications.Error.NoServer, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ErrorsManager.displayErrorServer(_:)), name: Notifications.Error.SaveClothe, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ErrorsManager.displayErrorServer(_:)), name: Notifications.Error.UploadClothe, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ErrorsManager.displayErrorServer(_:)), name: Notifications.Error.SaveOutfit, object: nil)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ErrorsManager.showLoginPage(_:)), name: Notifications.Error.NoAuthentication, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ErrorsManager.showLoginPage(_:)), name: Notifications.Error.NoAuthentication, object: nil)
 
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    func displayErrorServer(error: NSNotification){
+    func displayErrorServer(_ error: Foundation.Notification){
         var title = "", message = "", actionTitle = ""
         
         switch(error.name){
@@ -94,16 +95,16 @@ class ErrorsManager: NSObject {
             break
         }
         
-        if let appDelegate = UIApplication.sharedApplication().delegate, let window = appDelegate.window {
-            let alert = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: actionTitle, style: .Default) { _ in })
-            dispatch_async(dispatch_get_main_queue(), {
-                window!.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+        if let appDelegate = UIApplication.shared.delegate, let window = appDelegate.window {
+            let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: actionTitle, style: .default) { _ in })
+            DispatchQueue.main.async(execute: {
+                window!.rootViewController?.present(alert, animated: true, completion: nil)
             })
         }
     }
     
-    func showLoginPage(error: NSNotification){
+    func showLoginPage(_ error: Foundation.Notification){
         let loginBL = LoginBL()
         loginBL.logoutWithSuccess(nil)
         loginBL.showLoginPage(error)
@@ -112,17 +113,17 @@ class ErrorsManager: NSObject {
 
 public struct Notifications {
     public struct Error {
-        public static let NoServer = "errorServer"
-        public static let SaveClothe = "saveClothe"
-        public static let UploadClothe = "uploadClothe"
-        public static let GetDressing = "getDressing"
-        public static let GetOutfit = "getOutfit"
-        public static let SaveOutfit = "saveOutfit"
-        public static let CreateAccount = "createAccount"
-        public static let Login = "login"
-        public static let UpdateClothe = "updateClothe"
-        public static let CreateAccount_Email_Duplicate = "createAccount_Email_Duplicate"
-        public static let CreateAccount_Style_Required = "createAccount_Style_Required"
-        public static let NoAuthentication = "error_noauthentication"
+        public static let NoServer = Notification.Name("errorServer")
+        public static let SaveClothe = Notification.Name("saveClothe")
+        public static let UploadClothe = Notification.Name("uploadClothe")
+        public static let GetDressing = Notification.Name("getDressing")
+        public static let GetOutfit = Notification.Name("getOutfit")
+        public static let SaveOutfit = Notification.Name("saveOutfit")
+        public static let CreateAccount = Notification.Name("createAccount")
+        public static let Login = Notification.Name("login")
+        public static let UpdateClothe = Notification.Name("updateClothe")
+        public static let CreateAccount_Email_Duplicate = Notification.Name("createAccount_Email_Duplicate")
+        public static let CreateAccount_Style_Required = Notification.Name("createAccount_Style_Required")
+        public static let NoAuthentication = Notification.Name("error_noauthentication")
     }
 }

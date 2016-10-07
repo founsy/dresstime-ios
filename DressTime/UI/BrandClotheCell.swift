@@ -11,7 +11,7 @@ import UIKit
 
 
 protocol BrandClotheCellDelegate {
-    func brandClotheCell(cell: BrandClotheCell, selectedItem clothe: BrandClothe)
+    func brandClotheCell(_ cell: BrandClotheCell, selectedItem clothe: BrandClothe)
 }
 
 class BrandClotheCell: UICollectionViewCell {
@@ -23,7 +23,7 @@ class BrandClotheCell: UICollectionViewCell {
     
     var delegate: BrandClotheCellDelegate?
     
-    @IBAction func shopTapped(sender: AnyObject) {
+    @IBAction func shopTapped(_ sender: AnyObject) {
         if let del = self.delegate {
             del.brandClotheCell(self, selectedItem: brandClotheModel!)
             print(brandClotheModel?.clothe_shopUrl)
@@ -31,7 +31,7 @@ class BrandClotheCell: UICollectionViewCell {
        
     }
     
-    @IBAction func dislikeTapped(sender: AnyObject) {
+    @IBAction func dislikeTapped(_ sender: AnyObject) {
     }
     
     var brandClotheModel: BrandClothe? {
@@ -44,21 +44,21 @@ class BrandClotheCell: UICollectionViewCell {
         super.awakeFromNib()
     }
     
-    private func updateView(){
+    fileprivate func updateView(){
         let currency = brandClotheModel!.clothe_currency
         
         self.priceLabel.text = "\(brandClotheModel!.clothe_price) \(currency == "EUR" ? "€" : "")"
         
-        if let imageURL = NSURL(string: (brandClotheModel?.clothe_image)!) {
-            self.imageView.setImageWithURL(imageURL)
+        if let imageURL = URL(string: (brandClotheModel?.clothe_image)!) {
+            self.imageView.setImage(withUrl: imageURL)
         }
-        if let imageURL = NSURL(string: (brandClotheModel?.clothe_brandLogo)!) {
-            self.brandIcon.setImageWithURL(imageURL)
+        if let imageURL = URL(string: (brandClotheModel?.clothe_brandLogo)!) {
+            self.brandIcon.setImage(withUrl:imageURL)
         }
     
-        self.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
+        self.layer.cornerRadius = 5.0
         self.priceView.layer.cornerRadius = 20
         self.priceView.layer.borderWidth = 1.0
-        self.priceView.layer.borderColor = UIColor.blackColor().CGColor
+        self.priceView.layer.borderColor = UIColor.black.cgColor
     }
 }

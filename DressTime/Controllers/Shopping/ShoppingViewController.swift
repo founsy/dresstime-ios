@@ -9,20 +9,40 @@
 import Foundation
 import SwiftyJSON
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class ShoppingViewController: DTViewController {
     @IBOutlet weak var tableView: UITableView!
 
-    private var brandClotheCell: ClotheSelectionCell?
-    private var matchClotheCell: ClotheMatchSelectionCell?
-    private var priceSelectionCell: PriceSelectionCell?
-    private var textCell : TextSelectionCell?
+    fileprivate var brandClotheCell: ClotheSelectionCell?
+    fileprivate var matchClotheCell: ClotheMatchSelectionCell?
+    fileprivate var priceSelectionCell: PriceSelectionCell?
+    fileprivate var textCell : TextSelectionCell?
     
-    private let cellIdentifier = "BrandClotheCell"
-    private var brandClothes: [BrandClothe]?
-    private var typeSelected = "maille"
+    fileprivate let cellIdentifier = "BrandClotheCell"
+    fileprivate var brandClothes: [BrandClothe]?
+    fileprivate var typeSelected = "maille"
     
-    private var currentBrandClothe: BrandClothe?
+    fileprivate var currentBrandClothe: BrandClothe?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,26 +53,26 @@ class ShoppingViewController: DTViewController {
         loadBrandClothe()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "showStore"){
             if let brandClothe = self.currentBrandClothe {
-                if let vc = segue.destinationViewController as? StoreViewController {
+                if let vc = segue.destination as? StoreViewController {
                     vc.urlShop = brandClothe.clothe_shopUrl
                 }
             }
         }
     }
     
-    private func loadBrandClothe(){
+    fileprivate func loadBrandClothe(){
         ActivityLoader.shared.showProgressView(view)
         let service = DressTimeService()
         service.GetBrandClothes() { (isSuccess, object) -> Void in
@@ -72,25 +92,25 @@ class ShoppingViewController: DTViewController {
         }
     }
     
-    private func sortArrayByPrice(list : [BrandClothe]) -> [BrandClothe]{
-        return list.sort { (clothe1, clothe2) -> Bool in
+    fileprivate func sortArrayByPrice(_ list : [BrandClothe]) -> [BrandClothe]{
+        return list.sorted { (clothe1, clothe2) -> Bool in
             clothe1.clothe_price.doubleValue < clothe2.clothe_price.doubleValue
         }
     }
 }
 
 extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 6
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if (indexPath.row == 3){
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if ((indexPath as NSIndexPath).row == 3){
             return 250.0
-        } else if (indexPath.row == 5){
+        } else if ((indexPath as NSIndexPath).row == 5){
             return 150.0
         }else {
-            if (UIScreen.mainScreen().bounds.height == 736){
+            if (UIScreen.main.bounds.height == 736){
                 return 55.0
             } else {
                 return 44.0
@@ -98,12 +118,12 @@ extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
     }
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if (indexPath.row == 2){
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if ((indexPath as NSIndexPath).row == 2){
             if let _ = cell as? PriceSelectionCell {
                 //c.drawSlider()
             }
-        } else if (indexPath.row == 1){
+        } else if ((indexPath as NSIndexPath).row == 1){
             if let c = cell as? TypeSelectionCell {
                 cell.layoutIfNeeded()
                 c.drawBorderButton()
@@ -111,33 +131,33 @@ extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if (indexPath.row == 0){
-            return self.tableView.dequeueReusableCellWithIdentifier("textHeader")! as UITableViewCell
-        } else if (indexPath.row == 1){
-            let typeCell = self.tableView.dequeueReusableCellWithIdentifier("typeSelection")! as! TypeSelectionCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if ((indexPath as NSIndexPath).row == 0){
+            return self.tableView.dequeueReusableCell(withIdentifier: "textHeader")! as UITableViewCell
+        } else if ((indexPath as NSIndexPath).row == 1){
+            let typeCell = self.tableView.dequeueReusableCell(withIdentifier: "typeSelection")! as! TypeSelectionCell
             typeCell.delegate = self
             return typeCell
-        } else if (indexPath.row == 2) {
-            priceSelectionCell = self.tableView.dequeueReusableCellWithIdentifier("priceSelection")! as? PriceSelectionCell
+        } else if ((indexPath as NSIndexPath).row == 2) {
+            priceSelectionCell = self.tableView.dequeueReusableCell(withIdentifier: "priceSelection")! as? PriceSelectionCell
             priceSelectionCell?.delegate = self
             return priceSelectionCell!
-        } else if (indexPath.row == 3){
-            self.brandClotheCell = self.tableView.dequeueReusableCellWithIdentifier("clotheSelection")! as? ClotheSelectionCell
+        } else if ((indexPath as NSIndexPath).row == 3){
+            self.brandClotheCell = self.tableView.dequeueReusableCell(withIdentifier: "clotheSelection")! as? ClotheSelectionCell
             self.brandClotheCell?.delegate = self
             return self.brandClotheCell!
-        } else if (indexPath.row == 4){
-            self.textCell = self.tableView.dequeueReusableCellWithIdentifier("textCell")! as? TextSelectionCell
+        } else if ((indexPath as NSIndexPath).row == 4){
+            self.textCell = self.tableView.dequeueReusableCell(withIdentifier: "textCell")! as? TextSelectionCell
             return self.textCell!
-        } else if (indexPath.row == 5){
-            self.matchClotheCell = self.tableView.dequeueReusableCellWithIdentifier("clotheMatchSelection")! as? ClotheMatchSelectionCell
+        } else if ((indexPath as NSIndexPath).row == 5){
+            self.matchClotheCell = self.tableView.dequeueReusableCell(withIdentifier: "clotheMatchSelection")! as? ClotheMatchSelectionCell
             return self.matchClotheCell!
         } else {
             return UITableViewCell()
         }
     }
     
-    private func minPrice(type : String) -> NSNumber {
+    fileprivate func minPrice(_ type : String) -> NSNumber {
         let typeFiltered = self.brandClothes!.filter { (item) -> Bool in
             item.clothe_type == type
         }
@@ -155,7 +175,7 @@ extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
         return minPrice != nil ? minPrice! : 0
     }
     
-    private func maxPrice(type : String) -> NSNumber {
+    fileprivate func maxPrice(_ type : String) -> NSNumber {
         let typeFiltered = self.brandClothes!.filter { (item) -> Bool in
             item.clothe_type == type
         }
@@ -179,16 +199,16 @@ extension ShoppingViewController: UITableViewDataSource, UITableViewDelegate {
 extension ShoppingViewController : PriceSelectionCellDelegate {
     
     /* Delegate */
-    func priceSelectionCell(cell: UITableViewCell, valueChanged rangeSlider: RangeSlider) {
-        self.brandClotheCell!.minValue = rangeSlider.lowerValue
-        self.brandClotheCell!.maxValue = rangeSlider.upperValue
+    func priceSelectionCell(_ cell: UITableViewCell, valueChanged rangeSlider: RangeSlider) {
+        self.brandClotheCell!.minValue = rangeSlider.lowerValue as NSNumber?
+        self.brandClotheCell!.maxValue = rangeSlider.upperValue as NSNumber?
         self.brandClotheCell!.pickerView.reloadData()
         self.brandClotheCell!.pickerView.selectItem(0)
     }
 }
 
 extension ShoppingViewController: TypeSelectionCellDelegate {
-    func onSelectedType(typeSelected: String) {
+    func onSelectedType(_ typeSelected: String) {
         self.brandClotheCell!.selectedType = typeSelected
         self.typeSelected = typeSelected
         let minValue = self.minPrice(self.typeSelected)
@@ -213,7 +233,7 @@ extension ShoppingViewController: TypeSelectionCellDelegate {
 
 
 extension ShoppingViewController: ClotheSelectionCellDelegate {
-    func onSelectedBrandClothe(myClothes: [ClotheModel]) {
+    func onSelectedBrandClothe(_ myClothes: [ClotheModel]) {
         self.matchClotheCell?.clothes = myClothes
         if let cell = self.textCell {
             cell.numberOutfit.text = "+\(myClothes.count)"
@@ -221,8 +241,8 @@ extension ShoppingViewController: ClotheSelectionCellDelegate {
         self.matchClotheCell?.collectionView.reloadData()
     }
     
-    func clotheSelectionCell(cell: ClotheSelectionCell, shopSelected clothe: BrandClothe) {
+    func clotheSelectionCell(_ cell: ClotheSelectionCell, shopSelected clothe: BrandClothe) {
         self.currentBrandClothe = clothe
-        self.performSegueWithIdentifier("showStore", sender: self)
+        self.performSegue(withIdentifier: "showStore", sender: self)
     }
 }

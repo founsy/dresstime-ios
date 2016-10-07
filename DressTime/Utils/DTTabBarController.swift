@@ -10,9 +10,9 @@ import Foundation
 import UIKit
 
 
-public class DTTabBarController: UITabBarController {
+open class DTTabBarController: UITabBarController {
 
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         self.tabBar.tintColor = UIColor.dressTimeRedBrand()
         
         for item in self.tabBar.items! {

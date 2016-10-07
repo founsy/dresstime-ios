@@ -26,7 +26,7 @@ extension Profil {
     @NSManaged var name: String?
     @NSManaged var numberPts: NSNumber?
     @NSManaged var onPartyStyle: String?
-    @NSManaged var picture: NSData?
+    @NSManaged var picture: Data?
     @NSManaged var picture_url: String?
     @NSManaged var refresh_token: String?
     @NSManaged var relaxStyle: String?

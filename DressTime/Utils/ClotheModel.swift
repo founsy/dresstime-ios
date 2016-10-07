@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-public class ClotheModel: NSObject {
+open class ClotheModel: NSObject {
     var id: String?
     var clothe_colors: String
     var clothe_litteralColor: String

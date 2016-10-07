@@ -12,8 +12,8 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 
 class LoginViewController : UIViewController {
-    private var userByFB: User?
-    private var user: User?
+    fileprivate var userByFB: User?
+    fileprivate var user: User?
     
     @IBOutlet weak var letsGo: UIButton!
     @IBOutlet weak var email: DTTextField!
@@ -21,7 +21,7 @@ class LoginViewController : UIViewController {
     @IBOutlet weak var labelOr: UILabel!
     @IBOutlet weak var facebookButton: FBSDKLoginButton!
 
-    @IBAction func onLetsGoTapped(sender: AnyObject) {
+    @IBAction func onLetsGoTapped(_ sender: AnyObject) {
         self.login(email.text, password: password.text)
     }
     
@@ -34,26 +34,26 @@ class LoginViewController : UIViewController {
         
     }
     
-    private func setLocalization(){
-        letsGo.setTitle(NSLocalizedString("loginLetsGoButton", comment: "Let's go"), forState: .Normal)
+    fileprivate func setLocalization(){
+        letsGo.setTitle(NSLocalizedString("loginLetsGoButton", comment: "Let's go"), for: UIControlState())
         labelOr.text = NSLocalizedString("loginEmailOr", comment: "Or")
     }
     
     
-    private func showError(titleKey: String, messageKey: String, buttonKey: String, handler: ((UIAlertAction) -> Void)?){
-        dispatch_async(dispatch_get_main_queue(),  { () -> Void in
-            let alert = UIAlertController(title: NSLocalizedString(titleKey, comment: ""), message: NSLocalizedString(messageKey, comment: ""), preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString(buttonKey, comment: ""), style: .Default, handler: handler))
-            self.presentViewController(alert, animated: true){}
+    fileprivate func showError(_ titleKey: String, messageKey: String, buttonKey: String, handler: ((UIAlertAction) -> Void)?){
+        DispatchQueue.main.async(execute: { () -> Void in
+            let alert = UIAlertController(title: NSLocalizedString(titleKey, comment: ""), message: NSLocalizedString(messageKey, comment: ""), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString(buttonKey, comment: ""), style: .default, handler: handler))
+            self.present(alert, animated: true){}
         })
     }
     
-    private func goToHome(){
+    fileprivate func goToHome(){
         ActivityLoader.shared.hideProgressView()
-        dispatch_async(dispatch_get_main_queue(),  { () -> Void in
-            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        DispatchQueue.main.async(execute: { () -> Void in
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "NavHomeViewController")
             appDelegate.window?.rootViewController = initialViewController
             appDelegate.window?.makeKeyAndVisible()
         })
@@ -62,20 +62,20 @@ class LoginViewController : UIViewController {
 }
 
 extension LoginViewController : DressingSynchroDelegate {
-    func dressingSynchro(dressingSynchro: DressingSynchro, syncDidFinish isFinish: Bool) {
-        dispatch_async(dispatch_get_main_queue(),  { () -> Void in
+    func dressingSynchro(_ dressingSynchro: DressingSynchro, syncDidFinish isFinish: Bool) {
+        DispatchQueue.main.async(execute: { () -> Void in
             self.goToHome()
         })
         
     }
     
-    func dressingSynchro(dressingSynchro: DressingSynchro, synchingProgressing currentValue: Int, totalNumber: Int) {
+    func dressingSynchro(_ dressingSynchro: DressingSynchro, synchingProgressing currentValue: Int, totalNumber: Int) {
         ActivityLoader.shared.setLabel("Synching \(currentValue)/\(totalNumber) clothes")
     }
 }
 
 extension LoginViewController {
-    private func login(email: String?, password: String?){
+    fileprivate func login(_ email: String?, password: String?){
         if let login = email {
             if let newPassword = password {
                 if (login.isEmpty || newPassword.isEmpty){
@@ -105,17 +105,17 @@ extension LoginViewController {
                         if let err_desc = object["error_description"].string {
                             if (err_desc == "001"){
                                 print("Please validate your account");
-                                let alert = UIAlertController(title: "Account not validate", message: "Please validate your account! Do you want to send again the email?", preferredStyle: .Alert)
-                                alert.addAction(UIAlertAction(title: "Resend", style: .Default, handler: { (action) -> Void in
+                                let alert = UIAlertController(title: "Account not validate", message: "Please validate your account! Do you want to send again the email?", preferredStyle: .alert)
+                                alert.addAction(UIAlertAction(title: "Resend", style: .default, handler: { (action) -> Void in
                                     //Resend Validation Email
                                     LoginService().SendVerificationEmail(login, completion: { (isSuccess, object) -> Void in
                                         print("Email Send");
                                     });
                                 }));
-                                alert.addAction(UIAlertAction(title: "No", style: .Default, handler: { (action) -> Void in
-                                    self.dismissViewControllerAnimated(true, completion: nil)
+                                alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) -> Void in
+                                    self.dismiss(animated: true, completion: nil)
                                 }))
-                                self.presentViewController(alert, animated: true){}
+                                self.present(alert, animated: true){}
                             } else {
                                 self.showError("loginErrTitle", messageKey:  "loginErrMessage", buttonKey:  "loginErrButton", handler: nil)
                             }
@@ -130,18 +130,24 @@ extension LoginViewController {
         }
     }
     
-    private func isValidEmail(testStr:String) -> Bool {
+    fileprivate func isValidEmail(_ testStr:String) -> Bool {
         // println("validate calendar: \(testStr)")
         let emailRegEx = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
-        return emailTest.evaluateWithObject(testStr)
+        return emailTest.evaluate(with: testStr)
     }
     
 }
 
 extension LoginViewController : FBSDKLoginButtonDelegate {
-    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+    /*!
+     @abstract Sent to the delegate when the button was used to login.
+     @param loginButton the sender
+     @param result The results of the login
+     @param error The error (if any) from the login
+     */
+    public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
         print("User Logged In")
         if ((error) != nil){
             // Process error
@@ -164,12 +170,16 @@ extension LoginViewController : FBSDKLoginButtonDelegate {
                         if let _ = object["provider"].string {
                             self.userByFB = loginBL.loginFacebookWithSuccess(object)
                             if let url = self.userByFB?.picture {
-                                self.userByFB?.picture_data = NSData(contentsOfURL: NSURL(string: url)!)
+                                do {
+                                    self.userByFB?.picture_data = try Data(contentsOf: URL(string: url)!)
+                                } catch {
+                                    print("Error") // TODO - Notify User
+                                }
                             }
                             let storyboard = UIStoryboard(name: "Register", bundle: nil)
-                            let vc = storyboard.instantiateViewControllerWithIdentifier("SelectStyleViewController") as! SelectStyleViewController
+                            let vc = storyboard.instantiateViewController(withIdentifier: "SelectStyleViewController") as! SelectStyleViewController
                             vc.user = self.userByFB
-                            self.presentViewController(vc, animated: true, completion: nil)
+                            self.present(vc, animated: true, completion: nil)
                         } else {
                             //Otherwise find an account go to Home
                             loginBL.loginWithSuccess(object)
@@ -184,7 +194,7 @@ extension LoginViewController : FBSDKLoginButtonDelegate {
         
     }
     
-    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
         
     }
     

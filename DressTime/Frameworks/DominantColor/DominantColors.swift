@@ -147,11 +147,11 @@ public func dominantColorsInImage(
     }
     // Cluster the colors using the k-means algorithm
     let k = selectKForElements(labValues)
-    var clusters = kmeans(labValues, k: k, seed: seed, distance: distanceForAccuracy(accuracy))
+    let clusters = kmeans(labValues, k: k, seed: seed, distance: distanceForAccuracy(accuracy))
     
     // Sort the clusters by size in descending order so that the
     // most dominant colors come first.
-    clusters.sort { $0.size > $1.size }
+    _ = clusters.sorted { $0.size > $1.size }
     
     return clusters.map { RGBVectorToCGColor(IN_LABToRGB($0.centroid)) }
 }

@@ -13,17 +13,17 @@ import DominantColor
 
 class CameraViewController : DTViewController {
     
-    private var captureManager: CameraSessionManager?
-    private var currentImage: UIImage?
-    private var bufferImage: UIImage?
-    private var skipImage: Int = 0
-    private var arrayColors:[UIColor] = []
-    private var arrayUIView: [UIView] = []
-    private var timeToScan: Bool = false
-    private let labelsSubTop = ["tshirt", "shirt", "shirt-sleeve", "polo","polo-sleeve"]
-    private let labelsSubPants = ["jeans", "jeans-slim", "trousers-pleated", "trousers-suit", "chinos", "trousers-regular", "trousers", "trousers-slim", "bermuda", "short"]
-    private let labelsSubMaille = ["jumper-fin","jumper-epais ","cardigan","sweater"]
-    private var isCapturing = false
+    fileprivate var captureManager: CameraSessionManager?
+    fileprivate var currentImage: UIImage?
+    fileprivate var bufferImage: UIImage?
+    fileprivate var skipImage: Int = 0
+    fileprivate var arrayColors:[UIColor] = []
+    fileprivate var arrayUIView: [UIView] = []
+    fileprivate var timeToScan: Bool = false
+    fileprivate let labelsSubTop = ["tshirt", "shirt", "shirt-sleeve", "polo","polo-sleeve"]
+    fileprivate let labelsSubPants = ["jeans", "jeans-slim", "trousers-pleated", "trousers-suit", "chinos", "trousers-regular", "trousers", "trousers-slim", "bermuda", "short"]
+    fileprivate let labelsSubMaille = ["jumper-fin","jumper-epais ","cardigan","sweater"]
+    fileprivate var isCapturing = false
     
     var typeClothe: String!
     var subTypeClothe: String!
@@ -35,21 +35,21 @@ class CameraViewController : DTViewController {
     @IBOutlet weak var opacityView: UIView!
     @IBOutlet weak var messageColorLabel: UILabel!
     
-    @IBAction func onBackButton(sender: AnyObject) {
+    @IBAction func onBackButton(_ sender: AnyObject) {
         self.captureManager!.session.stopRunning()
-        self.navigationController?.popViewControllerAnimated(true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func onClose(sender: AnyObject) {
+    @IBAction func onClose(_ sender: AnyObject) {
         self.captureManager!.session.stopRunning()
-        self.dismissViewControllerAnimated(true, completion: nil);
+        self.dismiss(animated: true, completion: nil);
     }
     
-    @IBAction func onCapture(sender: AnyObject) {
+    @IBAction func onCapture(_ sender: AnyObject) {
         #if (arch(i386) || arch(x86_64)) && os(iOS)
             self.currentImage = UIImage(named: "login-bg")
             self.arrayColors = self.currentImage!.dominantColors()
-            self.performSegueWithIdentifier("showConfirmation", sender: self)
+            self.performSegue(withIdentifier: "showConfirmation", sender: self)
         #else
             if (!self.isCapturing){
                 self.isCapturing = true
@@ -60,7 +60,7 @@ class CameraViewController : DTViewController {
                         self.arrayColors = self.currentImage!.dominantColors()
                         self.timeToScan = false
                         self.captureManager!.session.stopRunning()
-                        self.performSegueWithIdentifier("showConfirmation", sender: self)
+                        self.performSegue(withIdentifier: "showConfirmation", sender: self)
                     } else {
                         NSLog("Error")
                     }
@@ -69,7 +69,7 @@ class CameraViewController : DTViewController {
         #endif
     }
     
-    @IBAction func onLight(sender: AnyObject) {
+    @IBAction func onLight(_ sender: AnyObject) {
         self.captureManager!.toggleFlash()
     }
     
@@ -86,24 +86,24 @@ class CameraViewController : DTViewController {
         let layerRect = self.view.layer.bounds
         
         self.captureManager!.previewLayer.bounds = layerRect
-        self.captureManager!.previewLayer.position = CGPointMake(CGRectGetMidX(layerRect), CGRectGetMidY(layerRect))
+        self.captureManager!.previewLayer.position = CGPoint(x: layerRect.midX, y: layerRect.midY)
         self.captureManager!.sessionDelegate = self
         
         let uiView = UIView(frame: layerRect)
         uiView.layer.addSublayer(self.captureManager!.previewLayer)
         
         self.view.addSubview(uiView)
-        self.view.bringSubviewToFront(self.opacityView)
+        self.view.bringSubview(toFront: self.opacityView)
         
         self.color1View.layer.cornerRadius = 10.0
         self.color1View.layer.borderWidth = 1.0
-        self.color1View.layer.borderColor = UIColor.whiteColor().CGColor
+        self.color1View.layer.borderColor = UIColor.white.cgColor
         self.color2View.layer.cornerRadius = 10.0
         self.color2View.layer.borderWidth = 1.0
-        self.color2View.layer.borderColor = UIColor.whiteColor().CGColor
+        self.color2View.layer.borderColor = UIColor.white.cgColor
         self.color3View.layer.cornerRadius = 10.0
         self.color3View.layer.borderWidth = 1.0
-        self.color3View.layer.borderColor = UIColor.whiteColor().CGColor
+        self.color3View.layer.borderColor = UIColor.white.cgColor
         
         self.arrayUIView.append(self.color1View)
         self.arrayUIView.append(self.color2View)
@@ -113,19 +113,19 @@ class CameraViewController : DTViewController {
         messageColorLabel.text = NSLocalizedString("captureStep2ColorMsg", comment: "the awesome color of your clothe")
     }
     
-    private func whiteNavBar(){
+    fileprivate func whiteNavBar(){
         let bar:UINavigationBar! =  self.navigationController?.navigationBar
         
-        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        bar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         bar.shadowImage = UIImage()
         bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
-        bar.tintColor = UIColor.blackColor()
-        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.blackColor()]
-        self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        bar.tintColor = UIColor.black
+        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.black]
+        self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         self.captureManager!.startCamera()
     }
     
@@ -133,14 +133,14 @@ class CameraViewController : DTViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "showConfirmation"){
-            let controller = segue.destinationViewController as! CaptureConfirmationViewController
+            let controller = segue.destination as! CaptureConfirmationViewController
             if let image = self.currentImage {
                 #if (arch(i386) || arch(x86_64)) && os(iOS)
                      let img = image
                 #else
-                    let img = UIImage(CGImage: image.CGImage!, scale: 1.0, orientation: UIImageOrientation.Right)
+                    let img = UIImage(cgImage: image.cgImage!, scale: 1.0, orientation: UIImageOrientation.right)
                 #endif
                 let result = self.wrapResultObject(UIImageJPEGRepresentation(img, 1.0)!, labels: getListOfSubType(self.typeClothe))
                 controller.clotheObject = result
@@ -149,7 +149,7 @@ class CameraViewController : DTViewController {
         }
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
@@ -158,7 +158,7 @@ class CameraViewController : DTViewController {
         captureManager = nil
     }
     
-    private func drawClearRectArea(){
+    fileprivate func drawClearRectArea(){
         //opacityView is a UIView of what I want to be "solid"
         let outerPath = UIBezierPath(rect: self.view.frame)
         
@@ -167,20 +167,20 @@ class CameraViewController : DTViewController {
         self.view.layoutIfNeeded()
         self.scanArea.layoutIfNeeded()
 
-        let rectPath = UIBezierPath(rect: CGRectMake(self.scanArea.frame.origin.x + 2, self.scanArea.frame.origin.y + 2, self.scanArea.frame.width - 4, self.scanArea.frame.height + 11))
+        let rectPath = UIBezierPath(rect: CGRect(x: self.scanArea.frame.origin.x + 2, y: self.scanArea.frame.origin.y + 2, width: self.scanArea.frame.width - 4, height: self.scanArea.frame.height + 11))
         outerPath.usesEvenOddFillRule = true
-        outerPath.appendPath(rectPath)
+        outerPath.append(rectPath)
         
         let maskLayer = CAShapeLayer()
-        maskLayer.path = outerPath.CGPath
+        maskLayer.path = outerPath.cgPath
         maskLayer.fillRule = kCAFillRuleEvenOdd
-        maskLayer.fillColor = UIColor.whiteColor().CGColor
+        maskLayer.fillColor = UIColor.white.cgColor
         
         self.opacityView.layer.mask = maskLayer
     
     }
     
-    private func getListOfSubType(type:String) -> [String]{
+    fileprivate func getListOfSubType(_ type:String) -> [String]{
         if (type == "top"){
             return self.labelsSubTop
         } else if (type == "maille") {
@@ -192,33 +192,33 @@ class CameraViewController : DTViewController {
         }
     }
     
-    func imageFromSampleBuffer(sampleBuffer :CMSampleBufferRef) -> UIImage? {
-        let imageBuffer: CVImageBufferRef = CMSampleBufferGetImageBuffer(sampleBuffer)!
+    func imageFromSampleBuffer(_ sampleBuffer :CMSampleBuffer) -> UIImage? {
+        let imageBuffer: CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
         
-        CVPixelBufferLockBaseAddress(imageBuffer, 0)
-        let baseAddress: UnsafeMutablePointer<Void> = CVPixelBufferGetBaseAddressOfPlane(imageBuffer, Int(0))
+        CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: CVOptionFlags(0)))
+        let baseAddress: UnsafeMutableRawPointer = CVPixelBufferGetBaseAddressOfPlane(imageBuffer, Int(0))!
         
         let bytesPerRow:Int = CVPixelBufferGetBytesPerRow(imageBuffer)
         let width: Int = CVPixelBufferGetWidth(imageBuffer)
         let height: Int = CVPixelBufferGetHeight(imageBuffer)
         
-        let colorSpace: CGColorSpaceRef = CGColorSpaceCreateDeviceRGB()!
+        let colorSpace: CGColorSpace = CGColorSpaceCreateDeviceRGB()
         
         let bitsPerCompornent:Int = 8
-        let bitmapInfo = CGBitmapInfo(rawValue: (CGBitmapInfo.ByteOrder32Little.rawValue | CGImageAlphaInfo.PremultipliedFirst.rawValue) as UInt32)
-        let newContext: CGContextRef = CGBitmapContextCreate(baseAddress, width, height, bitsPerCompornent, bytesPerRow, colorSpace, bitmapInfo.rawValue)!
+        let bitmapInfo = CGBitmapInfo(rawValue: (CGBitmapInfo.byteOrder32Little.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue) as UInt32)
+        let newContext: CGContext = CGContext(data: baseAddress, width: width, height: height, bitsPerComponent: bitsPerCompornent, bytesPerRow: bytesPerRow, space: colorSpace, bitmapInfo: bitmapInfo.rawValue)!
         
-        CGContextSaveGState(newContext)
+        newContext.saveGState()
        
-        let imageRef: CGImageRef = CGBitmapContextCreateImage(newContext)!
+        let imageRef: CGImage = newContext.makeImage()!
         
-        let resultImage = UIImage(CGImage: imageRef, scale: 1.0, orientation: UIImageOrientation.Up)
+        let resultImage = UIImage(cgImage: imageRef, scale: 1.0, orientation: UIImageOrientation.up)
         UIGraphicsEndImageContext()
         
         return resultImage
     }
     
-    private func wrapResultObject(image: NSData, labels: [String]) -> [String: AnyObject]{
+    fileprivate func wrapResultObject(_ image: Data, labels: [String]) -> [String: AnyObject]{
         var colors = ""
         for i in 0 ..< min(self.arrayColors.count, 3) {
             if (colors != ""){
@@ -228,49 +228,49 @@ class CameraViewController : DTViewController {
         }
         
         let jsonObject: [String: AnyObject] = [
-            "clothe_id": NSUUID().UUIDString,
-            "clothe_partnerid": -1,
-            "clothe_partnerName": "",
-            "clothe_type": self.typeClothe,
-            "clothe_subtype": self.subTypeClothe,
-            "clothe_name": "",
-            "clothe_cut":"",
-            "clothe_image": image,
-            "clothe_colors": colors
+            "clothe_id": UUID().uuidString as AnyObject,
+            "clothe_partnerid": -1 as AnyObject,
+            "clothe_partnerName": "" as AnyObject,
+            "clothe_type": self.typeClothe as AnyObject,
+            "clothe_subtype": self.subTypeClothe as AnyObject,
+            "clothe_name": "" as AnyObject,
+            "clothe_cut":"" as AnyObject,
+            "clothe_image": image as AnyObject,
+            "clothe_colors": colors as AnyObject
         ]
         
         return jsonObject
     }
     
-    func rectToCropImg(image: UIImage) -> CGRect{
+    func rectToCropImg(_ image: UIImage) -> CGRect{
         let visibleLayerFrame = self.scanArea.frame
-        let metaRect = self.captureManager!.previewLayer.metadataOutputRectOfInterestForRect(visibleLayerFrame)
+        let metaRect = self.captureManager!.previewLayer.metadataOutputRectOfInterest(for: visibleLayerFrame)
         let originalSize = image.size;
         
-        var cropRect = CGRectMake( metaRect.origin.x * originalSize.width, metaRect.origin.y * originalSize.height, metaRect.size.width * originalSize.width, metaRect.size.height * originalSize.height)
+        var cropRect = CGRect( x: metaRect.origin.x * originalSize.width, y: metaRect.origin.y * originalSize.height, width: metaRect.size.width * originalSize.width, height: metaRect.size.height * originalSize.height)
         
-        cropRect = CGRectIntegral(cropRect)
+        cropRect = cropRect.integral
         return cropRect
     }
     
-    private func cropImage(image: UIImage) -> UIImage {
+    fileprivate func cropImage(_ image: UIImage) -> UIImage {
        // println(self.scanArea.frame)
         let rect = rectToCropImg(image)
-        let imageRef = CGImageCreateWithImageInRect(image.CGImage, rect);
+        let imageRef = image.cgImage?.cropping(to: rect);
         // or use the UIImage wherever you like
-        return UIImage(CGImage: imageRef!)
+        return UIImage(cgImage: imageRef!)
     }
     
 }
 
 extension CameraViewController: CameraSessionControllerDelegate{
-    func cameraSessionDidOutputSampleBuffer(sampleBuffer: CMSampleBuffer!){
+    func cameraSessionDidOutputSampleBuffer(_ sampleBuffer: CMSampleBuffer!){
         if (self.skipImage == 20) {
             if let image = imageFromSampleBuffer(sampleBuffer) {
                 self.bufferImage = cropImage(image)
                 self.arrayColors = self.bufferImage!.dominantColors()
                 self.timeToScan = false
-                dispatch_sync(dispatch_get_main_queue(), {
+                DispatchQueue.main.sync(execute: {
                     for i in 0..<min(self.arrayColors.count, self.arrayUIView.count) {
                         self.arrayUIView[i].backgroundColor = self.arrayColors[i]
                     }

@@ -20,19 +20,19 @@ class SettingsStyleCell: UITableViewCell {
     @IBOutlet weak var businessStyle: UIImageView!
     @IBOutlet weak var casualChicStyle: UIImageView!
     
-    private var isMoving = false
+    fileprivate var isMoving = false
     
-    private var tempUIImage: UIImageView?
-    private var relaxImage: UIImageView?
-    private var atWorkImage: UIImageView?
-    private var onPartyImage: UIImageView?
+    fileprivate var tempUIImage: UIImageView?
+    fileprivate var relaxImage: UIImageView?
+    fileprivate var atWorkImage: UIImageView?
+    fileprivate var onPartyImage: UIImageView?
     
-    private var relaxSelected: String?
-    private var atWorkSelected: String?
-    private var onPartySelected: String?
+    fileprivate var relaxSelected: String?
+    fileprivate var atWorkSelected: String?
+    fileprivate var onPartySelected: String?
     
-    private var imageSelected: UIImageView?
-    private var currentStyleSelected: String?
+    fileprivate var imageSelected: UIImageView?
+    fileprivate var currentStyleSelected: String?
     
     override func awakeFromNib(){
         super.awakeFromNib()
@@ -87,9 +87,9 @@ class SettingsStyleCell: UITableViewCell {
     }
     
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let tableView = self.superview?.superview as? UITableView {
-            tableView.scrollEnabled = false
+            tableView.isScrollEnabled = false
         }
         if (!self.isMoving){
             
@@ -99,7 +99,7 @@ class SettingsStyleCell: UITableViewCell {
             }
             
             let touch = touches.first
-            let location = touch!.locationInView(self)
+            let location = touch!.location(in: self)
             
             if let icon = self.whichStyleSelected(location) {
                 NSLog("Frame of selected icon \(icon.frame.origin.x) \(icon.frame.origin.y)")
@@ -109,8 +109,8 @@ class SettingsStyleCell: UITableViewCell {
                 isMoving = true
                 NSLog("Start to move")
             } else if let tempImage = self.whichSelectedStyle(location) {  //Inside a container?
-                let viewPoint = tempImage.convertPoint(location, fromView: self)
-                if tempImage.pointInside(viewPoint, withEvent: nil) {
+                let viewPoint = tempImage.convert(location, from: self)
+                if tempImage.point(inside: viewPoint, with: nil) {
                     self.tempUIImage = tempImage
                     isMoving = true
                     NSLog("Start to move temp")
@@ -120,43 +120,43 @@ class SettingsStyleCell: UITableViewCell {
     }
     
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if (isMoving){
             let touch = touches.first
-            let location = touch!.locationInView(self)
-            self.tempUIImage!.center = CGPointMake(location.x, location.y)
+            let location = touch!.location(in: self)
+            self.tempUIImage!.center = CGPoint(x: location.x, y: location.y)
         }
         
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first
-        let location = touch!.locationInView(touch!.window)
+        let location = touch!.location(in: touch!.window)
         
         if let container = self.whichContainerSelected(location) {
-            let points = self.containerView.convertRect(container.frame, toView: self)
-            let center = CGPointMake(CGRectGetMidX(points), CGRectGetMidY(points))
+            let points = self.containerView.convert(container.frame, to: self)
+            let center = CGPoint(x: points.midX, y: points.midY)
             animationEnd(center)
         } else {
             let viewPoint = whichStyle(self.tempUIImage!)
             if let point = viewPoint {
                 NSLog("Animation go back to park area")
-                animationPark(CGPointMake(point.x - 15.0, point.y - 5.0))
+                animationPark(CGPoint(x: point.x - 15.0, y: point.y - 5.0))
             } else {
                 NSLog("Remove uiImageView")
                 self.tempUIImage!.removeFromSuperview()
             }
         }
         if let tableView = self.superview?.superview as? UITableView {
-            tableView.scrollEnabled = true
+            tableView.isScrollEnabled = true
         }
         self.currentStyleSelected = nil
         
     }
     
-    private func animationEnd(destination: CGPoint){
+    fileprivate func animationEnd(_ destination: CGPoint){
         
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.tempUIImage!.center = destination
             }, completion: { animationFinished in
                 // when complete, remove the square from the parent view
@@ -165,9 +165,9 @@ class SettingsStyleCell: UITableViewCell {
         })
     }
     
-    private func animationPark(destination: CGPoint){
+    fileprivate func animationPark(_ destination: CGPoint){
         
-        UIView.animateWithDuration(0.5, animations: {
+        UIView.animate(withDuration: 0.5, animations: {
             self.tempUIImage!.center = destination
             }, completion: { animationFinished in
                 // when complete, remove the square from the parent view
@@ -180,7 +180,7 @@ class SettingsStyleCell: UITableViewCell {
         
     }
     
-    private func initStyleSelected(selectedStyle: String, containerName: String) {
+    fileprivate func initStyleSelected(_ selectedStyle: String, containerName: String) {
         var container: UIImageView?
         //var iconStyle: UIImageView?
         if (containerName == "relax") {
@@ -208,45 +208,45 @@ class SettingsStyleCell: UITableViewCell {
     }
 
     
-    private func whichStyleSelected(location: CGPoint) -> UIImageView? {
-        var viewPoint = sportwearStyle.convertPoint(location, fromView: self)
-        if sportwearStyle.pointInside(viewPoint, withEvent: nil) {
+    fileprivate func whichStyleSelected(_ location: CGPoint) -> UIImageView? {
+        var viewPoint = sportwearStyle.convert(location, from: self)
+        if sportwearStyle.point(inside: viewPoint, with: nil) {
             self.currentStyleSelected = "sportwear"
             return sportwearStyle
         }
-        viewPoint = fashionStyle.convertPoint(location, fromView: self)
-        if fashionStyle.pointInside(viewPoint, withEvent: nil) {
+        viewPoint = fashionStyle.convert(location, from: self)
+        if fashionStyle.point(inside: viewPoint, with: nil) {
             self.currentStyleSelected = "fashion"
             return fashionStyle
         }
-        viewPoint = businessStyle.convertPoint(location, fromView: self)
-        if businessStyle.pointInside(viewPoint, withEvent: nil) {
+        viewPoint = businessStyle.convert(location, from: self)
+        if businessStyle.point(inside: viewPoint, with: nil) {
             self.currentStyleSelected = "business"
             return businessStyle
         }
-        viewPoint = casualChicStyle.convertPoint(location, fromView: self)
-        if casualChicStyle.pointInside(viewPoint, withEvent: nil) {
+        viewPoint = casualChicStyle.convert(location, from: self)
+        if casualChicStyle.point(inside: viewPoint, with: nil) {
             self.currentStyleSelected = "casual"
             return casualChicStyle
         }
         return nil
     }
     
-    private func whichContainerSelected(location: CGPoint) -> UIImageView? {
-        var viewPoint = relaxContainer.convertPoint(location, fromView: self)
-        if relaxContainer.pointInside(viewPoint, withEvent: nil){
+    fileprivate func whichContainerSelected(_ location: CGPoint) -> UIImageView? {
+        var viewPoint = relaxContainer.convert(location, from: self)
+        if relaxContainer.point(inside: viewPoint, with: nil){
             self.relaxImage = self.tempUIImage
             self.relaxSelected = self.currentStyleSelected
             return relaxContainer
         }
-        viewPoint = atWorkContainer.convertPoint(location, fromView: self)
-        if atWorkContainer.pointInside(viewPoint, withEvent: nil){
+        viewPoint = atWorkContainer.convert(location, from: self)
+        if atWorkContainer.point(inside: viewPoint, with: nil){
             self.atWorkImage = self.tempUIImage
             self.atWorkSelected = self.currentStyleSelected
             return atWorkContainer
         }
-        viewPoint = onPartyContainer.convertPoint(location, fromView: self)
-        if onPartyContainer.pointInside(viewPoint, withEvent: nil){
+        viewPoint = onPartyContainer.convert(location, from: self)
+        if onPartyContainer.point(inside: viewPoint, with: nil){
             self.onPartyImage = self.tempUIImage
             self.onPartySelected = self.currentStyleSelected
             return onPartyContainer
@@ -254,24 +254,24 @@ class SettingsStyleCell: UITableViewCell {
         return nil
     }
     
-    private func whichSelectedStyle(location: CGPoint) -> UIImageView?{
+    fileprivate func whichSelectedStyle(_ location: CGPoint) -> UIImageView?{
         if let image = relaxImage {
-            let viewPoint = image.convertPoint(location, fromView: self)
-            if image.pointInside(viewPoint, withEvent: nil){
+            let viewPoint = image.convert(location, from: self)
+            if image.point(inside: viewPoint, with: nil){
                 self.relaxSelected = nil
                 return image
             }
         }
         if let image = atWorkImage {
-            let viewPoint = image.convertPoint(location, fromView: self)
-            if image.pointInside(viewPoint, withEvent: nil){
+            let viewPoint = image.convert(location, from: self)
+            if image.point(inside: viewPoint, with: nil){
                 self.atWorkSelected = nil
                 return image
             }
         }
         if let image = onPartyImage {
-            let viewPoint = image.convertPoint(location, fromView: self)
-            if image.pointInside(viewPoint, withEvent: nil){
+            let viewPoint = image.convert(location, from: self)
+            if image.point(inside: viewPoint, with: nil){
                 self.onPartySelected = nil
                 return image
             }
@@ -280,20 +280,20 @@ class SettingsStyleCell: UITableViewCell {
     }
     
     
-    private func whichStyle(image: UIImageView) -> CGPoint? {
+    fileprivate func whichStyle(_ image: UIImageView) -> CGPoint? {
         if (image.accessibilityIdentifier == "sportwear"){
-            return sportwearStyle.convertPoint(sportwearStyle.center, toView: self)
+            return sportwearStyle.convert(sportwearStyle.center, to: self)
         } else if (image.accessibilityIdentifier == "fashion"){
-            return fashionStyle.convertPoint(fashionStyle.center, toView: self)
+            return fashionStyle.convert(fashionStyle.center, to: self)
         } else if (image.accessibilityIdentifier == "business"){
-            return businessStyle.convertPoint(businessStyle.center, toView: self)
+            return businessStyle.convert(businessStyle.center, to: self)
         } else if (image.accessibilityIdentifier == "casual"){
-            return casualChicStyle.convertPoint(casualChicStyle.center, toView: self)
+            return casualChicStyle.convert(casualChicStyle.center, to: self)
         }
         return nil
     }
     
-    private func createTempImageView(imageToClone: UIImageView, location: CGPoint?) -> UIImageView {
+    fileprivate func createTempImageView(_ imageToClone: UIImageView, location: CGPoint?) -> UIImageView {
         let temp = UIImageView(frame: imageToClone.frame)
         if let loc = location {
             temp.center = loc

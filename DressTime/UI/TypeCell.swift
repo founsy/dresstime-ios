@@ -10,11 +10,11 @@ import Foundation
 import UIKit
 
 protocol TypeCellDelegate {
-    func typeCell(typeCell: TypeCell, didSelectType indexPath: NSIndexPath)
+    func typeCell(_ typeCell: TypeCell, didSelectType indexPath: IndexPath)
 }
 
 class TypeCell: UITableViewCell {
-    var indexPath: NSIndexPath?
+    var indexPath: IndexPath?
     var delegate: TypeCellDelegate?
     
     var currentType: String?
@@ -27,7 +27,7 @@ class TypeCell: UITableViewCell {
     @IBOutlet weak var addTypedButton: UIButton!
     
     
-    @IBAction func onAddTypedTapped(sender: AnyObject) {
+    @IBAction func onAddTypedTapped(_ sender: AnyObject) {
         //TODO - Fix the issue on tap long
         /*if let del = self.delegate {
             self.viewLongPress.hidden = true
@@ -38,11 +38,11 @@ class TypeCell: UITableViewCell {
     override func awakeFromNib() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(TypeCell.tapHandle(_:)))
         self.viewLongPress.addGestureRecognizer(tapGesture)
-        self.viewLongPress.hidden = true
+        self.viewLongPress.isHidden = true
     }
     
-    func tapHandle(gestureRecognizer: UILongPressGestureRecognizer){
-        self.viewLongPress.hidden = true
+    func tapHandle(_ gestureRecognizer: UILongPressGestureRecognizer){
+        self.viewLongPress.isHidden = true
     }
     
     func removeAllSubviews(){
@@ -51,15 +51,15 @@ class TypeCell: UITableViewCell {
         }
     }
     
-    func addViews(isStepLeft: Bool){
-        self.longPressLabel.text = "\(NSLocalizedString("Add", comment: "")) \(NSLocalizedString(currentType!.uppercaseString, comment: ""))"
-        self.backgroundImage.image = UIImage(named: "Background\(currentType!)\(SharedData.sharedInstance.sexe!.uppercaseString)")
+    func addViews(_ isStepLeft: Bool){
+        self.longPressLabel.text = "\(NSLocalizedString("Add", comment: "")) \(NSLocalizedString(currentType!.uppercased(), comment: ""))"
+        self.backgroundImage.image = UIImage(named: "Background\(currentType!)\(SharedData.sharedInstance.sexe!.uppercased())")
         
-        let stepView = NSBundle.mainBundle().loadNibNamed("StepsControl", owner: self, options: nil)[0] as! StepsControl
+        let stepView = Bundle.main.loadNibNamed("StepsControl", owner: self, options: nil)?[0] as! StepsControl
         stepView.currentType = self.currentType
         stepView.number = self.number!
         stepView.updateStepViews(self.number!)
-        let numberClotheView = NSBundle.mainBundle().loadNibNamed("NumberClotheControl", owner: self, options: nil)[0] as! NumberClotheControl
+        let numberClotheView = Bundle.main.loadNibNamed("NumberClotheControl", owner: self, options: nil)?[0] as! NumberClotheControl
         numberClotheView.updateControl(self.number!, type: self.currentType!)
         
         if (isStepLeft){

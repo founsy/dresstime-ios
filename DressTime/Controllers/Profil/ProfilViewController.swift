@@ -11,12 +11,12 @@ import UIKit
 
 class ProfilViewController: DTTableViewController {
     let cellIdentifier = "profilTypeCell"
-    private var type = [String]()
+    fileprivate var type = [String]()
     var countType:Array<String>?
     
-    private var typeColtheSelected: String?
-    private var currentClotheOpenSelected: Int?
-    private var headerView: UIView!
+    fileprivate var typeColtheSelected: String?
+    fileprivate var currentClotheOpenSelected: Int?
+    fileprivate var headerView: UIView!
     
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var buttonAddClothe: UIButton!
@@ -24,25 +24,25 @@ class ProfilViewController: DTTableViewController {
     @IBOutlet weak var profilButton: UIButton!
     @IBOutlet weak var styleLabel: UILabel!
     
-    private var kTableHeaderHeight:CGFloat = 300.0
+    fileprivate var kTableHeaderHeight:CGFloat = 300.0
     
-    @IBAction func onStyleTapped(sender: AnyObject) {
+    @IBAction func onStyleTapped(_ sender: AnyObject) {
         //self.performSegueWithIdentifier("showStyle", sender: self)
         let storyboard = UIStoryboard(name: "Register", bundle: nil)
-        if let initialViewController = storyboard.instantiateViewControllerWithIdentifier("SelectStyleViewController") as? SelectStyleViewController {
+        if let initialViewController = storyboard.instantiateViewController(withIdentifier: "SelectStyleViewController") as? SelectStyleViewController {
             initialViewController.currentUserId = SharedData.sharedInstance.currentUserId
             self.navigationController?.pushViewController(initialViewController, animated: true)
         }
         
     }
     
-    @IBAction func onProfilPictureTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("showSettings", sender: self)
+    @IBAction func onProfilPictureTapped(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "showSettings", sender: self)
     }
     
-    @IBAction func onAddClotheTapped(sender: AnyObject) {
+    @IBAction func onAddClotheTapped(_ sender: AnyObject) {
         self.currentClotheOpenSelected = nil
-        self.performSegueWithIdentifier("AddClothe", sender: self)
+        self.performSegue(withIdentifier: "AddClothe", sender: self)
     }
     
     override func viewDidLoad() {
@@ -51,7 +51,7 @@ class ProfilViewController: DTTableViewController {
         longPressedGesture.minimumPressDuration = 1.0
         
         self.tableView.addGestureRecognizer(longPressedGesture)
-        self.tableView.registerNib(UINib(nibName: "TypeCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
+        self.tableView.register(UINib(nibName: "TypeCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
         
         headerView = self.tableView.tableHeaderView
         self.tableView.tableHeaderView = nil
@@ -71,19 +71,19 @@ class ProfilViewController: DTTableViewController {
 
         }
         
-        profilButton.layer.shadowColor = UIColor.blackColor().CGColor
-        profilButton.layer.shadowOffset = CGSizeMake(0, 1)
+        profilButton.layer.shadowColor = UIColor.black.cgColor
+        profilButton.layer.shadowOffset = CGSize(width: 0, height: 1)
         profilButton.layer.shadowOpacity = 0.50
         profilButton.layer.shadowRadius = 4
-        profilButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Fill
-        profilButton.contentVerticalAlignment = UIControlContentVerticalAlignment.Fill
-        profilButton.imageView?.contentMode = .ScaleToFill
+        profilButton.contentHorizontalAlignment = UIControlContentHorizontalAlignment.fill
+        profilButton.contentVerticalAlignment = UIControlContentVerticalAlignment.fill
+        profilButton.imageView?.contentMode = .scaleToFill
         profilButton.layer.cornerRadius = 47.5
         profilButton.clipsToBounds = true
-        self.view.bringSubviewToFront(self.profilButton)
+        self.view.bringSubview(toFront: self.profilButton)
     }
     
-    override func viewWillAppear(animated: Bool){
+    override func viewWillAppear(_ animated: Bool){
         super.viewWillAppear(animated)
         
         updateHeaderView()
@@ -91,29 +91,29 @@ class ProfilViewController: DTTableViewController {
         self.type = SharedData.sharedInstance.getType(SharedData.sharedInstance.sexe!)
         initData()
         if let profil_image = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!)?.picture{
-            profilButton.setImage(UIImage(data: profil_image), forState: .Normal)
+            profilButton.setImage(UIImage(data: profil_image), for: UIControlState())
         } else {
-            profilButton.setImage(UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercaseString)"), forState: .Normal)
+            profilButton.setImage(UIImage(named: "profile\(SharedData.sharedInstance.sexe!.uppercased())"), for: UIControlState())
         }
         
-        backgroundImage.image = UIImage(named: "BackgroundHeader\(SharedData.sharedInstance.sexe!.uppercaseString)")
+        backgroundImage.image = UIImage(named: "BackgroundHeader\(SharedData.sharedInstance.sexe!.uppercased())")
         
         
         //Remove Title of Back button
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Wardrobe", comment: ""), style: .Plain, target: nil, action: nil)
-        UIApplication.sharedApplication().statusBarHidden = false // for status bar hide
-        self.navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Wardrobe", comment: ""), style: .plain, target: nil, action: nil)
+        UIApplication.shared.isStatusBarHidden = false // for status bar hide
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
        
         OneSignal.defaultClient().sendTag("page", value: "Profil")
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.navigationController?.navigationBar.alpha = 1.0
         
@@ -121,7 +121,7 @@ class ProfilViewController: DTTableViewController {
     
     
     
-    private func updateHeaderView(){
+    fileprivate func updateHeaderView(){
         var headerRect = CGRect(x: 0, y: -kTableHeaderHeight, width: tableView.bounds.width, height: kTableHeaderHeight)
         if  tableView.contentOffset.y < -kTableHeaderHeight {
             headerRect.origin.y = tableView.contentOffset.y
@@ -130,7 +130,7 @@ class ProfilViewController: DTTableViewController {
         headerView.frame = headerRect
     }
     
-    override func scrollViewDidScroll(scrollView: UIScrollView) {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         updateHeaderView()
         if (tableView.contentOffset.y > -260){
             navigationController?.navigationBar.alpha = (CGFloat(abs(tableView.contentOffset.y))/260.0-0.5) > 0.3 ? (CGFloat(abs(tableView.contentOffset.y))/250.0-0.5) : 0
@@ -139,13 +139,13 @@ class ProfilViewController: DTTableViewController {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "DetailsClothes"){
-            let targetVC = segue.destinationViewController as! DetailTypeViewController
+            let targetVC = segue.destination as! DetailTypeViewController
             targetVC.typeClothe = [self.typeColtheSelected!]
-            targetVC.viewMode = ViewMode.Dressing
+            targetVC.viewMode = ViewMode.dressing
         } else if (segue.identifier == "AddClothe"){
-            let navController = segue.destinationViewController as! UINavigationController
+            let navController = segue.destination as! UINavigationController
             let targetVC = navController.topViewController as! TypeViewController
             if let typeClothe = self.currentClotheOpenSelected {
                 targetVC.openItem(typeClothe)
@@ -157,14 +157,14 @@ class ProfilViewController: DTTableViewController {
         
     }
     
-    func longPressedHandle(gestureRecognizer: UILongPressGestureRecognizer){
-        let point = gestureRecognizer.locationInView(self.tableView)
-        let indexPath = self.tableView.indexPathForRowAtPoint(point)
+    func longPressedHandle(_ gestureRecognizer: UILongPressGestureRecognizer){
+        let point = gestureRecognizer.location(in: self.tableView)
+        let indexPath = self.tableView.indexPathForRow(at: point)
         if (indexPath == nil) {
             NSLog("long press on table view but not on a row");
-        } else if (gestureRecognizer.state == UIGestureRecognizerState.Began) {
-            if let cell = self.tableView.cellForRowAtIndexPath(indexPath!) as? TypeCell {
-                cell.viewLongPress.hidden = false
+        } else if (gestureRecognizer.state == UIGestureRecognizerState.began) {
+            if let cell = self.tableView.cellForRow(at: indexPath!) as? TypeCell {
+                cell.viewLongPress.isHidden = false
             }
         } else {
             print(gestureRecognizer.state)
@@ -172,12 +172,12 @@ class ProfilViewController: DTTableViewController {
     }
 
     
-    private func initData() {
+    fileprivate func initData() {
         var totalClothe = 0
         let dal = ClothesDAL()
         countType = Array<String>()
         for i in 0...self.type.count-1 {
-            let typeCell = self.type[i].lowercaseString
+            let typeCell = self.type[i].lowercased()
             let count = dal.fetch(type: typeCell).count
             totalClothe = totalClothe + count
             countType?.append("\(count)")
@@ -188,30 +188,30 @@ class ProfilViewController: DTTableViewController {
 
 
 extension ProfilViewController {
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 200.0
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.typeColtheSelected = self.type[indexPath.row].lowercaseString
-        self.performSegueWithIdentifier("DetailsClothes", sender: self)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.typeColtheSelected = self.type[(indexPath as NSIndexPath).row].lowercased()
+        self.performSegue(withIdentifier: "DetailsClothes", sender: self)
     }
 }
 
 extension ProfilViewController {
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.type.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! TypeCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath) as! TypeCell
         cell.removeAllSubviews()
-        let typeCell = self.type[indexPath.row]
+        let typeCell = self.type[(indexPath as NSIndexPath).row]
         cell.delegate = self
         cell.currentType = typeCell
-        cell.number = Int(self.countType![indexPath.row])!
-        if (indexPath.row % 2 == 0){
+        cell.number = Int(self.countType![(indexPath as NSIndexPath).row])!
+        if ((indexPath as NSIndexPath).row % 2 == 0){
            cell.addViews(false)
         } else {
             cell.addViews(true)
@@ -219,16 +219,16 @@ extension ProfilViewController {
         
         //Remove edge insets to have full width separtor line
         cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
         
         return cell
     }
 }
 
 extension ProfilViewController: TypeCellDelegate {
-    func typeCell(typeCell: TypeCell, didSelectType indexPath: NSIndexPath) {
-        self.currentClotheOpenSelected = indexPath.row
-        self.performSegueWithIdentifier("AddClothe", sender: self)
+    func typeCell(_ typeCell: TypeCell, didSelectType indexPath: IndexPath) {
+        self.currentClotheOpenSelected = (indexPath as NSIndexPath).row
+        self.performSegue(withIdentifier: "AddClothe", sender: self)
     }
 }

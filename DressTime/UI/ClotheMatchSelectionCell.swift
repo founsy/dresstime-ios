@@ -10,14 +10,14 @@ import Foundation
 import UIKit
 
 class ClotheMatchSelectionCell: UITableViewCell {
-    private let cellIdentifier = "ClotheCell"
+    fileprivate let cellIdentifier = "ClotheCell"
     @IBOutlet weak var collectionView: UICollectionView!
     
     var clothes: [ClotheModel]?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.collectionView.registerNib(UINib(nibName: "ClotheCell", bundle:nil), forCellWithReuseIdentifier: self.cellIdentifier)
+        self.collectionView.register(UINib(nibName: "ClotheCell", bundle:nil), forCellWithReuseIdentifier: self.cellIdentifier)
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
     }
@@ -25,17 +25,17 @@ class ClotheMatchSelectionCell: UITableViewCell {
 }
 
 extension ClotheMatchSelectionCell: UICollectionViewDataSource, UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let clothesMatched = self.clothes {
             return clothesMatched.count
         }
         return 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! ClotheCell
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.cellIdentifier, for: indexPath) as! ClotheCell
         if let clothesMatched = self.clothes {
-            let clothe_id = clothesMatched[indexPath.row].clothe_id
+            let clothe_id = clothesMatched[(indexPath as NSIndexPath).row].clothe_id
             let dal = ClothesDAL()
             if let clothe = dal.fetch(clothe_id) {
                 cell.imageView.image = clothe.getImage()

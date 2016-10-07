@@ -21,8 +21,8 @@ enum Style : String {
 
 class SelectStyleViewController: DTViewController {
     
-    private var selectedStyle = [String]()
-    private var confirmationView: ConfirmSave?
+    fileprivate var selectedStyle = [String]()
+    fileprivate var confirmationView: ConfirmSave?
     
     var currentUserId: String?
     var user: User?
@@ -39,59 +39,59 @@ class SelectStyleViewController: DTViewController {
     @IBOutlet weak var casualChicLabel: UILabel!
     
     
-    @IBAction func buttonsStyle(sender: AnyObject) {
+    @IBAction func buttonsStyle(_ sender: AnyObject) {
         if (sender === fashionbutton){
-            fashionbutton.selected = !fashionbutton.selected
+            fashionbutton.isSelected = !fashionbutton.isSelected
             if (!selectedStyle.contains(Style.Fashion.rawValue)){
                 selectedStyle.append(Style.Fashion.rawValue)
             } else {
-                if let index = selectedStyle.indexOf(Style.Fashion.rawValue) {
-                    selectedStyle.removeAtIndex(index)
+                if let index = selectedStyle.index(of: Style.Fashion.rawValue) {
+                    selectedStyle.remove(at: index)
                 }
 
             }
         } else if (sender === businessButton){
-            businessButton.selected = !businessButton.selected
+            businessButton.isSelected = !businessButton.isSelected
             
             if (!selectedStyle.contains(Style.Business.rawValue)){
                 selectedStyle.append(Style.Business.rawValue)
             } else {
-                if let index = selectedStyle.indexOf(Style.Business.rawValue) {
-                    selectedStyle.removeAtIndex(index)
+                if let index = selectedStyle.index(of: Style.Business.rawValue) {
+                    selectedStyle.remove(at: index)
                 }
                 
             }
         } else if (sender === sportWearButton){
-            sportWearButton.selected = !sportWearButton.selected
+            sportWearButton.isSelected = !sportWearButton.isSelected
             
             if (!selectedStyle.contains(Style.Sportwear.rawValue)){
                 selectedStyle.append(Style.Sportwear.rawValue)
             } else {
-                if let index = selectedStyle.indexOf(Style.Sportwear.rawValue) {
-                    selectedStyle.removeAtIndex(index)
+                if let index = selectedStyle.index(of: Style.Sportwear.rawValue) {
+                    selectedStyle.remove(at: index)
                 }
                 
             }
         } else if (sender === casualChicButton){
-            casualChicButton.selected = !casualChicButton.selected
+            casualChicButton.isSelected = !casualChicButton.isSelected
             
             if (!selectedStyle.contains(Style.CasualChic.rawValue)){
                 selectedStyle.append(Style.CasualChic.rawValue)
             } else {
-                if let index = selectedStyle.indexOf(Style.CasualChic.rawValue) {
-                    selectedStyle.removeAtIndex(index)
+                if let index = selectedStyle.index(of: Style.CasualChic.rawValue) {
+                    selectedStyle.remove(at: index)
                 }
             }
         }
-        validationButton.enabled = !(selectedStyle.count == 0) //TODO - Change color when button is disabled
-        if (validationButton.enabled) {
+        validationButton.isEnabled = !(selectedStyle.count == 0) //TODO - Change color when button is disabled
+        if (validationButton.isEnabled) {
             validationButton.backgroundColor = UIColor.dressTimeRed()
         } else {
             validationButton.backgroundColor = UIColor.dressTimeRedDisabled()
         }
     }
     
-    @IBAction func onValidatationTapped(sender: AnyObject) {
+    @IBAction func onValidatationTapped(_ sender: AnyObject) {
         //Update Current User
         if let userId = currentUserId {
             modifyUser(userId)
@@ -103,23 +103,23 @@ class SelectStyleViewController: DTViewController {
     override func viewDidLoad(){
         super.viewDidLoad()
         self.classNameAnalytics = "RegisterStyle"
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
         
         if let userId = currentUserId {
             let dal = ProfilsDAL()
             if let profil = dal.fetch(userId) {
                 if let stylesStr = profil.styles {
-                    self.selectedStyle = stylesStr.componentsSeparatedByString(",")
-                    for var item in self.selectedStyle {
+                    self.selectedStyle = stylesStr.components(separatedBy: ",")
+                    for item in self.selectedStyle {
                         switch(item) {
                         case Style.Business.rawValue:
-                            businessButton.selected = true
+                            businessButton.isSelected = true
                         case Style.CasualChic.rawValue:
-                            casualChicButton.selected = true
+                            casualChicButton.isSelected = true
                         case Style.Fashion.rawValue:
-                            fashionbutton.selected = true
+                            fashionbutton.isSelected = true
                         case Style.Sportwear.rawValue:
-                            sportWearButton.selected = true
+                            sportWearButton.isSelected = true
                         default:
                             print("No style")
                         }
@@ -135,59 +135,59 @@ class SelectStyleViewController: DTViewController {
         
     }
     
-    private func setLocalization(){
-        validationButton.setTitle(NSLocalizedString("styleSelectionValidationButton", comment: ""), forState: .Normal)
-        selectStyleLabel.text = NSLocalizedString("styleSelectionStyleLabel", comment: "").uppercaseString
+    fileprivate func setLocalization(){
+        validationButton.setTitle(NSLocalizedString("styleSelectionValidationButton", comment: ""), for: UIControlState())
+        selectStyleLabel.text = NSLocalizedString("styleSelectionStyleLabel", comment: "").uppercased()
         fashionLabel.text = NSLocalizedString("styleSelectionFashionLabel", comment: "")
         businessLabel.text = NSLocalizedString("styleSelectionBusinessLabel", comment: "")
         sportwearLabel.text = NSLocalizedString("styleSelectionSportwearLabel", comment: "")
         casualChicLabel.text = NSLocalizedString("styleSelectionCasualChicLabel", comment: "")
     }
     
-    private func createConfirmationView(){
-        self.confirmationView = NSBundle.mainBundle().loadNibNamed("ConfirmSave", owner: self, options: nil)[0] as? ConfirmSave
-        self.confirmationView!.frame = CGRectMake(UIScreen.mainScreen().bounds.size.width/2.0 - 50, UIScreen.mainScreen().bounds.size.height/2.0 - 50, 100, 100)
+    fileprivate func createConfirmationView(){
+        self.confirmationView = Bundle.main.loadNibNamed("ConfirmSave", owner: self, options: nil)?[0] as? ConfirmSave
+        self.confirmationView!.frame = CGRect(x: UIScreen.main.bounds.size.width/2.0 - 50, y: UIScreen.main.bounds.size.height/2.0 - 50, width: 100, height: 100)
         self.confirmationView!.alpha = 0
         self.confirmationView!.layer.cornerRadius = 50
         
         self.view.addSubview(self.confirmationView!)
     }
     
-    private func createUser(){
+    fileprivate func createUser(){
         if let newUser = self.user {
             let dal = ProfilsDAL()
-            newUser.styles = self.selectedStyle.joinWithSeparator(",")            
+            newUser.styles = self.selectedStyle.joined(separator: ",")            
             
             if let profil = dal.save(newUser) {
                 
                 UserService().CreateUser(profil, password: newUser.password, completion: { (isSuccess, object) -> Void in
                     if (isSuccess){
                         //Create Model
-                        if (FBSDKAccessToken.currentAccessToken() == nil){
+                        if (FBSDKAccessToken.current() == nil){
                             self.loginSuccess(profil, password: newUser.password!)
                         } else {
-                            let defaults = NSUserDefaults.standardUserDefaults()
-                            defaults.setObject(profil.userid, forKey: "userId")
+                            let defaults = UserDefaults.standard
+                            defaults.set(profil.userid, forKey: "userId")
                             defaults.synchronize()
                         }
                         SharedData.sharedInstance.currentUserId = profil.userid
                         SharedData.sharedInstance.sexe = profil.gender
                         
                         let mixpanel = Mixpanel.sharedInstance()
-                        mixpanel.people.set(["$name" : profil.lastName!, "firstname": profil.firstName!, "$email" : profil.email!, "Styles": profil.styles!,"Notification" : Notification.morning.rawValue])
-                        
-                        UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: { () -> Void in
+                        mixpanel.people.set(["$name" : profil.lastName!, "firstname": profil.firstName!, "$email" : profil.email!, "Styles": profil.styles!,"Notification" : NotificationTime.morning.rawValue])
+                    
+                        UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: { () -> Void in
                             self.confirmationView?.alpha = 1
                             self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
                             }, completion: { (isFinish) -> Void in
-                                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                                UIView.animate(withDuration: 0.2, animations: { () -> Void in
                                     self.confirmationView?.alpha = 0
                                     self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
                                     }, completion: { (finish) -> Void in
-                                        dispatch_async(dispatch_get_main_queue(),  { () -> Void in
-                                            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                                        DispatchQueue.main.async(execute: { () -> Void in
+                                            let appDelegate = UIApplication.shared.delegate as! AppDelegate
                                             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                                            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("NavHomeViewController")
+                                            let initialViewController = storyboard.instantiateViewController(withIdentifier: "NavHomeViewController")
                                             appDelegate.window?.rootViewController = initialViewController
                                             appDelegate.window?.makeKeyAndVisible()
                                         })
@@ -197,11 +197,12 @@ class SelectStyleViewController: DTViewController {
                     } else {
                         if (object["code"].numberValue == 11000){
                             //TODO - Duplication Key (email)
-                            NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.CreateAccount_Email_Duplicate, object: nil)
+                            NotificationCenter.default.post(name: Notifications.Error.CreateAccount_Email_Duplicate, object: nil)
+                            //NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Error.CreateAccount_Email_Duplicate), object: nil)
                         } else if (object["name"].stringValue == "ValidationError") {
-                            NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.CreateAccount_Style_Required, object: nil)
+                            NotificationCenter.default.post(name: Notifications.Error.CreateAccount_Style_Required, object: nil)
                         } else {
-                            NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.CreateAccount, object: nil)
+                            NotificationCenter.default.post(name: Notifications.Error.CreateAccount, object: nil)
                         }
                         return
                     }
@@ -211,25 +212,25 @@ class SelectStyleViewController: DTViewController {
         }
     }
     
-    private func modifyUser(userId: String){
+    fileprivate func modifyUser(_ userId: String){
         let dal = ProfilsDAL()
         if let profil = dal.fetch(userId) {
-            profil.styles = self.selectedStyle.joinWithSeparator(",")
+            profil.styles = self.selectedStyle.joined(separator: ",")
             
             let newProfil = dal.update(profil)
             UserService().UpdateUser(newProfil!, completion: { (isSuccess, object) -> Void in
                 self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
-                self.view.bringSubviewToFront(self.confirmationView!)
+                self.view.bringSubview(toFront: self.confirmationView!)
                 
-                UIView.animateWithDuration(1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: { () -> Void in
+                UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: { () -> Void in
                     self.confirmationView?.alpha = 1
                     self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
                     }, completion: { (isFinish) -> Void in
-                        UIView.animateWithDuration(0.2, animations: { () -> Void in
+                        UIView.animate(withDuration: 0.2, animations: { () -> Void in
                             self.confirmationView?.alpha = 0
                             self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
                             }, completion: { (finish) -> Void in
-                                self.navigationController?.popViewControllerAnimated(true)
+                                _ = self.navigationController?.popViewController(animated: true)
                         })
                 })
             })
@@ -238,16 +239,16 @@ class SelectStyleViewController: DTViewController {
         }
     }
     
-    private func loginSuccess(profil: Profil, password: String){
+    fileprivate func loginSuccess(_ profil: Profil, password: String){
         LoginService().Login(profil.email!, password: password) { (isSuccess, object) -> Void in
             if (isSuccess){
                 let loginBL = LoginBL();
                 loginBL.loginWithSuccess(object)
             } else {
                 ActivityLoader.shared.hideProgressView()
-                let alert = UIAlertController(title: NSLocalizedString("loginErrTitle", comment: ""), message: NSLocalizedString("loginErrMessage", comment: ""), preferredStyle: .Alert)
-                alert.addAction(UIAlertAction(title: NSLocalizedString("loginErrButton", comment: ""), style: .Default) { _ in })
-                self.presentViewController(alert, animated: true){}
+                let alert = UIAlertController(title: NSLocalizedString("loginErrTitle", comment: ""), message: NSLocalizedString("loginErrMessage", comment: ""), preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("loginErrButton", comment: ""), style: .default) { _ in })
+                self.present(alert, animated: true){}
             }
             
         }

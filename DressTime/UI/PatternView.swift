@@ -15,6 +15,6 @@ class PatternView: UIView {
     @IBOutlet weak var patternLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        patternImage.tintColor = UIColor.whiteColor()
+        patternImage.tintColor = UIColor.white
     }
 }

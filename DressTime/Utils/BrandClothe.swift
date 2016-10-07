@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-public class BrandClothe: ClotheModel{
+open class BrandClothe: ClotheModel{
     var clothe_brand: String?
     var clothe_brandLogo: String?
     var clothe_price: NSNumber

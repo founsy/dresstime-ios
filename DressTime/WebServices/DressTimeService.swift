@@ -23,12 +23,12 @@ class DressTimeService {
     let baseUrlOutfits = "\(baseURL)outfits/"
     let baseUrlBrand = "\(baseURL)brand/"
     
-    func GetOutfitsToday(location: CLLocation, completion: (isSuccess: Bool, object: JSON) -> Void){
+    func GetOutfitsToday(_ location: CLLocation, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if (Mock.isMockable()){
             if let nsdata = ReadJsonFile().readFile("\(SharedData.sharedInstance.currentUserId!)-OutfitsToday"){
                 var json = JSON(data: nsdata)
                 var newJSON = [JSON]()
-                let moment = WeatherWrapper().getNameByTime(json["weather"][0]["hour"].intValue).lowercaseString
+                let moment = WeatherWrapper().getNameByTime(json["weather"][0]["hour"].intValue).lowercased()
                 
                 for (_, subjson) in json["outfits"][moment] {
                     if (subjson["style"].stringValue == "fashion" || subjson["style"].stringValue == "casual"){
@@ -36,30 +36,30 @@ class DressTimeService {
                     }
                 }
                 json["outfits"] = JSON(newJSON)
-                completion(isSuccess: true, object:json)
+                completion(true, json)
             } else {
-                completion(isSuccess: false, object: "")
+                completion(false, "")
             }
         } else {
             self.getOutfits(location, completion: completion)
         }
     }
     
-    func GetOutfitsPutOn(completion: (isSuccess: Bool, object: JSON) -> Void){
+    func GetOutfitsPutOn(_ completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         self.getOutfitsPutOn(completion)
     }
     
-    func GetBrandClothes(completion: (isSuccess: Bool, object:  [BrandClothe]?) -> Void){
+    func GetBrandClothes(_ completion: @escaping (_ isSuccess: Bool, _ object:  [BrandClothe]?) -> Void){
         self.getBrandClothes(completion)
     }
     
-    func SaveOutfit(outfit: Outfit, completion: (isSuccess: Bool) -> Void){
+    func SaveOutfit(_ outfit: Outfit, completion: @escaping (_ isSuccess: Bool) -> Void){
         if (Mock.isMockable()){
             if let nsdata = ReadJsonFile().readFile("outfitsToday"){
                 _ = JSON(data: nsdata)
-                completion(isSuccess: true)
+                completion(true)
             } else {
-                completion(isSuccess: false)
+                completion(false)
             }
         } else {
             self.saveOutfit(outfit, completion: completion)
@@ -67,7 +67,7 @@ class DressTimeService {
     }
     
     
-    private func jsonToBrandClothe(json: JSON) -> [BrandClothe] {
+    fileprivate func jsonToBrandClothe(_ json: JSON) -> [BrandClothe] {
         var brandClothes = [BrandClothe]()
         for i in 0...json.arrayValue.count-1{
             brandClothes.append(BrandClothe(json: json.arrayValue[i]))
@@ -79,129 +79,128 @@ class DressTimeService {
     /*           PRIVATE FUNCTION        */
     /*************************************/
     
-    private func getOutfits(location: CLLocation, completion: (isSuccess: Bool, object: JSON) -> Void){
+    fileprivate func getOutfits(_ location: CLLocation, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         let dal = ProfilsDAL()
         if let userId = SharedData.sharedInstance.currentUserId,
             let profil = dal.fetch(userId) {
            
-            var path = baseUrlOutfits + "v2.2/?lat=\(location.coordinate.latitude)&long=\(location.coordinate.longitude)&timezone=\(NSTimeZone.systemTimeZone().secondsFromGMT)"
+            var path = baseUrlOutfits + "v2.2/?lat=\(location.coordinate.latitude)&long=\(location.coordinate.longitude)&timezone=\(NSTimeZone.system.secondsFromGMT())"
             
             var headers :[String : String]?
             
-            let preferredLanguage:NSString = NSLocale.preferredLanguages()[0]
-            let lang = preferredLanguage.substringToIndex(2)
+            let preferredLanguage:NSString = Locale.preferredLanguages[0] as NSString
+            let lang = preferredLanguage.substring(to: 2)
             
-            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
+            if ((FBSDKAccessToken.current()) != nil && profil.fb_id != nil){
                 headers = ["Accept-Language" : lang]
-                path = path + "&access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+                path = path + "&access_token=\(FBSDKAccessToken.current().tokenString)"
             } else {
                 if let token = profil.access_token {
                     headers = ["Authorization": "Bearer \(token)", "Accept-Language" : lang]
                 } else {
-                    completion(isSuccess: false, object: "")
+                    completion(false, "")
                 }
             }
             
-            
-            Alamofire.request(.GET, path, parameters: nil, encoding: .JSON, headers: headers).validate().responseJSON { response in
-                    switch response.result {
-                    case .Success(let json):
-                        print("Success getOutfits")
-                        completion(isSuccess: true, object: JSON(json))
-                    case .Failure(let error):
-                        if let error = error as NSError? {
-                            if error.code == 401 {
-                                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.NoAuthentication, object: nil)
-                            } else {
-                                print(error.localizedDescription)
-                                completion(isSuccess: false, object: JSON(error.localizedDescription))
-                            }
+            Alamofire.request(URL(string: path)!, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let json):
+                    print("Success getOutfits")
+                    completion(true, JSON(json))
+                case .failure(let error):
+                    if let error = error as NSError? {
+                        if error.code == 401 {
+                            NotificationCenter.default.post(name: Notifications.Error.NoAuthentication, object: nil)
+                        } else {
+                            print(error.localizedDescription)
+                            completion(false, JSON(error.localizedDescription))
                         }
+                    }
                 }
-            }
+            })
         } else {
-            completion(isSuccess: false, object: "")
+            completion(false, "")
         }
     }
     
     
-    private func getOutfitsPutOn(completion: (isSuccess: Bool, object: JSON) -> Void){
+    fileprivate func getOutfitsPutOn(_ completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         let dal = ProfilsDAL()
         if let profil = dal.fetch(SharedData.sharedInstance.currentUserId!) {
             
             var path = baseUrlOutfits + "outfitsPutOn";
             var headers :[String : String]?
-            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
-                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            if ((FBSDKAccessToken.current()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.current().tokenString)"
             } else {
                 if let token = profil.access_token {
                     headers = ["Authorization": "Bearer \(token)"]
                 } else {
-                    completion(isSuccess: false, object: "")
+                    completion(false, "")
                 }
             }
             
-            Alamofire.request(.GET, path, parameters: nil, encoding: .JSON, headers: headers).validate().responseJSON { response in
+            Alamofire.request(URL(string: path)!, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON(completionHandler: { (response) in
                 switch response.result {
-                case .Success(let json):
+                case .success(let json):
                     print("Success getOutfits")
-                    completion(isSuccess: true, object: JSON(json))
-                case .Failure(let error):
+                    completion(true, JSON(json))
+                case .failure(let error):
                     if let error = error as NSError? {
                         print(error.localizedDescription)
-                        completion(isSuccess: false, object: JSON(error.localizedDescription))
+                        completion(false, JSON(error.localizedDescription))
                     }
                 }
-            }
+            })
 
         } else {
-        completion(isSuccess: false, object: "")
+        completion(false, "")
         }
     }
 
 
-    private func getBrandClothes(completion: (isSuccess: Bool, object: [BrandClothe]?) -> Void){
+    fileprivate func getBrandClothes(_ completion: @escaping (_ isSuccess: Bool, _ object: [BrandClothe]?) -> Void){
         let dal = ProfilsDAL()
         if let profil = dal.fetch(SharedData.sharedInstance.currentUserId!) {
             var path = self.baseUrlBrand
             var headers :[String : String]?
-            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
-                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            if ((FBSDKAccessToken.current()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.current().tokenString)"
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
             
-            Alamofire.request(.GET, path, parameters: nil, encoding: .JSON, headers: headers).validate().responseJSON { response in
+            Alamofire.request(URL(string: path)!, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON(completionHandler: { (response) in
                 if response.result.isSuccess {
                     let jsonDic = JSON(response.result.value!)
-                    completion(isSuccess: true, object: self.jsonToBrandClothe(jsonDic))
+                    completion(true, self.jsonToBrandClothe(jsonDic))
                 } else {
-                    completion(isSuccess: false, object: nil)
+                    completion(false, nil)
                 }
-            }
+            })
         } else {
-            completion(isSuccess: false, object: nil)
+            completion(false, nil)
         }
     }
     
-    private func saveOutfit(outfit: Outfit, completion: (isSuccess: Bool) -> Void){
+    fileprivate func saveOutfit(_ outfit: Outfit, completion: @escaping (_ isSuccess: Bool) -> Void){
         //Save outfit but remove images before
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
             var path = baseUrlOutfits + "OOTD"
             var headers :[String : String]?
-            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
-                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            if ((FBSDKAccessToken.current()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.current().tokenString)"
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
-  
-            Alamofire.request(.POST, path, parameters: outfit.toDictionnary() as? [String : AnyObject], encoding: .JSON, headers: headers).validate().responseJSON { response in
+            
+            Alamofire.request(URL(string: path)!, method: HTTPMethod.post, parameters: outfit.toDictionnary() as? [String : AnyObject], encoding: JSONEncoding.default, headers: headers).validate().responseJSON(completionHandler: { (response) in
                 if response.result.isSuccess {
-                    completion(isSuccess: true)
+                    completion(true)
                 } else {
-                    completion(isSuccess: false)
+                    completion(false)
                 }
-            }
+            })
         }
     }
     

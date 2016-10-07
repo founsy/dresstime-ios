@@ -26,40 +26,40 @@ class LoginService {
     static let clientSecret = "SomeRandomCharsAndNumbers"
     
     
-    func Login(login: String, password: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+    func Login(_ login: String, password: String, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         self.login(login, password: password, completion: completion)
     }
     
-    func Logout(access_token: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+    func Logout(_ access_token: String, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if (Mock.isMockable()){
             if let nsdata = ReadJsonFile().readFile("logout"){
                 let json = JSON(data: nsdata)
-                completion(isSuccess: true, object:json)
+                completion(true, json)
             } else {
-                completion(isSuccess: false, object: "")
+                completion(false, "")
             }
         } else {
             self.logout(access_token, completion: completion)
         }
     }
     
-    func SendVerificationEmail(email: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+    func SendVerificationEmail(_ email: String, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if (Mock.isMockable()){
-            completion(isSuccess: true, object: "")
+            completion(true, "")
         } else {
             self.sendVerificationEmail(email, completion: completion)
         }
     }
     
-    func RefreshToken(refreshToken: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+    func RefreshToken(_ refreshToken: String, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if (Mock.isMockable()){
             if let nsdata = ReadJsonFile().readFile("refreshToken"){
-                let str = NSString(data: nsdata, encoding:NSUTF8StringEncoding)
+                let str = NSString(data: nsdata, encoding:String.Encoding.utf8.rawValue)
                 print(str)
                 let json = JSON(data: nsdata)
-                completion(isSuccess: true, object:json)
+                completion(true, json)
             } else {
-                completion(isSuccess: false, object: "")
+                completion(false, "")
             }
         } else {
             self.refreshToken(refreshToken, completion: completion)
@@ -71,7 +71,7 @@ class LoginService {
     /*************************************/
     
     //POST
-    private func login(login: String, password: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+    fileprivate func login(_ login: String, password: String, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         let parameters = [
             "grant_type" : LoginService.grantTypePassword,
             "client_id" : LoginService.clientId,
@@ -80,57 +80,54 @@ class LoginService {
             "password" : password
         ]
         let path = base_url + "token"
-        Alamofire.request(.POST, path, parameters: parameters, encoding: .JSON).validate().responseJSON { response in
-            if response.result.isSuccess {
-                let jsonDic = JSON(response.result.value!)
-                completion(isSuccess: true, object: jsonDic)
-            } else {
-                print(response.result.error)
-                let error = JSON(response.result.error!)
-                completion(isSuccess: false, object: error)
+        Alamofire.request(URL(string: path)!, method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate().responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let json):
+                completion(true, JSON(json))
+            case .failure(let error):
+                completion(false, JSON(error))
             }
-        }
+        })
     }
     
     //GET
-    private func logout(accessToken: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+    fileprivate func logout(_ accessToken: String, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         let dal = ProfilsDAL()
         if let profil = dal.fetch(SharedData.sharedInstance.currentUserId!) {
             var path = base_url_auth + "logout"
 
             var headers :[String : String]?
-            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
-                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            if ((FBSDKAccessToken.current()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.current().tokenString)"
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
             
-            Alamofire.request(.GET, path, parameters: nil, encoding: .JSON, headers: headers).validate().responseJSON { (response) -> Void in
-                if response.result.isSuccess {
-                    print(response.result.value)
-                    let jsonDic = JSON(response.result.value!)
-                    completion(isSuccess: true, object: jsonDic)
-                } else {
-                    completion(isSuccess: false, object: "")
+            Alamofire.request(URL(string: path)!, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let json):
+                    completion(true, JSON(json))
+                case .failure(let error):
+                    completion(false, JSON(error))
                 }
-            }
+            })
         }
     }
     
-    private func sendVerificationEmail(email: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+    fileprivate func sendVerificationEmail(_ email: String, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         let path =  "\(base_url_email)send?email=\(email)"
-        Alamofire.request(.GET, path, parameters: nil, encoding: .JSON).validate().responseJSON { (response) -> Void in
-            if response.result.isSuccess {
-                print(response.result.value)
-                let jsonDic = JSON(response.result.value!)
-                completion(isSuccess: true, object: jsonDic)
-            } else {
-                completion(isSuccess: false, object: "")
+        
+        Alamofire.request(URL(string: path)!, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let json):
+                completion(true, JSON(json))
+            case .failure(let error):
+                completion(false, JSON(error))
             }
-        }
+        })
     }
     
-    private func refreshToken(refreshToken: String, completion:(isSuccess: Bool, object: JSON) -> Void) {
+    fileprivate func refreshToken(_ refreshToken: String, completion:@escaping (_ isSuccess: Bool, _ object: JSON) -> Void) {
         let parameters = [
             "grant_type" : LoginService.grantTypeRefresh,
             "client_id" : LoginService.clientId,
@@ -138,22 +135,21 @@ class LoginService {
             "refresh_token" : refreshToken
         ]
         let path = base_url + "token"
-        Alamofire.request(.POST, path, parameters: parameters, encoding: .JSON).validate().responseJSON { response in
-            if response.result.isSuccess {
-                print(response.result.value)
-                let jsonDic = JSON(response.result.value!)
-                completion(isSuccess: true, object: jsonDic)
-            } else {
-                completion(isSuccess: false, object: "")
+        
+        Alamofire.request(URL(string: path)!, method: HTTPMethod.get, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate().responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let json):
+                completion(true, JSON(json))
+            case .failure(let error):
+                completion(false, JSON(error))
             }
-        }
-
+        })
     }
 }
 
 
-public class Mock {
+open class Mock {
     static func isMockable() -> Bool{
-       return (SharedData.sharedInstance.currentUserId?.lowercaseString == "alexandre" || SharedData.sharedInstance.currentUserId?.lowercaseString == "juliette")
+       return (SharedData.sharedInstance.currentUserId?.lowercased() == "alexandre" || SharedData.sharedInstance.currentUserId?.lowercased() == "juliette")
     }
 }

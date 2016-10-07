@@ -10,10 +10,10 @@ import Foundation
 
 class PListReader {
     
-    static func getStringProperty(key: String) -> String {
-        let path = NSBundle.mainBundle().pathForResource("DressTime", ofType: "plist")
+    static func getStringProperty(_ key: String) -> String {
+        let path = Bundle.main.path(forResource: "DressTime", ofType: "plist")
         let dict = NSDictionary(contentsOfFile: path!)
-        return dict!.valueForKey(key) as! String
+        return dict!.value(forKey: key) as! String
     }
 
 }

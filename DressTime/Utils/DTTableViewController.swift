@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-public class DTTableViewController: UITableViewController {
+open class DTTableViewController: UITableViewController {
     
-    override public func viewDidLoad() {
+    override open func viewDidLoad() {
         //self.tabBarController?.tabBar.tintColor = UIColor.dressTimeOrange()
     }
 }

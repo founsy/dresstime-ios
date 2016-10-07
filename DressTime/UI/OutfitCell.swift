@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol OutfitCellDelegate {
-    func outfitCell(outfitCell : UICollectionViewCell, typeSelected type: String)
+    func outfitCell(_ outfitCell : UICollectionViewCell, typeSelected type: String)
 }
 
 class OufitCell: UICollectionViewCell {
@@ -21,17 +21,17 @@ class OufitCell: UICollectionViewCell {
     @IBOutlet weak var momentLabel: UILabel!
     
     var delegate: OutfitCellDelegate?
-    private let BL = DressTimeBL()
+    fileprivate let BL = DressTimeBL()
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        containerMomentImage.roundCorners(.AllCorners, radius: 27.5)
+        containerMomentImage.layer.cornerRadius = 27.5
     }
     
-    func createOutfitView(outfit: Outfit, cell: OufitCell){
+    func createOutfitView(_ outfit: Outfit, cell: OufitCell){
         var j = 1
         let dal = ClothesDAL()
-        for i in (outfit.clothes.count-1).stride(through: 0, by: -1) {
+        for i in stride(from: (outfit.clothes.count-1), through: 0, by: -1) {
             let clothe_id = outfit.clothes[i].clothe_id
             if let clothe = dal.fetch(clothe_id) {
                 let width:CGFloat = cell.containerView.frame.width
@@ -55,7 +55,7 @@ class OufitCell: UICollectionViewCell {
                     y = self.containerView.frame.height - (height * CGFloat(j)) + (height/2.0)
                 }
                 
-                let rect = CGRectMake(x, y, width, height)
+                let rect = CGRect(x: x, y: y, width: width, height: height)
                 j += 1
                 
                 self.createClotheView(clothe, rect: rect)
@@ -64,66 +64,42 @@ class OufitCell: UICollectionViewCell {
         self.putOnStyle(outfit.isPutOn, style: outfit.style)
     }
     
-    
-    
-    
-    private func applyPlainShadow(view: UIView) {
-        let layer = view.layer
-        let shadowPath = UIBezierPath(roundedRect: view.bounds, cornerRadius: layer.cornerRadius)
-        layer.masksToBounds = false
-        layer.shadowColor = UIColor.blackColor().CGColor
-        //layer.shadowOffset = CGSizeMake(0, 10)
-        layer.shadowOpacity = 1
-        layer.shadowRadius = 4
-        layer.shouldRasterize = false
-        layer.shadowPath = shadowPath.CGPath
-    }
-
-    
-    private func createClotheView(clothe: Clothe, rect: CGRect){
-         let view = UIView(frame: rect)
-            view.backgroundColor = UIColor.clearColor()
-            view.roundCorners(UIRectCorner.AllCorners, radius: 5.0)
-            view.layer.masksToBounds = true
-        
-            let img = clothe.getImage()
+    fileprivate func createClotheView(_ clothe: Clothe, rect: CGRect){
+        let view = UIView(frame: rect)
+        view.backgroundColor = UIColor.clear
             
-            let imageView = UIImageView(frame: CGRectMake(0, 0, rect.size.width, rect.size.height))
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: rect.size.width, height: rect.size.height))
+        imageView.contentMode = UIViewContentMode.scaleToFill
         
-                imageView.image = img
-                imageView.contentMode = UIViewContentMode.ScaleToFill
-        
-            self.applyPlainShadow(view)
-            view.addSubview(imageView)
-            self.containerView.addSubview(view)
+        DispatchQueue.main.async {
+            let img = clothe.getImage()
+            imageView.image = img
+        }
+
+        view.addSubview(imageView)
+        self.containerView.layer.cornerRadius = 5.0
+        self.containerView.clipsToBounds = true
+        self.containerView.addSubview(view)
     }
     
-    private func putOnStyle(isPutOn: Bool, style: String){
+    fileprivate func putOnStyle(_ isPutOn: Bool, style: String){
         if (isPutOn){
-            self.containerView.layer.borderColor = UIColor.dressTimeRedBrand().CGColor
+            self.containerView.layer.borderColor = UIColor.dressTimeRedBrand().cgColor
             self.containerMomentImage.backgroundColor = UIColor.dressTimeRedBrand()
             self.imageView.image = UIImage(named: "checkSelected")
-            self.imageView.tintColor = UIColor.whiteColor()
-            self.momentLabel.textColor = UIColor.whiteColor()
+            self.imageView.tintColor = UIColor.white
+            self.momentLabel.textColor = UIColor.white
         } else {
             self.containerMomentImage.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.3)
-            self.imageView.tintColor = UIColor.whiteColor()
-            self.momentLabel.textColor = UIColor.whiteColor()
+            self.imageView.tintColor = UIColor.white
+            self.momentLabel.textColor = UIColor.white
         }
-        self.momentLabel.text = NSLocalizedString(style, comment: "style").lowercaseString
+        self.momentLabel.text = NSLocalizedString(style, comment: "style").lowercased()
     }
     
     func removeOldImages(){
         for item in containerView.subviews {
             item.removeFromSuperview()
-        }
-    }
-    
-    func someAction(sender:UITapGestureRecognizer){
-        // do other task
-        print(sender.view?.accessibilityIdentifier)
-        if let del = self.delegate {
-            del.outfitCell(self, typeSelected: sender.view!.accessibilityIdentifier!)
         }
     }
 }

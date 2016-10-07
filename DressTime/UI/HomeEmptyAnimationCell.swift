@@ -15,7 +15,7 @@ class HomeEmptyAnimationCell: UITableViewCell {
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var bubbleImageView: UIImageView!
     
-    private var arrowImageView: UIImageView?
+    fileprivate var arrowImageView: UIImageView?
     var controller: HomeViewController?
     
     override func awakeFromNib() {
@@ -28,7 +28,7 @@ class HomeEmptyAnimationCell: UITableViewCell {
         messageLabel.text = NSLocalizedString("homeEmptyAnimationMessage", comment: "")
     }
     
-    private func loadAnimateImage() -> [UIImage] {
+    fileprivate func loadAnimateImage() -> [UIImage] {
         let imagesListArray :NSMutableArray = []
         for position in 0...296{
             var i = String(position)
@@ -40,7 +40,7 @@ class HomeEmptyAnimationCell: UITableViewCell {
             
             let strImageName : String = "men_00\(i).png"
             let image  = UIImage(named:strImageName)
-            imagesListArray.addObject(image!)
+            imagesListArray.add(image!)
         }
         return imagesListArray as AnyObject as! [UIImage]
     }
@@ -51,14 +51,14 @@ class HomeEmptyAnimationCell: UITableViewCell {
         }
     
         self.arrowImageView = UIImageView(image: UIImage(named: "arrowIcon"))
-        let p = self.bubbleImageView.convertPoint(self.bubbleImageView.frame.origin, toView: self.controller!.view)
+        let p = self.bubbleImageView.convert(self.bubbleImageView.frame.origin, to: self.controller!.view)
         
-        let t = self.bubbleImageView.superview!.convertPoint(self.bubbleImageView.frame.origin, toView: nil)
+        let t = self.bubbleImageView.superview!.convert(self.bubbleImageView.frame.origin, to: nil)
         
         let y = t.y > 300 ? t.y - (self.bubbleImageView.frame.height/2): 186.0 + p.y - 10
         let x = bubbleImageView.frame.width + bubbleImageView.frame.origin.x
         
-        self.arrowImageView!.frame = CGRectMake(x, 64.0, 64.0, y)
+        self.arrowImageView!.frame = CGRect(x: x, y: 64.0, width: 64.0, height: y)
         self.controller!.view.addSubview(self.arrowImageView!)
     }
 }

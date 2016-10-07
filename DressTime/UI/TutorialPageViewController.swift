@@ -15,8 +15,8 @@ class TutorialPageViewController: UIViewController {
     @IBOutlet weak var subTitleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
-    private let titleName = ["TutorialPage1Title", "TutorialPage2Title", "TutorialPage3Title", "TutorialPage4Title"]
-    private let subTitleName = ["TutorialPage1Msg", "TutorialPage2Msg", "TutorialPage3Msg", "TutorialPage4Msg"]
+    fileprivate let titleName = ["TutorialPage1Title", "TutorialPage2Title", "TutorialPage3Title", "TutorialPage4Title"]
+    fileprivate let subTitleName = ["TutorialPage1Msg", "TutorialPage2Msg", "TutorialPage3Msg", "TutorialPage4Msg"]
     
     var index:Int = 0 {
         didSet {

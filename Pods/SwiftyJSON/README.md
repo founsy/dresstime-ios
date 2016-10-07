@@ -1,6 +1,6 @@
 #SwiftyJSON
 
-[![Travis CI](https://travis-ci.org/SwiftyJSON/SwiftyJSON.svg?branch=master)](https://travis-ci.org/SwiftyJSON/SwiftyJSON) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) ![CocoaPods](https://img.shields.io/cocoapods/v/SwiftyJSON.svg) ![Platform](https://img.shields.io/badge/platforms-iOS%208.0+%20%7C%20macOS%2010.10+%20%7C%20tvOS%209.0+%20%7C%20watchOS%202.0+-333333.svg)
+[![Travis CI](https://travis-ci.org/SwiftyJSON/SwiftyJSON.svg?branch=master)](https://travis-ci.org/SwiftyJSON/SwiftyJSON)
 
 SwiftyJSON makes it easy to deal with JSON data in Swift.
 
@@ -82,13 +82,13 @@ if let userName = json[999999]["wrong_key"]["wrong_name"].string {
 
 ## Requirements
 
-- iOS 8.0+ | macOS 10.10+ | tvOS 9.0+ | watchOS 2.0+
+- iOS 7.0+ / OS X 10.9+
 - Xcode 8
 
 ##Integration
 
 ####CocoaPods (iOS 8+, OS X 10.9+)
-You can use [CocoaPods](http://cocoapods.org/) to install `SwiftyJSON`by adding it to your `Podfile`:
+You can use [Cocoapods](http://cocoapods.org/) to install `SwiftyJSON`by adding it to your `Podfile`:
 ```ruby
 platform :ios, '8.0'
 use_frameworks!
@@ -115,7 +115,7 @@ let package = Package(
     name: "YOUR_PROJECT_NAME",
     targets: [],
     dependencies: [
-        .Package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", versions: Version(1,0,0)..<Version(2, .max, .max)),
+        .Package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", versions: "2.3.3" ..< Version.max)
     ]
 )
 ```
@@ -152,12 +152,6 @@ if let dataFromString = jsonString.dataUsingEncoding(NSUTF8StringEncoding, allow
 //Getting a double from a JSON Array
 let name = json[0].double
 ```
-
-```swift
-//Getting an array of string from a JSON Array
-let arrayNames =  json["users"].arrayValue.map({$0["name"].stringValue})
-```
-
 ```swift
 //Getting a string from a JSON Dictionary
 let name = json["name"].stringValue
@@ -305,7 +299,7 @@ json["id"].int =  1234567890
 json["coordinate"].double =  8766.766
 json["name"].string =  "Jack"
 json.arrayObject = [1,2,3,4]
-json.dictionaryObject = ["name":"Jack", "age":25]
+json.dictionary = ["name":"Jack", "age":25]
 ```
 
 ####Raw object
@@ -327,7 +321,7 @@ if let string = json.rawString() {
     //Do something you want
 }
 ```
-####Existence
+####Existance
 ```swift
 //shows you whether value specified in JSON or not
 if json["name"].isExists()
@@ -392,9 +386,11 @@ SwiftyJSON nicely wraps the result of the Alamofire JSON response handler:
 ```swift
 Alamofire.request(.GET, url).validate().responseJSON { response in
     switch response.result {
-    case .Success(let value):
-        let json = JSON(value)
-        print("JSON: \(json)")
+    case .Success:
+        if let value = response.result.value {
+          let json = JSON(value)
+          print("JSON: \(json)")
+        }
     case .Failure(let error):
         print(error)
     }

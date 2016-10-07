@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol HomeEmptyStepCellDelegate {
-    func homeEmptyStepCell(homeEmptyStepCell: HomeEmptyStepCell, didSelectItem item: String)
+    func homeEmptyStepCell(_ homeEmptyStepCell: HomeEmptyStepCell, didSelectItem item: String)
 }
 
 class HomeEmptyStepCell: UITableViewCell {
@@ -26,10 +26,10 @@ class HomeEmptyStepCell: UITableViewCell {
         let clotheDAL = ClothesDAL()
         
         for i in 0 ..< type.count {
-            let number = clotheDAL.fetch(type: type[i].lowercaseString).count
-            let view = NSBundle.mainBundle().loadNibNamed("EmptyTypeView", owner: self, options: nil)[0] as! EmptyTypeView
+            let number = clotheDAL.fetch(type: type[i].lowercased()).count
+            let view = Bundle.main.loadNibNamed("EmptyTypeView", owner: self, options: nil)?[0] as! EmptyTypeView
             view.iconImage.image = UIImage(named: getImageName(type[i]))
-            view.currentType = type[i].lowercaseString
+            view.currentType = type[i].lowercased()
             view.updateStepViews(number)
             view.delegate = self
             stackView.addArrangedSubview(view)
@@ -38,8 +38,8 @@ class HomeEmptyStepCell: UITableViewCell {
        // stackView.translatesAutoresizingMaskIntoConstraints = false;
     }
     
-    private func getImageName(type: String) -> String{
-        switch (type.lowercaseString){
+    fileprivate func getImageName(_ type: String) -> String{
+        switch (type.lowercased()){
             case "maille":
                 return "sweaterIcon"
             case "top":
@@ -55,7 +55,7 @@ class HomeEmptyStepCell: UITableViewCell {
 }
 
 extension HomeEmptyStepCell : EmptyTypeViewDelegate {
-    func emptyTypeView(emptyTypeView: EmptyTypeView, didSelectItem item: String) {
+    func emptyTypeView(_ emptyTypeView: EmptyTypeView, didSelectItem item: String) {
         if let del = self.delegate {
             del.homeEmptyStepCell(self, didSelectItem: item)
         }

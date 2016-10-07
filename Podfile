@@ -12,8 +12,7 @@ target 'DressTime' do
 	pod 'MapleBacon'
 	pod 'FBSDKCoreKit'
 	pod 'FBSDKLoginKit'
-	pod 'SwiftyJSON'
-	#pod 'OneSignal', '~> 1.13'
+	pod 'SwiftyJSON', '~> 3.0.0'
 end
 
 target 'DressTime Dev' do
@@ -25,7 +24,7 @@ target 'DressTime Dev' do
 	pod 'MapleBacon'
 	pod 'FBSDKCoreKit'
 	pod 'FBSDKLoginKit'
-	pod 'SwiftyJSON'
+	pod 'SwiftyJSON', '~> 3.0.0'
 end
 
 target 'DressTimeTests' do
@@ -40,3 +39,9 @@ target 'DressTimeUITests' do
 
 end
 
+post_install do |installer| 
+  installer.pods_project.targets.each  do |target| 
+      target.build_configurations.each  do |config| config.build_settings['SWIFT_VERSION'] = '3.0' 
+      end 
+   end 
+end

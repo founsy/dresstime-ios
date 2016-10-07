@@ -22,10 +22,10 @@ class CalendarViewController: DTViewController {
     var gradient : CAGradientLayer?
     var imageBg : UIImage?
     
-    var currentIndex: NSIndexPath?
+    var currentIndex: IndexPath?
     
-    private var creationDate:NSDate?
-    private var arrayOfDate = [[NSDate]]()
+    fileprivate var creationDate:Date?
+    fileprivate var arrayOfDate = [[Date]]()
     
     override func viewDidLoad(){
         super.viewDidLoad()
@@ -33,66 +33,66 @@ class CalendarViewController: DTViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.registerNib(UINib(nibName: "ClotheCalendarCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
-        tableView.registerNib(UINib(nibName: "NoClotheCalendarCell", bundle:nil), forCellReuseIdentifier: self.cellNoClotheIdentifier)
+        tableView.register(UINib(nibName: "ClotheCalendarCell", bundle:nil), forCellReuseIdentifier: self.cellIdentifier)
+        tableView.register(UINib(nibName: "NoClotheCalendarCell", bundle:nil), forCellReuseIdentifier: self.cellNoClotheIdentifier)
         
         
         collectionView.allowsMultipleSelection = false
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.registerNib(UINib(nibName: "NumberCalendarCell", bundle:nil), forCellWithReuseIdentifier: self.numberCellIdentifier)
+        collectionView.register(UINib(nibName: "NumberCalendarCell", bundle:nil), forCellWithReuseIdentifier: self.numberCellIdentifier)
         collectionView.remembersLastFocusedIndexPath = true
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let weather = SharedData.sharedInstance.currentWeater {
             self.imageBackground.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(weather.code == nil ? 800 : weather.code!))
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         DressTimeService().GetOutfitsPutOn { (isSuccess, object) -> Void in
             if (isSuccess){
                 for item in object.arrayValue {
-                self.tableData.append(Outfit(json: item))
+                    self.tableData.append(Outfit(json: item))
                 }
-                self.getIndex()
+                self.calculateLast30Days()
                 self.tableView.reloadData()
                 self.collectionView.reloadData()
-                self.collectionView(self.collectionView, didSelectItemAtIndexPath: NSIndexPath(forItem: 0, inSection: 0))
-                self.collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UICollectionViewScrollPosition.None, animated: true)
+                self.collectionView(self.collectionView, didSelectItemAt: IndexPath(item: 0, section: 0))
+                self.collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: UICollectionViewScrollPosition.top, animated: true)
             } else {
-                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.SaveOutfit, object: nil)
+                NotificationCenter.default.post(name: Notifications.Error.SaveOutfit, object: nil)
             }
         }
 
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "showOutfitMaker"){
-            let vc = segue.destinationViewController as! OutfitViewController
+            let vc = segue.destination as! OutfitViewController
             vc.creationDate = self.creationDate
             if (self.currentIndex != nil) {
-                if let outfit = self.getOutfit(arrayOfDate[currentIndex!.section][currentIndex!.row].toS("MM-dd-YY")!) {
+                if let outfit = self.getOutfit(arrayOfDate[(currentIndex! as NSIndexPath).section][(currentIndex! as NSIndexPath).row].toS("MM-dd-YY")!) {
                     vc.currentOutfits = outfit.clothes
                 }
             }
         }
     }
     
-    private func getIndex(){
-        var lastMonth = NSDate() - 15.day
-        var previousDate: NSDate?
+    fileprivate func calculateLast30Days(){
+        var lastMonth = Date() - 15.day
+        var previousDate: Date?
         
-        self.arrayOfDate = [[NSDate]]()
+        self.arrayOfDate = [[Date]]()
         var index = -1
-        while (NSDate() > lastMonth){
+        while (lowerDate(left: Date(), right: lastMonth)){
             if (previousDate == nil || previousDate!.toS("MMM")! != lastMonth.toS("MMM")!) {
-                arrayOfDate.append([NSDate]())
+                arrayOfDate.append([Date]())
                 index = index + 1
             }
             arrayOfDate[index].append(lastMonth)
@@ -100,19 +100,19 @@ class CalendarViewController: DTViewController {
             lastMonth = lastMonth + 1.day
         }
         for i in 0..<arrayOfDate.count {
-            arrayOfDate[i] = arrayOfDate[i].reverse()
+            arrayOfDate[i] = arrayOfDate[i].reversed()
         }
-        arrayOfDate = arrayOfDate.reverse()
+        arrayOfDate = arrayOfDate.reversed()
     }
     
-    private func createOutfitView(outfit: Outfit, cell: ClotheCalendarCell){
+    fileprivate func createOutfitView(_ outfit: Outfit, cell: ClotheCalendarCell){
         var j = 1
         if (outfit.clothes.count > 0){
             //Be sure the order of clothes are ok
             outfit.orderOutfit()
             let dal = ClothesDAL()
      
-            for i in (outfit.clothes.count-1).stride(through: 0, by: -1) {
+            for i in stride(from: (outfit.clothes.count-1), through: 0, by: -1) {
                 let clothe_id = outfit.clothes[i].clothe_id
                 if let clothe = dal.fetch(clothe_id) {
                     let width:CGFloat = cell.containerView.frame.width
@@ -136,7 +136,7 @@ class CalendarViewController: DTViewController {
                         y = cell.containerView.frame.height - (height * CGFloat(j)) + (height/2.0)
                     }
                     
-                    let rect = CGRectMake(x, y, width, height)
+                    let rect = CGRect(x: x, y: y, width: width, height: height)
                     j += 1
                     
                     cell.createClotheView(clothe, rect: rect)
@@ -145,7 +145,7 @@ class CalendarViewController: DTViewController {
         }
     }
     
-    private func getOutfit(date: String) -> Outfit? {
+    fileprivate func getOutfit(_ date: String) -> Outfit? {
         for item in self.tableData {
             let outfitdate = item.updatedDate!.toS("MM-dd-YY")
             if (outfitdate == date){
@@ -155,69 +155,68 @@ class CalendarViewController: DTViewController {
         return nil
     }
     
-    private func didEndScrolling(scrollView: UIScrollView){
+    fileprivate func didEndScrolling(_ scrollView: UIScrollView){
         var center = scrollView.frame.origin;
         center.x += scrollView.frame.size.width / 2;
         center.y += scrollView.frame.size.height / 2;
-        center = scrollView.convertPoint(center, fromView: scrollView.superview)
+        center = scrollView.convert(center, from: scrollView.superview)
         
         if (scrollView == tableView){
             let rect = CGRect(x: center.x - 50, y: center.y - 50, width: 100, height: 100)
-            if let array = self.tableView.indexPathsForRowsInRect(rect) {
+            if let array = self.tableView.indexPathsForRows(in: rect) {
                 let indexPath = array[0]
-                print(indexPath.section)
-                self.collectionView.selectItemAtIndexPath(NSIndexPath(forItem: indexPath.row, inSection: indexPath.section), animated: true, scrollPosition: UICollectionViewScrollPosition.CenteredVertically)
-                self.collectionView.deselectItemAtIndexPath(NSIndexPath(forItem: currentIndex!.row, inSection: indexPath.section), animated: true)
-                self.collectionView(self.collectionView, didDeselectItemAtIndexPath: NSIndexPath(forItem: currentIndex!.row, inSection: indexPath.section))
-                self.collectionView(self.collectionView, didSelectItemAtIndexPath: NSIndexPath(forItem: indexPath.row, inSection: indexPath.section))
+                self.collectionView.selectItem(at: IndexPath(item: indexPath.row, section: indexPath.section), animated: true, scrollPosition: UICollectionViewScrollPosition.centeredVertically)
+                self.collectionView.deselectItem(at: IndexPath(item: currentIndex!.row, section: indexPath.section), animated: true)
+                self.collectionView(self.collectionView, didDeselectItemAt: IndexPath(item: currentIndex!.row, section: indexPath.section))
+                self.collectionView(self.collectionView, didSelectItemAt: IndexPath(item: indexPath.row, section: indexPath.section))
             }
         }
     }
 }
 
 extension CalendarViewController : UITableViewDataSource , UITableViewDelegate {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return self.arrayOfDate.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.arrayOfDate[section].count
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.currentIndex = indexPath
-        self.performSegueWithIdentifier("showOutfitMaker", sender: self)
+        self.performSegue(withIdentifier: "showOutfitMaker", sender: self)
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let outfit = getOutfit(self.arrayOfDate[indexPath.section][indexPath.row].toS("MM-dd-YY")!) {
-            let cell = tableView.dequeueReusableCellWithIdentifier(self.cellIdentifier, forIndexPath: indexPath) as! ClotheCalendarCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: self.cellIdentifier, for: indexPath) as! ClotheCalendarCell
             cell.removeOldImages()
             createOutfitView(outfit, cell: cell)
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(self.cellNoClotheIdentifier, forIndexPath: indexPath) as! NoClotheCalendarCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: self.cellNoClotheIdentifier, for: indexPath) as! NoClotheCalendarCell
             cell.indexPath = indexPath
             cell.delegate = self
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
+            cell.selectionStyle = UITableViewCellSelectionStyle.none
             return cell
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-         if let _ = getOutfit(arrayOfDate[indexPath.section][indexPath.row].toS("MM-dd-YY")!) {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+         if let _ = getOutfit(arrayOfDate[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row].toS("MM-dd-YY")!) {
             return 305.0
          } else {
             return 277.0
         }
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         self.didEndScrolling(scrollView)
     }
     
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         if !decelerate {
             self.didEndScrolling(scrollView)
         }
@@ -226,28 +225,28 @@ extension CalendarViewController : UITableViewDataSource , UITableViewDelegate {
 }
 
 extension CalendarViewController: NoClotheCalendarCellDelegate {
-    func noClotheCalendarCell(noClotheCalendarCell: NoClotheCalendarCell, didCreateOutfit item: NSIndexPath) {
+    func noClotheCalendarCell(_ noClotheCalendarCell: NoClotheCalendarCell, didCreateOutfit item: IndexPath) {
         //Save the date when the user want to create the outfit
-        self.creationDate = self.arrayOfDate[item.section][item.row]
+        self.creationDate = self.arrayOfDate[(item as NSIndexPath).section][(item as NSIndexPath).row]
         //Outfit Maker ViewController
-        self.performSegueWithIdentifier("showOutfitMaker", sender: self)
+        self.performSegue(withIdentifier: "showOutfitMaker", sender: self)
     }
 }
 
 extension CalendarViewController : UICollectionViewDataSource {    
-    func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
         //Return number of section corresponding of number of month
         return self.arrayOfDate.count
     }
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.arrayOfDate[section].count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.numberCellIdentifier, forIndexPath: indexPath) as! NumberCalendarCell
-        cell.label.text = self.arrayOfDate[indexPath.section][indexPath.row].toS("dd")//toS("MMM dd")
-        if (currentIndex?.section == indexPath.section && currentIndex?.row == indexPath.row){
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: self.numberCellIdentifier, for: indexPath) as! NumberCalendarCell
+        cell.label.text = self.arrayOfDate[(indexPath as NSIndexPath).section][(indexPath as NSIndexPath).row].toS("dd")//toS("MMM dd")
+        if ((currentIndex as NSIndexPath?)?.section == (indexPath as NSIndexPath).section && (currentIndex as NSIndexPath?)?.row == (indexPath as NSIndexPath).row){
             cell.selectedStyle()
         } else {
             cell.unselectedStyle()
@@ -255,13 +254,13 @@ extension CalendarViewController : UICollectionViewDataSource {
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionElementKindSectionHeader {
-            let cell = collectionView.dequeueReusableSupplementaryViewOfKind(UICollectionElementKindSectionHeader, withReuseIdentifier: "header", forIndexPath: indexPath)
+            let cell = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "header", for: indexPath)
             if let textField = cell.subviews[0] as? UILabel {
-                let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue,
-                                          NSFontAttributeName : UIFont.boldSystemFontOfSize(17)]
-                textField.attributedText = NSAttributedString(string: self.arrayOfDate[indexPath.section][0].toS("MMM")!, attributes: underlineAttribute)
+                let underlineAttribute = [NSUnderlineStyleAttributeName: NSUnderlineStyle.styleSingle.rawValue,
+                                          NSFontAttributeName : UIFont.boldSystemFont(ofSize: 17)] as [String : Any]
+                textField.attributedText = NSAttributedString(string: self.arrayOfDate[(indexPath as NSIndexPath).section][0].toS("MMM")!, attributes: underlineAttribute)
             }
             return cell
         } else {
@@ -272,21 +271,21 @@ extension CalendarViewController : UICollectionViewDataSource {
 }
 
 extension CalendarViewController : UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let index = self.currentIndex {
-            self.collectionView.deselectItemAtIndexPath(NSIndexPath(forItem: index.row, inSection: index.section), animated: true)
-            self.collectionView(self.collectionView, didDeselectItemAtIndexPath: NSIndexPath(forItem: index.row, inSection: index.section))
+            self.collectionView.deselectItem(at: IndexPath(item: (index as NSIndexPath).row, section: (index as NSIndexPath).section), animated: true)
+            self.collectionView(self.collectionView, didDeselectItemAt: IndexPath(item: (index as NSIndexPath).row, section: (index as NSIndexPath).section))
         }
         
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as? NumberCalendarCell
+        let cell = collectionView.cellForItem(at: indexPath) as? NumberCalendarCell
         cell?.selectedStyle()
         currentIndex = indexPath
-        self.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: indexPath.row, inSection: indexPath.section), atScrollPosition: UITableViewScrollPosition.Middle, animated: true)
+        self.tableView.scrollToRow(at: IndexPath(item: (indexPath as NSIndexPath).row, section: (indexPath as NSIndexPath).section), at: UITableViewScrollPosition.middle, animated: true)
 
     }
     
-    func collectionView(collectionView: UICollectionView, didDeselectItemAtIndexPath indexPath: NSIndexPath) {
-        let cell = collectionView.cellForItemAtIndexPath(indexPath) as? NumberCalendarCell
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as? NumberCalendarCell
         cell?.unselectedStyle()
         currentIndex = nil
         

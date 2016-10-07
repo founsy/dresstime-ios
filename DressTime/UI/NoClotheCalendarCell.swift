@@ -11,7 +11,7 @@ import UIKit
 
 
 protocol NoClotheCalendarCellDelegate {
-    func noClotheCalendarCell(noClotheCalendarCell : NoClotheCalendarCell, didCreateOutfit item: NSIndexPath)
+    func noClotheCalendarCell(_ noClotheCalendarCell : NoClotheCalendarCell, didCreateOutfit item: IndexPath)
 }
 
 class NoClotheCalendarCell: UITableViewCell {
@@ -19,18 +19,18 @@ class NoClotheCalendarCell: UITableViewCell {
     @IBOutlet weak var addOutfit: UIButton!
     @IBOutlet weak var commentsCalendar: UILabel!
     
-    var date: NSDate?
+    var date: Date?
     var delegate: NoClotheCalendarCellDelegate?
-    var indexPath: NSIndexPath?
+    var indexPath: IndexPath?
     
     
-    @IBAction func createOutfit(sender: AnyObject) {
+    @IBAction func createOutfit(_ sender: AnyObject) {
         delegate?.noClotheCalendarCell(self, didCreateOutfit: indexPath!)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        addOutfit.layer.borderColor = UIColor.whiteColor().CGColor
+        addOutfit.layer.borderColor = UIColor.white.cgColor
         addOutfit.layer.borderWidth = 1.0
         addOutfit.layer.cornerRadius = 8.0
         

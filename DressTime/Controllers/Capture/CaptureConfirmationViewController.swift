@@ -21,10 +21,10 @@ class CaptureConfirmationViewController: DTViewController {
     @IBOutlet weak var patternContainerView: UIView!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
-    private let patternData = ["plain", "Hstripe", "Vstripe", "check", "gingham", "jacquard", "printed", "unisTouchImprime"]
-    private var pickerView: AKPickerView!
-    private var selectedPattern: Int = 0
-    private var isModify = false
+    fileprivate let patternData = ["plain", "Hstripe", "Vstripe", "check", "gingham", "jacquard", "printed", "unisTouchImprime"]
+    fileprivate var pickerView: AKPickerView!
+    fileprivate var selectedPattern: Int = 0
+    fileprivate var isModify = false
     
     var previousController: UIViewController!
     var clotheObject:[String: AnyObject]? {
@@ -39,16 +39,16 @@ class CaptureConfirmationViewController: DTViewController {
         }
     }
 
-    @IBAction func onTouchUpColor(sender: UIButton) {
+    @IBAction func onTouchUpColor(_ sender: UIButton) {
         for i in 0 ..< colorBtnCollection.count{
             if (colorBtnCollection[i] == sender){
-                colorBtnCollection[i].selected = true
+                colorBtnCollection[i].isSelected = true
                 colorBtnCollection[i].layer.borderWidth = 2.0
-                colorBtnCollection[i].layer.borderColor = UIColor.dressTimeOrange().CGColor
+                colorBtnCollection[i].layer.borderColor = UIColor.dressTimeOrange().cgColor
             } else {
-                colorBtnCollection[i].selected = false
+                colorBtnCollection[i].isSelected = false
                 colorBtnCollection[i].layer.borderWidth = 1.0
-                colorBtnCollection[i].layer.borderColor = UIColor.whiteColor().CGColor
+                colorBtnCollection[i].layer.borderColor = UIColor.white.cgColor
             }
         }
 
@@ -64,48 +64,48 @@ class CaptureConfirmationViewController: DTViewController {
         nameClothe.delegate = self
         
         whiteNavBar()
-        self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         createPickerView()
         applyStyleTextView(nameClothe)
         
         if let clothe = self.clotheObject {
             self.setNewClotheData(clothe)
-            self.saveButton.title = NSLocalizedString("captureStep3AddBtn", comment: "").uppercaseString
+            self.saveButton.title = NSLocalizedString("captureStep3AddBtn", comment: "").uppercased()
         }
         
         if let clothe = self.currentClothe {
             self.setModifyClotheData(clothe)
-            self.saveButton.title = NSLocalizedString("captureStep3ModifyBtn", comment: "").uppercaseString
+            self.saveButton.title = NSLocalizedString("captureStep3ModifyBtn", comment: "").uppercased()
         }
         
         //Set Translation
         headerMsgLabel.text = NSLocalizedString("captureStep3HeaderMsg", comment: "")
-        patternTitleLabel.text = NSLocalizedString("captureStep3PatternTitle", comment: "").uppercaseString
+        patternTitleLabel.text = NSLocalizedString("captureStep3PatternTitle", comment: "").uppercased()
     }
     
-    private func setColors(colors: String){
+    fileprivate func setColors(_ colors: String){
         let colors = self.splitHexColor(colors)
         for i in 0 ..< min(colorBtnCollection.count, colors.count){
             setColorStyle(colorBtnCollection[i])
             colorBtnCollection[i].backgroundColor = UIColor.colorWithHexString(colors[i] as String)
             if (i == 0){
-                colorBtnCollection[i].selected = true
+                colorBtnCollection[i].isSelected = true
                 colorBtnCollection[i].layer.borderWidth = 2.0
-                colorBtnCollection[i].layer.borderColor = UIColor.dressTimeOrange().CGColor
+                colorBtnCollection[i].layer.borderColor = UIColor.dressTimeOrange().cgColor
             }
         }
     }
     
-    private func setNewClotheData(clothe : [String: AnyObject]){
+    fileprivate func setNewClotheData(_ clothe : [String: AnyObject]){
         let type = clothe["clothe_type"] as! String
         let subtype = clothe["clothe_subtype"] as! String
         nameClothe.text = "\(type) - \(subtype)"
-        captureResult.image = UIImage(data: clothe["clothe_image"] as! NSData)
+        captureResult.image = UIImage(data: clothe["clothe_image"] as! Data)
         self.setColors(clothe["clothe_colors"] as! String)
     }
     
-    private func setModifyClotheData(clothe: Clothe){
+    fileprivate func setModifyClotheData(_ clothe: Clothe){
         let subtype = clothe.clothe_subtype
         let split = subtype.characters.split{$0 == "-"}.map(String.init)
         if (split.count > 1){
@@ -132,14 +132,14 @@ class CaptureConfirmationViewController: DTViewController {
         
         self.setColors(clothe.clothe_colors)
         
-        if let index = self.patternData.indexOf(clothe.clothe_pattern) {
+        if let index = self.patternData.index(of: clothe.clothe_pattern) {
             self.pickerView.selectItem(index)
             self.selectedPattern = index
         }
 
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
     
@@ -148,63 +148,63 @@ class CaptureConfirmationViewController: DTViewController {
         view.endEditing(true)
     }
     
-    private func setColorStyle(color: UIView){
+    fileprivate func setColorStyle(_ color: UIView){
         color.layer.cornerRadius = 5.0
         color.layer.borderWidth = 1.0
-        color.layer.borderColor = UIColor.whiteColor().CGColor
+        color.layer.borderColor = UIColor.white.cgColor
     }
     
-    private func applyStyleTextView(textField: UITextField){
+    fileprivate func applyStyleTextView(_ textField: UITextField){
         let bottomLine = CALayer()
-        bottomLine.frame = CGRectMake(0.0, textField.frame.height - 1, textField.frame.width, 1.0)
-        bottomLine.backgroundColor = UIColor.whiteColor().CGColor
-        textField.borderStyle = UITextBorderStyle.None
+        bottomLine.frame = CGRect(x: 0.0, y: textField.frame.height - 1, width: textField.frame.width, height: 1.0)
+        bottomLine.backgroundColor = UIColor.white.cgColor
+        textField.borderStyle = UITextBorderStyle.none
         textField.layer.addSublayer(bottomLine)
         textField.layer.masksToBounds = true
     }
     
-    private func whiteNavBar(){
+    fileprivate func whiteNavBar(){
         let bar:UINavigationBar! =  self.navigationController?.navigationBar
-        self.navigationController?.navigationBarHidden = false
-        bar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.isNavigationBarHidden = false
+        bar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         bar.shadowImage = UIImage()
         bar.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
-        bar.tintColor = UIColor.blackColor()
-        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.blackColor()]
-        self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+        bar.tintColor = UIColor.black
+        bar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.black]
+        self.navigationItem.backBarButtonItem   = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
     }
     
-    private func createPickerView(){
+    fileprivate func createPickerView(){
         self.pickerView = AKPickerView(frame: patternContainerView.bounds)
         self.pickerView.delegate = self;
         self.pickerView.dataSource = self;
-        self.pickerView.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight];
+        self.pickerView.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight];
         
         self.patternContainerView.addSubview(self.pickerView)
         
-        self.pickerView.font =  UIFont.italicSystemFontOfSize(13.0)
-        self.pickerView.highlightedFont =  UIFont.systemFontOfSize(19.0, weight: UIFontWeightMedium)
+        self.pickerView.font =  UIFont.italicSystemFont(ofSize: 13.0)
+        self.pickerView.highlightedFont =  UIFont.systemFont(ofSize: 19.0, weight: UIFontWeightMedium)
         self.pickerView.interitemSpacing = 20.0
-        self.pickerView.textColor = UIColor.whiteColor()
-        self.pickerView.highlightedTextColor = UIColor.whiteColor()
-        self.pickerView.pickerViewStyle = AKPickerViewStyle.Wheel
+        self.pickerView.textColor = UIColor.white
+        self.pickerView.highlightedTextColor = UIColor.white
+        self.pickerView.pickerViewStyle = AKPickerViewStyle.wheel
         self.pickerView.maskDisabled = false
         
     }
     
-    private func splitHexColor(colors: String) -> [String]{
+    fileprivate func splitHexColor(_ colors: String) -> [String]{
         return colors.characters.split() { $0 == "," } .map { String($0) }
     }
     
-    private func isUnis() -> NSNumber{
+    fileprivate func isUnis() -> NSNumber{
         var isUnis = 1;
         if (self.patternData[self.selectedPattern] != "plain"){
             isUnis = 0
         }
-        return isUnis
+        return isUnis as NSNumber
     }
     
-    private func addClothe(){
+    fileprivate func addClothe(){
         ActivityLoader.shared.showProgressView(view)
         let resultCapture = NSMutableDictionary(dictionary: self.clotheObject!)
         
@@ -227,9 +227,9 @@ class CaptureConfirmationViewController: DTViewController {
         
         let dal = ClothesDAL()
         let clothe = dal.save(resultCapture)
-        DressingService().UploadImage(clothe.clothe_id, data: resultCapture["clothe_image"] as! NSData, completion: { (isSuccess, object) in
+        DressingService().UploadImage(clothe.clothe_id, data: resultCapture["clothe_image"] as! Data, completion: { (isSuccess, object) in
             if (!isSuccess) {
-                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.UploadClothe, object: nil)
+                NotificationCenter.default.post(name: Notifications.Error.UploadClothe, object: nil)
             }
             print("OK")
         })
@@ -237,18 +237,18 @@ class CaptureConfirmationViewController: DTViewController {
         DressingService().SaveClothe(clothe) { (isSuccess, object) -> Void in
             if (isSuccess){
                 print("Save Clothe")
-                NSNotificationCenter.defaultCenter().postNotificationName("NewClotheAddedNotification", object: self, userInfo: ["type": resultCapture["clothe_type"] as! String])
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewClotheAddedNotification"), object: self, userInfo: ["type": resultCapture["clothe_type"] as! String])
            
                 ActivityLoader.shared.hideProgressView()
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             } else {
-                NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.SaveClothe, object: nil)
+                NotificationCenter.default.post(name: Notifications.Error.SaveClothe, object: nil)
             }
             
         }
     }
     
-    private func updateClothe(){
+    fileprivate func updateClothe(){
         ActivityLoader.shared.showProgressView(view)
         let dal = ClothesDAL()
         self.currentClothe?.clothe_isUnis = self.isUnis()
@@ -260,15 +260,15 @@ class CaptureConfirmationViewController: DTViewController {
         dal.update(self.currentClothe!)
         DressingService().UpdateClothe(self.currentClothe!) { (isSuccess, object) -> Void in
             ActivityLoader.shared.hideProgressView()
-            self.dismissViewControllerAnimated(true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         
     }
     
-    private func getSelectedColor() -> String {
+    fileprivate func getSelectedColor() -> String {
         let hexTranslator = HexColorToName()
         for item in colorBtnCollection {
-            if (item.selected){
+            if (item.isSelected){
                 let colorName = UIColor.colorWithHexString(item.backgroundColor!.hexStringFromColor())
                 let name = hexTranslator.name(colorName)
                 return name[1] as! String
@@ -277,10 +277,10 @@ class CaptureConfirmationViewController: DTViewController {
         return ""
     }
     
-    private func getMainColor() -> String {
+    fileprivate func getMainColor() -> String {
         var mainColor = ""
         for item in colorBtnCollection {
-            if (item.selected){
+            if (item.isSelected){
                 if (mainColor.isEmpty){
                     mainColor = item.backgroundColor!.hexStringFromColor()
                 } else {
@@ -297,11 +297,11 @@ class CaptureConfirmationViewController: DTViewController {
         return mainColor
     }
     
-    @IBAction func onBack(sender: AnyObject) {
-         self.navigationController?.popViewControllerAnimated(true)
+    @IBAction func onBack(_ sender: AnyObject) {
+         _ = self.navigationController?.popViewController(animated: true)
     }
     
-    @IBAction func onAddTouch(sender: AnyObject) {
+    @IBAction func onAddTouch(_ sender: AnyObject) {
         if (!self.isModify){
             self.addClothe()
         } else {
@@ -309,32 +309,32 @@ class CaptureConfirmationViewController: DTViewController {
         }
     }
     
-    @IBAction func onBackTouch(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    @IBAction func onBackTouch(_ sender: AnyObject) {
+        self.dismiss(animated: true, completion: nil)
         if let controller = self.previousController {
-            self.presentViewController(controller, animated: true, completion: nil)
+            self.present(controller, animated: true, completion: nil)
         }
     }
     
 
-    @IBAction func onBrandTouch(sender: AnyObject) {
+    @IBAction func onBrandTouch(_ sender: AnyObject) {
     }
     
-    private func applySelect(item: Int){
+    fileprivate func applySelect(_ item: Int){
         for j in 0 ..< self.patternData.count {
-            if let cell = pickerView.collectionView.cellForItemAtIndexPath(NSIndexPath(forItem: j, inSection: 0)) as? AKCollectionViewCell{
+            if let cell = pickerView.collectionView.cellForItem(at: IndexPath(item: j, section: 0)) as? AKCollectionViewCell{
                 for subview in cell.view.subviews {
                     if let view = subview as? PatternView{
-                        UIView.transitionWithView(view.patternImage, duration: 0.32, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
+                        UIView.transition(with: view.patternImage, duration: 0.32, options: UIViewAnimationOptions.transitionCrossDissolve, animations: { () -> Void in
                             if (j == item){
                                 view.patternImage.tintColor = UIColor.dressTimeRedBrand()
                             } else {
-                                view.patternImage.tintColor = UIColor.whiteColor()
+                                view.patternImage.tintColor = UIColor.white
                             }
                             //view.patternImage.image = image
                             }, completion: nil)
-                        let font = j == item ? UIFont.boldSystemFontOfSize(17) : UIFont.italicSystemFontOfSize(13)
-                        let color = j == item ? UIColor.dressTimeRedBrand() : UIColor.whiteColor()
+                        let font = j == item ? UIFont.boldSystemFont(ofSize: 17) : UIFont.italicSystemFont(ofSize: 13)
+                        let color = j == item ? UIColor.dressTimeRedBrand() : UIColor.white
                         view.patternLabel.animateToFont(font, color: color, withDuration: 0.32)
                     }
                 }
@@ -344,25 +344,25 @@ class CaptureConfirmationViewController: DTViewController {
 }
 
 extension UILabel {
-    func animateToFont(font: UIFont, color: UIColor,  withDuration duration: NSTimeInterval) {
+    func animateToFont(_ font: UIFont, color: UIColor,  withDuration duration: Foundation.TimeInterval) {
         let oldFont = self.font
         self.font = font
         //let oldOrigin = frame.origin
-        let labelScale = oldFont.pointSize / font.pointSize
+        let labelScale = (oldFont?.pointSize)! / font.pointSize
         let oldTransform = transform
-        transform = CGAffineTransformScale(transform, labelScale, labelScale)
+        transform = transform.scaledBy(x: labelScale, y: labelScale)
         //frame.origin = oldOrigin
         //setNeedsUpdateConstraints()
-        UIView.animateWithDuration(duration) {
+        UIView.animate(withDuration: duration, animations: {
             self.transform = oldTransform
             //self.layoutIfNeeded()
             self.textColor = color
-        }
+        }) 
     }
 }
 
 extension CaptureConfirmationViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.view.endEditing(true)
         return false
     }
@@ -370,15 +370,15 @@ extension CaptureConfirmationViewController: UITextFieldDelegate {
 
 extension CaptureConfirmationViewController : AKPickerViewDataSource {
     
-    func numberOfItemsInPickerView(pickerView: AKPickerView) -> Int {
+    func numberOfItemsInPickerView(_ pickerView: AKPickerView) -> Int {
         return self.patternData.count
     }
     
-    func pickerView(pickerView: AKPickerView, viewForItem item: Int) -> UIView {
-        let view = NSBundle.mainBundle().loadNibNamed("PatternView", owner: self, options: nil)[0] as! PatternView
-        view.frame = CGRectMake(0, 0, 100, 60)
+    func pickerView(_ pickerView: AKPickerView, viewForItem item: Int) -> UIView {
+        let view = Bundle.main.loadNibNamed("PatternView", owner: self, options: nil)?[0] as! PatternView
+        view.frame = CGRect(x: 0, y: 0, width: 100, height: 60)
         view.patternLabel.text = NSLocalizedString(self.patternData[item], comment: "") 
-        view.patternLabel.textColor = UIColor.whiteColor()
+        view.patternLabel.textColor = UIColor.white
         if let img = UIImage(named: "\(self.patternData[item])Icon") {
             view.patternImage.image = img
         } else {
@@ -393,7 +393,7 @@ extension CaptureConfirmationViewController : AKPickerViewDataSource {
 }
 
 extension CaptureConfirmationViewController : AKPickerViewDelegate {
-    func pickerView(pickerView: AKPickerView, didSelectItem item: Int){
+    func pickerView(_ pickerView: AKPickerView, didSelectItem item: Int){
         NSLog(self.patternData[item]);
         self.selectedPattern = item
         applySelect(item)

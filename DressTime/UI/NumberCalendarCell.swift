@@ -15,19 +15,19 @@ class NumberCalendarCell: UICollectionViewCell {
     @IBOutlet weak var label: UILabel!
     
     func selectedStyle(){
-        label.font = UIFont.boldSystemFontOfSize(20.0)
+        label.font = UIFont.boldSystemFont(ofSize: 20.0)
         roundView.layer.cornerRadius = 20.0
         roundView.layer.borderWidth = 2.0
-        roundView.layer.borderColor = UIColor.whiteColor().CGColor
+        roundView.layer.borderColor = UIColor.white.cgColor
         roundView.layer.masksToBounds = true
         
     }
     
     func unselectedStyle(){
-        label.font = UIFont.systemFontOfSize(16.0)
+        label.font = UIFont.systemFont(ofSize: 16.0)
         roundView.layer.cornerRadius = 0.0
         roundView.layer.borderWidth = 0.0
-        roundView.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6).CGColor
+        roundView.layer.borderColor = UIColor(red: 1, green: 1, blue: 1, alpha: 0.6).cgColor
         roundView.layer.masksToBounds = true
     }
 

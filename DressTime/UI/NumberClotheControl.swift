@@ -14,8 +14,8 @@ class NumberClotheControl: UIView {
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
     
-    func updateControl(number: Int, type: String){
+    func updateControl(_ number: Int, type: String){
         self.numberLabel.text = "\(number)"
-        self.typeLabel.text = NSLocalizedString(type, comment: "Translate type").uppercaseString
+        self.typeLabel.text = NSLocalizedString(type, comment: "Translate type").uppercased()
     }
 }

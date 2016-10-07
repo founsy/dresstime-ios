@@ -23,13 +23,13 @@ enum ClotheOrder : Int {
     case pants = 3
 }
 
-public class Outfit: NSObject{
+open class Outfit: NSObject{
     var matchingRate: NSNumber
     var clothes: [ClotheModel]
     var style: String
     var isSuggestion: Bool
     var isPutOn: Bool
-    var updatedDate : NSDate?
+    var updatedDate : Date?
     var moment: String?
     var _id: String
     
@@ -41,7 +41,7 @@ public class Outfit: NSObject{
         self.isPutOn = json["isPutOn"].bool != nil ? json["isPutOn"].boolValue : false
         self.moment = json["moment"].stringValue
         if let update = json["updated"].string {
-            self.updatedDate = NSDate(dateString: update)
+            self.updatedDate = Date(dateString: update)
         }
         
         self.clothes = [ClotheModel]()
@@ -56,7 +56,7 @@ public class Outfit: NSObject{
         }
     }
     
-    public init(clothes: [ClotheModel], updatedDate: NSDate, isSuggestion: Bool, isPutOn: Bool){
+    public init(clothes: [ClotheModel], updatedDate: Date, isSuggestion: Bool, isPutOn: Bool){
         self._id = ""
         self.matchingRate = 0
         self.style = ""
@@ -87,7 +87,7 @@ public class Outfit: NSObject{
         return dictionnary
     }
     
-    func getOrder(type: String) -> Int {
+    func getOrder(_ type: String) -> Int {
         if type.isEmpty {
             return 0
         }
@@ -105,7 +105,7 @@ public class Outfit: NSObject{
     
     func orderOutfit() {
         var clothes = self.clothes
-        clothes.sortInPlace { (clothe1, clothe2) -> Bool in
+        clothes.sort { (clothe1, clothe2) -> Bool in
             getOrder(clothe1.clothe_type) < getOrder(clothe2.clothe_type)
         }
         
@@ -135,16 +135,15 @@ public class Outfit: NSObject{
     }
 }
 
-extension NSDate
+extension Date
 {
-    convenience
     init(dateString:String) {
-        let dateStringFormatter = NSDateFormatter()
+        let dateStringFormatter = DateFormatter()
         dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        if let d = dateStringFormatter.dateFromString(dateString) {
-            self.init(timeInterval:0, sinceDate:d)
+        if let d = dateStringFormatter.date(from: dateString) {
+            self = Date(timeInterval: 0, since: d)
         } else {
-            self.init(timeIntervalSince1970: 0)
+            self = Date(timeIntervalSince1970: 0)
         }
     }
 }

@@ -8,21 +8,32 @@
 
 import Foundation
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 
 enum ViewMode {
-    case OutfitView
-    case SelectClothe
-    case Dressing
+    case outfitView
+    case selectClothe
+    case dressing
 }
 
 @objc
 protocol ClotheTableViewCellDelegate : NSObjectProtocol {
-    optional func onFavoriteClick(isFavorite: Bool)
-    optional func removeItem(item: Clothe) -> Void
-    optional func detailItem(item: Clothe) -> Void
-    optional func changeItem(item: Clothe) -> Void
-    optional func selectItem(item: Clothe) -> Void
+    @objc optional func onFavoriteClick(_ isFavorite: Bool)
+    @objc optional func removeItem(_ item: Clothe) -> Void
+    @objc optional func detailItem(_ item: Clothe) -> Void
+    @objc optional func changeItem(_ item: Clothe) -> Void
+    @objc optional func selectItem(_ item: Clothe) -> Void
 }
 
 class ClotheTableViewCell: UITableViewCell{
@@ -36,7 +47,7 @@ class ClotheTableViewCell: UITableViewCell{
     }
     var viewMode: ViewMode? {
         didSet {
-            if let mode = self.viewMode where mode == ViewMode.OutfitView || mode == ViewMode.Dressing {
+            if let mode = self.viewMode , mode == ViewMode.outfitView || mode == ViewMode.dressing {
                 let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ClotheTableViewCell.finishTapped(_:)))
                 self.clotheImageView.addGestureRecognizer(tapGestureRecognizer)
                 
@@ -47,25 +58,25 @@ class ClotheTableViewCell: UITableViewCell{
                 panGestureRecognizer.delegate = self
                 self.mouvingCard.addGestureRecognizer(panGestureRecognizer)
                 
-                selectButton.hidden = true
-            } else if let mode = self.viewMode where mode == ViewMode.SelectClothe {
-                selectButton.hidden = false
+                selectButton.isHidden = true
+            } else if let mode = self.viewMode , mode == ViewMode.selectClothe {
+                selectButton.isHidden = false
                 let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(ClotheTableViewCell.detailTapped(_:)))
                 self.clotheImageView.addGestureRecognizer(tapGestureRecognizer)
                 
             }
         }
     }
-    var delayTime: NSTimeInterval = 0
+    var delayTime: Foundation.TimeInterval = 0
     
     var isEditingMode : Bool = false {
         didSet {
             if (isEditingMode){
-                UIView.animateWithDuration(0.3, delay: delayTime, options: UIViewAnimationOptions.AllowAnimatedContent, animations: {
+                UIView.animate(withDuration: 0.3, delay: delayTime, options: UIViewAnimationOptions.allowAnimatedContent, animations: {
                     self.actionView.alpha = 1
                     }, completion: nil)
             } else {
-                UIView.animateWithDuration(0.3, animations: {
+                UIView.animate(withDuration: 0.3, animations: {
                     self.actionView.alpha = 0
                 })
             }
@@ -76,7 +87,7 @@ class ClotheTableViewCell: UITableViewCell{
     var originPoint: CGPoint?
     var centerPoint: CGPoint?
     var backgroundTaskIdentifier: UIBackgroundTaskIdentifier?
-    var timer: NSTimer?
+    var timer: Timer?
     var isConfirmeMode = false
     var ACTION_MARGIN: Float = 120      //%%% distance from center where the action applies. Higher = swipe further in order for the action to be called
     
@@ -91,16 +102,16 @@ class ClotheTableViewCell: UITableViewCell{
     @IBOutlet weak var selectButton: UIButton!
     
     //Actions
-    @IBAction func selectButton(sender: AnyObject) {
+    @IBAction func selectButton(_ sender: AnyObject) {
         self.delegate?.selectItem!(self.clothe!)
     }
     
-    @IBAction func confirmationAction(sender: AnyObject) {
+    @IBAction func confirmationAction(_ sender: AnyObject) {
         print("confirmation Clic")
         timer?.invalidate()
-        let finishPoint: CGPoint = CGPointMake(-500, self.originPoint!.y)
+        let finishPoint: CGPoint = CGPoint(x: -500, y: self.originPoint!.y)
         self.delegate?.removeItem!(self.clothe!)
-        UIView.animateWithDuration(0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.mouvingCard.center = finishPoint
             self.confirmationView.alpha = 0
             }, completion: {
@@ -109,36 +120,36 @@ class ClotheTableViewCell: UITableViewCell{
         })
     }
     
-    @IBAction func onFavoriteTapped(sender: UIButton) {
-        if (favoriteButton.selected){
-            favoriteButton.selected = false
-            favoriteButton.setImage(UIImage(named: "loveIconOFF"), forState: UIControlState.Normal)
+    @IBAction func onFavoriteTapped(_ sender: UIButton) {
+        if (favoriteButton.isSelected){
+            favoriteButton.isSelected = false
+            favoriteButton.setImage(UIImage(named: "loveIconOFF"), for: UIControlState())
         } else {
-            favoriteButton.selected = true
-            favoriteButton.setImage(UIImage(named: "loveIconON"), forState: UIControlState.Selected)
+            favoriteButton.isSelected = true
+            favoriteButton.setImage(UIImage(named: "loveIconON"), for: UIControlState.selected)
         }
         if let clo = self.clothe {
             let dal = ClothesDAL()
-            clo.clothe_favorite = favoriteButton.selected
+            clo.clothe_favorite = favoriteButton.isSelected
             dal.update(clo)
             DressingService().UpdateClothe(clo) { (isSuccess, object) -> Void in
                 if (!isSuccess) {
-                    NSNotificationCenter.defaultCenter().postNotificationName(Notifications.Error.UpdateClothe, object: nil)
+                    NotificationCenter.default.post(name: Notifications.Error.UpdateClothe, object: nil)
                 }
                 print("Clothe Sync")
             }
         }
     }
     
-    @IBAction func onRemoveTapped(sender: AnyObject) {
+    @IBAction func onRemoveTapped(_ sender: AnyObject) {
         self.delegate?.removeItem!(self.clothe!)
     }
     
-    @IBAction func onDetailTapped(sender: AnyObject) {
+    @IBAction func onDetailTapped(_ sender: AnyObject) {
         self.delegate?.detailItem!(self.clothe!)
     }
     
-    @IBAction func onModifyTapped(sender: AnyObject) {
+    @IBAction func onModifyTapped(_ sender: AnyObject) {
         self.delegate?.changeItem!(self.clothe!)
     }
     
@@ -149,10 +160,10 @@ class ClotheTableViewCell: UITableViewCell{
         super.awakeFromNib()
         self.setupView()
         
-        ACTION_MARGIN = Float(UIScreen.mainScreen().bounds.width) * (1.0/3.0)
+        ACTION_MARGIN = Float(UIScreen.main.bounds.width) * (1.0/3.0)
         
-        backgroundTaskIdentifier = UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler({
-            UIApplication.sharedApplication().endBackgroundTask(self.backgroundTaskIdentifier!)
+        backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(expirationHandler: {
+            UIApplication.shared.endBackgroundTask(self.backgroundTaskIdentifier!)
         })
        
 
@@ -170,8 +181,8 @@ class ClotheTableViewCell: UITableViewCell{
         self.selectButton.layer.cornerRadius = 8
     }
     
-    func initFavoriteButton(isFavorite: Bool){
-        favoriteButton.selected = isFavorite
+    func initFavoriteButton(_ isFavorite: Bool){
+        favoriteButton.isSelected = isFavorite
         if (isFavorite){
             favoriteButton.imageView?.image = UIImage(named: "loveIconON")
         } else {
@@ -179,31 +190,31 @@ class ClotheTableViewCell: UITableViewCell{
         }
     }
     
-    func detailTapped(gestureRecognizer: UITapGestureRecognizer) -> Void {
+    func detailTapped(_ gestureRecognizer: UITapGestureRecognizer) -> Void {
         self.delegate?.detailItem!(self.clothe!)
     }
     
-    func finishTapped(gestureRecognizer: UITapGestureRecognizer) -> Void {
+    func finishTapped(_ gestureRecognizer: UITapGestureRecognizer) -> Void {
         self.isEditingMode = !self.isEditingMode
     }
     
-    func beingDragged(gestureRecognizer: UIPanGestureRecognizer) -> Void {
+    func beingDragged(_ gestureRecognizer: UIPanGestureRecognizer) -> Void {
         if (!self.isConfirmeMode){
-            if let tim = self.timer where tim.valid {
+            if let tim = self.timer , tim.isValid {
                 timer?.invalidate()
             }
-            xFromCenter = Float(gestureRecognizer.translationInView(self.mouvingCard).x)
+            xFromCenter = Float(gestureRecognizer.translation(in: self.mouvingCard).x)
                         
             switch gestureRecognizer.state {
-            case UIGestureRecognizerState.Began:
+            case UIGestureRecognizerState.began:
                 self.originPoint = self.mouvingCard.center
-            case UIGestureRecognizerState.Changed:
-                let point = CGPointMake(self.originPoint!.x + CGFloat(xFromCenter!), self.originPoint!.y)
+            case UIGestureRecognizerState.changed:
+                let point = CGPoint(x: self.originPoint!.x + CGFloat(xFromCenter!), y: self.originPoint!.y)
                 self.mouvingCard.center = point
                 if (xFromCenter < 0) {
                     self.updateOverlay(CGFloat(xFromCenter!))
                 }
-            case UIGestureRecognizerState.Ended:
+            case UIGestureRecognizerState.ended:
                 self.afterSwipeAction()
             default:
                 break
@@ -211,7 +222,7 @@ class ClotheTableViewCell: UITableViewCell{
         }
     }
     
-    func updateOverlay(distance: CGFloat) -> Void {
+    func updateOverlay(_ distance: CGFloat) -> Void {
         let alpha = CGFloat(min(fabsf(Float(distance))/200, 1))
         confirmationView.alpha = alpha
     }
@@ -226,18 +237,18 @@ class ClotheTableViewCell: UITableViewCell{
             self.isConfirmeMode = true
             self.leftAction()
         } else {
-            UIView.animateWithDuration(0.3, animations: {() -> Void in
+            UIView.animate(withDuration: 0.3, animations: {() -> Void in
                 self.confirmationView.alpha = 0
                 self.originPoint = self.contentView.center
                 self.mouvingCard.center = self.contentView.center
-                self.mouvingCard.transform = CGAffineTransformMakeRotation(0)
+                self.mouvingCard.transform = CGAffineTransform(rotationAngle: 0)
             })
         }
     }
     
     func rightAction() -> Void {
-        let finishPoint: CGPoint = CGPointMake(2*500, self.originPoint!.y)
-        UIView.animateWithDuration(0.3, animations: {
+        let finishPoint: CGPoint = CGPoint(x: 2*500, y: self.originPoint!.y)
+        UIView.animate(withDuration: 0.3, animations: {
             self.mouvingCard.center = finishPoint
             }, completion: {
                 (value: Bool) in
@@ -247,17 +258,17 @@ class ClotheTableViewCell: UITableViewCell{
     
     func leftAction() -> Void {
         //Stop the action
-        UIView.animateWithDuration(0.3, animations: {
-            let centerPoint = CGPointMake(-(self.clotheImageView.frame.width/4), self.clotheImageView.center.y)
+        UIView.animate(withDuration: 0.3, animations: {
+            let centerPoint = CGPoint(x: -(self.clotheImageView.frame.width/4), y: self.clotheImageView.center.y)
             self.mouvingCard.center = centerPoint
-        }) { (value : Bool) in
-            self.timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: #selector(ClotheTableViewCell.confirmationDeleting), userInfo: nil, repeats: false)
-        }
+        }, completion: { (value : Bool) in
+            self.timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(ClotheTableViewCell.confirmationDeleting), userInfo: nil, repeats: false)
+        }) 
     }
     
     func confirmationDeleting(){
         print("confirmationDeleting")
-        UIView.animateWithDuration(0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.mouvingCard.center = self.originPoint!
             self.confirmationView.alpha = 0
             }, completion: {
@@ -267,9 +278,9 @@ class ClotheTableViewCell: UITableViewCell{
         })
     }
     
-    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if let panGestureRecognizer = gestureRecognizer as? UIPanGestureRecognizer {
-            let translation = panGestureRecognizer.translationInView(superview!)
+            let translation = panGestureRecognizer.translation(in: superview!)
             if fabs(translation.x) > fabs(translation.y) {
                 return true
             }

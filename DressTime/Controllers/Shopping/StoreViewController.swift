@@ -18,7 +18,7 @@ class StoreViewController: DTViewController {
     
     @IBOutlet weak var titleNavBar: UINavigationItem!
     required init?(coder aDecoder: NSCoder) {
-        self.webView = WKWebView(frame: CGRectZero)
+        self.webView = WKWebView(frame: CGRect.zero)
         super.init(coder: aDecoder)
     }
     
@@ -30,17 +30,17 @@ class StoreViewController: DTViewController {
         view.addSubview(webView)
         
         self.webView.translatesAutoresizingMaskIntoConstraints = false
-        let height = NSLayoutConstraint(item: webView, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 1, constant: 0)
-        let width = NSLayoutConstraint(item: webView, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 1, constant: 0)
+        let height = NSLayoutConstraint(item: webView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 1, constant: 0)
+        let width = NSLayoutConstraint(item: webView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0)
         view.addConstraints([height, width])
         
-        let url = NSURL(string: urlShop!)
-        let req = NSURLRequest(URL:url!)
-        self.webView.loadRequest(req)
+        let url = URL(string: urlShop!)
+        let req = URLRequest(url:url!)
+        self.webView.load(req)
     }
     
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }

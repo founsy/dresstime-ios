@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 protocol TypeSelectionCellDelegate {
-    func onSelectedType(typeSelected: String)
+    func onSelectedType(_ typeSelected: String)
 }
 
 class TypeSelectionCell: UITableViewCell {
@@ -23,46 +23,46 @@ class TypeSelectionCell: UITableViewCell {
         if (SharedData.sharedInstance.sexe == "M"){
             for i in 0 ..< buttonType.count {
                 if (buttonType[i].accessibilityIdentifier == "dress"){
-                    buttonType[i].hidden = true
+                    buttonType[i].isHidden = true
                 }
             }
         }
         for i in 0 ..< buttonType.count{
-            buttonType[i].setTitle(NSLocalizedString(buttonType[i].accessibilityIdentifier!, comment: "").uppercaseString, forState: .Normal)
+            buttonType[i].setTitle(NSLocalizedString(buttonType[i].accessibilityIdentifier!, comment: "").uppercased(), for: UIControlState())
         }
     }
     
     func drawBorderButton(){
         for i in 0 ..< buttonType.count {
-            if (buttonType[i].selected){
+            if (buttonType[i].isSelected){
                  createBorder(buttonType[i])
             }
-            buttonType[i].addTarget(self, action: #selector(TypeSelectionCell.createBorderButton(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+            buttonType[i].addTarget(self, action: #selector(TypeSelectionCell.createBorderButton(_:)), for: UIControlEvents.touchUpInside)
         }
     }
     
-    func createBorderButton(btn: UIButton){
+    func createBorderButton(_ btn: UIButton){
         removeBorder()
-        btn.selected = true
+        btn.isSelected = true
         createBorder(btn)
         if let del = self.delegate {
             del.onSelectedType(btn.accessibilityIdentifier!)
         }
     }
     
-    private func createBorder(btn: UIButton){
+    fileprivate func createBorder(_ btn: UIButton){
         let height:CGFloat = 3.0
         let color = UIColor(red: 235/255, green: 175/255, blue: 73/255, alpha: 1.0)
-        let lineView = UIView(frame: CGRectMake(10, btn.frame.size.height - height, btn.frame.size.width - 20.0, height))
+        let lineView = UIView(frame: CGRect(x: 10, y: btn.frame.size.height - height, width: btn.frame.size.width - 20.0, height: height))
         lineView.backgroundColor = color
         btn.addSubview(lineView)
     }
 
-    private func removeBorder(){
+    fileprivate func removeBorder(){
         for i in 0 ..< buttonType.count{
-            buttonType[i].selected = false
+            buttonType[i].isSelected = false
             for subView in buttonType[i].subviews {
-                if (!subView.isKindOfClass(UILabel)){
+                if (!subView.isKind(of: UILabel.self)){
                     subView.removeFromSuperview()
                 }
             }

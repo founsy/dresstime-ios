@@ -26,7 +26,7 @@ class SharedData {
     var highTemp: String?
     var city: String?
     
-    func getType(gender: String) -> [String]{
+    func getType(_ gender: String) -> [String]{
         if (gender == "M"){
             return ["Maille","Top", "Pants"]
         } else {
@@ -34,7 +34,7 @@ class SharedData {
         }
     }
     
-    func getSubType(type: String) -> [String] {
+    func getSubType(_ type: String) -> [String] {
         switch type {
             case "Maille":
                 return ["jumper-fin","jumper-epais","cardigan","sweater"]
@@ -49,7 +49,7 @@ class SharedData {
         }
     }
     
-    func subTypeToImage(subtype: String) -> String {
+    func subTypeToImage(_ subtype: String) -> String {
         switch subtype {
             case "jumper-fin":
                 return "jumperThin"

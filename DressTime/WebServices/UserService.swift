@@ -16,21 +16,21 @@ class UserService {
     let baseUrlUser = "\(DressTimeService.baseURL)users/"
     let baseUrlRegistration = "\(DressTimeService.baseURL)auth/registration"
     
-    func UpdateUser(user: Profil, completion: (isSuccess: Bool, object: JSON) -> Void){
+    func UpdateUser(_ user: Profil, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         self.updateUser(user, completion: completion)
     }
     
-    func CreateUser(user: Profil, password: String?, completion: (isSuccess: Bool, object: JSON) -> Void){
+    func CreateUser(_ user: Profil, password: String?, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         self.createUser(user, password: password, completion: completion)
     }
     
-    func GetUser(completion: (isSuccess: Bool, object: JSON) -> Void){
+    func GetUser(_ completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         self.getUser(completion)
     }
 
 
-    private func createUser(user: Profil, password: String?, completion: (isSuccess: Bool, object: JSON) -> Void){
-        let parameters : [String : AnyObject]? = [
+    fileprivate func createUser(_ user: Profil, password: String?, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
+        let parameters : [String : Any]? = [
             "email" : user.email != nil ? user.email! : "",
             "password" : password != nil ? password! : "",
             "username" : user.email != nil ? user.email! : "",
@@ -46,28 +46,28 @@ class UserService {
             "lastName" : user.lastName != nil ? user.lastName! : ""
         ]
         
-        Alamofire.request(.POST, baseUrlRegistration, parameters: parameters, encoding: .JSON).validate().responseJSON { response in
+        Alamofire.request(URL(string: baseUrlRegistration)!, method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate().responseJSON(completionHandler: { (response) in
             print(response.result.value)
             switch response.result {
-            case .Success:
-                let jsonDic = JSON(response.result.value!)
-                completion(isSuccess: true, object: jsonDic)
-            case .Failure(let error):
+            case .success(let json):
+                let jsonDic = JSON(json)
+                completion(true, jsonDic)
+            case .failure(let error):
                 print(error)
                 if let data = response.data {
                     let json = JSON(data: data)
                     print("Failure Response: \(json)")
-                    completion(isSuccess: false, object: json)
+                    completion(false, json)
                     
                 }
-                completion(isSuccess: false, object: JSON(error))
+                completion(false, JSON(error))
             }
-        }
+        })
 
     }
     
     
-    private func updateUser(user: Profil, completion: (isSuccess: Bool, object: JSON) -> Void){
+    fileprivate func updateUser(_ user: Profil, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         //TODO - Check if currentUserId available
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
             
@@ -87,46 +87,44 @@ class UserService {
             
             var path = self.baseUrlUser
             var headers :[String : String]?
-            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
-                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            if ((FBSDKAccessToken.current()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.current().tokenString)"
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
             
-            Alamofire.request(.PUT, path, parameters: parameters, encoding: .JSON, headers: headers).responseJSON { response in
-                if response.result.isSuccess {
-                    print(response.result.value)
-                    let jsonDic = JSON(response.result.value!)
-                    completion(isSuccess: true, object: jsonDic)
-                } else {
-                    completion(isSuccess: false, object: "")
+            Alamofire.request(URL(string: path)!, method: HTTPMethod.put, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let json):
+                    let jsonDic = JSON(json)
+                    completion(true, jsonDic)
+                case.failure(let error):
+                    completion(false, JSON(error))
                 }
-            }
+            })
         }
-        completion(isSuccess: false, object: "")
+        completion(false, "")
     }
     
-    private func getUser(completion: (isSuccess: Bool, object: JSON) -> Void){
+    fileprivate func getUser(_ completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         var path = self.baseUrlUser
         var headers :[String : String]?
-        if ((FBSDKAccessToken.currentAccessToken()) != nil){
-            path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+        if ((FBSDKAccessToken.current()) != nil){
+            path = path + "?access_token=\(FBSDKAccessToken.current().tokenString)"
         } else {
             if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
                  headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
         }
-        
-        Alamofire.request(.GET, path, parameters: nil, encoding: .JSON, headers: headers).responseJSON { response in
-            print(response.result.value)
-            if response.result.isSuccess {
-                print(response.result.value)
-                let jsonDic = JSON(response.result.value!)
-                completion(isSuccess: true, object: jsonDic)
-            } else {
-                completion(isSuccess: false, object: "")
+        Alamofire.request(URL(string: path)!, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON(completionHandler: { (response) in
+            switch response.result {
+            case .success(let json):
+                let jsonDic = JSON(json)
+                completion(true, jsonDic)
+            case.failure(let error):
+                completion(false, JSON(error))
             }
-        }
+        })
     }
     
 }

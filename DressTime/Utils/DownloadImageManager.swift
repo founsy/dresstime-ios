@@ -11,10 +11,11 @@ import Foundation
 
 class DownloadImageManager {
     
-    func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
-            completion(data: data, response: response, error: error)
-            }.resume()
+    func getDataFromUrl(_ url:URL, completion: @escaping ((_ data: Data?, _ response: URLResponse?, _ error: Error? ) -> Void)) {
+        
+        URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+            completion(data, response, error)
+            })
     }
     
   /*  func downloadImage(url: NSURL){

@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-public class ActivityLoader: NSObject {
+open class ActivityLoader: NSObject {
     var containerView = UIView()
     var progressView = UIView()
     var activityIndicator: UIActivityLoader!
@@ -23,26 +23,26 @@ public class ActivityLoader: NSObject {
     
     override init(){
         super.init()
-        activityIndicator = NSBundle.mainBundle().loadNibNamed("UIActivityLoader", owner: self, options: nil)[0] as! UIActivityLoader
+        activityIndicator = Bundle.main.loadNibNamed("UIActivityLoader", owner: self, options: nil)?[0] as! UIActivityLoader
     }
     
-    func showProgressView(view: UIView) {
+    func showProgressView(_ view: UIView) {
         
         containerView.frame = view.frame
         containerView.center = view.center
         
-        activityIndicator.frame = CGRectMake(0, 0, 150, 100)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 150, height: 100)
         activityIndicator.center = view.center
         activityIndicator.clipsToBounds = true
         activityIndicator.layer.cornerRadius = 10
         
         containerView.addSubview(activityIndicator)
         view.addSubview(containerView)
-        view.bringSubviewToFront(containerView)
+        view.bringSubview(toFront: containerView)
         activityIndicator.progessIndicator.startAnimating()
     }
     
-    func setLabel(value: String){
+    func setLabel(_ value: String){
         activityIndicator.infoLabel.text = value
     }
     

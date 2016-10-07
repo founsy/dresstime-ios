@@ -26,22 +26,22 @@ class DressTimeBL {
         case pants = 3
     }
     
-    func orderOutfit(outfit: Outfit) -> Outfit{
+    func orderOutfit(_ outfit: Outfit) -> Outfit{
         var clothes = [ClotheModel]()
         
         for item in outfit.clothes {
             switch ClotheType(rawValue: item.clothe_type)! {
             case ClotheType.maille :
-                clothes.insert(item, atIndex: ClotheOrder.maille.rawValue)
+                clothes.insert(item, at: ClotheOrder.maille.rawValue)
                 break
             case ClotheType.top :
-                clothes.insert(item, atIndex: ClotheOrder.top.rawValue)
+                clothes.insert(item, at: ClotheOrder.top.rawValue)
                 break
             case ClotheType.dress :
-                clothes.insert(item, atIndex: ClotheOrder.dress.rawValue - 1)
+                clothes.insert(item, at: ClotheOrder.dress.rawValue - 1)
                 break
             case ClotheType.pants :
-                clothes.insert(item, atIndex: ClotheOrder.pants.rawValue - 1)
+                clothes.insert(item, at: ClotheOrder.pants.rawValue - 1)
                 break
             }
         }

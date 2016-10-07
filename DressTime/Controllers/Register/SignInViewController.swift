@@ -15,18 +15,18 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var createAccountButton: UIButton!
     
     
-    @IBAction func onSignInTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("signinShow", sender: self)
+    @IBAction func onSignInTapped(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "signinShow", sender: self)
     }
     
-    @IBAction func onSignUpTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("createAccountShow", sender: self)
+    @IBAction func onSignUpTapped(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "createAccountShow", sender: self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         setLocalization()
     }
 
@@ -35,9 +35,9 @@ class SignInViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    private func setLocalization(){
-        signInButton.setTitle(NSLocalizedString("registerSignInButton", comment: "Sign In"), forState: .Normal)
-        createAccountButton.setTitle(NSLocalizedString("registerCreateAccountButton", comment: "Create an account"), forState: .Normal)
+    fileprivate func setLocalization(){
+        signInButton.setTitle(NSLocalizedString("registerSignInButton", comment: "Sign In"), for: UIControlState())
+        createAccountButton.setTitle(NSLocalizedString("registerCreateAccountButton", comment: "Create an account"), for: UIControlState())
     }
 }
 

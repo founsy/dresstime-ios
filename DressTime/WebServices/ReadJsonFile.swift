@@ -10,9 +10,9 @@ import Foundation
 
 class ReadJsonFile {
     
-    func readFile(fileName: String) -> NSData? {
-        if let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "json") {
-            if let jsonData = NSData(contentsOfFile: path) {
+    func readFile(_ fileName: String) -> Data? {
+        if let path = Bundle.main.path(forResource: fileName, ofType: "json") {
+            if let jsonData = try? Data(contentsOf: URL(fileURLWithPath: path)) {
                 return jsonData
             }
         }

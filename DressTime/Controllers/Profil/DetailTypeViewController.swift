@@ -8,17 +8,37 @@
 
 import Foundation
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 protocol DetailTypeViewControllerDelegate {
-    func detailTypeViewController(selectedItem : Clothe)
+    func detailTypeViewController(_ selectedItem : Clothe)
 }
 
 class DetailTypeViewController: DTViewController {
-    private var clothesList: [Clothe]?
-    private var currentSection = -1
-    private let height:CGFloat = 220.0
-    private var indexPathToAnimate: NSIndexPath?
-    private var isAlreadyOpened = false
+    fileprivate var clothesList: [Clothe]?
+    fileprivate var currentSection = -1
+    fileprivate let height:CGFloat = 220.0
+    fileprivate var indexPathToAnimate: IndexPath?
+    fileprivate var isAlreadyOpened = false
     
     var isNeedAnimatedFirstElem = false
     var typeClothe: [String]?
@@ -36,8 +56,8 @@ class DetailTypeViewController: DTViewController {
     @IBOutlet weak var emptyViewImage: UIImageView!
     @IBOutlet weak var buttonCapture: UIButton!
     
-    @IBAction func onCaptureTapped(sender: AnyObject) {
-        self.performSegueWithIdentifier("showCapture", sender: self)
+    @IBAction func onCaptureTapped(_ sender: AnyObject) {
+        self.performSegue(withIdentifier: "showCapture", sender: self)
     }
     
     override func viewDidLoad() {
@@ -45,81 +65,81 @@ class DetailTypeViewController: DTViewController {
         
         super.viewDidLoad()
         self.classNameAnalytics = "DetailType"
-        tableView.registerNib(UINib(nibName: "ClotheTableCell", bundle:nil), forCellReuseIdentifier: ClotheTableViewCell.cellIdentifier)
+        tableView.register(UINib(nibName: "ClotheTableCell", bundle:nil), forCellReuseIdentifier: ClotheTableViewCell.cellIdentifier)
         
         tableView!.delegate = self
         tableView!.dataSource = self
-        self.tableView.tableFooterView = UIView(frame: CGRectZero)
+        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         //TODO Manage Localization
         var title = ""
         for type in self.typeClothe! {
-            title = "\(title) \(NSLocalizedString(type, comment:"").uppercaseString)"
+            title = "\(title) \(NSLocalizedString(type, comment:"").uppercased())"
         }
         titleNav.title = "\(NSLocalizedString("detailTypeMyMsg", comment: "")) \(title)!"
         emptyViewLabel.text = NSLocalizedString("detailTypeEmptyMsg", comment: "")
         
         
         emptyViewButton.layer.cornerRadius = 10.0
-        emptyViewButton.layer.borderColor = UIColor.whiteColor().CGColor
+        emptyViewButton.layer.borderColor = UIColor.white.cgColor
         emptyViewButton.layer.borderWidth = 1.0
-        emptyViewImage.image = UIImage(named: "underwearIcon\(SharedData.sharedInstance.sexe!.uppercaseString)")
+        emptyViewImage.image = UIImage(named: "underwearIcon\(SharedData.sharedInstance.sexe!.uppercased())")
         
         self.buttonCapture.layer.cornerRadius = 20.0
-        self.buttonCapture.layer.shadowOffset = CGSizeMake(0, 1);
-        self.buttonCapture.layer.shadowColor = UIColor.blackColor().CGColor
+        self.buttonCapture.layer.shadowOffset = CGSize(width: 0, height: 1);
+        self.buttonCapture.layer.shadowColor = UIColor.black.cgColor
         self.buttonCapture.layer.shadowRadius = 5;
         self.buttonCapture.layer.shadowOpacity = 0.5;
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.alpha = 1.0
         
         initData()
         tableView.reloadData()
         if (clothesList?.count > 0){
-            self.emptyView.hidden = true
-            self.backgroundImageView.hidden = false
-            self.tableView.hidden = false
-            self.buttonCapture.hidden = false
+            self.emptyView.isHidden = true
+            self.backgroundImageView.isHidden = false
+            self.tableView.isHidden = false
+            self.buttonCapture.isHidden = false
         } else {
-            self.emptyView.hidden = false
-            self.backgroundImageView.hidden = true
-            self.tableView.hidden = true
-            self.buttonCapture.hidden = true
+            self.emptyView.isHidden = false
+            self.backgroundImageView.isHidden = true
+            self.tableView.isHidden = true
+            self.buttonCapture.isHidden = true
 
         }
 
-        if (viewMode == ViewMode.SelectClothe){
-            self.buttonCapture.hidden = true
+        if (viewMode == ViewMode.selectClothe){
+            self.buttonCapture.isHidden = true
             titleNav.title = "Select your \(self.typeClothe![0])..."
-            navigationItem.backBarButtonItem = UIBarButtonItem(title: "Outfit", style: .Plain, target: nil, action: nil) //TODO Translate
+            navigationItem.backBarButtonItem = UIBarButtonItem(title: "Outfit", style: .plain, target: nil, action: nil) //TODO Translate
             
                 if let weather = SharedData.sharedInstance.currentWeater {
                     self.backgroundImageView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(weather.code == nil ? 800 : weather.code!))
                 }
             
         } else {
-            self.buttonCapture.hidden = false
+            self.buttonCapture.isHidden = false
             //Remove Title of Back button
-            navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("detailTypeBackBtn", comment: ""), style: .Plain, target: nil, action: nil)
+            navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("detailTypeBackBtn", comment: ""), style: .plain, target: nil, action: nil)
             
             setBackgroundImage()
         }
     }
     
-    private func setBackgroundImage(){
-        if let types = self.typeClothe where types.count == 1 {
+    fileprivate func setBackgroundImage(){
+        if let types = self.typeClothe , types.count == 1 {
             switch types[0] {
             case ClotheType.maille.rawValue:
-                self.backgroundImageView.image = UIImage(named: "BackgroundMaille\(SharedData.sharedInstance.sexe!.uppercaseString)")
+                self.backgroundImageView.image = UIImage(named: "BackgroundMaille\(SharedData.sharedInstance.sexe!.uppercased())")
                 break
             case ClotheType.top.rawValue:
-                self.backgroundImageView.image = UIImage(named: "BackgroundTop\(SharedData.sharedInstance.sexe!.uppercaseString)")
+                self.backgroundImageView.image = UIImage(named: "BackgroundTop\(SharedData.sharedInstance.sexe!.uppercased())")
                 break
             case ClotheType.pants.rawValue:
-                self.backgroundImageView.image = UIImage(named: "BackgroundPants\(SharedData.sharedInstance.sexe!.uppercaseString)")
+                self.backgroundImageView.image = UIImage(named: "BackgroundPants\(SharedData.sharedInstance.sexe!.uppercased())")
                 break
             case ClotheType.dress.rawValue:
                 self.backgroundImageView.image = UIImage(named: "BackgroundDressF")
@@ -135,9 +155,9 @@ class DetailTypeViewController: DTViewController {
         if let types = self.typeClothe {
             self.clothesList = [Clothe]()
             for type in types {
-                self.clothesList?.appendContentsOf(dal.fetch(type: type))
+                self.clothesList?.append(contentsOf: dal.fetch(type: type))
                 if let clothe = clotheToChange {
-                    self.clothesList?.sortInPlace { (element1, element2) -> Bool in
+                    self.clothesList?.sort { (element1, element2) -> Bool in
                         return element1.clothe_id == clothe.clothe_id
                     }
                 }
@@ -146,47 +166,47 @@ class DetailTypeViewController: DTViewController {
         }
     }
     
-    private func openEditClotheView(){
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            self.performSegueWithIdentifier("detailClothe", sender: self)
+    fileprivate func openEditClotheView(){
+        DispatchQueue.main.async(execute: { () -> Void in
+            self.performSegue(withIdentifier: "detailClothe", sender: self)
         })
     }
     
-    private func deleteClothe(indexPath: NSIndexPath){
-        if let currentClothe = self.clothesList?[indexPath.row] {
+    fileprivate func deleteClothe(_ indexPath: IndexPath){
+        if let currentClothe = self.clothesList?[(indexPath as NSIndexPath).row] {
             DressingService().DeleteClothe(currentClothe.clothe_id, completion: { (isSuccess, object) -> Void in
                 print("Clothe deleted")
-                ClothesDAL().delete(currentClothe)
-                NSNotificationCenter.defaultCenter().postNotificationName("ClotheDeletedNotification", object: self, userInfo: ["type": currentClothe.clothe_type])
+                _ = ClothesDAL().delete(currentClothe)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ClotheDeletedNotification"), object: self, userInfo: ["type": currentClothe.clothe_type])
             })
         }
-        self.clothesList!.removeAtIndex(indexPath.row)
-        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        self.clothesList!.remove(at: (indexPath as NSIndexPath).row)
+        self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         if (clothesList?.count > 0){
-            self.emptyView.hidden = true
-            self.tableView.hidden = false
+            self.emptyView.isHidden = true
+            self.tableView.isHidden = false
         } else {
-            self.emptyView.hidden = false
-            self.tableView.hidden = true
+            self.emptyView.isHidden = false
+            self.tableView.isHidden = true
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "detailClothe") {
-            let navigationController = segue.destinationViewController as! UINavigationController
+            let navigationController = segue.destination as! UINavigationController
             if let detailController = navigationController.viewControllers[0] as? DetailClotheViewController {
                 detailController.currentClothe =  self.clotheToChange
                 detailController.delegate = self
             }
         } else if (segue.identifier == "showCapture"){
-            let navController = segue.destinationViewController as! UINavigationController
+            let navController = segue.destination as! UINavigationController
             let targetVC = navController.topViewController as! TypeViewController
             targetVC.openItem(getTypeClothe(typeClothe![0]))
         }
     }
     
-    private func getTypeClothe(typeClothe: String) -> Int {
-        switch(typeClothe.lowercaseString){
+    fileprivate func getTypeClothe(_ typeClothe: String) -> Int {
+        switch(typeClothe.lowercased()){
             case "maille":
                 return 0
             case "top":
@@ -202,31 +222,31 @@ class DetailTypeViewController: DTViewController {
 }
 
 extension DetailTypeViewController: ClotheTableViewCellDelegate {
-    func selectItem(item: Clothe) -> Void {
+    func selectItem(_ item: Clothe) -> Void {
         self.delegate?.detailTypeViewController(item)
-        self.navigationController?.popViewControllerAnimated(true)
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
-    func changeItem(item: Clothe) -> Void {
-        if let mode = self.viewMode where mode == ViewMode.Dressing {
+    func changeItem(_ item: Clothe) -> Void {
+        if let mode = self.viewMode , mode == ViewMode.dressing {
             //Go to Edit
             self.clotheToChange = item
             self.openEditClotheView()
         }
     }
     
-    func detailItem(item: Clothe) {
+    func detailItem(_ item: Clothe) {
         self.clotheToChange = item
         self.openEditClotheView()
     }
     
-    func removeItem(item: Clothe) -> Void {
-        if let mode = self.viewMode where mode == ViewMode.Dressing {
+    func removeItem(_ item: Clothe) -> Void {
+        if let mode = self.viewMode , mode == ViewMode.dressing {
             //Go to delete
             if let clothes = self.clothesList {
                 for index in 0..<clothes.count {
                     if (clothes[index].clothe_id == item.clothe_id){
-                        self.deleteClothe(NSIndexPath(forRow: index, inSection: 0))
+                        self.deleteClothe(IndexPath(row: index, section: 0))
                         break
                     }
                 }
@@ -236,15 +256,15 @@ extension DetailTypeViewController: ClotheTableViewCellDelegate {
 }
 
 extension DetailTypeViewController: DetailClotheViewControllerDelegate {
-    func detailClotheView(detailClotheview : DetailClotheViewController, itemDeleted item: String) {
-        self.deleteClothe(NSIndexPath(forRow: self.currentSection, inSection: 0))
+    func detailClotheView(_ detailClotheview : DetailClotheViewController, itemDeleted item: String) {
+        self.deleteClothe(IndexPath(row: self.currentSection, section: 0))
     }
     
-    func detailClotheView(detailClotheView : DetailClotheViewController, noAction result: Clothe) {
+    func detailClotheView(_ detailClotheView : DetailClotheViewController, noAction result: Clothe) {
         if let clothes = self.clothesList {
             for i in 0..<clothes.count {
                 if (clothes[i].clothe_id == result.clothe_id){
-                    self.indexPathToAnimate = NSIndexPath(forRow: i, inSection: 0)
+                    self.indexPathToAnimate = IndexPath(row: i, section: 0)
                     break
                 }
                 self.indexPathToAnimate = nil
@@ -257,11 +277,11 @@ extension DetailTypeViewController: DetailClotheViewControllerDelegate {
 
 extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
 
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return self.height
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         if let list = self.clothesList {
             return list.count
         } else {
@@ -269,11 +289,16 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(ClotheTableViewCell.cellIdentifier, forIndexPath: indexPath) as! ClotheTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ClotheTableViewCell.cellIdentifier, for: indexPath) as! ClotheTableViewCell
     
-        let clothe = self.clothesList![indexPath.row]
-        cell.clotheImageView.image = clothe.getImage().imageWithImage(480.0)
+        let clothe = self.clothesList![(indexPath as NSIndexPath).row]
+        
+        DispatchQueue.main.async {
+            let img = clothe.getImage()//.resize(CGSize(width: 480.0, height: 250))
+            cell.clotheImageView.image = img//clothe.getImage().imageWithImage(480.0)
+        }
+        cell.clotheImageView.contentMode = .scaleAspectFill
         cell.initFavoriteButton(clothe.clothe_favorite)
         cell.clothe = clothe
         cell.clotheImageView.clipsToBounds = true
@@ -282,20 +307,8 @@ extension DetailTypeViewController: UITableViewDataSource, UITableViewDelegate {
         
         //Remove edge insets to have full width separtor line
         cell.preservesSuperviewLayoutMargins = false
-        cell.separatorInset = UIEdgeInsetsZero
-        cell.layoutMargins = UIEdgeInsetsZero
-        
-       /* if let path = indexPathToAnimate where path.row == indexPath.row && !isAlreadyOpened {
-            let centerPoint = CGPointMake((cell.mouvingCard.frame.width + (cell.mouvingCard.frame.width * 3/4)), cell.mouvingCard.center.y)
-            cell.mouvingCard.center = centerPoint
-            UIView.animateWithDuration(0.4, animations: {
-                cell.mouvingCard.center = cell.contentView.center
-                }, completion: {
-                    (value: Bool) in
-                    self.indexPathToAnimate = nil
-                    self.isAlreadyOpened = true
-            })
-        } */
+        cell.separatorInset = UIEdgeInsets.zero
+        cell.layoutMargins = UIEdgeInsets.zero
         
         return cell;
     }

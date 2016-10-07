@@ -16,7 +16,7 @@ class Clothe: NSManagedObject {
     @NSManaged var clothe_litteralColor: String
     @NSManaged var clothe_cut: String
     @NSManaged var clothe_id: String
-    @NSManaged var clothe_image: NSData?
+    @NSManaged var clothe_image: Data?
     @NSManaged var clothe_isUnis: NSNumber
     @NSManaged var clothe_name: String
     @NSManaged var clothe_partnerid: NSNumber
@@ -29,19 +29,18 @@ class Clothe: NSManagedObject {
     
     func toDictionnary() -> NSDictionary {
         let attributes = Array(self.entity.attributesByName.keys)
-        let dict = self.dictionaryWithValuesForKeys(attributes)
-        return dict ;
+        let dict = self.dictionaryWithValues(forKeys: attributes)
+        return dict as NSDictionary ;
+    }
+    
+    func getImagePath() -> String {
+        return FileManager.getDocumentsDirectory().appendingPathComponent("\(self.clothe_id).png")
     }
     
     func getImage() -> UIImage {
-        if let image = UIImage(contentsOfFile: FileManager.getDocumentsDirectory().stringByAppendingPathComponent("\(self.clothe_id).png")){
+        if let image = UIImage(contentsOfFile: FileManager.getDocumentsDirectory().appendingPathComponent("\(self.clothe_id).png")){
             return image
         }
-        /*if let img = self.clothe_image {
-            if let uiimage = UIImage(data: img) {
-                return uiimage
-            }
-        } */
         
         var named = ""
         switch(self.clothe_type){

@@ -20,18 +20,18 @@ class StepsControl: UIView {
         super.awakeFromNib()
         
         for i in 0 ..< stepsViewCollections.count {
-            stepsViewCollections[i].layer.borderColor = UIColor.whiteColor().CGColor
+            stepsViewCollections[i].layer.borderColor = UIColor.white.cgColor
             stepsViewCollections[i].layer.borderWidth = 1
-            stepsViewCollections[i].backgroundColor = UIColor.clearColor()
+            stepsViewCollections[i].backgroundColor = UIColor.clear
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(StepsControl.updateValue(_:)), name: "NewClotheAddedNotification", object: nil)
+        NotificationCenter.default.addObserver(self, selector:#selector(StepsControl.updateValue(_:)), name: NSNotification.Name(rawValue: "NewClotheAddedNotification"), object: nil)
     }
     
-    func updateValue(notification: NSNotification) {
-        let userInfo = notification.userInfo as! [String: AnyObject]
+    func updateValue(_ notification: Foundation.Notification) {
+        let userInfo = (notification as NSNotification).userInfo as! [String: AnyObject]
         let type = userInfo["type"] as! String
-        if (type.lowercaseString == currentType!.lowercaseString){
+        if (type.lowercased() == currentType!.lowercased()){
             number += 1
             updateStepViews(number)
             
@@ -40,11 +40,11 @@ class StepsControl: UIView {
     
 
     
-    func updateStepViews(number: Int){
+    func updateStepViews(_ number: Int){
         if (number > self.stepsViewCollections.count) {
-            self.titleLabel.hidden = true
+            self.titleLabel.isHidden = true
             for j in 0 ..< self.stepsViewCollections.count{
-                self.stepsViewCollections[j].hidden = true
+                self.stepsViewCollections[j].isHidden = true
             }
             return
         }
@@ -52,26 +52,26 @@ class StepsControl: UIView {
         var mutableString: NSMutableAttributedString
         if (number >= 0 && number <= 2) {
             mutableString = NSMutableAttributedString(string: "\(stepsViewCollections.count - number) \(getLabel(number))"
-            ,attributes: [NSFontAttributeName:UIFont.systemFontOfSize(19.0)])
-            mutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: NSRange(location:0, length:  1))
+            ,attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 19.0)])
+            mutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSRange(location:0, length:  1))
         } else {
             mutableString = NSMutableAttributedString(string: "\(getLabel(number))"
-                ,attributes: [NSFontAttributeName:UIFont.systemFontOfSize(19.0)])
-            mutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.whiteColor(), range: NSRange(location:0, length:  mutableString.length))
+                ,attributes: [NSFontAttributeName:UIFont.systemFont(ofSize: 19.0)])
+            mutableString.addAttribute(NSForegroundColorAttributeName, value: UIColor.white, range: NSRange(location:0, length:  mutableString.length))
         }
         self.titleLabel.attributedText = mutableString
         
         for j in 0 ..< self.stepsViewCollections.count {
-            self.stepsViewCollections[j].hidden = false
+            self.stepsViewCollections[j].isHidden = false
             if (j < number){
                 self.stepsViewCollections[j].backgroundColor = UIColor.dressTimeRedBrand()
             } else {
-                self.stepsViewCollections[j].backgroundColor = UIColor.clearColor()
+                self.stepsViewCollections[j].backgroundColor = UIColor.clear
             }
         }
     }
     
-    private func getLabel(number: Int) -> String {
+    fileprivate func getLabel(_ number: Int) -> String {
         if (number >= 0 && number <= 2){
             return NSLocalizedString("profilStepMore", comment: "")
         } else if (number == 3) {
@@ -81,6 +81,6 @@ class StepsControl: UIView {
         }
     }
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
 }

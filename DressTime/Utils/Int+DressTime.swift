@@ -10,14 +10,14 @@ import Foundation
 
 extension Int {
     var months: TimeInterval {
-        return TimeInterval(interval: self, unit: TimeIntervalUnit.Months);
+        return TimeInterval(interval: self, unit: TimeIntervalUnit.months);
     }
     
     var day: TimeInterval {
-        return TimeInterval(interval: self, unit: TimeIntervalUnit.Days);
+        return TimeInterval(interval: self, unit: TimeIntervalUnit.days);
     }
     
-    var days: NSTimeInterval {
+    var days: Foundation.TimeInterval {
         let DAY_IN_SECONDS = 60 * 60 * 24
         let days:Double = Double(DAY_IN_SECONDS) * Double(self)
         return days

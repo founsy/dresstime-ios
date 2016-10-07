@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-public class Profil: NSManagedObject {
+open class Profil: NSManagedObject {
 
 // Insert code here to add functionality to your managed object subclass
 

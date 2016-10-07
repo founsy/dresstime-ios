@@ -16,110 +16,109 @@ import FBSDKLoginKit
 class DressingService {
     let baseUrlDressing = "\(DressTimeService.baseURL)dressing/"//"http://api.drez.io/dressing/"
     
-    func UpdateClothe(clothe: Clothe, completion: (isSuccess: Bool, object: JSON) -> Void){
+    func UpdateClothe(_ clothe: Clothe, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if (Mock.isMockable()){
-            completion(isSuccess: true, object:nil)
+            completion(true, nil)
         } else {
             self.updateClothe(clothe, completion: completion)
         }
     }
     
-    func GetImageClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+    func GetImageClothe(_ clotheId: String, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if (Mock.isMockable()){
-            completion(isSuccess: true, object:nil)
+            completion(true, nil)
         } else {
             self.getImageClothe(clotheId, completion: completion)
         }
     }
     
     
-    func UploadImage(clotheId: String, data: NSData,  completion: (isSuccess: Bool, object: JSON) -> Void){
+    func UploadImage(_ clotheId: String, data: Data,  completion: (_ isSuccess: Bool, _ object: JSON) -> Void){
         
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
             var path = baseUrlDressing + "clothes/image/\(clotheId)"
             
-            var request = NSMutableURLRequest(URL:  NSURL(string: path)!)
-            request.HTTPMethod = "POST"
+            var request = NSMutableURLRequest(url:  URL(string: path)!)
+            request.httpMethod = "POST"
             
-            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
-                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
-                request = NSMutableURLRequest(URL:  NSURL(string: path)!)
-                request.HTTPMethod = "POST"
+            if ((FBSDKAccessToken.current()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.current().tokenString)"
+                request = NSMutableURLRequest(url:  URL(string: path)!)
+                request.httpMethod = "POST"
             } else {
                 request.addValue("Bearer \(profil.access_token!)", forHTTPHeaderField: "Authorization")
             }
-           
-            
-            Photo.upload(data, filename: "\(clotheId).jpg", request: request)
+        
+          /*  Photo.upload(data as NSData, filename: "\(clotheId).jpg", request: request)
                 .progress { (bytesWritten, totalBytesWritten, totalBytesExpectedToWrite) in
                     print(totalBytesWritten)
                 }
                 .responseJSON { (response) in
                     print(response)
-            }
+            } */
         }
     }
     
     
-    func SaveClothe(clothe: Clothe, completion: (isSuccess: Bool, object: JSON) -> Void){
+    func SaveClothe(_ clothe: Clothe, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if (Mock.isMockable()){
             if let nsdata = ReadJsonFile().readFile("outfitsToday"){
                 let json = JSON(data: nsdata)
-                completion(isSuccess: true, object:json)
+                completion(true, json)
             } else {
-                completion(isSuccess: false, object: "")
+                completion(false, "")
             }
         } else {
             self.saveClothe(clothe, completion: completion)
         }
     }
     
-    func GetDressing(completion: (isSuccess: Bool, object: JSON) -> Void){
+    func GetDressing(_ completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if (Mock.isMockable()){
             if let nsdata = ReadJsonFile().readFile("outfitsToday"){
                 let json = JSON(data: nsdata)
-                completion(isSuccess: true, object:json)
+                completion(true, json)
             } else {
-                completion(isSuccess: false, object: "")
+                completion(false, "")
             }
         } else {
             self.getDressing(completion)
         }
     }
     
-    func GetClothesIdDressing(completion: (isSuccess: Bool, object: JSON) -> Void){
+    func GetClothesIdDressing(_ completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if (Mock.isMockable()){
             if let nsdata = ReadJsonFile().readFile("outfitsToday"){
                 let json = JSON(data: nsdata)
-                completion(isSuccess: true, object:json)
+                completion(true, json)
             } else {
-                completion(isSuccess: false, object: "")
+                completion(false, "")
             }
         } else {
             self.getClothesIdDressing(completion)
         }
     }
     
-    func GetClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+    func GetClothe(_ clotheId: String, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if (Mock.isMockable()){
             if let nsdata = ReadJsonFile().readFile("outfitsToday"){
                 let json = JSON(data: nsdata)
-                completion(isSuccess: true, object:json)
+                completion(true, json)
             } else {
-                completion(isSuccess: false, object: "")
+                completion(false, "")
             }
         } else {
             self.getClothe(clotheId, completion: completion)
         }
     }
     
-    func DeleteClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+    func DeleteClothe(_ clotheId: String, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if (Mock.isMockable()){
             if let nsdata = ReadJsonFile().readFile("outfitsToday"){
                 let json = JSON(data: nsdata)
-                completion(isSuccess: true, object:json)
+                completion(true, json)
             } else {
-                completion(isSuccess: false, object: "")
+                completion( false, "")
             }
         } else {
             self.deleteClothe(clotheId, completion: completion)
@@ -132,7 +131,7 @@ class DressingService {
      /*           PRIVATE FUNCTION        */
      /*************************************/
     
-    private func saveClothe(clothe: Clothe, completion: (isSuccess: Bool, object: JSON) -> Void){
+    fileprivate func saveClothe(_ clothe: Clothe, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
             var dressingSeriazible = [[String:AnyObject]]()
             
@@ -148,174 +147,165 @@ class DressingService {
             var path = baseUrlDressing + "clothes/"
             
             var headers :[String : String]?
-            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
-                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            if ((FBSDKAccessToken.current()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.current().tokenString)"
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
             
-            Alamofire.request(.POST, path, parameters: parameters, encoding: .JSON, headers: headers).validate().responseJSON { response in
-                if response.result.isSuccess {
-                    print(response.result.value)
-                    let jsonDic = JSON(response.result.value!)
-                    completion(isSuccess: true, object: jsonDic)
-                } else {
-                    completion(isSuccess: false, object: "")
+            Alamofire.request(URL(string: path)!, method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).validate().responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let json):
+                    completion(true, JSON(json))
+                case .failure(let error):
+                    completion(false, JSON(error))
                 }
-            }
+            })
         }
     }
     
-    private func updateClothe(clothe: Clothe, completion: (isSuccess: Bool, object: JSON) -> Void){
+    fileprivate func updateClothe(_ clothe: Clothe, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
             let dict = NSMutableDictionary(dictionary: clothe.toDictionnary())
-            dict.removeObjectForKey("clothe_image")
+            dict.removeObject(forKey: "clothe_image")
             
             var path = baseUrlDressing + "clothes/"
             var headers :[String : String]?
-            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
-                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            if ((FBSDKAccessToken.current()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.current().tokenString)"
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
-            Alamofire.request(.PUT, path, parameters: dict as? [String : AnyObject], encoding: .JSON, headers: headers).validate().responseJSON { response in
-                if response.result.isSuccess {
-                    print(response.result.value)
-                    let jsonDic = JSON(response.result.value!)
-                    completion(isSuccess: true, object: jsonDic)
-                } else {
-                    completion(isSuccess: false, object: "")
+            
+            Alamofire.request(URL(string: path)!, method: HTTPMethod.put, parameters: dict as? [String : AnyObject], encoding: JSONEncoding.default, headers: headers).validate().responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let json):
+                    completion(true, JSON(json))
+                case .failure(let error):
+                    completion(false, JSON(error))
                 }
-            }
+            })
         }
     }
     
-    private func getDressing(completion: (isSuccess: Bool, object: JSON) -> Void){
+    fileprivate func getDressing(_ completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
             var path = baseUrlDressing + "clothes/"
             var headers :[String : String]?
-            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
-                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            if ((FBSDKAccessToken.current()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.current().tokenString)"
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
-            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).validate().responseJSON { response in
-                if response.result.isSuccess {
-                    print(response.result.value)
-                    let jsonDic = JSON(response.result.value!)
-                    completion(isSuccess: true, object: jsonDic)
-                } else {
-                    completion(isSuccess: false, object: "")
+            
+            Alamofire.request(URL(string: path)!, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let json):
+                    completion(true, JSON(json))
+                case .failure(let error):
+                    completion(false, JSON(error))
                 }
-            }
+            })
         }
-        completion(isSuccess: false, object: "")
+        completion(false, "")
     }
     
-    private func getClothesIdDressing(completion: (isSuccess: Bool, object: JSON) -> Void){
+    fileprivate func getClothesIdDressing(_ completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
             var path = baseUrlDressing + "clothesIds/"
             var headers :[String : String]?
-            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
-                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            if ((FBSDKAccessToken.current()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.current().tokenString)"
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
-            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).validate().responseJSON { response in
-                if response.result.isSuccess {
-                    print(response.result.value)
-                    let jsonDic = JSON(response.result.value!)
-                    completion(isSuccess: true, object: jsonDic)
-                    /* //TODO - Convert msg to Array<String>
-                    var idList = [String]()
-                    if let array = msg["list"] as? NSArray {
-                    for item in array{
-                    if let obj = item as? NSDictionary {
-                    idList.append(obj["id"] as! String)
-                    }
-                    }
-                    }*/
-                } else {
-                    completion(isSuccess: false, object: "")
+            
+            Alamofire.request(URL(string: path)!, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let json):
+                    completion(true, JSON(json))
+                case .failure(let error):
+                    completion(false, JSON(error))
                 }
-            }
+            })
+            
         }
-        completion(isSuccess: false, object: "")
+        completion(false, "")
     }
     
-    private func getClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+    fileprivate func getClothe(_ clotheId: String, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
             var path = baseUrlDressing + "clothes/" + clotheId
             
             var headers :[String : String]?
-            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
-                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            if ((FBSDKAccessToken.current()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.current().tokenString)"
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
-            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).validate().responseJSON { response in
-                if response.result.isSuccess {
-                    print(response.result.value)
-                    let jsonDic = JSON(response.result.value!)
-                    completion(isSuccess: true, object: jsonDic)
-                } else {
-                    completion(isSuccess: false, object: "")
+            
+            Alamofire.request(URL(string: path)!, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let json):
+                    completion(true, JSON(json))
+                case .failure(let error):
+                    completion(false, JSON(error))
                 }
-            }
+            })
         }
-        completion(isSuccess: false, object: "")
+        completion(false, "")
     }
     
-    private func getImageClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+    fileprivate func getImageClothe(_ clotheId: String, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
             var path = baseUrlDressing + "clothes/image/" + clotheId
             
             var headers :[String : String]?
-            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
-                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            if ((FBSDKAccessToken.current()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.current().tokenString)"
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
-            Alamofire.request(.GET, path, encoding: .JSON, headers: headers).validate().responseJSON { response in
-                if response.result.isSuccess {
-                    print(response.result.value)
-                    let jsonDic = JSON(response.result.value!)
-                    completion(isSuccess: true, object: jsonDic)
-                } else {
-                    completion(isSuccess: false, object: "")
+            
+            Alamofire.request(URL(string: path)!, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let json):
+                    completion(true, JSON(json))
+                case .failure(let error):
+                    completion(false, JSON(error))
                 }
-            }
+            })
         }
-        completion(isSuccess: false, object: "")
+        completion(false, "")
     }
     
-    private func deleteClothe(clotheId: String, completion: (isSuccess: Bool, object: JSON) -> Void){
+    fileprivate func deleteClothe(_ clotheId: String, completion: @escaping (_ isSuccess: Bool, _ object: JSON) -> Void){
         if let profil = ProfilsDAL().fetch(SharedData.sharedInstance.currentUserId!) {
             var path = baseUrlDressing + "clothes/" + clotheId
             
             var headers :[String : String]?
-            if ((FBSDKAccessToken.currentAccessToken()) != nil && profil.fb_id != nil){
-                path = path + "?access_token=\(FBSDKAccessToken.currentAccessToken().tokenString)"
+            if ((FBSDKAccessToken.current()) != nil && profil.fb_id != nil){
+                path = path + "?access_token=\(FBSDKAccessToken.current().tokenString)"
             } else {
                 headers = ["Authorization": "Bearer \(profil.access_token!)"]
             }
-            Alamofire.request(.DELETE, path, encoding: .JSON, headers: headers).validate().responseJSON { response in
-                if response.result.isSuccess {
-                    print(response.result.value)
-                    let jsonDic = JSON(response.result.value!)
-                    completion(isSuccess: true, object: jsonDic)
-                } else {
-                    completion(isSuccess: false, object: "")
+            
+            Alamofire.request(URL(string: path)!, method: HTTPMethod.delete, parameters: nil, encoding: JSONEncoding.default, headers: headers).validate().responseJSON(completionHandler: { (response) in
+                switch response.result {
+                case .success(let json):
+                    completion(true, JSON(json))
+                case .failure(let error):
+                    completion(false, JSON(error))
                 }
-            }
+            })
         }
-        completion(isSuccess: false, object: "")
+        completion(false, "")
     }
 }
 
-
+/*
 class Photo {
-    class func upload(image: NSData, filename: String, request: NSMutableURLRequest) -> Request {
+    class func upload(_ image: NSData, filename: String, request: NSMutableURLRequest) -> Request {
         let boundary = "NET-POST-boundary-\(arc4random())-\(arc4random())"
         request.setValue("multipart/form-data;boundary="+boundary,
                          forHTTPHeaderField: "Content-Type")
@@ -325,11 +315,12 @@ class Photo {
                   "Content-Disposition: form-data; name=\"clothe_image\";" +
                     " filename=\"\(filename)\"\r\n",
                   "Content-Type: image/png\r\n\r\n"] {
-                    parameters.appendData(s.dataUsingEncoding(NSUTF8StringEncoding)!)
+                    parameters.append(s.data(using: String.Encoding.utf8)!)
         }
-        parameters.appendData(image)
-        parameters.appendData("\r\n--\(boundary)--\r\n"
-            .dataUsingEncoding(NSUTF8StringEncoding)!)
-        return Alamofire.upload(request, data: parameters)
+        parameters.append(image as Data)
+        parameters.append("\r\n--\(boundary)--\r\n"
+            .data(using: String.Encoding.utf8)!)
+        
+        return Alamofire.upload(parameters, to: request) //Alamofire.upload(request, data: parameters)
     }
-}
+} */

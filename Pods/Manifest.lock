@@ -18,7 +18,7 @@ PODS:
   - Mixpanel (3.0.4):
     - Mixpanel/Mixpanel (= 3.0.4)
   - Mixpanel/Mixpanel (3.0.4)
-  - SwiftyJSON (3.1.0)
+  - SwiftyJSON (3.0.0)
 
 DEPENDENCIES:
   - Alamofire
@@ -29,7 +29,7 @@ DEPENDENCIES:
   - FBSDKLoginKit
   - MapleBacon
   - Mixpanel
-  - SwiftyJSON
+  - SwiftyJSON (~> 3.0.0)
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
@@ -41,8 +41,8 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 9a514a55a7d05190f64d4ef09502737588b5b561
   MapleBacon: afb48c2ab4133e19e3c380a01d3b3cfc3ed2baf2
   Mixpanel: 4a2330c26556109d2f42b01e36a05eb9e2caf25e
-  SwiftyJSON: 29b9f2a64f118c07e691667c2ba1efe536acfe0b
+  SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
 
-PODFILE CHECKSUM: 07670be6bbdd01af8641768613db44236862f1e3
+PODFILE CHECKSUM: 1a731830c6a5bb8663af7900389946ba60d55d6a
 
 COCOAPODS: 1.1.0.rc.2

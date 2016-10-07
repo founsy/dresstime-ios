@@ -11,7 +11,7 @@ import UIKit
 
 class IndexedCollectionView: UICollectionView {
     
-    var indexPath: NSIndexPath!
+    var indexPath: IndexPath!
     
     override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
         super.init(frame: frame, collectionViewLayout: layout)
@@ -31,8 +31,8 @@ class TypeTableViewCell: UITableViewCell {
     @IBOutlet weak var blackView: UIView!
     
     var collectionView: IndexedCollectionView!
-    private let kCellReuse : String = "SubTypeCell"
-    private let collectionCellWidth:CGFloat = 114.0
+    fileprivate let kCellReuse : String = "SubTypeCell"
+    fileprivate let collectionCellWidth:CGFloat = 114.0
     var collectionWidth: CGFloat!
     var currentSection: Int!
     var isLoaded = false
@@ -63,37 +63,37 @@ class TypeTableViewCell: UITableViewCell {
     func initialize(){
         let collectionLayout = UICollectionViewFlowLayout()
         collectionLayout.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0)
-        collectionLayout.itemSize = CGSizeMake(self.collectionCellWidth, 90);
-        collectionLayout.scrollDirection = UICollectionViewScrollDirection.Vertical
+        collectionLayout.itemSize = CGSize(width: self.collectionCellWidth, height: 90);
+        collectionLayout.scrollDirection = UICollectionViewScrollDirection.vertical
         
-        collectionView = IndexedCollectionView(frame: CGRectZero, collectionViewLayout: collectionLayout)
+        collectionView = IndexedCollectionView(frame: CGRect.zero, collectionViewLayout: collectionLayout)
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.backgroundColor = UIColor.clearColor()
+        collectionView.backgroundColor = UIColor.clear
         
         //collectionView.dataSource = self
         //collectionView.delegate = self
         
         let customCell = UINib(nibName: "SubTypeCell", bundle: nil)
-        self.collectionView.registerNib(customCell, forCellWithReuseIdentifier: kCellReuse)
+        self.collectionView.register(customCell, forCellWithReuseIdentifier: kCellReuse)
         self.contentView.addSubview(self.collectionView)
-        self.collectionView.hidden = true
+        self.collectionView.isHidden = true
     }
     
     func showCollectionView(){
-        self.iconImageView.hidden = true
-        self.labelTypeText.hidden = true
+        self.iconImageView.isHidden = true
+        self.labelTypeText.isHidden = true
         self.collectionView.reloadData()
-        self.collectionView.hidden = false
+        self.collectionView.isHidden = false
         //self.blurView.hidden = false
-        self.blackView.hidden = false
+        self.blackView.isHidden = false
     }
     
     func hideCollectionView(){
-        self.iconImageView.hidden = false
-        self.labelTypeText.hidden = false
-        self.collectionView.hidden = true
+        self.iconImageView.isHidden = false
+        self.labelTypeText.isHidden = false
+        self.collectionView.isHidden = true
         //self.blurView.hidden = true
-         self.blackView.hidden = true
+         self.blackView.isHidden = true
     }
     
     func calculateCollectionViewHeight() -> CGFloat {
@@ -108,21 +108,21 @@ class TypeTableViewCell: UITableViewCell {
         let frame = self.contentView.bounds
         let margin = CGFloat((frame.width - collectionViewWidth)/2)
         
-        self.collectionView.frame = CGRectMake(margin, 10, CGFloat(self.collectionCellWidth*2), calculateCollectionViewHeight())
+        self.collectionView.frame = CGRect(x: margin, y: 10, width: CGFloat(self.collectionCellWidth*2), height: calculateCollectionViewHeight())
     }
     
-    func setCollectionViewDataSourceDelegate(dataSourceDelegate delegate: protocol<UICollectionViewDelegate,UICollectionViewDataSource>, index: NSInteger) {
+    func setCollectionViewDataSourceDelegate(dataSourceDelegate delegate: UICollectionViewDelegate & UICollectionViewDataSource, index: NSInteger) {
         self.collectionView.dataSource = delegate
         self.collectionView.delegate = delegate
         self.collectionView.tag = index
         self.collectionView.reloadData()
     }
     
-    func setCollectionViewDataSourceDelegate(dataSourceDelegate delegate: protocol<UICollectionViewDelegate,UICollectionViewDataSource>, indexPath: NSIndexPath) {
+    func setCollectionViewDataSourceDelegate(dataSourceDelegate delegate: UICollectionViewDelegate & UICollectionViewDataSource, indexPath: IndexPath) {
         self.collectionView.dataSource = delegate
         self.collectionView.delegate = delegate
         self.collectionView.indexPath = indexPath
-        self.collectionView.tag = indexPath.section
+        self.collectionView.tag = (indexPath as NSIndexPath).section
         self.collectionView.reloadData()
     }
 }

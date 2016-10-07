@@ -11,12 +11,12 @@ import UIKit
 
 
 protocol PriceSelectionCellDataSource {
-    func priceSelectionCell(cell: UITableViewCell, minValueForSelectedType type: String) -> NSNumber?
-    func priceSelectionCell(cell: UITableViewCell, maxValueForSelectedType type: String) -> NSNumber?
+    func priceSelectionCell(_ cell: UITableViewCell, minValueForSelectedType type: String) -> NSNumber?
+    func priceSelectionCell(_ cell: UITableViewCell, maxValueForSelectedType type: String) -> NSNumber?
 }
 
 protocol PriceSelectionCellDelegate {
-    func priceSelectionCell(cell: UITableViewCell, valueChanged rangeSlider: RangeSlider)
+    func priceSelectionCell(_ cell: UITableViewCell, valueChanged rangeSlider: RangeSlider)
 }
 
 class PriceSelectionCell: UITableViewCell {
@@ -24,7 +24,7 @@ class PriceSelectionCell: UITableViewCell {
     @IBOutlet weak var minLabel: UILabel!
     @IBOutlet weak var maxLabel: UILabel!
     @IBOutlet weak var rangeView: UIView!
-    private let slider = RangeSlider(frame: CGRectZero)
+    fileprivate let slider = RangeSlider(frame: CGRect.zero)
     
     var dataSource: PriceSelectionCellDataSource?
     var delegate: PriceSelectionCellDelegate?
@@ -49,12 +49,12 @@ class PriceSelectionCell: UITableViewCell {
         super.awakeFromNib()
         slider.trackHighlightTintColor = UIColor(red: 235/255, green: 175/255, blue: 73/255, alpha: 1)
         rangeView.addSubview(slider)
-        slider.addTarget(self, action: #selector(PriceSelectionCell.rangeSliderValueChanged(_:)), forControlEvents: .ValueChanged)
-        slider.addTarget(self, action: #selector(PriceSelectionCell.touchUp(_:)), forControlEvents: .TouchUpInside)
+        slider.addTarget(self, action: #selector(PriceSelectionCell.rangeSliderValueChanged(_:)), for: .valueChanged)
+        slider.addTarget(self, action: #selector(PriceSelectionCell.touchUp(_:)), for: .touchUpInside)
     }
     
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         drawSlider()
     }
     
@@ -65,16 +65,16 @@ class PriceSelectionCell: UITableViewCell {
         slider.lowerValue = 0.0
         slider.maximumValue = 150.0
         slider.upperValue = 150.0
-        slider.frame = CGRectMake(0, 0, rangeView.frame.width, 18)
+        slider.frame = CGRect(x: 0, y: 0, width: rangeView.frame.width, height: 18)
     }
     
-    func touchUp(rangeSlider: RangeSlider) {
+    func touchUp(_ rangeSlider: RangeSlider) {
         if let del = self.delegate {
             del.priceSelectionCell(self, valueChanged: rangeSlider)
         }
     }
     
-    func rangeSliderValueChanged(rangeSlider: RangeSlider) {
+    func rangeSliderValueChanged(_ rangeSlider: RangeSlider) {
         let lower = Int(rangeSlider.lowerValue * 100) / 100
         let upper = Int(rangeSlider.upperValue * 100) / 100
         minLabel.text = "\(lower) €"

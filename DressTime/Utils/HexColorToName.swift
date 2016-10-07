@@ -15,7 +15,7 @@ class HexColorToName {
     init(){
         var color: String, rgb:[Int], hsl: [Int], uiColor: UIColor;
         for i in 0 ..< self.colorName.count {
-            self.colorName[i][0] = (self.colorName[i][0] as! String).uppercaseString
+            self.colorName[i][0] = (self.colorName[i][0] as! String).uppercased() as AnyObject
             color = "#" + (self.colorName[i][0] as! String);
             uiColor = UIColor.colorWithHexString(color)
             rgb = self.rgb(uiColor);
@@ -26,8 +26,8 @@ class HexColorToName {
     }
     
     
-    func name(uiColor: UIColor) -> [AnyObject]{
-        let color = hexStringFromColor(uiColor).uppercaseString
+    func name(_ uiColor: UIColor) -> [Any]{
+        let color = hexStringFromColor(uiColor).uppercased()
         var rgb = self.rgb(uiColor);
         let r = rgb[0], g = rgb[1], b = rgb[2];
         var hsl = self.hsl(uiColor);
@@ -64,14 +64,14 @@ class HexColorToName {
         }
         
         if (cl < 0){
-           return ["#000000", "Invalid Color: " + color, false]
+           return ["#000000" as AnyObject, "Invalid Color: " + color, false]
         } else {
            return ["#" + (self.colorName[cl][0] as! String), self.colorName[cl][1], false]
         }
 
     }
     
-    func hsl(color: UIColor) -> [Int]{
+    func hsl(_ color: UIColor) -> [Int]{
     
         var hue:CGFloat = 0;
         var saturation: CGFloat = 0;
@@ -83,7 +83,7 @@ class HexColorToName {
     }
 
 
-     func rgb(color: UIColor) -> [Int] {
+     func rgb(_ color: UIColor) -> [Int] {
         var red:CGFloat = 0 ;
         var green: CGFloat = 0;
         var blue: CGFloat = 0;
@@ -93,7 +93,7 @@ class HexColorToName {
         return [Int(red), Int(green), Int(blue)]
     }
     
-    func hexStringFromColor(color: UIColor) -> String{
+    func hexStringFromColor(_ color: UIColor) -> String{
         var r:CGFloat = 0
         var g:CGFloat = 0
         var b:CGFloat = 0
@@ -109,7 +109,7 @@ class HexColorToName {
     
     
     
-    var colorName: [[AnyObject]] = [
+    var colorName: [[Any]] = [
         ["2a3133", "Anthracite grey"],
         ["F5F5DC", "Beige"],
         ["000000", "Black"],
