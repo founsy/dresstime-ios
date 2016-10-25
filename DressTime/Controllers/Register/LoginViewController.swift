@@ -85,11 +85,12 @@ extension LoginViewController {
                 
                 view.endEditing(true)
                 ActivityLoader.shared.showProgressView(self.view)
-                LoginService().Login(login, password: newPassword) { (isSuccess, object) -> Void in
-                    if (isSuccess){
+                
+                DressTimeClient().fetchLoginWithCompletion(with: login, password: password!, withCompletion: { (result) in
+                    switch result {
+                    case .success(let json):
                         let loginBL = LoginBL()
-                        loginBL.loginWithSuccess(object)
-                        
+                        loginBL.loginWithSuccess(json)
                         //Check after login, if a synchro is necessary
                         //Today, only if Local database is empty
                         //TODO - Tomorrow, syncro differential
@@ -100,32 +101,12 @@ extension LoginViewController {
                                 self.goToHome()
                             }
                         })
-                    } else {
+                    case .failure(let fetchError):
+                        print(fetchError)
                         ActivityLoader.shared.hideProgressView()
-                        if let err_desc = object["error_description"].string {
-                            if (err_desc == "001"){
-                                print("Please validate your account");
-                                let alert = UIAlertController(title: "Account not validate", message: "Please validate your account! Do you want to send again the email?", preferredStyle: .alert)
-                                alert.addAction(UIAlertAction(title: "Resend", style: .default, handler: { (action) -> Void in
-                                    //Resend Validation Email
-                                    LoginService().SendVerificationEmail(login, completion: { (isSuccess, object) -> Void in
-                                        print("Email Send");
-                                    });
-                                }));
-                                alert.addAction(UIAlertAction(title: "No", style: .default, handler: { (action) -> Void in
-                                    self.dismiss(animated: true, completion: nil)
-                                }))
-                                self.present(alert, animated: true){}
-                            } else {
-                                self.showError("loginErrTitle", messageKey:  "loginErrMessage", buttonKey:  "loginErrButton", handler: nil)
-                            }
-                        } else {
-                            self.showError("loginErrTitle", messageKey:  "loginErrMessage", buttonKey:  "loginErrButton", handler: nil)
-                        }
-                        
+                        self.showError("loginErrTitle", messageKey:  "loginErrMessage", buttonKey:  "loginErrButton", handler: nil)
                     }
-                    
-                }
+                })
             }
         }
     }
@@ -163,12 +144,14 @@ extension LoginViewController : FBSDKLoginButtonDelegate {
             // If you ask for multiple permissions at once, you
             // should check if specific permissions missing
             if result.grantedPermissions.contains("email") {
-                UserService().GetUser({ (isSuccess, object) -> Void in
-                    let loginBL = LoginBL()
-                    if (isSuccess){
+                let dressTimeClient = DressTimeClient()
+                dressTimeClient.fetchUserWithCompletion(withCompletion: { (result) in
+                    switch result {
+                    case .success(let json):
+                        let loginBL = LoginBL()
                         //If into object provider is Facebook, meaning no account still exists on our system
-                        if let _ = object["provider"].string {
-                            self.userByFB = loginBL.loginFacebookWithSuccess(object)
+                        if let _ = json["provider"].string {
+                            self.userByFB = loginBL.loginFacebookWithSuccess(json)
                             if let url = self.userByFB?.picture {
                                 do {
                                     self.userByFB?.picture_data = try Data(contentsOf: URL(string: url)!)
@@ -182,10 +165,12 @@ extension LoginViewController : FBSDKLoginButtonDelegate {
                             self.present(vc, animated: true, completion: nil)
                         } else {
                             //Otherwise find an account go to Home
-                            loginBL.loginWithSuccess(object)
+                            loginBL.loginWithSuccess(json)
                             self.goToHome();
                         }
-                    } else {
+                    case .failure(let error):
+                        //TODO: Display error using Notification Center
+                        print("\(#function) Error : \(error)")
                         self.showError("loginErrTitle", messageKey:  "loginErrMessage", buttonKey:  "loginErrButton", handler: nil)
                     }
                 })

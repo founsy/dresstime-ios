@@ -29,14 +29,10 @@ class DressingSynchro {
     
     func execute(_ completion: (_ isNeeded: Bool) -> Void){
         if (isDressingEmpty()){
-            if (Mock.isMockable()){
-                updateMockableLocalstorage()
-            } else {
-                
-                self.updateLocalStorage({ (isFinish) -> Void in
-                    self.downloadImage()
-                })
-            }
+            self.updateLocalStorage({ (isFinish) -> Void in
+                self.downloadImage()
+            })
+
             completion(true)
         } else {
             completion(false)
@@ -56,9 +52,14 @@ class DressingSynchro {
     
     fileprivate func isDressingBackup(_ getCompleted: ()){
         //Check if a backup dressing exist on server-side
-        DressingService().GetClothesIdDressing { (isSuccess, object) -> Void in
-            //self.clothesStored = object
-            getCompleted
+        let dressTimeClient = DressTimeClient()
+        dressTimeClient.fetchClothesIdWithCompletion { (result) in
+            switch result {
+            case .success(_):
+                getCompleted
+            case .failure(let error):
+                print("\(#function) Error: \(error)")
+            }
         }
     }
     
@@ -71,43 +72,52 @@ class DressingSynchro {
     
     
     fileprivate func updateLocalStorage(_ completion: @escaping (_ isNeeded: Bool) -> Void){
-        let dressingSvc = DressingService()
-        dressingSvc.GetDressing { (isSuccess, object) -> Void in
-            if (isSuccess){
-                let clotheDAL = ClothesDAL()
-                for i in 0 ..< object.arrayValue.count {
-                    let clothe = object.arrayValue[i]
-                    let isUnis = clothe["clothe_isUnis"].boolValue
-                
-                    _ = clotheDAL.save(clothe["clothe_id"].stringValue, partnerId: clothe["clothe_partnerid"].floatValue, partnerName: clothe["clothe_partnerName"].stringValue, type: clothe["clothe_type"] .stringValue, subType: clothe["clothe_subtype"].stringValue, name: clothe["clothe_name"].stringValue , isUnis: isUnis, pattern: clothe["clothe_pattern"].stringValue, cut: clothe["clothe_cut"].stringValue, image: nil, colors: clothe["clothe_colors"].stringValue)
-                }
-                completion(true)
+        let dressTimeClient = DressTimeClient()
+        dressTimeClient.fetchDressingWithCompletion(withCompletion: { (result) in
+            switch result {
+                case .success(let json):
+                    let clotheDAL = ClothesDAL()
+                    for clothe in json.arrayValue {
+                        let isUnis = clothe["clothe_isUnis"].boolValue
+                        
+                        _ = clotheDAL.save(clothe["clothe_id"].stringValue, partnerId: clothe["clothe_partnerid"].floatValue, partnerName: clothe["clothe_partnerName"].stringValue, type: clothe["clothe_type"] .stringValue, subType: clothe["clothe_subtype"].stringValue, name: clothe["clothe_name"].stringValue , isUnis: isUnis, pattern: clothe["clothe_pattern"].stringValue, cut: clothe["clothe_cut"].stringValue, image: nil, colors: clothe["clothe_colors"].stringValue)
+                    }
+                    completion(true)
+                case .failure(let error):
+                print("\(#function) Error: \(error)")
+                completion(false)
             }
-        }
+        })
     }
     
     fileprivate func downloadImage(){
         let clotheDAL = ClothesDAL()
-        let dressingSvc = DressingService()
+        let dressTimeClient = DressTimeClient()
         let clothes = clotheDAL.fetch()
         var numberSync = 0
-        for i in 0 ..< clothes.count {
-            dressingSvc.GetImageClothe(clothes[i].clothe_id, completion: { (isSuccess, object) -> Void in
-                if (isSuccess){
-                    _ = FileManager.saveImage("\(object["clothe_id"].stringValue).png", imageBase64: object["clothe_image"].stringValue)
-                    //clotheDAL.updateClotheImage(object["clothe_id"].stringValue, imageBase64: object["clothe_image"].stringValue)
+        
+        for clothe in clothes {
+            dressTimeClient.fetchClotheImageWithCompletion(for: clothe.clothe_id, withCompletion: { (result) in
+                switch result {
+                case .success(let json):
+                    _ = FileManager.saveImage("\(json["clothe_id"].stringValue).png", imageBase64: json["clothe_image"].stringValue)
                     numberSync += 1
                     if let del = self.delagate{
                         del.dressingSynchro(self, synchingProgressing: numberSync, totalNumber: clothes.count)
                     }
-                }
-                if (numberSync >= clothes.count){
-                    if let del = self.delagate{
-                        del.dressingSynchro(self, syncDidFinish: true)
+                    
+                    if (numberSync >= clothes.count){
+                        if let del = self.delagate{
+                            del.dressingSynchro(self, syncDidFinish: true)
+                        }
                     }
+                    
+                case .failure(let error):
+                    print("\(#function) Error: \(error)")
                 }
             })
         }
+        
         if (clothes.count == 0){
             if let del = self.delagate{
                 del.dressingSynchro(self, syncDidFinish: true)
@@ -127,25 +137,4 @@ class DressingSynchro {
             }
         }
     }
-    
-    fileprivate func updateMockableLocalstorage(){
-        if let nsdata = ReadJsonFile().readFile(SharedData.sharedInstance.currentUserId!){
-            let json = JSON(data: nsdata)
-            let clotheDAL = ClothesDAL()
-            
-            for (_, clothe) in json {   
-                let image: String = clothe["clothe_image"].stringValue
-                let data: Data = Data(base64Encoded: image, options: Data.Base64DecodingOptions.ignoreUnknownCharacters)!
-                let isUnis = clothe["clothe_isUnis"].boolValue
-                
-                _ = clotheDAL.save(clothe["clothe_id"].stringValue, partnerId: clothe["clothe_partnerid"].floatValue, partnerName: clothe["clothe_partnerName"].stringValue, type: clothe["clothe_type"] .stringValue, subType: clothe["clothe_subtype"].stringValue, name: clothe["clothe_name"].stringValue , isUnis: isUnis, pattern: clothe["clothe_pattern"].stringValue, cut: clothe["clothe_cut"].stringValue, image: data, colors: clothe["clothe_colors"].stringValue)
-            }
-            
-            if let del = self.delagate{
-               del.dressingSynchro(self, syncDidFinish: true)
-            }
-        }
-    }
-
-
 }

@@ -9,6 +9,17 @@
 import Foundation
 
 extension Date {
+    
+    init(dateString:String) {
+        let dateStringFormatter = DateFormatter()
+        dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        if let d = dateStringFormatter.date(from: dateString) {
+            self = Date(timeInterval: 0, since: d)
+        } else {
+            self = Date(timeIntervalSince1970: 0)
+        }
+    }
+    
     func toS(_ format:String) -> String? {
         let formatter:DateFormatter = DateFormatter()
         //formatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")

@@ -47,7 +47,7 @@ class CameraViewController : DTViewController {
     
     @IBAction func onCapture(_ sender: AnyObject) {
         #if (arch(i386) || arch(x86_64)) && os(iOS)
-            self.currentImage = UIImage(named: "login-bg")
+            self.currentImage = UIImage(named: "backgroundStep1")
             self.arrayColors = self.currentImage!.dominantColors()
             self.performSegue(withIdentifier: "showConfirmation", sender: self)
         #else
@@ -126,7 +126,11 @@ class CameraViewController : DTViewController {
     
 
     override func viewDidAppear(_ animated: Bool) {
-        self.captureManager!.startCamera()
+        #if (arch(i386) || arch(x86_64)) && os(iOS)
+            print("Don't start camera on simulator")
+        #else
+            self.captureManager!.startCamera()
+        #endif
     }
     
     override func didReceiveMemoryWarning() {

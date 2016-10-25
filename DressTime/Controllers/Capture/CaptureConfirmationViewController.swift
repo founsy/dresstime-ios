@@ -227,24 +227,29 @@ class CaptureConfirmationViewController: DTViewController {
         
         let dal = ClothesDAL()
         let clothe = dal.save(resultCapture)
-        DressingService().UploadImage(clothe.clothe_id, data: resultCapture["clothe_image"] as! Data, completion: { (isSuccess, object) in
-            if (!isSuccess) {
+        let dressTimeClient = DressTimeClient()
+        dressTimeClient.uploadClotheImageWithCompletion(for: clothe.clothe_id, data: resultCapture["clothe_image"] as! Data) { (result) in
+            switch result {
+            case .success(_):
+                print("Upload finished")
+            case .failure(let error):
+                //TODO: Error Management
+                print("\(#function) Error: \(error)")
                 NotificationCenter.default.post(name: Notifications.Error.UploadClothe, object: nil)
             }
-            print("OK")
-        })
-        
-        DressingService().SaveClothe(clothe) { (isSuccess, object) -> Void in
-            if (isSuccess){
+        }
+
+        dressTimeClient.saveClotheWithCompletion(for: clothe) { (result) in
+            switch result {
+            case .success(_):
                 print("Save Clothe")
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "NewClotheAddedNotification"), object: self, userInfo: ["type": resultCapture["clothe_type"] as! String])
-           
                 ActivityLoader.shared.hideProgressView()
                 self.dismiss(animated: true, completion: nil)
-            } else {
+            case .failure(let error):
+                print("\(#function) Error: \(error)")
                 NotificationCenter.default.post(name: Notifications.Error.SaveClothe, object: nil)
             }
-            
         }
     }
     
@@ -258,11 +263,17 @@ class CaptureConfirmationViewController: DTViewController {
         self.currentClothe?.clothe_litteralColor = getSelectedColor()
         
         dal.update(self.currentClothe!)
-        DressingService().UpdateClothe(self.currentClothe!) { (isSuccess, object) -> Void in
+        let dressTimeClient = DressTimeClient()
+        dressTimeClient.updateClotheWithCompletion(for: self.currentClothe!) { (result) in
+            switch result {
+            case .success(_):
+                print("Clothe updated")
+            case .failure(let error):
+                print("\(#function) Error : \(error)")
+            }
             ActivityLoader.shared.hideProgressView()
             self.dismiss(animated: true, completion: nil)
         }
-        
     }
     
     fileprivate func getSelectedColor() -> String {

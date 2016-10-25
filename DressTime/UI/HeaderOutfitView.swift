@@ -17,9 +17,11 @@ class HeaderOutfitView: UIView {
     var delegate: HeaderOutfitViewDelegate?
     
     @IBOutlet weak var addButton: UIButton!
+    
     @IBAction func onTappedAdd(_ sender: AnyObject) {
         delegate?.headerOutfitView(true)
     }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }

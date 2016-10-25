@@ -98,12 +98,18 @@ class SettingsTableViewController: UITableViewController {
                 userSaving.notification = notification
             }
             
-            UserService().UpdateUser(userSaving, completion: { (isSuccess, object) -> Void in
-                let profilDal = ProfilsDAL()
-                _ = profilDal.update(userSaving)
-                let mixpanel = Mixpanel.sharedInstance()
-                mixpanel.people.set(["$name" : userSaving.lastName!, "firstname": userSaving.firstName!, "$email" : userSaving.email!, "Notification" : userSaving.notification!])
-                
+            let dressTimeClient = DressTimeClient()
+            dressTimeClient.updateUserWithCompletion(userSaving, withCompletion: { (result) in
+                switch result {
+                case .success(_):
+                    let profilDal = ProfilsDAL()
+                    _ = profilDal.update(userSaving)
+                    let mixpanel = Mixpanel.sharedInstance()
+                    mixpanel.people.set(["$name" : userSaving.lastName!, "firstname": userSaving.firstName!, "$email" : userSaving.email!, "Notification" : userSaving.notification!])
+                case .failure(let error):
+                    //TODO: Error Management
+                    print("\(#function) Error: \(error)")
+                }
             })
             
             self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
@@ -238,19 +244,17 @@ class SettingsTableViewController: UITableViewController {
     }
     
     func logout() {
-        let profilDal = ProfilsDAL()
-        if let user = profilDal.fetch(SharedData.sharedInstance.currentUserId!) {
-            let loginBL = LoginBL()
-            if let token = user.access_token {
-                LoginService().Logout(token, completion: { (isSuccess, object) -> Void in
-                    loginBL.logoutWithSuccess(user)
-                    self.goToLogin()
-                })
-            } else {
-                loginBL.logoutWithSuccess(user)
+        let dressTimeClient = DressTimeClient()
+        dressTimeClient.fetchLogoutWithCompletion { (result) in
+            switch result {
+            case .success(_):
+                let loginBL = LoginBL()
+                loginBL.logoutWithSuccess(nil)
                 self.goToLogin()
+            case .failure(let error):
+                //TODO: Display Error message
+                print("\(#function) Error: \(error)")
             }
-            
         }
     }
     

@@ -132,15 +132,18 @@ open class LoginBL {
                         }
                     }
                     
-                    UserService().UpdateUser(user, completion: { (isSuccess, object) -> Void in
-                        if (isSuccess){
+                    let dressTimeClient = DressTimeClient()
+                    dressTimeClient.updateUserWithCompletion(user, withCompletion: { (result) in
+                        switch result {
+                        case .success(_):
                             let dal = ProfilsDAL()
                             _ = dal.update(user)
+                        case .failure(let error):
+                            //TODO: Error management
+                            print("\(#function) Error: \(error)")
                         }
                     })
                 }
-                
-                
             }
 
         }
@@ -149,29 +152,33 @@ open class LoginBL {
     open func unmergeProfilWithFacebook(_ user: Profil, completion: @escaping (_ isSuccess: Bool) -> Void){
         user.fb_id = ""
         user.fb_token = ""
-        UserService().UpdateUser(user, completion: { (isSuccess, object) -> Void in
-            if (isSuccess){
+        let dressTimeClient = DressTimeClient()
+        dressTimeClient.updateUserWithCompletion(user, withCompletion: { (result) in
+            switch result {
+            case .success(_):
                 let dal = ProfilsDAL()
                 _ = dal.update(user)
+                completion(true)
+            case .failure(let error):
+                //TODO: Error management
+                print("\(#function) Error: \(error)")
+                completion(false)
             }
-            completion(isSuccess)
         })
-        
     }
     
     open func showLoginPage(_ error: Foundation.Notification){
         /* Display alert and redirect to login page */
         if let appDelegate = UIApplication.shared.delegate, let window = appDelegate.window {
             let alert = UIAlertController(title: "No Login title", message: "No Login message", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "", style: .default, handler: { (alertAction) in
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (alertAction) in
                 //Go back to login page
                 DispatchQueue.main.async(execute: { () -> Void in
                     let rootController:UIViewController = UIStoryboard(name: "Register", bundle: Bundle.main).instantiateViewController(withIdentifier: "LoginNavigationController")
                     let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     appDelegate.window!.makeKeyAndVisible()
                     appDelegate.window!.rootViewController = rootController
-                    
-                    //self.navigationController?.popToRootViewControllerAnimated(false)
+                    appDelegate.window!.rootViewController?.present(rootController, animated: true, completion: nil)
                 })
                 
             }))
@@ -200,10 +207,18 @@ open class LoginBL {
             }
             
             profil.styles = styles.joined(separator: ",")
+            
             //TODO Save new styles on back-end
-            UserService().UpdateUser(profil, completion: { (isSuccess, object) -> Void in
-                let profilDal = ProfilsDAL()
-                _ = profilDal.update(profil)
+            let dressTimeClient = DressTimeClient()
+            dressTimeClient.updateUserWithCompletion(profil, withCompletion: { (result) in
+                switch result {
+                case .success(_):
+                    let dal = ProfilsDAL()
+                    _ = dal.update(profil)
+                case .failure(let error):
+                    //TODO: Error management
+                    print("\(#function) Error: \(error)")
+                }
             })
         }
     }

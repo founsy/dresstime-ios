@@ -159,10 +159,10 @@ class SelectStyleViewController: DTViewController {
             newUser.styles = self.selectedStyle.joined(separator: ",")            
             
             if let profil = dal.save(newUser) {
-                
-                UserService().CreateUser(profil, password: newUser.password, completion: { (isSuccess, object) -> Void in
-                    if (isSuccess){
-                        //Create Model
+                let dressTimeClient = DressTimeClient()
+                dressTimeClient.createUserWithCompletion(profil, password: newUser.password, withCompletion: { (result) in
+                    switch result {
+                    case .success(_):
                         if (FBSDKAccessToken.current() == nil){
                             self.loginSuccess(profil, password: newUser.password!)
                         } else {
@@ -175,7 +175,7 @@ class SelectStyleViewController: DTViewController {
                         
                         let mixpanel = Mixpanel.sharedInstance()
                         mixpanel.people.set(["$name" : profil.lastName!, "firstname": profil.firstName!, "$email" : profil.email!, "Styles": profil.styles!,"Notification" : NotificationTime.morning.rawValue])
-                    
+                        
                         UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: { () -> Void in
                             self.confirmationView?.alpha = 1
                             self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
@@ -193,21 +193,27 @@ class SelectStyleViewController: DTViewController {
                                         })
                                 })
                         })
-                        
-                    } else {
-                        if (object["code"].numberValue == 11000){
+                    case .failure(let error):
+                        //TODO: Manage Error from Server
+                        print("\(#function) Error: \(error)")
+                        switch error {
+                        case DressTimeError.duplicateAccountError(_):
+                            NotificationCenter.default.post(name: Notifications.Error.CreateAccount_Email_Duplicate, object: nil)
+                        default:
+                             NotificationCenter.default.post(name: Notifications.Error.CreateAccount, object: nil)
+                        }
+                        /*if (object["code"].numberValue == 11000){
                             //TODO - Duplication Key (email)
                             NotificationCenter.default.post(name: Notifications.Error.CreateAccount_Email_Duplicate, object: nil)
                             //NotificationCenter.default.post(name: NSNotification.Name(rawValue: Notifications.Error.CreateAccount_Email_Duplicate), object: nil)
                         } else if (object["name"].stringValue == "ValidationError") {
                             NotificationCenter.default.post(name: Notifications.Error.CreateAccount_Style_Required, object: nil)
                         } else {
-                            NotificationCenter.default.post(name: Notifications.Error.CreateAccount, object: nil)
+                         
                         }
-                        return
+                        return */
                     }
                 })
-                
             }
         }
     }
@@ -218,41 +224,46 @@ class SelectStyleViewController: DTViewController {
             profil.styles = self.selectedStyle.joined(separator: ",")
             
             let newProfil = dal.update(profil)
-            UserService().UpdateUser(newProfil!, completion: { (isSuccess, object) -> Void in
-                self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
-                self.view.bringSubview(toFront: self.confirmationView!)
-                
-                UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: { () -> Void in
-                    self.confirmationView?.alpha = 1
-                    self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
-                    }, completion: { (isFinish) -> Void in
-                        UIView.animate(withDuration: 0.2, animations: { () -> Void in
-                            self.confirmationView?.alpha = 0
-                            self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
-                            }, completion: { (finish) -> Void in
-                                _ = self.navigationController?.popViewController(animated: true)
-                        })
-                })
+            let dressTimeClient = DressTimeClient()
+            dressTimeClient.updateUserWithCompletion(newProfil!, withCompletion: { (result) in
+                switch result {
+                case .success(_):
+                    self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
+                    self.view.bringSubview(toFront: self.confirmationView!)
+                    
+                    UIView.animate(withDuration: 1.0, delay: 0.0, usingSpringWithDamping: 0.25, initialSpringVelocity: 0.0, options: [], animations: { () -> Void in
+                        self.confirmationView?.alpha = 1
+                        self.confirmationView?.layer.transform = CATransform3DMakeScale(1.0, 1.0, 1.0)
+                        }, completion: { (isFinish) -> Void in
+                            UIView.animate(withDuration: 0.2, animations: { () -> Void in
+                                self.confirmationView?.alpha = 0
+                                self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
+                                }, completion: { (finish) -> Void in
+                                    _ = self.navigationController?.popViewController(animated: true)
+                            })
+                    })
+                case .failure(let error):
+                    //TODO: Error Management
+                    print("\(#function) Error: \(error)")
+                }
             })
-            
-            
         }
     }
     
     fileprivate func loginSuccess(_ profil: Profil, password: String){
-        LoginService().Login(profil.email!, password: password) { (isSuccess, object) -> Void in
-            if (isSuccess){
+        let dressTimeClient = DressTimeClient()
+        dressTimeClient.fetchLoginWithCompletion(with: profil.email!, password: password) { (result) in
+            switch result {
+            case .success(let json):
                 let loginBL = LoginBL();
-                loginBL.loginWithSuccess(object)
-            } else {
+                loginBL.loginWithSuccess(json)
+            case .failure(let _):
                 ActivityLoader.shared.hideProgressView()
+                //TODO: Use Notification Center to display error
                 let alert = UIAlertController(title: NSLocalizedString("loginErrTitle", comment: ""), message: NSLocalizedString("loginErrMessage", comment: ""), preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("loginErrButton", comment: ""), style: .default) { _ in })
                 self.present(alert, animated: true){}
             }
-            
         }
-        
     }
-    
 }

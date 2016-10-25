@@ -75,8 +75,9 @@ class CameraSessionManager: NSObject, AVCaptureVideoDataOutputSampleBufferDelega
                     print("Simulator Mode")
                 #else
                     self.session.commitConfiguration()
+                    self.startCamera()
                 #endif
-                self.startCamera()
+                
                 DispatchQueue.main.sync(execute: {
                     self.cameraSessionReady()
                 })

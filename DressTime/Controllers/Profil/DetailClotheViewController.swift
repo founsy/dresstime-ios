@@ -69,14 +69,21 @@ class DetailClotheViewController: DTViewController {
     
     
     @IBAction func onClickDelete(_ sender: AnyObject) {
-        DressingService().DeleteClothe(currentClothe.clothe_id) { (isSuccess, object) -> Void in
-            print("Clothe deleted")
-            let dal = ClothesDAL()
-            _ = dal.delete(self.currentClothe)
-            DispatchQueue.main.sync(execute: {
-                //self.delegate?.onDeleteCloth!()
-                self.dismiss(animated: true, completion: nil)
-            })
+        let dressTimeClient = DressTimeClient()
+        dressTimeClient.deleteClotheWithCompletion(for: currentClothe.clothe_id) { (result) in
+            switch result {
+            case .success(_):
+                print("Clothe deleted")
+                let dal = ClothesDAL()
+                _ = dal.delete(self.currentClothe)
+                DispatchQueue.main.sync(execute: {
+                    //self.delegate?.onDeleteCloth!()
+                    self.dismiss(animated: true, completion: nil)
+                })
+            case .failure(let error):
+                //TODO: Error Management
+                print("\(#function) Error : \(error)")
+            }
         }
     }
     

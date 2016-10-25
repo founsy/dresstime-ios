@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0105594A1C2ACBB60098E976 /* DTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010559491C2ACBB60098E976 /* DTViewController.swift */; };
+		01070A2B1DA9991C00397EAC /* DressTimeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01070A2A1DA9991C00397EAC /* DressTimeClient.swift */; };
+		01070A2C1DA99C8B00397EAC /* DressTimeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01070A2A1DA9991C00397EAC /* DressTimeClient.swift */; };
 		010EE6771C83159E007A5828 /* StoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 010EE6761C83159E007A5828 /* StoreViewController.swift */; };
 		011EEE5C1D53849E0067E60E /* Date+DressTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011EEE5B1D53849E0067E60E /* Date+DressTime.swift */; };
 		011EEE5E1D5384D40067E60E /* Int+DressTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011EEE5D1D5384D40067E60E /* Int+DressTime.swift */; };
@@ -50,13 +52,11 @@
 		013C7ECA1D6215A100311981 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB5B1C29CA6C005B2A59 /* HomeViewController.swift */; };
 		013C7ECB1D6215A100311981 /* Clothe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB6A1C29CA6C005B2A59 /* Clothe.swift */; };
 		013C7ECC1D6215A100311981 /* ProfilsDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB6E1C29CA6C005B2A59 /* ProfilsDAL.swift */; };
-		013C7ECD1D6215A100311981 /* DressingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB721C29CA6C005B2A59 /* DressingService.swift */; };
 		013C7ECF1D6215A100311981 /* ProfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB621C29CA6C005B2A59 /* ProfilViewController.swift */; };
 		013C7ED11D6215A100311981 /* DressTime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D41B5935B3003D5E41 /* DressTime.xcdatamodeld */; };
 		013C7ED21D6215A100311981 /* SelectStyleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186F9941D451B270061596C /* SelectStyleViewController.swift */; };
 		013C7ED31D6215A100311981 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0186F9921D4505B60061596C /* SignInViewController.swift */; };
 		013C7ED61D6215A100311981 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB631C29CA6C005B2A59 /* SettingsTableViewController.swift */; };
-		013C7ED81D6215A100311981 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB741C29CA6C005B2A59 /* LoginService.swift */; };
 		013C7ED91D6215A100311981 /* SettingsHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB061C29CA31005B2A59 /* SettingsHeaderCell.swift */; };
 		013C7EDA1D6215A100311981 /* HomeOutfitsListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB001C29CA31005B2A59 /* HomeOutfitsListCell.swift */; };
 		013C7EDB1D6215A100311981 /* WeatherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB4B1C29CA45005B2A59 /* WeatherWrapper.swift */; };
@@ -85,7 +85,6 @@
 		013C7EFC1D6215A100311981 /* NumberClotheControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 019436431C32009A001F5D82 /* NumberClotheControl.swift */; };
 		013C7EFE1D6215A100311981 /* NumberCalendarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C47A9B1C6F4EF2006CDD14 /* NumberCalendarCell.swift */; };
 		013C7EFF1D6215A100311981 /* OutfitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB011C29CA31005B2A59 /* OutfitCell.swift */; };
-		013C7F001D6215A100311981 /* DressTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB731C29CA6C005B2A59 /* DressTimeService.swift */; };
 		013C7F021D6215A100311981 /* UIColor+Dresstime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB481C29CA45005B2A59 /* UIColor+Dresstime.swift */; };
 		013C7F031D6215A100311981 /* ErrorsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0136D0431D094550007076A2 /* ErrorsManager.swift */; };
 		013C7F041D6215A100311981 /* HexColorToName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB451C29CA45005B2A59 /* HexColorToName.swift */; };
@@ -111,7 +110,6 @@
 		013C7F1D1D6215A100311981 /* LaunchingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018C145E1CF9DF05000F3330 /* LaunchingView.swift */; };
 		013C7F1E1D6215A100311981 /* ClotheScrollTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BAF41C29CA31005B2A59 /* ClotheScrollTableCell.swift */; };
 		013C7F1F1D6215A100311981 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01C454D21B5935B3003D5E41 /* AppDelegate.swift */; };
-		013C7F201D6215A100311981 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB771C29CA6C005B2A59 /* UserService.swift */; };
 		013C7F221D6215A100311981 /* TitleNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB0B1C29CA31005B2A59 /* TitleNavBar.swift */; };
 		013C7F251D6215A100311981 /* SettingsStyleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB081C29CA31005B2A59 /* SettingsStyleCell.swift */; };
 		013C7F271D6215A100311981 /* DetailClotheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB601C29CA6C005B2A59 /* DetailClotheViewController.swift */; };
@@ -260,11 +258,7 @@
 		01D3BB891C29CA6C005B2A59 /* Profil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB6D1C29CA6C005B2A59 /* Profil.swift */; };
 		01D3BB8A1C29CA6C005B2A59 /* ProfilsDAL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB6E1C29CA6C005B2A59 /* ProfilsDAL.swift */; };
 		01D3BB8B1C29CA6C005B2A59 /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB6F1C29CA6C005B2A59 /* SharedData.swift */; };
-		01D3BB8D1C29CA6C005B2A59 /* DressingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB721C29CA6C005B2A59 /* DressingService.swift */; };
-		01D3BB8E1C29CA6C005B2A59 /* DressTimeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB731C29CA6C005B2A59 /* DressTimeService.swift */; };
-		01D3BB8F1C29CA6C005B2A59 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB741C29CA6C005B2A59 /* LoginService.swift */; };
 		01D3BB901C29CA6C005B2A59 /* ReadJsonFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB751C29CA6C005B2A59 /* ReadJsonFile.swift */; };
-		01D3BB921C29CA6C005B2A59 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01D3BB771C29CA6C005B2A59 /* UserService.swift */; };
 		01D3BB9C1C29CB09005B2A59 /* artill_clean_icons-webfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 01D3BB9B1C29CB09005B2A59 /* artill_clean_icons-webfont.ttf */; };
 		01FC61FF1C31FC1F004C5CF6 /* StepsControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = 01FC61FE1C31FC1F004C5CF6 /* StepsControl.xib */; };
 		01FC62031C31FDB9004C5CF6 /* StepsControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01FC62021C31FDB9004C5CF6 /* StepsControl.swift */; };
@@ -335,6 +329,7 @@
 		010559491C2ACBB60098E976 /* DTViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DTViewController.swift; sourceTree = "<group>"; };
 		0105906F1C0E1DD40037FC61 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		010590711C0E1DDC0037FC61 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Main.strings; sourceTree = "<group>"; };
+		01070A2A1DA9991C00397EAC /* DressTimeClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressTimeClient.swift; sourceTree = "<group>"; };
 		010DEB621BE61E800079ACCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		010EE6761C83159E007A5828 /* StoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreViewController.swift; sourceTree = "<group>"; };
 		011EEE5B1D53849E0067E60E /* Date+DressTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+DressTime.swift"; sourceTree = "<group>"; };
@@ -476,11 +471,7 @@
 		01D3BB6D1C29CA6C005B2A59 /* Profil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Profil.swift; sourceTree = "<group>"; };
 		01D3BB6E1C29CA6C005B2A59 /* ProfilsDAL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilsDAL.swift; sourceTree = "<group>"; };
 		01D3BB6F1C29CA6C005B2A59 /* SharedData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
-		01D3BB721C29CA6C005B2A59 /* DressingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressingService.swift; sourceTree = "<group>"; };
-		01D3BB731C29CA6C005B2A59 /* DressTimeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DressTimeService.swift; sourceTree = "<group>"; wrapsLines = 0; };
-		01D3BB741C29CA6C005B2A59 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
 		01D3BB751C29CA6C005B2A59 /* ReadJsonFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ReadJsonFile.swift; path = ../WebServices/ReadJsonFile.swift; sourceTree = "<group>"; };
-		01D3BB771C29CA6C005B2A59 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		01D3BB9B1C29CB09005B2A59 /* artill_clean_icons-webfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "artill_clean_icons-webfont.ttf"; sourceTree = "<group>"; };
 		01FC61FE1C31FC1F004C5CF6 /* StepsControl.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StepsControl.xib; sourceTree = "<group>"; };
 		01FC62021C31FDB9004C5CF6 /* StepsControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepsControl.swift; sourceTree = "<group>"; };
@@ -882,10 +873,7 @@
 		01D3BB701C29CA6C005B2A59 /* WebServices */ = {
 			isa = PBXGroup;
 			children = (
-				01D3BB721C29CA6C005B2A59 /* DressingService.swift */,
-				01D3BB731C29CA6C005B2A59 /* DressTimeService.swift */,
-				01D3BB741C29CA6C005B2A59 /* LoginService.swift */,
-				01D3BB771C29CA6C005B2A59 /* UserService.swift */,
+				01070A2A1DA9991C00397EAC /* DressTimeClient.swift */,
 			);
 			path = WebServices;
 			sourceTree = "<group>";
@@ -1553,16 +1541,15 @@
 				013C7EC71D6215A100311981 /* ClotheCell.swift in Sources */,
 				013C7EC81D6215A100311981 /* ClotheModel.swift in Sources */,
 				013C7EC91D6215A100311981 /* LoginBL.swift in Sources */,
+				01070A2C1DA99C8B00397EAC /* DressTimeClient.swift in Sources */,
 				013C7ECA1D6215A100311981 /* HomeViewController.swift in Sources */,
 				013C7ECB1D6215A100311981 /* Clothe.swift in Sources */,
 				013C7ECC1D6215A100311981 /* ProfilsDAL.swift in Sources */,
-				013C7ECD1D6215A100311981 /* DressingService.swift in Sources */,
 				013C7ECF1D6215A100311981 /* ProfilViewController.swift in Sources */,
 				013C7ED11D6215A100311981 /* DressTime.xcdatamodeld in Sources */,
 				013C7ED21D6215A100311981 /* SelectStyleViewController.swift in Sources */,
 				013C7ED31D6215A100311981 /* SignInViewController.swift in Sources */,
 				013C7ED61D6215A100311981 /* SettingsTableViewController.swift in Sources */,
-				013C7ED81D6215A100311981 /* LoginService.swift in Sources */,
 				013C7ED91D6215A100311981 /* SettingsHeaderCell.swift in Sources */,
 				013C7EDA1D6215A100311981 /* HomeOutfitsListCell.swift in Sources */,
 				013C7EDB1D6215A100311981 /* WeatherWrapper.swift in Sources */,
@@ -1591,7 +1578,6 @@
 				013C7EFC1D6215A100311981 /* NumberClotheControl.swift in Sources */,
 				013C7EFE1D6215A100311981 /* NumberCalendarCell.swift in Sources */,
 				013C7EFF1D6215A100311981 /* OutfitCell.swift in Sources */,
-				013C7F001D6215A100311981 /* DressTimeService.swift in Sources */,
 				013C7F021D6215A100311981 /* UIColor+Dresstime.swift in Sources */,
 				013C7F031D6215A100311981 /* ErrorsManager.swift in Sources */,
 				013C7F041D6215A100311981 /* HexColorToName.swift in Sources */,
@@ -1617,7 +1603,6 @@
 				013C7F1D1D6215A100311981 /* LaunchingView.swift in Sources */,
 				013C7F1E1D6215A100311981 /* ClotheScrollTableCell.swift in Sources */,
 				013C7F1F1D6215A100311981 /* AppDelegate.swift in Sources */,
-				013C7F201D6215A100311981 /* UserService.swift in Sources */,
 				013C7F221D6215A100311981 /* TitleNavBar.swift in Sources */,
 				013C7F251D6215A100311981 /* SettingsStyleCell.swift in Sources */,
 				013C7F271D6215A100311981 /* DetailClotheViewController.swift in Sources */,
@@ -1659,16 +1644,15 @@
 				01D3BB1B1C29CA31005B2A59 /* ClotheCell.swift in Sources */,
 				01608C771C7E3FE400D42B20 /* ClotheModel.swift in Sources */,
 				0155C6341C30378100B5ACD2 /* LoginBL.swift in Sources */,
+				01070A2B1DA9991C00397EAC /* DressTimeClient.swift in Sources */,
 				01D3BB7C1C29CA6C005B2A59 /* HomeViewController.swift in Sources */,
 				01D3BB861C29CA6C005B2A59 /* Clothe.swift in Sources */,
 				01D3BB8A1C29CA6C005B2A59 /* ProfilsDAL.swift in Sources */,
-				01D3BB8D1C29CA6C005B2A59 /* DressingService.swift in Sources */,
 				01D3BB811C29CA6C005B2A59 /* ProfilViewController.swift in Sources */,
 				01C454D61B5935B3003D5E41 /* DressTime.xcdatamodeld in Sources */,
 				0186F9951D451B270061596C /* SelectStyleViewController.swift in Sources */,
 				0186F9931D4505B60061596C /* SignInViewController.swift in Sources */,
 				01D3BB821C29CA6C005B2A59 /* SettingsTableViewController.swift in Sources */,
-				01D3BB8F1C29CA6C005B2A59 /* LoginService.swift in Sources */,
 				01D3BB301C29CA31005B2A59 /* SettingsHeaderCell.swift in Sources */,
 				01D3BB2A1C29CA31005B2A59 /* HomeOutfitsListCell.swift in Sources */,
 				01D3BB541C29CA45005B2A59 /* WeatherWrapper.swift in Sources */,
@@ -1697,7 +1681,6 @@
 				019436441C32009A001F5D82 /* NumberClotheControl.swift in Sources */,
 				01C47A9C1C6F4EF2006CDD14 /* NumberCalendarCell.swift in Sources */,
 				01D3BB2B1C29CA31005B2A59 /* OutfitCell.swift in Sources */,
-				01D3BB8E1C29CA6C005B2A59 /* DressTimeService.swift in Sources */,
 				01D3BB511C29CA45005B2A59 /* UIColor+Dresstime.swift in Sources */,
 				0136D0441D094550007076A2 /* ErrorsManager.swift in Sources */,
 				01D3BB4E1C29CA45005B2A59 /* HexColorToName.swift in Sources */,
@@ -1723,7 +1706,6 @@
 				018C145F1CF9DF05000F3330 /* LaunchingView.swift in Sources */,
 				01D3BB1E1C29CA31005B2A59 /* ClotheScrollTableCell.swift in Sources */,
 				01C454D31B5935B3003D5E41 /* AppDelegate.swift in Sources */,
-				01D3BB921C29CA6C005B2A59 /* UserService.swift in Sources */,
 				01D3BB351C29CA31005B2A59 /* TitleNavBar.swift in Sources */,
 				01D3BB321C29CA31005B2A59 /* SettingsStyleCell.swift in Sources */,
 				01D3BB7F1C29CA6C005B2A59 /* DetailClotheViewController.swift in Sources */,

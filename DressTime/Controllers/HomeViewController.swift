@@ -257,16 +257,18 @@ class HomeViewController: DTViewController {
     }
     
     fileprivate func loadOutfits(){
-        DressTimeService().GetOutfitsToday(self.currentLocation) { (isSuccess, object) -> Void in
-            if (isSuccess){
+        let dressTimeClient = DressTimeClient()
+        dressTimeClient.fetchOutfitsOfTheDayWithCompletion(at: self.currentLocation) { (result) in
+            switch result {
+            case .success(let result):
                 self.isLoaded = true
-                
-                self.currentWeather = Weather(json: object["weather"]["current"])
+                // Get the weather
+                self.currentWeather = result.weather
                 SharedData.sharedInstance.currentWeater = self.currentWeather
-                let sentence = object["weather"]["comment"].stringValue
                 
+                //Display the weather
                 DispatchQueue.main.async(execute: { () -> Void in
-                    self.commentWeather.text = sentence
+                    self.commentWeather.text = self.currentWeather!.sentence
                     self.iconLabel.text = self.currentWeather!.icon != nil ? self.currentWeather!.icon! : ""
                     let temperature:Int = self.currentWeather!.temp != nil ? self.currentWeather!.temp! : 0
                     self.temperatureLabel.text = "\(temperature)°"
@@ -277,33 +279,26 @@ class HomeViewController: DTViewController {
                         }
                     }
                 })
-                
-                if let outfits = object["outfits"].array {
-                    self.outfitList = [Outfit]()
-                    //Load the collection of Outfits
-                    if let outfitsCell = self.outfitsCell {
-                        for outfit in outfits {
-                            let outfitItem = Outfit(json: outfit)
-                            outfitItem.orderOutfit()
-                            self.outfitList.append(outfitItem)
-                        }
-                        self.outfitList = self.outfitList.sorted(by: { (outfit1, outfit2) -> Bool in
-                            return outfit1.isPutOn && outfit2.isPutOn
-                        })
-                        
-                        self.outfitsCell!.dataSource = self
-                        outfitsCell.outfitCollectionView.reloadData()
-                        
-                    }
-                    self.loadingView!.animateMask()
+                self.outfitList = result.outfits
+                //Load the collection of Outfits
+                if let outfitsCell = self.outfitsCell {
+                    self.outfitList = self.outfitList.sorted(by: { (outfit1, outfit2) -> Bool in
+                        return outfit1.isPutOn
+                    })
+                    
+                    self.outfitsCell!.dataSource = self
+                    outfitsCell.outfitCollectionView.reloadData()
                 }
-            } else {
+                self.loadingView!.animateMask()
+            case .failure(let error):
                 //TO DO - ADD Error Messages
+                print("\(#function) Error: \(error)")
                 self.isLoaded = false
                 NotificationCenter.default.post(name: Notifications.Error.GetOutfit, object: nil)
                 DispatchQueue.main.async(execute: {
                     self.loadingView!.animateMask()
                 })
+
             }
         }
     }

@@ -36,6 +36,24 @@ class ClothesDAL {
         return clothes
     }
     
+    func fetch(types: [String]) -> [Clothe]{
+        var clothes  = [Clothe]()
+        if let userId = SharedData.sharedInstance.currentUserId {
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Clothe")
+            let predicate = NSPredicate(format: "clothe_type IN %@ AND profilRel.userid = %@", types, userId)
+            
+            // Set the predicate on the fetch request
+            fetchRequest.predicate = predicate
+            
+            do {
+                clothes = try self.managedObjectContext.fetch(fetchRequest) as! [Clothe]
+            } catch let error as NSError {
+                print(error)
+            }
+        }
+        return clothes
+    }
+    
     func fetch(_ clotheId: String) -> Clothe? {
         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Clothe")
         let predicate = NSPredicate(format: "clothe_id = %@", clotheId)

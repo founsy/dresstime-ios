@@ -74,7 +74,7 @@ class ShoppingViewController: DTViewController {
     
     fileprivate func loadBrandClothe(){
         ActivityLoader.shared.showProgressView(view)
-        let service = DressTimeService()
+       /* let service = DressTimeService()
         service.GetBrandClothes() { (isSuccess, object) -> Void in
             if (isSuccess){
                 self.brandClothes = object
@@ -89,7 +89,7 @@ class ShoppingViewController: DTViewController {
                 self.brandClotheCell!.pickerView.selectItem(0)
             }
             ActivityLoader.shared.hideProgressView()
-        }
+        } */
     }
     
     fileprivate func sortArrayByPrice(_ list : [BrandClothe]) -> [BrandClothe]{

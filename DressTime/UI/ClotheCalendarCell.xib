@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="NO">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <development version="7000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -10,23 +11,25 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="310"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ixf-gR-mz3" id="OWI-Id-iM3">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="309.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="309"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bKp-kl-MTU">
-                        <rect key="frame" x="20" y="15" width="280" height="280"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <rect key="frame" x="60" y="15" width="200" height="279"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="200" id="2LK-me-fgH"/>
+                        </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstItem="bKp-kl-MTU" firstAttribute="leading" secondItem="OWI-Id-iM3" secondAttribute="leading" constant="20" id="3YX-PP-y2P"/>
-                    <constraint firstAttribute="trailing" secondItem="bKp-kl-MTU" secondAttribute="trailing" constant="20" id="DTE-R3-B4y"/>
+                    <constraint firstItem="bKp-kl-MTU" firstAttribute="centerX" secondItem="OWI-Id-iM3" secondAttribute="centerX" id="C5F-PO-UWc"/>
                     <constraint firstAttribute="bottom" secondItem="bKp-kl-MTU" secondAttribute="bottom" constant="15" id="Jzm-0a-Z9g"/>
                     <constraint firstItem="bKp-kl-MTU" firstAttribute="top" secondItem="OWI-Id-iM3" secondAttribute="top" constant="15" id="P8K-Y1-eF2"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="containerView" destination="bKp-kl-MTU" id="eIP-o4-fSh"/>
             </connections>

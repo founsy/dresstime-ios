@@ -28,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>4</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -95,6 +95,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera used to capture your clothe!</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>The application uses this information to show you your location</string>
 	<key>UIAppFonts</key>
@@ -103,7 +105,7 @@
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>remote-notification</string>
+		<string>fetch</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

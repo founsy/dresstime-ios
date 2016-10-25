@@ -10,7 +10,6 @@ import Foundation
 import UIKit
 
 protocol OutfitViewControllerDelegate {
-
     func outfitViewControllerDelegate(_ outfitViewController: OutfitViewController, didModifyOutfit outfit: Outfit)
 }
 
@@ -19,16 +18,15 @@ class OutfitViewController: DTViewController {
     fileprivate let cellIdentifier : String = "ClotheTableCell"
     fileprivate let dal = ClothesDAL()
     fileprivate var currentClothe: Clothe?
-    fileprivate var typeToOpen: [String]?
     fileprivate var indexPathToAnimate : Int?
     fileprivate var isEditingMode = false
     
     fileprivate var confirmationView: ConfirmSave?
     
     var outfitObject: Outfit?
-    var currentOutfits = [ClotheModel]()
+    var currentOutfits: [ClotheModel]?
     var delegate: OutfitViewControllerDelegate?
-    var creationDate : Date?
+    var creationDate = Date()
     var gradient : CAGradientLayer?
     
     @IBOutlet weak var tableView: UITableView!
@@ -40,49 +38,50 @@ class OutfitViewController: DTViewController {
     @IBAction func onEditTapped(_ sender: AnyObject) {
         isEditingMode = !isEditingMode
         if (isEditingMode){
-            onEditTapped.title = "Cancel" //TODO Translate
+            self.addDoneBarButton()
         } else {
-             onEditTapped.title = "Edit" //TODO Translate
+             self.addEditBarButton()
         }
         tableView.reloadData()
     }
     
     @IBAction func onDressUpTapped(_ sender: AnyObject) {
-        self.outfitObject?.isPutOn = true
-        
         if (outfitObject == nil) {
-            outfitObject = Outfit(clothes: self.currentOutfits, updatedDate: self.creationDate!, isSuggestion: false, isPutOn: true)
+            outfitObject = Outfit(clothes: self.currentOutfits!, updatedDate: self.creationDate, isSuggestion: false, isPutOn: true)
+            // TODO - Add style
+        } else if (outfitObject!.clothes.count != self.currentOutfits!.count) {
+            outfitObject!.clothes = self.currentOutfits!
         }
         
-        
+        self.outfitObject?.isPutOn = true
         var isModify = false
-        if (currentOutfits.count == outfitObject!.clothes.count) {
-            for i in 0..<currentOutfits.count {
-                isModify = isModify || (currentOutfits[i].clothe_id != outfitObject?.clothes[i].clothe_id)
+        if (currentOutfits!.count == outfitObject!.clothes.count) {
+            for i in 0..<currentOutfits!.count {
+                isModify = isModify || (currentOutfits![i].clothe_id != outfitObject?.clothes[i].clothe_id)
             }
         } else {
             isModify = true
         }
         
         if (isModify){
-            self.outfitObject?.clothes = currentOutfits
+            self.outfitObject?.clothes = currentOutfits!
             self.outfitObject?.orderOutfit()
-            self.outfitObject?.isSuggestion = !isModify
+            self.outfitObject?.isSuggestion = false
         }
         
-        if let date = self.creationDate {
-            self.outfitObject?.updatedDate = date
-        }
+        self.outfitObject?.updatedDate = self.creationDate
         
-        let dressSvc = DressTimeService()
-        dressSvc.SaveOutfit(self.outfitObject!) { (isSuccess) -> Void in
-            print(isSuccess)
-            if (isSuccess){
+        let dresstimeClient = DressTimeClient()
+        dresstimeClient.saveOutfitWithCompletion(for: self.outfitObject!, withCompletion: {
+            result in
+            switch result {
+            case .success(_):
                 self.delegate?.outfitViewControllerDelegate(self, didModifyOutfit: self.outfitObject!)
-            } else {
+            case .failure(let error):
+                print("\(#function) Error : \(error)")
                 NotificationCenter.default.post(name: Notifications.Error.SaveOutfit, object: nil)
             }
-        }
+        })
         
         self.confirmationView?.layer.transform = CATransform3DMakeScale(0.5 , 0.5, 1.0)
         
@@ -99,6 +98,7 @@ class OutfitViewController: DTViewController {
         })
     }
 
+    // MARK: - LifeCycle Methode
     override func viewDidLoad() {
         self.hideTabBar = true
         super.viewDidLoad()
@@ -113,6 +113,18 @@ class OutfitViewController: DTViewController {
         dressupButton.layer.shadowColor = UIColor.black.cgColor
         dressupButton.layer.shadowRadius = 5;
         dressupButton.layer.shadowOpacity = 0.5;
+        
+        if let weather = SharedData.sharedInstance.currentWeater {
+            self.backgroundImageView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(weather.code == nil ? 800 : weather.code!))
+        }
+        
+        if self.currentOutfits == nil {
+            self.currentOutfits = self.outfitObject?.clothes ?? [ClotheModel]()
+        }
+        self.checkOutfitValidation()
+
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -124,18 +136,14 @@ class OutfitViewController: DTViewController {
         //Remove Title of Back button
         navigationItem.backBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Outfit", comment: ""), style: .plain, target: nil, action: nil)
         
-        if let weather = SharedData.sharedInstance.currentWeater {
-            self.backgroundImageView.image = UIImage(named: WeatherHelper.changeBackgroundDependingWeatherCondition(weather.code == nil ? 800 : weather.code!))
+        if let animateIndex = self.indexPathToAnimate {
+            tableView.reloadRows(at: [IndexPath(row: animateIndex, section: 0)] , with: UITableViewRowAnimation.automatic)
+            self.checkOutfitValidation()
         }
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-        self.tableView.reloadData()
         
         self.confirmationView = Bundle.main.loadNibNamed("ConfirmSave", owner: self, options: nil)?[0] as? ConfirmSave
         self.confirmationView!.frame = CGRect(x: UIScreen.main.bounds.size.width/2.0 - 50, y: UIScreen.main.bounds.size.height/2.0 - 50 - 65, width: 100, height: 100)
@@ -146,6 +154,11 @@ class OutfitViewController: DTViewController {
         ActivityLoader.shared.hideProgressView()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.currentClothe = nil
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "detailClothe") {
             let navigationController = segue.destination as! UINavigationController
@@ -154,18 +167,23 @@ class OutfitViewController: DTViewController {
             }
         } else if (segue.identifier == "dressingList") {
             if let detailController = segue.destination as? DetailTypeViewController {
-                detailController.typeClothe =  self.typeToOpen
+                detailController.typeClothe =  self.currentClothe != nil ? [self.currentClothe!.clothe_type] : typeOfClothesInOutfit()
                 detailController.clotheToChange = self.currentClothe
                 detailController.isNeedAnimatedFirstElem = true
                 detailController.viewMode = ViewMode.selectClothe
                 detailController.delegate = self
+                self.currentClothe = nil
             }
         }
     }
     
+    // MARK: - Check Outfit Validation
     func checkOutfitValidation(){
-        if (self.currentOutfits.count < 2
-            || (self.currentOutfits.count == 1 && self.currentOutfits[0].clothe_type == ClotheType.dress.rawValue)) {
+        
+        let types = typeOfClothesInOutfit()
+        
+        if types.contains(ClotheType.pants.rawValue)
+            || (self.currentOutfits!.count == 1 && SharedData.sharedInstance.sexe! == "M") {
             self.dressupButton.isEnabled = false
             self.dressupButton.backgroundColor = UIColor.dressTimeRedDisabled()
         } else {
@@ -173,20 +191,69 @@ class OutfitViewController: DTViewController {
             self.dressupButton.backgroundColor = UIColor.dressTimeRed()
         }
     }
+    
+    func typeOfClothesInOutfit() -> [String] {
+        //Dress + Bottom -> Maille ou Top
+        //Dress -> Maille ou Top
+        //Top + Bottom -> Maille
+        //Top + Dress -> Maille
+        //Maille + Dress -> Top
+        //Maille + Bottom -> Top
+    
+        var isTop = false, isMaille = false, isBottom = false, isDress = false
+        
+        for index in 0..<self.currentOutfits!.count {
+            isTop = isTop || self.currentOutfits![index].clothe_type == ClotheType.top.rawValue
+            isMaille = isMaille || self.currentOutfits![index].clothe_type == ClotheType.maille.rawValue
+            isBottom = isBottom || self.currentOutfits![index].clothe_type == ClotheType.pants.rawValue
+            isDress = isDress || self.currentOutfits![index].clothe_type == ClotheType.dress.rawValue
+        }
+    
+        var typeToOpen = [String]()
+        if (!isMaille) {
+            typeToOpen.append(ClotheType.maille.rawValue)
+        }
+        if (!isTop){
+            typeToOpen.append(ClotheType.top.rawValue)
+        }
+        if (!isBottom) {
+            typeToOpen.append(ClotheType.pants.rawValue)
+        }
+        if (!isDress && SharedData.sharedInstance.sexe! == "F") {
+            typeToOpen.append(ClotheType.dress.rawValue)
+        }
+        return typeToOpen
+    }
+    
+    // MARK: - Change Bar Button Image
+    private func addDoneBarButton(){
+        //TODO: Translate button
+        let doneBarButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(onEditTapped(_:)))
+        self.navigationItem.setRightBarButtonItems([doneBarButton], animated: true)
+    }
+    
+    private func addEditBarButton(){
+        //TODO: Translate button
+        let doneBarButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(onEditTapped(_:)))
+        self.navigationItem.setRightBarButtonItems([doneBarButton], animated: true)
+    }
 }
 
+
 extension OutfitViewController: ClotheTableViewCellDelegate {
+    // MARK: - ClotheTableView Deletage
+    
     func removeItem(_ item: Clothe) -> Void {
         //Remove clohes
         var index = 0
-        for i in 0..<self.currentOutfits.count {
-            if currentOutfits[i].clothe_id == item.clothe_id {  // note: === not ==
+        for i in 0..<self.currentOutfits!.count {
+            if currentOutfits![i].clothe_id == item.clothe_id {  // note: === not ==
                 index = i
                 break
             }
         }
         // could removeAtIndex in the loop but keep it here for when indexOfObject works
-        currentOutfits.remove(at: index)
+        currentOutfits!.remove(at: index)
         
         // use the UITableView to animate the removal of this row
         tableView.beginUpdates()
@@ -194,7 +261,7 @@ extension OutfitViewController: ClotheTableViewCellDelegate {
         tableView.deleteRows(at: [indexPathForRow], with: .fade)
         tableView.endUpdates()
         tableView.reloadData()
-        if (self.currentOutfits.count == 0) {
+        if (self.currentOutfits!.count == 0) {
             onEditTapped.title = "Edit"
             isEditingMode = false
         }
@@ -206,7 +273,14 @@ extension OutfitViewController: ClotheTableViewCellDelegate {
     func changeItem(_ item: Clothe) -> Void {
         //Open dressing details
         self.currentClothe = item
-        self.typeToOpen = [item.clothe_type]
+        var index = 0
+        for i in 0..<self.currentOutfits!.count {
+            if currentOutfits![i].clothe_id == item.clothe_id {  // note: === not ==
+                index = i
+                break
+            }
+        }
+        self.indexPathToAnimate = index
         self.performSegue(withIdentifier: "dressingList", sender: self)
     }
     
@@ -222,8 +296,13 @@ extension OutfitViewController: ClotheTableViewCellDelegate {
 
 extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        if (SharedData.sharedInstance.sexe == "M" && self.currentOutfits.count != 3)
-         || (SharedData.sharedInstance.sexe == "F" && self.currentOutfits.count != 4) {
+        // Calendar
+        guard let outfits = self.currentOutfits else {
+            return 100.0
+        }
+        
+        if (SharedData.sharedInstance.sexe == "M" && outfits.count != 3)
+         || (SharedData.sharedInstance.sexe == "F" && outfits.count != 4) {
             return 100.0
         }
         return 0.0
@@ -245,12 +324,15 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return self.currentOutfits.count
+        if let outfits = self.currentOutfits {
+           return outfits.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ClotheTableViewCell.cellIdentifier, for: indexPath) as! ClotheTableViewCell
-        if let clothe = dal.fetch(self.currentOutfits[(indexPath as NSIndexPath).row].clothe_id) {
+        if let clothe = dal.fetch(self.currentOutfits![indexPath.row].clothe_id) {
             DispatchQueue.main.async {
                 cell.clotheImageView.image = clothe.getImage().imageWithImage(480.0)
             }
@@ -259,7 +341,7 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
             cell.clotheImageView.clipsToBounds = true
             cell.delegate = self
             cell.viewMode = ViewMode.outfitView
-            cell.delayTime = 0.3 * Double((indexPath as NSIndexPath).row)
+            cell.delayTime = 0.3 * Double(indexPath.row)
             cell.isEditingMode = self.isEditingMode
 
             //Remove edge insets to have full width separtor line
@@ -267,10 +349,10 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
             cell.separatorInset = UIEdgeInsets.zero
             cell.layoutMargins = UIEdgeInsets.zero
             
-            if (indexPathToAnimate == (indexPath as NSIndexPath).row) {
+            if (indexPathToAnimate == indexPath.row) {
                 let centerPoint = CGPoint(x: (cell.mouvingCard.frame.width + (cell.mouvingCard.frame.width * 3/4)), y: cell.mouvingCard.center.y)
                 cell.mouvingCard.center = centerPoint
-                UIView.animate(withDuration: 0.4, animations: {
+                UIView.animate(withDuration: 0.3, animations: {
                     cell.mouvingCard.center = cell.contentView.center
                     }, completion: {
                         (value: Bool) in
@@ -283,35 +365,7 @@ extension OutfitViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension OutfitViewController: HeaderOutfitViewDelegate {
-    func headerOutfitView(_ didSelectedAdd : Bool) {
-        //Dress + Bottom -> Maille ou Top
-        //Dress -> Maille ou Top
-        //Top + Bottom -> Maille
-        //Top + Dress -> Maille
-        //Maille + Dress -> Top
-        //Maille + Bottom -> Top
-        
-        var isTop = false, isMaille = false, isBottom = false, isDress = false
-        for index in 0..<self.currentOutfits.count {
-            isTop = isTop || self.currentOutfits[index].clothe_type == ClotheType.top.rawValue
-            isMaille = isMaille || self.currentOutfits[index].clothe_type == ClotheType.maille.rawValue
-            isBottom = isBottom || self.currentOutfits[index].clothe_type == ClotheType.pants.rawValue
-            isDress = isDress || self.currentOutfits[index].clothe_type == ClotheType.dress.rawValue
-        }
-       
-        self.typeToOpen = [String]()
-        if (!isMaille) {
-            self.typeToOpen?.append(ClotheType.maille.rawValue)
-        } else if (!isTop){
-            self.typeToOpen?.append(ClotheType.top.rawValue)
-        } else if (!isBottom) {
-            self.typeToOpen?.append(ClotheType.pants.rawValue)
-        } else if (!isDress && SharedData.sharedInstance.sexe! == "F") {
-            self.typeToOpen?.append(ClotheType.dress.rawValue)
-        }
-        if (typeToOpen!.count == 0){
-            typeToOpen = nil
-        }
+    func headerOutfitView(_ didSelectedAdd : Bool) {        
         self.performSegue(withIdentifier: "dressingList", sender: self)
     }
 }
@@ -320,21 +374,21 @@ extension OutfitViewController: DetailTypeViewControllerDelegate {
     func detailTypeViewController(_ selectedItem : Clothe) {
         print("Add Item")
         var isAdded = false
-        for index in 0..<self.currentOutfits.count {
-            if (self.currentOutfits[index].clothe_type == selectedItem.clothe_type){
-                self.currentOutfits[index] = ClotheModel(clothe: selectedItem)
+        for index in 0..<self.currentOutfits!.count {
+            if (self.currentOutfits![index].clothe_type == selectedItem.clothe_type){
+                self.currentOutfits![index] = ClotheModel(clothe: selectedItem)
                 isAdded = true
                 break
             }
         }
         if (!isAdded){
-            self.currentOutfits.append(ClotheModel(clothe: selectedItem))
+            self.currentOutfits!.append(ClotheModel(clothe: selectedItem))
         }
-        let outfit = Outfit(clothes: self.currentOutfits, updatedDate: Date(), isSuggestion: false, isPutOn: false)
-        outfit.orderOutfit()
-        self.currentOutfits = outfit.clothes
-        for i in 0..<outfit.clothes.count {
-            if (outfit.clothes[i].clothe_id == selectedItem.clothe_id){
+        self.outfitObject = Outfit(clothes: self.currentOutfits!, updatedDate: self.creationDate, isSuggestion: false, isPutOn: false)
+        self.outfitObject!.orderOutfit()
+        self.currentOutfits = self.outfitObject!.clothes
+        for i in 0..<self.outfitObject!.clothes.count {
+            if (self.outfitObject!.clothes[i].clothe_id == selectedItem.clothe_id){
                 indexPathToAnimate = i
             }
         }

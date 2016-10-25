@@ -88,6 +88,8 @@ class ErrorsManager: NSObject {
             message = NSLocalizedString("saveOutfitErrMessage", comment: "")
             actionTitle = NSLocalizedString("saveOutfitErrButton", comment: "")
             break
+        case Notifications.Error.NoAuthentication:
+            showLoginPage(error)
         default:
             title = ""
             message = ""

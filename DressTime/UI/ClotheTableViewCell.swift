@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -74,10 +75,12 @@ class ClotheTableViewCell: UITableViewCell{
             if (isEditingMode){
                 UIView.animate(withDuration: 0.3, delay: delayTime, options: UIViewAnimationOptions.allowAnimatedContent, animations: {
                     self.actionView.alpha = 1
+                    self.delayTime = 0
                     }, completion: nil)
             } else {
                 UIView.animate(withDuration: 0.3, animations: {
                     self.actionView.alpha = 0
+                    self.delayTime = 0
                 })
             }
         }
@@ -132,12 +135,16 @@ class ClotheTableViewCell: UITableViewCell{
             let dal = ClothesDAL()
             clo.clothe_favorite = favoriteButton.isSelected
             dal.update(clo)
-            DressingService().UpdateClothe(clo) { (isSuccess, object) -> Void in
-                if (!isSuccess) {
+            let dressTimeClient = DressTimeClient()
+            dressTimeClient.updateClotheWithCompletion(for: clo, withCompletion: { (result) in
+                switch result {
+                case .success(_):
+                    print("Clothe updated")
+                case .failure(let error):
                     NotificationCenter.default.post(name: Notifications.Error.UpdateClothe, object: nil)
+                    print("\(#function) Error : \(error)")
                 }
-                print("Clothe Sync")
-            }
+            })
         }
     }
     

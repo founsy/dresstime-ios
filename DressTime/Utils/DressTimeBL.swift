@@ -21,9 +21,24 @@ class DressTimeBL {
     
     enum ClotheOrder : Int {
         case maille = 0
-        case top = 1
-        case dress = 2
+        case dress = 1
+        case top = 2
         case pants = 3
+    }
+    
+    static func getClotheOrder(withType type: String) -> Int {
+        switch type {
+        case ClotheType.maille.rawValue:
+           return ClotheOrder.maille.rawValue
+        case ClotheType.dress.rawValue:
+            return ClotheOrder.dress.rawValue
+        case ClotheType.top.rawValue:
+            return ClotheOrder.top.rawValue
+        case ClotheType.pants.rawValue:
+            return ClotheOrder.pants.rawValue
+        default:
+            return -1
+        }
     }
     
     func orderOutfit(_ outfit: Outfit) -> Outfit{

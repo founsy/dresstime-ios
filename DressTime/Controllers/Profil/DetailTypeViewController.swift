@@ -129,6 +129,12 @@ class DetailTypeViewController: DTViewController {
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        self.clothesList = nil
+        self.clotheToChange = nil
+    }
+    
     fileprivate func setBackgroundImage(){
         if let types = self.typeClothe , types.count == 1 {
             switch types[0] {
@@ -153,16 +159,15 @@ class DetailTypeViewController: DTViewController {
     func initData(){
         let dal = ClothesDAL()
         if let types = self.typeClothe {
-            self.clothesList = [Clothe]()
-            for type in types {
-                self.clothesList?.append(contentsOf: dal.fetch(type: type))
-                if let clothe = clotheToChange {
-                    self.clothesList?.sort { (element1, element2) -> Bool in
-                        return element1.clothe_id == clothe.clothe_id
-                    }
+            self.clothesList = dal.fetch(types: types)
+            self.clothesList!.sort(by: { (elem1, elem2) -> Bool in
+                return DressTimeBL.getClotheOrder(withType: elem1.clothe_type) < DressTimeBL.getClotheOrder(withType: elem2.clothe_type)
+            })
+            if let clothe = clotheToChange {
+                self.clothesList?.sort { (element1, element2) -> Bool in
+                    return element1.clothe_id == clothe.clothe_id
                 }
             }
-            
         }
     }
     
@@ -173,14 +178,23 @@ class DetailTypeViewController: DTViewController {
     }
     
     fileprivate func deleteClothe(_ indexPath: IndexPath){
-        if let currentClothe = self.clothesList?[(indexPath as NSIndexPath).row] {
-            DressingService().DeleteClothe(currentClothe.clothe_id, completion: { (isSuccess, object) -> Void in
+        guard let currentClothe = self.clothesList?[indexPath.row] else {
+            return
+        }
+        
+        let dressTimeClient = DressTimeClient()
+        dressTimeClient.deleteClotheWithCompletion(for: currentClothe.clothe_id) { (result) in
+            switch result {
+            case .success(_):
                 print("Clothe deleted")
                 _ = ClothesDAL().delete(currentClothe)
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "ClotheDeletedNotification"), object: self, userInfo: ["type": currentClothe.clothe_type])
-            })
+            case .failure(let error):
+                print("\(#function) Error : \(error)")
+            }
         }
-        self.clothesList!.remove(at: (indexPath as NSIndexPath).row)
+        
+        self.clothesList!.remove(at: indexPath.row)
         self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
         if (clothesList?.count > 0){
             self.emptyView.isHidden = true

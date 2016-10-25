@@ -30,7 +30,6 @@ open class Outfit: NSObject{
     var isSuggestion: Bool
     var isPutOn: Bool
     var updatedDate : Date?
-    var moment: String?
     var _id: String
     
     public init(json: JSON){
@@ -39,7 +38,6 @@ open class Outfit: NSObject{
         self.style = json["style"].stringValue
         self.isSuggestion = json["isSuggestion"].bool != nil ? json["isSuggestion"].boolValue : true
         self.isPutOn = json["isPutOn"].bool != nil ? json["isPutOn"].boolValue : false
-        self.moment = json["moment"].stringValue
         if let update = json["updated"].string {
             self.updatedDate = Date(dateString: update)
         }
@@ -62,7 +60,7 @@ open class Outfit: NSObject{
         self.style = ""
         self.isSuggestion = isSuggestion
         self.isPutOn = isPutOn
-        self.moment = ""
+        self.updatedDate = updatedDate
         self.clothes = clothes
     }
     
@@ -108,42 +106,6 @@ open class Outfit: NSObject{
         clothes.sort { (clothe1, clothe2) -> Bool in
             getOrder(clothe1.clothe_type) < getOrder(clothe2.clothe_type)
         }
-        
-       /* for item in self.clothes {
-            switch ClotheType(rawValue: item.clothe_type)! {
-            case ClotheType.maille :
-                clothes[ClotheOrder.maille.rawValue] = item
-                break
-            case ClotheType.top :
-                if (ClotheOrder.top.rawValue < clothes.count) {
-                    clothes[ClotheOrder.top.rawValue] = item
-                }
-                break
-            case ClotheType.dress :
-                if (ClotheOrder.dress.rawValue - 1 < clothes.count) {
-                    clothes[ClotheOrder.dress.rawValue - 1] = item
-                }
-                break
-            case ClotheType.pants :
-                if (ClotheOrder.pants.rawValue - 1) < clothes.count {
-                    clothes[ClotheOrder.pants.rawValue - 1] = item
-                }
-                break
-            }
-        } */
         self.clothes = clothes
-    }
-}
-
-extension Date
-{
-    init(dateString:String) {
-        let dateStringFormatter = DateFormatter()
-        dateStringFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        if let d = dateStringFormatter.date(from: dateString) {
-            self = Date(timeInterval: 0, since: d)
-        } else {
-            self = Date(timeIntervalSince1970: 0)
-        }
     }
 }

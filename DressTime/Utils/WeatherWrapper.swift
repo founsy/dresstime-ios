@@ -18,19 +18,21 @@ open class Weather: NSObject {
     var hour: Int?
     var city: String?
     var icon: String?
+    var sentence: String?
     
     public override init(){
     }
     
     public init(json: JSON){
-        code = json["code"].int
-        temp = json["temp"].int
-        tempMin = json["tempMin"].int
-        tempMax = json["tempMax"].int
-        time = json["time"].string
-        hour = json["hour"].int
-        city = json["city"].string
-        icon = json["icon"].string
+        code = json["current"]["code"].int
+        temp = json["current"]["temp"].int
+        tempMin = json["current"]["tempMin"].int
+        tempMax = json["current"]["tempMax"].int
+        time = json["current"]["time"].string
+        hour = json["current"]["hour"].int
+        city = json["current"]["city"].string
+        icon = json["current"]["icon"].string
+        sentence = json["comment"].string
     }
 }
 

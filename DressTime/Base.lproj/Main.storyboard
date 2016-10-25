@@ -621,7 +621,7 @@
         <scene sceneID="nhW-OM-0Nb">
             <objects>
                 <navigationController title="Detail Clothe Navigation" id="YjD-kx-zf5" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ffz-tJ-qGb">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ffz-tJ-qGb">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1449,7 +1449,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Rpk-sO-sQf">
-                                        <rect key="frame" x="0.0" y="50" width="40" height="60"/>
+                                        <rect key="frame" x="5" y="50" width="40" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
@@ -1457,7 +1457,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="7lv-qh-D2W">
-                                        <rect key="frame" x="50.5" y="50" width="40" height="60"/>
+                                        <rect key="frame" x="5" y="110" width="40" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
@@ -1465,7 +1465,7 @@
                                         </view>
                                     </collectionViewCell>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="NME-IP-hH0">
-                                        <rect key="frame" x="101" y="50" width="40" height="60"/>
+                                        <rect key="frame" x="5" y="170" width="40" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="40" height="60"/>
@@ -1474,7 +1474,7 @@
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="header" id="eLg-dV-fNn">
-                                    <rect key="frame" x="0.0" y="0.0" width="1000" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aug" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZiV-hb-W96">
@@ -1553,7 +1553,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="textHeader" rowHeight="21" id="z3E-2Q-nCD" customClass="HeaderShoppingCell" customModule="DressTime" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="textHeader" rowHeight="21" id="z3E-2Q-nCD" customClass="HeaderShoppingCell" customModule="DressTime" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="21"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="z3E-2Q-nCD" id="BKm-32-NK7">
@@ -1577,7 +1577,7 @@
                                             <outlet property="headerMsgLabel" destination="YXH-mi-2z0" id="2yL-za-qFi"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="typeSelection" id="zIg-Nr-Ra9" customClass="TypeSelectionCell" customModule="DressTime" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="typeSelection" id="zIg-Nr-Ra9" customClass="TypeSelectionCell" customModule="DressTime" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="49" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zIg-Nr-Ra9" id="IpZ-zf-7J7">
@@ -1647,7 +1647,7 @@
                                             <outletCollection property="buttonType" destination="EM7-Ho-Z21" collectionClass="NSMutableArray" id="DMl-gw-mWr"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="priceSelection" id="hkQ-ZR-1WY" customClass="PriceSelectionCell" customModule="DressTime" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="priceSelection" id="hkQ-ZR-1WY" customClass="PriceSelectionCell" customModule="DressTime" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="93" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hkQ-ZR-1WY" id="DNZ-Ta-mjR">
@@ -1696,7 +1696,7 @@
                                             <outlet property="rangeView" destination="X3R-wX-DLC" id="v8c-qJ-G5X"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="clotheSelection" rowHeight="250" id="kpL-Xz-ul4" customClass="ClotheSelectionCell" customModule="DressTime" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="clotheSelection" rowHeight="250" id="kpL-Xz-ul4" customClass="ClotheSelectionCell" customModule="DressTime" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="137" width="375" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kpL-Xz-ul4" id="Ftc-Vm-nRf">
@@ -1754,7 +1754,7 @@
                                             <outlet property="collectionView" destination="PGh-uj-yz2" id="JGD-8Z-7Lc"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="textCell" id="Jrx-cJ-hJL" customClass="TextSelectionCell" customModule="DressTime" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="textCell" id="Jrx-cJ-hJL" customClass="TextSelectionCell" customModule="DressTime" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="387" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Jrx-cJ-hJL" id="SB5-mf-NZx">
@@ -1816,7 +1816,7 @@
                                             <outlet property="viewContainer" destination="g6W-Un-Ebf" id="UrZ-93-aF9"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="clotheMatchSelection" rowHeight="150" id="tEa-lt-ceh" customClass="ClotheMatchSelectionCell" customModule="DressTime" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="clotheMatchSelection" rowHeight="150" id="tEa-lt-ceh" customClass="ClotheMatchSelectionCell" customModule="DressTime" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="431" width="375" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tEa-lt-ceh" id="T0M-aQ-Xzr">
@@ -1941,7 +1941,7 @@
             <objects>
                 <navigationController title="Home Navigation" id="tj2-h4-e72" customClass="DTNavigationController" customModule="DressTime" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" tag="3" title="Daily" image="sunIcon" id="frV-nf-91l"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AvW-Dg-MhU">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AvW-Dg-MhU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1972,7 +1972,7 @@
                                 <color key="sectionIndexColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexTrackingBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
-                                <view key="tableHeaderView" opaque="NO" clipsSubviews="YES" contentMode="center" misplaced="YES" id="j93-Zu-WAN">
+                                <view key="tableHeaderView" opaque="NO" clipsSubviews="YES" contentMode="center" id="j93-Zu-WAN">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
@@ -2017,11 +2017,11 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="emptyStepCell" rowHeight="186" id="bSS-fC-50C" userLabel="emptyStepCell" customClass="HomeEmptyStepCell" customModule="DressTime" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1" width="1000" height="186"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="emptyStepCell" rowHeight="186" id="bSS-fC-50C" userLabel="emptyStepCell" customClass="HomeEmptyStepCell" customModule="DressTime" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1" width="375" height="186"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bSS-fC-50C" id="jC9-kM-QUd">
-                                            <frame key="frameInset" width="1000" height="186"/>
+                                            <frame key="frameInset" width="375" height="186"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XOE-h9-uNZ">
@@ -2068,11 +2068,11 @@
                                             <outlet property="stackView" destination="EzF-9o-df0" id="SN0-4c-JWj"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" misplaced="YES" restorationIdentifier="emptyAnimationCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="emptyAnimationCell" rowHeight="370" id="Z9b-eN-VVh" userLabel="emptyAnimationCell" customClass="HomeEmptyAnimationCell" customModule="DressTime" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="187" width="1000" height="370"/>
+                                    <tableViewCell contentMode="scaleToFill" restorationIdentifier="emptyAnimationCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="emptyAnimationCell" rowHeight="370" id="Z9b-eN-VVh" userLabel="emptyAnimationCell" customClass="HomeEmptyAnimationCell" customModule="DressTime" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="187" width="375" height="370"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Z9b-eN-VVh" id="ORa-ov-dad">
-                                            <frame key="frameInset" width="1000" height="370"/>
+                                            <frame key="frameInset" width="375" height="370"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bubbleIcon" translatesAutoresizingMaskIntoConstraints="NO" id="sXo-EZ-nId">
@@ -2108,11 +2108,11 @@
                                             <outlet property="messageLabel" destination="Ywa-jn-GGx" id="OfO-u0-AIX"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="myOutfitsCell" rowHeight="400" id="tbw-tw-H17" customClass="HomeOutfitsListCell" customModule="DressTime" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="557" width="1000" height="400"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="myOutfitsCell" rowHeight="400" id="tbw-tw-H17" customClass="HomeOutfitsListCell" customModule="DressTime" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="557" width="375" height="400"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tbw-tw-H17" id="hQH-n0-YA8">
-                                            <frame key="frameInset" width="1000" height="400"/>
+                                            <frame key="frameInset" width="375" height="400"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="ivU-kB-y0T">
@@ -2177,11 +2177,11 @@
                                             <outlet property="outfitCollectionView" destination="Tfb-96-iZv" id="OTk-7M-w9x"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="brandOutfitsCell" rowHeight="300" id="FQB-14-wSG" customClass="HomeBrandOutfitsListCell" customModule="DressTime" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="957" width="1000" height="300"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="brandOutfitsCell" rowHeight="300" id="FQB-14-wSG" customClass="HomeBrandOutfitsListCell" customModule="DressTime" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="957" width="375" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FQB-14-wSG" id="UYp-ew-u7H">
-                                            <frame key="frameInset" width="1000" height="300"/>
+                                            <frame key="frameInset" width="375" height="300"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Apb-RR-gb9">
@@ -2336,10 +2336,10 @@
         <image name="underwearIconF" width="84" height="153"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GLC-Uz-kuT"/>
         <segue reference="RQo-jk-TTL"/>
-        <segue reference="FQ7-dF-Sc5"/>
-        <segue reference="9Hh-61-zgV"/>
+        <segue reference="GLC-Uz-kuT"/>
+        <segue reference="MoU-FC-nOn"/>
         <segue reference="Mz3-Xd-4Oh"/>
+        <segue reference="f53-7Z-dz1"/>
     </inferredMetricsTieBreakers>
 </document>
